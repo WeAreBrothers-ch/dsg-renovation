@@ -1,0 +1,116 @@
+<div class="grille12 demande__grille">
+        <div class="demande__form revele">
+          <form class="formulaire" id="bordereau" novalidate
+                action="mailto:contact@dsg-renov.ch" method="post" enctype="text/plain">
+            <div class="formulaire__entete trace trace--bas">
+              <p class="etiquette"><b>Bordereau</b> — Demande de devis</p>
+              <p class="etiquette">Champs marqués <span style="color:var(--c-signal)">*</span> obligatoires</p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="nom">Nom et prénom <span>*</span></label>
+              <input type="text" id="nom" name="nom" autocomplete="name" required placeholder="Marie Dupont">
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="email">Courriel <span>*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required placeholder="marie.dupont@exemple.ch">
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="telephone">Téléphone <span>*</span></label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" required placeholder="+41 79 000 00 00">
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="type">Type de bien <span>*</span></label>
+              <select id="type" name="type" required>
+                <option value="">Choisir…</option>
+                <option>Appartement</option>
+                <option>Maison / villa</option>
+                <option>Immeuble / régie</option>
+                <option>Local commercial</option>
+              </select>
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="surface">Surface approximative</label>
+              <input type="text" id="surface" name="surface" inputmode="numeric" placeholder="120 m²">
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ">
+              <label class="champ__label" for="lieu">Commune du bien</label>
+              <input type="text" id="lieu" name="lieu" autocomplete="address-level2" placeholder="Lausanne">
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ formulaire__large">
+              <label class="champ__label" for="delai">Démarrage souhaité</label>
+              <select id="delai" name="delai">
+                <option value="">Choisir…</option>
+                <option>Dès que possible</option>
+                <option>Dans 1 à 3 mois</option>
+                <option>Dans 3 à 6 mois</option>
+                <option>Pas encore décidé</option>
+              </select>
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ formulaire__large">
+              <label class="champ__label" for="message">Décrivez votre projet <span>*</span></label>
+              <textarea id="message" name="message" required placeholder="Pièces concernées, travaux envisagés, contraintes particulières…"></textarea>
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="champ formulaire__large">
+              <!-- Le renvoi vit hors du label : à l'intérieur, un clic sur le
+                   lien cocherait aussi la case. -->
+              <div class="consentement">
+                <input type="checkbox" id="consentement" name="consentement" required>
+                <label for="consentement">J'accepte que DSG Rénovation utilise ces informations pour me recontacter au sujet de ma demande. Aucune donnée n'est transmise à des tiers.</label>
+              </div>
+              <p class="consentement__renvoi"><a href="confidentialite.html">Lire la politique de confidentialité</a></p>
+              <p class="champ__erreur" aria-live="polite"></p>
+            </div>
+
+            <div class="formulaire__large">
+              <button class="btn btn--plein" type="submit" style="width:100%" data-magnetique>Envoyer ma demande<span class="fleche" aria-hidden="true"></span></button>
+              <p class="message-formulaire" id="bordereauRetour" role="status" tabindex="-1" style="margin-top:var(--sp-4)"></p>
+            </div>
+          </form>
+        </div>
+
+        <aside class="demande__contact coordonnees revele trace" aria-label="Coordonnées de DSG Rénovation">
+          <div class="coordonnees__bloc">
+            <h3>Nous joindre directement</h3>
+            <address class="donnee" style="margin-top:var(--sp-3)">
+              <a href="tel:+41218470202">+41 21 847 02 02</a>
+              <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
+            </address>
+          </div>
+          <div class="coordonnees__bloc">
+            <h3>Atelier &amp; bureau</h3>
+            <address class="donnee" style="margin-top:var(--sp-3)">
+              Avenue de Béthusy 60<br>1012 Lausanne, Suisse
+            </address>
+          </div>
+          <!-- CONTENU À VALIDER : horaires d'ouverture à confirmer avec le client -->
+          <div class="coordonnees__bloc">
+            <h3>Horaires</h3>
+            <p class="donnee" style="margin-top:var(--sp-3)">Lundi – vendredi<br>08:00 – 17:00</p>
+          </div>
+          <div class="coordonnees__bloc">
+            <h3>Zone d'intervention</h3>
+            <ul class="lots coordonnees__zones">
+              <li>Lausanne</li><li>Genève</li><li>Morges</li><li>Nyon</li><li>Vevey</li><li>Montreux</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>

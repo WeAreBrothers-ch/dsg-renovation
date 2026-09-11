@@ -1,0 +1,30 @@
+<div class="comparateur comparateur--couverture" data-comparateur data-curseur="Glisser">
+        <div class="comparateur__vue comparateur__vue--apres">
+          <picture>
+            <source srcset="assets/images/sejour-apres.avif" type="image/avif">
+            <img src="assets/images/sejour-apres.jpg"
+                 alt="Après travaux : séjour traversant ouvert sur une cuisine blanche, parquet chêne posé et murs repris"
+                 width="1404" height="682" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <div class="comparateur__vue comparateur__vue--avant">
+          <picture>
+            <source srcset="assets/images/sejour-avant.avif" type="image/avif">
+            <img src="assets/images/sejour-avant.jpg"
+                 alt="Avant travaux : cloison porteuse mise à nu, gaines apparentes et chape brute avant reprise"
+                 width="1404" height="682" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+
+        <span class="comparateur__etat comparateur__etat--avant">Avant</span>
+        <span class="comparateur__etat comparateur__etat--apres">Après</span>
+
+        <div class="comparateur__poignee" role="slider" tabindex="0"
+             aria-label="Comparer l'état avant et après travaux"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
+          <svg class="comparateur__glyphe" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M6 2 1.5 6 6 10"/><path d="M20 2 24.5 6 20 10"/>
+          </svg>
+        </div>
+      </div>
+<p class="comparaison__aide"><i aria-hidden="true"></i> Glissez la poignée · ou utilisez les flèches du clavier</p>
