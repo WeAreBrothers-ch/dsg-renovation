@@ -37,15 +37,15 @@ ENCHAINEMENT = [
 
 # Correspondance entre un besoin exprimé et le lot qui y répond.
 BESOINS = [
-    ("« Mon appartement est sombre »", "faux-plafonds",
+    ("« Mon appartement est sombre »", "platrerie-cloisons",
      "Éclairage intégré et teintes claires — souvent avec la peinture."),
-    ("« Il me manque une chambre »", "cloisons",
+    ("« Il me manque une chambre »", "platrerie-cloisons",
      "Recouper un volume existant, isolation phonique comprise."),
-    ("« Les murs sont fissurés »", "platrerie",
+    ("« Les murs sont fissurés »", "platrerie-cloisons",
      "Traitement des fissures et reprise complète du support."),
-    ("« Ma salle de bains a trente ans »", "carrelage",
+    ("« Ma salle de bains a trente ans »", "carrelage-sols",
      "Dépose, étanchéité et recarrelage du sol au plafond."),
-    ("« La moquette doit partir »", "pose-de-sol",
+    ("« La moquette doit partir »", "carrelage-sols",
      "Dépose, ragréage et pose d'un parquet, d'un vinyle ou d'un linoléum."),
     ("« Je reloue dans six semaines »", "peinture",
      "Remise en état entre deux baux, nettoyage compris."),

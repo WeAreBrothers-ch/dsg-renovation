@@ -1,7 +1,7 @@
 # DSG Rénovation — site vitrine
 
 Site de **DSG Rénovation Sàrl**, entreprise de rénovation clé en main à
-Lausanne (arc lémanique). Dix-huit pages, dont une par prestation.
+Lausanne (arc lémanique). Douze pages, dont cinq de prestation.
 
 HTML, CSS et JavaScript natifs — aucun framework, aucune étape de build.
 Ouvrir `index.html` suffit.
@@ -10,13 +10,11 @@ Ouvrir `index.html` suffit.
 
 ```
 index.html            accueil : la preuve, les chiffres, les renvois
-entreprise.html       histoire, engagements, savoir-faire
-services.html         page pilier des neuf lots
-services/*.html       une page par prestation — neuf fichiers
-realisations.html     registre des chantiers, filtres et visionneuse
-references.html       partenaires, témoignages, travail avec les régies
-questions.html        questions fréquentes
-devis.html            bordereau de demande et coordonnées
+services.html         page pilier des cinq prestations
+services/*.html       une page par prestation — cinq fichiers
+realisations.html     registre des chantiers, familles de biens, imprévus
+entreprise.html       histoire, déroulé, limites, références, témoignages
+devis.html            bordereau, lecture d'un devis, vingt questions
 mentions-legales.html pièce annexe A — éditeur, droits, responsabilité
 confidentialite.html  pièce annexe B — traitement des données
 sitemap.xml           plan du site, régénéré avec les pages
@@ -26,6 +24,12 @@ assets/js/            un module par comportement
 assets/images/        tirages du comparateur avant / après
 outils/               générateur de pages — voir plus bas
 ```
+
+**Douze pages, quatre entrées de menu.** Les références vivent dans la
+page entreprise, dont elles sont la preuve ; les questions dans la page
+de devis, où elles se posent réellement. Les neuf métiers se répartissent
+sur cinq pages : ceux qui se posent ensemble sur un chantier partagent
+la leur, ce qui donne des pages denses plutôt que nombreuses.
 
 Toutes les pages partagent le même en-tête, le même menu et le même
 pied. `14-document.css` porte la mise en page des annexes légales,
@@ -50,8 +54,9 @@ python3 outils/construire.py
 | Fichier | Contenu |
 |---|---|
 | `donnees_site.py` | coordonnées, navigation, communes, relevé chiffré |
-| `services_gros_oeuvre.py` | rénovation totale, plâtrerie, cloisons, faux plafonds |
-| `services_finitions.py` | peinture, revêtements, carrelage, sols, nettoyage |
+| `services_gros_oeuvre.py` | fiches de lot : rénovation, plâtrerie, cloisons, faux plafonds |
+| `services_finitions.py` | fiches de lot : peinture, revêtements, carrelage, sols, nettoyage |
+| `prestations.py` | quelles fiches de lot partagent une page, et ce qui leur est commun |
 | `lausanne_gros_oeuvre.py` | ce que le bâti lausannois impose à ces quatre lots |
 | `lausanne_finitions.py` | idem pour les cinq lots de finition |
 | `contenu_entreprise.py` | histoire, déroulé d'un chantier, limites, engagements |
@@ -63,8 +68,8 @@ python3 outils/construire.py
 | `briques_bis.py` | frise, cartes, besoins, limites, conseils |
 | `page_service.py` | corps d'une page de prestation |
 | `page_accueil.py` | corps de l'accueil |
-| `pages_site.py` | entreprise, savoir-faire |
-| `pages_contenu.py` | réalisations, références, questions, devis |
+| `pages_site.py` | entreprise, prestations |
+| `pages_contenu.py` | réalisations, devis |
 | `catalogue.py` | fiche signalétique des pages de la racine |
 | `seo.py` | balisage structuré, `sitemap.xml`, `robots.txt` |
 | `fragments/` | blocs repris du dossier d'origine, tels quels |
@@ -86,7 +91,10 @@ toutes les pages, `Service` et `FAQPage` sur les pages de prestation,
 fil d'Ariane partout.
 
 Les pages de prestation visent les recherches de la région lausannoise
-(« peintre à Lausanne », « carreleur à Lausanne »…). Elles ne se
+(« peintre à Lausanne », « carreleur à Lausanne »…). Cinq pages denses
+plutôt que neuf moyennes : la profondeur d'une page pèse davantage que
+leur nombre, et un visiteur qui cherche des cloisons cherche souvent
+aussi la plâtrerie qui va avec. Elles ne se
 répètent pas : deux pages qui disent la même chose se concurrencent au
 lieu de s'additionner. L'accueil donne l'accroche de chaque sujet et
 renvoie vers la page qui le traite.

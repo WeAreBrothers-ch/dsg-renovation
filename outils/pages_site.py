@@ -85,9 +85,51 @@ def entreprise(services, base=""):
     </div>
   </section>
 
+  <section class="partenaires" aria-labelledby="tPartenaires">
+    <div class="zone">
+{briques.intercalaire("N° 06", "Références", "Régies, propriétaires et architectes",
+                      "Ils nous confient|leurs biens",
+                      "Une partie de notre activité vient de clients qui nous "
+                      "rappellent. C'est la seule référence qui vaille dans un "
+                      "métier où tout se sait vite.")}
+      <div class="service__texte revele" style="margin-bottom:var(--sp-7)">
+        <p>Les grandes régies de la place lausannoise nous confient des
+        remises en état entre deux locations, parfois plusieurs logements du
+        même immeuble sur une même année. Ce sont des chantiers courts,
+        cadrés par une date de libération, où la fiabilité compte davantage
+        que le prix : un logement rendu en retard, c'est un mois de loyer
+        perdu pour le propriétaire.</p>
+        <p>Les architectes nous confient l'exécution de lots sur descriptif.
+        Les propriétaires privés nous appellent le plus souvent après une
+        recommandation de voisinage — et repassent pour la pièce suivante
+        deux ans plus tard.</p>
+      </div>
+      {fragment('partenaires')}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tTemoins">
+    <div class="zone">
+{briques.intercalaire("N° 07", "Retours", "Ce que disent nos clients",
+                      "Trois chantiers,|trois avis")}
+      {fragment('temoins')}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tModes">
+    <div class="zone">
+{briques.intercalaire("N° 08", "Collaborations", "Selon qui commande",
+                      "Trois façons|de travailler avec nous",
+                      "Une régie, un architecte et un propriétaire n'attendent "
+                      "pas la même chose. Nous n'organisons donc pas le "
+                      "chantier de la même manière.")}
+{briques_bis.cartes(contenu_divers.COLLABORATIONS)}
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("N° 06", "Savoir-faire", "Neuf lots · une seule entreprise",
+{briques.intercalaire("N° 09", "Prestations", "Cinq pages, neuf métiers",
                       "Ce que nous|savons faire")}
 {briques.liste_metiers(services, base)}
     </div>
@@ -107,9 +149,10 @@ def savoir_faire(services, base=""):
     <div class="zone">
 {briques.intercalaire("N° 01", "Les neuf lots", "Une seule entreprise",
                       "Les lots que|nous menons",
-                      "Chaque lot a sa page : ce qu'il couvre, comment nous "
-                      "procédons, combien de temps il prend et ce que le bâti "
-                      "lausannois lui impose.")}
+                      "Cinq pages pour neuf métiers : ceux qui se posent "
+                      "ensemble sur un chantier partagent la leur. Chacune "
+                      "dit ce qu'elle couvre, comment nous procédons et ce "
+                      "que le bâti lausannois lui impose.")}
 {briques.liste_metiers(services, base)}
     </div>
   </section>

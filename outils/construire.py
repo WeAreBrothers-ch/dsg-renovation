@@ -24,12 +24,11 @@ import page_accueil
 import pages_contenu
 import pages_site
 import seo
+import prestations
 from donnees_site import SITE
-from services_finitions import SERVICES as FINITIONS
-from services_gros_oeuvre import SERVICES as GROS_OEUVRE
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SERVICES = sorted(GROS_OEUVRE + FINITIONS, key=lambda s: s["numero"])
+SERVICES = prestations.PAGES
 
 # Toutes les feuilles, dans l'ordre de leur numéro. Les pages riches les
 # chargent toutes : le poids total reste sous les cinquante kilo-octets,
@@ -118,7 +117,7 @@ def construire_services():
         "Les neuf lots de DSG Rénovation à Lausanne : rénovation totale, "
         "peinture, plâtrerie, cloisons, revêtements muraux, faux plafonds, "
         "carrelage, sols et nettoyage de fin de chantier.",
-        "Savoir-faire", ["Neuf métiers,", "un seul chantier"],
+        "Prestations", ["Neuf métiers,", "un seul chantier"],
         "Chaque lot est mené par des salariés de l'entreprise ou par des "
         "partenaires que nous suivons depuis des années.",
         pages_site.savoir_faire, BASE_JS + ["vignette.js"], [])]
@@ -137,15 +136,19 @@ def construire_services():
             "chapo": service["chapo"],
             "image_og": service["image"],
         }
-        fil = [("Accueil", "index.html"), ("Savoir-faire", "services.html"),
+        fil = [("Accueil", "index.html"), ("Prestations", "services.html"),
                (service["nom"], "")]
         corps = (briques.couverture(page, "../", fil)
-                 + page_service.corps(service, SERVICES, "../"))
+                 + page_service.corps(service, "../"))
         schemas = [
             seo.entreprise(),
-            seo.prestation(service),
-            seo.questions(service["questions"]),
-            seo.fil([("Accueil", ""), ("Savoir-faire", "services.html"),
+            seo.prestation(service, [
+                poste
+                for _, postes in prestations.prestations_de(service)
+                for poste in postes
+            ]),
+            seo.questions(prestations.questions_de(service)),
+            seo.fil([("Accueil", ""), ("Prestations", "services.html"),
                      (service["nom"], fichier)]),
         ]
         faits.append(ecrire(fichier, assembler(

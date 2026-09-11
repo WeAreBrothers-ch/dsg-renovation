@@ -257,3 +257,28 @@
   content:"";position:absolute;left:0;top:.6em;
   width:10px;height:1.5px;background:var(--c-signal-sombre);
 }
+
+/* ------------------------------------------------------------
+   PRESTATIONS GROUPÉES
+   Une page peut réunir plusieurs lots — plâtrerie, cloisons et
+   faux plafonds se posent ensemble. Chaque lot garde alors son
+   intitulé au-dessus de sa liste : la page reste un bordereau, pas
+   un inventaire indifférencié.
+   ------------------------------------------------------------ */
+.service__groupes{display:flex;flex-direction:column;gap:var(--sp-7)}
+.service__lot{
+  margin-bottom:var(--sp-4);
+  color:var(--c-encre);
+}
+/* La première liste d'un groupe porte déjà son filet haut : celui de
+   l'intitulé ferait doublon juste au-dessus. */
+.service__groupe .service__liste li:first-child{border-top:var(--bd-fin)}
+
+/* ------------------------------------------------------------
+   SECTIONS LOCALES EMPILÉES
+   Quand la page réunit plusieurs lots, chacun a son propre bloc
+   « sur le terrain ». Ils se suivent, séparés par leur seule
+   respiration : un filet de plus alourdirait la page.
+   ------------------------------------------------------------ */
+.local+.local{margin-top:var(--sp-9)}
+.local__titre{margin-bottom:var(--sp-6)}

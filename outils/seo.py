@@ -75,23 +75,27 @@ def _texte_nu(html):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", html)).strip()
 
 
-def prestation(service):
-    """Décrit un lot et la zone où il est proposé."""
+def prestation(fiche, offres):
+    """Décrit une prestation et la zone où elle est proposée.
+
+    `offres` est la liste à plat des postes couverts par la page, tous
+    lots confondus : le catalogue déclaré doit dire ce que la page dit.
+    """
     return _bloc({
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": _texte_nu(service["nom"]),
-        "serviceType": _texte_nu(service["nom"]),
-        "description": service["description"],
+        "name": _texte_nu(fiche["nom"]),
+        "serviceType": _texte_nu(fiche["nom"]),
+        "description": fiche["description"],
         "provider": {"@id": ENTREPRISE_ID},
         "areaServed": [{"@type": "City", "name": c} for c in COMMUNES],
-        "url": "%s/services/%s.html" % (SITE, service["slug"]),
+        "url": "%s/services/%s.html" % (SITE, fiche["slug"]),
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Prestations — " + _texte_nu(service["nom"]),
+            "name": "Prestations — " + _texte_nu(fiche["nom"]),
             "itemListElement": [
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": p}}
-                for p in service["prestations"]
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": o}}
+                for o in offres
             ],
         },
     })

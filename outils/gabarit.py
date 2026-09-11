@@ -8,10 +8,14 @@ ressources (« » ou « ../ »). Aucun chemin n'est écrit en dur ailleurs.
 from donnees_site import (ANNEXES, COURRIEL, LOGO, MARQUE, NAVIGATION, RUE,
                           TELEPHONE, TELEPHONE_BRUT, VILLE, ZONES_PIED)
 
+# Les esperluettes sont échappées : dans un attribut HTML, « &family »
+# est une référence d'entité mal formée. Les navigateurs la corrigent,
+# les validateurs la signalent.
 POLICES = (
     "https://fonts.googleapis.com/css2?family=Archivo:wght@500;800"
-    "&family=IBM+Plex+Mono:wght@400;500"
-    "&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    "&amp;family=IBM+Plex+Mono:wght@400;500"
+    "&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400"
+    "&amp;display=swap"
 )
 
 

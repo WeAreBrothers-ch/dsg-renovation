@@ -21,32 +21,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.dsg-renov.ch/services/platrerie.html</loc>
+    <loc>https://www.dsg-renov.ch/services/platrerie-cloisons.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.dsg-renov.ch/services/cloisons.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/services/revetements-muraux.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/services/faux-plafonds.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/services/carrelage.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/services/pose-de-sol.html</loc>
+    <loc>https://www.dsg-renov.ch/services/carrelage-sols.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -62,16 +42,6 @@
   </url>
   <url>
     <loc>https://www.dsg-renov.ch/realisations.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/references.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.dsg-renov.ch/questions.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

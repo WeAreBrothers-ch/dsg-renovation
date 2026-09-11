@@ -32,13 +32,15 @@ ZONES_PIED = [
 
 # Navigation principale : intitulé, fichier, et si l'entrée figure dans
 # la barre du haut (les autres n'apparaissent que dans le menu et le pied).
+# Quatre entrées. Les références ont rejoint la page entreprise, dont
+# elles sont la preuve ; les questions ont rejoint la page de devis, où
+# elles se posent réellement. Un menu court se lit, un menu long se
+# parcourt.
 NAVIGATION = [
-    {"nom": "L'entreprise", "url": "entreprise.html", "barre": False},
-    {"nom": "Savoir-faire", "url": "services.html", "barre": True},
+    {"nom": "Prestations", "url": "services.html", "barre": True},
     {"nom": "Réalisations", "url": "realisations.html", "barre": True},
-    {"nom": "Références", "url": "references.html", "barre": True},
-    {"nom": "Questions", "url": "questions.html", "barre": True},
-    {"nom": "Demander un devis", "url": "devis.html", "barre": False},
+    {"nom": "L'entreprise", "url": "entreprise.html", "barre": True},
+    {"nom": "Devis gratuit", "url": "devis.html", "barre": False},
 ]
 
 ANNEXES = [

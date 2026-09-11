@@ -20,7 +20,7 @@ ACTION_BORDEREAU = (
 
 
 def pages(base_js, questions_balisees):
-    """Les cinq pages de la racine, prêtes à être assemblées.
+    """Les trois pages de la racine, prêtes à être assemblées.
 
     Chaque entrée est le jeu d'arguments de `page_simple` : fichier,
     titre, description, étiquette, titre affiché, chapô, corps, modules,
@@ -30,8 +30,8 @@ def pages(base_js, questions_balisees):
         ("entreprise.html",
          "L'entreprise — DSG Rénovation, rénovation à Lausanne",
          "DSG Rénovation Sàrl, entreprise de rénovation fondée en 2019 à "
-         "Lausanne : 11 professionnels salariés, 600 chantiers livrés, "
-         "40 ans de savoir-faire transmis.",
+         "Lausanne : 11 professionnels salariés, 600 chantiers livrés, et les "
+         "régies qui nous confient leurs biens.",
          "L'entreprise", ["Quarante ans de métier,", "une entreprise jeune"],
          "Onze professionnels salariés, un réseau de partenaires de la "
          "région, et un seul métier : la rénovation.",
@@ -48,34 +48,14 @@ def pages(base_js, questions_balisees):
          pages_contenu.realisations,
          base_js + ["dossier.js", "lumineuse.js"], [], None),
 
-        ("references.html",
-         "Références et avis clients — DSG Rénovation Lausanne",
-         "Régies, architectes et propriétaires qui confient leurs biens à "
-         "DSG Rénovation à Lausanne et Genève, et ce qu'en disent nos "
-         "clients.",
-         "Références", ["Ils nous confient", "leurs biens"],
-         "Régies lausannoises, architectes et propriétaires privés : ceux "
-         "qui nous rappellent d'un chantier à l'autre.",
-         pages_contenu.references, base_js, [], None),
-
-        ("questions.html",
-         "Questions fréquentes — rénovation à Lausanne",
-         "Zone d'intervention, gratuité du devis, durée d'une rénovation, "
-         "vie dans le logement pendant les travaux : les réponses aux "
-         "questions que l'on nous pose avant de signer.",
-         "Questions", ["Ce qu'on nous", "demande le plus"],
-         "Les réponses aux questions qui reviennent avant la signature "
-         "d'un devis.",
-         pages_contenu.questions, base_js, [questions_balisees], None),
-
         ("devis.html",
-         "Demander un devis gratuit — DSG Rénovation Lausanne",
-         "Devis de rénovation gratuit et détaillé sous 72 heures à "
-         "Lausanne et sur l'arc lémanique. Visite et relevé compris, sans "
-         "engagement.",
-         "Demander un devis", ["Ouvrez", "votre dossier"],
+         "Devis rénovation gratuit à Lausanne — DSG Rénovation",
+         "Devis de rénovation gratuit et détaillé sous 72 heures à Lausanne. "
+         "Ce que contient un devis, comment en comparer deux, et les réponses "
+         "aux vingt questions qu'on nous pose avant de signer.",
+         "Devis gratuit", ["Ouvrez", "votre dossier"],
          "Visite, relevé et devis détaillé poste par poste. Gratuit, sous "
          "72 heures, sans engagement.",
-         pages_contenu.devis, base_js + ["formulaire.js"], [],
-         ACTION_BORDEREAU),
+         pages_contenu.devis, base_js + ["formulaire.js"],
+         [questions_balisees], ACTION_BORDEREAU),
     ]

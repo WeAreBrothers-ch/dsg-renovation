@@ -61,7 +61,7 @@ def accueil(services, base=""):
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("N° 02", "Savoir-faire", "Neuf lots · une seule entreprise",
+{briques.intercalaire("N° 02", "Prestations", "Neuf métiers · cinq pages",
                       "Neuf métiers,|un seul chantier",
                       "Tous nos lots sont réalisés par des salariés de "
                       "l'entreprise ou par des partenaires que nous suivons "
@@ -109,7 +109,7 @@ def accueil(services, base=""):
 {briques.intercalaire("N° 05", "Références", "Régies, propriétaires et architectes",
                       "Ils nous confient|leurs biens")}
       {fragment('partenaires')}
-      <p class="suite revele"><a href="{base}references.html">Lire les retours de nos clients<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite revele"><a href="{base}entreprise.html">Lire les retours de nos clients<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 """ + briques.appel(
