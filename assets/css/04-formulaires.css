@@ -51,6 +51,20 @@
   width:24px;height:24px;min-height:0;flex:0 0 auto;margin-top:0;
   accent-color:var(--c-signal);cursor:pointer;
 }
+.consentement label{cursor:pointer}
+
+/* Le renvoi vers la politique de confidentialité est posé sous la case,
+   et non dans son intitulé : à l'intérieur du label, un clic sur le lien
+   basculerait aussi la case. Il s'aligne sur le texte, pas sur la case. */
+.consentement__renvoi{
+  margin-top:var(--sp-2);padding-left:calc(24px + var(--sp-3));
+  font-size:var(--t-petit);
+}
+.consentement__renvoi a{
+  color:var(--c-signal-sombre);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.consentement__renvoi a:hover{color:var(--c-encre)}
 
 .message-formulaire{
   padding:var(--sp-4);border-radius:var(--r-net);

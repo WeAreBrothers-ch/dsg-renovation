@@ -10,10 +10,16 @@ Ouvrir `index.html` suffit.
 
 ```
 index.html            le dossier complet, en sept pièces
+mentions-legales.html pièce annexe A — éditeur, droits, responsabilité
+confidentialite.html  pièce annexe B — traitement des données
 assets/css/           feuilles numérotées, chargées dans l'ordre
 assets/js/            un module par comportement
 assets/images/        tirages du comparateur avant / après
 ```
+
+Les deux annexes partagent l'en-tête, le menu et le pied du dossier,
+mais n'en chargent que les feuilles utiles. Leur mise en page tient
+dans `14-document.css`.
 
 Les feuilles de style se lisent dans l'ordre de leur numéro :
 `00-jetons.css` porte **toutes** les valeurs du site (couleurs,
@@ -46,9 +52,26 @@ Le plancher du site est de 4,5:1 — seuil AA.
 | `formulaire.js` | validation de la demande de devis |
 | `dossier.js` | filtres des réalisations |
 
+Les annexes ne chargent que `nav.js`, `motion.js`, `effets.js` et
+`curseur.js` : elles n'ont ni comparateur, ni visionneuse, ni
+formulaire.
+
 Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans
 JavaScript.
+
+## À compléter avant mise en ligne
+
+Les annexes signalent visiblement les informations qui n'appartiennent
+qu'au client, au moyen de la classe `.a-valider` — un fond gris et un
+soulignement tireté, jamais de rouge. À obtenir puis à remplacer :
+
+- le numéro IDE de la société et l'identité du gérant responsable ;
+- le nom et l'adresse de l'hébergeur, une fois celui-ci choisi ;
+- l'auteur des prises de vue des chantiers.
+
+Chaque emplacement porte un commentaire `CONTENU À VALIDER` dans le
+HTML. Une recherche sur ce mot suffit à les retrouver tous.
 
 ## Documents de travail
 

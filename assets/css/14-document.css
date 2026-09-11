@@ -1,0 +1,204 @@
+/* ============================================================
+   DSG RÉNOVATION — 14 · PIÈCES ANNEXES
+   Mise en page des pages de texte suivi : mentions légales,
+   protection des données.
+
+   Ces pages sont les annexes du dossier. Elles n'ont ni couverture
+   ni photographie : rien qu'un en-tête de pièce, un bordereau de
+   renvoi et des articles numérotés en cellules à filets. Le tracé
+   fait tout le travail — c'est la même règle que le pied de page,
+   appliquée à du texte long.
+
+   Aucune valeur n'est écrite en dur : tout vient de 00-jetons.css.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   EN-TÊTE DE PIÈCE
+   L'en-tête du site est fixe : la pièce réserve elle-même sa
+   hauteur, comme le fait la couverture du dossier.
+   ------------------------------------------------------------ */
+.piece{padding-top:calc(var(--h-entete) + var(--sp-7))}
+@media (max-width:767px){.piece{padding-top:calc(var(--h-entete) + var(--sp-6))}}
+
+.piece__entete{
+  --c-trait:var(--c-encre);--e-trait:1.5px;
+  padding-bottom:var(--sp-7);
+}
+
+/* Fil d'Ariane : le chemin de retour au dossier, en mono comme
+   toutes les données de service du site. */
+.piece__chemin{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2);
+  margin-bottom:var(--sp-6);
+}
+.piece__chemin a{
+  display:inline-block;padding-block:var(--sp-1);
+  text-decoration:underline;text-underline-offset:3px;
+  transition:color var(--d-rapide) var(--e-standard);
+}
+.piece__chemin a:hover{color:var(--c-encre)}
+.piece__chemin span[aria-hidden]{color:var(--c-encre-40)}
+
+/* Le titre d'annexe reste en Archivo 500 : la graisse pleine et les
+   capitales sont réservées au titre de couverture, une seule fois
+   dans tout le site. */
+.piece__titre{
+  margin-top:var(--sp-4);
+  font-size:var(--t-piece);line-height:1.04;letter-spacing:-.03em;
+}
+.piece__chapo{margin-top:var(--sp-5)}
+
+/* Cartouche de mise à jour : deux données, deux cellules. */
+.piece__cote{
+  display:flex;flex-wrap:wrap;gap:var(--sp-5) var(--sp-8);
+  margin-top:var(--sp-6);
+}
+.piece__cote div{display:flex;flex-direction:column;gap:var(--sp-2)}
+.piece__cote dt{
+  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--c-encre-60);
+}
+.piece__cote dd{margin:0;font-family:var(--f-mono);font-size:var(--t-donnee)}
+
+/* ------------------------------------------------------------
+   CORPS DE LA PIÈCE
+   Deux colonnes : le bordereau de renvoi tient la marge, les
+   articles occupent la mesure de lecture.
+   ------------------------------------------------------------ */
+.piece__corps{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);
+  gap:var(--grille-goutt);
+  align-items:start;
+  padding-block:var(--sp-8) var(--sp-9);
+}
+@media (max-width:1023px){
+  .piece__corps{grid-template-columns:1fr;gap:var(--sp-7)}
+}
+
+/* ---------- Bordereau de renvoi ---------- */
+.renvoi{position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
+/* En colonne unique, le bordereau n'a pas besoin de son propre filet :
+   celui du premier article, juste en dessous, ferait doublon. */
+@media (max-width:1023px){
+  .renvoi{position:static;padding-bottom:var(--sp-2)}
+}
+.renvoi h2{
+  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--c-encre-60);
+}
+.renvoi ol{margin-top:var(--sp-4);display:flex;flex-direction:column}
+.renvoi a{
+  display:flex;gap:var(--sp-3);align-items:baseline;
+  padding-block:var(--sp-2);
+  font-size:var(--t-petit);color:var(--c-encre-60);
+  transition:color var(--d-rapide) var(--e-standard);
+}
+.renvoi a:hover{color:var(--c-encre)}
+.renvoi a .n{
+  flex:0 0 auto;
+  font-family:var(--f-mono);font-size:var(--t-etiquette);
+  font-variant-numeric:tabular-nums;color:var(--c-encre-40);
+}
+
+/* ---------- Articles ---------- */
+.articles{display:flex;flex-direction:column}
+
+/* Chaque article est une cellule à filet, coiffée de son numéro.
+   Le filet se tire à la règle à l'entrée dans l'écran, comme
+   partout ailleurs dans le dossier. */
+.article{
+  --c-trait:var(--c-ligne);
+  padding-block:var(--sp-7);
+}
+.articles>.article:last-child{
+  border-bottom:var(--bd-fin);
+}
+/* La marge de lecture est bornée à 66 caractères : au-delà, l'œil
+   perd la ligne suivante en revenant à gauche. */
+.article__tete{
+  display:flex;gap:var(--sp-4);align-items:baseline;
+  margin-bottom:var(--sp-5);
+}
+.article__n{
+  flex:0 0 auto;
+  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
+  letter-spacing:.14em;color:var(--c-signal-sombre);
+  font-variant-numeric:tabular-nums;
+}
+.article h2{font-size:var(--t-h3);letter-spacing:-.015em;line-height:1.15}
+
+.article__corps{max-width:66ch;color:var(--c-encre-60)}
+.article__corps>*+*{margin-top:var(--sp-4)}
+.article__corps h3{
+  font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
+  letter-spacing:-.01em;line-height:1.3;color:var(--c-encre);
+  margin-top:var(--sp-6);
+}
+.article__corps strong{color:var(--c-encre);font-weight:600}
+.article__corps a{
+  color:var(--c-signal-sombre);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.article__corps a:hover{color:var(--c-encre)}
+
+/* Les listes gardent la puce du dossier : un tiret cadratin posé
+   dans la marge, jamais une pastille. */
+.article__corps ul{display:flex;flex-direction:column;gap:var(--sp-3)}
+.article__corps ul li{position:relative;padding-left:var(--sp-5)}
+.article__corps ul li::before{
+  content:"—";position:absolute;left:0;top:0;
+  color:var(--c-encre-40);
+}
+
+/* Relevé de données : le même tableau à filets que le reste du
+   dossier, en deux colonnes sur grand écran, empilé sur téléphone.
+   Les liens y restent à l'encre : une adresse est une donnée, pas une
+   action — le rouge du dossier ne sert qu'à appeler un geste. */
+.releve-piece{
+  display:grid;grid-template-columns:minmax(0,15ch) minmax(0,1fr);
+  gap:var(--sp-3) var(--sp-5);
+  margin-top:var(--sp-4);
+}
+@media (max-width:479px){
+  .releve-piece{grid-template-columns:1fr;gap:var(--sp-1)}
+  .releve-piece dd{margin-bottom:var(--sp-4)}
+}
+.releve-piece dt{
+  font-family:var(--f-mono);font-size:var(--t-etiquette);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--c-encre-40);
+  padding-top:.15em;
+}
+.releve-piece dd{margin:0;color:var(--c-encre)}
+/* Spécificité alignée sur .article__corps a, qui pose le rouge. */
+.article__corps .releve-piece a{
+  color:var(--c-encre);text-decoration-color:var(--c-ligne-forte);
+}
+.article__corps .releve-piece a:hover{text-decoration-color:currentColor}
+
+/* ------------------------------------------------------------
+   RENVOI DE FIN — le retour au dossier
+   ------------------------------------------------------------ */
+.piece__sortie{
+  --c-trait:var(--c-encre);--e-trait:1.5px;
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:var(--sp-5);
+  padding-top:var(--sp-7);padding-bottom:var(--sp-9);
+}
+.piece__sortie p{max-width:46ch;color:var(--c-encre-60)}
+
+/* ------------------------------------------------------------
+   DONNÉE À VALIDER
+   Certaines informations légales n'appartiennent qu'au client :
+   numéro IDE, hébergeur, gérant. Plutôt que de les inventer ou de
+   les taire, la page les marque visiblement. Le repère est neutre
+   — pas de rouge : ce n'est pas une action, c'est une lacune.
+   À retirer dès que le client a fourni les valeurs.
+   ------------------------------------------------------------ */
+.a-valider{
+  background:var(--c-papier-2);
+  border-bottom:1px dashed var(--c-ligne-forte);
+  padding:.1em .3em;
+  color:var(--c-encre-60);
+  font-style:italic;
+}
+@media print{.a-valider{background:none}}
