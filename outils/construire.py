@@ -38,14 +38,14 @@ FEUILLES = [
     "04-formulaires.css", "05-navigation.css", "06-haut.css",
     "07-chantiers.css", "08-bas.css", "09-curseur.css", "10-comparateur.css",
     "11-lumineuse.css", "12-planche.css", "13-pile.css", "14-document.css",
-    "15-pages.css", "16-composants.css",
+    "15-pages.css", "16-composants.css", "17-repli.css",
 ]
 FEUILLES_ANNEXE = [
     "00-jetons.css", "01-socle.css", "02-boutons.css", "05-navigation.css",
-    "08-bas.css", "09-curseur.css", "14-document.css", "15-pages.css", "16-composants.css",
+    "08-bas.css", "09-curseur.css", "14-document.css", "15-pages.css", "16-composants.css", "17-repli.css",
 ]
 
-BASE_JS = ["nav.js", "motion.js", "effets.js", "curseur.js"]
+BASE_JS = ["nav.js", "motion.js", "effets.js", "curseur.js", "onglets.js"]
 
 
 def ecrire(chemin, contenu):

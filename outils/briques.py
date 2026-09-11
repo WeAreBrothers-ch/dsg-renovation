@@ -123,14 +123,12 @@ def appel(base, titre, texte):
 
 
 def questions_liste(paires):
-    """Liste de questions dépliables, telle quelle dans le dossier."""
-    items = "\n".join(
-        f"""        <li>
-          <details class="question">
-            <summary class="question__tete">{q}<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>{r}</p></div>
-          </details>
-        </li>"""
-        for q, r in paires
-    )
-    return '      <ul class="questions__liste revele">\n' + items + "\n      </ul>"
+    """Liste de questions dépliables.
+
+    Elles empruntent le dépliant de bordereau, comme le reste du site :
+    deux accordéons de dessins différents sur une même page se lisent
+    comme deux composants sans rapport.
+    """
+    import repli
+    return repli.replis([(q, "<p>%s</p>" % r) for q, r in paires],
+                        numerote=False)

@@ -34,8 +34,8 @@ la leur, ce qui donne des pages denses plutôt que nombreuses.
 Toutes les pages partagent le même en-tête, le même menu et le même
 pied. `14-document.css` porte la mise en page des annexes légales,
 `15-pages.css` celle des pages intérieures et des pages de prestation,
-`16-composants.css` la frise d'étapes, les cartes, le tableau des
-besoins et les autres blocs de contenu.
+`16-composants.css` les cartes et le tableau des besoins,
+`17-repli.css` les onglets et les dépliants.
 
 ## Le générateur
 
@@ -65,7 +65,8 @@ python3 outils/construire.py
 | `contenu_divers.py` | enchaînement des lots, besoins, familles de biens |
 | `gabarit.py` | tête du document, en-tête, menu, pied, scripts |
 | `briques.py` | couverture, intercalaire, relevé, appel à l'action |
-| `briques_bis.py` | frise, cartes, besoins, limites, conseils |
+| `briques_bis.py` | cartes à filet, tableau des besoins |
+| `repli.py` | onglets et dépliants — voir « Ce qui se replie » |
 | `page_service.py` | corps d'une page de prestation |
 | `page_accueil.py` | corps de l'accueil |
 | `pages_site.py` | entreprise, prestations |
@@ -82,6 +83,26 @@ Les feuilles de style se lisent dans l'ordre de leur numéro :
 `00-jetons.css` porte **toutes** les valeurs du site (couleurs,
 typographie, espacements, durées). Les autres n'y puisent que des
 jetons — aucune valeur n'est écrite en dur ailleurs, hors cas commenté.
+
+## Ce qui se replie
+
+Une page de chantier se feuillette, elle ne se déroule pas. Les listes
+longues, les méthodes en cinq étapes et les questions ne s'affichent
+donc pas d'un bloc : **on voit les intitulés, on ouvre ce qu'on veut
+lire.**
+
+Deux composants portent cela, tous deux dans `repli.py` :
+
+- **les onglets** — une languette par lot sur les pages qui en réunissent
+  plusieurs, et sur la section « sur le terrain » ;
+- **les dépliants** — une ligne de bordereau qui porte son numéro, son
+  intitulé et sa cote, et qui s'ouvre sur un paragraphe.
+
+Cela ne coûte rien au référencement : le contenu replié est dans le
+document, Google le lit. Sans JavaScript, les onglets affichent tous
+leurs panneaux et les dépliants restent ouvrables — rien n'est jamais
+inaccessible. Le module `onglets.js` ne fait qu'en masquer une partie
+quand il s'exécute.
 
 ## Référencement local
 
@@ -142,9 +163,11 @@ Le plancher du site est de 4,5:1 — seuil AA.
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `formulaire.js` | validation de la demande de devis |
 | `dossier.js` | filtres des réalisations |
+| `onglets.js` | jeux d'onglets des pages de prestation |
 
-Chaque page ne charge que les modules dont elle a besoin. Les quatre
-modules communs sont `nav.js`, `motion.js`, `effets.js` et `curseur.js` ;
+Chaque page ne charge que les modules dont elle a besoin. Les cinq
+modules communs sont `nav.js`, `motion.js`, `effets.js`, `curseur.js`
+et `onglets.js` ;
 `comparateur.js` ne sert qu'à l'accueil, `dossier.js` et `lumineuse.js`
 qu'aux réalisations, `formulaire.js` qu'à la page de devis.
 

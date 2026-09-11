@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="../assets/css/14-document.css">
 <link rel="stylesheet" href="../assets/css/15-pages.css">
 <link rel="stylesheet" href="../assets/css/16-composants.css">
+<link rel="stylesheet" href="../assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -383,13 +384,19 @@
         <h2 class="h2" data-lignes>Ce que nous<br>faisons</h2>
         
       </div>
-      <div class="local revele">
-        
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Un chantier propre le dernier jour n'est pas un chantier fini. La poussière fine reste en suspension, retombe sur les plinthes, dans les rails de fenêtre, sur le dessus des portes.</p><p>Nous traitons le nettoyage comme un lot à part entière, avec ses passes successives : décapage des traces de colle et de peinture, dépoussiérage complet, vitres et encadrements, sanitaires et robinetterie, puis sols.</p><p>Sur nos rénovations, ce lot est compris dans le devis. Nous intervenons aussi seuls, après les travaux d'une autre entreprise ou avant un état des lieux de sortie.</p>
-          </div>
-          <ul class="service__liste">
+
+        <div class="service__texte">
+          <p>Un chantier propre le dernier jour n'est pas un chantier fini. La poussière fine reste en suspension, retombe sur les plinthes, dans les rails de fenêtre, sur le dessus des portes.</p><p>Nous traitons le nettoyage comme un lot à part entière, avec ses passes successives : décapage des traces de colle et de peinture, dépoussiérage complet, vitres et encadrements, sanitaires et robinetterie, puis sols.</p><p>Sur nos rénovations, ce lot est compris dans le devis. Nous intervenons aussi seuls, après les travaux d'une autre entreprise ou avant un état des lieux de sortie.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">7 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Dépoussiérage complet, plinthes et dessus de portes compris</li>
             <li>Décapage des traces de peinture, colle, ciment et adhésif</li>
             <li>Vitres, encadrements, rails et appuis de fenêtre</li>
@@ -397,9 +404,9 @@
             <li>Cuisine : façades, plans de travail, intérieur des placards</li>
             <li>Sols lavés selon la nature du revêtement posé</li>
             <li>Évacuation des derniers déchets et protections</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
-      </div>
     </div>
   </section>
 
@@ -411,36 +418,44 @@
         <h2 class="h2" data-lignes>Comment nous<br>procédons</h2>
         
       </div>
-      <ol class="etapes">
-        <li class="etape revele trace">
-          <span class="etape__n">01</span>
-          <div>
-            <h3 class="h4">Repli du chantier</h3>
-            <p class="etape__texte">Dépose des protections et évacuation des derniers déchets et emballages.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">02</span>
-          <div>
-            <h3 class="h4">Première passe</h3>
-            <p class="etape__texte">Décapage des points durs et dépoussiérage descendant, du plafond vers le sol.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">03</span>
-          <div>
-            <h3 class="h4">Seconde passe</h3>
-            <p class="etape__texte">Rattrapage de la poussière retombée, vitres, sanitaires et cuisine.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">04</span>
-          <div>
-            <h3 class="h4">Contrôle</h3>
-            <p class="etape__texte">Tour du logement avec vous, pièce par pièce, avant remise des clés.</p>
-          </div>
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Repli du chantier</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Dépose des protections et évacuation des derniers déchets et emballages.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">Première passe</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Décapage des points durs et dépoussiérage descendant, du plafond vers le sol.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Seconde passe</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Rattrapage de la poussière retombée, vitres, sanitaires et cuisine.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Contrôle</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Tour du logement avec vous, pièce par pièce, avant remise des clés.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -502,8 +517,7 @@
         <h2 class="h2" data-lignes>Rendre<br>les clés</h2>
         
       </div>
-      <div class="local revele">
-        
+
         <div class="service__deux">
           <div class="service__texte">
             <p>Sur le marché lausannois, un logement se reloue vite : la date de libération est souvent calée sur l'entrée du locataire suivant, à quelques jours près. Le nettoyage n'est pas la dernière ligne du devis, c'est ce qui rend la date tenable.</p><p>Un état des lieux de sortie se joue sur des détails que la poussière de chantier masque : rails de fenêtre, dessus de portes, joints de faïence, intérieur des placards. Ce sont précisément les points que nous reprenons en seconde passe.</p><p>Nous intervenons aussi pour des régies sur des logements que nous n'avons pas rénovés, entre deux baux, avec un tour du logement contradictoire avant remise des clés.</p>
@@ -511,13 +525,12 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Ce que regarde un état des lieux</p>
             <ul class="encadre__liste">
-            <li>Les rails et les gonds de fenêtre, jamais nettoyés en cours de chantier.</li>
-            <li>Le détartrage complet de la robinetterie et des parois de douche.</li>
-            <li>L'intérieur des placards et le dessus des portes, hors du champ de vision courant.</li>
+              <li>Les rails et les gonds de fenêtre, jamais nettoyés en cours de chantier.</li>
+              <li>Le détartrage complet de la robinetterie et des parois de douche.</li>
+              <li>L'intérieur des placards et le dessus des portes, hors du champ de vision courant.</li>
             </ul>
           </aside>
         </div>
-      </div>
     </div>
   </section>
 
@@ -529,20 +542,26 @@
         <h2 class="h2" data-lignes>Ce qu'on nous<br>demande</h2>
         
       </div>
-      <ul class="questions__liste revele">
-        <li>
-          <details class="question">
-            <summary class="question__tete">Le nettoyage est-il compris dans vos devis de rénovation ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, systématiquement. Nous ne rendons pas un logement à nettoyer : c'est la dernière image que vous gardez du chantier.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Intervenez-vous pour un état des lieux de sortie ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, y compris sans avoir réalisé les travaux. C'est une demande fréquente des régies lausannoises entre deux locations.</p></div>
-          </details>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le nettoyage est-il compris dans vos devis de rénovation ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Oui, systématiquement. Nous ne rendons pas un logement à nettoyer : c'est la dernière image que vous gardez du chantier.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Intervenez-vous pour un état des lieux de sortie ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Oui, y compris sans avoir réalisé les travaux. C'est une demande fréquente des régies lausannoises entre deux locations.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -665,6 +684,7 @@
 <script src="../assets/js/motion.js" defer></script>
 <script src="../assets/js/effets.js" defer></script>
 <script src="../assets/js/curseur.js" defer></script>
+<script src="../assets/js/onglets.js" defer></script>
 <script src="../assets/js/vignette.js" defer></script>
 </body>
 </html>

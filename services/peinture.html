@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="../assets/css/14-document.css">
 <link rel="stylesheet" href="../assets/css/15-pages.css">
 <link rel="stylesheet" href="../assets/css/16-composants.css">
+<link rel="stylesheet" href="../assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -449,13 +450,25 @@
         <h2 class="h2" data-lignes>Ce que nous<br>faisons</h2>
         
       </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Travaux de peinture</h3>
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Remise en peinture d'un appartement avant emménagement, reprise complète d'une villa, rafraîchissement entre deux locations pour une régie : la peinture est notre lot le plus demandé à Lausanne et sur la Riviera.</p><p>Nous préparons les fonds avant de peindre, systématiquement. Rebouchage, ponçage, fixateur adapté au support : c'est ce travail invisible qui fait qu'une teinte tient dix ans au lieu de deux.</p><p>Les teintes sont validées avec vous sur place, sur une surface d'essai. Une couleur ne se juge jamais sur un nuancier, elle se juge sur le mur, à la lumière de la pièce.</p>
-          </div>
-          <ul class="service__liste">
+      <div class="jeu" data-onglets>
+        <div class="jeu__barre" role="tablist" aria-label="Les lots de cette prestation" data-onglets-barre hidden>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu1-o0" aria-controls="jeu1-p0" aria-selected="true">Travaux de peinture</button>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu1-o1" aria-controls="jeu1-p1" aria-selected="false">Revêtements muraux</button>
+        </div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu1-p0" aria-labelledby="jeu1-o0">
+
+        <div class="service__texte">
+          <p>Remise en peinture d'un appartement avant emménagement, reprise complète d'une villa, rafraîchissement entre deux locations pour une régie : la peinture est notre lot le plus demandé à Lausanne et sur la Riviera.</p><p>Nous préparons les fonds avant de peindre, systématiquement. Rebouchage, ponçage, fixateur adapté au support : c'est ce travail invisible qui fait qu'une teinte tient dix ans au lieu de deux.</p><p>Les teintes sont validées avec vous sur place, sur une surface d'essai. Une couleur ne se juge jamais sur un nuancier, elle se juge sur le mur, à la lumière de la pièce.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">7 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Peinture intérieure : murs, plafonds, boiseries et radiateurs</li>
             <li>Peinture extérieure : façades, volets, ferronneries, balcons</li>
             <li>Préparation des fonds : rebouchage, ponçage, fixateur</li>
@@ -463,24 +476,34 @@
             <li>Peinture de rénovation entre deux locations</li>
             <li>Finitions mates, veloutées, satinées ou laquées</li>
             <li>Traitement des pièces humides par peinture anti-moisissure</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
-      </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Revêtements muraux</h3>
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Le papier peint est revenu, et il ne ressemble plus à celui des années soixante-dix. Panoramiques, intissés texturés, fibres naturelles : un seul pan de mur suffit souvent à donner un caractère à une pièce entière.</p><p>La toile de verre, elle, répond à un autre besoin : masquer durablement un support fissuré. Peinte ensuite, elle tient là où l'enduit seul se rouvrirait.</p><p>Dans les deux cas, le fond décide du résultat. Nous préparons le support avant de poser, comme pour une peinture.</p>
-          </div>
-          <ul class="service__liste">
+</div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu1-p1" aria-labelledby="jeu1-o1">
+
+        <div class="service__texte">
+          <p>Le papier peint est revenu, et il ne ressemble plus à celui des années soixante-dix. Panoramiques, intissés texturés, fibres naturelles : un seul pan de mur suffit souvent à donner un caractère à une pièce entière.</p><p>La toile de verre, elle, répond à un autre besoin : masquer durablement un support fissuré. Peinte ensuite, elle tient là où l'enduit seul se rouvrirait.</p><p>Dans les deux cas, le fond décide du résultat. Nous préparons le support avant de poser, comme pour une peinture.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">6 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Pose de papier peint intissé, vinyle et traditionnel</li>
             <li>Panoramiques et lés numérotés, calepinés avant pose</li>
             <li>Toile de verre à peindre sur supports fissurés</li>
             <li>Revêtements décoratifs et effets de matière</li>
             <li>Dépose des anciens revêtements et reprise du fond</li>
             <li>Traitement des angles, tableaux et retours de fenêtre</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
+</div>
       </div>
     </div>
   </section>
@@ -493,43 +516,53 @@
         <h2 class="h2" data-lignes>Comment nous<br>procédons</h2>
         
       </div>
-      <ol class="etapes">
-        <li class="etape revele trace">
-          <span class="etape__n">01</span>
-          <div>
-            <h3 class="h4">Choix des teintes</h3>
-            <p class="etape__texte">Essais sur le mur, jugés le matin et le soir : une teinte change entièrement selon la lumière.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">02</span>
-          <div>
-            <h3 class="h4">Protection</h3>
-            <p class="etape__texte">Sols, meubles et menuiseries bâchés avant la première ouverture de pot.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">03</span>
-          <div>
-            <h3 class="h4">Préparation des fonds</h3>
-            <p class="etape__texte">Rebouchage, ponçage, dépoussiérage, puis primaire adapté au support.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">04</span>
-          <div>
-            <h3 class="h4">Application</h3>
-            <p class="etape__texte">Deux couches de finition au minimum, croisées, avec contrôle sous éclairage rasant.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">05</span>
-          <div>
-            <h3 class="h4">Repli</h3>
-            <p class="etape__texte">Dépose des protections, nettoyage et remise en place du mobilier.</p>
-          </div>
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Choix des teintes</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Essais sur le mur, jugés le matin et le soir : une teinte change entièrement selon la lumière.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">Protection</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Sols, meubles et menuiseries bâchés avant la première ouverture de pot.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Préparation des fonds</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Rebouchage, ponçage, dépoussiérage, puis primaire adapté au support.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Application</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Deux couches de finition au minimum, croisées, avec contrôle sous éclairage rasant.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">05</span>
+            <span class="repli__titre">Repli</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Dépose des protections, nettoyage et remise en place du mobilier.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -591,8 +624,13 @@
         <h2 class="h2" data-lignes>Ce que le bâti<br>lausannois impose</h2>
         
       </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Peindre à Lausanne</h3>
+      <div class="jeu" data-onglets>
+        <div class="jeu__barre" role="tablist" aria-label="Le bâti lausannois, lot par lot" data-onglets-barre hidden>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu2-o0" aria-controls="jeu2-p0" aria-selected="true">Peindre à Lausanne</button>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu2-o1" aria-controls="jeu2-p1" aria-selected="false">Poser dans l'ancien</button>
+        </div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu2-p0" aria-labelledby="jeu2-o0">
+
         <div class="service__deux">
           <div class="service__texte">
             <p>L'orientation change tout. Un appartement de Sous-Gare ouvert plein sud sur le lac reçoit une lumière franche et froide qui durcit les gris ; le même gris posé dans un logement du Vallon, orienté nord, vire au bleu. C'est la raison pour laquelle nous peignons toujours une surface d'essai sur place.</p><p>Les supports anciens demandent un fixateur. Le plâtre sur lattis des immeubles d'avant-guerre boit énormément : sans primaire adapté, la première couche disparaît dans le mur et la teinte finit inégale.</p><p>Dans les logements de rendement remis en état entre deux baux, nous travaillons en blanc cassé ou en teintes claires : elles supportent les retouches localisées, là où une teinte soutenue impose de refaire le pan entier au premier choc.</p>
@@ -600,15 +638,15 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Trois erreurs qui coûtent cher</p>
             <ul class="encadre__liste">
-            <li>Choisir une teinte sur nuancier en magasin, sous un éclairage qui n'a rien à voir avec celui de la pièce.</li>
-            <li>Peindre par-dessus un papier peint pour gagner deux jours, et le voir se décoller six mois plus tard.</li>
-            <li>Appliquer une seule couche sur un changement de teinte marqué : le fond réapparaît en séchant.</li>
+              <li>Choisir une teinte sur nuancier en magasin, sous un éclairage qui n'a rien à voir avec celui de la pièce.</li>
+              <li>Peindre par-dessus un papier peint pour gagner deux jours, et le voir se décoller six mois plus tard.</li>
+              <li>Appliquer une seule couche sur un changement de teinte marqué : le fond réapparaît en séchant.</li>
             </ul>
           </aside>
         </div>
-      </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Poser dans l'ancien</h3>
+</div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu2-p1" aria-labelledby="jeu2-o1">
+
         <div class="service__deux">
           <div class="service__texte">
             <p>Dans un immeuble lausannois ancien, aucun angle n'est à quatre-vingt-dix degrés et aucun mur n'est d'aplomb sur toute sa hauteur. Un lé posé au fil à plomb dérive visiblement en trois mètres si le calepinage n'a pas été pensé avant.</p><p>C'est pourquoi nous partons de l'angle le plus vu de la pièce, généralement celui qu'on découvre en entrant, et nous reportons le rattrapage dans l'angle le plus discret, souvent derrière la porte.</p><p>La toile de verre trouve ici son meilleur usage : sur un mur ancien qui travaille encore, elle ponte les microfissures et tient là où l'enduit seul se rouvrirait au premier hiver.</p>
@@ -616,12 +654,13 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Ce qui se décide avant la commande</p>
             <ul class="encadre__liste">
-            <li>Le métrage réel, relevé sur place : un panoramique se commande au lé près, il ne se rattrape pas.</li>
-            <li>Le sens du raccord et le mur de départ.</li>
-            <li>L'état du fond : un intissé ne masque aucun défaut, il les révèle en lumière rasante.</li>
+              <li>Le métrage réel, relevé sur place : un panoramique se commande au lé près, il ne se rattrape pas.</li>
+              <li>Le sens du raccord et le mur de départ.</li>
+              <li>L'état du fond : un intissé ne masque aucun défaut, il les révèle en lumière rasante.</li>
             </ul>
           </aside>
         </div>
+</div>
       </div>
     </div>
   </section>
@@ -634,38 +673,53 @@
         <h2 class="h2" data-lignes>Ce qu'on nous<br>demande</h2>
         
       </div>
-      <ul class="questions__liste revele">
-        <li>
-          <details class="question">
-            <summary class="question__tete">Peut-on repeindre par-dessus du papier peint ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Techniquement oui, durablement non. Les joints et les motifs finissent par réapparaître, et le papier se décolle en tirant la peinture avec lui. Nous déposons, nous reprenons le fond, puis nous peignons.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Combien de temps faut-il attendre avant de réemménager ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Une peinture en phase aqueuse est sèche au toucher en quelques heures et supporte le mobilier le lendemain. Comptez une quinzaine de jours pour la dureté finale : évitez de frotter les murs pendant ce délai.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Intervenez-vous pour une remise en état entre deux locataires ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>C'est une part importante de notre activité pour les régies lausannoises. Nous intervenons entre deux baux, avec une date de libération ferme.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Le papier peint tient-il dans une salle de bains ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Un vinyle sur intissé supporte une salle d'eau correctement ventilée, hors zone de projection directe. En contact avec l'eau, le carrelage reste la seule réponse durable.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Peut-on poser un papier peint sur un mur fissuré ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Pas directement : la fissure travaillera et déchirera le lé. Nous traitons d'abord la fissure, et nous posons une toile de verre quand le support bouge encore.</p></div>
-          </details>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Peut-on repeindre par-dessus du papier peint ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Techniquement oui, durablement non. Les joints et les motifs finissent par réapparaître, et le papier se décolle en tirant la peinture avec lui. Nous déposons, nous reprenons le fond, puis nous peignons.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Combien de temps faut-il attendre avant de réemménager ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Une peinture en phase aqueuse est sèche au toucher en quelques heures et supporte le mobilier le lendemain. Comptez une quinzaine de jours pour la dureté finale : évitez de frotter les murs pendant ce délai.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Intervenez-vous pour une remise en état entre deux locataires ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>C'est une part importante de notre activité pour les régies lausannoises. Nous intervenons entre deux baux, avec une date de libération ferme.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le papier peint tient-il dans une salle de bains ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Un vinyle sur intissé supporte une salle d'eau correctement ventilée, hors zone de projection directe. En contact avec l'eau, le carrelage reste la seule réponse durable.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Peut-on poser un papier peint sur un mur fissuré ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Pas directement : la fissure travaillera et déchirera le lé. Nous traitons d'abord la fissure, et nous posons une toile de verre quand le support bouge encore.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -788,6 +842,7 @@
 <script src="../assets/js/motion.js" defer></script>
 <script src="../assets/js/effets.js" defer></script>
 <script src="../assets/js/curseur.js" defer></script>
+<script src="../assets/js/onglets.js" defer></script>
 <script src="../assets/js/vignette.js" defer></script>
 </body>
 </html>

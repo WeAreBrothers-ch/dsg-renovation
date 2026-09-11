@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="../assets/css/14-document.css">
 <link rel="stylesheet" href="../assets/css/15-pages.css">
 <link rel="stylesheet" href="../assets/css/16-composants.css">
+<link rel="stylesheet" href="../assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -448,13 +449,25 @@
         <h2 class="h2" data-lignes>Ce que nous<br>faisons</h2>
         
       </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Carrelage</h3>
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Salle de bains reprise du sol au plafond, cuisine recarrelée, grand format posé dans une zone de jour : le carrelage est le revêtement le plus durable, à condition que le support et le tracé soient justes.</p><p>Nous étudions le calepinage avant de poser : où tombe la coupe, comment se centre le motif, où passent les joints de fractionnement. C'est ce travail sur plan qui fait la différence entre une pose correcte et une pose soignée.</p><p>L'étanchéité des zones humides est traitée sous le carrelage, avant la pose. C'est invisible, et c'est ce qui protège le logement du dessous.</p>
-          </div>
-          <ul class="service__liste">
+      <div class="jeu" data-onglets>
+        <div class="jeu__barre" role="tablist" aria-label="Les lots de cette prestation" data-onglets-barre hidden>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu5-o0" aria-controls="jeu5-p0" aria-selected="true">Carrelage</button>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu5-o1" aria-controls="jeu5-p1" aria-selected="false">Pose de sol</button>
+        </div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu5-p0" aria-labelledby="jeu5-o0">
+
+        <div class="service__texte">
+          <p>Salle de bains reprise du sol au plafond, cuisine recarrelée, grand format posé dans une zone de jour : le carrelage est le revêtement le plus durable, à condition que le support et le tracé soient justes.</p><p>Nous étudions le calepinage avant de poser : où tombe la coupe, comment se centre le motif, où passent les joints de fractionnement. C'est ce travail sur plan qui fait la différence entre une pose correcte et une pose soignée.</p><p>L'étanchéité des zones humides est traitée sous le carrelage, avant la pose. C'est invisible, et c'est ce qui protège le logement du dessous.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">7 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Carrelage de sol : grès cérame, pierre, grand format</li>
             <li>Faïence murale, salles de bains et crédences de cuisine</li>
             <li>Étanchéité sous carrelage des zones humides</li>
@@ -462,16 +475,24 @@
             <li>Pose droite, à joints décalés, en chevron ou en diagonale</li>
             <li>Plinthes, seuils, profilés d'angle et joints de finition</li>
             <li>Réfection de joints et remplacement de carreaux cassés</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
-      </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Pose de sol</h3>
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Parquet chêne dans un appartement lausannois, vinyle grand passage dans un logement de rendement, linoléum dans une pièce d'eau : le choix du revêtement dépend moins du goût que de l'usage de la pièce.</p><p>Nous préparons systématiquement le support : dépose de l'ancien sol, contrôle de l'humidité de la chape, ragréage autolissant. Un sol posé sur un support irrégulier s'entend à chaque pas et s'use en priorité aux points hauts.</p><p>Les plinthes et les seuils sont assortis et posés dans la foulée. C'est le détail qui distingue un chantier fini d'un chantier arrêté.</p>
-          </div>
-          <ul class="service__liste">
+</div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu5-p1" aria-labelledby="jeu5-o1">
+
+        <div class="service__texte">
+          <p>Parquet chêne dans un appartement lausannois, vinyle grand passage dans un logement de rendement, linoléum dans une pièce d'eau : le choix du revêtement dépend moins du goût que de l'usage de la pièce.</p><p>Nous préparons systématiquement le support : dépose de l'ancien sol, contrôle de l'humidité de la chape, ragréage autolissant. Un sol posé sur un support irrégulier s'entend à chaque pas et s'use en priorité aux points hauts.</p><p>Les plinthes et les seuils sont assortis et posés dans la foulée. C'est le détail qui distingue un chantier fini d'un chantier arrêté.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">7 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Parquet contrecollé et massif, collé ou flottant</li>
             <li>Sols vinyle et LVL, lames ou dalles, grand passage</li>
             <li>Linoléum et sols souples en lés</li>
@@ -479,8 +500,10 @@
             <li>Dépose et évacuation des anciens revêtements</li>
             <li>Plinthes, seuils, barres de jonction et finitions</li>
             <li>Sous-couches acoustiques pour les immeubles</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
+</div>
       </div>
     </div>
   </section>
@@ -493,36 +516,44 @@
         <h2 class="h2" data-lignes>Comment nous<br>procédons</h2>
         
       </div>
-      <ol class="etapes">
-        <li class="etape revele trace">
-          <span class="etape__n">01</span>
-          <div>
-            <h3 class="h4">Contrôle du support</h3>
-            <p class="etape__texte">Planéité, humidité, tenue : un support qui bouge fissure le carrelage, quel que soit le collage.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">02</span>
-          <div>
-            <h3 class="h4">Calepinage</h3>
-            <p class="etape__texte">Tracé des axes et position des coupes arrêtés avec vous avant la pose.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">03</span>
-          <div>
-            <h3 class="h4">Étanchéité</h3>
-            <p class="etape__texte">Natte ou résine sous les douches, les bacs et les zones de projection.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">04</span>
-          <div>
-            <h3 class="h4">Pose et joints</h3>
-            <p class="etape__texte">Collage au double encollage en grand format, puis jointoiement et nettoyage du voile de ciment.</p>
-          </div>
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Contrôle du support</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Planéité, humidité, tenue : un support qui bouge fissure le carrelage, quel que soit le collage.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">Calepinage</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Tracé des axes et position des coupes arrêtés avec vous avant la pose.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Étanchéité</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Natte ou résine sous les douches, les bacs et les zones de projection.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Pose et joints</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Collage au double encollage en grand format, puis jointoiement et nettoyage du voile de ciment.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -584,8 +615,13 @@
         <h2 class="h2" data-lignes>Ce que le bâti<br>lausannois impose</h2>
         
       </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Carreler en immeuble</h3>
+      <div class="jeu" data-onglets>
+        <div class="jeu__barre" role="tablist" aria-label="Le bâti lausannois, lot par lot" data-onglets-barre hidden>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu6-o0" aria-controls="jeu6-p0" aria-selected="true">Carreler en immeuble</button>
+          <button class="jeu__onglet" type="button" role="tab" data-onglet id="jeu6-o1" aria-controls="jeu6-p1" aria-selected="false">Des sols qui ont vécu</button>
+        </div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu6-p0" aria-labelledby="jeu6-o0">
+
         <div class="service__deux">
           <div class="service__texte">
             <p>Une salle de bains d'immeuble lausannois se refait presque toujours au-dessus d'un logement occupé. L'étanchéité posée sous le carrelage n'est donc pas un supplément de confort : c'est ce qui protège le plafond du voisin, et c'est le poste sur lequel nous ne transigeons jamais.</p><p>Dans l'ancien, la dépose réserve son lot d'imprévus : anciennes chapes sur sable, canalisations en plomb, planchers bois sous la faïence. Nous relevons ces points à la visite plutôt que de les découvrir la semaine du chantier.</p><p>L'accès compte autant que la pose. En vieille ville et dans les rues étroites de Sous-Gare, les cages d'escalier sont serrées et le stationnement limité : les livraisons se planifient, et les parties communes se protègent avant le premier carton.</p>
@@ -593,15 +629,15 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Une salle de bains, poste par poste</p>
             <ul class="encadre__liste">
-            <li>Dépose et évacuation : un à deux jours selon l'étage et l'ascenseur.</li>
-            <li>Reprise du support et étanchéité : deux jours, séchage compris.</li>
-            <li>Pose, jointoiement et sanitaires : le reste de la semaine.</li>
+              <li>Dépose et évacuation : un à deux jours selon l'étage et l'ascenseur.</li>
+              <li>Reprise du support et étanchéité : deux jours, séchage compris.</li>
+              <li>Pose, jointoiement et sanitaires : le reste de la semaine.</li>
             </ul>
           </aside>
         </div>
-      </div>
-      <div class="local revele">
-        <h3 class="h3 local__titre">Des sols qui ont vécu</h3>
+</div>
+        <div class="jeu__panneau" role="tabpanel" data-panneau id="jeu6-p1" aria-labelledby="jeu6-o1">
+
         <div class="service__deux">
           <div class="service__texte">
             <p>Sous la moquette d'un appartement lausannois des années soixante, on trouve souvent un parquet à lames d'origine, parfois récupérable. Sous un vieux linoléum d'immeuble d'avant-guerre, on trouve un plancher bois sur solives, qui bouge et qui grince.</p><p>Ces supports ne se ragréent pas comme une chape béton. Un plancher bois demande un panneau de répartition avant tout revêtement collé, sans quoi le jeu des lames se retransmet au sol neuf en quelques mois.</p><p>En immeuble, la sous-couche acoustique n'est pas négociable. Elle coûte peu et règle la principale source de conflit entre voisins après une rénovation : les bruits de pas.</p>
@@ -609,12 +645,13 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Ce que nous vérifions avant de poser</p>
             <ul class="encadre__liste">
-            <li>L'humidité résiduelle de la chape, mesurée et non estimée.</li>
-            <li>La planéité : deux millimètres sous une règle de deux mètres, pas davantage.</li>
-            <li>La hauteur disponible sous les portes et au droit des seuils.</li>
+              <li>L'humidité résiduelle de la chape, mesurée et non estimée.</li>
+              <li>La planéité : deux millimètres sous une règle de deux mètres, pas davantage.</li>
+              <li>La hauteur disponible sous les portes et au droit des seuils.</li>
             </ul>
           </aside>
         </div>
+</div>
       </div>
     </div>
   </section>
@@ -627,32 +664,44 @@
         <h2 class="h2" data-lignes>Ce qu'on nous<br>demande</h2>
         
       </div>
-      <ul class="questions__liste revele">
-        <li>
-          <details class="question">
-            <summary class="question__tete">Peut-on carreler par-dessus un ancien carrelage ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui si l'ancien est parfaitement adhérent, plan et dégraissé, et si la surépaisseur ne bloque ni les portes ni les seuils. Sinon la dépose reste plus sûre, et souvent moins chère que la reprise d'un sinistre.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Le grand format convient-il à une petite salle d'eau ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, et il l'agrandit visuellement en réduisant le nombre de joints. Il demande en revanche un support très plan : le ragréage préalable n'est pas optionnel.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Parquet ou vinyle pour un appartement en location ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Le vinyle grand passage encaisse mieux les rotations de locataires et se remplace pièce par pièce. Le parquet valorise davantage le bien à la revente. Le choix dépend de votre horizon, pas du produit.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Peut-on poser un sol sur un chauffage au sol ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, avec un revêtement compatible et une résistance thermique adaptée. Le collage est alors préférable au flottant, qui isole le chauffage de la pièce.</p></div>
-          </details>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Peut-on carreler par-dessus un ancien carrelage ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Oui si l'ancien est parfaitement adhérent, plan et dégraissé, et si la surépaisseur ne bloque ni les portes ni les seuils. Sinon la dépose reste plus sûre, et souvent moins chère que la reprise d'un sinistre.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le grand format convient-il à une petite salle d'eau ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Oui, et il l'agrandit visuellement en réduisant le nombre de joints. Il demande en revanche un support très plan : le ragréage préalable n'est pas optionnel.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Parquet ou vinyle pour un appartement en location ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Le vinyle grand passage encaisse mieux les rotations de locataires et se remplace pièce par pièce. Le parquet valorise davantage le bien à la revente. Le choix dépend de votre horizon, pas du produit.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Peut-on poser un sol sur un chauffage au sol ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Oui, avec un revêtement compatible et une résistance thermique adaptée. Le collage est alors préférable au flottant, qui isole le chauffage de la pièce.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -775,6 +824,7 @@
 <script src="../assets/js/motion.js" defer></script>
 <script src="../assets/js/effets.js" defer></script>
 <script src="../assets/js/curseur.js" defer></script>
+<script src="../assets/js/onglets.js" defer></script>
 <script src="../assets/js/vignette.js" defer></script>
 </body>
 </html>

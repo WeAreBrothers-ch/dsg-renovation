@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="assets/css/14-document.css">
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
+<link rel="stylesheet" href="assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -287,56 +288,62 @@
         <h2 class="h2" data-lignes>Comment se déroule<br>un chantier</h2>
         <p class="chapo intercalaire__chapo">Six temps, dans cet ordre, sur tous nos chantiers — qu'il s'agisse d'un seul lot ou d'une rénovation complète.</p>
       </div>
-      <ol class="frise">
-        <li class="temps revele trace">
-          <span class="temps__n">01</span>
-          <div class="temps__corps">
-            <h3 class="h4">Le premier appel</h3>
-            <p class="temps__texte">Cinq à dix minutes. Nous cherchons à savoir si le projet entre dans notre métier et dans notre zone. Si ce n'est pas le cas, nous le disons tout de suite plutôt que de faire durer.</p>
-          </div>
-          <span class="temps__cote donnee">Le jour même</span>
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">02</span>
-          <div class="temps__corps">
-            <h3 class="h4">La visite et le relevé</h3>
-            <p class="temps__texte">Nous venons sur place, mesurons, sondons les supports et notons les contraintes : accès, ascenseur, règlement de l'immeuble, horaires. C'est là que se jouent les trois quarts de la justesse du devis.</p>
-          </div>
-          <span class="temps__cote donnee">Sous une semaine</span>
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">03</span>
-          <div class="temps__corps">
-            <h3 class="h4">Le devis détaillé</h3>
-            <p class="temps__texte">Poste par poste, avec les quantités, les finitions retenues et ce qui est compris — protections, évacuation, nettoyage. Rien n'est renvoyé à un « selon besoin ».</p>
-          </div>
-          <span class="temps__cote donnee">72 heures après la visite</span>
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">04</span>
-          <div class="temps__corps">
-            <h3 class="h4">Le planning daté</h3>
-            <p class="temps__texte">Avant le premier jour, vous recevez le calendrier semaine par semaine de chaque corps de métier, avec la date de livraison.</p>
-          </div>
-          <span class="temps__cote donnee">À la signature</span>
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">05</span>
-          <div class="temps__corps">
-            <h3 class="h4">Le chantier</h3>
-            <p class="temps__texte">Un responsable unique pilote les lots et vous rend compte. Les imprévus sont signalés et chiffrés avant d'être exécutés, jamais après.</p>
-          </div>
-          <span class="temps__cote donnee">Selon le lot</span>
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">06</span>
-          <div class="temps__corps">
-            <h3 class="h4">La réception</h3>
-            <p class="temps__texte">Visite contradictoire pièce par pièce, liste des réserves, reprise sous dix jours, nettoyage complet, puis remise des clés.</p>
-          </div>
-          <span class="temps__cote donnee">Le dernier jour</span>
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Le premier appel</span>
+            <span class="repli__cote">Le jour même</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Cinq à dix minutes. Nous cherchons à savoir si le projet entre dans notre métier et dans notre zone. Si ce n'est pas le cas, nous le disons tout de suite plutôt que de faire durer.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">La visite et le relevé</span>
+            <span class="repli__cote">Sous une semaine</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Nous venons sur place, mesurons, sondons les supports et notons les contraintes : accès, ascenseur, règlement de l'immeuble, horaires. C'est là que se jouent les trois quarts de la justesse du devis.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Le devis détaillé</span>
+            <span class="repli__cote">72 heures après la visite</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Poste par poste, avec les quantités, les finitions retenues et ce qui est compris — protections, évacuation, nettoyage. Rien n'est renvoyé à un « selon besoin ».</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Le planning daté</span>
+            <span class="repli__cote">À la signature</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Avant le premier jour, vous recevez le calendrier semaine par semaine de chaque corps de métier, avec la date de livraison.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">05</span>
+            <span class="repli__titre">Le chantier</span>
+            <span class="repli__cote">Selon le lot</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Un responsable unique pilote les lots et vous rend compte. Les imprévus sont signalés et chiffrés avant d'être exécutés, jamais après.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">06</span>
+            <span class="repli__titre">La réception</span>
+            <span class="repli__cote">Le dernier jour</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Visite contradictoire pièce par pièce, liste des réserves, reprise sous dix jours, nettoyage complet, puis remise des clés.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -348,24 +355,44 @@
         <h2 class="h2" data-lignes>Ce que nous<br>ne faisons pas</h2>
         <p class="chapo intercalaire__chapo">Une entreprise qui accepte tout finit par mal faire quelque chose. Voici où nous nous arrêtons.</p>
       </div>
-      <ul class="limites">
-        <li class="limite revele trace">
-          <h3 class="h4 limite__titre">Nous ne faisons pas de construction neuve</h3>
-          <p class="etape__texte">Ni de promotion. Notre métier est le bâti existant, avec ses surprises et ses voisins.</p>
-        </li>
-        <li class="limite revele trace">
-          <h3 class="h4 limite__titre">Nous ne touchons pas à la structure</h3>
-          <p class="etape__texte">Ouvrir un mur porteur relève de l'ingénieur civil et d'une autorisation. Nous vous le disons à la visite et nous vous orientons.</p>
-        </li>
-        <li class="limite revele trace">
-          <h3 class="h4 limite__titre">Nous ne sortons pas de l'arc lémanique</h3>
-          <p class="etape__texte">Un chantier à deux heures de route, c'est une équipe qui arrive en retard et qui ne repasse pas pour une reprise.</p>
-        </li>
-        <li class="limite revele trace">
-          <h3 class="h4 limite__titre">Nous ne sous-traitons pas en cascade</h3>
-          <p class="etape__texte">Nos salariés font le travail, ou des partenaires que nous connaissons et que nous suivons. Pas d'entreprise inconnue découverte sur place.</p>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Nous ne faisons pas de construction neuve</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Ni de promotion. Notre métier est le bâti existant, avec ses surprises et ses voisins.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Nous ne touchons pas à la structure</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Ouvrir un mur porteur relève de l'ingénieur civil et d'une autorisation. Nous vous le disons à la visite et nous vous orientons.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Nous ne sortons pas de l'arc lémanique</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Un chantier à deux heures de route, c'est une équipe qui arrive en retard et qui ne repasse pas pour une reprise.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Nous ne sous-traitons pas en cascade</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Nos salariés font le travail, ou des partenaires que nous connaissons et que nous suivons. Pas d'entreprise inconnue découverte sur place.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -377,24 +404,44 @@
         <h2 class="h2" data-lignes>Quatre engagements,<br>tenus par écrit</h2>
         
       </div>
-      <ul class="engagements">
-        <li class="engagement revele trace">
-          <h3 class="h4">Un seul interlocuteur</h3>
-          <p class="etape__texte">Un responsable de chantier unique pilote tous les lots, du devis à la remise des clés. Vous ne coordonnez personne.</p>
-        </li>
-        <li class="engagement revele trace">
-          <h3 class="h4">Un planning daté</h3>
-          <p class="etape__texte">Le calendrier des corps de métier vous est transmis avant le démarrage, semaine par semaine, et tenu.</p>
-        </li>
-        <li class="engagement revele trace">
-          <h3 class="h4">Des salariés, pas une cascade</h3>
-          <p class="etape__texte">Onze professionnels de l'entreprise sur les chantiers. Les mêmes visages du premier au dernier jour.</p>
-        </li>
-        <li class="engagement revele trace">
-          <h3 class="h4">Une réception en règle</h3>
-          <p class="etape__texte">Visite contradictoire, liste des réserves, reprise sous dix jours et nettoyage complet inclus.</p>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Un seul interlocuteur</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Un responsable de chantier unique pilote tous les lots, du devis à la remise des clés. Vous ne coordonnez personne.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Un planning daté</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Le calendrier des corps de métier vous est transmis avant le démarrage, semaine par semaine, et tenu.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Des salariés, pas une cascade</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Onze professionnels de l'entreprise sur les chantiers. Les mêmes visages du premier au dernier jour.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Une réception en règle</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Visite contradictoire, liste des réserves, reprise sous dix jours et nettoyage complet inclus.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -631,6 +678,7 @@
 <script src="assets/js/motion.js" defer></script>
 <script src="assets/js/effets.js" defer></script>
 <script src="assets/js/curseur.js" defer></script>
+<script src="assets/js/onglets.js" defer></script>
 <script src="assets/js/vignette.js" defer></script>
 </body>
 </html>

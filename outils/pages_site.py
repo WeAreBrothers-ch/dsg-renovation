@@ -9,6 +9,7 @@ import os
 
 import briques
 import briques_bis
+import repli
 import contenu_divers
 import contenu_entreprise as ce
 
@@ -23,12 +24,9 @@ def fragment(nom):
 
 def entreprise(services, base=""):
     """Qui nous sommes, comment se déroule un chantier, nos limites."""
-    engagements = "\n".join(
-        f"""        <li class="engagement revele trace">
-          <h3 class="h4">{titre}</h3>
-          <p class="etape__texte">{texte}</p>
-        </li>"""
-        for titre, texte in ce.ENGAGEMENTS
+    engagements = repli.replis(
+        [(titre, "<p>%s</p>" % texte) for titre, texte in ce.ENGAGEMENTS],
+        numerote=False,
     )
     return f"""
   <section class="section" aria-labelledby="tHistoire">
@@ -61,7 +59,8 @@ def entreprise(services, base=""):
                       "Six temps, dans cet ordre, sur tous nos chantiers — "
                       "qu'il s'agisse d'un seul lot ou d'une rénovation "
                       "complète.")}
-{briques_bis.frise(ce.DEROULE)}
+{repli.replis([(titre, "<p>%s</p>" % texte, cote)
+                for titre, texte, cote in ce.DEROULE])}
     </div>
   </section>
 
@@ -71,7 +70,8 @@ def entreprise(services, base=""):
                       "Ce que nous|ne faisons pas",
                       "Une entreprise qui accepte tout finit par mal faire "
                       "quelque chose. Voici où nous nous arrêtons.")}
-{briques_bis.limites(ce.LIMITES)}
+{repli.replis([(titre, "<p>%s</p>" % texte)
+                for titre, texte in ce.LIMITES], numerote=False)}
     </div>
   </section>
 
@@ -79,9 +79,7 @@ def entreprise(services, base=""):
     <div class="zone">
 {briques.intercalaire("N° 05", "Engagements", "Ce sur quoi nous nous tenons",
                       "Quatre engagements,|tenus par écrit")}
-      <ul class="engagements">
 {engagements}
-      </ul>
     </div>
   </section>
 
@@ -175,7 +173,8 @@ def savoir_faire(services, base=""):
                       "Un chantier de rénovation ne se compose pas, il se "
                       "séquence. Inverser deux lots, c'est refaire le "
                       "premier.")}
-{briques_bis.frise(contenu_divers.ENCHAINEMENT, avec_cote=False)}
+{repli.replis([(titre, "<p>%s</p>" % texte)
+                for titre, texte in contenu_divers.ENCHAINEMENT])}
     </div>
   </section>
 

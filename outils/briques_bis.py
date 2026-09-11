@@ -1,31 +1,12 @@
-"""Composants nés du contenu neuf : frise, cartes, tableau de besoins.
+"""Cartes à filet et tableau des besoins.
 
 Ils suivent la règle du dossier : pas de fond, pas de rayon, un filet
 tiré à la règle et une étiquette dactylographiée. Le carton et l'encre,
 rien d'autre.
+
+Ce qui se lit en liste longue a migré vers `repli` : une page de
+chantier se feuillette, elle ne se déroule pas.
 """
-
-
-def frise(etapes, avec_cote=True):
-    """Une suite d'étapes numérotées, chacune sur son filet.
-
-    `etapes` accepte deux formes : (titre, texte) ou (titre, texte, cote).
-    La cote se pose à droite, comme la durée sur un bordereau.
-    """
-    lignes = []
-    for rang, etape in enumerate(etapes, 1):
-        titre, texte = etape[0], etape[1]
-        cote = etape[2] if len(etape) > 2 and avec_cote else ""
-        marque = ('<span class="temps__cote donnee">%s</span>' % cote) if cote else ""
-        lignes.append(f"""        <li class="temps revele trace">
-          <span class="temps__n">{rang:02d}</span>
-          <div class="temps__corps">
-            <h3 class="h4">{titre}</h3>
-            <p class="temps__texte">{texte}</p>
-          </div>
-          {marque}
-        </li>""")
-    return '      <ol class="frise">\n' + "\n".join(lignes) + "\n      </ol>"
 
 
 def cartes(items):
@@ -69,25 +50,3 @@ def besoins(lignes, services, base):
         for dit, slug, note in lignes
     )
     return '      <ul class="besoins">\n' + rangs + "\n      </ul>"
-
-
-def limites(items):
-    """Ce que nous ne faisons pas : un titre barré d'un trait, un motif."""
-    blocs = "\n".join(
-        f"""        <li class="limite revele trace">
-          <h3 class="h4 limite__titre">{titre}</h3>
-          <p class="etape__texte">{texte}</p>
-        </li>"""
-        for titre, texte in items
-    )
-    return '      <ul class="limites">\n' + blocs + "\n      </ul>"
-
-
-def liste_sobre(paragraphes, numerotee=True):
-    """Une liste de conseils : un chiffre, un paragraphe, un filet."""
-    balise = "ol" if numerotee else "ul"
-    items = "\n".join(
-        f"""        <li class="conseil revele trace"><p>{p}</p></li>"""
-        for p in paragraphes
-    )
-    return '      <%s class="conseils">\n' % balise + items + "\n      </%s>" % balise

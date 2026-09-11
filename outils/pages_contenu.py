@@ -6,6 +6,7 @@ chantier, les logos, les témoignages — et du contenu écrit pour elle.
 
 import briques
 import briques_bis
+import repli
 import contenu_devis as cd
 import contenu_divers as div
 import contenu_questions as cq
@@ -54,7 +55,8 @@ def realisations(services, base=""):
                       "Dans un logement ancien, la dépose réserve toujours "
                       "quelque chose. Les quatre cas ci-dessous reviennent "
                       "sur un chantier lausannois sur deux.")}
-{briques_bis.frise(div.SURPRISES, avec_cote=False)}
+{repli.replis([(titre, "<p>%s</p>" % texte)
+                for titre, texte in div.SURPRISES])}
     </div>
   </section>
 """ + briques.appel(
@@ -71,15 +73,8 @@ def devis(services, base=""):
     Le formulaire ouvre la page : quelqu'un qui arrive ici veut demander
     un devis, pas lire. Le reste répond à ceux qui hésitent encore.
     """
-    contient = "\n".join(
-        f"""        <li class="temps revele trace">
-          <span class="temps__n">{i:02d}</span>
-          <div class="temps__corps">
-            <h3 class="h4">{titre}</h3>
-            <p class="temps__texte">{texte}</p>
-          </div>
-        </li>"""
-        for i, (titre, texte) in enumerate(cd.CONTIENT, 1)
+    contient = repli.replis(
+        [(titre, "<p>%s</p>" % texte) for titre, texte in cd.CONTIENT]
     )
     preparer = "\n".join(
         "            <li><strong>%s</strong> — %s</li>" % (t, x)
@@ -120,9 +115,7 @@ def devis(services, base=""):
                       "Un devis de rénovation se lit poste par poste. Voici "
                       "ce que vous trouverez dans le nôtre, et ce qu'il faut "
                       "chercher dans n'importe quel autre.")}
-      <ol class="frise">
 {contient}
-      </ol>
     </div>
   </section>
 
@@ -133,7 +126,8 @@ def devis(services, base=""):
                       "Un écart de trente pour cent entre deux devis ne "
                       "signifie presque jamais que l'un est trop cher. Il "
                       "signifie qu'ils ne décrivent pas le même travail.")}
-{briques_bis.liste_sobre(cd.COMPARER)}
+{repli.replis([(p.split(".")[0] + ".", "<p>%s</p>" % p)
+                for p in cd.COMPARER])}
     </div>
   </section>
 

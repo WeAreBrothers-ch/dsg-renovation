@@ -8,6 +8,7 @@ lisible, et chaque métier garde ses mots-clés.
 
 import briques
 import prestations
+import repli
 from donnees_site import COMMUNES
 from lausanne_finitions import LOCAL as LOCAL_FINITIONS
 from lausanne_gros_oeuvre import LOCAL as LOCAL_GROS_OEUVRE
@@ -27,60 +28,45 @@ def _tirage(fiche):
 
 
 def _prestations(fiche):
-    """Ce que couvre la page : un bloc par lot, texte et liste en regard.
+    """Ce que couvre la page : un onglet par lot, la liste repliée.
 
-    Sur une page qui réunit plusieurs lots, chacun garde son intitulé,
-    son introduction et sa liste : le visiteur venu pour les cloisons
-    trouve les cloisons, et chaque métier garde ses mots-clés.
+    Trois lots affichés d'un bloc, c'est une vingtaine de lignes de
+    puces avant le premier paragraphe utile. Un onglet par lot, et la
+    liste des postes derrière une ligne qui s'ouvre : on choisit ce
+    qu'on veut lire.
     """
-    lots = prestations.lots_de(fiche)
-    multiple = len(lots) > 1
-    blocs = []
-    for lot in lots:
-        titre = ('<h3 class="h3 local__titre">%s</h3>' % lot["nom"]) if multiple else ""
+    panneaux = []
+    for lot in prestations.lots_de(fiche):
         textes = "".join("<p>%s</p>" % t for t in lot["intro"])
-        lignes = "\n".join("            <li>%s</li>" % p for p in lot["prestations"])
-        blocs.append(f"""      <div class="local revele">
-        {titre}
-        <div class="service__deux">
-          <div class="service__texte">
-            {textes}
-          </div>
-          <ul class="service__liste">
-{lignes}
-          </ul>
+        panneaux.append((lot["nom"], f"""
+        <div class="service__texte">
+          {textes}
         </div>
-      </div>""")
+        <div class="replis" style="margin-top:var(--sp-6)">
+{repli.repli_liste("Le détail des postes", lot["prestations"],
+                   "%d postes" % len(lot["prestations"]))}
+        </div>"""))
     return f"""
   <section class="section" aria-labelledby="quoi">
     <div class="zone">
 {briques.intercalaire("N° 01", "Prestations", "Ce que couvre la page",
                       "Ce que nous|faisons")}
-{chr(10).join(blocs)}
+{repli.onglets(panneaux, "Les lots de cette prestation")}
     </div>
   </section>
 """
 
 
 def _methode(fiche):
-    etapes = "\n".join(
-        f"""        <li class="etape revele trace">
-          <span class="etape__n">{i + 1:02d}</span>
-          <div>
-            <h3 class="h4">{titre}</h3>
-            <p class="etape__texte">{texte}</p>
-          </div>
-        </li>"""
-        for i, (titre, texte) in enumerate(prestations.etapes_de(fiche))
-    )
+    """La méthode, étape par étape, chacune derrière son intitulé."""
+    etapes = [(titre, "<p>%s</p>" % texte)
+              for titre, texte in prestations.etapes_de(fiche)]
     return f"""
   <section class="section" aria-labelledby="comment">
     <div class="zone">
 {briques.intercalaire("N° 02", "Méthode", "Du premier appel à la réception",
                       "Comment nous|procédons")}
-      <ol class="etapes">
-{etapes}
-      </ol>
+{repli.replis(etapes)}
     </div>
   </section>
 """
@@ -135,20 +121,15 @@ def _zone(base):
 
 
 def _local(fiche):
-    """Ce que le bâti lausannois impose, lot par lot."""
-    blocs = []
-    for rang, slug in enumerate(fiche["lots"]):
+    """Ce que le bâti lausannois impose, un onglet par lot."""
+    panneaux = []
+    for slug in fiche["lots"]:
         bloc = LOCAL[slug]
         points = "\n".join(
-            "            <li>%s</li>" % pt for pt in bloc["encadre"]["points"]
+            "              <li>%s</li>" % pt for pt in bloc["encadre"]["points"]
         )
         textes = "".join("<p>%s</p>" % t for t in bloc["paragraphes"])
-        titre = ""
-        if len(fiche["lots"]) > 1:
-            titre = ('<h3 class="h3 local__titre">%s</h3>'
-                     % bloc["titre"].replace("|", " "))
-        blocs.append(f"""      <div class="local revele">
-        {titre}
+        panneaux.append((bloc["titre"].replace("|", " "), f"""
         <div class="service__deux">
           <div class="service__texte">
             {textes}
@@ -159,18 +140,16 @@ def _local(fiche):
 {points}
             </ul>
           </aside>
-        </div>
-      </div>""")
+        </div>"""))
     premier = LOCAL[fiche["lots"][0]]
-    titre = (premier["titre"] if len(fiche["lots"]) == 1
-             else "Ce que le bâti|lausannois impose")
-    cote = (premier["cote"] if len(fiche["lots"]) == 1
-            else "Lot par lot")
+    seul = len(fiche["lots"]) == 1
+    titre = premier["titre"] if seul else "Ce que le bâti|lausannois impose"
+    cote = premier["cote"] if seul else "Lot par lot"
     return f"""
   <section class="section" aria-labelledby="local">
     <div class="zone">
 {briques.intercalaire("N° 04", "Sur le terrain", cote, titre)}
-{chr(10).join(blocs)}
+{repli.onglets(panneaux, "Le bâti lausannois, lot par lot")}
     </div>
   </section>
 """

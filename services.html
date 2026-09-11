@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="assets/css/14-document.css">
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
+<link rel="stylesheet" href="assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -354,72 +355,80 @@
         <h2 class="h2" data-lignes>Dans quel ordre<br>les lots s'enchaînent</h2>
         <p class="chapo intercalaire__chapo">Un chantier de rénovation ne se compose pas, il se séquence. Inverser deux lots, c'est refaire le premier.</p>
       </div>
-      <ol class="frise">
-        <li class="temps revele trace">
-          <span class="temps__n">01</span>
-          <div class="temps__corps">
-            <h3 class="h4">Démolition et dépose</h3>
-            <p class="temps__texte">Anciens revêtements, cloisons à supprimer, sanitaires déposés. Le logement revient à son état brut avant qu'on y ajoute quoi que ce soit.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">02</span>
-          <div class="temps__corps">
-            <h3 class="h4">Cloisons et faux plafonds</h3>
-            <p class="temps__texte">Les volumes se dessinent. Tout ce qui touche à la géométrie de la pièce se décide ici, parce qu'après, tout dépend de ces lignes.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">03</span>
-          <div class="temps__corps">
-            <h3 class="h4">Lots techniques</h3>
-            <p class="temps__texte">Électricité, sanitaire, ventilation : les réseaux passent dans les cloisons et les plafonds tant qu'ils sont ouverts.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">04</span>
-          <div class="temps__corps">
-            <h3 class="h4">Plâtrerie</h3>
-            <p class="temps__texte">Fermeture, bandes, enduits, lissage. Le support est rendu droit et prêt à recevoir sa finition.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">05</span>
-          <div class="temps__corps">
-            <h3 class="h4">Carrelage et étanchéité</h3>
-            <p class="temps__texte">Les pièces d'eau se traitent avant les sols secs : elles demandent des temps de séchage et salissent.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">06</span>
-          <div class="temps__corps">
-            <h3 class="h4">Sols</h3>
-            <p class="temps__texte">Ragréage puis pose. Le sol arrive tard pour ne pas être abîmé par les lots précédents.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">07</span>
-          <div class="temps__corps">
-            <h3 class="h4">Peinture et revêtements muraux</h3>
-            <p class="temps__texte">L'avant-dernier geste. Les retouches se font après la pose des plinthes et des portes.</p>
-          </div>
-          
-        </li>
-        <li class="temps revele trace">
-          <span class="temps__n">08</span>
-          <div class="temps__corps">
-            <h3 class="h4">Nettoyage et réception</h3>
-            <p class="temps__texte">Deux passes, un tour du logement avec vous, la liste des réserves, puis les clés.</p>
-          </div>
-          
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Démolition et dépose</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Anciens revêtements, cloisons à supprimer, sanitaires déposés. Le logement revient à son état brut avant qu'on y ajoute quoi que ce soit.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">Cloisons et faux plafonds</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Les volumes se dessinent. Tout ce qui touche à la géométrie de la pièce se décide ici, parce qu'après, tout dépend de ces lignes.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Lots techniques</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Électricité, sanitaire, ventilation : les réseaux passent dans les cloisons et les plafonds tant qu'ils sont ouverts.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Plâtrerie</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Fermeture, bandes, enduits, lissage. Le support est rendu droit et prêt à recevoir sa finition.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">05</span>
+            <span class="repli__titre">Carrelage et étanchéité</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Les pièces d'eau se traitent avant les sols secs : elles demandent des temps de séchage et salissent.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">06</span>
+            <span class="repli__titre">Sols</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Ragréage puis pose. Le sol arrive tard pour ne pas être abîmé par les lots précédents.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">07</span>
+            <span class="repli__titre">Peinture et revêtements muraux</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>L'avant-dernier geste. Les retouches se font après la pose des plinthes et des portes.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">08</span>
+            <span class="repli__titre">Nettoyage et réception</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Deux passes, un tour du logement avec vous, la liste des réserves, puis les clés.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -535,6 +544,7 @@
 <script src="assets/js/motion.js" defer></script>
 <script src="assets/js/effets.js" defer></script>
 <script src="assets/js/curseur.js" defer></script>
+<script src="assets/js/onglets.js" defer></script>
 <script src="assets/js/vignette.js" defer></script>
 </body>
 </html>

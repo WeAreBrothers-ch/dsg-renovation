@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="../assets/css/14-document.css">
 <link rel="stylesheet" href="../assets/css/15-pages.css">
 <link rel="stylesheet" href="../assets/css/16-composants.css">
+<link rel="stylesheet" href="../assets/css/17-repli.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -383,13 +384,19 @@
         <h2 class="h2" data-lignes>Ce que nous<br>faisons</h2>
         
       </div>
-      <div class="local revele">
-        
-        <div class="service__deux">
-          <div class="service__texte">
-            <p>Une rénovation totale, c'est dix métiers qui doivent se succéder dans le bon ordre, sans se marcher dessus. Le carreleur ne peut pas passer avant le plâtrier, le peintre ne peut pas finir avant que les sols soient posés. C'est cette coordination qui fait tenir ou déraper un chantier.</p><p>Nous prenons l'ensemble en charge. Vous signez un devis unique, vous recevez un planning daté avant le démarrage, et vous avez un seul numéro à appeler pendant toute la durée des travaux.</p><p>Nous intervenons sur des appartements de Lausanne et de ses communes voisines, sur des villas de Pully, Lutry ou Épalinges, et sur des immeubles de rendement pour le compte de régies lausannoises.</p>
-          </div>
-          <ul class="service__liste">
+
+        <div class="service__texte">
+          <p>Une rénovation totale, c'est dix métiers qui doivent se succéder dans le bon ordre, sans se marcher dessus. Le carreleur ne peut pas passer avant le plâtrier, le peintre ne peut pas finir avant que les sols soient posés. C'est cette coordination qui fait tenir ou déraper un chantier.</p><p>Nous prenons l'ensemble en charge. Vous signez un devis unique, vous recevez un planning daté avant le démarrage, et vous avez un seul numéro à appeler pendant toute la durée des travaux.</p><p>Nous intervenons sur des appartements de Lausanne et de ses communes voisines, sur des villas de Pully, Lutry ou Épalinges, et sur des immeubles de rendement pour le compte de régies lausannoises.</p>
+        </div>
+        <div class="replis" style="margin-top:var(--sp-6)">
+        <details class="repli repli--liste revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Le détail des postes</span>
+            <span class="repli__cote">7 postes</span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><ul class="service__liste">
             <li>Dépose des revêtements, cloisons et équipements existants</li>
             <li>Ouverture ou création de volumes, cloisons et faux plafonds</li>
             <li>Reprise complète des murs et des plafonds, enduits et lissage</li>
@@ -397,9 +404,9 @@
             <li>Mise en peinture de l'ensemble des surfaces et des boiseries</li>
             <li>Coordination des lots techniques : électricité, sanitaire, cuisine</li>
             <li>Nettoyage de fin de chantier et remise des clés</li>
-          </ul>
+          </ul></div>
+        </details>
         </div>
-      </div>
     </div>
   </section>
 
@@ -411,43 +418,53 @@
         <h2 class="h2" data-lignes>Comment nous<br>procédons</h2>
         
       </div>
-      <ol class="etapes">
-        <li class="etape revele trace">
-          <span class="etape__n">01</span>
-          <div>
-            <h3 class="h4">Visite et relevé</h3>
-            <p class="etape__texte">Nous nous déplaçons, mesurons et relevons l'état existant. La visite est gratuite et sans engagement.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">02</span>
-          <div>
-            <h3 class="h4">Devis détaillé</h3>
-            <p class="etape__texte">Vous recevez sous 72 heures un devis poste par poste, avec les quantités et les finitions retenues.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">03</span>
-          <div>
-            <h3 class="h4">Planning daté</h3>
-            <p class="etape__texte">Avant le premier coup de marteau, vous avez le calendrier semaine par semaine de tous les corps de métier.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">04</span>
-          <div>
-            <h3 class="h4">Chantier suivi</h3>
-            <p class="etape__texte">Un responsable unique pilote les lots et vous rend compte. Le chantier est rangé chaque soir.</p>
-          </div>
-        </li>
-        <li class="etape revele trace">
-          <span class="etape__n">05</span>
-          <div>
-            <h3 class="h4">Réception</h3>
-            <p class="etape__texte">Visite contradictoire, liste des réserves, reprise sous dix jours, puis remise des clés.</p>
-          </div>
-        </li>
-      </ol>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">01</span>
+            <span class="repli__titre">Visite et relevé</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Nous nous déplaçons, mesurons et relevons l'état existant. La visite est gratuite et sans engagement.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">02</span>
+            <span class="repli__titre">Devis détaillé</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Vous recevez sous 72 heures un devis poste par poste, avec les quantités et les finitions retenues.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">03</span>
+            <span class="repli__titre">Planning daté</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Avant le premier coup de marteau, vous avez le calendrier semaine par semaine de tous les corps de métier.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">04</span>
+            <span class="repli__titre">Chantier suivi</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Un responsable unique pilote les lots et vous rend compte. Le chantier est rangé chaque soir.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n" aria-hidden="true">05</span>
+            <span class="repli__titre">Réception</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Visite contradictoire, liste des réserves, reprise sous dix jours, puis remise des clés.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -509,8 +526,7 @@
         <h2 class="h2" data-lignes>Rénover<br>à Lausanne</h2>
         
       </div>
-      <div class="local revele">
-        
+
         <div class="service__deux">
           <div class="service__texte">
             <p>Le parc lausannois se lit par couches. Les immeubles de Sous-Gare, de Chauderon et du Vallon datent du premier tiers du vingtième siècle : hauts plafonds, parquets à lames clouées, murs en plâtre sur lattis. On y gagne des volumes magnifiques et on y trouve des surprises derrière chaque cloison.</p><p>Les quartiers de Bellevaux, Montoie et Vennes relèvent des années cinquante à soixante-dix : plans rationnels, cloisons légères, chapes fines. La rénovation y est plus prévisible, mais l'isolation phonique entre logements demande presque toujours une reprise.</p><p>Sur les hauts — Chailly, Épalinges, Le Mont — dominent les villas des années soixante-dix et quatre-vingt, très cloisonnées. L'essentiel du travail y consiste à rouvrir des volumes que l'époque avait fermés.</p>
@@ -518,13 +534,12 @@
           <aside class="encadre trace">
             <p class="etiquette encadre__titre">Les trois surprises les plus fréquentes</p>
             <ul class="encadre__liste">
-            <li>Une chape qui n'est pas de niveau : écart de deux à trois centimètres sur dix mètres, courant dans l'ancien.</li>
-            <li>Des gaines électriques non conformes découvertes à la dépose des anciens revêtements.</li>
-            <li>Un mur annoncé porteur qui ne l'est pas, ou l'inverse : seul un relevé sur place tranche.</li>
+              <li>Une chape qui n'est pas de niveau : écart de deux à trois centimètres sur dix mètres, courant dans l'ancien.</li>
+              <li>Des gaines électriques non conformes découvertes à la dépose des anciens revêtements.</li>
+              <li>Un mur annoncé porteur qui ne l'est pas, ou l'inverse : seul un relevé sur place tranche.</li>
             </ul>
           </aside>
         </div>
-      </div>
     </div>
   </section>
 
@@ -536,20 +551,26 @@
         <h2 class="h2" data-lignes>Ce qu'on nous<br>demande</h2>
         
       </div>
-      <ul class="questions__liste revele">
-        <li>
-          <details class="question">
-            <summary class="question__tete">Puis-je rester dans le logement pendant une rénovation totale ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>C'est possible sur un chantier mené par zones, mais rarement souhaitable : une rénovation totale touche l'eau, l'électricité et les sols en même temps. Libérer les lieux raccourcit le chantier et réduit la facture.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Gérez-vous les autorisations et les demandes à la régie ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Nous préparons les descriptifs techniques que la régie ou la copropriété réclame, et nous nous adaptons aux horaires imposés par le règlement de l'immeuble.</p></div>
-          </details>
-        </li>
-      </ul>
+      <div class="replis">
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Puis-je rester dans le logement pendant une rénovation totale ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>C'est possible sur un chantier mené par zones, mais rarement souhaitable : une rénovation totale touche l'eau, l'électricité et les sols en même temps. Libérer les lieux raccourcit le chantier et réduit la facture.</p></div>
+        </details>
+        <details class="repli revele trace">
+          <summary class="repli__tete">
+            <span class="repli__n"></span>
+            <span class="repli__titre">Gérez-vous les autorisations et les demandes à la régie ?</span>
+            <span></span>
+            <span class="repli__signe" aria-hidden="true"></span>
+          </summary>
+          <div class="repli__corps"><p>Nous préparons les descriptifs techniques que la régie ou la copropriété réclame, et nous nous adaptons aux horaires imposés par le règlement de l'immeuble.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
@@ -672,6 +693,7 @@
 <script src="../assets/js/motion.js" defer></script>
 <script src="../assets/js/effets.js" defer></script>
 <script src="../assets/js/curseur.js" defer></script>
+<script src="../assets/js/onglets.js" defer></script>
 <script src="../assets/js/vignette.js" defer></script>
 </body>
 </html>
