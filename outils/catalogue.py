@@ -8,27 +8,10 @@ Le point d'entrée se contente ensuite de les assembler.
 import pages_contenu
 import pages_site
 
-# Reprises telles quelles de la page questions, pour le balisage.
-LISTE_QUESTIONS = [
-    ("Intervenez-vous en dehors de Lausanne ?",
-     "Oui. Nous intervenons sur tout l'arc lémanique : Lausanne et Lavaux, "
-     "Genève, Morges, Nyon, Vevey et Montreux."),
-    ("Le devis est-il vraiment gratuit ?",
-     "Oui, déplacement et relevé compris, sans aucun engagement. Vous recevez "
-     "un devis détaillé poste par poste sous 72 heures après la visite."),
-    ("Puis-je rester dans le logement pendant les travaux ?",
-     "Dans la plupart des cas, oui. Nous organisons le chantier par zones "
-     "pour vous laisser une partie du logement utilisable."),
-    ("Combien de temps dure une rénovation complète ?",
-     "Environ 5 à 8 semaines pour un appartement de 100 m², et 10 à 14 "
-     "semaines pour une maison ou un immeuble."),
-    ("Travaillez-vous pour les régies et les propriétaires bailleurs ?",
-     "Oui, c'est une part importante de notre activité : remises en état "
-     "entre deux locations et rénovations d'immeubles en site occupé."),
-    ("Qui coordonne les différents corps de métier ?",
-     "Nous. Un responsable de chantier unique pilote l'ensemble des lots et "
-     "reste votre seul interlocuteur du devis à la remise des clés."),
-]
+from contenu_questions import toutes as LISTE_QUESTIONS_FN
+
+# Les vingt questions, à plat, pour le balisage structuré.
+LISTE_QUESTIONS = LISTE_QUESTIONS_FN()
 
 ACTION_BORDEREAU = (
     '<a class="btn btn--plein" href="#bordereau" data-magnetique>'

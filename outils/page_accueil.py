@@ -6,11 +6,13 @@ concurrencent dans les résultats de recherche au lieu de s'additionner.
 """
 
 import briques
+from donnees_site import COMMUNES
 from pages_site import fragment
 
 
 def accueil(services, base=""):
     """Page d'accueil : la preuve, les chiffres, les lots, les renvois."""
+    villes = "".join("<li>%s</li>" % c for c in COMMUNES)
     return f"""
   <section class="couverture" id="p01" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
@@ -78,9 +80,33 @@ def accueil(services, base=""):
     </div>
   </section>
 
+  <section class="section" aria-labelledby="tZone">
+    <div class="zone">
+{briques.intercalaire("N° 04", "Zone", "Atelier à Lausanne, avenue de Béthusy",
+                      "Où nous|intervenons",
+                      "Nous restons sur l'arc lémanique. Un chantier proche, "
+                      "c'est une équipe qui arrive à l'heure et qui repasse "
+                      "sans compter quand une reprise est nécessaire.")}
+      <div class="service__deux revele">
+        <div class="service__texte">
+          <p>À Lausanne, nous travaillons aussi bien dans les immeubles
+          anciens de Sous-Gare, de Chauderon et du Vallon que dans les
+          logements d'après-guerre de Bellevaux, de Montoie et de Vennes, et
+          dans les villas des hauts — Chailly, Épalinges, Le Mont.</p>
+          <p>Autour de la ville, nous intervenons chaque semaine à Pully,
+          Prilly, Renens, Ecublens et Lutry, ainsi que sur La Côte, à Lavaux
+          et jusqu'à Genève.</p>
+          <p><a href="{base}realisations.html">Voir les chantiers livrés</a>
+          dans la région.</p>
+        </div>
+        <ul class="lots service__villes">{villes}</ul>
+      </div>
+    </div>
+  </section>
+
   <section class="partenaires" aria-labelledby="tRef">
     <div class="zone">
-{briques.intercalaire("N° 04", "Références", "Régies, propriétaires et architectes",
+{briques.intercalaire("N° 05", "Références", "Régies, propriétaires et architectes",
                       "Ils nous confient|leurs biens")}
       {fragment('partenaires')}
       <p class="suite revele"><a href="{base}references.html">Lire les retours de nos clients<span class="fleche" aria-hidden="true"></span></a></p>

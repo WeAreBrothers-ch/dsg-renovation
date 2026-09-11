@@ -29,7 +29,9 @@ outils/               générateur de pages — voir plus bas
 
 Toutes les pages partagent le même en-tête, le même menu et le même
 pied. `14-document.css` porte la mise en page des annexes légales,
-`15-pages.css` celle des pages intérieures et des pages de prestation.
+`15-pages.css` celle des pages intérieures et des pages de prestation,
+`16-composants.css` la frise d'étapes, les cartes, le tableau des
+besoins et les autres blocs de contenu.
 
 ## Le générateur
 
@@ -50,11 +52,20 @@ python3 outils/construire.py
 | `donnees_site.py` | coordonnées, navigation, communes, relevé chiffré |
 | `services_gros_oeuvre.py` | rénovation totale, plâtrerie, cloisons, faux plafonds |
 | `services_finitions.py` | peinture, revêtements, carrelage, sols, nettoyage |
+| `lausanne_gros_oeuvre.py` | ce que le bâti lausannois impose à ces quatre lots |
+| `lausanne_finitions.py` | idem pour les cinq lots de finition |
+| `contenu_entreprise.py` | histoire, déroulé d'un chantier, limites, engagements |
+| `contenu_devis.py` | ce que contient un devis, comment le comparer |
+| `contenu_questions.py` | vingt questions, groupées par moment du projet |
+| `contenu_divers.py` | enchaînement des lots, besoins, familles de biens |
 | `gabarit.py` | tête du document, en-tête, menu, pied, scripts |
 | `briques.py` | couverture, intercalaire, relevé, appel à l'action |
+| `briques_bis.py` | frise, cartes, besoins, limites, conseils |
 | `page_service.py` | corps d'une page de prestation |
-| `pages_site.py` | accueil, entreprise, savoir-faire |
+| `page_accueil.py` | corps de l'accueil |
+| `pages_site.py` | entreprise, savoir-faire |
 | `pages_contenu.py` | réalisations, références, questions, devis |
+| `catalogue.py` | fiche signalétique des pages de la racine |
 | `seo.py` | balisage structuré, `sitemap.xml`, `robots.txt` |
 | `fragments/` | blocs repris du dossier d'origine, tels quels |
 
@@ -79,6 +90,21 @@ Les pages de prestation visent les recherches de la région lausannoise
 répètent pas : deux pages qui disent la même chose se concurrencent au
 lieu de s'additionner. L'accueil donne l'accroche de chaque sujet et
 renvoie vers la page qui le traite.
+
+Chaque page de prestation porte une section **« sur le terrain »** qui
+décrit ce que le bâti lausannois impose à ce lot : plâtre sur lattis
+des immeubles d'avant-guerre, hauteurs sous plafond du centre, accès
+des rues de Sous-Gare, contraintes des immeubles de rendement. C'est
+le contenu qu'aucun concurrent ne peut copier, et celui qui distingue
+une page « plâtrier à Lausanne » d'une page « plâtrier ».
+
+Les quartiers et communes cités sont ceux où l'entreprise travaille
+réellement : Sous-Gare, Chauderon, le Vallon, la Cité, Bellevaux,
+Montoie, Vennes, Sévelin, Chailly, puis Pully, Prilly, Renens,
+Ecublens, Épalinges, Lutry, Morges, Nyon, Vevey, Montreux et Genève.
+
+La page questions porte vingt questions groupées par moment du projet,
+toutes reprises dans le balisage `FAQPage`.
 
 Les deux annexes légales portent `noindex, follow` : utiles au visiteur,
 sans valeur pour la recherche.

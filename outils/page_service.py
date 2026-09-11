@@ -8,6 +8,48 @@ c'est lui qui donne du poids à chaque page auprès des moteurs.
 
 import briques
 from donnees_site import COMMUNES
+from lausanne_finitions import LOCAL as LOCAL_FINITIONS
+from lausanne_gros_oeuvre import LOCAL as LOCAL_GROS_OEUVRE
+
+LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS)
+
+
+def _tirage(service):
+    """Le tirage d'ouverture : une page de métier se montre d'abord."""
+    return f"""
+  <figure class="tirage revele-img">
+    <img src="{service['image']}" alt="{service['alt']}"
+         width="1600" height="900" fetchpriority="high" decoding="async">
+    <figcaption class="etiquette tirage__legende">{service['nom']} · Lausanne et arc lémanique</figcaption>
+  </figure>
+"""
+
+
+def _local(service):
+    """La section propre au bâti lausannois, avec son encadré."""
+    bloc = LOCAL[service["slug"]]
+    points = "\n".join(
+        "            <li>%s</li>" % pt for pt in bloc["encadre"]["points"]
+    )
+    textes = "".join("<p>%s</p>" % t for t in bloc["paragraphes"])
+    return f"""
+  <section class="section" aria-labelledby="local">
+    <div class="zone">
+{briques.intercalaire("N° 04", "Sur le terrain", bloc["cote"], bloc["titre"])}
+      <div class="service__deux revele">
+        <div class="service__texte">
+          {textes}
+        </div>
+        <aside class="encadre trace">
+          <p class="etiquette encadre__titre">{bloc['encadre']['titre']}</p>
+          <ul class="encadre__liste">
+{points}
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+"""
 
 
 def _prestations(service):
@@ -120,7 +162,7 @@ def _voisins(service, tous, base):
     return f"""
   <section class="section" aria-labelledby="voisins">
     <div class="zone">
-{briques.intercalaire("N° 05", "Lots voisins", "Souvent menés ensemble",
+{briques.intercalaire("N° 06", "Lots voisins", "Souvent menés ensemble",
                       "Ce qui va|avec ce lot")}
       <ul class="voisins">
 {fiches}
@@ -135,17 +177,19 @@ def corps(service, tous, base):
     questions = f"""
   <section class="section" aria-labelledby="questions">
     <div class="zone">
-{briques.intercalaire("N° 04", "Questions", "Sur ce lot précisément",
+{briques.intercalaire("N° 05", "Questions", "Sur ce lot précisément",
                       "Ce qu'on nous|demande")}
 {briques.questions_liste(service["questions"])}
     </div>
   </section>
 """
     return (
-        _prestations(service)
+        _tirage(service)
+        + _prestations(service)
         + _methode(service)
         + _reperes(service)
         + _zone(service, base)
+        + _local(service)
         + questions
         + _voisins(service, tous, base)
         + briques.appel(

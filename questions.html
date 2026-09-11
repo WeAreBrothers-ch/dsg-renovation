@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="assets/css/13-pile.css">
 <link rel="stylesheet" href="assets/css/14-document.css">
 <link rel="stylesheet" href="assets/css/15-pages.css">
+<link rel="stylesheet" href="assets/css/16-composants.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -156,7 +157,7 @@
       "name": "Intervenez-vous en dehors de Lausanne ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Nous intervenons sur tout l'arc lémanique : Lausanne et Lavaux, Genève, Morges, Nyon, Vevey et Montreux."
+        "text": "Oui. Nous travaillons sur tout l'arc lémanique : Lausanne et ses communes voisines — Pully, Prilly, Renens, Ecublens, Épalinges, Lutry —, ainsi que Morges, Nyon, Vevey, Montreux et Genève. Au-delà, appelez-nous : nous étudions la demande au cas par cas, en fonction de la taille du chantier."
       }
     },
     {
@@ -164,7 +165,31 @@
       "name": "Le devis est-il vraiment gratuit ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, déplacement et relevé compris, sans aucun engagement. Vous recevez un devis détaillé poste par poste sous 72 heures après la visite."
+        "text": "Oui, visite et relevé compris, sans aucun engagement. Vous recevez un devis détaillé poste par poste sous 72 heures ouvrables après le passage. Nous ne facturons pas l'étude, même si vous ne donnez pas suite."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sous quel délai pouvez-vous démarrer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Comptez généralement quatre à huit semaines entre la signature et le premier jour de chantier, selon la saison et la taille du lot. Les remises en état entre deux locations se calent plus vite, parce qu'elles sont courtes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Intervenez-vous pour un seul poste, ou seulement en rénovation complète ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les deux. Une remise en peinture seule, un sol à changer, une salle de bains à recarreler : ce sont des demandes courantes. Nous disons franchement quand un chantier est trop petit pour qu'un déplacement ait du sens."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il vider le logement avant votre visite ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. La visite sert à relever et à comprendre, pas à commencer. Nous avons seulement besoin d'accéder aux pièces concernées et, si possible, de voir un angle de mur dégagé pour juger l'état des supports."
       }
     },
     {
@@ -172,23 +197,7 @@
       "name": "Puis-je rester dans le logement pendant les travaux ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Dans la plupart des cas, oui. Nous organisons le chantier par zones pour vous laisser une partie du logement utilisable."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Combien de temps dure une rénovation complète ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Environ 5 à 8 semaines pour un appartement de 100 m², et 10 à 14 semaines pour une maison ou un immeuble."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Travaillez-vous pour les régies et les propriétaires bailleurs ?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oui, c'est une part importante de notre activité : remises en état entre deux locations et rénovations d'immeubles en site occupé."
+        "text": "Sur un lot isolé — peinture d'une pièce, changement de sol —, oui sans difficulté. Sur une rénovation complète, c'est possible en travaillant par zones, mais le chantier dure plus longtemps et coûte davantage. Libérer les lieux reste la solution la plus économique."
       }
     },
     {
@@ -196,7 +205,111 @@
       "name": "Qui coordonne les différents corps de métier ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nous. Un responsable de chantier unique pilote l'ensemble des lots et reste votre seul interlocuteur du devis à la remise des clés."
+        "text": "Nous. Un responsable de chantier unique pilote l'ensemble des lots et reste votre seul interlocuteur, du devis à la remise des clés. Vous n'avez aucun planning à faire coïncider."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels sont vos horaires de chantier ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En règle générale de 8 h à 17 h, du lundi au vendredi. En immeuble, nous nous alignons sur le règlement de la copropriété, qui encadre souvent les travaux bruyants et l'usage de l'ascenseur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment protégez-vous le logement et les parties communes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sols bâchés, mobilier restant protégé et filmé, cage d'escalier et ascenseur protégés sur le trajet emprunté. Le chantier est rangé chaque soir : c'est une règle interne, pas une faveur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il si vous découvrez un problème imprévu ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous arrêtons, nous vous appelons et nous chiffrons l'écart avant de reprendre. Une chape hors niveau, une gaine non conforme ou un mur porteur mal identifié se traitent par un avenant écrit, jamais par une facture de fin de chantier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte une rénovation complète à Lausanne ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le prix dépend de l'état existant bien plus que de la surface. Deux appartements de cent mètres carrés peuvent varier du simple au double selon que les sols sont récupérables ou non, que les cloisons bougent, que la salle de bains est reprise. C'est pourquoi nous ne publions pas de prix au mètre carré : il serait faux dans un cas sur deux."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Votre devis peut-il augmenter en cours de chantier ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pas sans votre accord écrit. Le devis signé fixe les postes et les quantités. Seuls un imprévu constaté ou une modification que vous demandez donnent lieu à un avenant, chiffré et validé avant exécution."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment se déroulent les paiements ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un acompte à la signature, des situations intermédiaires sur les chantiers longs, et le solde à la réception une fois les réserves levées. Les modalités exactes figurent sur le devis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il vous fournir les matériaux ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, nous les fournissons et ils figurent au devis. Si vous préférez acheter vous-même un carrelage ou un parquet précis, c'est possible : nous le posons, et nous vous indiquons auparavant les quantités et les contraintes de pose."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment comparer votre devis à un autre ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Poste par poste, pas au total. Vérifiez si la préparation des supports, l'évacuation des déchets, les protections et le nettoyage final y figurent : ce sont les lignes que l'on retire pour faire baisser un total, et celles qui réapparaissent en cours de chantier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment se passe la réception du chantier ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Par une visite contradictoire, pièce par pièce, avec vous. Ce qui ne va pas est noté sur une liste de réserves, que nous reprenons sous dix jours. Les clés sont remises une fois les réserves levées."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le nettoyage est-il compris ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, systématiquement, sur tous nos chantiers. Nous ne rendons pas un logement à nettoyer : c'est la dernière image que vous gardez du travail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que faire si un défaut apparaît après la livraison ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Appelez-nous. Une fissure de retrait, un joint qui se rétracte ou une porte qui travaille dans les premiers mois relèvent du comportement normal des matériaux, et nous revenons les reprendre. Les garanties légales du droit suisse s'appliquent par ailleurs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Travaillez-vous pour les régies et les propriétaires bailleurs ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est une part importante de notre activité à Lausanne : remises en état entre deux locations, rénovations d'immeubles en site occupé, interventions planifiées au fil des relocations, avec une date de libération ferme."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pouvez-vous intervenir sur un logement que vous n'avez pas rénové ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, notamment pour un nettoyage de fin de travaux ou une remise en état avant état des lieux de sortie, après le passage d'une autre entreprise."
       }
     }
   ]
@@ -277,49 +390,172 @@
     </div>
   </header>
 
-  <section class="section" aria-labelledby="tQuestions">
+  <section class="section" aria-label="Avant le devis">
     <div class="zone">
       <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>Questions</span>
-        <span class="intercalaire__cote">Avant de signer un devis</span>
-        <h2 class="h2" data-lignes>Les six questions<br>qui reviennent</h2>
+        <span class="repere trace trace--bas"><b>N° 01</b>Avant le devis</span>
+        <span class="intercalaire__cote">Zone, gratuité, délais</span>
+        <h2 class="h2" data-lignes>Avant de<br>nous appeler</h2>
         
       </div>
       <ul class="questions__liste revele">
         <li>
           <details class="question">
             <summary class="question__tete">Intervenez-vous en dehors de Lausanne ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui. Nous intervenons sur tout l'arc lémanique : Lausanne et Lavaux, Genève, Morges, Nyon, Vevey et Montreux. Au-delà de cette zone, appelez-nous : nous étudions la demande au cas par cas.</p></div>
+            <div class="question__corps"><p>Oui. Nous travaillons sur tout l'arc lémanique : Lausanne et ses communes voisines — Pully, Prilly, Renens, Ecublens, Épalinges, Lutry —, ainsi que Morges, Nyon, Vevey, Montreux et Genève. Au-delà, appelez-nous : nous étudions la demande au cas par cas, en fonction de la taille du chantier.</p></div>
           </details>
         </li>
         <li>
           <details class="question">
             <summary class="question__tete">Le devis est-il vraiment gratuit ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, déplacement et relevé compris, sans aucun engagement de votre part. Vous recevez un devis détaillé poste par poste sous 72 heures après la visite.</p></div>
+            <div class="question__corps"><p>Oui, visite et relevé compris, sans aucun engagement. Vous recevez un devis détaillé poste par poste sous 72 heures ouvrables après le passage. Nous ne facturons pas l'étude, même si vous ne donnez pas suite.</p></div>
           </details>
         </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Sous quel délai pouvez-vous démarrer ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Comptez généralement quatre à huit semaines entre la signature et le premier jour de chantier, selon la saison et la taille du lot. Les remises en état entre deux locations se calent plus vite, parce qu'elles sont courtes.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Intervenez-vous pour un seul poste, ou seulement en rénovation complète ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Les deux. Une remise en peinture seule, un sol à changer, une salle de bains à recarreler : ce sont des demandes courantes. Nous disons franchement quand un chantier est trop petit pour qu'un déplacement ait du sens.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Faut-il vider le logement avant votre visite ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Non. La visite sert à relever et à comprendre, pas à commencer. Nous avons seulement besoin d'accéder aux pièces concernées et, si possible, de voir un angle de mur dégagé pour juger l'état des supports.</p></div>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Pendant le chantier">
+    <div class="zone">
+      <div class="intercalaire revele">
+        <span class="repere trace trace--bas"><b>N° 02</b>Pendant le chantier</span>
+        <span class="intercalaire__cote">Organisation, nuisances, présence</span>
+        <h2 class="h2" data-lignes>Pendant<br>les travaux</h2>
+        
+      </div>
+      <ul class="questions__liste revele">
         <li>
           <details class="question">
             <summary class="question__tete">Puis-je rester dans le logement pendant les travaux ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Dans la plupart des cas, oui. Nous organisons le chantier par zones pour vous laisser une partie du logement utilisable. Pour une rénovation totale, une libération des lieux reste plus rapide et moins coûteuse.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Combien de temps dure une rénovation complète ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Compter environ 5 à 8 semaines pour un appartement de 100 m², et 10 à 14 semaines pour une maison ou un immeuble. La durée exacte figure dans le devis, avec un planning daté.</p></div>
-          </details>
-        </li>
-        <li>
-          <details class="question">
-            <summary class="question__tete">Travaillez-vous pour les régies et les propriétaires bailleurs ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Oui, c'est une part importante de notre activité : remises en état entre deux locations, rénovations d'immeubles en site occupé et interventions planifiées au fil des relocations.</p></div>
+            <div class="question__corps"><p>Sur un lot isolé — peinture d'une pièce, changement de sol —, oui sans difficulté. Sur une rénovation complète, c'est possible en travaillant par zones, mais le chantier dure plus longtemps et coûte davantage. Libérer les lieux reste la solution la plus économique.</p></div>
           </details>
         </li>
         <li>
           <details class="question">
             <summary class="question__tete">Qui coordonne les différents corps de métier ?<span class="depliant__signe" aria-hidden="true"></span></summary>
-            <div class="question__corps"><p>Nous. Un responsable de chantier unique pilote l'ensemble des lots et reste votre seul interlocuteur du devis à la remise des clés.</p></div>
+            <div class="question__corps"><p>Nous. Un responsable de chantier unique pilote l'ensemble des lots et reste votre seul interlocuteur, du devis à la remise des clés. Vous n'avez aucun planning à faire coïncider.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Quels sont vos horaires de chantier ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>En règle générale de 8 h à 17 h, du lundi au vendredi. En immeuble, nous nous alignons sur le règlement de la copropriété, qui encadre souvent les travaux bruyants et l'usage de l'ascenseur.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Comment protégez-vous le logement et les parties communes ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Sols bâchés, mobilier restant protégé et filmé, cage d'escalier et ascenseur protégés sur le trajet emprunté. Le chantier est rangé chaque soir : c'est une règle interne, pas une faveur.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Que se passe-t-il si vous découvrez un problème imprévu ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Nous arrêtons, nous vous appelons et nous chiffrons l'écart avant de reprendre. Une chape hors niveau, une gaine non conforme ou un mur porteur mal identifié se traitent par un avenant écrit, jamais par une facture de fin de chantier.</p></div>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Prix et paiement">
+    <div class="zone">
+      <div class="intercalaire revele">
+        <span class="repere trace trace--bas"><b>N° 03</b>Prix et paiement</span>
+        <span class="intercalaire__cote">Devis, avenants, échéances</span>
+        <h2 class="h2" data-lignes>Ce que ça<br>coûte</h2>
+        
+      </div>
+      <ul class="questions__liste revele">
+        <li>
+          <details class="question">
+            <summary class="question__tete">Combien coûte une rénovation complète à Lausanne ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Le prix dépend de l'état existant bien plus que de la surface. Deux appartements de cent mètres carrés peuvent varier du simple au double selon que les sols sont récupérables ou non, que les cloisons bougent, que la salle de bains est reprise. C'est pourquoi nous ne publions pas de prix au mètre carré : il serait faux dans un cas sur deux.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Votre devis peut-il augmenter en cours de chantier ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Pas sans votre accord écrit. Le devis signé fixe les postes et les quantités. Seuls un imprévu constaté ou une modification que vous demandez donnent lieu à un avenant, chiffré et validé avant exécution.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Comment se déroulent les paiements ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Un acompte à la signature, des situations intermédiaires sur les chantiers longs, et le solde à la réception une fois les réserves levées. Les modalités exactes figurent sur le devis.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Faut-il vous fournir les matériaux ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Non, nous les fournissons et ils figurent au devis. Si vous préférez acheter vous-même un carrelage ou un parquet précis, c'est possible : nous le posons, et nous vous indiquons auparavant les quantités et les contraintes de pose.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Comment comparer votre devis à un autre ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Poste par poste, pas au total. Vérifiez si la préparation des supports, l'évacuation des déchets, les protections et le nettoyage final y figurent : ce sont les lignes que l'on retire pour faire baisser un total, et celles qui réapparaissent en cours de chantier.</p></div>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Après la livraison">
+    <div class="zone">
+      <div class="intercalaire revele">
+        <span class="repere trace trace--bas"><b>N° 04</b>Après la livraison</span>
+        <span class="intercalaire__cote">Réception, réserves, régies</span>
+        <h2 class="h2" data-lignes>Une fois<br>le chantier livré</h2>
+        
+      </div>
+      <ul class="questions__liste revele">
+        <li>
+          <details class="question">
+            <summary class="question__tete">Comment se passe la réception du chantier ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Par une visite contradictoire, pièce par pièce, avec vous. Ce qui ne va pas est noté sur une liste de réserves, que nous reprenons sous dix jours. Les clés sont remises une fois les réserves levées.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Le nettoyage est-il compris ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Oui, systématiquement, sur tous nos chantiers. Nous ne rendons pas un logement à nettoyer : c'est la dernière image que vous gardez du travail.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Que faire si un défaut apparaît après la livraison ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Appelez-nous. Une fissure de retrait, un joint qui se rétracte ou une porte qui travaille dans les premiers mois relèvent du comportement normal des matériaux, et nous revenons les reprendre. Les garanties légales du droit suisse s'appliquent par ailleurs.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Travaillez-vous pour les régies et les propriétaires bailleurs ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>C'est une part importante de notre activité à Lausanne : remises en état entre deux locations, rénovations d'immeubles en site occupé, interventions planifiées au fil des relocations, avec une date de libération ferme.</p></div>
+          </details>
+        </li>
+        <li>
+          <details class="question">
+            <summary class="question__tete">Pouvez-vous intervenir sur un logement que vous n'avez pas rénové ?<span class="depliant__signe" aria-hidden="true"></span></summary>
+            <div class="question__corps"><p>Oui, notamment pour un nettoyage de fin de travaux ou une remise en état avant état des lieux de sortie, après le passage d'une autre entreprise.</p></div>
           </details>
         </li>
       </ul>
@@ -329,7 +565,7 @@
   <section class="section" aria-labelledby="tParLot">
     <div class="zone">
       <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Par lot</span>
+        <span class="repere trace trace--bas"><b>N° 05</b>Par lot</span>
         <span class="intercalaire__cote">Questions propres à chaque métier</span>
         <h2 class="h2" data-lignes>Une question<br>sur un lot précis ?</h2>
         
@@ -338,7 +574,8 @@
         <div class="service__texte">
           <p>Chaque page de prestation porte les questions propres à son
           métier : durée, préparation des supports, compatibilité des
-          matériaux, contraintes d'un logement occupé.</p>
+          matériaux, contraintes d'un logement occupé, et ce que le bâti
+          lausannois impose à ce lot en particulier.</p>
           <p>Si votre question n'y figure pas, appelez-nous. Nous répondons
           plus vite au téléphone que par écrit.</p>
         </div>

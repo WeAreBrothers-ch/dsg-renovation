@@ -1,0 +1,145 @@
+/* ============================================================
+   DSG RÉNOVATION — 16 · COMPOSANTS DE CONTENU
+   Frise d'étapes, cartes à filet, tableau des besoins, limites,
+   liste de conseils.
+
+   Même discipline que le reste du dossier : pas de fond, pas de
+   rayon, un filet tiré à la règle et une étiquette en mono. Les
+   valeurs viennent toutes de 00-jetons.css.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   FRISE — une suite d'étapes datées
+   Le numéro tient la marge, la cote ferme la ligne à droite :
+   c'est la mise en page d'un bordereau de chantier.
+   ------------------------------------------------------------ */
+.frise{display:flex;flex-direction:column}
+.temps{
+  --c-trait:var(--c-ligne);
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:var(--sp-5);align-items:baseline;
+  padding-block:var(--sp-6);
+}
+.temps__n{
+  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
+  letter-spacing:.14em;color:var(--c-signal-sombre);
+  font-variant-numeric:tabular-nums;
+}
+/* Une cellule de grille refuse de rétrécir sous la largeur de son
+   contenu tant qu'on ne le lui dit pas : sans cette réserve, un mot long
+   pousse la colonne et fait déborder la ligne entière. */
+.temps__corps,.besoin__reponse{min-width:0}
+.temps__texte{
+  margin-top:var(--sp-3);max-width:62ch;
+  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
+}
+.temps__cote{
+  color:var(--c-encre-40);white-space:nowrap;text-align:right;
+}
+@media (max-width:767px){
+  /* La cote passe sous le titre : à trois cent quatre-vingt-dix
+     pixels, une troisième colonne ne laisse plus rien au texte. */
+  .temps{grid-template-columns:auto minmax(0,1fr);gap:var(--sp-4)}
+  .temps__cote{grid-column:2;text-align:left;margin-top:var(--sp-3)}
+}
+
+/* ------------------------------------------------------------
+   CARTES — une famille, une cote, un texte, ses lots
+   ------------------------------------------------------------ */
+.cartes{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+  gap:0 var(--sp-7);
+}
+.carte{
+  --c-trait:var(--c-encre);--e-trait:1.5px;
+  display:flex;flex-direction:column;
+  padding-block:var(--sp-6) var(--sp-7);
+}
+.carte__cote{color:var(--c-encre-40)}
+.carte__titre{margin-top:var(--sp-4)}
+.carte__texte{
+  margin-top:var(--sp-4);
+  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
+}
+.carte__lots{
+  margin-top:auto;padding-top:var(--sp-5);
+  display:flex;flex-wrap:wrap;gap:var(--sp-2);
+}
+
+/* ------------------------------------------------------------
+   BESOINS — ce que dit le client, le lot qui répond
+   La phrase du visiteur à gauche, en italique : c'est une
+   citation, pas un intitulé de catalogue.
+   ------------------------------------------------------------ */
+.besoins{display:flex;flex-direction:column}
+.besoin{
+  --c-trait:var(--c-ligne);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:var(--sp-5) var(--sp-7);align-items:baseline;
+  padding-block:var(--sp-5);
+}
+@media (max-width:767px){
+  .besoin{grid-template-columns:1fr;gap:var(--sp-3)}
+}
+.besoin__dit{
+  font-family:var(--f-texte);font-style:italic;
+  font-size:var(--t-h4);line-height:1.35;color:var(--c-encre);
+}
+.besoin__lot{
+  display:inline-flex;align-items:center;gap:var(--sp-3);
+  font-weight:600;font-size:var(--t-petit);
+  border-bottom:1.5px solid var(--c-signal-sombre);
+  padding-bottom:2px;
+  transition:gap var(--d-rapide) var(--e-standard);
+}
+@media (hover:hover) and (pointer:fine){
+  .besoin__lot:hover{gap:var(--sp-4)}
+}
+.besoin__note{
+  margin-top:var(--sp-3);
+  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
+}
+
+/* ------------------------------------------------------------
+   LIMITES — ce que nous ne faisons pas
+   Le seul endroit du site où un titre porte une barre : elle dit
+   « non » avant que la phrase ne le dise.
+   ------------------------------------------------------------ */
+.limites{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:0 var(--sp-7);
+}
+.limite{--c-trait:var(--c-encre);--e-trait:1.5px;padding-block:var(--sp-6)}
+.limite__titre{
+  position:relative;padding-left:var(--sp-6);
+  color:var(--c-encre);
+}
+.limite__titre::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:16px;height:1.5px;background:var(--c-signal-sombre);
+}
+
+/* ------------------------------------------------------------
+   CONSEILS — une liste numérotée qui se lit comme un texte
+   ------------------------------------------------------------ */
+.conseils{
+  counter-reset:conseil;
+  display:flex;flex-direction:column;max-width:72ch;
+}
+.conseil{
+  --c-trait:var(--c-ligne);
+  counter-increment:conseil;
+  position:relative;padding:var(--sp-5) 0 var(--sp-5) var(--sp-8);
+  color:var(--c-encre-60);line-height:1.65;
+}
+.conseil::before{
+  content:counter(conseil,decimal-leading-zero);
+  position:absolute;left:0;top:calc(var(--sp-5) + .25em);
+  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
+  letter-spacing:.14em;color:var(--c-signal-sombre);
+  font-variant-numeric:tabular-nums;
+}
+@media (max-width:767px){
+  .conseil{padding-left:var(--sp-7)}
+}

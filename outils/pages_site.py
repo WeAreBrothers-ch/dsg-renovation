@@ -8,6 +8,9 @@ import io
 import os
 
 import briques
+import briques_bis
+import contenu_divers
+import contenu_entreprise as ce
 
 DOSSIER = os.path.join(os.path.dirname(__file__), "fragments")
 
@@ -19,27 +22,13 @@ def fragment(nom):
 
 
 def entreprise(services, base=""):
-    """Qui nous sommes, ce que nous garantissons, comment nous travaillons."""
-    engagements = [
-        ("Un seul interlocuteur",
-         "Un responsable de chantier unique pilote tous les lots, du devis à "
-         "la remise des clés. Vous ne coordonnez personne."),
-        ("Un planning daté",
-         "Le calendrier des corps de métier vous est transmis avant le "
-         "démarrage, semaine par semaine, et tenu."),
-        ("Des salariés, pas une cascade",
-         "Onze professionnels de l'entreprise sur les chantiers. Les mêmes "
-         "visages du premier au dernier jour."),
-        ("Une réception en règle",
-         "Visite contradictoire, liste des réserves, reprise sous dix jours "
-         "et nettoyage complet inclus."),
-    ]
-    cartes = "\n".join(
+    """Qui nous sommes, comment se déroule un chantier, nos limites."""
+    engagements = "\n".join(
         f"""        <li class="engagement revele trace">
           <h3 class="h4">{titre}</h3>
           <p class="etape__texte">{texte}</p>
         </li>"""
-        for titre, texte in engagements
+        for titre, texte in ce.ENGAGEMENTS
     )
     return f"""
   <section class="section" aria-labelledby="tHistoire">
@@ -48,35 +37,57 @@ def entreprise(services, base=""):
                       "D'où vient|l'entreprise")}
       <div class="service__deux revele">
         <div class="service__texte">
-          <p>DSG Rénovation a été fondée en 2019 à Lausanne, sur un
-          savoir-faire transmis depuis plus de quarante ans. L'entreprise est
-          jeune, le métier ne l'est pas.</p>
-          <p>Nous avons choisi de rester une structure à taille humaine, avec
-          onze professionnels salariés et un réseau de partenaires de la
-          région que nous suivons depuis des années. C'est ce qui nous permet
-          de tenir un planning : nous savons qui vient, et quand.</p>
-          <p>Nous ne faisons que de la rénovation. Pas de construction neuve,
-          pas de promotion. Un logement occupé, un immeuble habité, un
-          chantier à mener sans déranger les voisins : c'est notre terrain.</p>
+          {"".join("<p>%s</p>" % p for p in ce.HISTOIRE)}
         </div>
 {briques.releve_chiffre()}
       </div>
     </div>
   </section>
 
+  <section class="section" aria-labelledby="tMetier">
+    <div class="zone">
+{briques.intercalaire("N° 02", "Notre métier", "Rénovation, et rien d'autre",
+                      "Le bâti existant,|pas le neuf")}
+      <div class="service__texte revele">
+        {"".join("<p>%s</p>" % p for p in ce.METIER)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tDeroule">
+    <div class="zone">
+{briques.intercalaire("N° 03", "Déroulé", "Du premier appel aux clés",
+                      "Comment se déroule|un chantier",
+                      "Six temps, dans cet ordre, sur tous nos chantiers — "
+                      "qu'il s'agisse d'un seul lot ou d'une rénovation "
+                      "complète.")}
+{briques_bis.frise(ce.DEROULE)}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tLimites">
+    <div class="zone">
+{briques.intercalaire("N° 04", "Nos limites", "Dire non fait partie du métier",
+                      "Ce que nous|ne faisons pas",
+                      "Une entreprise qui accepte tout finit par mal faire "
+                      "quelque chose. Voici où nous nous arrêtons.")}
+{briques_bis.limites(ce.LIMITES)}
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="tEngagements">
     <div class="zone">
-{briques.intercalaire("N° 02", "Engagements", "Ce sur quoi nous nous tenons",
+{briques.intercalaire("N° 05", "Engagements", "Ce sur quoi nous nous tenons",
                       "Quatre engagements,|tenus par écrit")}
       <ul class="engagements">
-{cartes}
+{engagements}
       </ul>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("N° 03", "Savoir-faire", "Neuf lots · une seule entreprise",
+{briques.intercalaire("N° 06", "Savoir-faire", "Neuf lots · une seule entreprise",
                       "Ce que nous|savons faire")}
 {briques.liste_metiers(services, base)}
     </div>
@@ -90,22 +101,44 @@ def entreprise(services, base=""):
 
 
 def savoir_faire(services, base=""):
-    """Page pilier : elle porte les neuf lots et renvoie vers chacun."""
+    """Page pilier : les neuf lots, leur ordre, et le besoin qu'ils couvrent."""
     return f"""
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
 {briques.intercalaire("N° 01", "Les neuf lots", "Une seule entreprise",
                       "Les lots que|nous menons",
                       "Chaque lot a sa page : ce qu'il couvre, comment nous "
-                      "procédons, combien de temps il prend et ce qu'on nous "
-                      "demande le plus souvent à son sujet.")}
+                      "procédons, combien de temps il prend et ce que le bâti "
+                      "lausannois lui impose.")}
 {briques.liste_metiers(services, base)}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tBesoins">
+    <div class="zone">
+{briques.intercalaire("N° 02", "Par besoin", "Ce qu'on nous dit au téléphone",
+                      "Quel lot|pour quel besoin",
+                      "Personne n'appelle pour demander « de la plâtrerie ». "
+                      "Voici les phrases que nous entendons vraiment, et le "
+                      "lot qui y répond.")}
+{briques_bis.besoins(contenu_divers.BESOINS, services, base)}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tOrdre">
+    <div class="zone">
+{briques.intercalaire("N° 03", "L'ordre", "Pourquoi on ne peint pas en premier",
+                      "Dans quel ordre|les lots s'enchaînent",
+                      "Un chantier de rénovation ne se compose pas, il se "
+                      "séquence. Inverser deux lots, c'est refaire le "
+                      "premier.")}
+{briques_bis.frise(contenu_divers.ENCHAINEMENT, avec_cote=False)}
     </div>
   </section>
 
   <section class="section" aria-labelledby="tPourquoi">
     <div class="zone">
-{briques.intercalaire("N° 02", "Le principe", "Pourquoi une seule entreprise",
+{briques.intercalaire("N° 04", "Le principe", "Pourquoi une seule entreprise",
                       "Neuf lots chez nous,|ou neuf entreprises")}
       <div class="service__deux revele">
         <div class="service__texte">
@@ -120,7 +153,15 @@ def savoir_faire(services, base=""):
           <p>C'est aussi ce qui nous permet de vous donner une date de
           livraison, et de la tenir.</p>
         </div>
-{briques.releve_chiffre()}
+        <aside class="encadre trace">
+          <p class="etiquette encadre__titre">Ce que vous ne gérez pas</p>
+          <ul class="encadre__liste">
+            <li>La coordination des corps de métier entre eux.</li>
+            <li>Les temps de séchage et leur incidence sur le planning.</li>
+            <li>Les reprises entre deux lots, réglées en interne.</li>
+            <li>L'évacuation des déchets et le nettoyage final.</li>
+          </ul>
+        </aside>
       </div>
     </div>
   </section>

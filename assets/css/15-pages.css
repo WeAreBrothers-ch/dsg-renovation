@@ -206,3 +206,54 @@
   .pied__grille--large{grid-template-columns:1fr 1fr}
   .pied__grille--large>*:nth-child(2){border-left:0;padding-left:0}
 }
+
+/* ------------------------------------------------------------
+   TIRAGE D'OUVERTURE
+   Une page de métier se montre avant de s'expliquer. L'image va
+   bord à bord : c'est la seule chose du site qui sorte de la
+   grille, et c'est ce qui lui donne son ampleur.
+   ------------------------------------------------------------ */
+.tirage{
+  position:relative;margin:var(--sp-8) 0 0;
+  width:100vw;margin-left:50%;transform:translateX(-50%);
+  overflow:hidden;
+}
+.tirage img{
+  width:100%;height:clamp(260px,42vw,560px);object-fit:cover;
+  /* Le tirage de chantier est déjà lumineux : une pointe de saturation
+     suffit à le détacher du papier sans le rendre criard. */
+  filter:saturate(1.06);
+}
+.tirage__legende{
+  position:absolute;left:var(--x-marge);bottom:var(--sp-4);
+  padding:var(--sp-2) var(--sp-4);
+  background:var(--c-bitume);color:var(--c-craie);
+  border-radius:var(--r-net);
+}
+@media (max-width:767px){
+  .tirage{margin-top:var(--sp-7)}
+  .tirage__legende{left:var(--sp-4);font-size:11px}
+}
+
+/* ------------------------------------------------------------
+   ENCADRÉ
+   Une note de marge : ce que l'artisan dirait sur place, posé à
+   côté du texte courant. Fond en creux, filet tiré au-dessus.
+   ------------------------------------------------------------ */
+.encadre{
+  --c-trait:var(--c-encre);--e-trait:1.5px;
+  background:var(--c-papier-2);
+  padding:var(--sp-6) var(--sp-5) var(--sp-6);
+}
+.encadre__titre{color:var(--c-encre)}
+.encadre__liste{
+  margin-top:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4);
+}
+.encadre__liste li{
+  position:relative;padding-left:var(--sp-5);
+  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
+}
+.encadre__liste li::before{
+  content:"";position:absolute;left:0;top:.6em;
+  width:10px;height:1.5px;background:var(--c-signal-sombre);
+}
