@@ -6,51 +6,55 @@ concurrencent dans les résultats de recherche au lieu de s'additionner.
 """
 
 import briques
+import confiance
 from donnees_site import COMMUNES
+from ouverture import ouverture
 from pages_site import fragment
+
+# La légende reprend ce que montrent les deux tirages (voir leurs
+# textes alternatifs) : aucune information nouvelle n'est avancée.
+LEGENDE_COMPARATEUR = (
+    '<span><b>Séjour traversant</b> — de la chape brute au parquet chêne</span>'
+    '<span>Faites glisser la poignée pour comparer</span>'
+)
 
 
 def accueil(services, base=""):
-    """Page d'accueil : la preuve, les chiffres, les lots, les renvois."""
+    """Page d'accueil : la preuve, les chiffres, les lots, le déroulé."""
     villes = "".join("<li>%s</li>" % c for c in COMMUNES)
     return f"""
-  <section class="couverture" id="p01" aria-labelledby="t01">
+  <section class="couverture" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
+      <p class="couverture__nature">Entreprise de rénovation
+        <span>Lausanne &amp; arc lémanique</span></p>
       <div class="couverture__texte">
-        <p class="etiquette">Entreprise de rénovation · Lausanne</p>
-        <h1 id="t01">
-          <span class="ligne"><span>Du sol</span></span>
-          <span class="ligne"><span>au plafond,</span></span>
-          <span class="ligne"><span>tout en</span></span>
-          <span class="ligne"><span><span class="souligne">maîtrise.</span></span></span>
-        </h1>
-        <p class="chapo couverture__chapo">Rénovation totale d'appartements, de
-        maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un seul
-        interlocuteur, tous les corps de métier, un chantier livré propre et
-        dans les délais.</p>
-        <div class="couverture__actions">
-          <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="{base}realisations.html">Voir nos réalisations</a>
+        <h1 id="t01">Du sol au plafond, tout en maîtrise.</h1>
+        <div class="couverture__pied">
+          <p class="chapo couverture__chapo">Rénovation totale d'appartements,
+          de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
+          seul interlocuteur, tous les corps de métier, un chantier livré
+          propre et dans les délais.</p>
+          <div class="couverture__actions">
+            <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+            <a class="btn btn--cadre" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
-
-      <div class="couverture__preuve">
-      {fragment('comparateur')}
-      </div>
     </div>
+
+{ouverture(fragment('comparateur'), LEGENDE_COMPARATEUR)}
 
     <div class="zone couverture__cartouche">
     {fragment('identite')}
     </div>
+{confiance.bande_references(base)}
   </section>
-
-  {fragment('bandeau')}
 
   <section class="section" aria-labelledby="tEntreprise">
     <div class="zone">
-{briques.intercalaire("N° 01", "L'entreprise", "Relevé arrêté en janvier 2026",
+{briques.intercalaire("L'entreprise", "Relevé arrêté en janvier 2026",
                       "Professionnalisme,|fiabilité et passion")}
-      <p class="texte entreprise__intro revele">Fondée en <span class="nb">2019</span>
+      <p class="declaration entreprise__intro revele">Fondée en <span class="nb">2019</span>
       sur un savoir-faire transmis depuis plus de <span class="nb">40</span> ans,
       DSG Rénovation intervient à Lausanne, Genève et sur tout l'arc lémanique.
       Rénover, c'est notre métier — pas une activité parmi d'autres.</p>
@@ -61,7 +65,7 @@ def accueil(services, base=""):
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("N° 02", "Prestations", "Neuf métiers · cinq pages",
+{briques.intercalaire("Prestations", "Neuf métiers · cinq pages",
                       "Neuf métiers,|un seul chantier",
                       "Tous nos lots sont réalisés par des salariés de "
                       "l'entreprise ou par des partenaires que nous suivons "
@@ -73,7 +77,7 @@ def accueil(services, base=""):
 
   <section class="section" aria-labelledby="tChantier">
     <div class="zone">
-{briques.intercalaire("N° 03", "Réalisations", "Extrait du registre des chantiers",
+{briques.intercalaire("Réalisations", "Extrait du registre des chantiers",
                       "Un chantier,|en détail")}
       {fragment('signature')}
       <p class="suite revele"><a href="{base}realisations.html">Voir les six fiches de chantier<span class="fleche" aria-hidden="true"></span></a></p>
@@ -82,7 +86,7 @@ def accueil(services, base=""):
 
   <section class="section" aria-labelledby="tZone">
     <div class="zone">
-{briques.intercalaire("N° 04", "Zone", "Atelier à Lausanne, avenue de Béthusy",
+{briques.intercalaire("Zone", "Atelier à Lausanne, avenue de Béthusy",
                       "Où nous|intervenons",
                       "Nous restons sur l'arc lémanique. Un chantier proche, "
                       "c'est une équipe qui arrive à l'heure et qui repasse "
@@ -104,17 +108,20 @@ def accueil(services, base=""):
     </div>
   </section>
 
-  <section class="partenaires" aria-labelledby="tRef">
+  <section class="section" aria-labelledby="tEtapes">
     <div class="zone">
-{briques.intercalaire("N° 05", "Références", "Régies, propriétaires et architectes",
-                      "Ils nous confient|leurs biens")}
-      {fragment('partenaires')}
-      <p class="suite revele"><a href="{base}entreprise.html">Lire les retours de nos clients<span class="fleche" aria-hidden="true"></span></a></p>
+{briques.intercalaire("Déroulé", "De la demande à la livraison",
+                      "Comment se passe|votre demande",
+                      "Quatre temps, les mêmes sur tous nos chantiers. Vous "
+                      "savez à chaque étape ce qui vient ensuite, et quand.")}
+{confiance.etapes()}
+      <p class="suite revele"><a href="{base}entreprise.html#deroule">Le déroulé complet d'un chantier<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 """ + briques.appel(
         base,
         "Ouvrez votre dossier",
         "Décrivez votre projet en une minute. Nous nous déplaçons, mesurons "
-        "et vous remettons un devis détaillé et gratuit sous 72 heures.",
+        "et vous remettons un devis détaillé et gratuit 72 heures après la "
+        "visite.",
     )

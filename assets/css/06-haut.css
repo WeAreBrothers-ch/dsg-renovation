@@ -1,258 +1,148 @@
 /* ============================================================
-   DSG RÉNOVATION — 06 · HAUT DE DOSSIER
-   Couverture, relevé, engagements, savoir-faire.
+   DSG RÉNOVATION — 06 · HAUT DE L'ACCUEIL
+   Couverture, relevé chiffré, index des métiers.
    ============================================================ */
 
 /* ------------------------------------------------------------
-   01 · COUVERTURE
+   COUVERTURE
+   Du texte d'abord, sur le plâtre : la nature de l'entreprise dans
+   la marge, la promesse en grand dans la colonne de droite. L'image
+   vient ensuite, cadrée — elle ne s'impose pas d'un coup.
    ------------------------------------------------------------ */
-.couverture{padding-top:calc(var(--h-entete) + var(--sp-6));overflow:hidden}
-@media (max-width:767px){.couverture{padding-top:calc(var(--h-entete) + var(--sp-5))}}
-
-/* Les deux colonnes se répondent au centre plutôt que de s'aligner sur
-   leur bas : l'image étant plus haute que le texte, un alignement bas
-   reporterait toute la différence en vide au-dessus du titre. */
-.couverture__grille{align-items:center;padding-bottom:var(--sp-5)}
-.couverture__texte{grid-column:1/6}
-/* La preuve est l'argument le plus fort du dossier : elle prend sept
-   colonnes sur douze, mais reste dans les marges de page — elle se
-   pose sur la grille, elle n'en sort pas. */
-.couverture__preuve{
-  grid-column:6/13;justify-self:stretch;max-width:none;width:100%;
-  display:flex;flex-direction:column;gap:var(--sp-3);
+.couverture{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+.couverture__grille{row-gap:var(--sp-5);padding-bottom:clamp(40px,5vw,72px)}
+.couverture__nature{
+  grid-column:1/5;padding-top:.6em;
+  font-weight:500;font-size:var(--t-ui);line-height:1.4;color:var(--c-encre);
 }
-.couverture__preuve .comparaison__aide{margin:0}
-/* Le seul cri du dossier : graisse pleine et capitales, une seule fois
-   dans la page. Tous les autres titres sont en Archivo 500. */
+.couverture__nature span{display:block;color:var(--c-encre-60);font-weight:400}
+.couverture__texte{grid-column:5/13}
 .couverture h1{
-  margin-top:var(--sp-5);
-  font-family:var(--f-titre);font-weight:800;font-size:var(--t-couverture);
-  text-transform:uppercase;letter-spacing:-.035em;line-height:1.05;
+  font-size:var(--t-couverture);letter-spacing:-.035em;line-height:1;
+  max-width:8.7em;
 }
-/* La fenêtre du masque s'ouvre vers le haut de la même quantité, sinon
-   elle rognerait le fond du surlignage qu'on vient d'agrandir. La marge
-   négative annule le décalage : la ligne ne bouge pas. */
-/* La fenêtre du masque s'ouvre en haut pour les accents et en bas pour
-   le trait de soulignement, sans déplacer la ligne : les marges
-   négatives annulent exactement les rembourrages. */
-.couverture h1 .ligne{
-  display:block;overflow:hidden;
-  padding-top:.16em;margin-top:-.16em;
-  padding-bottom:.14em;margin-bottom:-.14em;
+.couverture__pied{
+  margin-top:clamp(28px,3.4vw,48px);
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:var(--sp-5) var(--sp-7);
 }
-.js .couverture h1 .ligne>span{
-  display:block;transform:translateY(120%);
-  transition:transform var(--d-ample) var(--e-sortie);
-}
-.js .couverture.est-vu h1 .ligne>span{transform:none}
-.js .couverture h1 .ligne:nth-child(2)>span{transition-delay:80ms}
-.js .couverture h1 .ligne:nth-child(3)>span{transition-delay:160ms}
-.js .couverture h1 .ligne:nth-child(4)>span{transition-delay:240ms}
-
-.couverture__chapo{margin-top:var(--sp-5)}
-.couverture__actions{margin-top:var(--sp-6);display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+.couverture__chapo{max-width:40ch}
+.couverture__actions{display:flex;flex-direction:column;align-items:stretch;width:max-content;max-width:100%;gap:var(--sp-3)}
+.couverture__actions .btn{min-width:min(100%,260px)}
 
 @media (max-width:1023px){
-  .couverture__texte{grid-column:1/9}
-  /* Les colonnes passent l'une sous l'autre : la preuve reprend toute
-     la largeur et n'a plus de raison d'être bornée ni poussée à droite. */
-  .couverture__preuve{
-    grid-column:1/9;margin-top:var(--sp-6);
-    justify-self:stretch;max-width:none;width:100%;
-  }
+  .couverture__nature,.couverture__texte{grid-column:1/-1}
+  .couverture__nature{padding-top:0}
 }
 @media (max-width:767px){
-  /* Sur téléphone, la phrase coule d'un seul tenant et se répartit
-     d'elle-même sur deux lignes : le découpage en quatre fragments n'a
-     de sens que dans la colonne étroite du grand écran. Les fragments
-     redeviennent donc du texte en ligne, séparés par une espace.
-     La révélation ligne par ligne cède la place à une apparition
-     d'ensemble — un masque n'a plus de découpe à masquer. */
-  .couverture h1{display:block}
-  .couverture h1 .ligne{
-    display:inline;overflow:visible;
-    /* La fenêtre du masque n'a plus lieu d'être : sans elle, le trait
-       et les accents débordent librement. */
-    padding:0;margin:0;
-  }
-  .couverture h1 .ligne::after{content:" "}
-  .js .couverture h1 .ligne>span{display:inline;transform:none}
-  .couverture__texte,.couverture__preuve{grid-column:1/5}
-  .couverture__grille{padding-bottom:var(--sp-4)}
-  /* La barre d'action fixe propose déjà « Appeler » et « Devis gratuit »
-     en permanence : les répéter ici ne ferait qu'allonger la couverture
-     avant d'arriver à la preuve. */
-  .couverture__actions{display:none}
+  .couverture__actions{width:100%;align-items:stretch}
+  /* La barre d'action fixe propose déjà « Appeler » : la couverture ne
+     garde que l'appel principal, pour que l'image arrive plus vite. */
+  .couverture__actions .btn--cadre{display:none}
 }
 
-/* Le rembourrage de la section suivante fournit déjà la respiration :
-   celui du cartouche n'a plus qu'à le décoller de son filet. */
-.couverture__cartouche{padding-bottom:var(--sp-3)}
-@media (max-width:767px){.couverture__cartouche{padding-bottom:var(--sp-3)}}
+/* Le cartouche d'identité suit l'image d'ouverture. */
+.couverture__cartouche{padding-top:var(--sp-7)}
 
 /* ------------------------------------------------------------
-   02 · L'ENTREPRISE — relevé et engagements réunis
-   Chaque promesse est adossée au chiffre qui la prouve : le chiffre
-   n'est plus une vitrine posée à côté du discours, il en est la
-   pièce justificative. Une ligne de bordereau par engagement.
-
-   La section est volontairement dense : c'est une page de dossier,
-   pas une affiche. Les respirations sont courtes, la hiérarchie
-   tient à la taille et au filet, pas au vide.
+   RELEVÉ CHIFFRÉ — quatre cases d'un même bordereau
+   Les traits sont les interstices d'un pixel laissés sur un fond
+   d'encre : ils se raccordent toujours, quelle que soit la grille.
    ------------------------------------------------------------ */
-.entreprise__intro{
-  max-width:62ch;
-  margin-top:calc(-1 * var(--sp-5));
-  margin-bottom:var(--sp-7);
-}
-
-/* Quatre cellules égales, deux par rangée. Chacune est assez étroite
-   pour que son texte remplisse sa colonne — c'est ce qui supprime le
-   vide qu'une pleine largeur laissait à droite. Et comme la grille est
-   fluide, le passage à une colonne sur téléphone ne demande aucune
-   autre bascule : les cellules gardent exactement la même structure. */
-/* Quatre fiches cartonnées à onglet. C'est la silhouette que le site
-   emploie déjà pour ses chemises de chantier, ramenée à la taille d'une
-   carte : l'onglet porte l'intitulé, la fiche porte le chiffre et sa
-   preuve. La grille reste fluide, donc le passage à une colonne sur
-   téléphone ne demande aucune autre bascule. */
-/* Quatre chemises de dossier, à la silhouette exacte de celles des
-   réalisations : encoche en diagonale, aplat de carton, angles vifs.
-   La languette porte l'intitulé, la chemise porte le chiffre et sa
-   preuve. Pas de bordure ni de rayon — le clip-path les rognerait, et
-   c'est justement la découpe qui dessine l'objet. */
+.entreprise__intro{margin-bottom:var(--sp-7)}
 .preuves{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:var(--sp-6) var(--grille-goutt);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
 .preuve{
-  --coche:34px;
-  /* La languette doit contenir le plus long des quatre intitulés :
-     sa largeur suit donc celle de la chemise. */
-  --languette:44%;
-  position:relative;
-  padding:calc(var(--coche) + var(--sp-5)) var(--sp-5) var(--sp-6);
-  background:var(--c-papier-2);
-  clip-path:polygon(0 0, var(--languette) 0,
-                    calc(var(--languette) + 6%) var(--coche),
-                    100% var(--coche), 100% 100%, 0 100%);
-  transition:background-color var(--d-survol) var(--e-power2);
+  display:flex;flex-direction:column;gap:var(--sp-4);
+  padding:var(--sp-5) var(--sp-5) var(--sp-6);background:var(--c-papier);
+  transition:background-color var(--d-normal) var(--e-standard);
 }
-.preuve:hover{background:var(--c-fiche)}
-
-/* L'intitulé s'inscrit dans la languette, comme la cote d'une chemise. */
-.preuve__onglet{
-  position:absolute;left:var(--sp-5);top:11px;
-  color:var(--c-encre-60);white-space:nowrap;
-}
-
-.preuve__chiffre{
-  display:flex;align-items:baseline;gap:0;
-  padding-bottom:var(--sp-4);
-  border-bottom:1.5px solid var(--c-encre);
-}
+@media (hover:hover) and (pointer:fine){.preuve:hover{background:var(--c-fiche)}}
+.preuve__onglet{color:var(--c-encre)}
+.preuve__chiffre{display:flex;align-items:flex-start;padding-top:var(--sp-6)}
 .preuve__val{
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-chiffre);
-  letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;
+  letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;
 }
-.preuve__plus{
-  font-family:var(--f-mono);font-weight:500;font-size:1rem;
-  line-height:1;align-self:flex-start;color:var(--c-signal);
-}
+.preuve__plus{font-weight:500;font-size:1.25rem;line-height:1;color:var(--c-signal-sombre)}
 .preuve__texte{
-  margin-top:var(--sp-4);
-  font-size:var(--t-texte);line-height:1.55;color:var(--c-encre-60);
+  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.5;
+  color:var(--c-encre-60);max-width:40ch;
 }
-
-@media (max-width:1023px){
-  /* La chemise rétrécit : sa languette doit s'élargir d'autant pour
-     continuer de contenir l'intitulé. */
-  .preuve{--languette:60%;padding-inline:var(--sp-4)}
-  .preuve__onglet{left:var(--sp-4)}
+.preuve__note{
+  margin-top:auto;padding-top:var(--sp-5);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);
+  letter-spacing:-.01em;line-height:1.25;color:var(--c-encre);
 }
-@media (max-width:767px){
-  .entreprise__intro{margin-bottom:var(--sp-6)}
-  /* Une seule colonne : la chemise reprend toute la largeur sans
-     changer de structure — même découpe, même hiérarchie interne. */
-  .preuves{grid-template-columns:1fr;gap:var(--sp-6)}
-  .preuve{--languette:78%}
-}
+.preuves--quatre{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1023px){.preuves--quatre{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){.preuves,.preuves--quatre{grid-template-columns:minmax(0,1fr)}}
+.service__deux .preuves{grid-template-columns:minmax(0,1fr)}
 
 /* ------------------------------------------------------------
-   04 · SAVOIR-FAIRE (index des métiers)
+   INDEX DES MÉTIERS
+   Des lignes de bordereau empilées dans un même cadre : numéro et
+   intitulé à gauche, résumé à droite. Au survol, la ligne se creuse
+   et un tirage suit la main.
    ------------------------------------------------------------ */
-.metiers{position:relative}
-/* La ligne ne se remplit pas au survol : seul son filet passe à l'encre
-   pleine. Le tirage photo est déjà l'événement de la ligne — un fond qui
-   s'éclaircit en plus ne ferait que salir la lecture. */
+.metiers{position:relative;border-top:1px solid var(--c-cadre)}
 .metiers__ligne{
+  position:relative;
   display:flex;align-items:center;gap:var(--sp-5);
-  padding:var(--sp-5) var(--sp-2);
-  border-top:1px solid var(--c-ligne);
-  transition:border-color var(--d-rapide) var(--e-standard);
+  min-height:76px;padding:var(--sp-4) var(--sp-4) var(--sp-4) 0;
+  border-bottom:1px solid var(--c-cadre);
+  transition:background-color var(--d-rapide) var(--e-standard);
 }
-.metiers>li:last-child .metiers__ligne{border-bottom:1px solid var(--c-ligne)}
-.metiers__ligne:hover{border-top-color:var(--c-encre)}
-.metiers>li:hover+li .metiers__ligne{border-top-color:var(--c-encre)}
-.metiers>li:last-child .metiers__ligne:hover{border-bottom-color:var(--c-encre)}
+@media (hover:hover) and (pointer:fine){
+  .metiers__ligne:hover{background:var(--c-papier-2)}
+}
 .metiers__n{
-  flex:0 0 auto;width:34px;
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;color:var(--c-encre-40);
+  flex:0 0 auto;width:2.2em;
+  font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;
+  color:var(--c-encre-60);
 }
 .metiers__titre{
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-h3);
   letter-spacing:-.02em;line-height:1.15;
 }
 .metiers__desc{
-  margin-left:auto;max-width:36ch;text-align:right;
-  font-size:var(--t-petit);color:var(--c-encre-60);
+  margin-left:auto;max-width:34ch;text-align:right;
+  font-family:var(--f-lecture);font-size:var(--t-petit);line-height:1.45;color:var(--c-encre-60);
 }
 .metiers__chev{
-  flex:0 0 auto;width:10px;height:10px;
-  border-top:1.5px solid var(--c-encre);border-right:1.5px solid var(--c-encre);
-  transform:rotate(45deg);
-  transition:transform var(--d-rapide) var(--e-standard);
+  flex:0 0 auto;width:15px;height:10px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform var(--d-normal) var(--e-sortie);
 }
 @media (hover:hover) and (pointer:fine){
-  .metiers__ligne:hover .metiers__chev{transform:rotate(45deg) translate(6px,-6px)}
+  .metiers__ligne:hover .metiers__chev{transform:translateX(4px)}
 }
 .metiers__vue{
-  position:absolute;right:11%;top:50%;z-index:3;
-  width:158px;aspect-ratio:4/5;pointer-events:none;
-  border-radius:var(--r-net);overflow:hidden;box-shadow:var(--om-1);
-  opacity:0;transform:translateY(-50%) scale(.96) rotate(-3deg);
+  position:absolute;right:14%;top:50%;z-index:3;
+  width:168px;aspect-ratio:4/5;pointer-events:none;overflow:hidden;box-shadow:var(--om-1);
+  opacity:0;transform:translateY(-50%) scale(.96);
   transition:opacity var(--d-normal) var(--e-sortie),transform var(--d-normal) var(--e-sortie);
 }
-.metiers__vue img{width:100%;height:100%;object-fit:cover;filter:saturate(1.06) contrast(1.02)}
+.metiers__vue img{width:100%;height:100%;object-fit:cover}
 @media (hover:hover) and (pointer:fine){
-  .metiers__ligne:hover .metiers__vue{opacity:1;transform:translateY(-50%) scale(1) rotate(-3deg)}
+  .metiers__ligne:hover .metiers__vue{opacity:1;transform:translateY(-50%) scale(1)}
 }
-/* Sans survol possible, la vignette prend sa place dans la ligne et se
-   dévoile quand celle-ci entre dans l'écran. L'emplacement est réservé
-   en permanence : le défilement ne saute jamais. */
+/* Sans survol, la vignette prend sa place dans la ligne et se découvre
+   quand celle-ci entre dans l'écran. L'emplacement est réservé : le
+   défilement ne saute jamais. */
 @media (max-width:1023px){
   .metiers__desc{display:none}
-  .metiers__ligne{gap:var(--sp-3);padding-block:var(--sp-3)}
-  .metiers__n{width:28px}
-  .metiers__titre{
-    flex:1;min-width:0;
-    font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
-  }
-  /* Révélation signature du site : le tirage se décoffre du bas vers le
-     haut en glissant depuis la droite, pendant que la ligne monte. */
+  .metiers__ligne{gap:var(--sp-3);min-height:72px;padding-block:var(--sp-3)}
+  .metiers__titre{flex:1;min-width:0;font-size:var(--t-h4)}
   .metiers__vue{
-    position:static;order:1;flex:0 0 auto;
-    width:52px;aspect-ratio:1/1;
-    transform:translateX(20px) scale(.98);
-    clip-path:inset(100% 0 0 0);
-    transition:opacity var(--d-normal) var(--e-sortie),
-               transform var(--d-lent) var(--e-sortie),
-               clip-path var(--d-lent) var(--e-sortie);
+    position:static;order:1;flex:0 0 auto;width:52px;aspect-ratio:1/1;box-shadow:none;
+    opacity:0;transform:translateX(12px);
+    transition:opacity var(--d-ample) var(--e-sortie),transform var(--d-ample) var(--e-sortie);
   }
-  .metiers__chev{order:2;margin-left:0}
-  .metiers__ligne[data-vue-visible="true"] .metiers__vue{
-    opacity:1;transform:none;clip-path:inset(0);
-  }
+  .metiers__chev{order:2}
+  .metiers__ligne[data-vue-visible="true"] .metiers__vue,
+  html:not(.js) .metiers__vue{opacity:1;transform:none}
 }

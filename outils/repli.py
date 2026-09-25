@@ -60,7 +60,7 @@ def replis(entrees, numerote=True):
         numero = ('<span class="repli__n" aria-hidden="true">%02d</span>' % rang
                   if numerote else '<span class="repli__n"></span>')
         marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
-        lignes.append(f"""        <details class="repli revele trace">
+        lignes.append(f"""        <details class="repli revele">
           <summary class="repli__tete">
             {numero}
             <span class="repli__titre">{titre}</span>
@@ -77,7 +77,7 @@ def repli_liste(titre, items, cote=""):
     lignes = "\n".join("            <li>%s</li>" % i for i in items)
     corps = '<ul class="service__liste">\n%s\n          </ul>' % lignes
     marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
-    return f"""        <details class="repli repli--liste revele trace">
+    return f"""        <details class="repli repli--liste revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">{titre}</span>

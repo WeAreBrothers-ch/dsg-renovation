@@ -1,0 +1,22 @@
+/* ============================================================
+   DSG RÉNOVATION — 19 · IMPRESSION
+   Le site bascule sur papier blanc en redéfinissant les jetons, et
+   non composant par composant.
+   ============================================================ */
+@media print{
+  :root,.sur-sombre{
+    --c-papier:#fff;--c-papier-2:#fff;--c-fiche:#fff;--c-teinte:#fff;
+    --c-bitume:#fff;--c-bitume-2:#fff;
+    --c-encre:#000;--c-encre-60:#333;--c-encre-40:#555;
+    --c-craie:#000;--c-craie-60:#333;
+    --c-signal:#000;--c-signal-sombre:#000;--c-signal-clair:#000;
+    --c-ligne:rgba(0,0,0,.32);--c-ligne-forte:rgba(0,0,0,.62);--c-cadre:#000;
+  }
+  body{background:#fff;color:#000}
+  .entete,.barre-mobile,.menu,.filtres,.ouverture__rideau{display:none!important}
+  .section{padding-block:24px;break-inside:avoid}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:10px}
+  .chemise,.temoin{break-inside:avoid}
+  .marque img,.pied__marque img,.menu__haut img{filter:none}
+  .partenaires__grille img{filter:grayscale(1);opacity:1}
+}

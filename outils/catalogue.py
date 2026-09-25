@@ -24,7 +24,8 @@ def pages(base_js, questions_balisees):
 
     Chaque entrée est le jeu d'arguments de `page_simple` : fichier,
     titre, description, étiquette, titre affiché, chapô, corps, modules,
-    balisage supplémentaire, puis l'action de couverture.
+    balisage supplémentaire, image de partage (None : le logo), puis
+    l'action de couverture.
     """
     return [
         ("entreprise.html",
@@ -50,12 +51,12 @@ def pages(base_js, questions_balisees):
 
         ("devis.html",
          "Devis rénovation gratuit à Lausanne — DSG Rénovation",
-         "Devis de rénovation gratuit et détaillé sous 72 heures à Lausanne. "
+         "Devis de rénovation gratuit et détaillé à Lausanne, 72 h après la visite. "
          "Ce que contient un devis, comment en comparer deux, et les réponses "
          "aux vingt questions qu'on nous pose avant de signer.",
          "Devis gratuit", ["Ouvrez", "votre dossier"],
-         "Visite, relevé et devis détaillé poste par poste. Gratuit, sous "
-         "72 heures, sans engagement.",
+         "Visite, relevé et devis détaillé poste par poste. Gratuit, remis "
+         "72 heures après la visite, sans engagement.",
          pages_contenu.devis, base_js + ["formulaire.js"],
-         [questions_balisees], ACTION_BORDEREAU),
+         [questions_balisees], None, ACTION_BORDEREAU),
     ]

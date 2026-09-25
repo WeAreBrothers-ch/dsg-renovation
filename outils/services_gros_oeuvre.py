@@ -19,7 +19,7 @@ SERVICES = [
         "description": (
             "Rénovation totale clé en main à Lausanne et dans l'arc lémanique : "
             "tous les corps de métier coordonnés par un seul interlocuteur. "
-            "Devis gratuit sous 72 heures."
+            "Devis gratuit 72 h après la visite."
         ),
         "h1": ["Rénovation complète", "à Lausanne"],
         "chapo": (
@@ -55,7 +55,7 @@ SERVICES = [
         "etapes": [
             ("Visite et relevé", "Nous nous déplaçons, mesurons et relevons "
              "l'état existant. La visite est gratuite et sans engagement."),
-            ("Devis détaillé", "Vous recevez sous 72 heures un devis poste "
+            ("Devis détaillé", "72 heures après la visite, vous recevez un devis poste "
              "par poste, avec les quantités et les finitions retenues."),
             ("Planning daté", "Avant le premier coup de marteau, vous avez "
              "le calendrier semaine par semaine de tous les corps de métier."),
@@ -67,7 +67,7 @@ SERVICES = [
         "reperes": [
             ("Durée type", "5 à 8 semaines pour 100 m²"),
             ("Maison ou immeuble", "10 à 14 semaines"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
             ("Réserves", "Reprises sous 10 jours"),
         ],
         "questions": [
@@ -137,7 +137,7 @@ SERVICES = [
             ("Finitions", "Q2 à Q4 selon l'exigence"),
             ("Pièce courante", "1 à 3 jours"),
             ("Couplage", "Le plus souvent avec la peinture"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Faut-il lisser tous les murs avant de repeindre ?",
@@ -205,7 +205,7 @@ SERVICES = [
             ("Cloison simple", "2 à 3 jours, finition comprise"),
             ("Isolation", "Laine minérale systématique"),
             ("Épaisseur courante", "de 7 à 10 cm"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Puis-je abattre un mur pour ouvrir la cuisine ?",
@@ -274,7 +274,7 @@ SERVICES = [
             ("Perte de hauteur", "de 8 à 15 cm selon le cas"),
             ("Pièce courante", "3 à 5 jours"),
             ("Éclairage", "Calepinage validé avant pose"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Combien de hauteur sous plafond vais-je perdre ?",

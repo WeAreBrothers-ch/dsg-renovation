@@ -4,15 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DSG Rénovation — Entreprise de rénovation à Lausanne</title>
-<meta name="description" content="Entreprise de rénovation clé en main à Lausanne et sur l'arc lémanique : rénovation totale, peinture, plâtrerie, carrelage et sols. 600 chantiers livrés. Devis gratuit sous 72 h.">
-<meta name="theme-color" content="#F7F7F5">
+<meta name="description" content="Entreprise de rénovation clé en main à Lausanne et sur l'arc lémanique : rénovation totale, peinture, plâtrerie, carrelage et sols. 600 chantiers livrés. Devis gratuit 72 h après la visite.">
+<meta name="theme-color" content="#EEEBE5">
 <link rel="canonical" href="https://www.dsg-renov.ch/">
+<link rel="icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" type="image/png">
+<link rel="apple-touch-icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">
 <meta property="og:site_name" content="DSG Rénovation">
 <meta property="og:title" content="DSG Rénovation — Entreprise de rénovation à Lausanne">
-<meta property="og:description" content="Entreprise de rénovation clé en main à Lausanne et sur l'arc lémanique : rénovation totale, peinture, plâtrerie, carrelage et sols. 600 chantiers livrés. Devis gratuit sous 72 h.">
+<meta property="og:description" content="Entreprise de rénovation clé en main à Lausanne et sur l'arc lémanique : rénovation totale, peinture, plâtrerie, carrelage et sols. 600 chantiers livrés. Devis gratuit 72 h après la visite.">
 <meta property="og:url" content="https://www.dsg-renov.ch/">
 <meta property="og:image" content="https://static.wixstatic.com/media/2c1464_593f3a927ebd420ab56d4d306a4e6aa5~mv2.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400&amp;display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/00-jetons.css">
 <link rel="stylesheet" href="assets/css/01-socle.css">
@@ -40,6 +42,8 @@
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
 <link rel="stylesheet" href="assets/css/17-repli.css">
+<link rel="stylesheet" href="assets/css/18-confiance.css">
+<link rel="stylesheet" href="assets/css/19-impression.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -133,7 +137,7 @@
 <body>
 <a class="saut" href="#contenu">Aller au contenu principal</a>
 
-<header class="entete entete--posee" id="entete">
+<header class="entete" id="entete">
   <div class="zone entete__inner">
     <a class="marque" href="index.html" aria-label="DSG Rénovation, retour à l'accueil">
       <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38">
@@ -147,57 +151,55 @@
 
     <div class="entete__actions">
       <a class="entete__tel" href="tel:+41218470202">+41 21 847 02 02</a>
-      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit</a>
+      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <span></span>
-    </button>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
 
-<div class="menu sur-sombre" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-  <div class="zone menu__haut" style="padding-inline:0">
-    <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28">
-    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">&times;</button>
+<div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="menu__haut">
+    <span class="menu__marque"><img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28"></span>
+    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li><a href="services.html"><span class="n">01</span>Prestations</a></li>
-    <li><a href="realisations.html"><span class="n">02</span>Réalisations</a></li>
-    <li><a href="entreprise.html"><span class="n">03</span>L'entreprise</a></li>
-    <li><a href="devis.html"><span class="n">04</span>Devis gratuit</a></li>
+    <li><a href="services.html">Prestations</a></li>
+    <li><a href="realisations.html">Réalisations</a></li>
+    <li><a href="entreprise.html">L'entreprise</a></li>
+    <li><a href="devis.html">Devis gratuit</a></li>
   </ul>
   <div class="menu__pied">
     <a class="donnee" href="tel:+41218470202">+41 21 847 02 02</a>
     <a class="donnee" href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
-    <a class="btn btn--sombre" href="devis.html">Demander un devis gratuit</a>
+    <a class="btn btn--plein" href="devis.html">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 
 <main id="contenu">
 
-  <section class="couverture" id="p01" aria-labelledby="t01">
+  <section class="couverture" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
+      <p class="couverture__nature">Entreprise de rénovation
+        <span>Lausanne &amp; arc lémanique</span></p>
       <div class="couverture__texte">
-        <p class="etiquette">Entreprise de rénovation · Lausanne</p>
-        <h1 id="t01">
-          <span class="ligne"><span>Du sol</span></span>
-          <span class="ligne"><span>au plafond,</span></span>
-          <span class="ligne"><span>tout en</span></span>
-          <span class="ligne"><span><span class="souligne">maîtrise.</span></span></span>
-        </h1>
-        <p class="chapo couverture__chapo">Rénovation totale d'appartements, de
-        maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un seul
-        interlocuteur, tous les corps de métier, un chantier livré propre et
-        dans les délais.</p>
-        <div class="couverture__actions">
-          <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="realisations.html">Voir nos réalisations</a>
+        <h1 id="t01">Du sol au plafond, tout en maîtrise.</h1>
+        <div class="couverture__pied">
+          <p class="chapo couverture__chapo">Rénovation totale d'appartements,
+          de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
+          seul interlocuteur, tous les corps de métier, un chantier livré
+          propre et dans les délais.</p>
+          <div class="couverture__actions">
+            <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+            <a class="btn btn--cadre" href="realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="couverture__preuve">
-      <div class="comparateur comparateur--couverture" data-comparateur data-curseur="Glisser">
+  <figure class="ouverture" data-ouverture>
+    <div class="ouverture__cadre">
+      <div class="comparateur" data-comparateur data-curseur="Glisser">
         <div class="comparateur__vue comparateur__vue--apres">
           <picture>
             <source srcset="assets/images/sejour-apres.avif" type="image/avif">
@@ -215,47 +217,65 @@
           </picture>
         </div>
 
-        <span class="comparateur__etat comparateur__etat--avant">Avant</span>
         <span class="comparateur__etat comparateur__etat--apres">Après</span>
+        <span class="comparateur__etat comparateur__etat--avant">Avant</span>
 
-        <div class="comparateur__poignee" role="slider" tabindex="0"
-             aria-label="Comparer l'état avant et après travaux"
-             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
-          <svg class="comparateur__glyphe" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <path d="M6 2 1.5 6 6 10"/><path d="M20 2 24.5 6 20 10"/>
-          </svg>
+        <div class="comparateur__rail">
+          <div class="comparateur__poignee" role="slider" tabindex="0"
+               aria-label="Comparer l'état avant et après travaux"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
+            <svg class="comparateur__glyphe" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M6 2 1.5 6 6 10"/><path d="M20 2 24.5 6 20 10"/>
+            </svg>
+          </div>
         </div>
       </div>
-<p class="comparaison__aide"><i aria-hidden="true"></i> Glissez la poignée · ou utilisez les flèches du clavier</p>
-      </div>
+
+      <span class="ouverture__rideau ouverture__rideau--g" aria-hidden="true"></span>
+      <span class="ouverture__rideau ouverture__rideau--d" aria-hidden="true"></span>
     </div>
+    <figcaption class="zone ouverture__legende"><span><b>Séjour traversant</b> — de la chape brute au parquet chêne</span><span>Faites glisser la poignée pour comparer</span></figcaption>
+  </figure>
 
     <div class="zone couverture__cartouche">
-    <dl class="identite" aria-label="Fiche d'identité de l'entreprise">
-      <div><dt>Société</dt><dd>DSG Rénovation Sàrl</dd></div>
-      <div><dt>Siège</dt><dd>Lausanne (VD)</dd></div>
-      <div><dt>Savoir-faire</dt><dd>40 ans · depuis 2019</dd></div>
-      <div><dt>Zone</dt><dd>Arc lémanique</dd></div>
+    <dl class="identite" aria-label="L'entreprise en bref">
+      <div><dt>Chantiers livrés</dt><dd>600+ sur l'arc lémanique</dd></div>
+      <div><dt>Équipe</dt><dd>11 professionnels salariés</dd></div>
+      <div><dt>Devis</dt><dd>Gratuit · 72 h après visite</dd></div>
+      <div><dt>Atelier</dt><dd>Lausanne, av. de Béthusy</dd></div>
     </dl>
-    </div>
-  </section>
 
-  <div class="bandeau" aria-hidden="true">
-    <div class="bandeau__piste">
-    <span>Rénovation totale</span><i></i><span>Peinture</span><i></i><span>Plâtrerie</span><i></i><span>Cloisons</span><i></i><span>Faux plafonds</span><i></i><span>Carrelage</span><i></i><span>Parquet &amp; linoléum</span><i></i><span>Papier peint</span><i></i><span>Nettoyage de fin de chantier</span><i></i>
-    <span>Rénovation totale</span><i></i><span>Peinture</span><i></i><span>Plâtrerie</span><i></i><span>Cloisons</span><i></i><span>Faux plafonds</span><i></i><span>Carrelage</span><i></i><span>Parquet &amp; linoléum</span><i></i><span>Papier peint</span><i></i><span>Nettoyage de fin de chantier</span><i></i>
     </div>
-  </div>
+
+    <div class="zone caution" role="group" aria-labelledby="tCaution">
+      <p class="caution__titre" id="tCaution">Ils nous confient leurs biens</p>
+      <ul class="partenaires__grille revele">
+        <li><img src="https://static.wixstatic.com/media/2c1464_51a61ef883614cd79df85ed6455dc6e3~mv2.png" alt="Vitelli Architectes" width="380" height="99" loading="lazy" decoding="async"></li>
+        <li><img src="https://static.wixstatic.com/media/2c1464_efbfbae88bc246848f6ef1b5f1eea865~mv2.png" alt="Gerofinance Régie du Rhône" width="2127" height="353" loading="lazy" decoding="async"></li>
+        <li><img src="https://static.wixstatic.com/media/2c1464_1df3c1502edc4ed39aff38e01f7a9f5c~mv2.png" alt="Patrimonium" width="1531" height="212" loading="lazy" decoding="async"></li>
+        <li><img src="https://static.wixstatic.com/media/2c1464_1557bff3aeef42d1b8c7c3430f45d23f~mv2.png" alt="Privera" width="1200" height="230" loading="lazy" decoding="async"></li>
+        <li><img src="https://static.wixstatic.com/media/2c1464_79208b8bb756457aae973df6e4252ab1~mv2.png" alt="de Rham" width="504" height="108" loading="lazy" decoding="async"></li>
+        <li><img src="https://static.wixstatic.com/media/2c1464_816153da3c114f20a00fba61b95b0415~mv2.png" alt="Galland &amp; Cie, régie immobilière" width="1080" height="303" loading="lazy" decoding="async"></li>
+        <li class="partenaires__carre"><img src="https://static.wixstatic.com/media/2c1464_e0e4de49acaa4d66adf588419e89c526~mv2.png" alt="Groupe Bernard Nicod" width="432" height="432" loading="lazy" decoding="async"></li>
+      </ul>
+      <a class="caution__lien" href="entreprise.html#references">Nos références<span class="fleche" aria-hidden="true"></span></a>
+    </div>
+
+  </section>
 
   <section class="section" aria-labelledby="tEntreprise">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>L'entreprise</span>
-        <span class="intercalaire__cote">Relevé arrêté en janvier 2026</span>
-        <h2 class="h2" data-lignes>Professionnalisme,<br>fiabilité et passion</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">L'entreprise</p>
+          <p class="intercalaire__cote">Relevé arrêté en janvier 2026</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tEntreprise" class="h2" data-lignes>Professionnalisme,<br>fiabilité et passion</h2>
+          
+        </div>
       </div>
-      <p class="texte entreprise__intro revele">Fondée en <span class="nb">2019</span>
+      <p class="declaration entreprise__intro revele">Fondée en <span class="nb">2019</span>
       sur un savoir-faire transmis depuis plus de <span class="nb">40</span> ans,
       DSG Rénovation intervient à Lausanne, Genève et sur tout l'arc lémanique.
       Rénover, c'est notre métier — pas une activité parmi d'autres.</p>
@@ -263,30 +283,30 @@
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Chantiers livrés</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="600">600</span><span class="preuve__plus">+</span>
+            <span class="preuve__val">600</span><span class="preuve__plus">+</span>
           </p>
-          <p class="preuve__texte">Un seul contact du devis à la remise des clés. Nous coordonnons tous les corps de métier, vous ne gérez rien.</p>
+          <p class="preuve__texte">Appartements, maisons et immeubles, pour des propriétaires privés comme pour les régies de la place lausannoise.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Ans de savoir-faire</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="40">40</span>
+            <span class="preuve__val">40</span>
           </p>
-          <p class="preuve__texte">Planning de chantier daté, transmis avant le démarrage et tenu semaine après semaine. Aucun chantier laissé ouvert.</p>
+          <p class="preuve__texte">Un métier transmis depuis plus de quarante ans, repris en <span class="nb">2019</span> sous le nom DSG Rénovation.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Professionnels salariés</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="11">11</span>
+            <span class="preuve__val">11</span>
           </p>
           <p class="preuve__texte">Des professionnels salariés, pas de sous-traitance en cascade : les mêmes visages du premier au dernier jour.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Partenaires de la région</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="35">35</span><span class="preuve__plus">+</span>
+            <span class="preuve__val">35</span><span class="preuve__plus">+</span>
           </p>
-          <p class="preuve__texte">Réception de chantier contradictoire, reprise des réserves sous <span class="nb">10</span> jours et nettoyage complet inclus.</p>
+          <p class="preuve__texte">Des artisans que nous suivons depuis des années. Jamais d'entreprise inconnue découverte sur place.</p>
         </li>
       </ul>
       <p class="suite revele"><a href="entreprise.html">Découvrir l'entreprise<span class="fleche" aria-hidden="true"></span></a></p>
@@ -295,11 +315,15 @@
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Prestations</span>
-        <span class="intercalaire__cote">Neuf métiers · cinq pages</span>
-        <h2 class="h2" data-lignes>Neuf métiers,<br>un seul chantier</h2>
-        <p class="chapo intercalaire__chapo">Tous nos lots sont réalisés par des salariés de l'entreprise ou par des partenaires que nous suivons depuis des années.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Prestations</p>
+          <p class="intercalaire__cote">Neuf métiers · cinq pages</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tLots" class="h2" data-lignes>Neuf métiers,<br>un seul chantier</h2>
+          <p class="chapo intercalaire__chapo">Tous nos lots sont réalisés par des salariés de l'entreprise ou par des partenaires que nous suivons depuis des années.</p>
+        </div>
       </div>
       <ul class="metiers revele" data-suivi-vignette>
         <li>
@@ -354,15 +378,22 @@
 
   <section class="section" aria-labelledby="tChantier">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 03</b>Réalisations</span>
-        <span class="intercalaire__cote">Extrait du registre des chantiers</span>
-        <h2 class="h2" data-lignes>Un chantier,<br>en détail</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Réalisations</p>
+          <p class="intercalaire__cote">Extrait du registre des chantiers</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tChantier" class="h2" data-lignes>Un chantier,<br>en détail</h2>
+          
+        </div>
       </div>
-      <div class="signature revele">
+      <!-- CONTENU À VALIDER : noms de chantier, communes, surfaces, durées et
+     années à confirmer par le client, fiche par fiche. Les photographies
+     viennent de l'ancien site de l'entreprise. -->
+<div class="signature pleine-largeur revele">
         <div class="signature__texte">
-          <p class="etiquette"><b>Pièce jointe</b> — Chantier signature</p>
+          <p class="etiquette">Chantier signature</p>
           <h3 class="h3" style="margin-top:var(--sp-4)">Immeuble Béthusy — six appartements rénovés en site occupé</h3>
           <p class="texte" style="margin-top:var(--sp-4)">Reprise complète de six logements pour une régie lausannoise : plâtrerie, peinture, faux plafonds, carrelage et sols. Chantier mené étage par étage pour maintenir les locataires en place, avec nettoyage livré à chaque réception.</p>
           <dl class="releve" style="margin-top:var(--sp-5);max-width:380px">
@@ -371,8 +402,8 @@
             <dt>Livré</dt><dd>2025</dd>
           </dl>
         </div>
-        <figure class="signature__media revele-img">
-          <span class="tampon signature__tampon" aria-hidden="true">Chantier<br>réceptionné<br>2025</span>
+        <figure class="signature__media">
+          <span class="tampon signature__tampon" aria-hidden="true">Chantier réceptionné · 2025</span>
           <span class="signature__cadre">
             <img src="https://static.wixstatic.com/media/2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg"
                  alt="Cuisine et dégagement d'un appartement de l'immeuble Béthusy après reprise des murs, plafonds et sols"
@@ -386,11 +417,15 @@
 
   <section class="section" aria-labelledby="tZone">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 04</b>Zone</span>
-        <span class="intercalaire__cote">Atelier à Lausanne, avenue de Béthusy</span>
-        <h2 class="h2" data-lignes>Où nous<br>intervenons</h2>
-        <p class="chapo intercalaire__chapo">Nous restons sur l'arc lémanique. Un chantier proche, c'est une équipe qui arrive à l'heure et qui repasse sans compter quand une reprise est nécessaire.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Zone</p>
+          <p class="intercalaire__cote">Atelier à Lausanne, avenue de Béthusy</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tZone" class="h2" data-lignes>Où nous<br>intervenons</h2>
+          <p class="chapo intercalaire__chapo">Nous restons sur l'arc lémanique. Un chantier proche, c'est une équipe qui arrive à l'heure et qui repasse sans compter quand une reprise est nécessaire.</p>
+        </div>
       </div>
       <div class="service__deux revele">
         <div class="service__texte">
@@ -409,37 +444,54 @@
     </div>
   </section>
 
-  <section class="partenaires" aria-labelledby="tRef">
+  <section class="section" aria-labelledby="tEtapes">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 05</b>Références</span>
-        <span class="intercalaire__cote">Régies, propriétaires et architectes</span>
-        <h2 class="h2" data-lignes>Ils nous confient<br>leurs biens</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Déroulé</p>
+          <p class="intercalaire__cote">De la demande à la livraison</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tEtapes" class="h2" data-lignes>Comment se passe<br>votre demande</h2>
+          <p class="chapo intercalaire__chapo">Quatre temps, les mêmes sur tous nos chantiers. Vous savez à chaque étape ce qui vient ensuite, et quand.</p>
+        </div>
       </div>
-      <ul class="partenaires__grille revele">
-        <li><img src="https://static.wixstatic.com/media/2c1464_51a61ef883614cd79df85ed6455dc6e3~mv2.png" alt="Vitelli Architectes" width="380" height="99" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_efbfbae88bc246848f6ef1b5f1eea865~mv2.png" alt="Gerofinance Régie du Rhône" width="2127" height="353" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_1df3c1502edc4ed39aff38e01f7a9f5c~mv2.png" alt="Patrimonium" width="1531" height="212" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_1557bff3aeef42d1b8c7c3430f45d23f~mv2.png" alt="Privera" width="1200" height="230" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_79208b8bb756457aae973df6e4252ab1~mv2.png" alt="de Rham" width="504" height="108" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_816153da3c114f20a00fba61b95b0415~mv2.png" alt="Galland &amp; Cie, régie immobilière" width="1080" height="303" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_e0e4de49acaa4d66adf588419e89c526~mv2.png" alt="Groupe Bernard Nicod" width="432" height="432" loading="lazy" decoding="async"></li>
-      </ul>
-      <p class="suite revele"><a href="entreprise.html">Lire les retours de nos clients<span class="fleche" aria-hidden="true"></span></a></p>
+      <ol class="etapes pleine-largeur" aria-labelledby="tEtapes">
+        <li class="etape revele">
+          <p class="etape__tete"><span class="etape__n">01</span><span class="etape__cote">Premier échange</span></p>
+          <h3 class="etape__titre">Vous décrivez le projet</h3>
+          <p class="etape__texte">Par téléphone ou par le bordereau. En quelques minutes, nous vous disons si le projet entre dans notre métier et dans notre zone.</p>
+        </li>
+        <li class="etape revele">
+          <p class="etape__tete"><span class="etape__n">02</span><span class="etape__cote">Sous une semaine</span></p>
+          <h3 class="etape__titre">Nous venons mesurer</h3>
+          <p class="etape__texte">Visite sur place, relevé et sondage des supports. Elle est gratuite et ne vous engage à rien.</p>
+        </li>
+        <li class="etape revele">
+          <p class="etape__tete"><span class="etape__n">03</span><span class="etape__cote">72 h après la visite</span></p>
+          <h3 class="etape__titre">Vous recevez le devis</h3>
+          <p class="etape__texte">Poste par poste, protections, évacuation et nettoyage compris. Rien n'est renvoyé à un « selon besoin ».</p>
+        </li>
+        <li class="etape revele">
+          <p class="etape__tete"><span class="etape__n">04</span><span class="etape__cote">À la date convenue</span></p>
+          <h3 class="etape__titre">Nous livrons à la date dite</h3>
+          <p class="etape__texte">Planning daté avant le démarrage, un seul responsable de chantier, réception pièce par pièce et reprise des réserves sous dix jours.</p>
+        </li>
+      </ol>
+      <p class="suite revele"><a href="entreprise.html#deroule">Le déroulé complet d'un chantier<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
-  <section class="section rappel sur-sombre" aria-labelledby="rappelTitre">
+  <section class="section rappel" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
-      <div>
-        <p class="etiquette">Prochaine étape</p>
-        <h2 class="h2 rappel__titre" id="rappelTitre">Ouvrez votre dossier</h2>
-        <p class="chapo" style="margin-top:var(--sp-5)">Décrivez votre projet en une minute. Nous nous déplaçons, mesurons et vous remettons un devis détaillé et gratuit sous 72 heures.</p>
-      </div>
-      <div class="rappel__actions">
-        <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-        <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
+      <div class="rappel__corps">
+        <h2 class="rappel__titre" id="rappelTitre">Ouvrez votre dossier</h2>
+        <p class="chapo">Décrivez votre projet en une minute. Nous nous déplaçons, mesurons et vous remettons un devis détaillé et gratuit 72 heures après la visite.</p>
+        <div class="rappel__actions">
+          <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -447,7 +499,7 @@
 
 <footer class="pied sur-sombre">
   <div class="zone">
-    <div class="pied__grille pied__grille--large">
+    <div class="pied__grille">
       <div class="pied__marque">
         <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38" loading="lazy" decoding="async">
         <address class="donnee">
@@ -455,6 +507,9 @@
           <a href="tel:+41218470202">+41 21 847 02 02</a>
           <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
         </address>
+        <!-- CONTENU À VALIDER : horaires à confirmer avec le client -->
+        <p class="donnee pied__horaires">Lundi – vendredi, 08:00 – 17:00</p>
+        <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
       <nav class="pied__col" aria-labelledby="piedNav">
@@ -502,7 +557,7 @@
 
 <div class="barre-mobile" id="barreMobile" data-visible="false">
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
-  <a class="btn btn--plein" href="devis.html">Devis gratuit</a>
+  <a class="btn btn--plein" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/nav.js" defer></script>
 <script src="assets/js/motion.js" defer></script>
@@ -511,5 +566,6 @@
 <script src="assets/js/onglets.js" defer></script>
 <script src="assets/js/comparateur.js" defer></script>
 <script src="assets/js/vignette.js" defer></script>
+<script src="assets/js/ouverture.js" defer></script>
 </body>
 </html>

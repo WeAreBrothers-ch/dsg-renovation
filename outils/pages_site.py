@@ -1,4 +1,4 @@
-"""Corps des pages entreprise et savoir-faire, et accès aux fragments.
+"""Corps de la page entreprise, et accès aux fragments.
 
 `fragment()` vit ici parce que toutes les pages y puisent : ce sont les
 blocs repris tels quels du dossier d'origine.
@@ -10,6 +10,7 @@ import os
 import briques
 import briques_bis
 import repli
+import confiance
 import contenu_divers
 import contenu_entreprise as ce
 
@@ -31,7 +32,7 @@ def entreprise(services, base=""):
     return f"""
   <section class="section" aria-labelledby="tHistoire">
     <div class="zone">
-{briques.intercalaire("N° 01", "Histoire", "Depuis 2019 à Lausanne",
+{briques.intercalaire("Histoire", "Depuis 2019 à Lausanne",
                       "D'où vient|l'entreprise")}
       <div class="service__deux revele">
         <div class="service__texte">
@@ -44,7 +45,7 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tMetier">
     <div class="zone">
-{briques.intercalaire("N° 02", "Notre métier", "Rénovation, et rien d'autre",
+{briques.intercalaire("Notre métier", "Rénovation, et rien d'autre",
                       "Le bâti existant,|pas le neuf")}
       <div class="service__texte revele">
         {"".join("<p>%s</p>" % p for p in ce.METIER)}
@@ -52,9 +53,9 @@ def entreprise(services, base=""):
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tDeroule">
+  <section class="section" id="deroule" aria-labelledby="tDeroule">
     <div class="zone">
-{briques.intercalaire("N° 03", "Déroulé", "Du premier appel aux clés",
+{briques.intercalaire("Déroulé", "Du premier appel aux clés",
                       "Comment se déroule|un chantier",
                       "Six temps, dans cet ordre, sur tous nos chantiers — "
                       "qu'il s'agisse d'un seul lot ou d'une rénovation "
@@ -66,7 +67,7 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tLimites">
     <div class="zone">
-{briques.intercalaire("N° 04", "Nos limites", "Dire non fait partie du métier",
+{briques.intercalaire("Nos limites", "Dire non fait partie du métier",
                       "Ce que nous|ne faisons pas",
                       "Une entreprise qui accepte tout finit par mal faire "
                       "quelque chose. Voici où nous nous arrêtons.")}
@@ -77,15 +78,15 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tEngagements">
     <div class="zone">
-{briques.intercalaire("N° 05", "Engagements", "Ce sur quoi nous nous tenons",
+{briques.intercalaire("Engagements", "Ce sur quoi nous nous tenons",
                       "Quatre engagements,|tenus par écrit")}
 {engagements}
     </div>
   </section>
 
-  <section class="partenaires" aria-labelledby="tPartenaires">
+  <section class="partenaires" id="references" aria-labelledby="tPartenaires">
     <div class="zone">
-{briques.intercalaire("N° 06", "Références", "Régies, propriétaires et architectes",
+{briques.intercalaire("Références", "Régies, propriétaires et architectes",
                       "Ils nous confient|leurs biens",
                       "Une partie de notre activité vient de clients qui nous "
                       "rappellent. C'est la seule référence qui vaille dans un "
@@ -108,15 +109,15 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tTemoins">
     <div class="zone">
-{briques.intercalaire("N° 07", "Retours", "Ce que disent nos clients",
+{briques.intercalaire("Retours", "Ce que disent nos clients",
                       "Trois chantiers,|trois avis")}
-      {fragment('temoins')}
+{confiance.temoins()}
     </div>
   </section>
 
   <section class="section" aria-labelledby="tModes">
     <div class="zone">
-{briques.intercalaire("N° 08", "Collaborations", "Selon qui commande",
+{briques.intercalaire("Collaborations", "Selon qui commande",
                       "Trois façons|de travailler avec nous",
                       "Une régie, un architecte et un propriétaire n'attendent "
                       "pas la même chose. Nous n'organisons donc pas le "
@@ -127,7 +128,7 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("N° 09", "Prestations", "Cinq pages, neuf métiers",
+{briques.intercalaire("Prestations", "Cinq pages, neuf métiers",
                       "Ce que nous|savons faire")}
 {briques.liste_metiers(services, base)}
     </div>
@@ -137,79 +138,4 @@ def entreprise(services, base=""):
         "Parlons de votre projet",
         "Un appel suffit pour savoir si nous sommes la bonne entreprise pour "
         "votre chantier. Nous le disons franchement quand ce n'est pas le cas.",
-    )
-
-
-def savoir_faire(services, base=""):
-    """Page pilier : les neuf lots, leur ordre, et le besoin qu'ils couvrent."""
-    return f"""
-  <section class="section" aria-labelledby="tLots">
-    <div class="zone">
-{briques.intercalaire("N° 01", "Les neuf lots", "Une seule entreprise",
-                      "Les lots que|nous menons",
-                      "Cinq pages pour neuf métiers : ceux qui se posent "
-                      "ensemble sur un chantier partagent la leur. Chacune "
-                      "dit ce qu'elle couvre, comment nous procédons et ce "
-                      "que le bâti lausannois lui impose.")}
-{briques.liste_metiers(services, base)}
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="tBesoins">
-    <div class="zone">
-{briques.intercalaire("N° 02", "Par besoin", "Ce qu'on nous dit au téléphone",
-                      "Quel lot|pour quel besoin",
-                      "Personne n'appelle pour demander « de la plâtrerie ». "
-                      "Voici les phrases que nous entendons vraiment, et le "
-                      "lot qui y répond.")}
-{briques_bis.besoins(contenu_divers.BESOINS, services, base)}
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="tOrdre">
-    <div class="zone">
-{briques.intercalaire("N° 03", "L'ordre", "Pourquoi on ne peint pas en premier",
-                      "Dans quel ordre|les lots s'enchaînent",
-                      "Un chantier de rénovation ne se compose pas, il se "
-                      "séquence. Inverser deux lots, c'est refaire le "
-                      "premier.")}
-{repli.replis([(titre, "<p>%s</p>" % texte)
-                for titre, texte in contenu_divers.ENCHAINEMENT])}
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="tPourquoi">
-    <div class="zone">
-{briques.intercalaire("N° 04", "Le principe", "Pourquoi une seule entreprise",
-                      "Neuf lots chez nous,|ou neuf entreprises")}
-      <div class="service__deux revele">
-        <div class="service__texte">
-          <p>Une rénovation qui passe par neuf entreprises différentes, c'est
-          neuf devis à comparer, neuf plannings à faire coïncider et, au
-          moindre retard, neuf interlocuteurs qui se renvoient la
-          responsabilité.</p>
-          <p>Quand le plâtrier, le peintre, le carreleur et le poseur de sol
-          appartiennent à la même maison, la question ne se pose pas : le
-          fond mal dressé est repris par celui qui l'a fait, et le planning
-          se recale en interne.</p>
-          <p>C'est aussi ce qui nous permet de vous donner une date de
-          livraison, et de la tenir.</p>
-        </div>
-        <aside class="encadre trace">
-          <p class="etiquette encadre__titre">Ce que vous ne gérez pas</p>
-          <ul class="encadre__liste">
-            <li>La coordination des corps de métier entre eux.</li>
-            <li>Les temps de séchage et leur incidence sur le planning.</li>
-            <li>Les reprises entre deux lots, réglées en interne.</li>
-            <li>L'évacuation des déchets et le nettoyage final.</li>
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </section>
-""" + briques.appel(
-        base,
-        "Un lot, ou le chantier entier",
-        "Nous intervenons aussi bien sur un seul poste que sur une rénovation "
-        "complète. Décrivez votre projet, nous vous disons ce qu'il demande.",
     )

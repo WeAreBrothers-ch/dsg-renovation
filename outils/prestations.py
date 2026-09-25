@@ -31,7 +31,7 @@ PAGES = [
         "description": (
             "Rénovation totale clé en main à Lausanne et dans l'arc lémanique : "
             "tous les corps de métier coordonnés par un seul interlocuteur. "
-            "Devis gratuit sous 72 heures."
+            "Devis gratuit 72 h après la visite."
         ),
         "h1": ["Rénovation complète", "à Lausanne"],
         "chapo": "Appartement, maison ou immeuble repris de fond en comble. "
@@ -43,7 +43,7 @@ PAGES = [
         "reperes": [
             ("Durée type", "5 à 8 semaines pour 100 m²"),
             ("Maison ou immeuble", "10 à 14 semaines"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
             ("Réserves", "Reprises sous 10 jours"),
         ],
         "lies": ["platrerie-cloisons", "peinture", "carrelage-sols",
@@ -61,7 +61,7 @@ PAGES = [
         "description": (
             "Entreprise de peinture à Lausanne : préparation des fonds, mise "
             "en teinte intérieure et extérieure, pose de papier peint et de "
-            "toile de verre. Devis gratuit sous 72 heures."
+            "toile de verre. Devis gratuit 72 h après la visite."
         ),
         "h1": ["Peinture et", "revêtements muraux"],
         "chapo": "Une belle peinture, c'est quatre-vingts pour cent de "
@@ -74,7 +74,7 @@ PAGES = [
             ("Appartement 100 m²", "1 à 2 semaines"),
             ("Couches de finition", "2 au minimum"),
             ("Teintes", "Essai sur site avant validation"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "lies": ["platrerie-cloisons", "renovation-complete", "carrelage-sols",
                  "nettoyage-fin-de-chantier"],
@@ -104,7 +104,7 @@ PAGES = [
             ("Finitions", "Q2 à Q4 selon l'exigence"),
             ("Cloison simple", "2 à 3 jours, finition comprise"),
             ("Perte de hauteur", "8 à 15 cm sous faux plafond"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "lies": ["peinture", "renovation-complete", "carrelage-sols",
                  "nettoyage-fin-de-chantier"],
@@ -133,7 +133,7 @@ PAGES = [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
             ("Appartement 100 m²", "3 à 5 jours de sol"),
             ("En immeuble", "Sous-couche acoustique systématique"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "lies": ["renovation-complete", "platrerie-cloisons", "peinture",
                  "nettoyage-fin-de-chantier"],

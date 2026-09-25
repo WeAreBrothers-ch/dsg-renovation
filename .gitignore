@@ -13,3 +13,5 @@
 # (~4 Mo) et sans rapport avec le site livré. Retirer cette ligne pour
 # les versionner malgré tout.
 inspirations/
+__pycache__/
+*.pyc

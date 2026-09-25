@@ -1,6 +1,6 @@
 /* ============================================================
    DSG RÉNOVATION — MOUVEMENT
-   Révélations au défilement, compteurs du relevé, année courante.
+   Révélations au défilement, vignettes des métiers, année courante.
    Tout contenu reste lisible si ce fichier ne s'exécute pas.
    ============================================================ */
 (function () {
@@ -25,14 +25,12 @@
   });
 
   /* ---------- Révélations ---------- */
-  var aReveler = document.querySelectorAll(".revele, .revele-img");
-  var couverture = document.querySelector(".couverture");
+  var aReveler = document.querySelectorAll(".revele");
 
   function toutAfficher() {
     Array.prototype.forEach.call(aReveler, function (element) {
       element.classList.add("est-vu");
     });
-    if (couverture) { couverture.classList.add("est-vu"); }
   }
 
   if (!("IntersectionObserver" in window)) {
@@ -53,13 +51,6 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" });
 
     Array.prototype.forEach.call(aReveler, function (element) { observateur.observe(element); });
-
-    /* La couverture se révèle dès le premier rendu. */
-    window.requestAnimationFrame(function () {
-      window.requestAnimationFrame(function () {
-        if (couverture) { couverture.classList.add("est-vu"); }
-      });
-    });
   }
 
   /* ---------- Vignettes des savoir-faire (tactile) ----------
@@ -82,58 +73,9 @@
     Array.prototype.forEach.call(lignesMetiers, function (ligne) {
       observateurMetiers.observe(ligne);
     });
-  }
-
-  /* ---------- Compteurs du relevé ---------- */
-  var releve = document.getElementById("releveGeneral");
-  var dejaCompte = false;
-
-  /**
-   * Anime un nombre de 0 vers sa valeur cible.
-   * @param {HTMLElement} noeud
-   */
-  function compter(noeud) {
-    var cible = parseInt(noeud.getAttribute("data-compteur") || "", 10);
-    if (isNaN(cible)) { return; }
-    if (mouvementReduit) { noeud.textContent = String(cible); return; }
-
-    var duree = 1400;
-    var depart = null;
-
-    function pas(horodatage) {
-      if (depart === null) { depart = horodatage; }
-      var avancee = Math.min((horodatage - depart) / duree, 1);
-      var adouci = 1 - Math.pow(1 - avancee, 3);
-      noeud.textContent = String(Math.round(cible * adouci));
-      if (avancee < 1) { window.requestAnimationFrame(pas); }
-    }
-
-    noeud.textContent = "0";
-    window.requestAnimationFrame(pas);
-  }
-
-  function lancerCompteurs() {
-    if (dejaCompte || !releve) { return; }
-    dejaCompte = true;
-    var noeuds = releve.querySelectorAll("[data-compteur]");
-    Array.prototype.forEach.call(noeuds, function (noeud) {
-      if (noeud instanceof HTMLElement) { compter(noeud); }
+  } else {
+    Array.prototype.forEach.call(lignesMetiers, function (ligne) {
+      ligne.setAttribute("data-vue-visible", "true");
     });
-  }
-
-  if (releve) {
-    if (!("IntersectionObserver" in window)) {
-      lancerCompteurs();
-    } else {
-      var observateurReleve = new IntersectionObserver(function (entrees) {
-        entrees.forEach(function (entree) {
-          if (entree.isIntersecting) {
-            lancerCompteurs();
-            observateurReleve.disconnect();
-          }
-        });
-      }, { threshold: 0.4 });
-      observateurReleve.observe(releve);
-    }
   }
 }());

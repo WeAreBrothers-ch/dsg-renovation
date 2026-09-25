@@ -1,184 +1,129 @@
 /* ============================================================
-   DSG RÉNOVATION — 02 · BOUTONS, ONGLETS, ÉTIQUETTES
-   Signalétique de base : boutons, intercalaires, tampons, filtres.
+   DSG RÉNOVATION — 02 · BOUTONS, INTERCALAIRES, FILTRES
    ============================================================ */
-
 
 /* ------------------------------------------------------------
    BOUTONS
+   Des aplats rectangulaires, texte à gauche et flèche au bout,
+   comme une ligne de légende sur un plan. Au survol, une seconde
+   encre glisse depuis la gauche et recouvre la première.
    ------------------------------------------------------------ */
-/* Le survol ne change pas la couleur du bouton : une seconde encre
-   monte depuis le bas et recouvre la première. Le geste est le même
-   que celui du voile, tourné à la verticale. */
 .btn{
   position:relative;overflow:hidden;isolation:isolate;
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-3);
-  min-height:52px;padding:0 26px;border-radius:var(--r-net);
-  font-weight:500;font-size:var(--t-texte);line-height:1.2;text-align:center;
-  transition:background-color var(--d-rapide) var(--e-standard),
-             color var(--d-rapide) var(--e-standard),
+  display:inline-flex;align-items:center;justify-content:space-between;gap:var(--sp-5);
+  min-height:52px;padding:0 var(--sp-5);
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);
+  line-height:1.2;text-align:left;
+  transition:color var(--d-rapide) var(--e-standard),
              border-color var(--d-rapide) var(--e-standard),
              transform var(--d-rapide) var(--e-standard),
              scale 160ms var(--e-sortie);
 }
-/* Le rouge de la marque ne sert qu'ici : à appeler l'action. */
-.btn--plein{background:var(--c-signal);color:var(--c-fiche)}
-.btn--plein::after{
+.btn::after{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:var(--c-signal-sombre);
-  transform:scaleY(0);transform-origin:bottom;
-  transition:transform var(--d-survol) var(--e-power2);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform 420ms var(--e-sortie);
 }
-/* Le balayage du bouton reste réservé au survol souris ; au clavier il
-   demeure, car il marque la position du focus. */
 @media (hover:hover) and (pointer:fine){
-  .btn--plein:hover::after{transform:scaleY(1)}
+  .btn:hover::after{transform:scaleX(1)}
 }
-.btn--plein:focus-visible::after{transform:scaleY(1)}
-.btn--cadre{border:var(--bd-cadre);color:var(--c-encre)}
-.btn--cadre:hover{background:var(--c-encre);color:var(--c-papier)}
-.btn--sombre{background:var(--c-signal);color:var(--c-fiche)}
-.btn--sombre:hover{background:var(--c-signal-sombre);color:var(--c-fiche)}
-.btn--compact{min-height:44px;padding:0 20px;font-size:var(--t-petit)}
+.btn:focus-visible::after{transform:scaleX(1)}
 
-/* Chevron diagonal : la signalétique de lien du site. */
+/* La brique ne sert qu'ici : à appeler l'action. */
+.btn--plein{background:var(--c-signal);color:var(--c-fiche)}
+.btn--plein::after{background:var(--c-signal-sombre)}
+
+.btn--cadre{box-shadow:inset 0 0 0 1px var(--c-cadre);color:var(--c-encre)}
+.btn--cadre::after{background:var(--c-papier-2)}
+
+.btn--compact{min-height:40px;padding:0 var(--sp-4);gap:var(--sp-4);font-size:var(--t-nav)}
+
+/* Flèche de légende, dessinée en masque : elle prend la couleur du
+   texte qu'elle prolonge. */
 .fleche{
-  width:8px;height:8px;flex:0 0 auto;
-  border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;
-  transform:rotate(45deg);
-  transition:transform var(--d-rapide) var(--e-standard);
+  flex:0 0 auto;width:15px;height:10px;
+  background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform var(--d-normal) var(--e-sortie);
 }
 @media (hover:hover) and (pointer:fine){
-  .btn:hover .fleche{transform:rotate(45deg) translate(2px,-2px)}
+  .btn:hover .fleche,a:hover>.fleche{transform:translateX(3px)}
 }
 
 /* ------------------------------------------------------------
-   INTERCALAIRE — l'en-tête de chaque pièce du dossier
-   Un simple repère : numéro et nom de la pièce posés sur un
-   filet d'encre, la cote à l'autre bout, puis le titre.
+   INTERCALAIRE — l'en-tête de chaque section
+   L'intitulé tient la marge gauche, le titre ouvre la colonne de
+   droite, et tout le contenu de la section s'y range ensuite. Sur
+   grand écran, l'intitulé reste accroché pendant la lecture de
+   la section : on sait toujours où l'on est.
    ------------------------------------------------------------ */
-.intercalaire{position:relative;margin-bottom:var(--sp-8)}
-
-/* Le filet d'intercalaire se tire à la règle quand la pièce entre dans
-   l'écran : c'est le geste signature du dossier, répété à chaque section. */
-.repere{
-  display:block;padding-bottom:var(--sp-3);
-  --c-trait:var(--c-encre);--e-trait:2.5px;
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;line-height:1.2;
+.intercalaire{margin-bottom:var(--sp-8)}
+.intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-5)}
+.intercalaire__nom{
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);
   color:var(--c-encre);
 }
-.repere b{font-weight:500;color:var(--c-signal-sombre);margin-right:var(--sp-4)}
-.sur-sombre .repere{color:var(--c-craie);--c-trait:var(--c-craie)}
-.sur-sombre .repere b{color:var(--c-signal-sombre)}
-
 .intercalaire__cote{
-  position:absolute;right:0;top:0;
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;line-height:1.2;
-  color:var(--c-encre-40);
+  font-family:var(--f-texte);font-size:var(--t-ui);color:var(--c-encre-60);
 }
-.sur-sombre .intercalaire__cote{color:var(--c-craie-60)}
-@media (max-width:1023px){.intercalaire__cote{display:none}}
-
-.intercalaire h2{margin-top:var(--sp-6);font-size:var(--t-piece)}
+.intercalaire h2{font-size:var(--t-h2);max-width:14.8em}
 .intercalaire__chapo{margin-top:var(--sp-5)}
 
-@media (max-width:767px){
-  .intercalaire{margin-bottom:var(--sp-7)}
-  .intercalaire h2{margin-top:var(--sp-5)}
+@media (min-width:1024px){
+  .zone:has(>.intercalaire){
+    display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+    column-gap:var(--grille-goutt);row-gap:0;align-items:start;
+  }
+  .zone:has(>.intercalaire)>*{grid-column:5/-1}
+  .zone:has(>.intercalaire)>.intercalaire{display:contents}
+  /* La marge couvre toutes les rangées de la section : c'est ce qui
+     lui laisse la hauteur nécessaire pour rester accrochée. */
+  .intercalaire__marge{
+    grid-column:1/5;grid-row:1/span 40;align-self:start;
+    position:sticky;top:calc(var(--h-entete) + var(--sp-6));
+    flex-direction:column;margin-bottom:0;padding-right:var(--sp-6);
+  }
+  .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
+  /* Les blocs qui ont besoin de toute la largeur la reprennent. */
+  .zone:has(>.intercalaire)>.pleine-largeur{grid-column:1/-1;grid-row:auto}
 }
 
 /* ------------------------------------------------------------
-   TAMPON
-   Cercle encré, légèrement de travers. Un seul par section.
+   TAMPON — la mention de réception posée sur un tirage
+   Un simple cartouche d'encre, droit : un procès-verbal, pas un
+   coup de tampon.
    ------------------------------------------------------------ */
 .tampon{
-  display:grid;place-items:center;text-align:center;
-  width:118px;height:118px;border-radius:var(--r-rond);
-  border:2px solid var(--c-signal-sombre);color:var(--c-signal-sombre);
-  box-shadow:inset 0 0 0 4px var(--c-papier),inset 0 0 0 5px var(--c-signal-sombre);
-  background:rgba(247,247,245,.9);
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.1em;text-transform:uppercase;line-height:1.6;
-  transform:rotate(-8deg);
+  display:inline-block;padding:var(--sp-2) var(--sp-3);
+  background:var(--c-fiche);color:var(--c-encre);
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-etiquette);line-height:1.3;
 }
-@media (max-width:767px){.tampon{width:102px;height:102px;font-size:11px;line-height:1.5}}
-
 
 /* ------------------------------------------------------------
-   BANDEAU DÉFILANT
+   FILTRES — tri des réalisations
+   Une rangée de cellules jointives, comme les cases d'un plan.
    ------------------------------------------------------------ */
-.bandeau{
-  background:var(--c-bitume);color:var(--c-craie);
-  overflow:hidden;padding-block:var(--sp-4);
-  white-space:nowrap;user-select:none;position:relative;z-index:2;
-  border-block:1px solid var(--c-ligne-d);
-}
-.bandeau__piste{
-  display:inline-flex;align-items:center;gap:var(--sp-5);
-  animation:defile 60s linear infinite;will-change:transform;
-}
-.bandeau:hover .bandeau__piste,
-.bandeau:focus-within .bandeau__piste{animation-play-state:paused}
-/* Le bandeau est un ruban de téléscripteur, pas un cri : il défile en
-   petites capitales mono, à la même voix que les étiquettes du dossier. */
-.bandeau span{
-  font-family:var(--f-mono);font-weight:500;font-size:13px;
-  text-transform:uppercase;letter-spacing:.14em;
-}
-.bandeau i{
-  width:7px;height:7px;flex:0 0 auto;
-  border-radius:var(--r-rond);background:var(--c-ligne-forte);
-}
-@keyframes defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.bandeau__piste{animation:none!important}}
-
-/* ------------------------------------------------------------
-   FILTRES — boutons de tri des réalisations
-   ------------------------------------------------------------ */
-.filtres{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
-
+.filtres{display:flex;flex-wrap:wrap}
 .filtre{
-  min-height:40px;padding:0 var(--sp-4);
-  border:var(--bd-fin);border-radius:var(--r-net);
+  min-height:44px;padding:0 var(--sp-5);
+  box-shadow:inset 0 0 0 1px var(--c-cadre);margin-right:-1px;
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-nav);
   color:var(--c-encre-60);
   transition:background-color var(--d-rapide) var(--e-standard),
              color var(--d-rapide) var(--e-standard),
-             border-color var(--d-rapide) var(--e-standard),
              scale 160ms var(--e-sortie);
 }
-.filtre:hover{border-color:var(--c-ligne-forte);color:var(--c-encre)}
-.filtre[aria-pressed="true"]{
-  background:var(--c-encre);border-color:var(--c-encre);color:var(--c-papier);
+@media (hover:hover) and (pointer:fine){
+  .filtre:hover{color:var(--c-encre);background:var(--c-papier-2)}
 }
-/* Sur téléphone les quatre filtres tiennent sur une seule ligne : ils
-   se resserrent, et cessent de passer à la ligne. Sur les écrans les
-   plus étroits, où même resserrés ils ne tiendraient pas, la rangée
-   défile latéralement plutôt que de se casser en deux — un filtre à
-   demi visible sur le bord indique de lui-même qu'on peut la pousser.
-   Le débord jusqu'aux marges de page évite que le dernier ne paraisse
-   tranché par le bord de l'écran. */
+.filtre[aria-pressed="true"]{background:var(--c-encre);color:var(--c-papier)}
 @media (max-width:767px){
   .filtres{
-    /* Occupe sa propre ligne dans la barre : sans quoi le parent, en
-       flex, contraindrait sa largeur et le débord serait rogné. */
-    flex:1 1 100%;
-    flex-wrap:nowrap;
-    gap:6px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
     margin-inline:calc(-1 * var(--grille-marge));
     padding-inline:var(--grille-marge);
   }
   .filtres::-webkit-scrollbar{display:none}
-  .filtre{
-    flex:0 0 auto;
-    padding:0 var(--sp-3);
-    font-size:14px;
-  }
+  .filtre{flex:0 0 auto;padding:0 var(--sp-4)}
 }
-
-

@@ -18,20 +18,20 @@ def realisations(services, base=""):
     return f"""
   <section class="section" aria-labelledby="tFiches">
     <div class="zone">
-{briques.intercalaire("N° 01", "Registre", "Six chantiers livrés",
+{briques.intercalaire("Registre", "Six chantiers livrés",
                       "Le registre|des chantiers",
                       "Chaque fiche donne le relevé complet du chantier. "
                       "Dépliez-la pour lire le détail des travaux, ou "
                       "agrandissez la vue.")}
       {fragment('filtres')}
       {fragment('chantiers')}
-      <p class="chantiers__vide chapo" id="aucunChantier" hidden>Aucune fiche ne correspond à ce filtre pour le moment.</p>
+      <p class="chantiers__vide chapo pleine-largeur" id="aucunChantier" hidden>Aucune fiche ne correspond à ce filtre pour le moment.</p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tSignature">
     <div class="zone">
-{briques.intercalaire("N° 02", "Pièce jointe", "Chantier signature",
+{briques.intercalaire("Pièce jointe", "Chantier signature",
                       "Six appartements,|en site occupé")}
       {fragment('signature')}
     </div>
@@ -39,7 +39,7 @@ def realisations(services, base=""):
 
   <section class="section" aria-labelledby="tBiens">
     <div class="zone">
-{briques.intercalaire("N° 03", "Familles", "Ce que nous reprenons dans la région",
+{briques.intercalaire("Familles", "Ce que nous reprenons dans la région",
                       "Trois types de biens,|trois chantiers différents",
                       "Un appartement de Sous-Gare, une villa de Chailly et "
                       "un immeuble de rendement ne se rénovent pas de la "
@@ -50,7 +50,7 @@ def realisations(services, base=""):
 
   <section class="section" aria-labelledby="tSurprises">
     <div class="zone">
-{briques.intercalaire("N° 04", "Imprévus", "Ce qu'on découvre en ouvrant",
+{briques.intercalaire("Imprévus", "Ce qu'on découvre en ouvrant",
                       "Ce qu'il y a|derrière les murs",
                       "Dans un logement ancien, la dépose réserve toujours "
                       "quelque chose. Les quatre cas ci-dessous reviennent "
@@ -84,7 +84,7 @@ def devis(services, base=""):
         f"""
   <section class="section" aria-label="{groupe['nom']}">
     <div class="zone">
-{briques.intercalaire(groupe["numero"], groupe["nom"], groupe["cote"],
+{briques.intercalaire(groupe["nom"], groupe["cote"],
                       groupe["titre"])}
 {briques.questions_liste(groupe["questions"])}
     </div>
@@ -95,13 +95,13 @@ def devis(services, base=""):
     return f"""
   <section class="section" aria-labelledby="tBordereau">
     <div class="zone">
-{briques.intercalaire("N° 01", "Demande", "Réponse sous 72 heures ouvrables",
+{briques.intercalaire("Demande", "Visite gratuite, sans engagement",
                       "Le bordereau|de demande",
                       "Décrivez votre projet en une minute. Nous nous "
                       "déplaçons, mesurons et vous remettons un devis détaillé "
                       "et gratuit.")}
 
-      <div class="grille12 demande__grille">
+      <div class="grille12 demande__grille pleine-largeur">
         {fragment('formulaire')}
         {fragment('coordonnees')}
       </div>
@@ -110,7 +110,7 @@ def devis(services, base=""):
 
   <section class="section" aria-labelledby="tContient">
     <div class="zone">
-{briques.intercalaire("N° 02", "Le devis", "Ce qui doit y figurer",
+{briques.intercalaire("Le devis", "Ce qui doit y figurer",
                       "Ce que contient|notre devis",
                       "Un devis de rénovation se lit poste par poste. Voici "
                       "ce que vous trouverez dans le nôtre, et ce qu'il faut "
@@ -121,7 +121,7 @@ def devis(services, base=""):
 
   <section class="section" aria-labelledby="tComparer">
     <div class="zone">
-{briques.intercalaire("N° 03", "Comparer", "Deux devis, deux chantiers",
+{briques.intercalaire("Comparer", "Deux devis, deux chantiers",
                       "Comment comparer|deux devis",
                       "Un écart de trente pour cent entre deux devis ne "
                       "signifie presque jamais que l'un est trop cher. Il "
@@ -133,7 +133,7 @@ def devis(services, base=""):
 
   <section class="section" aria-labelledby="tPreparer">
     <div class="zone">
-{briques.intercalaire("N° 04", "La visite", "Ce qui fait gagner du temps",
+{briques.intercalaire("La visite", "Ce qui fait gagner du temps",
                       "Ce qu'il faut|préparer")}
       <div class="service__deux revele">
         <div class="service__texte">
@@ -143,7 +143,7 @@ def devis(services, base=""):
           <p>Rien n'est obligatoire : venir sans rien ne nous empêchera pas
           de relever et de chiffrer.</p>
         </div>
-        <aside class="encadre trace">
+        <aside class="encadre">
           <p class="etiquette encadre__titre">À rassembler avant notre passage</p>
           <ul class="encadre__liste">
 {preparer}

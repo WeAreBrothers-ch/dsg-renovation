@@ -1,192 +1,170 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
-   Concept : « PAPIER BLANC, ENCRE NOIRE, ROUGE FRANC »
+   Concept (25/09/2026) : « LE PLAN D'IMPLANTATION »
 
-   Répartition 60 / 30 / 10 :
-     60 %  papier — le blanc, l'espace, la lumière du chantier fini
-     30 %  encre  — noir profond : sections pleines, pied, photos
-     10 %  rouge  — le signal seul : appels à l'action, repères,
-                    section en cours de lecture
+   Un chantier de rénovation commence par un relevé : on reporte la
+   pièce sur le plan, on pose des repères aux angles, puis on ouvre.
+   Le site en reprend la matière et le geste :
+     - un fond de plâtre frais, chaud et mat — pas de blanc clinique ;
+     - une encre terre d'ombre, jamais un noir pur ;
+     - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
+       comme les piquets d'implantation d'un géomètre ;
+     - un seul accent, la brique : rare, sourd, réservé à l'action.
 
-   Le rouge n'est pas une matière ici, c'est un signal. Il ne couvre
-   jamais de grande surface : il claque parce qu'il est rare.
+   Répartition : 70 % plâtre · 25 % encre · 5 % brique.
 
-   Le rouge existe en trois nuances, et ce n'est pas un caprice. Un
-   rouge assez vif pour éclater en aplat (5.0:1 sous du blanc) tombe
-   à 4.3:1 en texte sur les surfaces secondaires, sous le seuil AA.
-   D'où : --c-signal pour les aplats, --c-signal-sombre pour ce qui
-   est écrit ou tracé sur fond clair, --c-signal-clair sur fond noir.
-
-   Les sections sombres n'héritent pas de l'encre du fond : elles
-   redéfinissent la gamme localement (voir « SECTIONS SOMBRES »).
-   Aucun composant n'a donc à connaître la couleur de son fond — il
-   demande --c-encre et obtient la bonne.
-
-   Toutes les valeurs du site viennent d'ici. Aucune valeur
-   codée en dur ailleurs (hors cas documenté).
-   Chaque couleur de texte porte son rapport de contraste mesuré :
-   aucune ne descend sous 4.5:1, seuil AA.
+   Aucune valeur n'est écrite ailleurs qu'ici (hors cas commenté).
+   Chaque couleur de texte porte son contraste mesuré (WCAG 2.1) sur
+   les fonds où elle sert. Plancher du site : 4.5:1, seuil AA.
    ============================================================ */
 :root{
   /* ---------- Surfaces ---------- */
-  --c-papier:#F7F7F5;        /* DOMINANTE 60 % : papier, blanc légèrement cassé */
-  --c-papier-2:#EDEDEA;      /* creux : bandeaux, surfaces en retrait */
-  --c-fiche:#FFFFFF;         /* relief : cartes et formulaire, blanc pur */
-  --c-bitume:#0E0E0E;        /* 30 % : sections pleines, pied de page */
-  --c-bitume-2:#1C1C1C;      /* surface élevée dans une section noire */
+  --c-papier:#EEEBE5;        /* DOMINANTE : plâtre frais */
+  --c-papier-2:#E3DFD7;      /* creux : bandes, sections en retrait */
+  --c-fiche:#F7F5F1;         /* relief : cellules de formulaire, panneaux */
+  --c-teinte:#DAD4C9;        /* aplat d'action secondaire (barre mobile) */
+  --c-bitume:#27211C;        /* nuit : pied de page, table lumineuse */
+  --c-bitume-2:#342C26;      /* surface élevée dans la nuit */
 
-  /* ---------- Textes sur le papier ---------- */
-  --c-encre:#0E0E0E;         /* 18.0:1 — texte principal */
-  --c-encre-60:#55554F;      /* 7.0:1  — textes secondaires */
-  --c-encre-40:#67675F;      /* 4.9:1 au pire — métadonnées, jamais sous 12px */
-  --c-craie:#FFFFFF;         /* 19.3:1 sur le noir */
-  --c-craie-60:#A8A8A2;      /* 8.1:1 sur le noir */
+  /* ---------- Textes sur le plâtre ----------
+     papier / creux / fiche / teinte */
+  --c-encre:#27211C;         /* 13.4 / 12.0 / 14.6 / 10.8 */
+  --c-encre-60:#574F47;      /*  6.8 /  6.0 /  7.4 /  5.5 */
+  --c-encre-40:#6A6158;      /*  5.1 /  4.6 /  5.6 — JAMAIS sur la teinte (4.1) */
+  --c-craie:#EEEBE5;         /* 13.4 sur la nuit */
+  --c-craie-60:#B8AFA4;      /*  7.4 sur la nuit, 6.3 sur la nuit élevée */
 
-  /* ---------- Signal — ACCENT 10 % ---------- */
-  --c-signal:#D91F26;        /* aplats : boutons, surlignage (blanc dessus, 5.0:1) */
-  --c-signal-sombre:#B0161C;  /* 6.6:1 — écrit ou tracé sur fond clair, et survol */
-  --c-signal-clair:#FF6B5E;  /* 6.9:1 — écrit ou tracé sur fond noir */
-  --c-bleu:#1B3B6F;          /* focus des champs */
+  /* ---------- Brique — l'accent unique ---------- */
+  --c-signal:#9A3324;        /* aplat des boutons d'appel — blanc dessus : 7.3 */
+  --c-signal-sombre:#86291C; /* écrit sur plâtre : 7.5 / 6.7 / 8.2, et survol */
+  --c-signal-clair:#E29A86;  /* écrit sur la nuit : 7.0 */
 
-  /* ---------- États système ---------- */
-  --c-valide:#1B7A52;
-  --c-alerte:#A33818;
-  --c-focus:#1B3B6F;
+  /* ---------- États ---------- */
+  --c-valide:#2F6B4A;        /* 5.6 sur le plâtre */
+  --c-alerte:#8E3B12;        /* 6.3 sur le plâtre */
+  --c-focus:#27211C;
 
-  /* ---------- Filets ---------- */
-  --c-ligne:rgba(14,14,14,.14);
-  --c-ligne-forte:rgba(14,14,14,.42);
-  --c-ligne-d:rgba(255,255,255,.18);
+  /* ---------- Filets ----------
+     Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
+     une séparation discrète. Le filet doux sert à l'intérieur des blocs. */
+  --c-ligne:rgba(39,33,28,.16);
+  --c-ligne-forte:rgba(39,33,28,.5);
+  --c-cadre:var(--c-encre);
   --bd-fin:1px solid var(--c-ligne);
-  --bd-fin-d:1px solid var(--c-ligne-d);
-  --bd-cadre:1.5px solid var(--c-encre);
+
+  /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre. */
+  --repere:5px;
 }
 
 /* ============================================================
-   SECTIONS SOMBRES — les 30 % d'encre
-   Un bloc noir redéfinit la gamme pour lui et tout ce qu'il contient.
-   C'est ce qui évite d'avoir à maintenir une exception par composant
-   le jour où la dominante change — et le site vient d'en changer.
+   SECTIONS DE NUIT
+   Un bloc sombre redéfinit la gamme pour lui et tout ce qu'il
+   contient : aucun composant n'a à connaître la couleur de son fond,
+   il demande --c-encre et obtient la bonne.
    ============================================================ */
-.sur-sombre,
-.pied,
-.menu,
-.bandeau{
-  --c-papier:#0E0E0E;
-  --c-papier-2:#1C1C1C;
-  --c-fiche:#1C1C1C;
-  --c-encre:#FFFFFF;         /* 19.3:1 */
-  --c-encre-60:#A8A8A2;      /* 8.1:1 */
-  --c-encre-40:#8E8E88;      /* 5.6:1 */
-  --c-signal-sombre:var(--c-signal-sombre);
-  --c-ligne:rgba(255,255,255,.16);
-  --c-ligne-forte:rgba(255,255,255,.42);
-  --c-valide:#7FCBA4;
+.sur-sombre{
+  --c-papier:#27211C;
+  --c-papier-2:#342C26;
+  --c-fiche:#342C26;
+  --c-encre:#EEEBE5;         /* 13.4 */
+  --c-encre-60:#B8AFA4;      /*  7.4 */
+  --c-encre-40:#A0968A;      /*  5.5 */
+  --c-signal-sombre:var(--c-signal-clair); /* 7.0 */
+  --c-ligne:rgba(238,235,229,.16);
+  --c-ligne-forte:rgba(238,235,229,.42);
+  --c-cadre:rgba(238,235,229,.34);
+  --c-valide:#9CCDAE;
   --c-alerte:#F0A07A;
-  --c-focus:#FFD98A;
+  --c-focus:#EEEBE5;
   color:var(--c-encre);
 }
 
-:root{
-  /* ---------- Typographie ---------- */
-  --f-titre:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --f-texte:"IBM Plex Sans",system-ui,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
+/* Polices de secours calibrées : tant que les polices du site ne sont
+   pas arrivées, le texte s'affiche dans une police locale de même
+   chasse, pour qu'il ne se recompose pas à leur arrivée — c'est ce qui
+   tient le décalage de mise en page (CLS) à zéro. L'Arial occupe déjà
+   la même largeur que l'Archivo (écart mesuré : 0,2 %). La Georgia, elle,
+   est 8 à 10 % plus large que la Newsreader aux tailles de lecture :
+   on la ramène à sa mesure. */
+@font-face{
+  font-family:"Newsreader repli";
+  src:local("Georgia");
+  size-adjust:91.5%;
+}
 
-  /* Seul le titre de couverture est en capitales et en graisse 800.
-     Tous les autres titres passent en Archivo 500, casse normale :
-     la tenue vient de l'échelle et du crénage, pas du gras. */
-  --t-couverture:clamp(1.875rem,3.8vw,3.875rem);
-  /* Titre de pièce : le plancher tient compte du mot le plus long
-     du site (« Professionnalisme, ») sur un écran de 360 px. */
-  --t-piece:clamp(2rem,4.6vw,4rem);
-  --t-h2:clamp(1.75rem,3.4vw,3rem);
+:root{
+  /* ---------- Typographie ----------
+     Une grotesque pour tout ce qui se lit d'un coup d'œil — titres,
+     intitulés, données, commandes. Une sérif de lecture pour tout ce
+     qui se lit en phrases — chapôs, paragraphes, réponses. C'est la
+     voix d'un bureau d'architecte : le plan en linéale, la notice en
+     romain. Casse normale partout, graisse 500 pour les titres. */
+  --f-titre:"Archivo",Arial,"Liberation Sans",sans-serif;
+  --f-texte:"Archivo",Arial,"Liberation Sans",sans-serif;
+  --f-lecture:"Newsreader","Newsreader repli",Georgia,serif;
+
+  --t-couverture:clamp(2.5rem,5.6vw,5.25rem);
+  --t-piece:clamp(2.25rem,4.6vw,4.25rem);
+  --t-h2:clamp(1.75rem,3.1vw,2.875rem);
   --t-h3:clamp(1.375rem,2vw,1.75rem);
-  --t-h4:clamp(1.125rem,1.4vw,1.3125rem);
-  --t-chapo:clamp(1.0625rem,1.3vw,1.25rem);
-  --t-texte:clamp(1rem,1.05vw,1.0625rem);
-  /* Navigation, filtres, liens de pied : une seule taille de service. */
+  --t-h4:clamp(1.125rem,1.35vw,1.3125rem);
+  --t-declaration:clamp(1.375rem,2.2vw,2rem);
+  --t-chapo:clamp(1.1875rem,1.45vw,1.375rem);
+  --t-texte:clamp(1.0625rem,1.1vw,1.1875rem);
+  --t-ui:1rem;
   --t-nav:.9375rem;
-  --t-petit:.875rem;
-  --t-etiquette:.75rem;
-  --t-donnee:clamp(.8125rem,1vw,.875rem);
-  /* Sous le titre de pièce (3rem) : un chiffre plus gros que le titre
-     qui le surmonte inverse la hiérarchie de lecture. */
-  --t-chiffre:clamp(2rem,3vw,2.75rem);
+  --t-petit:.9375rem;
+  --t-etiquette:.875rem;
+  --t-donnee:.9375rem;
+  --t-champ:clamp(1.1875rem,1.6vw,1.5rem);
+  --t-chiffre:clamp(2.5rem,4vw,3.5rem);
 
   /* ---------- Espacement (échelle 4px) ---------- */
   --sp-1:4px;  --sp-2:8px;   --sp-3:12px;  --sp-4:16px;
   --sp-5:24px; --sp-6:32px;  --sp-7:48px;  --sp-8:64px;
-  --sp-9:96px; --sp-10:128px;--sp-11:160px;--sp-12:200px;
+  --sp-9:96px;
 
   /* ---------- Grille ----------
-     Deux jetons fluides portent tout le rythme, horizontal et vertical.
-     Comme ils sont interpolés en continu, la page ne saute plus aux
-     ruptures de media query : le dossier garde la même respiration du
-     téléphone au grand écran. */
-  --x-marge:clamp(20px,4.4vw,64px);
-  --y-bloc:clamp(48px,5.2vw,88px);
-
-  --grille-max:1680px;
-  --grille-contenu:1560px;
-  --grille-texte:680px;
+     Deux jetons fluides portent le rythme : la page respire autant du
+     téléphone au grand écran, sans saut aux ruptures. Le rythme
+     vertical est large — c'est l'air entre les blocs qui fait le calme. */
+  --x-marge:clamp(16px,3.3vw,48px);
+  --y-bloc:clamp(64px,7.6vw,128px);
+  --grille-contenu:1600px;
   --grille-goutt:24px;
   --grille-marge:var(--x-marge);
+  --sec-y:var(--y-bloc);
 
   /* ---------- Rayons ----------
-     Le carton se coupe net : un seul rayon de travail, très court.
-     Le cercle complet est réservé aux objets réellement ronds —
-     tampon, pastille de curseur, boutons circulaires. Un bouton
-     rectangulaire est un bouton de bordereau, pas une pilule. */
-  --r-0:0px;
-  --r-net:3px;
-  /* Les tirages photo sont les seules surfaces à s'adoucir un peu :
-     un angle vif sur une grande image durcit toute la page. */
-  --r-image:10px;
+     Tout est coupé net, images comprises : un plan n'a pas d'angle
+     arrondi. Le seul rayon est celui des objets réellement ronds — la
+     pastille du curseur. */
   --r-rond:999px;
-  /* Alias historiques, conservés le temps que tous les appels migrent. */
-  --r-fiche:var(--r-net);
-  --r-pilule:var(--r-rond);
-  --r-md:var(--r-net);
-  --r-lg:var(--r-net);
 
-  /* ---------- Ombres (volontairement pauvres) ----------
-     Une feuille posée sur une autre : l'ombre est courte et franche,
-     jamais un halo diffus. Réservée aux objets réellement flottants. */
-  --om-0:none;
-  --om-1:0 1px 2px rgba(14,14,14,.06),0 8px 20px rgba(14,14,14,.08);
-  --om-2:0 2px 4px rgba(14,14,14,.08),0 20px 48px rgba(14,14,14,.14);
+  /* ---------- Ombres ----------
+     Presque absentes. Seuls les objets qui flottent réellement au-dessus
+     de la page — vignette qui suit la main, poignée du comparateur —
+     en portent une, courte et douce. */
+  --om-1:0 1px 2px rgba(39,33,28,.08),0 10px 24px rgba(39,33,28,.10);
+  --om-2:0 2px 6px rgba(39,33,28,.12),0 24px 56px rgba(39,33,28,.18);
 
-  /* ---------- Motion ----------
-     Le dossier se dessine plutôt qu'il ne surgit : les gestes amples
-     sont longs et symétriques (--e-power4), les survols courts et nets. */
-  /* Aucune courbe d'entrée (ease-in) : elle retarde le premier
-     mouvement, à l'instant précis où le regard est le plus attentif,
-     et fait paraître l'interface lente. */
-  --e-sortie:cubic-bezier(.22,1,.36,1);
+  /* ---------- Mouvement ----------
+     Aucune courbe d'entrée (ease-in) : elle retarde le premier
+     mouvement à l'instant précis où le regard est le plus attentif. */
+  --e-sortie:cubic-bezier(.23,1,.32,1);
   --e-standard:cubic-bezier(.4,0,.2,1);
-  --e-mecanique:cubic-bezier(.65,0,.35,1);
-  --e-power2:cubic-bezier(.645,.045,.355,1);
-  --e-power4:cubic-bezier(.83,0,.17,1);
-  --d-instant:120ms;
-  --d-rapide:200ms;
-  --d-survol:300ms;
-  --d-normal:240ms;   /* sous les 300 ms : au-delà, une interaction traîne */
-  --d-ample:900ms;
-  --d-lent:1200ms;
+  --d-rapide:180ms;
+  --d-normal:240ms;
+  --d-ample:800ms;
 
   /* ---------- Mesures d'interface ---------- */
-  --h-entete:74px;
+  --h-entete:64px;
   --h-barre-mobile:0px;
-  --sec-y:var(--y-bloc);
 }
 
-/* Marge de page et rythme vertical ne sont plus redéfinis ici : ils sont
-   fluides et suivent la largeur d'écran sans rupture. Ne restent que les
-   mesures qui changent réellement de nature selon l'appareil. */
 @media (max-width:1279px){
-  :root{--grille-goutt:20px;--h-barre-mobile:68px}
+  :root{--grille-goutt:20px;--h-barre-mobile:64px}
 }
 @media (max-width:767px){
-  :root{--grille-goutt:16px;--h-entete:62px}
+  :root{--grille-goutt:16px}
 }

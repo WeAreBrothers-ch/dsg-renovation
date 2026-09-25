@@ -17,7 +17,7 @@ SERVICES = [
         "description": (
             "Entreprise de peinture à Lausanne : préparation des fonds, mise "
             "en teinte intérieure et extérieure, finitions mates ou satinées. "
-            "Devis gratuit sous 72 heures."
+            "Devis gratuit 72 h après la visite."
         ),
         "h1": ["Travaux", "de peinture"],
         "chapo": (
@@ -65,7 +65,7 @@ SERVICES = [
             ("Appartement 100 m²", "1 à 2 semaines"),
             ("Couches de finition", "2 au minimum"),
             ("Teintes", "Essai sur site avant validation"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Peut-on repeindre par-dessus du papier peint ?",
@@ -137,7 +137,7 @@ SERVICES = [
             ("Pièce courante", "1 à 2 jours"),
             ("Panoramique", "Calepinage validé avant commande"),
             ("Toile de verre", "Peinte après pose, 2 couches"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Le papier peint tient-il dans une salle de bains ?",
@@ -206,7 +206,7 @@ SERVICES = [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
             ("Grand format", "Double encollage systématique"),
             ("Étanchéité", "Traitée sous le revêtement"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Peut-on carreler par-dessus un ancien carrelage ?",
@@ -276,7 +276,7 @@ SERVICES = [
             ("Appartement 100 m²", "3 à 5 jours, ragréage compris"),
             ("Acclimatation parquet", "48 à 72 h sur place"),
             ("Immeuble", "Sous-couche acoustique systématique"),
-            ("Devis", "Gratuit, remis sous 72 h"),
+            ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Parquet ou vinyle pour un appartement en location ?",

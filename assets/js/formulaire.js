@@ -1,12 +1,14 @@
 /* ============================================================
    DSG RÉNOVATION — BORDEREAU DE DEMANDE
-   Validation côté client puis ouverture du courriel prérempli.
+   Validation côté client, puis envoi.
 
-   NOTE TECHNIQUE : en l'absence de serveur, la demande part par
-   le client de messagerie du visiteur. Au passage en production,
-   remplacer « envoyer() » par un appel au point d'entrée choisi
-   (Supabase, Formspree…). Le repli sans JavaScript est assuré par
-   l'attribut action du formulaire.
+   Deux voies d'envoi :
+   - si le formulaire porte une adresse dans data-envoi (Formspree,
+     Web3Forms, formulaire Infomaniak…), la demande y part
+     directement et le visiteur reste sur la page ;
+   - sinon, repli : le logiciel de messagerie du visiteur s'ouvre
+     avec la demande préremplie.
+   Sans JavaScript, l'attribut action du formulaire prend le relais.
    ============================================================ */
 (function () {
   "use strict";
@@ -15,19 +17,26 @@
   if (!(formulaire instanceof HTMLFormElement)) { return; }
 
   var retour = document.getElementById("bordereauRetour");
+  var bouton = formulaire.querySelector('button[type="submit"]');
+  var POINT_ENVOI = (formulaire.getAttribute("data-envoi") || "").trim();
   var DESTINATAIRE = "contact@dsg-renov.ch";
+  var TELEPHONE = "+41 21 847 02 02";
   var MOTIF_EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+  /* Champs qui ne se valident pas un par un : les pastilles sont
+     facultatives, le piège à robots doit rester vide. */
+  var HORS_VALIDATION = ["travaux", "site_web"];
 
   /** Libellés affichés dans le courriel, dans l'ordre du bordereau. */
   var CHAMPS = [
-    { nom: "nom", libelle: "Nom" },
-    { nom: "email", libelle: "Courriel" },
-    { nom: "telephone", libelle: "Téléphone" },
+    { nom: "travaux", libelle: "Travaux concernés" },
     { nom: "type", libelle: "Type de bien" },
-    { nom: "surface", libelle: "Surface approximative" },
     { nom: "lieu", libelle: "Commune du bien" },
+    { nom: "surface", libelle: "Surface approximative" },
     { nom: "delai", libelle: "Démarrage souhaité" },
-    { nom: "message", libelle: "Description du projet" }
+    { nom: "message", libelle: "Description du projet" },
+    { nom: "nom", libelle: "Nom" },
+    { nom: "telephone", libelle: "Téléphone" },
+    { nom: "email", libelle: "Courriel" }
   ];
 
   /**
@@ -52,8 +61,8 @@
   function verifier(controle) {
     var valeur = controle.value.trim();
 
-    if (controle.type === "checkbox") {
-      return controle.checked ? "" : "Merci de cocher cette case pour continuer.";
+    if (controle instanceof HTMLInputElement && controle.type === "checkbox") {
+      return !controle.required || controle.checked ? "" : "Merci de cocher cette case pour continuer.";
     }
     if (controle.required && valeur === "") {
       return "Ce champ est obligatoire.";
@@ -71,7 +80,7 @@
   function controles() {
     return Array.prototype.filter.call(
       formulaire.querySelectorAll("input, select, textarea"),
-      function (element) { return element.type !== "submit"; }
+      function (element) { return HORS_VALIDATION.indexOf(element.name) === -1; }
     );
   }
 
@@ -86,22 +95,69 @@
   });
 
   /**
-   * Compose le courriel prérempli à partir des réponses.
-   * @returns {string}
+   * Réponses du bordereau, dans l'ordre, prêtes à être lues.
+   * @returns {Array<string>}
    */
-  function composerLien() {
+  function resume() {
     var donnees = new FormData(formulaire);
-    var lignes = ["Demande de devis déposée depuis le site dsg-renov.ch", ""];
-
-    CHAMPS.forEach(function (champ) {
-      var valeur = String(donnees.get(champ.nom) || "").trim();
-      lignes.push(champ.libelle + " : " + (valeur === "" ? "—" : valeur));
+    return CHAMPS.map(function (champ) {
+      var valeur = donnees.getAll(champ.nom).map(function (v) { return String(v).trim(); })
+        .filter(function (v) { return v !== ""; }).join(", ");
+      return champ.libelle + " : " + (valeur === "" ? "—" : valeur);
     });
+  }
 
-    var objet = "Demande de devis — " + String(donnees.get("nom") || "").trim();
-    return "mailto:" + DESTINATAIRE +
-      "?subject=" + encodeURIComponent(objet) +
+  /** @returns {string} */
+  function objet() {
+    var nom = formulaire.elements.namedItem("nom");
+    return "Demande de devis — " + (nom instanceof HTMLInputElement ? nom.value.trim() : "");
+  }
+
+  /**
+   * Affiche le message de retour et y porte le focus.
+   * @param {string} texte
+   * @param {boolean} [enErreur]
+   */
+  function annoncer(texte, enErreur) {
+    if (!retour) { return; }
+    retour.textContent = texte;
+    retour.classList.toggle("message-formulaire--erreur", Boolean(enErreur));
+    retour.focus();
+  }
+
+  /** @param {boolean} actif */
+  function patienter(actif) {
+    if (!(bouton instanceof HTMLButtonElement)) { return; }
+    bouton.disabled = actif;
+    bouton.setAttribute("aria-busy", actif ? "true" : "false");
+  }
+
+  function ouvrirMessagerie() {
+    var lignes = ["Demande de devis déposée depuis le site dsg-renov.ch", ""].concat(resume());
+    window.location.href = "mailto:" + DESTINATAIRE +
+      "?subject=" + encodeURIComponent(objet()) +
       "&body=" + encodeURIComponent(lignes.join("\n"));
+    annoncer("Votre logiciel de messagerie s'ouvre avec la demande préremplie. " +
+      "S'il ne s'ouvre pas, écrivez directement à " + DESTINATAIRE + " ou appelez le " + TELEPHONE + ".");
+  }
+
+  function envoyer() {
+    var donnees = new FormData(formulaire);
+    donnees.set("travaux", donnees.getAll("travaux").join(", "));
+    donnees.set("_subject", objet());
+    patienter(true);
+
+    window.fetch(POINT_ENVOI, { method: "POST", body: donnees, headers: { Accept: "application/json" } })
+      .then(function (reponse) {
+        if (!reponse.ok) { throw new Error("Réponse " + reponse.status); }
+        formulaire.reset();
+        annoncer("Merci, votre demande est bien arrivée. Nous vous rappelons pour fixer la visite.");
+      })
+      .catch(function () {
+        annoncer("La demande n'a pas pu partir — votre connexion ou notre service a peut-être " +
+          "flanché. Réessayez dans un instant, ou appelez-nous au " + TELEPHONE + ".", true);
+      })
+      .then(function () { patienter(false); });
   }
 
   formulaire.addEventListener("submit", function (evenement) {
@@ -120,12 +176,13 @@
       return;
     }
 
-    window.location.href = composerLien();
-
-    if (retour) {
-      retour.textContent = "Votre logiciel de messagerie s'ouvre avec la demande préremplie. " +
-        "S'il ne s'ouvre pas, écrivez directement à " + DESTINATAIRE + " ou appelez le +41 21 847 02 02.";
-      retour.focus();
+    /* Un robot a rempli le piège : on fait mine d'avoir reçu. */
+    var piege = formulaire.elements.namedItem("site_web");
+    if (piege instanceof HTMLInputElement && piege.value !== "") {
+      annoncer("Merci, votre demande est bien arrivée.");
+      return;
     }
+
+    if (POINT_ENVOI !== "" && "fetch" in window) { envoyer(); } else { ouvrirMessagerie(); }
   });
 }());

@@ -3,14 +3,17 @@
     <div class="zone">
 
       <!-- ---------- En-tête de pièce ---------- -->
-      <header class="piece__entete trace--bas trace revele">
-        <nav class="piece__chemin donnee" aria-label="Fil d'Ariane">
+      <header class="piece__entete">
+        <div class="piece__marge">
+        <nav class="piece__chemin" aria-label="Fil d'Ariane">
           <a href="index.html">Accueil</a>
           <span aria-hidden="true">/</span>
           <span>Confidentialité</span>
         </nav>
 
-        <p class="etiquette">Pièce annexe · <b>B</b></p>
+        <p class="piece__nature">Pièce annexe B</p>
+        </div>
+        <div class="piece__tete">
         <h1 class="piece__titre">Politique de confidentialité</h1>
         <p class="chapo piece__chapo">
           Ce site ne dépose aucun témoin de connexion et ne mesure pas son
@@ -32,6 +35,7 @@
             <dd>LPD (CH) · RGPD (UE)</dd>
           </div>
         </dl>
+        </div>
       </header>
 
       <!-- ---------- Corps ---------- -->
@@ -57,7 +61,7 @@
 
         <div class="articles">
 
-          <section class="article trace revele" id="a1" aria-labelledby="t-a1">
+          <section class="article revele" id="a1" aria-labelledby="t-a1">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">01</span>
               <h2 id="t-a1">Responsable du traitement</h2>
@@ -86,7 +90,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a2" aria-labelledby="t-a2">
+          <section class="article revele" id="a2" aria-labelledby="t-a2">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">02</span>
               <h2 id="t-a2">Ce que ce site ne fait pas</h2>
@@ -109,7 +113,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a3" aria-labelledby="t-a3">
+          <section class="article revele" id="a3" aria-labelledby="t-a3">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">03</span>
               <h2 id="t-a3">Données que vous nous transmettez</h2>
@@ -137,7 +141,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a4" aria-labelledby="t-a4">
+          <section class="article revele" id="a4" aria-labelledby="t-a4">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">04</span>
               <h2 id="t-a4">Comment votre demande nous parvient</h2>
@@ -168,7 +172,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a5" aria-labelledby="t-a5">
+          <section class="article revele" id="a5" aria-labelledby="t-a5">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">05</span>
               <h2 id="t-a5">Finalité et base légale</h2>
@@ -200,7 +204,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a6" aria-labelledby="t-a6">
+          <section class="article revele" id="a6" aria-labelledby="t-a6">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">06</span>
               <h2 id="t-a6">Durée de conservation</h2>
@@ -220,7 +224,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a7" aria-labelledby="t-a7">
+          <section class="article revele" id="a7" aria-labelledby="t-a7">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">07</span>
               <h2 id="t-a7">Qui accède à vos données</h2>
@@ -248,7 +252,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a8" aria-labelledby="t-a8">
+          <section class="article revele" id="a8" aria-labelledby="t-a8">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">08</span>
               <h2 id="t-a8">Ressources chargées par le navigateur</h2>
@@ -276,7 +280,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a9" aria-labelledby="t-a9">
+          <section class="article revele" id="a9" aria-labelledby="t-a9">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">09</span>
               <h2 id="t-a9">Sécurité</h2>
@@ -301,7 +305,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a10" aria-labelledby="t-a10">
+          <section class="article revele" id="a10" aria-labelledby="t-a10">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">10</span>
               <h2 id="t-a10">Vos droits</h2>
@@ -333,7 +337,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a11" aria-labelledby="t-a11">
+          <section class="article revele" id="a11" aria-labelledby="t-a11">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">11</span>
               <h2 id="t-a11">Autorité de contrôle</h2>
@@ -356,7 +360,7 @@
             </div>
           </section>
 
-          <section class="article trace revele" id="a12" aria-labelledby="t-a12">
+          <section class="article revele" id="a12" aria-labelledby="t-a12">
             <div class="article__tete">
               <span class="article__n" aria-hidden="true">12</span>
               <h2 id="t-a12">Évolution de ce document</h2>
@@ -379,10 +383,10 @@
       </div>
 
       <!-- ---------- Sortie ---------- -->
-      <div class="piece__sortie trace revele">
+      <div class="piece__sortie revele">
         <p>
           Une question sur le traitement de vos données, ou sur un projet
-          de rénovation ? Nous répondons sous 72 heures.
+          de rénovation&nbsp;? Nous répondons sous 72 heures.
         </p>
         <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
       </div>

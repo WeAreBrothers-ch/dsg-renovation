@@ -1,138 +1,83 @@
 /* ============================================================
-   DSG RÉNOVATION — 03 · CHEMISE DE CHANTIER
-   La silhouette d'un dossier suspendu : languette à gauche,
-   encoche en diagonale, aplat de carton, angles vifs.
+   DSG RÉNOVATION — 03 · FICHES DE CHANTIER
+   Un tirage, puis sa fiche dans un cadre d'un pixel : la photo
+   montre, le cadre documente.
    ============================================================ */
 
-.chemise{
-  --coche:34px;
-  position:relative;
-  display:flex;flex-direction:column;gap:var(--sp-4);
-  padding:calc(var(--coche) + var(--sp-4)) var(--sp-5) var(--sp-5);
-  background:var(--c-papier-2);
-  clip-path:polygon(0 0, 42% 0, 48% var(--coche),
-                    100% var(--coche), 100% 100%, 0 100%);
-  transition:transform var(--d-normal) var(--e-sortie),
-             background-color var(--d-rapide) var(--e-standard);
-}
-/* Le soulèvement de la chemise n'a de sens qu'au survol d'une souris :
-   au doigt, il resterait figé après le tap. Le focus clavier le garde,
-   lui, car il signale où l'on se trouve. */
-@media (hover:hover) and (pointer:fine){
-  .chemise:hover{transform:translateY(-6px)}
-}
-.chemise:focus-within{transform:translateY(-6px)}
+.chemise{position:relative;display:flex;flex-direction:column}
 
-/* Cote du dossier, inscrite dans la languette. */
+/* Numéro de registre : posé sur le tirage, à la manière d'une cote. */
 .chemise__onglet{
-  position:absolute;left:var(--sp-5);top:11px;
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;line-height:1;
-  color:var(--c-signal);
+  position:absolute;left:0;top:0;z-index:2;
+  padding:var(--sp-2) var(--sp-3);
+  background:var(--c-papier);color:var(--c-encre-60);
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-etiquette);
+  font-variant-numeric:tabular-nums;line-height:1.2;
 }
 
-/* Le tirage photo, glissé dans la chemise.
-   Un voile de nuit repose en permanence sur le tirage et se lève au
-   passage de la main : la photo s'allume au lieu de simplement grossir.
-   C'est l'intention de la DA — les chantiers sont la seule lumière de
-   la page — et elle n'était jusqu'ici codée nulle part. */
 .chemise__tirage{
   display:block;position:relative;overflow:hidden;
-  flex:0 0 auto;aspect-ratio:4/3;background:var(--c-papier-2);
+  aspect-ratio:4/3;background:var(--c-papier-2);
 }
 .chemise__tirage img{
   width:100%;height:100%;object-fit:cover;
-  filter:saturate(1.06) contrast(1.02);
-  transition:transform var(--d-survol) var(--e-power2);
-}
-.chemise__tirage::after{
-  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(14,14,14,.34),rgba(14,14,14,0) 46%);
-  transition:opacity var(--d-survol) var(--e-power2);
+  transition:transform 700ms var(--e-sortie);
 }
 @media (hover:hover) and (pointer:fine){
-  .chemise:hover .chemise__tirage img{transform:scale(1.04)}
-  .chemise:hover .chemise__tirage::after{opacity:0}
+  .chemise:hover .chemise__tirage img{transform:scale(1.03)}
 }
 
-.chemise__fiche{flex:1;display:flex;flex-direction:column;gap:var(--sp-4)}
-.chemise__meta{
-  margin-top:var(--sp-2);
-  font-family:var(--f-mono);font-size:13px;
-  letter-spacing:.01em;color:var(--c-encre);
+.chemise__fiche{
+  flex:1;display:flex;flex-direction:column;gap:var(--sp-4);
+  padding:var(--sp-5);
+  box-shadow:inset 0 0 0 1px var(--c-cadre);
+  margin-top:-1px;
 }
-
-/* Sur le carton, la hiérarchie vient de la taille et du chasse, jamais
-   d'un gris : tous les textes gardent un contraste franc. */
-.chemise .releve dt,
-.chemise .depliant__corps p,
-.chemise .lots li{color:var(--c-encre)}
-
+.chemise__meta{margin-top:var(--sp-1);font-size:var(--t-petit);color:var(--c-encre-60)}
 
 /* ------------------------------------------------------------
-   RELEVÉ TECHNIQUE — libellé à gauche, valeur à droite
+   RELEVÉ — libellé à gauche, valeur à droite
    ------------------------------------------------------------ */
 .releve{display:grid;grid-template-columns:auto 1fr;gap:var(--sp-2) var(--sp-4)}
-.releve dt{
-  font-family:var(--f-texte);font-weight:500;font-size:14px;
-  color:var(--c-encre-40);
-}
+.releve dt{font-size:var(--t-petit);color:var(--c-encre-60)}
 .releve dd{
-  font-family:var(--f-mono);font-size:var(--t-donnee);
-  letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  font-size:var(--t-petit);font-weight:500;font-variant-numeric:tabular-nums;
   color:var(--c-encre);text-align:right;
 }
-.sur-sombre .releve dt{color:var(--c-craie-60)}
-.sur-sombre .releve dd{color:var(--c-craie)}
-
-/* Variante réglée : chaque donnée sur sa propre ligne, comme sur un bordereau. */
 .releve--regle{gap:0}
-.releve--regle dt,
-.releve--regle dd{
-  padding-block:var(--sp-3);
-  border-top:1px solid var(--c-ligne);
-}
+.releve--regle dt,.releve--regle dd{padding-block:var(--sp-3);border-top:var(--bd-fin)}
 .releve--regle dd a{
   display:inline-block;padding-block:var(--sp-2);
   text-decoration:underline;text-underline-offset:3px;
 }
-.releve--regle dd a:hover{color:var(--c-encre)}
 
 /* ------------------------------------------------------------
-   DÉPLIANT — « ouvrir le dossier »
-   Repose sur <details> : fonctionne sans JavaScript.
+   DÉPLIANT — « ouvrir la fiche », sur <details> : sans script,
+   il s'ouvre quand même.
    ------------------------------------------------------------ */
-.depliant{border-top:1px solid var(--c-ligne-forte);margin-top:auto}
+.depliant{border-top:var(--bd-fin);margin-top:auto}
 .depliant__tete{
   display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
-  min-height:44px;padding:var(--sp-4) 0 0;cursor:pointer;list-style:none;
-  font-family:var(--f-texte);font-weight:600;font-size:15px;
-  color:var(--c-encre);
-  transition:color var(--d-rapide) var(--e-standard),
-             scale 160ms var(--e-sortie);
+  min-height:44px;padding-top:var(--sp-3);cursor:pointer;list-style:none;
+  font-weight:500;font-size:var(--t-petit);color:var(--c-encre);
 }
-.depliant__tete:hover{color:var(--c-encre)}
-.depliant__signe{
-  position:relative;width:18px;height:18px;flex:0 0 auto;
-  border:1px solid var(--c-ligne-forte);border-radius:var(--r-rond);
-}
+.depliant__signe{position:relative;width:12px;height:12px;flex:0 0 auto}
 .depliant__signe::before,.depliant__signe::after{
-  content:"";position:absolute;left:50%;top:50%;background:currentColor;
-  transform:translate(-50%,-50%);
+  content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;
+  background:currentColor;transition:transform var(--d-normal) var(--e-sortie);
 }
-.depliant__signe::before{width:8px;height:1.5px}
-.depliant__signe::after{
-  width:1.5px;height:8px;
-  transition:transform var(--d-normal) var(--e-mecanique),opacity var(--d-rapide) linear;
+.depliant__signe::after{transform:rotate(90deg)}
+.depliant[open] .depliant__signe::after{transform:rotate(0)}
+.depliant__corps{padding-top:var(--sp-3);display:flex;flex-direction:column;gap:var(--sp-4)}
+.depliant__corps p{
+  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.55;
+  color:var(--c-encre-60);
 }
-.depliant[open] .depliant__signe::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
-.depliant__corps{padding-top:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-4)}
-.depliant__corps p{font-size:var(--t-petit);line-height:1.65;color:var(--c-encre-60)}
 
-/* Liste des lots traités */
+/* Lots traités : de petites cases jointives. */
 .lots{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
 .lots li{
   padding:var(--sp-1) var(--sp-3);
-  border:1px solid var(--c-ligne-forte);border-radius:var(--r-net);
-  font-family:var(--f-texte);font-size:13px;color:var(--c-encre-60);
+  box-shadow:inset 0 0 0 1px var(--c-ligne-forte);
+  font-size:var(--t-etiquette);color:var(--c-encre-60);
 }

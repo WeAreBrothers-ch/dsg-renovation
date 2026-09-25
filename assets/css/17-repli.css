@@ -1,160 +1,89 @@
 /* ============================================================
    DSG RÉNOVATION — 17 · CE QUI SE REPLIE
-   Onglets et dépliants. Le dossier ne s'étale plus : il se
-   feuillette.
-
-   Principe : tout le contenu est dans la page, mais il ne se
-   montre pas d'un bloc. Ce qui reste visible, c'est l'intitulé,
-   le numéro et la cote — de quoi choisir ce qu'on veut lire.
+   Onglets et dépliants. Tout le contenu est dans la page — Google
+   le lit — mais il ne se montre pas d'un bloc : on voit les
+   intitulés, on ouvre ce qu'on veut lire.
    ============================================================ */
 
 /* ------------------------------------------------------------
-   ONGLETS
-   Des languettes de classeur : intitulé nu, filet dessous, et
-   un trait d'accent sous celle qu'on consulte. Même geste que
-   la navigation du haut.
+   ONGLETS — des cases jointives, comme les rubriques de l'en-tête.
+   La case consultée porte le repère de brique.
    ------------------------------------------------------------ */
-.jeu{margin-top:var(--sp-6)}
-.jeu__barre{
-  display:flex;flex-wrap:wrap;gap:var(--sp-1);
-  border-bottom:var(--bd-fin);
-  margin-bottom:var(--sp-7);
-}
+.jeu__barre{display:flex;flex-wrap:wrap;margin-bottom:var(--sp-7)}
 .jeu__onglet{
-  position:relative;
-  padding:var(--sp-4) var(--sp-4);
-  font-family:var(--f-texte);font-weight:500;font-size:var(--t-nav);
-  color:var(--c-encre-60);white-space:nowrap;
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  min-height:48px;padding:0 var(--sp-5);margin:0 -1px -1px 0;
+  box-shadow:inset 0 0 0 1px var(--c-cadre);
+  font-weight:500;font-size:var(--t-nav);color:var(--c-encre-60);white-space:nowrap;
   transition:color var(--d-rapide) var(--e-standard),
+             background-color var(--d-rapide) var(--e-standard),
              scale 160ms var(--e-sortie);
 }
-.jeu__onglet::after{
-  content:"";position:absolute;left:var(--sp-3);right:var(--sp-3);bottom:-1px;
-  height:1px;background:var(--c-encre-40);
-  transform:scaleX(0);transform-origin:left center;
-  transition:transform var(--d-normal) var(--e-sortie),
-             background-color var(--d-rapide) var(--e-standard),
-             height var(--d-rapide) var(--e-standard);
-}
 @media (hover:hover) and (pointer:fine){
-  .jeu__onglet:hover{color:var(--c-encre)}
-  .jeu__onglet:hover::after{transform:scaleX(1)}
+  .jeu__onglet:hover{color:var(--c-encre);background:var(--c-papier-2)}
 }
-.jeu__onglet:active{scale:.97}
-.jeu__onglet[aria-selected="true"]{color:var(--c-encre)}
-.jeu__onglet[aria-selected="true"]::after{
-  transform:scaleX(1);height:2px;background:var(--c-signal-sombre);
+.jeu__onglet[aria-selected="true"]{color:var(--c-encre);background:var(--c-papier-2)}
+.jeu__onglet[aria-selected="true"]::before{
+  content:"";width:var(--repere);height:var(--repere);background:var(--c-signal);
 }
+.jeu__onglet:focus-visible{outline-offset:-4px}
 /* Le panneau entre par une montée courte : assez pour qu'on voie
    qu'il a changé, assez peu pour ne pas faire attendre. */
-.js .jeu__panneau:not([hidden]){
-  animation:panneau var(--d-normal) var(--e-sortie) both;
-}
-@keyframes panneau{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:none}
-}
-@media (prefers-reduced-motion:reduce){
-  .js .jeu__panneau:not([hidden]){animation:none}
-}
-/* Sans script, les panneaux se suivent : ils ont alors besoin
-   d'être séparés, sans quoi on lit un seul bloc. */
+.js .jeu__panneau:not([hidden]){animation:panneau var(--d-normal) var(--e-sortie) both}
+@keyframes panneau{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js .jeu__panneau:not([hidden]){animation:none}}
+/* Sans script, les panneaux se suivent : ils ont besoin d'air. */
 .jeu__panneau+.jeu__panneau{margin-top:var(--sp-8)}
 .js .jeu__panneau+.jeu__panneau{margin-top:0}
 @media (max-width:479px){
-  /* La barre défile horizontalement plutôt que de passer à la
-     ligne : trois languettes empilées ressemblent à un menu.
-     Un voile au bord droit dit qu'il reste quelque chose à voir —
-     sans lui, une languette coupée passe pour un défaut. */
-  .jeu{position:relative}
-  .jeu__barre{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .jeu__barre{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
   .jeu__barre::-webkit-scrollbar{display:none}
-  .jeu__onglet{padding-inline:var(--sp-3)}
-  .jeu::after{
-    content:"";position:absolute;top:0;right:0;
-    width:40px;height:3.2em;pointer-events:none;
-    background:linear-gradient(to right,
-               rgba(247,247,245,0), var(--c-papier));
-  }
+  .jeu__onglet{padding-inline:var(--sp-4)}
 }
 
 /* ------------------------------------------------------------
    DÉPLIANT DE BORDEREAU
-   Une ligne qui se déplie : numéro, intitulé, cote, et le signe
-   d'ouverture à droite. Fermé, c'est une ligne de sommaire ;
-   ouvert, c'est un paragraphe.
+   Une ligne dans un cadre : numéro, intitulé, cote, et le signe
+   d'ouverture. Fermée, c'est une ligne de sommaire ; ouverte,
+   c'est un paragraphe.
    ------------------------------------------------------------ */
-.repli{--c-trait:var(--c-ligne)}
+.replis{display:flex;flex-direction:column;border:1px solid var(--c-cadre)}
+.repli+.repli{border-top:1px solid var(--c-cadre)}
 .repli__tete{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto auto;
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;
   gap:var(--sp-4);align-items:baseline;
-  padding-block:var(--sp-5);
+  min-height:60px;padding:var(--sp-4) var(--sp-5);
   cursor:pointer;list-style:none;
-  transition:color var(--d-rapide) var(--e-standard),
-             scale 160ms var(--e-sortie);
+  transition:background-color var(--d-rapide) var(--e-standard);
 }
-.repli__tete::-webkit-details-marker{display:none}
-.repli__tete:active{scale:.995}
-.repli__n{
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;color:var(--c-signal-sombre);
-  font-variant-numeric:tabular-nums;
-}
-.repli__titre{
-  font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
-  letter-spacing:-.01em;line-height:1.3;
-}
-.repli__cote{
-  font-family:var(--f-mono);font-size:var(--t-donnee);
-  color:var(--c-encre-40);white-space:nowrap;
-}
-/* Le signe est un plus qui devient un moins : deux traits, dont
-   un pivote. C'est le même objet que le dépliant des chantiers. */
-.repli__signe{
-  position:relative;width:14px;height:14px;flex:0 0 auto;
-  align-self:center;
-}
+@media (hover:hover) and (pointer:fine){.repli__tete:hover{background:var(--c-papier-2)}}
+.repli__tete:focus-visible{outline-offset:-3px}
+.repli__n{font-weight:500;font-size:var(--t-ui);font-variant-numeric:tabular-nums;color:var(--c-encre-60)}
+.repli__titre{font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;line-height:1.3}
+.repli[open] .repli__titre{font-size:var(--t-h3);letter-spacing:-.02em}
+.repli__cote{font-size:var(--t-petit);color:var(--c-encre-60);white-space:nowrap}
+.repli__signe{position:relative;width:14px;height:14px;flex:0 0 auto;align-self:center}
 .repli__signe::before,.repli__signe::after{
-  content:"";position:absolute;inset:50% 0 auto 0;
-  height:1.5px;background:var(--c-encre);
-  transition:transform var(--d-normal) var(--e-sortie);
+  content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;
+  background:var(--c-encre);transition:transform var(--d-normal) var(--e-sortie);
 }
 .repli__signe::after{transform:rotate(90deg)}
 .repli[open] .repli__signe::after{transform:rotate(0)}
 .repli__corps{
-  padding:0 0 var(--sp-6) calc(var(--sp-4) + 2.4em);
-  max-width:68ch;color:var(--c-encre-60);line-height:1.65;
+  padding:0 var(--sp-5) var(--sp-6);max-width:calc(64ch + var(--sp-5) * 2);
+  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.6;color:var(--c-encre-60);
 }
 .repli__corps>*+*{margin-top:var(--sp-4)}
-/* Les réponses portent parfois un renvoi vers une autre page : il garde
-   l'encre d'action du dossier, comme dans tout texte courant. */
-.repli__corps a{
-  color:var(--c-signal-sombre);
-  text-decoration:underline;text-underline-offset:3px;
-}
+.repli__corps a{color:var(--c-signal-sombre);text-decoration:underline;text-underline-offset:3px}
 .repli__corps a:hover{color:var(--c-encre)}
 .repli__corps strong{color:var(--c-encre);font-weight:600}
 @media (max-width:767px){
-  .repli__tete{
-    grid-template-columns:auto minmax(0,1fr) auto;
-    row-gap:var(--sp-2);
-  }
-  .repli__cote{grid-column:2;grid-row:2;text-align:left}
-  .repli__corps{padding-left:calc(var(--sp-4) + 2.4em)}
-}
-@media (max-width:479px){
-  .repli__corps{padding-left:0}
+  .repli__tete{grid-template-columns:auto minmax(0,1fr) auto;row-gap:var(--sp-1);padding-inline:var(--sp-4)}
+  .repli__cote{grid-column:2;grid-row:2}
+  .repli__signe{grid-column:3;grid-row:1}
+  .repli__tete>span:not([class]){display:none}
+  .repli__corps{padding-inline:var(--sp-4)}
 }
 
-/* La liste de dépliants ferme son dernier filet. */
-.replis{display:flex;flex-direction:column}
-.replis>.repli:last-of-type{border-bottom:var(--bd-fin)}
-
-/* ------------------------------------------------------------
-   LISTE REPLIABLE
-   Une liste de prestations sous une seule ligne : « Les sept
-   postes » plutôt que sept lignes déroulées.
-   ------------------------------------------------------------ */
-.repli--liste .repli__corps{padding-bottom:var(--sp-5)}
-.repli--liste .service__liste li:first-child{border-top:var(--bd-fin)}
+/* Liste repliable : les postes d'un lot sous une seule ligne. */
+.repli--liste .repli__corps{max-width:none;font-family:var(--f-texte)}

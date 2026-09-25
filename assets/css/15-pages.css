@@ -1,46 +1,41 @@
 /* ============================================================
    DSG RÉNOVATION — 15 · PAGES DU SITE
-   Composants nés du passage d'une page unique à un site : couverture
-   de page intérieure, colonnes de prestation, étapes numérotées,
-   relevé de repères, lots voisins, renvoi de fin de page.
+   Colonnes de prestation, lots voisins, liens de suite, encadré,
+   renvoi de fin de page.
 
    Tout puise dans 00-jetons.css. Aucune valeur en dur.
    ============================================================ */
 
 /* ------------------------------------------------------------
-   COUVERTURE DE PAGE INTÉRIEURE
-   Le titre de couverture reste le seul du site en graisse pleine
-   et en capitales. Une page intérieure s'ouvre plus bas de ton :
-   Archivo 500, casse normale, comme les annexes.
-   ------------------------------------------------------------ */
-.piece--titre{padding-bottom:0}
-.piece--titre .couverture__actions{margin-top:var(--sp-6)}
-
-/* La couverture du dossier masque ses boutons sur téléphone : la barre
-   d'action fixe les propose déjà, et elle arrive vite. Une page
-   intérieure s'ouvre sur du texte, et cette barre ne se montre qu'après
-   480 pixels de défilement : sans cette exception, le haut de page
-   n'offrirait aucune action pendant tout un écran. */
-@media (max-width:767px){
-  .piece--titre .couverture__actions{display:flex}
-  .piece--titre .couverture__actions .btn{flex:1 1 auto}
-}
-
-/* Le fil d'Ariane se termine par la page consultée, qui n'est pas un
-   lien : le dernier séparateur n'a donc rien à séparer. */
-.piece__chemin span[aria-hidden]:last-child{display:none}
-
-/* ------------------------------------------------------------
-   DEUX COLONNES — texte tenu à la mesure, liste dans la marge
+   DEUX COLONNES — texte tenu à la mesure, liste à côté
    ------------------------------------------------------------ */
 .service__deux{
-  display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
   gap:var(--grille-goutt) var(--sp-8);align-items:start;
 }
 @media (max-width:1023px){
-  .service__deux{grid-template-columns:1fr;gap:var(--sp-7)}
+  .service__deux{grid-template-columns:minmax(0,1fr);gap:var(--sp-7)}
 }
-.service__texte{max-width:66ch;color:var(--c-encre-60)}
+.service__texte{
+  max-width:62ch;font-family:var(--f-lecture);font-size:var(--t-texte);
+  line-height:1.6;color:var(--c-encre-60);text-wrap:pretty;
+}
+
+/* La colonne de texte s'accroche pendant que la colonne de droite
+   défile. Sur ces blocs, le relevé ou la liste des postes est deux à
+   trois fois plus haut que le texte qui l'explique : sans cela, on
+   finit par lire des chiffres dont l'énoncé est sorti de l'écran.
+
+   L'accroche est réservée au grand écran, où les deux colonnes
+   existent réellement. Elle demande `align-self:start`, faute de quoi
+   la cellule de grille occupe toute la hauteur et n'a plus de marge
+   pour glisser — `.service__deux` le pose déjà sur ses enfants. */
+@media (min-width:1024px){
+  .service__deux>.service__texte{
+    position:sticky;
+    top:calc(var(--h-entete) + var(--sp-7));
+  }
+}
 .service__texte>*+*{margin-top:var(--sp-4)}
 .service__texte a{
   color:var(--c-signal-sombre);
@@ -51,234 +46,88 @@
 /* La liste des prestations est un bordereau : une ligne, un filet. */
 .service__liste{display:flex;flex-direction:column}
 .service__liste li{
-  padding-block:var(--sp-4);border-top:var(--bd-fin);
-  font-size:var(--t-petit);line-height:1.5;
+  display:flex;gap:var(--sp-3);align-items:baseline;
+  padding-block:var(--sp-3);border-top:var(--bd-fin);
+  font-size:var(--t-ui);line-height:1.45;color:var(--c-encre);
+}
+.service__liste li::before{
+  content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);
+  background:var(--c-encre-40);transform:translateY(-2px);
 }
 .service__liste li:last-child{border-bottom:var(--bd-fin)}
-
 .service__villes{align-content:start}
 
-/* ------------------------------------------------------------
-   ÉTAPES DE LA MÉTHODE
-   Chaque étape est une cellule à filet coiffée de son rang.
-   ------------------------------------------------------------ */
-/* Deux colonnes, pas quatre : une méthode se lit en séquence, et des
-   cellules larges laissent respirer le texte de chaque étape. */
-.etapes{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:0 var(--sp-8);
-}
-@media (max-width:767px){.etapes{grid-template-columns:1fr;gap:0}}
-.etape{
-  --c-trait:var(--c-ligne);
-  display:flex;gap:var(--sp-4);align-items:baseline;
-  padding-block:var(--sp-6);
-}
-.etape__n{
-  flex:0 0 auto;
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;color:var(--c-signal-sombre);
-  font-variant-numeric:tabular-nums;
-}
-.etape__texte{
-  margin-top:var(--sp-3);max-width:52ch;
-  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
-}
-
-/* ------------------------------------------------------------
-   ENGAGEMENTS — même cellule, sans numéro
-   ------------------------------------------------------------ */
-.engagements{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
-  gap:0 var(--sp-6);
-}
-.engagement{--c-trait:var(--c-encre);--e-trait:1.5px;padding-block:var(--sp-6)}
-
-/* ------------------------------------------------------------
-   REPÈRES D'UN LOT
-   La même chemise que le relevé général, mais qui porte une
-   mention au lieu d'un chiffre : la durée d'un lot ne se compte
-   pas, elle s'annonce.
-   ------------------------------------------------------------ */
-.preuve__note{
-  padding-bottom:var(--sp-4);border-bottom:1.5px solid var(--c-encre);
-  font-family:var(--f-texte);font-size:var(--t-h4);font-weight:600;
-  letter-spacing:-.01em;line-height:1.3;color:var(--c-encre);
-}
-/* Les quatre repères tiennent sur une rangée : ils sont courts, là où
-   le relevé général porte un paragraphe sous chaque chiffre.
-   Leur languette est plus large que celle du relevé : « Appartement
-   100 m² » ne tient pas dans les 44 % d'une chemise de chiffre. */
-.preuves--quatre{grid-template-columns:repeat(4,1fr)}
-.preuves--quatre .preuve{--languette:76%}
-@media (max-width:1023px){
-  .preuves--quatre{grid-template-columns:repeat(2,1fr)}
-  .preuves--quatre .preuve{--languette:70%}
-}
-@media (max-width:599px){
-  .preuves--quatre{grid-template-columns:1fr}
-  .preuves--quatre .preuve{--languette:82%}
-}
-
-/* Dans une colonne étroite, les chemises s'empilent : à moins de
-   trois cents pixels, la languette mange le chiffre. */
-.service__deux .preuves{grid-template-columns:1fr}
-
-.section--serre{padding-block:var(--sp-7)}
+.section--serre{padding-block:0 var(--sec-y)}
 
 /* ------------------------------------------------------------
    LOTS VOISINS — le maillage entre prestations
+   Des cases jointives, comme les rubriques de l'en-tête.
    ------------------------------------------------------------ */
+/* Chaque case trace son propre contour, qui déborde d'un pixel dans
+   l'interstice : deux contours voisins s'y superposent en un seul
+   trait. Une rangée incomplète ne laisse donc jamais de case vide. */
 .voisins{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));
-  gap:0 var(--sp-6);
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
+  gap:1px;padding:1px;
 }
+.voisins>li{display:flex}
 .voisin{
-  --c-trait:var(--c-encre);--e-trait:1.5px;
-  display:flex;align-items:center;gap:var(--sp-4);
-  padding-block:var(--sp-5);
-  transition:color var(--d-rapide) var(--e-standard);
+  flex:1;display:flex;align-items:center;gap:var(--sp-4);
+  min-height:88px;padding:var(--sp-4) var(--sp-5);outline:1px solid var(--c-cadre);
+  transition:background-color var(--d-rapide) var(--e-standard);
 }
-.voisin__n{
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  letter-spacing:.14em;color:var(--c-encre-40);
-  font-variant-numeric:tabular-nums;
-}
-.voisin__nom{
-  font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
-  letter-spacing:-.01em;line-height:1.3;
-}
+@media (hover:hover) and (pointer:fine){.voisin:hover{background:var(--c-papier-2)}}
+.voisin:focus-visible{outline:2px solid var(--c-focus);outline-offset:-1px}
+.voisin__n{font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;color:var(--c-encre-60)}
+.voisin__nom{font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;line-height:1.25}
 .voisin__chev{
-  margin-left:auto;width:8px;height:8px;flex:0 0 auto;
-  border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;
-  transform:rotate(45deg);
-  transition:transform var(--d-rapide) var(--e-standard);
+  margin-left:auto;flex:0 0 auto;width:15px;height:10px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform var(--d-normal) var(--e-sortie);
 }
-@media (hover:hover) and (pointer:fine){
-  .voisin:hover .voisin__chev{transform:rotate(45deg) translate(3px,-3px)}
-}
+@media (hover:hover) and (pointer:fine){.voisin:hover .voisin__chev{transform:translateX(4px)}}
 
 /* ------------------------------------------------------------
    LIEN DE SUITE — le renvoi discret en fin de section
    ------------------------------------------------------------ */
 .suite{margin-top:var(--sp-7)}
 .suite a{
-  display:inline-flex;align-items:center;gap:var(--sp-3);
-  padding-block:var(--sp-2);
-  font-weight:500;
-  border-bottom:1.5px solid var(--c-signal-sombre);
-  transition:gap var(--d-rapide) var(--e-standard);
+  display:inline-flex;align-items:center;gap:var(--sp-4);
+  min-height:44px;padding-block:var(--sp-2);
+  font-weight:500;border-bottom:1px solid var(--c-cadre);
 }
-@media (hover:hover) and (pointer:fine){
-  .suite a:hover{gap:var(--sp-4)}
+
+/* ------------------------------------------------------------
+   ENCADRÉ — ce que l'artisan dirait sur place
+   ------------------------------------------------------------ */
+.encadre{padding:var(--sp-6) var(--sp-5);background:var(--c-fiche);box-shadow:inset 0 0 0 1px var(--c-cadre)}
+.encadre__titre{color:var(--c-encre)}
+.encadre__liste{margin-top:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4)}
+.encadre__liste li{
+  position:relative;padding-left:var(--sp-5);
+  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.5;color:var(--c-encre-60);
+}
+.encadre__liste li::before{
+  content:"";position:absolute;left:0;top:.6em;
+  width:var(--repere);height:var(--repere);background:var(--c-signal-sombre);
 }
 
 /* ------------------------------------------------------------
    RENVOI DE FIN DE PAGE
-   Le seul bloc sombre des pages intérieures : il ferme la page
-   comme le pied ferme le site.
+   Un creux de plâtre plutôt qu'un aplat noir : la page se referme
+   sur la question qu'on attend du visiteur.
    ------------------------------------------------------------ */
-.rappel{background:var(--c-bitume)}
+.rappel{background:var(--c-papier-2)}
 .rappel__grille{
-  display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
-  gap:var(--sp-7) var(--sp-8);align-items:center;
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:var(--sp-5) var(--grille-goutt);align-items:start;
 }
-@media (max-width:1023px){
-  .rappel__grille{grid-template-columns:1fr}
-}
-.rappel__titre{margin-top:var(--sp-4)}
-.rappel__actions{display:flex;flex-wrap:wrap;gap:var(--sp-3)}
-/* Sur fond noir, le bouton cadre emprunte l'encre claire du bloc. */
-.rappel .btn--cadre{border-color:var(--c-encre);color:var(--c-encre)}
-.rappel .btn--cadre:hover{background:var(--c-encre);color:var(--c-bitume)}
-
-/* ------------------------------------------------------------
-   PIED À QUATRE COLONNES
-   Le site a gagné une colonne de prestations : la grille du pied
-   passe de trois à quatre cellules.
-   ------------------------------------------------------------ */
-.pied__grille--large{grid-template-columns:1.6fr 1fr 1fr 1fr}
-@media (max-width:1023px){
-  .pied__grille--large{grid-template-columns:1fr 1fr}
-  .pied__grille--large>*:nth-child(3){border-left:0;padding-left:0}
-}
-@media (max-width:767px){
-  .pied__grille--large{grid-template-columns:1fr 1fr}
-  .pied__grille--large>*:nth-child(2){border-left:0;padding-left:0}
-}
-
-/* ------------------------------------------------------------
-   TIRAGE D'OUVERTURE
-   Une page de métier se montre avant de s'expliquer. L'image va
-   bord à bord : c'est la seule chose du site qui sorte de la
-   grille, et c'est ce qui lui donne son ampleur.
-   ------------------------------------------------------------ */
-.tirage{
-  position:relative;margin:var(--sp-8) 0 0;
-  width:100vw;margin-left:50%;transform:translateX(-50%);
-  overflow:hidden;
-}
-.tirage img{
-  width:100%;height:clamp(260px,42vw,560px);object-fit:cover;
-  /* Le tirage de chantier est déjà lumineux : une pointe de saturation
-     suffit à le détacher du papier sans le rendre criard. */
-  filter:saturate(1.06);
-}
-.tirage__legende{
-  position:absolute;left:var(--x-marge);bottom:var(--sp-4);
-  padding:var(--sp-2) var(--sp-4);
-  background:var(--c-bitume);color:var(--c-craie);
-  border-radius:var(--r-net);
-}
-@media (max-width:767px){
-  .tirage{margin-top:var(--sp-7)}
-  .tirage__legende{left:var(--sp-4);font-size:11px}
-}
-
-/* ------------------------------------------------------------
-   ENCADRÉ
-   Une note de marge : ce que l'artisan dirait sur place, posé à
-   côté du texte courant. Fond en creux, filet tiré au-dessus.
-   ------------------------------------------------------------ */
-.encadre{
-  --c-trait:var(--c-encre);--e-trait:1.5px;
-  background:var(--c-papier-2);
-  padding:var(--sp-6) var(--sp-5) var(--sp-6);
-}
-.encadre__titre{color:var(--c-encre)}
-.encadre__liste{
-  margin-top:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-4);
-}
-.encadre__liste li{
-  position:relative;padding-left:var(--sp-5);
-  font-size:var(--t-petit);line-height:1.6;color:var(--c-encre-60);
-}
-.encadre__liste li::before{
-  content:"";position:absolute;left:0;top:.6em;
-  width:10px;height:1.5px;background:var(--c-signal-sombre);
-}
-
-/* ------------------------------------------------------------
-   PRESTATIONS GROUPÉES
-   Une page peut réunir plusieurs lots — plâtrerie, cloisons et
-   faux plafonds se posent ensemble. Chaque lot garde alors son
-   intitulé au-dessus de sa liste : la page reste un bordereau, pas
-   un inventaire indifférencié.
-   ------------------------------------------------------------ */
-.service__groupes{display:flex;flex-direction:column;gap:var(--sp-7)}
-.service__lot{
-  margin-bottom:var(--sp-4);
-  color:var(--c-encre);
-}
-/* La première liste d'un groupe porte déjà son filet haut : celui de
-   l'intitulé ferait doublon juste au-dessus. */
-.service__groupe .service__liste li:first-child{border-top:var(--bd-fin)}
-
-/* ------------------------------------------------------------
-   SECTIONS LOCALES EMPILÉES
-   Quand la page réunit plusieurs lots, chacun a son propre bloc
-   « sur le terrain ». Ils se suivent, séparés par leur seule
-   respiration : un filet de plus alourdirait la page.
-   ------------------------------------------------------------ */
-.local+.local{margin-top:var(--sp-9)}
-.local__titre{margin-bottom:var(--sp-6)}
+.rappel__marge{grid-column:1/5;padding-top:.6em}
+.rappel__corps{grid-column:5/13}
+.rappel__titre{font-size:var(--t-piece);letter-spacing:-.035em;line-height:1.02;max-width:10.7em}
+.rappel .chapo{margin-top:var(--sp-5)}
+.rappel__actions{margin-top:var(--sp-6);display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+.rappel__actions .btn{min-width:min(100%,260px)}
+@media (max-width:1023px){.rappel__marge,.rappel__corps{grid-column:1/-1}}
+@media (max-width:767px){.rappel__actions{flex-direction:column}}

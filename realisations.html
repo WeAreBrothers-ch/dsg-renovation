@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nos réalisations de rénovation à Lausanne</title>
 <meta name="description" content="Six chantiers de rénovation livrés à Lausanne, Pully, Genève : appartements, maisons et immeubles. Surfaces, durées et lots détaillés fiche par fiche.">
-<meta name="theme-color" content="#F7F7F5">
+<meta name="theme-color" content="#EEEBE5">
 <link rel="canonical" href="https://www.dsg-renov.ch/realisations.html">
+<link rel="icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" type="image/png">
+<link rel="apple-touch-icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">
@@ -20,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400&amp;display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/00-jetons.css">
 <link rel="stylesheet" href="assets/css/01-socle.css">
@@ -40,6 +42,8 @@
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
 <link rel="stylesheet" href="assets/css/17-repli.css">
+<link rel="stylesheet" href="assets/css/18-confiance.css">
+<link rel="stylesheet" href="assets/css/19-impression.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -153,7 +157,7 @@
 <body>
 <a class="saut" href="#contenu">Aller au contenu principal</a>
 
-<header class="entete entete--posee" id="entete">
+<header class="entete" id="entete">
   <div class="zone entete__inner">
     <a class="marque" href="index.html" aria-label="DSG Rénovation, retour à l'accueil">
       <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38">
@@ -167,54 +171,50 @@
 
     <div class="entete__actions">
       <a class="entete__tel" href="tel:+41218470202">+41 21 847 02 02</a>
-      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit</a>
+      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <span></span>
-    </button>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
 
-<div class="menu sur-sombre" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-  <div class="zone menu__haut" style="padding-inline:0">
-    <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28">
-    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">&times;</button>
+<div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="menu__haut">
+    <span class="menu__marque"><img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28"></span>
+    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li><a href="services.html"><span class="n">01</span>Prestations</a></li>
-    <li><a href="realisations.html"><span class="n">02</span>Réalisations</a></li>
-    <li><a href="entreprise.html"><span class="n">03</span>L'entreprise</a></li>
-    <li><a href="devis.html"><span class="n">04</span>Devis gratuit</a></li>
+    <li><a href="services.html">Prestations</a></li>
+    <li><a href="realisations.html">Réalisations</a></li>
+    <li><a href="entreprise.html">L'entreprise</a></li>
+    <li><a href="devis.html">Devis gratuit</a></li>
   </ul>
   <div class="menu__pied">
     <a class="donnee" href="tel:+41218470202">+41 21 847 02 02</a>
     <a class="donnee" href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
-    <a class="btn btn--sombre" href="devis.html">Demander un devis gratuit</a>
+    <a class="btn btn--plein" href="devis.html">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 
 <main id="contenu">
 
-  <header class="piece piece--titre">
+  <header class="piece">
     <div class="zone">
-      <div class="piece__entete trace--bas trace revele">
-        <nav class="piece__chemin donnee" aria-label="Fil d'Ariane">
+      <div class="piece__entete">
+        <div class="piece__marge">
+          <nav class="piece__chemin" aria-label="Fil d'Ariane">
           <a href="index.html">Accueil</a>
           <span aria-hidden="true">/</span>
           <span>Réalisations</span>
-        </nav>
-
-        <p class="etiquette">Réalisations</p>
-        <h1 class="piece__titre" data-lignes>
-          <span class="ligne"><span>Six fiches</span></span>
-          <span class="ligne"><span>de chantier</span></span>
-        </h1>
-        <p class="chapo piece__chapo">Appartements, maisons et immeubles livrés à Lausanne et sur l'arc lémanique, avec leur relevé complet.</p>
-
-        <div class="couverture__actions">
+          </nav>
+        </div>
+        <div class="piece__tete">
+          <h1 class="piece__titre">Six fiches de chantier</h1>
+          <p class="chapo piece__chapo">Appartements, maisons et immeubles livrés à Lausanne et sur l'arc lémanique, avec leur relevé complet.</p>
+          <div class="couverture__actions">
           <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -222,13 +222,17 @@
 
   <section class="section" aria-labelledby="tFiches">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>Registre</span>
-        <span class="intercalaire__cote">Six chantiers livrés</span>
-        <h2 class="h2" data-lignes>Le registre<br>des chantiers</h2>
-        <p class="chapo intercalaire__chapo">Chaque fiche donne le relevé complet du chantier. Dépliez-la pour lire le détail des travaux, ou agrandissez la vue.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Registre</p>
+          <p class="intercalaire__cote">Six chantiers livrés</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tFiches" class="h2" data-lignes>Le registre<br>des chantiers</h2>
+          <p class="chapo intercalaire__chapo">Chaque fiche donne le relevé complet du chantier. Dépliez-la pour lire le détail des travaux, ou agrandissez la vue.</p>
+        </div>
       </div>
-      <div class="chantiers__barre">
+      <div class="chantiers__barre pleine-largeur">
         <div class="filtres" id="filtresChantiers" role="group" aria-label="Filtrer les fiches par type de bien" hidden>
           <button class="filtre" type="button" data-filtre="tous" aria-pressed="true">Tous</button>
           <button class="filtre" type="button" data-filtre="appartement" aria-pressed="false">Appartement</button>
@@ -237,7 +241,10 @@
         </div>
         <p class="chantiers__compte" id="compteChantiers" role="status">6 fiches affichées</p>
       </div>
-      <div class="chantiers__grille" id="grilleChantiers" data-galerie>
+      <!-- CONTENU À VALIDER : noms de chantier, communes, surfaces, durées et
+     années à confirmer par le client, fiche par fiche. Les photographies
+     viennent de l'ancien site de l'entreprise. -->
+<div class="chantiers__grille pleine-largeur" id="grilleChantiers" data-galerie>
 
         <article class="chemise revele" data-type="appartement">
           <span class="chemise__onglet">N° 001</span>
@@ -420,21 +427,28 @@
         </article>
 
       </div>
-      <p class="chantiers__vide chapo" id="aucunChantier" hidden>Aucune fiche ne correspond à ce filtre pour le moment.</p>
+      <p class="chantiers__vide chapo pleine-largeur" id="aucunChantier" hidden>Aucune fiche ne correspond à ce filtre pour le moment.</p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tSignature">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Pièce jointe</span>
-        <span class="intercalaire__cote">Chantier signature</span>
-        <h2 class="h2" data-lignes>Six appartements,<br>en site occupé</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Pièce jointe</p>
+          <p class="intercalaire__cote">Chantier signature</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tSignature" class="h2" data-lignes>Six appartements,<br>en site occupé</h2>
+          
+        </div>
       </div>
-      <div class="signature revele">
+      <!-- CONTENU À VALIDER : noms de chantier, communes, surfaces, durées et
+     années à confirmer par le client, fiche par fiche. Les photographies
+     viennent de l'ancien site de l'entreprise. -->
+<div class="signature pleine-largeur revele">
         <div class="signature__texte">
-          <p class="etiquette"><b>Pièce jointe</b> — Chantier signature</p>
+          <p class="etiquette">Chantier signature</p>
           <h3 class="h3" style="margin-top:var(--sp-4)">Immeuble Béthusy — six appartements rénovés en site occupé</h3>
           <p class="texte" style="margin-top:var(--sp-4)">Reprise complète de six logements pour une régie lausannoise : plâtrerie, peinture, faux plafonds, carrelage et sols. Chantier mené étage par étage pour maintenir les locataires en place, avec nettoyage livré à chaque réception.</p>
           <dl class="releve" style="margin-top:var(--sp-5);max-width:380px">
@@ -443,8 +457,8 @@
             <dt>Livré</dt><dd>2025</dd>
           </dl>
         </div>
-        <figure class="signature__media revele-img">
-          <span class="tampon signature__tampon" aria-hidden="true">Chantier<br>réceptionné<br>2025</span>
+        <figure class="signature__media">
+          <span class="tampon signature__tampon" aria-hidden="true">Chantier réceptionné · 2025</span>
           <span class="signature__cadre">
             <img src="https://static.wixstatic.com/media/2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg"
                  alt="Cuisine et dégagement d'un appartement de l'immeuble Béthusy après reprise des murs, plafonds et sols"
@@ -457,26 +471,30 @@
 
   <section class="section" aria-labelledby="tBiens">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 03</b>Familles</span>
-        <span class="intercalaire__cote">Ce que nous reprenons dans la région</span>
-        <h2 class="h2" data-lignes>Trois types de biens,<br>trois chantiers différents</h2>
-        <p class="chapo intercalaire__chapo">Un appartement de Sous-Gare, une villa de Chailly et un immeuble de rendement ne se rénovent pas de la même façon, ni pour les mêmes raisons.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Familles</p>
+          <p class="intercalaire__cote">Ce que nous reprenons dans la région</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tBiens" class="h2" data-lignes>Trois types de biens,<br>trois chantiers différents</h2>
+          <p class="chapo intercalaire__chapo">Un appartement de Sous-Gare, une villa de Chailly et un immeuble de rendement ne se rénovent pas de la même façon, ni pour les mêmes raisons.</p>
+        </div>
       </div>
       <ul class="cartes">
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Sous-Gare, Chauderon, le Vallon, la Cité</p>
           <h3 class="h3 carte__titre">L'appartement ancien du centre</h3>
           <p class="carte__texte">Hauts plafonds, parquets à lames, murs en plâtre sur lattis. On y gagne des volumes que le neuf ne sait plus produire, et on y trouve des surprises derrière chaque cloison. Le travail porte d'abord sur les supports : ce sont eux qui décident du résultat.</p>
           <ul class="lots carte__lots"><li>Plâtrerie</li><li>Peinture</li><li>Sols</li><li>Faux plafonds</li></ul>
         </li>
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Chailly, Épalinges, Le Mont, Pully</p>
           <h3 class="h3 carte__titre">La villa des hauts</h3>
           <p class="carte__texte">Des maisons des années soixante-dix et quatre-vingt, très cloisonnées, avec des volumes fermés que l'époque appréciait. L'essentiel du chantier consiste à rouvrir, à éclaircir et à remplacer des revêtements qui ont quarante ans.</p>
           <ul class="lots carte__lots"><li>Cloisons</li><li>Carrelage</li><li>Peinture</li><li>Sols</li></ul>
         </li>
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Toute l'agglomération lausannoise</p>
           <h3 class="h3 carte__titre">L'immeuble de rendement</h3>
           <p class="carte__texte">Des remises en état entre deux locations, souvent logement par logement, dans un immeuble habité. La contrainte n'est pas technique, elle est calendaire : une date de libération ferme, cadrée sur l'entrée du locataire suivant.</p>
@@ -488,14 +506,18 @@
 
   <section class="section" aria-labelledby="tSurprises">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 04</b>Imprévus</span>
-        <span class="intercalaire__cote">Ce qu'on découvre en ouvrant</span>
-        <h2 class="h2" data-lignes>Ce qu'il y a<br>derrière les murs</h2>
-        <p class="chapo intercalaire__chapo">Dans un logement ancien, la dépose réserve toujours quelque chose. Les quatre cas ci-dessous reviennent sur un chantier lausannois sur deux.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Imprévus</p>
+          <p class="intercalaire__cote">Ce qu'on découvre en ouvrant</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tSurprises" class="h2" data-lignes>Ce qu'il y a<br>derrière les murs</h2>
+          <p class="chapo intercalaire__chapo">Dans un logement ancien, la dépose réserve toujours quelque chose. Les quatre cas ci-dessous reviennent sur un chantier lausannois sur deux.</p>
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">01</span>
             <span class="repli__titre">Une chape qui n'est pas de niveau</span>
@@ -504,7 +526,7 @@
           </summary>
           <div class="repli__corps"><p>Deux à trois centimètres d'écart sur dix mètres, courant dans les immeubles d'avant-guerre. Un ragréage règle la question, mais il s'ajoute au devis s'il n'a pas été anticipé à la visite.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">02</span>
             <span class="repli__titre">Un plancher bois sous le revêtement</span>
@@ -513,7 +535,7 @@
           </summary>
           <div class="repli__corps"><p>Sous un vieux linoléum, on trouve souvent des lames sur solives qui jouent. Un panneau de répartition devient nécessaire avant tout revêtement collé.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">03</span>
             <span class="repli__titre">Des installations électriques d'un autre âge</span>
@@ -522,7 +544,7 @@
           </summary>
           <div class="repli__corps"><p>Fils sous tube métallique, absence de terre, tableau saturé. Nous ne sommes pas électriciens, mais nous le signalons et nous coordonnons l'intervention.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">04</span>
             <span class="repli__titre">Un mur qui n'est pas celui qu'on croyait</span>
@@ -535,16 +557,16 @@
     </div>
   </section>
 
-  <section class="section rappel sur-sombre" aria-labelledby="rappelTitre">
+  <section class="section rappel" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
-      <div>
-        <p class="etiquette">Prochaine étape</p>
-        <h2 class="h2 rappel__titre" id="rappelTitre">Votre chantier, le prochain</h2>
-        <p class="chapo" style="margin-top:var(--sp-5)">Décrivez votre projet : nous vous dirons ce qu'il demande, combien de temps il prend et ce qu'il coûte.</p>
-      </div>
-      <div class="rappel__actions">
-        <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-        <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
+      <div class="rappel__corps">
+        <h2 class="rappel__titre" id="rappelTitre">Votre chantier, le prochain</h2>
+        <p class="chapo">Décrivez votre projet : nous vous dirons ce qu'il demande, combien de temps il prend et ce qu'il coûte.</p>
+        <div class="rappel__actions">
+          <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -552,7 +574,7 @@
 
 <footer class="pied sur-sombre">
   <div class="zone">
-    <div class="pied__grille pied__grille--large">
+    <div class="pied__grille">
       <div class="pied__marque">
         <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38" loading="lazy" decoding="async">
         <address class="donnee">
@@ -560,6 +582,9 @@
           <a href="tel:+41218470202">+41 21 847 02 02</a>
           <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
         </address>
+        <!-- CONTENU À VALIDER : horaires à confirmer avec le client -->
+        <p class="donnee pied__horaires">Lundi – vendredi, 08:00 – 17:00</p>
+        <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
       <nav class="pied__col" aria-labelledby="piedNav">
@@ -607,7 +632,7 @@
 
 <div class="barre-mobile" id="barreMobile" data-visible="false">
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
-  <a class="btn btn--plein" href="devis.html">Devis gratuit</a>
+  <a class="btn btn--plein" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/nav.js" defer></script>
 <script src="assets/js/motion.js" defer></script>

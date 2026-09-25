@@ -1,74 +1,140 @@
 /* ============================================================
-   DSG RÉNOVATION — 04 · FORMULAIRES
-   Champs du bordereau de demande de devis.
+   DSG RÉNOVATION — 04 · FORMULAIRE DE DEMANDE
+   Un bordereau en cellules jointives : chaque question occupe sa
+   case, l'intitulé en petit, la réponse en grand. Les traits de la
+   grille sont les interstices d'un pixel laissés entre les cases,
+   sur un fond d'encre — ils se raccordent donc toujours, quelle que
+   soit la répartition des cases.
    ============================================================ */
 
-/* ------------------------------------------------------------
-   CHAMPS DE FORMULAIRE — style « bordereau administratif »
-   ------------------------------------------------------------ */
-.champ{display:flex;flex-direction:column;gap:var(--sp-2)}
-.champ__label{
-  font-family:var(--f-texte);font-weight:500;font-size:14px;
-  color:var(--c-encre-60);
+.formulaire{display:flex;flex-direction:column;gap:var(--sp-6)}
+.formulaire__entete{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:var(--sp-2) var(--sp-4);
 }
-.champ__label span{color:var(--c-signal)}
+.formulaire__requis{color:var(--c-signal-sombre)}
 
-.champ input,
-.champ select,
-.champ textarea{
-  width:100%;min-height:52px;padding:var(--sp-3) var(--sp-4);
-  background:var(--c-fiche);color:var(--c-encre);
-  border:1.5px solid var(--c-ligne);border-radius:var(--r-net);
-  font-family:var(--f-texte);font-size:var(--t-texte);line-height:1.5;
-  transition:border-color var(--d-rapide) var(--e-standard);
+.formulaire__partie{
+  min-width:0;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
-.champ textarea{min-height:132px;resize:vertical}
+/* Flottante, la légende devient une case ordinaire de la grille. */
+.formulaire__legende{
+  float:left;width:100%;grid-column:1/-1;
+  display:flex;align-items:baseline;gap:var(--sp-3);
+  padding:var(--sp-4) var(--sp-5);background:var(--c-papier-2);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;
+}
+.formulaire__n{font-variant-numeric:tabular-nums;color:var(--c-encre-60)}
+.formulaire__n::before{content:"0"}
+.formulaire__large{grid-column:1/-1}
+@media (max-width:599px){.formulaire__partie{grid-template-columns:minmax(0,1fr)}}
+
+/* ------------------------------------------------------------
+   CHAMP — une case
+   ------------------------------------------------------------ */
+.champ{
+  display:flex;flex-direction:column;gap:var(--sp-2);
+  padding:var(--sp-4) var(--sp-5) var(--sp-3);background:var(--c-fiche);
+  transition:box-shadow var(--d-rapide) var(--e-standard);
+}
+.champ:focus-within{box-shadow:inset 0 0 0 2px var(--c-focus)}
+.champ__label{font-weight:500;font-size:var(--t-etiquette);color:var(--c-encre)}
+.champ__label span{color:var(--c-signal-sombre)}
+
+.champ input,.champ select,.champ textarea{
+  width:100%;min-height:44px;padding:0;margin:0;
+  background:transparent;color:var(--c-encre);border:0;border-radius:0;
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-champ);
+  letter-spacing:-.01em;line-height:1.3;
+}
+.champ input:focus,.champ select:focus,.champ textarea:focus{outline:none}
+.champ textarea{min-height:128px;resize:vertical;padding-top:var(--sp-1)}
 .champ select{
-  appearance:none;cursor:pointer;padding-right:var(--sp-8);
+  appearance:none;cursor:pointer;padding-right:var(--sp-6);
   background-image:linear-gradient(45deg,transparent 50%,var(--c-encre) 50%),
                    linear-gradient(135deg,var(--c-encre) 50%,transparent 50%);
-  background-position:calc(100% - 26px) 24px,calc(100% - 20px) 24px;
-  background-size:6px 6px,6px 6px;background-repeat:no-repeat;
+  background-position:calc(100% - 12px) 50%,calc(100% - 6px) 50%;
+  background-size:6px 6px;background-repeat:no-repeat;
 }
-.champ input:hover,.champ select:hover,.champ textarea:hover{border-color:var(--c-ligne-forte)}
-.champ input:focus,.champ select:focus,.champ textarea:focus{
-  border-color:var(--c-bleu);outline:2px solid var(--c-bleu);outline-offset:1px;
-}
-.champ input::placeholder,.champ textarea::placeholder{color:var(--c-encre-40)}
+.champ input::placeholder,.champ textarea::placeholder{color:var(--c-encre-40);opacity:1}
+.champ__aide{font-family:var(--f-lecture);font-size:var(--t-petit);color:var(--c-encre-60)}
 
-.champ--erreur input,.champ--erreur select,.champ--erreur textarea{border-color:var(--c-alerte)}
-.champ__erreur{
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  letter-spacing:.06em;color:var(--c-alerte);
-}
+.champ--erreur,.champ--erreur:focus-within{box-shadow:inset 0 0 0 2px var(--c-alerte)}
+.champ__erreur{font-weight:500;font-size:var(--t-etiquette);color:var(--c-alerte)}
 .champ__erreur:empty{display:none}
 
+/* ------------------------------------------------------------
+   PASTILLES — cases à cocher lues comme des étiquettes de lot
+   Cible tactile de 44 px au minimum.
+   ------------------------------------------------------------ */
+.pastilles{display:flex;flex-wrap:wrap;gap:var(--sp-2);padding-block:var(--sp-2)}
+.pastille{position:relative;cursor:pointer}
+.champ .pastille input{
+  position:absolute;inset:0;width:100%;height:100%;min-height:0;
+  margin:0;opacity:0;cursor:pointer;
+}
+.pastille span{
+  display:inline-flex;align-items:center;gap:var(--sp-2);min-height:44px;
+  padding:0 var(--sp-4);box-shadow:inset 0 0 0 1px var(--c-ligne-forte);
+  font-size:var(--t-petit);font-weight:500;color:var(--c-encre);
+  transition:background-color var(--d-rapide) var(--e-standard),
+             box-shadow var(--d-rapide) var(--e-standard),
+             color var(--d-rapide) var(--e-standard);
+}
+@media (hover:hover) and (pointer:fine){
+  .pastille:hover span{box-shadow:inset 0 0 0 1px var(--c-encre)}
+}
+.pastille input:checked+span{background:var(--c-encre);color:var(--c-fiche);box-shadow:none}
+.pastille input:checked+span::before{
+  content:"";width:10px;height:6px;margin-top:-3px;
+  border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(-45deg);
+}
+.pastille input:focus-visible+span{outline:2px solid var(--c-focus);outline-offset:2px}
+
+/* ------------------------------------------------------------
+   CONSENTEMENT
+   Le renvoi vers la politique vit hors du label : à l'intérieur,
+   un clic sur le lien cocherait aussi la case.
+   ------------------------------------------------------------ */
 .consentement{
   display:flex;align-items:flex-start;gap:var(--sp-3);
-  font-size:var(--t-petit);line-height:1.55;color:var(--c-encre-60);
+  font-size:var(--t-petit);line-height:1.5;color:var(--c-encre-60);
 }
-.consentement input{
-  width:24px;height:24px;min-height:0;flex:0 0 auto;margin-top:0;
-  accent-color:var(--c-signal);cursor:pointer;
+.champ .consentement input{
+  width:22px;height:22px;min-height:0;flex:0 0 auto;margin-top:1px;
+  accent-color:var(--c-encre);cursor:pointer;
 }
 .consentement label{cursor:pointer}
-
-/* Le renvoi vers la politique de confidentialité est posé sous la case,
-   et non dans son intitulé : à l'intérieur du label, un clic sur le lien
-   basculerait aussi la case. Il s'aligne sur le texte, pas sur la case. */
-.consentement__renvoi{
-  margin-top:var(--sp-2);padding-left:calc(24px + var(--sp-3));
-  font-size:var(--t-petit);
-}
+.consentement__renvoi{padding-left:calc(22px + var(--sp-3));font-size:var(--t-petit)}
 .consentement__renvoi a{
-  color:var(--c-signal-sombre);
-  text-decoration:underline;text-underline-offset:3px;
+  display:inline-block;padding-block:var(--sp-2);
+  color:var(--c-signal-sombre);text-decoration:underline;text-underline-offset:3px;
 }
-.consentement__renvoi a:hover{color:var(--c-encre)}
+
+/* ------------------------------------------------------------
+   ENVOI ET RETOUR
+   ------------------------------------------------------------ */
+.formulaire__envoi{width:100%;min-height:60px}
+.formulaire__envoi[disabled]{opacity:.6;cursor:progress}
+.formulaire__garanties{
+  display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);margin-top:var(--sp-4);
+  font-size:var(--t-petit);color:var(--c-encre-60);
+}
+.formulaire__garanties li{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.formulaire__garanties li::before{
+  content:"";width:var(--repere);height:var(--repere);background:var(--c-encre);
+}
+/* Piège à robots : hors de l'écran plutôt que masqué, certains
+   programmes ignorent les champs en display:none. */
+.formulaire__piege{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 
 .message-formulaire{
-  padding:var(--sp-4);border-radius:var(--r-net);
-  border-left:3px solid var(--c-valide);background:var(--c-papier-2);
+  margin-top:var(--sp-4);padding:var(--sp-4) var(--sp-5);
+  box-shadow:inset 0 0 0 1px var(--c-valide);background:var(--c-fiche);
   font-size:var(--t-petit);line-height:1.6;
 }
 .message-formulaire:empty{display:none}
+.message-formulaire--erreur{box-shadow:inset 0 0 0 1px var(--c-alerte)}

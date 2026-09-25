@@ -1,15 +1,16 @@
 /* ============================================================
-   DSG RÉNOVATION — 09 · CURSEUR D'ARCHIVE
-   Pastille encrée qui remplace le pointeur sur les éléments
-   consultables. Créée par assets/js/curseur.js uniquement.
+   DSG RÉNOVATION — 09 · CURSEUR D'INVITATION
+   Une pastille d'encre qui remplace le pointeur sur ce qui se
+   manipule — le comparateur (« Glisser »), les tirages
+   (« Agrandir »). Créée par assets/js/curseur.js uniquement.
    ============================================================ */
 
 .curseur{
   position:fixed;top:0;left:0;z-index:90;
   display:grid;place-items:center;
-  min-width:14px;height:14px;padding:0;
+  min-width:12px;height:12px;padding:0;
   border-radius:var(--r-rond);
-  background:var(--c-signal);color:var(--c-fiche);
+  background:var(--c-encre);color:var(--c-papier);
   pointer-events:none;opacity:0;
   transition:opacity var(--d-rapide) var(--e-standard),
              min-width var(--d-normal) var(--e-sortie),
@@ -18,19 +19,14 @@
   will-change:transform;
 }
 .curseur span{
-  font-family:var(--f-mono);font-weight:500;font-size:.6875rem;
-  letter-spacing:.1em;text-transform:uppercase;line-height:1;white-space:nowrap;
+  font-family:var(--f-texte);font-weight:500;font-size:.8125rem;
+  line-height:1;white-space:nowrap;
   opacity:0;transform:scale(.9);
   transition:opacity var(--d-rapide) var(--e-standard),transform var(--d-normal) var(--e-sortie);
 }
-
-/* La pastille reste un repère, pas un panneau : elle accompagne la main
-   sans masquer le tirage qu'elle invite à consulter. */
-.curseur[data-actif="true"]{
-  opacity:1;min-width:72px;height:72px;padding:0 var(--sp-3);
-}
+.curseur[data-actif="true"]{opacity:1;min-width:76px;height:76px;padding:0 var(--sp-3)}
 .curseur[data-actif="true"] span{opacity:1;transform:none}
-.curseur[data-presse="true"]{min-width:62px;height:62px}
+.curseur[data-presse="true"]{min-width:64px;height:64px}
 
 /* Le pointeur natif s'efface uniquement là où la pastille prend le relais. */
 .a-curseur [data-curseur],

@@ -1,13 +1,10 @@
 /* ============================================================
    DSG RÉNOVATION — NAVIGATION
-   En-tête au défilement, menu plein écran, sommaire actif,
-   barre d'action mobile.
+   Menu plein écran, barre d'action mobile.
    ============================================================ */
 (function () {
   "use strict";
 
-  /** @type {HTMLElement|null} */
-  var entete = document.getElementById("entete");
   /** @type {HTMLElement|null} */
   var menu = document.getElementById("menu");
   /** @type {HTMLButtonElement|null} */
@@ -63,14 +60,12 @@
     if (window.innerWidth > 1279 && menuEstOuvert()) { basculerMenu(false); }
   });
 
-  /* ---------- En-tête et barre mobile au défilement ---------- */
-
-  /* L'en-tête ne se masque jamais : les intercalaires collants viennent
-     s'y accrocher, et le bouton « Devis » reste accessible en permanence. */
+  /* ---------- Barre mobile au défilement ----------
+     Elle n'apparaît qu'une fois la couverture passée : en haut de page,
+     les boutons de la couverture font déjà ce travail. */
   function auDefilement() {
     var y = window.scrollY;
 
-    if (entete) { entete.classList.toggle("entete--posee", y > 60); }
     if (barreMobile) {
       barreMobile.setAttribute("data-visible", y > 480 ? "true" : "false");
     }
@@ -85,40 +80,4 @@
   }, { passive: true });
 
   auDefilement();
-
-  /* ---------- Pièce du dossier active (nav + rail) ---------- */
-
-  var liens = document.querySelectorAll("[data-lien-piece]");
-  if (!liens.length || !("IntersectionObserver" in window)) { return; }
-
-  /** @type {Array<{lien:Element, cible:Element}>} */
-  var pieces = [];
-  Array.prototype.forEach.call(liens, function (lien) {
-    var ancre = lien.getAttribute("href");
-    if (!ancre || ancre.charAt(0) !== "#") { return; }
-    var cible = document.getElementById(ancre.slice(1));
-    if (cible) { pieces.push({ lien: lien, cible: cible }); }
-  });
-
-  /**
-   * Marque comme active toutes les entrées pointant vers la section visible.
-   * @param {Element} cibleActive
-   */
-  function activer(cibleActive) {
-    pieces.forEach(function (piece) {
-      if (piece.cible === cibleActive) {
-        piece.lien.setAttribute("aria-current", "true");
-      } else {
-        piece.lien.removeAttribute("aria-current");
-      }
-    });
-  }
-
-  var observateur = new IntersectionObserver(function (entrees) {
-    entrees.forEach(function (entree) {
-      if (entree.isIntersecting) { activer(entree.target); }
-    });
-  }, { rootMargin: "-25% 0px -60% 0px", threshold: 0 });
-
-  pieces.forEach(function (piece) { observateur.observe(piece.cible); });
 }());

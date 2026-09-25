@@ -8,7 +8,6 @@ ni le visiteur ni le référencement.
 
 GROUPES = [
     {
-        "numero": "N° 01",
         "nom": "Avant le devis",
         "cote": "Zone, gratuité, délais",
         "titre": "Avant de|nous appeler",
@@ -42,7 +41,6 @@ GROUPES = [
         ],
     },
     {
-        "numero": "N° 02",
         "nom": "Pendant le chantier",
         "cote": "Organisation, nuisances, présence",
         "titre": "Pendant|les travaux",
@@ -74,7 +72,6 @@ GROUPES = [
         ],
     },
     {
-        "numero": "N° 03",
         "nom": "Prix et paiement",
         "cote": "Devis, avenants, échéances",
         "titre": "Ce que ça|coûte",
@@ -109,7 +106,6 @@ GROUPES = [
         ],
     },
     {
-        "numero": "N° 04",
         "nom": "Après la livraison",
         "cote": "Réception, réserves, régies",
         "titre": "Une fois|le chantier livré",

@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>L'entreprise — DSG Rénovation, rénovation à Lausanne</title>
 <meta name="description" content="DSG Rénovation Sàrl, entreprise de rénovation fondée en 2019 à Lausanne : 11 professionnels salariés, 600 chantiers livrés, et les régies qui nous confient leurs biens.">
-<meta name="theme-color" content="#F7F7F5">
+<meta name="theme-color" content="#EEEBE5">
 <link rel="canonical" href="https://www.dsg-renov.ch/entreprise.html">
+<link rel="icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" type="image/png">
+<link rel="apple-touch-icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">
@@ -20,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400&amp;display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/00-jetons.css">
 <link rel="stylesheet" href="assets/css/01-socle.css">
@@ -40,6 +42,8 @@
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
 <link rel="stylesheet" href="assets/css/17-repli.css">
+<link rel="stylesheet" href="assets/css/18-confiance.css">
+<link rel="stylesheet" href="assets/css/19-impression.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -153,7 +157,7 @@
 <body>
 <a class="saut" href="#contenu">Aller au contenu principal</a>
 
-<header class="entete entete--posee" id="entete">
+<header class="entete" id="entete">
   <div class="zone entete__inner">
     <a class="marque" href="index.html" aria-label="DSG Rénovation, retour à l'accueil">
       <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38">
@@ -167,54 +171,50 @@
 
     <div class="entete__actions">
       <a class="entete__tel" href="tel:+41218470202">+41 21 847 02 02</a>
-      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit</a>
+      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <span></span>
-    </button>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
 
-<div class="menu sur-sombre" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-  <div class="zone menu__haut" style="padding-inline:0">
-    <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28">
-    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">&times;</button>
+<div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="menu__haut">
+    <span class="menu__marque"><img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28"></span>
+    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li><a href="services.html"><span class="n">01</span>Prestations</a></li>
-    <li><a href="realisations.html"><span class="n">02</span>Réalisations</a></li>
-    <li><a href="entreprise.html"><span class="n">03</span>L'entreprise</a></li>
-    <li><a href="devis.html"><span class="n">04</span>Devis gratuit</a></li>
+    <li><a href="services.html">Prestations</a></li>
+    <li><a href="realisations.html">Réalisations</a></li>
+    <li><a href="entreprise.html">L'entreprise</a></li>
+    <li><a href="devis.html">Devis gratuit</a></li>
   </ul>
   <div class="menu__pied">
     <a class="donnee" href="tel:+41218470202">+41 21 847 02 02</a>
     <a class="donnee" href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
-    <a class="btn btn--sombre" href="devis.html">Demander un devis gratuit</a>
+    <a class="btn btn--plein" href="devis.html">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 
 <main id="contenu">
 
-  <header class="piece piece--titre">
+  <header class="piece">
     <div class="zone">
-      <div class="piece__entete trace--bas trace revele">
-        <nav class="piece__chemin donnee" aria-label="Fil d'Ariane">
+      <div class="piece__entete">
+        <div class="piece__marge">
+          <nav class="piece__chemin" aria-label="Fil d'Ariane">
           <a href="index.html">Accueil</a>
           <span aria-hidden="true">/</span>
           <span>L'entreprise</span>
-        </nav>
-
-        <p class="etiquette">L'entreprise</p>
-        <h1 class="piece__titre" data-lignes>
-          <span class="ligne"><span>Quarante ans de métier,</span></span>
-          <span class="ligne"><span>une entreprise jeune</span></span>
-        </h1>
-        <p class="chapo piece__chapo">Onze professionnels salariés, un réseau de partenaires de la région, et un seul métier : la rénovation.</p>
-
-        <div class="couverture__actions">
+          </nav>
+        </div>
+        <div class="piece__tete">
+          <h1 class="piece__titre">Quarante ans de métier, une entreprise jeune</h1>
+          <p class="chapo piece__chapo">Onze professionnels salariés, un réseau de partenaires de la région, et un seul métier : la rénovation.</p>
+          <div class="couverture__actions">
           <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -222,11 +222,15 @@
 
   <section class="section" aria-labelledby="tHistoire">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>Histoire</span>
-        <span class="intercalaire__cote">Depuis 2019 à Lausanne</span>
-        <h2 class="h2" data-lignes>D'où vient<br>l'entreprise</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Histoire</p>
+          <p class="intercalaire__cote">Depuis 2019 à Lausanne</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tHistoire" class="h2" data-lignes>D'où vient<br>l'entreprise</h2>
+          
+        </div>
       </div>
       <div class="service__deux revele">
         <div class="service__texte">
@@ -236,30 +240,30 @@
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Chantiers livrés</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="600">600</span><span class="preuve__plus">+</span>
+            <span class="preuve__val">600</span><span class="preuve__plus">+</span>
           </p>
-          <p class="preuve__texte">Un seul contact du devis à la remise des clés. Nous coordonnons tous les corps de métier, vous ne gérez rien.</p>
+          <p class="preuve__texte">Appartements, maisons et immeubles, pour des propriétaires privés comme pour les régies de la place lausannoise.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Ans de savoir-faire</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="40">40</span>
+            <span class="preuve__val">40</span>
           </p>
-          <p class="preuve__texte">Planning de chantier daté, transmis avant le démarrage et tenu semaine après semaine. Aucun chantier laissé ouvert.</p>
+          <p class="preuve__texte">Un métier transmis depuis plus de quarante ans, repris en <span class="nb">2019</span> sous le nom DSG Rénovation.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Professionnels salariés</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="11">11</span>
+            <span class="preuve__val">11</span>
           </p>
           <p class="preuve__texte">Des professionnels salariés, pas de sous-traitance en cascade : les mêmes visages du premier au dernier jour.</p>
         </li>
         <li class="preuve revele">
           <span class="preuve__onglet etiquette">Partenaires de la région</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="35">35</span><span class="preuve__plus">+</span>
+            <span class="preuve__val">35</span><span class="preuve__plus">+</span>
           </p>
-          <p class="preuve__texte">Réception de chantier contradictoire, reprise des réserves sous <span class="nb">10</span> jours et nettoyage complet inclus.</p>
+          <p class="preuve__texte">Des artisans que nous suivons depuis des années. Jamais d'entreprise inconnue découverte sur place.</p>
         </li>
       </ul>
       </div>
@@ -268,11 +272,15 @@
 
   <section class="section" aria-labelledby="tMetier">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Notre métier</span>
-        <span class="intercalaire__cote">Rénovation, et rien d'autre</span>
-        <h2 class="h2" data-lignes>Le bâti existant,<br>pas le neuf</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Notre métier</p>
+          <p class="intercalaire__cote">Rénovation, et rien d'autre</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tMetier" class="h2" data-lignes>Le bâti existant,<br>pas le neuf</h2>
+          
+        </div>
       </div>
       <div class="service__texte revele">
         <p>Nous ne faisons que de la rénovation. Pas de construction neuve, pas de promotion immobilière. Un logement occupé, un immeuble habité, des voisins à ménager et un calendrier de relocation à tenir : c'est notre terrain, et c'est un métier différent de celui du gros œuvre.</p><p>Concrètement, cela veut dire que nous savons travailler dans trente mètres carrés avec un ascenseur étroit, que nous protégeons une cage d'escalier avant d'y monter le premier sac, et que nous rangeons le chantier chaque soir parce que quelqu'un y vit ou y passe.</p>
@@ -280,16 +288,20 @@
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tDeroule">
+  <section class="section" id="deroule" aria-labelledby="tDeroule">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 03</b>Déroulé</span>
-        <span class="intercalaire__cote">Du premier appel aux clés</span>
-        <h2 class="h2" data-lignes>Comment se déroule<br>un chantier</h2>
-        <p class="chapo intercalaire__chapo">Six temps, dans cet ordre, sur tous nos chantiers — qu'il s'agisse d'un seul lot ou d'une rénovation complète.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Déroulé</p>
+          <p class="intercalaire__cote">Du premier appel aux clés</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tDeroule" class="h2" data-lignes>Comment se déroule<br>un chantier</h2>
+          <p class="chapo intercalaire__chapo">Six temps, dans cet ordre, sur tous nos chantiers — qu'il s'agisse d'un seul lot ou d'une rénovation complète.</p>
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">01</span>
             <span class="repli__titre">Le premier appel</span>
@@ -298,7 +310,7 @@
           </summary>
           <div class="repli__corps"><p>Cinq à dix minutes. Nous cherchons à savoir si le projet entre dans notre métier et dans notre zone. Si ce n'est pas le cas, nous le disons tout de suite plutôt que de faire durer.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">02</span>
             <span class="repli__titre">La visite et le relevé</span>
@@ -307,7 +319,7 @@
           </summary>
           <div class="repli__corps"><p>Nous venons sur place, mesurons, sondons les supports et notons les contraintes : accès, ascenseur, règlement de l'immeuble, horaires. C'est là que se jouent les trois quarts de la justesse du devis.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">03</span>
             <span class="repli__titre">Le devis détaillé</span>
@@ -316,7 +328,7 @@
           </summary>
           <div class="repli__corps"><p>Poste par poste, avec les quantités, les finitions retenues et ce qui est compris — protections, évacuation, nettoyage. Rien n'est renvoyé à un « selon besoin ».</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">04</span>
             <span class="repli__titre">Le planning daté</span>
@@ -325,7 +337,7 @@
           </summary>
           <div class="repli__corps"><p>Avant le premier jour, vous recevez le calendrier semaine par semaine de chaque corps de métier, avec la date de livraison.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">05</span>
             <span class="repli__titre">Le chantier</span>
@@ -334,7 +346,7 @@
           </summary>
           <div class="repli__corps"><p>Un responsable unique pilote les lots et vous rend compte. Les imprévus sont signalés et chiffrés avant d'être exécutés, jamais après.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">06</span>
             <span class="repli__titre">La réception</span>
@@ -349,14 +361,18 @@
 
   <section class="section" aria-labelledby="tLimites">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 04</b>Nos limites</span>
-        <span class="intercalaire__cote">Dire non fait partie du métier</span>
-        <h2 class="h2" data-lignes>Ce que nous<br>ne faisons pas</h2>
-        <p class="chapo intercalaire__chapo">Une entreprise qui accepte tout finit par mal faire quelque chose. Voici où nous nous arrêtons.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Nos limites</p>
+          <p class="intercalaire__cote">Dire non fait partie du métier</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tLimites" class="h2" data-lignes>Ce que nous<br>ne faisons pas</h2>
+          <p class="chapo intercalaire__chapo">Une entreprise qui accepte tout finit par mal faire quelque chose. Voici où nous nous arrêtons.</p>
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Nous ne faisons pas de construction neuve</span>
@@ -365,7 +381,7 @@
           </summary>
           <div class="repli__corps"><p>Ni de promotion. Notre métier est le bâti existant, avec ses surprises et ses voisins.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Nous ne touchons pas à la structure</span>
@@ -374,7 +390,7 @@
           </summary>
           <div class="repli__corps"><p>Ouvrir un mur porteur relève de l'ingénieur civil et d'une autorisation. Nous vous le disons à la visite et nous vous orientons.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Nous ne sortons pas de l'arc lémanique</span>
@@ -383,7 +399,7 @@
           </summary>
           <div class="repli__corps"><p>Un chantier à deux heures de route, c'est une équipe qui arrive en retard et qui ne repasse pas pour une reprise.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Nous ne sous-traitons pas en cascade</span>
@@ -398,14 +414,18 @@
 
   <section class="section" aria-labelledby="tEngagements">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 05</b>Engagements</span>
-        <span class="intercalaire__cote">Ce sur quoi nous nous tenons</span>
-        <h2 class="h2" data-lignes>Quatre engagements,<br>tenus par écrit</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Engagements</p>
+          <p class="intercalaire__cote">Ce sur quoi nous nous tenons</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tEngagements" class="h2" data-lignes>Quatre engagements,<br>tenus par écrit</h2>
+          
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Un seul interlocuteur</span>
@@ -414,7 +434,7 @@
           </summary>
           <div class="repli__corps"><p>Un responsable de chantier unique pilote tous les lots, du devis à la remise des clés. Vous ne coordonnez personne.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Un planning daté</span>
@@ -423,7 +443,7 @@
           </summary>
           <div class="repli__corps"><p>Le calendrier des corps de métier vous est transmis avant le démarrage, semaine par semaine, et tenu.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Des salariés, pas une cascade</span>
@@ -432,7 +452,7 @@
           </summary>
           <div class="repli__corps"><p>Onze professionnels de l'entreprise sur les chantiers. Les mêmes visages du premier au dernier jour.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Une réception en règle</span>
@@ -445,13 +465,17 @@
     </div>
   </section>
 
-  <section class="partenaires" aria-labelledby="tPartenaires">
+  <section class="partenaires" id="references" aria-labelledby="tPartenaires">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 06</b>Références</span>
-        <span class="intercalaire__cote">Régies, propriétaires et architectes</span>
-        <h2 class="h2" data-lignes>Ils nous confient<br>leurs biens</h2>
-        <p class="chapo intercalaire__chapo">Une partie de notre activité vient de clients qui nous rappellent. C'est la seule référence qui vaille dans un métier où tout se sait vite.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Références</p>
+          <p class="intercalaire__cote">Régies, propriétaires et architectes</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tPartenaires" class="h2" data-lignes>Ils nous confient<br>leurs biens</h2>
+          <p class="chapo intercalaire__chapo">Une partie de notre activité vient de clients qui nous rappellent. C'est la seule référence qui vaille dans un métier où tout se sait vite.</p>
+        </div>
       </div>
       <div class="service__texte revele" style="margin-bottom:var(--sp-7)">
         <p>Les grandes régies de la place lausannoise nous confient des
@@ -472,67 +496,85 @@
         <li><img src="https://static.wixstatic.com/media/2c1464_1557bff3aeef42d1b8c7c3430f45d23f~mv2.png" alt="Privera" width="1200" height="230" loading="lazy" decoding="async"></li>
         <li><img src="https://static.wixstatic.com/media/2c1464_79208b8bb756457aae973df6e4252ab1~mv2.png" alt="de Rham" width="504" height="108" loading="lazy" decoding="async"></li>
         <li><img src="https://static.wixstatic.com/media/2c1464_816153da3c114f20a00fba61b95b0415~mv2.png" alt="Galland &amp; Cie, régie immobilière" width="1080" height="303" loading="lazy" decoding="async"></li>
-        <li><img src="https://static.wixstatic.com/media/2c1464_e0e4de49acaa4d66adf588419e89c526~mv2.png" alt="Groupe Bernard Nicod" width="432" height="432" loading="lazy" decoding="async"></li>
+        <li class="partenaires__carre"><img src="https://static.wixstatic.com/media/2c1464_e0e4de49acaa4d66adf588419e89c526~mv2.png" alt="Groupe Bernard Nicod" width="432" height="432" loading="lazy" decoding="async"></li>
       </ul>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tTemoins">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 07</b>Retours</span>
-        <span class="intercalaire__cote">Ce que disent nos clients</span>
-        <h2 class="h2" data-lignes>Trois chantiers,<br>trois avis</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Retours</p>
+          <p class="intercalaire__cote">Ce que disent nos clients</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tTemoins" class="h2" data-lignes>Trois chantiers,<br>trois avis</h2>
+          
+        </div>
       </div>
-      <div class="temoins" style="margin-top:var(--sp-8)">
+      <div class="temoins">
         <figure class="temoin revele">
-          <blockquote>« Chantier tenu au jour près. Nous avons récupéré l'appartement nettoyé, sans une seule reprise à demander. »</blockquote>
           <figcaption>
             <span class="temoin__qui">Sandra M.</span>
             <span class="temoin__quoi">Appartement 4,5 p. · Lausanne · 2025</span>
           </figcaption>
+          <div class="temoin__corps">
+            <blockquote><p>«&nbsp;Chantier tenu au jour près. Nous avons récupéré l'appartement nettoyé, sans une seule reprise à demander.&nbsp;»</p></blockquote>
+            <p class="temoin__statut a-valider">Témoignage provisoire, à remplacer par un avis client réel</p>
+          </div>
         </figure>
         <figure class="temoin revele">
-          <blockquote>« Un seul interlocuteur pour la peinture, les sols et les plafonds : c'est ce qui nous a décidés, et ça a tenu du début à la fin. »</blockquote>
           <figcaption>
             <span class="temoin__qui">Régie immobilière · Genève</span>
             <span class="temoin__quoi">Six logements · 2024</span>
           </figcaption>
+          <div class="temoin__corps">
+            <blockquote><p>«&nbsp;Un seul interlocuteur pour la peinture, les sols et les plafonds : c'est ce qui nous a décidés, et ça a tenu du début à la fin.&nbsp;»</p></blockquote>
+            <p class="temoin__statut a-valider">Témoignage provisoire, à remplacer par un avis client réel</p>
+          </div>
         </figure>
         <figure class="temoin revele">
-          <blockquote>« Devis clair, pas de supplément en cours de route. L'équipe est ponctuelle et laisse le chantier propre chaque soir. »</blockquote>
           <figcaption>
             <span class="temoin__qui">Julien D.</span>
             <span class="temoin__quoi">Maison individuelle · Pully · 2025</span>
           </figcaption>
+          <div class="temoin__corps">
+            <blockquote><p>«&nbsp;Devis clair, pas de supplément en cours de route. L'équipe est ponctuelle et laisse le chantier propre chaque soir.&nbsp;»</p></blockquote>
+            <p class="temoin__statut a-valider">Témoignage provisoire, à remplacer par un avis client réel</p>
+          </div>
         </figure>
       </div>
+      <!-- À FOURNIR PAR LE CLIENT : lien vers la fiche Google Business Profile et sa note moyenne réelle, à afficher ici sous la forme « Lire nos avis Google ». Ne jamais afficher de note ni d'étoiles tant qu'elles ne sont pas vérifiables. -->
     </div>
   </section>
 
   <section class="section" aria-labelledby="tModes">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 08</b>Collaborations</span>
-        <span class="intercalaire__cote">Selon qui commande</span>
-        <h2 class="h2" data-lignes>Trois façons<br>de travailler avec nous</h2>
-        <p class="chapo intercalaire__chapo">Une régie, un architecte et un propriétaire n'attendent pas la même chose. Nous n'organisons donc pas le chantier de la même manière.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Collaborations</p>
+          <p class="intercalaire__cote">Selon qui commande</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tModes" class="h2" data-lignes>Trois façons<br>de travailler avec nous</h2>
+          <p class="chapo intercalaire__chapo">Une régie, un architecte et un propriétaire n'attendent pas la même chose. Nous n'organisons donc pas le chantier de la même manière.</p>
+        </div>
       </div>
       <ul class="cartes">
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Remises en état et site occupé</p>
           <h3 class="h3 carte__titre">Avec une régie</h3>
           <p class="carte__texte">Nous établissons des devis par logement, avec une date de libération ferme. Sur un immeuble, nous intervenons appartement par appartement au fil des relocations, sans bloquer les surfaces encore louées. Le nettoyage est compris : le logement est reloueable le jour de la réception.</p>
           <ul class="lots carte__lots"><li>Devis par logement</li><li>Date de libération ferme</li><li>Chantier en site occupé</li></ul>
         </li>
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Exécution sur descriptif</p>
           <h3 class="h3 carte__titre">Avec un architecte</h3>
           <p class="carte__texte">Nous répondons sur descriptif et nous tenons le planning des lots qui nous sont confiés. Les réunions de chantier sont suivies par le même responsable du début à la fin, ce qui évite de réexpliquer le dossier à chaque passage.</p>
           <ul class="lots carte__lots"><li>Réponse sur descriptif</li><li>Interlocuteur unique</li><li>Suivi de réunions</li></ul>
         </li>
-        <li class="carte revele trace">
+        <li class="carte revele">
           <p class="etiquette carte__cote">Du premier appel aux clés</p>
           <h3 class="h3 carte__titre">Avec un propriétaire</h3>
           <p class="carte__texte">C'est le cas le plus fréquent, et celui qui demande le plus de pédagogie. Nous expliquons ce que chaque poste recouvre, nous montrons les échantillons sur place et nous validons les teintes avec vous avant d'appliquer quoi que ce soit.</p>
@@ -544,11 +586,15 @@
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 09</b>Prestations</span>
-        <span class="intercalaire__cote">Cinq pages, neuf métiers</span>
-        <h2 class="h2" data-lignes>Ce que nous<br>savons faire</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Prestations</p>
+          <p class="intercalaire__cote">Cinq pages, neuf métiers</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tLots" class="h2" data-lignes>Ce que nous<br>savons faire</h2>
+          
+        </div>
       </div>
       <ul class="metiers revele" data-suivi-vignette>
         <li>
@@ -600,16 +646,16 @@
     </div>
   </section>
 
-  <section class="section rappel sur-sombre" aria-labelledby="rappelTitre">
+  <section class="section rappel" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
-      <div>
-        <p class="etiquette">Prochaine étape</p>
-        <h2 class="h2 rappel__titre" id="rappelTitre">Parlons de votre projet</h2>
-        <p class="chapo" style="margin-top:var(--sp-5)">Un appel suffit pour savoir si nous sommes la bonne entreprise pour votre chantier. Nous le disons franchement quand ce n'est pas le cas.</p>
-      </div>
-      <div class="rappel__actions">
-        <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-        <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
+      <div class="rappel__corps">
+        <h2 class="rappel__titre" id="rappelTitre">Parlons de votre projet</h2>
+        <p class="chapo">Un appel suffit pour savoir si nous sommes la bonne entreprise pour votre chantier. Nous le disons franchement quand ce n'est pas le cas.</p>
+        <div class="rappel__actions">
+          <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -617,7 +663,7 @@
 
 <footer class="pied sur-sombre">
   <div class="zone">
-    <div class="pied__grille pied__grille--large">
+    <div class="pied__grille">
       <div class="pied__marque">
         <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38" loading="lazy" decoding="async">
         <address class="donnee">
@@ -625,6 +671,9 @@
           <a href="tel:+41218470202">+41 21 847 02 02</a>
           <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
         </address>
+        <!-- CONTENU À VALIDER : horaires à confirmer avec le client -->
+        <p class="donnee pied__horaires">Lundi – vendredi, 08:00 – 17:00</p>
+        <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
       <nav class="pied__col" aria-labelledby="piedNav">
@@ -672,7 +721,7 @@
 
 <div class="barre-mobile" id="barreMobile" data-visible="false">
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
-  <a class="btn btn--plein" href="devis.html">Devis gratuit</a>
+  <a class="btn btn--plein" href="devis.html">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/nav.js" defer></script>
 <script src="assets/js/motion.js" defer></script>

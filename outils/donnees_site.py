@@ -48,19 +48,29 @@ ANNEXES = [
     {"nom": "Confidentialité", "url": "confidentialite.html"},
 ]
 
-# Chiffres du relevé, avec la preuve que chacun porte. Repris tels quels
-# du dossier d'origine : intitulé de languette, valeur, signe, texte.
+# Horaires du bureau. CONTENU À VALIDER : à confirmer avec le client.
+HORAIRES = "Lundi – vendredi, 08:00 – 17:00"
+
+# Itinéraire vers l'atelier : un lien de recherche, qui ne dépend d'aucune
+# fiche d'établissement. À remplacer par le lien de la fiche Google
+# Business Profile dès qu'elle existe (À FOURNIR PAR LE CLIENT).
+ITINERAIRE = ("https://www.google.com/maps/search/?api=1&amp;query="
+              "Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne")
+
+# Chiffres du relevé, avec la preuve que chacun porte. Chaque texte
+# explique le chiffre qu'il accompagne : un chiffre sans explication est
+# une vitrine, un chiffre expliqué est une pièce justificative.
 RELEVE = [
     ("Chantiers livrés", "600", "+",
-     "Un seul contact du devis à la remise des clés. Nous coordonnons tous "
-     "les corps de métier, vous ne gérez rien."),
+     "Appartements, maisons et immeubles, pour des propriétaires privés "
+     "comme pour les régies de la place lausannoise."),
     ("Ans de savoir-faire", "40", "",
-     "Planning de chantier daté, transmis avant le démarrage et tenu semaine "
-     "après semaine. Aucun chantier laissé ouvert."),
+     "Un métier transmis depuis plus de quarante ans, repris en "
+     "<span class=\"nb\">2019</span> sous le nom DSG Rénovation."),
     ("Professionnels salariés", "11", "",
      "Des professionnels salariés, pas de sous-traitance en cascade : les "
      "mêmes visages du premier au dernier jour."),
     ("Partenaires de la région", "35", "+",
-     "Réception de chantier contradictoire, reprise des réserves sous "
-     "<span class=\"nb\">10</span> jours et nettoyage complet inclus."),
+     "Des artisans que nous suivons depuis des années. Jamais d'entreprise "
+     "inconnue découverte sur place."),
 ]

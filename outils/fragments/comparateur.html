@@ -1,4 +1,4 @@
-<div class="comparateur comparateur--couverture" data-comparateur data-curseur="Glisser">
+<div class="comparateur" data-comparateur data-curseur="Glisser">
         <div class="comparateur__vue comparateur__vue--apres">
           <picture>
             <source srcset="assets/images/sejour-apres.avif" type="image/avif">
@@ -16,15 +16,16 @@
           </picture>
         </div>
 
-        <span class="comparateur__etat comparateur__etat--avant">Avant</span>
         <span class="comparateur__etat comparateur__etat--apres">Après</span>
+        <span class="comparateur__etat comparateur__etat--avant">Avant</span>
 
-        <div class="comparateur__poignee" role="slider" tabindex="0"
-             aria-label="Comparer l'état avant et après travaux"
-             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
-          <svg class="comparateur__glyphe" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <path d="M6 2 1.5 6 6 10"/><path d="M20 2 24.5 6 20 10"/>
-          </svg>
+        <div class="comparateur__rail">
+          <div class="comparateur__poignee" role="slider" tabindex="0"
+               aria-label="Comparer l'état avant et après travaux"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal">
+            <svg class="comparateur__glyphe" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M6 2 1.5 6 6 10"/><path d="M20 2 24.5 6 20 10"/>
+            </svg>
+          </div>
         </div>
       </div>
-<p class="comparaison__aide"><i aria-hidden="true"></i> Glissez la poignée · ou utilisez les flèches du clavier</p>

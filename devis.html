@@ -4,23 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Devis rénovation gratuit à Lausanne — DSG Rénovation</title>
-<meta name="description" content="Devis de rénovation gratuit et détaillé sous 72 heures à Lausanne. Ce que contient un devis, comment en comparer deux, et les réponses aux vingt questions qu'on nous pose avant de signer.">
-<meta name="theme-color" content="#F7F7F5">
+<meta name="description" content="Devis de rénovation gratuit et détaillé à Lausanne, 72 h après la visite. Ce que contient un devis, comment en comparer deux, et les réponses aux vingt questions qu'on nous pose avant de signer.">
+<meta name="theme-color" content="#EEEBE5">
 <link rel="canonical" href="https://www.dsg-renov.ch/devis.html">
+<link rel="icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" type="image/png">
+<link rel="apple-touch-icon" href="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">
 <meta property="og:site_name" content="DSG Rénovation">
 <meta property="og:title" content="Devis rénovation gratuit à Lausanne — DSG Rénovation">
-<meta property="og:description" content="Devis de rénovation gratuit et détaillé sous 72 heures à Lausanne. Ce que contient un devis, comment en comparer deux, et les réponses aux vingt questions qu'on nous pose avant de signer.">
+<meta property="og:description" content="Devis de rénovation gratuit et détaillé à Lausanne, 72 h après la visite. Ce que contient un devis, comment en comparer deux, et les réponses aux vingt questions qu'on nous pose avant de signer.">
 <meta property="og:url" content="https://www.dsg-renov.ch/devis.html">
-<meta property="og:image" content="<a class="btn btn--plein" href="#bordereau" data-magnetique>Remplir le bordereau<span class="fleche" aria-hidden="true"></span></a>">
+<meta property="og:image" content="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400&amp;display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/00-jetons.css">
 <link rel="stylesheet" href="assets/css/01-socle.css">
@@ -40,6 +42,8 @@
 <link rel="stylesheet" href="assets/css/15-pages.css">
 <link rel="stylesheet" href="assets/css/16-composants.css">
 <link rel="stylesheet" href="assets/css/17-repli.css">
+<link rel="stylesheet" href="assets/css/18-confiance.css">
+<link rel="stylesheet" href="assets/css/19-impression.css">
 
 <!-- Marque la présence du JavaScript avant le premier rendu : évite tout clignotement. -->
 <script>document.documentElement.className += " js";</script>
@@ -321,7 +325,7 @@
 <body>
 <a class="saut" href="#contenu">Aller au contenu principal</a>
 
-<header class="entete entete--posee" id="entete">
+<header class="entete" id="entete">
   <div class="zone entete__inner">
     <a class="marque" href="index.html" aria-label="DSG Rénovation, retour à l'accueil">
       <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38">
@@ -335,54 +339,50 @@
 
     <div class="entete__actions">
       <a class="entete__tel" href="tel:+41218470202">+41 21 847 02 02</a>
-      <a class="btn btn--plein btn--compact" href="devis.html">Devis gratuit</a>
+      <a class="btn btn--plein btn--compact" href="#bordereau">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
-      <span></span>
-    </button>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
 
-<div class="menu sur-sombre" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-  <div class="zone menu__haut" style="padding-inline:0">
-    <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28">
-    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">&times;</button>
+<div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="menu__haut">
+    <span class="menu__marque"><img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="54" height="28"></span>
+    <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li><a href="services.html"><span class="n">01</span>Prestations</a></li>
-    <li><a href="realisations.html"><span class="n">02</span>Réalisations</a></li>
-    <li><a href="entreprise.html"><span class="n">03</span>L'entreprise</a></li>
-    <li><a href="devis.html"><span class="n">04</span>Devis gratuit</a></li>
+    <li><a href="services.html">Prestations</a></li>
+    <li><a href="realisations.html">Réalisations</a></li>
+    <li><a href="entreprise.html">L'entreprise</a></li>
+    <li><a href="devis.html">Devis gratuit</a></li>
   </ul>
   <div class="menu__pied">
     <a class="donnee" href="tel:+41218470202">+41 21 847 02 02</a>
     <a class="donnee" href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
-    <a class="btn btn--sombre" href="devis.html">Demander un devis gratuit</a>
+    <a class="btn btn--plein" href="devis.html">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 
 <main id="contenu">
 
-  <header class="piece piece--titre">
+  <header class="piece">
     <div class="zone">
-      <div class="piece__entete trace--bas trace revele">
-        <nav class="piece__chemin donnee" aria-label="Fil d'Ariane">
+      <div class="piece__entete">
+        <div class="piece__marge">
+          <nav class="piece__chemin" aria-label="Fil d'Ariane">
           <a href="index.html">Accueil</a>
           <span aria-hidden="true">/</span>
           <span>Devis gratuit</span>
-        </nav>
-
-        <p class="etiquette">Devis gratuit</p>
-        <h1 class="piece__titre" data-lignes>
-          <span class="ligne"><span>Ouvrez</span></span>
-          <span class="ligne"><span>votre dossier</span></span>
-        </h1>
-        <p class="chapo piece__chapo">Visite, relevé et devis détaillé poste par poste. Gratuit, sous 72 heures, sans engagement.</p>
-
-        <div class="couverture__actions">
-          <a class="btn btn--plein" href="devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02</a>
+          </nav>
+        </div>
+        <div class="piece__tete">
+          <h1 class="piece__titre">Ouvrez votre dossier</h1>
+          <p class="chapo piece__chapo">Visite, relevé et devis détaillé poste par poste. Gratuit, remis 72 heures après la visite, sans engagement.</p>
+          <div class="couverture__actions">
+          <a class="btn btn--plein" href="#bordereau" data-magnetique>Remplir le bordereau<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -390,100 +390,151 @@
 
   <section class="section" aria-labelledby="tBordereau">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>Demande</span>
-        <span class="intercalaire__cote">Réponse sous 72 heures ouvrables</span>
-        <h2 class="h2" data-lignes>Le bordereau<br>de demande</h2>
-        <p class="chapo intercalaire__chapo">Décrivez votre projet en une minute. Nous nous déplaçons, mesurons et vous remettons un devis détaillé et gratuit.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Demande</p>
+          <p class="intercalaire__cote">Visite gratuite, sans engagement</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tBordereau" class="h2" data-lignes>Le bordereau<br>de demande</h2>
+          <p class="chapo intercalaire__chapo">Décrivez votre projet en une minute. Nous nous déplaçons, mesurons et vous remettons un devis détaillé et gratuit.</p>
+        </div>
       </div>
 
-      <div class="grille12 demande__grille">
+      <div class="grille12 demande__grille pleine-largeur">
         <div class="demande__form revele">
-          <form class="formulaire" id="bordereau" novalidate
+          <!-- À FOURNIR : adresse du service d'envoi (Formspree, Web3Forms,
+               formulaire Infomaniak…) dans data-envoi. Tant qu'elle est
+               vide, la demande part par le logiciel de messagerie du
+               visiteur, ce qui échoue chez ceux qui n'en ont pas configuré. -->
+          <form class="formulaire" id="bordereau" novalidate data-envoi=""
                 action="mailto:contact@dsg-renov.ch" method="post" enctype="text/plain">
-            <div class="formulaire__entete trace trace--bas">
+            <div class="formulaire__entete">
               <p class="etiquette"><b>Bordereau</b> — Demande de devis</p>
-              <p class="etiquette">Champs marqués <span style="color:var(--c-signal)">*</span> obligatoires</p>
+              <p class="etiquette">Champs marqués <span class="formulaire__requis" aria-hidden="true">*</span> obligatoires</p>
             </div>
 
-            <div class="champ">
-              <label class="champ__label" for="nom">Nom et prénom <span>*</span></label>
-              <input type="text" id="nom" name="nom" autocomplete="name" required placeholder="Marie Dupont">
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
+            <fieldset class="formulaire__partie">
+              <legend class="formulaire__legende"><span class="formulaire__n">1</span>Votre projet</legend>
 
-            <div class="champ">
-              <label class="champ__label" for="email">Courriel <span>*</span></label>
-              <input type="email" id="email" name="email" autocomplete="email" required placeholder="marie.dupont@exemple.ch">
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ">
-              <label class="champ__label" for="telephone">Téléphone <span>*</span></label>
-              <input type="tel" id="telephone" name="telephone" autocomplete="tel" required placeholder="+41 79 000 00 00">
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ">
-              <label class="champ__label" for="type">Type de bien <span>*</span></label>
-              <select id="type" name="type" required>
-                <option value="">Choisir…</option>
-                <option>Appartement</option>
-                <option>Maison / villa</option>
-                <option>Immeuble / régie</option>
-                <option>Local commercial</option>
-              </select>
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ">
-              <label class="champ__label" for="surface">Surface approximative</label>
-              <input type="text" id="surface" name="surface" inputmode="numeric" placeholder="120 m²">
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ">
-              <label class="champ__label" for="lieu">Commune du bien</label>
-              <input type="text" id="lieu" name="lieu" autocomplete="address-level2" placeholder="Lausanne">
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ formulaire__large">
-              <label class="champ__label" for="delai">Démarrage souhaité</label>
-              <select id="delai" name="delai">
-                <option value="">Choisir…</option>
-                <option>Dès que possible</option>
-                <option>Dans 1 à 3 mois</option>
-                <option>Dans 3 à 6 mois</option>
-                <option>Pas encore décidé</option>
-              </select>
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ formulaire__large">
-              <label class="champ__label" for="message">Décrivez votre projet <span>*</span></label>
-              <textarea id="message" name="message" required placeholder="Pièces concernées, travaux envisagés, contraintes particulières…"></textarea>
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
-
-            <div class="champ formulaire__large">
-              <!-- Le renvoi vit hors du label : à l'intérieur, un clic sur le
-                   lien cocherait aussi la case. -->
-              <div class="consentement">
-                <input type="checkbox" id="consentement" name="consentement" required>
-                <label for="consentement">J'accepte que DSG Rénovation utilise ces informations pour me recontacter au sujet de ma demande. Aucune donnée n'est transmise à des tiers.</label>
+              <div class="champ formulaire__large">
+                <p class="champ__label" id="travauxLabel">Travaux concernés</p>
+                <div class="pastilles" role="group" aria-labelledby="travauxLabel">
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Rénovation complète"><span>Rénovation complète</span></label>
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Peinture et revêtements"><span>Peinture &amp; revêtements</span></label>
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Plâtrerie, cloisons, faux plafonds"><span>Plâtrerie &amp; cloisons</span></label>
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Carrelage et sols"><span>Carrelage &amp; sols</span></label>
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Nettoyage de fin de chantier"><span>Nettoyage</span></label>
+                  <label class="pastille"><input type="checkbox" name="travaux" value="Pas encore défini"><span>Je ne sais pas encore</span></label>
+                </div>
               </div>
-              <p class="consentement__renvoi"><a href="confidentialite.html">Lire la politique de confidentialité</a></p>
-              <p class="champ__erreur" aria-live="polite"></p>
-            </div>
+
+              <div class="champ">
+                <label class="champ__label" for="type">Type de bien <span aria-hidden="true">*</span></label>
+                <select id="type" name="type" required>
+                  <option value="">Choisir…</option>
+                  <option>Appartement</option>
+                  <option>Maison / villa</option>
+                  <option>Immeuble / régie</option>
+                  <option>Local commercial</option>
+                </select>
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="lieu">Commune du bien</label>
+                <input type="text" id="lieu" name="lieu" autocomplete="address-level2" placeholder="Lausanne">
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="surface">Surface approximative</label>
+                <input type="text" id="surface" name="surface" inputmode="numeric" placeholder="120 m²">
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="delai">Démarrage souhaité</label>
+                <select id="delai" name="delai">
+                  <option value="">Choisir…</option>
+                  <option>Dès que possible</option>
+                  <option>Dans 1 à 3 mois</option>
+                  <option>Dans 3 à 6 mois</option>
+                  <option>Pas encore décidé</option>
+                </select>
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ formulaire__large">
+                <label class="champ__label" for="message">Décrivez votre projet <span aria-hidden="true">*</span></label>
+                <textarea id="message" name="message" required aria-describedby="messageAide" placeholder="Pièces concernées, travaux envisagés, contraintes particulières…"></textarea>
+                <p class="champ__aide" id="messageAide">Quelques lignes suffisent : nous préciserons tout à la visite.</p>
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="formulaire__partie">
+              <legend class="formulaire__legende"><span class="formulaire__n">2</span>Vos coordonnées</legend>
+
+              <div class="champ formulaire__large">
+                <label class="champ__label" for="nom">Nom et prénom <span aria-hidden="true">*</span></label>
+                <input type="text" id="nom" name="nom" autocomplete="name" required placeholder="Marie Dupont">
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="telephone">Téléphone <span aria-hidden="true">*</span></label>
+                <input type="tel" id="telephone" name="telephone" autocomplete="tel" required placeholder="+41 79 000 00 00">
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="email">Courriel <span aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" required placeholder="marie.dupont@exemple.ch">
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+
+              <!-- Piège à robots : invisible pour un visiteur, rempli par les
+                   programmes qui remplissent tout. Une demande qui le porte
+                   est ignorée sans message. -->
+              <div class="formulaire__piege" aria-hidden="true">
+                <label for="siteWeb">Ne pas remplir</label>
+                <input type="text" id="siteWeb" name="site_web" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="champ formulaire__large">
+                <!-- Le renvoi vit hors du label : à l'intérieur, un clic sur le
+                     lien cocherait aussi la case. -->
+                <div class="consentement">
+                  <input type="checkbox" id="consentement" name="consentement" required>
+                  <label for="consentement">J'accepte que DSG Rénovation utilise ces informations pour me recontacter au sujet de ma demande. Aucune donnée n'est transmise à des tiers.</label>
+                </div>
+                <p class="consentement__renvoi"><a href="confidentialite.html">Lire la politique de confidentialité</a></p>
+                <p class="champ__erreur" aria-live="polite"></p>
+              </div>
+            </fieldset>
 
             <div class="formulaire__large">
-              <button class="btn btn--plein" type="submit" style="width:100%" data-magnetique>Envoyer ma demande<span class="fleche" aria-hidden="true"></span></button>
-              <p class="message-formulaire" id="bordereauRetour" role="status" tabindex="-1" style="margin-top:var(--sp-4)"></p>
+              <button class="btn btn--plein formulaire__envoi" type="submit" data-magnetique>Envoyer ma demande<span class="fleche" aria-hidden="true"></span></button>
+              <ul class="formulaire__garanties">
+                <li>Gratuit et sans engagement</li>
+                <li>Visite sous une semaine</li>
+                <li>Devis 72 h après la visite</li>
+              </ul>
+              <p class="message-formulaire" id="bordereauRetour" role="status" tabindex="-1"></p>
             </div>
           </form>
         </div>
-        <aside class="demande__contact coordonnees revele trace" aria-label="Coordonnées de DSG Rénovation">
+
+        <aside class="demande__contact coordonnees revele" aria-label="Coordonnées de DSG Rénovation">
+          <div class="coordonnees__bloc">
+            <h3>Après l'envoi</h3>
+            <ol class="suite-demande">
+              <li><span><b>Nous vous rappelons</b> pour un premier échange de quelques minutes.</span></li>
+              <li><span><b>Nous venons mesurer</b>, sous une semaine. La visite est gratuite.</span></li>
+              <li><span><b>Vous recevez le devis</b>, poste par poste, 72 h après la visite.</span></li>
+            </ol>
+          </div>
           <div class="coordonnees__bloc">
             <h3>Nous joindre directement</h3>
             <address class="donnee" style="margin-top:var(--sp-3)">
@@ -515,14 +566,18 @@
 
   <section class="section" aria-labelledby="tContient">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Le devis</span>
-        <span class="intercalaire__cote">Ce qui doit y figurer</span>
-        <h2 class="h2" data-lignes>Ce que contient<br>notre devis</h2>
-        <p class="chapo intercalaire__chapo">Un devis de rénovation se lit poste par poste. Voici ce que vous trouverez dans le nôtre, et ce qu'il faut chercher dans n'importe quel autre.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Le devis</p>
+          <p class="intercalaire__cote">Ce qui doit y figurer</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tContient" class="h2" data-lignes>Ce que contient<br>notre devis</h2>
+          <p class="chapo intercalaire__chapo">Un devis de rénovation se lit poste par poste. Voici ce que vous trouverez dans le nôtre, et ce qu'il faut chercher dans n'importe quel autre.</p>
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">01</span>
             <span class="repli__titre">Le détail poste par poste</span>
@@ -531,7 +586,7 @@
           </summary>
           <div class="repli__corps"><p>Chaque lot apparaît séparément, avec ses quantités : mètres carrés de mur à reprendre, mètres carrés de sol à poser, nombre de portes à laquer. Un devis en une seule ligne « rénovation appartement » ne se vérifie pas.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">02</span>
             <span class="repli__titre">La préparation des supports</span>
@@ -540,7 +595,7 @@
           </summary>
           <div class="repli__corps"><p>Rebouchage, ponçage, ragréage, fixateur. C'est le poste le plus souvent absent des devis bon marché, et celui qui décide de la tenue du résultat.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">03</span>
             <span class="repli__titre">Les protections et l'évacuation</span>
@@ -549,7 +604,7 @@
           </summary>
           <div class="repli__corps"><p>Bâchage des sols et du mobilier, protection des parties communes, bennes et évacuation des déchets de chantier. Ces lignes ont un coût réel : quand elles manquent, elles reviennent ailleurs.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">04</span>
             <span class="repli__titre">Le nettoyage de fin de travaux</span>
@@ -558,7 +613,7 @@
           </summary>
           <div class="repli__corps"><p>Compris sur tous nos chantiers. Un devis qui l'exclut vous laisse un logement inhabitable le jour de la livraison.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">05</span>
             <span class="repli__titre">Le planning et la date de livraison</span>
@@ -567,7 +622,7 @@
           </summary>
           <div class="repli__corps"><p>Une durée en semaines et une date d'achèvement, pas une estimation verbale.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">06</span>
             <span class="repli__titre">Les conditions de paiement</span>
@@ -582,14 +637,18 @@
 
   <section class="section" aria-labelledby="tComparer">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 03</b>Comparer</span>
-        <span class="intercalaire__cote">Deux devis, deux chantiers</span>
-        <h2 class="h2" data-lignes>Comment comparer<br>deux devis</h2>
-        <p class="chapo intercalaire__chapo">Un écart de trente pour cent entre deux devis ne signifie presque jamais que l'un est trop cher. Il signifie qu'ils ne décrivent pas le même travail.</p>
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Comparer</p>
+          <p class="intercalaire__cote">Deux devis, deux chantiers</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tComparer" class="h2" data-lignes>Comment comparer<br>deux devis</h2>
+          <p class="chapo intercalaire__chapo">Un écart de trente pour cent entre deux devis ne signifie presque jamais que l'un est trop cher. Il signifie qu'ils ne décrivent pas le même travail.</p>
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">01</span>
             <span class="repli__titre">Comparez poste par poste, jamais au total.</span>
@@ -598,7 +657,7 @@
           </summary>
           <div class="repli__corps"><p>Comparez poste par poste, jamais au total. Deux devis qui diffèrent de trente pour cent ne décrivent presque jamais le même travail : l'un prépare les fonds, l'autre peint directement dessus.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">02</span>
             <span class="repli__titre">Cherchez les lignes absentes.</span>
@@ -607,7 +666,7 @@
           </summary>
           <div class="repli__corps"><p>Cherchez les lignes absentes. Préparation des supports, protections, évacuation, nettoyage final, reprise des angles et des tableaux de fenêtre : ce sont les postes que l'on retire pour afficher un prix d'appel, et qui réapparaissent en cours de chantier sous forme de suppléments.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">03</span>
             <span class="repli__titre">Vérifiez les quantités.</span>
@@ -616,7 +675,7 @@
           </summary>
           <div class="repli__corps"><p>Vérifiez les quantités. Un devis sérieux annonce des mètres carrés relevés sur place, pas une surface habitable reprise du bail : les surfaces de murs et de plafonds n'ont rien à voir avec celle du sol.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">04</span>
             <span class="repli__titre">Regardez le nombre de couches.</span>
@@ -625,7 +684,7 @@
           </summary>
           <div class="repli__corps"><p>Regardez le nombre de couches. Deux couches de finition après primaire est la règle. Une seule couche annoncée, c'est un chantier à refaire dans trois ans.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n" aria-hidden="true">05</span>
             <span class="repli__titre">Demandez qui exécute.</span>
@@ -640,11 +699,15 @@
 
   <section class="section" aria-labelledby="tPreparer">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 04</b>La visite</span>
-        <span class="intercalaire__cote">Ce qui fait gagner du temps</span>
-        <h2 class="h2" data-lignes>Ce qu'il faut<br>préparer</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">La visite</p>
+          <p class="intercalaire__cote">Ce qui fait gagner du temps</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 id="tPreparer" class="h2" data-lignes>Ce qu'il faut<br>préparer</h2>
+          
+        </div>
       </div>
       <div class="service__deux revele">
         <div class="service__texte">
@@ -654,7 +717,7 @@
           <p>Rien n'est obligatoire : venir sans rien ne nous empêchera pas
           de relever et de chiffrer.</p>
         </div>
-        <aside class="encadre trace">
+        <aside class="encadre">
           <p class="etiquette encadre__titre">À rassembler avant notre passage</p>
           <ul class="encadre__liste">
             <li><strong>Les plans, si vous les avez</strong> — Même anciens, même approximatifs. Ils font gagner du temps et évitent les mauvaises surprises sur les murs porteurs.</li>
@@ -670,14 +733,18 @@
 
   <section class="section" aria-label="Avant le devis">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 01</b>Avant le devis</span>
-        <span class="intercalaire__cote">Zone, gratuité, délais</span>
-        <h2 class="h2" data-lignes>Avant de<br>nous appeler</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Avant le devis</p>
+          <p class="intercalaire__cote">Zone, gratuité, délais</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 class="h2" data-lignes>Avant de<br>nous appeler</h2>
+          
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Intervenez-vous en dehors de Lausanne ?</span>
@@ -686,7 +753,7 @@
           </summary>
           <div class="repli__corps"><p>Oui. Nous travaillons sur tout l'arc lémanique : Lausanne et ses communes voisines — Pully, Prilly, Renens, Ecublens, Épalinges, Lutry —, ainsi que Morges, Nyon, Vevey, Montreux et Genève. Au-delà, appelez-nous : nous étudions la demande au cas par cas, en fonction de la taille du chantier.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Le devis est-il vraiment gratuit ?</span>
@@ -695,7 +762,7 @@
           </summary>
           <div class="repli__corps"><p>Oui, visite et relevé compris, sans aucun engagement. Vous recevez un devis détaillé poste par poste sous 72 heures ouvrables après le passage. Nous ne facturons pas l'étude, même si vous ne donnez pas suite.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Sous quel délai pouvez-vous démarrer ?</span>
@@ -704,7 +771,7 @@
           </summary>
           <div class="repli__corps"><p>Comptez généralement quatre à huit semaines entre la signature et le premier jour de chantier, selon la saison et la taille du lot. Les remises en état entre deux locations se calent plus vite, parce qu'elles sont courtes.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Intervenez-vous pour un seul poste, ou seulement en rénovation complète ?</span>
@@ -713,7 +780,7 @@
           </summary>
           <div class="repli__corps"><p>Les deux. Une remise en peinture seule, un sol à changer, une salle de bains à recarreler : ce sont des demandes courantes. Nous disons franchement quand un chantier est trop petit pour qu'un déplacement ait du sens.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Faut-il vider le logement avant votre visite ?</span>
@@ -728,14 +795,18 @@
 
   <section class="section" aria-label="Pendant le chantier">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 02</b>Pendant le chantier</span>
-        <span class="intercalaire__cote">Organisation, nuisances, présence</span>
-        <h2 class="h2" data-lignes>Pendant<br>les travaux</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Pendant le chantier</p>
+          <p class="intercalaire__cote">Organisation, nuisances, présence</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 class="h2" data-lignes>Pendant<br>les travaux</h2>
+          
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Puis-je rester dans le logement pendant les travaux ?</span>
@@ -744,7 +815,7 @@
           </summary>
           <div class="repli__corps"><p>Sur un lot isolé — peinture d'une pièce, changement de sol —, oui sans difficulté. Sur une rénovation complète, c'est possible en travaillant par zones, mais le chantier dure plus longtemps et coûte davantage. Libérer les lieux reste la solution la plus économique.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Qui coordonne les différents corps de métier ?</span>
@@ -753,7 +824,7 @@
           </summary>
           <div class="repli__corps"><p>Nous. Un responsable de chantier unique pilote l'ensemble des lots et reste votre seul interlocuteur, du devis à la remise des clés. Vous n'avez aucun planning à faire coïncider.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Quels sont vos horaires de chantier ?</span>
@@ -762,7 +833,7 @@
           </summary>
           <div class="repli__corps"><p>En règle générale de 8 h à 17 h, du lundi au vendredi. En immeuble, nous nous alignons sur le règlement de la copropriété, qui encadre souvent les travaux bruyants et l'usage de l'ascenseur.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Comment protégez-vous le logement et les parties communes ?</span>
@@ -771,7 +842,7 @@
           </summary>
           <div class="repli__corps"><p>Sols bâchés, mobilier restant protégé et filmé, cage d'escalier et ascenseur protégés sur le trajet emprunté. Le chantier est rangé chaque soir : c'est une règle interne, pas une faveur.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Que se passe-t-il si vous découvrez un problème imprévu ?</span>
@@ -786,14 +857,18 @@
 
   <section class="section" aria-label="Prix et paiement">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 03</b>Prix et paiement</span>
-        <span class="intercalaire__cote">Devis, avenants, échéances</span>
-        <h2 class="h2" data-lignes>Ce que ça<br>coûte</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Prix et paiement</p>
+          <p class="intercalaire__cote">Devis, avenants, échéances</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 class="h2" data-lignes>Ce que ça<br>coûte</h2>
+          
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Combien coûte une rénovation complète à Lausanne ?</span>
@@ -802,7 +877,7 @@
           </summary>
           <div class="repli__corps"><p>Le prix dépend de l'état existant bien plus que de la surface. Deux appartements de cent mètres carrés peuvent varier du simple au double selon que les sols sont récupérables ou non, que les cloisons bougent, que la salle de bains est reprise. C'est pourquoi nous ne publions pas de prix au mètre carré : il serait faux dans un cas sur deux.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Votre devis peut-il augmenter en cours de chantier ?</span>
@@ -811,7 +886,7 @@
           </summary>
           <div class="repli__corps"><p>Pas sans votre accord écrit. Le devis signé fixe les postes et les quantités. Seuls un imprévu constaté ou une modification que vous demandez donnent lieu à un avenant, chiffré et validé avant exécution.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Comment se déroulent les paiements ?</span>
@@ -820,7 +895,7 @@
           </summary>
           <div class="repli__corps"><p>Un acompte à la signature, des situations intermédiaires sur les chantiers longs, et le solde à la réception une fois les réserves levées. Les modalités exactes figurent sur le devis.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Faut-il vous fournir les matériaux ?</span>
@@ -829,7 +904,7 @@
           </summary>
           <div class="repli__corps"><p>Non, nous les fournissons et ils figurent au devis. Si vous préférez acheter vous-même un carrelage ou un parquet précis, c'est possible : nous le posons, et nous vous indiquons auparavant les quantités et les contraintes de pose.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Comment comparer votre devis à un autre ?</span>
@@ -844,14 +919,18 @@
 
   <section class="section" aria-label="Après la livraison">
     <div class="zone">
-      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>N° 04</b>Après la livraison</span>
-        <span class="intercalaire__cote">Réception, réserves, régies</span>
-        <h2 class="h2" data-lignes>Une fois<br>le chantier livré</h2>
-        
+      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">Après la livraison</p>
+          <p class="intercalaire__cote">Réception, réserves, régies</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 class="h2" data-lignes>Une fois<br>le chantier livré</h2>
+          
+        </div>
       </div>
       <div class="replis">
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Comment se passe la réception du chantier ?</span>
@@ -860,7 +939,7 @@
           </summary>
           <div class="repli__corps"><p>Par une visite contradictoire, pièce par pièce, avec vous. Ce qui ne va pas est noté sur une liste de réserves, que nous reprenons sous dix jours. Les clés sont remises une fois les réserves levées.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Le nettoyage est-il compris ?</span>
@@ -869,7 +948,7 @@
           </summary>
           <div class="repli__corps"><p>Oui, systématiquement, sur tous nos chantiers. Nous ne rendons pas un logement à nettoyer : c'est la dernière image que vous gardez du travail.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Que faire si un défaut apparaît après la livraison ?</span>
@@ -878,7 +957,7 @@
           </summary>
           <div class="repli__corps"><p>Appelez-nous. Une fissure de retrait, un joint qui se rétracte ou une porte qui travaille dans les premiers mois relèvent du comportement normal des matériaux, et nous revenons les reprendre. Les garanties légales du droit suisse s'appliquent par ailleurs.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Travaillez-vous pour les régies et les propriétaires bailleurs ?</span>
@@ -887,7 +966,7 @@
           </summary>
           <div class="repli__corps"><p>C'est une part importante de notre activité à Lausanne : remises en état entre deux locations, rénovations d'immeubles en site occupé, interventions planifiées au fil des relocations, avec une date de libération ferme.</p></div>
         </details>
-        <details class="repli revele trace">
+        <details class="repli revele">
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">Pouvez-vous intervenir sur un logement que vous n'avez pas rénové ?</span>
@@ -903,7 +982,7 @@
 
 <footer class="pied sur-sombre">
   <div class="zone">
-    <div class="pied__grille pied__grille--large">
+    <div class="pied__grille">
       <div class="pied__marque">
         <img src="https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png" alt="DSG Rénovation" width="73" height="38" loading="lazy" decoding="async">
         <address class="donnee">
@@ -911,6 +990,9 @@
           <a href="tel:+41218470202">+41 21 847 02 02</a>
           <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
         </address>
+        <!-- CONTENU À VALIDER : horaires à confirmer avec le client -->
+        <p class="donnee pied__horaires">Lundi – vendredi, 08:00 – 17:00</p>
+        <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
       <nav class="pied__col" aria-labelledby="piedNav">
@@ -958,7 +1040,7 @@
 
 <div class="barre-mobile" id="barreMobile" data-visible="false">
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
-  <a class="btn btn--plein" href="devis.html">Devis gratuit</a>
+  <a class="btn btn--plein" href="#bordereau">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/nav.js" defer></script>
 <script src="assets/js/motion.js" defer></script>

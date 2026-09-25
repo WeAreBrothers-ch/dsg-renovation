@@ -9,7 +9,7 @@ from donnees_site import RELEVE, TELEPHONE, TELEPHONE_BRUT
 
 
 def couverture(page, base, fil, action=None):
-    """En-tête de page : fil d'Ariane, étiquette, titre, chapô, actions.
+    """En-tête de page : fil d'Ariane, titre, chapô, actions.
 
     `action` remplace le bouton de devis là où il pointerait vers la page
     consultée : un bouton qui renvoie où l'on se trouve déjà est un
@@ -20,31 +20,31 @@ def couverture(page, base, fil, action=None):
          % (base, url, nom)) if url else "<span>%s</span>" % nom
         for nom, url in fil
     )
-    lignes = "\n          ".join(
-        '<span class="ligne"><span>%s</span></span>' % l for l in page["h1"]
-    )
+    # Le titre de page s'affiche d'emblée, sans révélation : c'est
+    # souvent le plus grand élément du premier écran, et le retarder
+    # retarderait d'autant le premier affichage utile (LCP).
+    titre = " ".join(page["h1"])
     principale = action or (
         '<a class="btn btn--plein" href="%sdevis.html" data-magnetique>'
         'Demander un devis gratuit<span class="fleche" aria-hidden="true">'
         "</span></a>" % base
     )
     return f"""
-  <header class="piece piece--titre">
+  <header class="piece">
     <div class="zone">
-      <div class="piece__entete trace--bas trace revele">
-        <nav class="piece__chemin donnee" aria-label="Fil d'Ariane">
+      <div class="piece__entete">
+        <div class="piece__marge">
+          <nav class="piece__chemin" aria-label="Fil d'Ariane">
           {miettes}
-        </nav>
-
-        <p class="etiquette">{page['etiquette']}</p>
-        <h1 class="piece__titre" data-lignes>
-          {lignes}
-        </h1>
-        <p class="chapo piece__chapo">{page['chapo']}</p>
-
-        <div class="couverture__actions">
+          </nav>
+        </div>
+        <div class="piece__tete">
+          <h1 class="piece__titre">{titre}</h1>
+          <p class="chapo piece__chapo">{page['chapo']}</p>
+          <div class="couverture__actions">
           {principale}
-          <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a>
+          <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -52,8 +52,9 @@ def couverture(page, base, fil, action=None):
 """
 
 
-def intercalaire(numero, nom, cote, titre, chapo=""):
-    """L'en-tête de section du dossier : repère, cote, titre.
+def intercalaire(nom, cote, titre, chapo=""):
+    """L'en-tête de section : l'intitulé et sa cote dans la marge, le
+    titre dans la colonne de droite.
 
     Les lignes du titre se séparent par une barre verticale, et non par
     un saut de ligne : l'antislash se perdrait d'un niveau
@@ -61,11 +62,15 @@ def intercalaire(numero, nom, cote, titre, chapo=""):
     """
     lignes = titre.replace("|", "<br>")
     texte = ('<p class="chapo intercalaire__chapo">%s</p>' % chapo) if chapo else ""
-    return f"""      <div class="intercalaire revele">
-        <span class="repere trace trace--bas"><b>{numero}</b>{nom}</span>
-        <span class="intercalaire__cote">{cote}</span>
-        <h2 class="h2" data-lignes>{lignes}</h2>
-        {texte}
+    return f"""      <div class="intercalaire">
+        <div class="intercalaire__marge revele">
+          <p class="intercalaire__nom">{nom}</p>
+          <p class="intercalaire__cote">{cote}</p>
+        </div>
+        <div class="intercalaire__corps revele">
+          <h2 class="h2" data-lignes>{lignes}</h2>
+          {texte}
+        </div>
       </div>"""
 
 
@@ -94,7 +99,7 @@ def releve_chiffre():
         f"""        <li class="preuve revele">
           <span class="preuve__onglet etiquette">{nom}</span>
           <p class="preuve__chiffre">
-            <span class="preuve__val" data-compteur="{val}">{val}</span>{'<span class="preuve__plus">' + plus + '</span>' if plus else ''}
+            <span class="preuve__val">{val}</span>{'<span class="preuve__plus">' + plus + '</span>' if plus else ''}
           </p>
           <p class="preuve__texte">{texte}</p>
         </li>"""
@@ -106,16 +111,16 @@ def releve_chiffre():
 def appel(base, titre, texte):
     """Le renvoi de fin de page vers la demande de devis."""
     return f"""
-  <section class="section rappel sur-sombre" aria-labelledby="rappelTitre">
+  <section class="section rappel" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
-      <div>
-        <p class="etiquette">Prochaine étape</p>
-        <h2 class="h2 rappel__titre" id="rappelTitre">{titre}</h2>
-        <p class="chapo" style="margin-top:var(--sp-5)">{texte}</p>
-      </div>
-      <div class="rappel__actions">
-        <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-        <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a>
+      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
+      <div class="rappel__corps">
+        <h2 class="rappel__titre" id="rappelTitre">{titre}</h2>
+        <p class="chapo">{texte}</p>
+        <div class="rappel__actions">
+          <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
+        </div>
       </div>
     </div>
   </section>

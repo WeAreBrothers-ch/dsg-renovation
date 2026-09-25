@@ -1,78 +1,28 @@
 /* ============================================================
-   DSG RÉNOVATION — 12 · JAUGE ET SUIVI
-   Repères de lecture : jauge du rail, vignette qui suit la main.
+   DSG RÉNOVATION — 12 · VIGNETTE QUI SUIT LE POINTEUR
+   Index des métiers : le tirage accompagne la main. L'attribut
+   data-suivi n'est posé que si assets/js/vignette.js tourne —
+   sinon la vignette garde sa position fixe d'origine.
    ============================================================ */
 
-/* ------------------------------------------------------------
-   JAUGE DE LECTURE — le curseur du réglet
-   La ligne de dos s'encre au laiton à mesure que le dossier est
-   parcouru : c'est la position du curseur sur la règle.
-   ------------------------------------------------------------ */
-.rail::after{
-  content:"";position:absolute;left:0;top:var(--rail-marge,0);
-  width:1px;pointer-events:none;
-  height:calc(var(--lecture,0) * (100% - var(--rail-marge,0px) * 2));
-  background:var(--c-signal-sombre);
-  transition:height var(--d-instant) linear;
-}
-
-/* ------------------------------------------------------------
-   RÉGLURE D'EN-TÊTE — la règle des écrans sans rail
-   Sous 1400 px le réglet latéral n'a plus la place d'exister. La
-   précision se reporte alors sur une réglure de 4 px au pied de
-   l'en-tête : elle ne recouvre aucune information et se remplit au
-   laiton à mesure de la lecture.
-   ------------------------------------------------------------ */
-@media (max-width:1399px){
-  .entete__inner{position:relative}
-  .entete__inner::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
-    pointer-events:none;
-    background-image:
-      repeating-linear-gradient(to right,
-        var(--c-ligne-forte) 0 1px,transparent 1px 8px),
-      linear-gradient(var(--c-signal-sombre),var(--c-signal-sombre));
-    background-size:100% 3px,calc(var(--lecture,0) * 100%) 1px;
-    background-position:left bottom,left bottom;
-    background-repeat:no-repeat;
-    transition:background-size var(--d-instant) linear;
-  }
-}
-
-/* ------------------------------------------------------------
-   VIGNETTE QUI SUIT LE POINTEUR (liste des savoir-faire)
-   Elle accompagne la main, mais reste bridée sur la moitié droite
-   de la liste : elle ne recouvre jamais les intitulés de métier.
-   L'attribut data-suivi n'est posé que si le script tourne — sinon
-   la vignette garde sa position fixe d'origine.
-   ------------------------------------------------------------ */
 @media (min-width:1024px) and (pointer:fine){
   .metiers[data-suivi="actif"] .metiers__vue{
     right:auto;top:0;left:0;
 
-    /* Position, inclinaison et grossissement sont séparés en trois
-       propriétés distinctes. Le suivi (translate + rotate) est calculé
-       image par image par le ressort du script : aucune transition ne
-       doit s'y appliquer, sinon les deux lissages se cumulent et le
-       tirage traîne derrière la main. Seuls le fondu et le
-       grossissement d'arrivée restent animés par le navigateur. */
+    /* Position, inclinaison et grossissement sont trois propriétés
+       distinctes. Le suivi (translate + rotate) est calculé image par
+       image par le ressort du script : aucune transition ne s'y
+       applique, sinon les deux lissages se cumuleraient. */
     transform:none;
     translate:calc(var(--vx,0px) - 50%) calc(var(--vy,0px) - 50%);
     rotate:var(--vr,-2deg);
     scale:.94;
     transform-origin:50% 30%;
-
     transition:opacity var(--d-rapide) var(--e-standard),
                scale var(--d-normal) var(--e-sortie);
     will-change:translate,rotate,scale,opacity;
     backface-visibility:hidden;
-
-    /* Le tirage passe désormais au-dessus des intitulés : une ombre plus
-       marquée le décolle nettement du papier au lieu de l'y écraser. */
     box-shadow:var(--om-2);
   }
-  .metiers[data-suivi="actif"] .metiers__ligne:hover .metiers__vue{
-    transform:none;
-    scale:1;
-  }
+  .metiers[data-suivi="actif"] .metiers__ligne:hover .metiers__vue{transform:none;scale:1}
 }

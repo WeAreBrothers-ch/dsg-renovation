@@ -35,14 +35,18 @@ Toutes les pages partagent le même en-tête, le même menu et le même
 pied. `14-document.css` porte la mise en page des annexes légales,
 `15-pages.css` celle des pages intérieures et des pages de prestation,
 `16-composants.css` les cartes et le tableau des besoins,
-`17-repli.css` les onglets et les dépliants.
+`17-repli.css` les onglets et les dépliants, `18-confiance.css` les
+blocs de réassurance : logos sous la couverture, déroulé en quatre
+temps, « après l'envoi ». `10-comparateur.css` porte l'image
+d'ouverture et le comparateur avant / après, `19-impression.css` la
+version papier.
 
 ## Le générateur
 
-Les dix-huit pages sont assemblées par un script, puis livrées en HTML
+Les douze pages sont assemblées par un script, puis livrées en HTML
 statique. **Ce n'est pas une étape de build** : le site fonctionne sans
 lui, et ouvrir `index.html` suffit toujours. C'est une commodité de
-maintenance, qui évite de corriger un numéro de téléphone dans dix-huit
+maintenance, qui évite de corriger un numéro de téléphone dans douze
 fichiers.
 
 Après une modification du contenu ou du chrome :
@@ -63,13 +67,21 @@ python3 outils/construire.py
 | `contenu_devis.py` | ce que contient un devis, comment le comparer |
 | `contenu_questions.py` | vingt questions, groupées par moment du projet |
 | `contenu_divers.py` | enchaînement des lots, besoins, familles de biens |
-| `gabarit.py` | tête du document, en-tête, menu, pied, scripts |
+| `assemblage.py` | liste des feuilles et scripts, assemblage et écriture d'une page |
+| `gabarit.py` | tête du document, en-tête, menu, scripts |
+| `gabarit_pied.py` | pied de page : coordonnées, horaires, itinéraire |
+| `gabarit_liens.py` | liens du chrome qui dépendent de la page consultée |
+| `confiance.py` | déroulé en quatre temps, logos sous la couverture, témoignages |
+| `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
 | `briques.py` | couverture, intercalaire, relevé, appel à l'action |
 | `briques_bis.py` | cartes à filet, tableau des besoins |
 | `repli.py` | onglets et dépliants — voir « Ce qui se replie » |
 | `page_service.py` | corps d'une page de prestation |
+| `service_liens.py` | zone d'intervention et lots voisins d'une page de prestation |
+| `ouverture.py` | l'image d'ouverture cadrée qui s'élargit au défilement |
 | `page_accueil.py` | corps de l'accueil |
-| `pages_site.py` | entreprise, prestations |
+| `pages_site.py` | entreprise |
+| `page_prestations.py` | page pilier des prestations |
 | `pages_contenu.py` | réalisations, devis |
 | `catalogue.py` | fiche signalétique des pages de la racine |
 | `seo.py` | balisage structuré, `sitemap.xml`, `robots.txt` |
@@ -140,9 +152,18 @@ sans valeur pour la recherche.
 
 ## Direction artistique
 
-Papier blanc, encre noire, rouge de marque, répartis 60 / 30 / 10.
-Le rouge n'est pas une matière : il ne sert qu'à l'action — boutons
-d'appel, repère de la section lue, surlignage du titre.
+Version du 25/09/2026, « Le plan d'implantation », inspirée de
+tekt.com.au — tout est décrit dans `DIRECTION-ARTISTIQUE.md`.
+
+Plâtre frais, encre terre d'ombre, brique réservée à l'action. Des
+cadres d'un pixel marqués d'un repère carré à chaque angle, une
+grotesque (Archivo) pour les titres et une sérif de lecture
+(Newsreader) pour les phrases. Chaque section range son intitulé dans
+la marge gauche, qui reste accroché pendant la lecture.
+
+L'image d'ouverture n'arrive pas en plein écran : elle est cadrée dans
+la colonne de la page, puis s'élargit jusqu'aux bords à mesure qu'on
+descend. Sur l'accueil, c'est le comparateur avant / après.
 
 Les blocs sombres redéfinissent la gamme d'encres localement
 (`.sur-sombre`) : aucun composant n'a à connaître la couleur de son
@@ -155,20 +176,23 @@ Le plancher du site est de 4,5:1 — seuil AA.
 
 | Fichier | Rôle |
 |---|---|
-| `nav.js` | navigation, section courante, menu plein écran |
-| `motion.js` | révélations au défilement, compteurs du relevé |
-| `effets.js` | jauge de lecture, accord des éléments fixes au fond, parallaxe |
+| `nav.js` | menu plein écran, barre d'action mobile |
+| `motion.js` | révélations au défilement, vignettes des métiers sur téléphone |
+| `effets.js` | boutons d'appel légèrement magnétiques |
+| `ouverture.js` | l'image d'ouverture s'élargit au défilement |
+| `curseur.js` | pastille « Glisser » / « Agrandir » qui remplace le pointeur |
 | `vignette.js` | tirage qui suit le pointeur dans la liste des savoir-faire |
-| `comparateur.js` | glissière avant / après (souris, tactile, clavier) |
+| `comparateur.js` | glissière avant / après (souris, tactile, clavier), démonstration à la première vue |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
-| `formulaire.js` | validation de la demande de devis |
+| `formulaire.js` | validation et envoi de la demande de devis |
 | `dossier.js` | filtres des réalisations |
 | `onglets.js` | jeux d'onglets des pages de prestation |
 
 Chaque page ne charge que les modules dont elle a besoin. Les cinq
 modules communs sont `nav.js`, `motion.js`, `effets.js`, `curseur.js`
 et `onglets.js` ;
-`comparateur.js` ne sert qu'à l'accueil, `dossier.js` et `lumineuse.js`
+`comparateur.js` ne sert qu'à l'accueil, `ouverture.js` à l'accueil et
+aux pages de prestation, `dossier.js` et `lumineuse.js`
 qu'aux réalisations, `formulaire.js` qu'à la page de devis.
 
 Tout est neutralisé si le visiteur demande moins de mouvement
@@ -183,14 +207,30 @@ soulignement tireté, jamais de rouge. À obtenir puis à remplacer :
 
 - le numéro IDE de la société et l'identité du gérant responsable ;
 - le nom et l'adresse de l'hébergeur, une fois celui-ci choisi ;
-- l'auteur des prises de vue des chantiers.
+- l'auteur des prises de vue des chantiers ;
+- **les témoignages** : les trois textes actuels sont provisoires et
+  s'affichent comme tels. Les remplacer par de vrais avis (accord écrit
+  de chaque client) dans `outils/confiance.py`, puis passer
+  `PROVISOIRES` à `False` ;
+- **l'adresse du service d'envoi du formulaire** (Formspree, Web3Forms,
+  formulaire Infomaniak…) dans l'attribut `data-envoi` de
+  `outils/fragments/formulaire.html`. Sans elle, la demande part par le
+  logiciel de messagerie du visiteur, ce qui échoue chez ceux qui n'en
+  ont pas configuré ;
+- les horaires du bureau (`HORAIRES` dans `donnees_site.py`) ;
+- le détail des six fiches de chantier et du chantier signature
+  (noms, surfaces, durées, années) ;
+- le lien de la fiche Google Business Profile, une fois créée
+  (`ITINERAIRE` dans `donnees_site.py`, et l'emplacement réservé sous
+  les témoignages).
 
-Chaque emplacement porte un commentaire `CONTENU À VALIDER` dans le
-HTML. Une recherche sur ce mot suffit à les retrouver tous.
+Chaque emplacement porte un commentaire `CONTENU À VALIDER` ou
+`À FOURNIR` dans le HTML ou le script. Une recherche sur ces mots
+suffit à les retrouver tous.
 
 ## Documents de travail
 
-`DA-MOMDESIGN.md` — analyse de référence et direction corrective.
-`DIRECTION-ARTISTIQUE.md` et `dsg-renov-claude.md` décrivent des états
+`DIRECTION-ARTISTIQUE.md` — direction actuelle (v2, 25/09/2026).
+`DA-MOMDESIGN.md` et `dsg-renov-claude.md` décrivent des états
 antérieurs du projet : ils sont conservés pour mémoire mais **ne
 correspondent plus au site actuel**.

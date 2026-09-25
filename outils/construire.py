@@ -10,7 +10,6 @@ après une modification du contenu ou du chrome :
 Ouvrir index.html suffit toujours pour consulter le site.
 """
 
-import io
 import os
 import sys
 
@@ -18,55 +17,17 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import briques
 import catalogue
-import gabarit
 import page_service
 import page_accueil
-import pages_contenu
+import page_prestations
 import pages_site
 import seo
 import prestations
+from assemblage import (BASE_JS, FEUILLES, FEUILLES_ANNEXE, assembler,
+                        ecrire)
 from donnees_site import SITE
 
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SERVICES = prestations.PAGES
-
-# Toutes les feuilles, dans l'ordre de leur numéro. Les pages riches les
-# chargent toutes : le poids total reste sous les cinquante kilo-octets,
-# et un jeu par page se serait périmé au premier composant déplacé.
-FEUILLES = [
-    "00-jetons.css", "01-socle.css", "02-boutons.css", "03-fiches.css",
-    "04-formulaires.css", "05-navigation.css", "06-haut.css",
-    "07-chantiers.css", "08-bas.css", "09-curseur.css", "10-comparateur.css",
-    "11-lumineuse.css", "12-planche.css", "13-pile.css", "14-document.css",
-    "15-pages.css", "16-composants.css", "17-repli.css",
-]
-FEUILLES_ANNEXE = [
-    "00-jetons.css", "01-socle.css", "02-boutons.css", "05-navigation.css",
-    "08-bas.css", "09-curseur.css", "14-document.css", "15-pages.css", "16-composants.css", "17-repli.css",
-]
-
-BASE_JS = ["nav.js", "motion.js", "effets.js", "curseur.js", "onglets.js"]
-
-
-def ecrire(chemin, contenu):
-    complet = os.path.join(RACINE, chemin)
-    os.makedirs(os.path.dirname(complet) or ".", exist_ok=True)
-    with io.open(complet, "w", encoding="utf-8") as f:
-        f.write(contenu)
-    return chemin
-
-
-def assembler(page, corps, base, feuilles, modules, schemas):
-    """Un document complet : tête, en-tête, corps, pied, scripts."""
-    return (
-        gabarit.tete(page, base, feuilles, schemas)
-        + gabarit.entete(base, page["courante"])
-        + '\n<main id="contenu">\n'
-        + corps
-        + "</main>\n"
-        + gabarit.pied(base, page["courante"], SERVICES)
-        + gabarit.scripts(base, modules)
-    )
 
 
 def page_simple(fichier, titre, description, etiquette, h1, chapo,
@@ -97,7 +58,7 @@ def construire_accueil():
         "description": (
             "Entreprise de rénovation clé en main à Lausanne et sur l'arc "
             "lémanique : rénovation totale, peinture, plâtrerie, carrelage et "
-            "sols. 600 chantiers livrés. Devis gratuit sous 72 h."
+            "sols. 600 chantiers livrés. Devis gratuit 72 h après la visite."
         ),
         "canonique": SITE + "/",
         "courante": "index.html",
@@ -105,7 +66,7 @@ def construire_accueil():
     }
     corps = page_accueil.accueil(SERVICES, "")
     schemas = [seo.entreprise()]
-    modules = BASE_JS + ["comparateur.js", "vignette.js"]
+    modules = BASE_JS + ["comparateur.js", "vignette.js", "ouverture.js"]
     return ecrire("index.html", assembler(page, corps, "", FEUILLES, modules, schemas))
 
 
@@ -120,7 +81,7 @@ def construire_services():
         "Prestations", ["Neuf métiers,", "un seul chantier"],
         "Chaque lot est mené par des salariés de l'entreprise ou par des "
         "partenaires que nous suivons depuis des années.",
-        pages_site.savoir_faire, BASE_JS + ["vignette.js"], [])]
+        page_prestations.savoir_faire, BASE_JS + ["vignette.js"], [])]
 
     for service in SERVICES:
         fichier = "services/%s.html" % service["slug"]
@@ -152,7 +113,7 @@ def construire_services():
                      (service["nom"], fichier)]),
         ]
         faits.append(ecrire(fichier, assembler(
-            page, corps, "../", FEUILLES, BASE_JS + ["vignette.js"], schemas)))
+            page, corps, "../", FEUILLES, BASE_JS + ["ouverture.js"], schemas)))
     return faits
 
 

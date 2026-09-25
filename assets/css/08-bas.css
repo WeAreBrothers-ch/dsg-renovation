@@ -1,138 +1,102 @@
 /* ============================================================
-   DSG RÉNOVATION — 08 · BAS DE DOSSIER
-   Questions, demande de devis, pied de page.
+   DSG RÉNOVATION — 08 · BAS DE PAGE
+   Demande de devis (formulaire + coordonnées), pied de page.
    ============================================================ */
 
 /* ------------------------------------------------------------
-   08 · QUESTIONS
-   ------------------------------------------------------------ */
-.questions__liste{max-width:900px}
-.question{border-top:var(--bd-fin)}
-.questions__liste li:last-child .question{border-bottom:var(--bd-fin)}
-.question__tete{
-  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-5);
-  padding:var(--sp-5) 0;cursor:pointer;list-style:none;
-  font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
-  letter-spacing:-.01em;line-height:1.35;
-  transition:color var(--d-rapide) var(--e-standard),
-             scale 160ms var(--e-sortie);
-}
-.question__tete:hover{color:var(--c-encre)}
-.question__corps{padding:0 0 var(--sp-6);max-width:66ch;color:var(--c-encre-60)}
-.question__corps a{color:var(--c-signal-sombre);text-decoration:underline;text-underline-offset:3px}
-
-/* ------------------------------------------------------------
-   09 · DEMANDE (formulaire + coordonnées)
+   DEMANDE
    ------------------------------------------------------------ */
 .demande__grille{align-items:start}
-.demande__form{grid-column:1/8}
-.demande__contact{grid-column:9/13;position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
+.demande__form{grid-column:5/13}
+.demande__contact{grid-column:1/5;grid-row:1;position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
 @media (max-width:1023px){
-  .demande__form{grid-column:1/9}
-  .demande__contact{grid-column:1/9;position:static;margin-top:var(--sp-7)}
-}
-@media (max-width:767px){.demande__form,.demande__contact{grid-column:1/5}}
-
-.formulaire{
-  display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);
-  background:var(--c-fiche);border:var(--bd-cadre);border-radius:var(--r-net);
-  padding:var(--sp-6);
-}
-.formulaire__entete{
-  grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;
-  justify-content:space-between;gap:var(--sp-3);
-  padding-bottom:var(--sp-4);
-}
-.formulaire__large{grid-column:1/-1}
-@media (max-width:479px){
-  .formulaire{grid-template-columns:1fr;padding:var(--sp-5)}
+  .demande__form,.demande__contact{grid-column:1/-1}
+  .demande__contact{grid-row:auto;position:static;margin-top:var(--sp-7)}
 }
 
-.coordonnees{
-  --c-trait:var(--c-encre);--e-trait:1.5px;
-  padding:var(--sp-5) 0 0;display:flex;flex-direction:column;gap:var(--sp-5);
-}
-.coordonnees h3{
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;color:var(--c-encre-60);
-}
-.coordonnees address{font-style:normal;display:flex;flex-direction:column;gap:var(--sp-2)}
+.coordonnees{display:flex;flex-direction:column;box-shadow:inset 0 0 0 1px var(--c-cadre)}
+.coordonnees__bloc{padding:var(--sp-5)}
+.coordonnees__bloc+.coordonnees__bloc{border-top:1px solid var(--c-cadre)}
+.coordonnees h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
+.coordonnees address{display:flex;flex-direction:column;gap:var(--sp-1);color:var(--c-encre-60)}
 .coordonnees a{
-  display:inline-block;padding-block:var(--sp-2);
-  text-decoration:underline;text-underline-offset:3px;
+  display:inline-block;padding-block:var(--sp-2);color:var(--c-encre);
+  text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
+  transition:text-decoration-color var(--d-rapide) var(--e-standard);
 }
-.coordonnees a:hover{color:var(--c-encre)}
-.coordonnees__bloc+.coordonnees__bloc{padding-top:var(--sp-5);border-top:var(--bd-fin)}
-.coordonnees__zones{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3)}
+.coordonnees a:hover{text-decoration-color:currentColor}
+.coordonnees .donnee{color:var(--c-encre-60)}
+.coordonnees__zones{margin-top:var(--sp-3)}
 
 /* ------------------------------------------------------------
    PIED DE PAGE
+   Le seul grand aplat de nuit du site : il ferme la page comme la
+   dalle ferme le chantier. Ses colonnes sont des cases d'un pixel,
+   et le nom de l'entreprise s'y inscrit en très grand.
    ------------------------------------------------------------ */
-/* Le pied porte lui-même la réserve d'espace de la barre d'action :
-   son noir descend ainsi jusqu'au bas de l'écran et passe derrière la
-   barre. Réservé sur le corps de page, il laissait au contraire une
-   bande claire sous le pied — exactement là où la barre se pose. */
 .pied{
-  background:var(--c-bitume);color:var(--c-craie);
-  padding-top:var(--sp-9);padding-bottom:var(--h-barre-mobile);
-  overflow:hidden;position:relative;z-index:2;
+  background:var(--c-bitume);color:var(--c-encre);
+  padding-top:var(--sp-7);padding-bottom:var(--h-barre-mobile);
+  overflow:hidden;position:relative;
 }
-/* Le pied est le bordereau de fin de dossier : des cellules à filets,
-   sans fond ni rayon, chacune coiffée de son intitulé. La grille cesse
-   d'être une mise en page invisible pour devenir la structure lisible
-   du document. */
 .pied__grille{
-  display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;
-  border-top:1px solid var(--c-ligne-d);
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:1px;
+  background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
-.pied__grille>*{
-  padding:var(--sp-6) var(--sp-5);
-  border-left:1px solid var(--c-ligne-d);
+.pied__grille>*{padding:var(--sp-5);background:var(--c-bitume)}
+@media (max-width:1023px){
+  .pied__grille{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pied__marque{grid-column:1/-1}
 }
-.pied__grille>*:first-child{border-left:0;padding-left:0}
-@media (max-width:767px){
-  .pied__grille{grid-template-columns:1fr 1fr}
-  .pied__marque{grid-column:1/3;border-bottom:1px solid var(--c-ligne-d)}
-  .pied__grille>*{padding:var(--sp-5) var(--sp-4)}
-  .pied__grille>*:nth-child(2){border-left:0;padding-left:0}
+/* Sur téléphone, deux colonnes plutôt qu'une pile : le pied reste
+   court. Les zones, sans lien, se lisent en une ligne. */
+@media (max-width:599px){
+  .pied__grille{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pied__grille>*{padding:var(--sp-4)}
+  .pied__col:last-child{grid-column:1/-1}
+  .pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
 }
-.pied__marque img{height:36px;width:auto;margin-bottom:var(--sp-5);filter:brightness(0) invert(1)}
-.pied address{font-style:normal;display:flex;flex-direction:column;color:var(--c-craie-60)}
+
+.pied__marque img{height:34px;width:auto;margin-bottom:var(--sp-4);filter:brightness(0) invert(.93) sepia(.1)}
+.pied address{display:flex;flex-direction:column;color:var(--c-encre-60)}
 .pied address a,.pied address span{display:inline-block;padding-block:var(--sp-2)}
-.pied address a:hover{color:var(--c-craie)}
-.pied__col h3{
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;color:var(--c-craie-60);
-}
+.pied address a{transition:color var(--d-rapide) var(--e-standard)}
+.pied address a:hover{color:var(--c-encre)}
+.pied__col h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
 .pied__col ul{margin-top:var(--sp-3);display:flex;flex-direction:column}
+.pied__col li{font-size:var(--t-petit);color:var(--c-encre-60)}
+.pied__col li:not(:has(a)){padding-block:var(--sp-1)}
 .pied__col a{
-  display:block;padding-block:var(--sp-2);font-size:var(--t-petit);
+  display:block;padding-block:var(--sp-2);
   transition:color var(--d-rapide) var(--e-standard);
 }
-.pied__col a:hover{color:var(--c-craie)}
+.pied__col a:hover,.pied__col a[aria-current]{color:var(--c-encre)}
+.pied__horaires{margin-top:var(--sp-4);color:var(--c-encre-60)}
+.pied__itineraire{
+  display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);padding-block:var(--sp-2);
+  font-size:var(--t-petit);color:var(--c-encre);
+  text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
+  transition:text-decoration-color var(--d-rapide) var(--e-standard);
+}
+.pied__itineraire:hover{text-decoration-color:currentColor}
+
 .pied__legal{
-  margin-top:var(--sp-8);padding-top:var(--sp-5);border-top:1px solid var(--c-ligne-d);
-  display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);justify-content:space-between;
-  font-family:var(--f-texte);font-size:14px;color:var(--c-craie-60);
+  margin-top:var(--sp-4);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-2) var(--sp-5);justify-content:space-between;
+  font-size:var(--t-petit);color:var(--c-encre-60);
 }
-.pied__legal a{display:inline-block;padding-block:var(--sp-2)}
-.pied__legal a:hover{color:var(--c-craie)}
-/* Le logotype est centré, et non calé à gauche : sur un large écran il
-   ne remplit jamais toute la ligne, et tout le vide se retrouvait sinon
-   du même côté. Le centrage garantit aussi qu'un éventuel dépassement
-   se répartisse également au lieu de rogner la fin du mot. */
+.pied__legal a{display:inline-block;padding-block:var(--sp-2);transition:color var(--d-rapide) var(--e-standard)}
+.pied__legal a:hover,.pied__legal a[aria-current]{color:var(--c-encre)}
+
+/* Le nom de l'entreprise, à l'échelle d'une enseigne. Il ferme le
+   pied sur toute la largeur et se laisse rogner par le bas. */
 .pied__logotype{
-  margin-top:var(--sp-7);margin-bottom:-.16em;
-  padding-inline:var(--grille-marge);
-  font-family:var(--f-titre);font-weight:800;font-size:min(9.8vw,12rem);
-  text-transform:uppercase;letter-spacing:-.04em;line-height:.8;
-  text-align:center;white-space:nowrap;user-select:none;
+  margin-top:var(--sp-6);margin-bottom:-.2em;padding-inline:var(--grille-marge);
+  font-family:var(--f-titre);font-weight:500;font-size:min(8vw,8rem);
+  letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
+  color:var(--c-encre-60);
 }
-/* Sur téléphone il occuperait un écran entier pour un mot que le logo
-   du haut a déjà dit, et il passe juste derrière la barre d'action.
-   C'est lui qui fermait le pied : sans lui, les mentions légales
-   viendraient buter contre le bas. */
 @media (max-width:767px){
-  .pied__logotype{display:none}
-  .pied{padding-bottom:calc(var(--sp-7) + var(--h-barre-mobile))}
+  .pied{padding-top:var(--sp-6)}
+  .pied__logotype{margin-top:var(--sp-5);font-size:12.4vw}
 }

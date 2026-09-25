@@ -1,122 +1,129 @@
 /* ============================================================
-   DSG RÉNOVATION — 10 · COMPARATEUR AVANT / APRÈS
-   Deux tirages superposés, séparés par une règle que l'on déplace.
-   Sans JavaScript, la coupe reste figée à 50 % : les deux états
-   du logement restent visibles.
+   DSG RÉNOVATION — 10 · OUVERTURE ET COMPARATEUR AVANT / APRÈS
+
+   L'OUVERTURE
+   L'image d'ouverture ne s'impose pas d'un coup. Elle arrive
+   cadrée dans la colonne de la page, ses quatre angles marqués
+   de repères, puis s'élargit jusqu'aux bords de l'écran à mesure
+   qu'on descend — comme une pièce qu'on ouvre après l'avoir
+   relevée sur plan.
+
+   Le geste ne touche ni la taille ni la position de l'image : deux
+   « rideaux » couleur plâtre masquent ses bords et s'écartent en
+   `transform` (assets/js/ouverture.js). Aucune mise en page n'est
+   recalculée, aucun décalage n'est possible, et sans script ou en
+   mouvement réduit l'image reste simplement cadrée.
+
+   LE COMPARATEUR
+   Deux tirages superposés. L'état livré se découvre depuis la
+   gauche par une double translation — le cadre avance, l'image
+   recule d'autant — : tout le mouvement passe par `transform`.
+   Sans JavaScript, la coupe reste à 50 %.
    ============================================================ */
 
+.ouverture{
+  position:relative;margin:0;
+  /* Retrait de la fenêtre au repos : exactement la marge de la zone
+     de contenu, pour que l'image s'aligne sur la colonne de la page. */
+  --ouv-marge:max(var(--grille-marge),calc((100% - var(--grille-contenu)) / 2 + var(--grille-marge)));
+}
+.ouverture__cadre{position:relative;overflow:hidden}
+.ouverture__rideau{
+  position:absolute;top:0;bottom:0;z-index:4;width:var(--ouv-marge);
+  background:var(--c-papier);will-change:transform;
+}
+.ouverture__rideau--g{left:0}
+.ouverture__rideau--d{right:0}
+/* Les repères d'angle de la fenêtre voyagent avec les rideaux et
+   sortent de l'écran quand l'image atteint le plein cadre. */
+.ouverture__rideau::after{
+  content:"";position:absolute;top:0;bottom:0;width:var(--repere);
+  background:
+    linear-gradient(var(--c-cadre),var(--c-cadre)) top / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-cadre),var(--c-cadre)) bottom / var(--repere) var(--repere) no-repeat;
+}
+.ouverture__rideau--g::after{right:calc(var(--repere) / -2)}
+.ouverture__rideau--d::after{left:calc(var(--repere) / -2)}
+
+.ouverture__legende{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;
+  gap:var(--sp-2) var(--sp-6);padding-top:var(--sp-4);
+  font-size:var(--t-petit);color:var(--c-encre-60);
+}
+.ouverture__legende b{font-weight:500;color:var(--c-encre)}
+
+/* Tirage d'ouverture des pages de prestation. */
+.ouverture--tirage{margin-top:var(--sp-8)}
+.ouverture--tirage .ouverture__cadre img{
+  width:100%;height:clamp(280px,46vw,640px);object-fit:cover;
+}
+
+/* ------------------------------------------------------------
+   COMPARATEUR
+   ------------------------------------------------------------ */
 .comparateur{
   position:relative;overflow:hidden;
-  aspect-ratio:16/9;max-height:78vh;
+  aspect-ratio:16/9;max-height:min(82vh,860px);width:100%;
   background:var(--c-bitume-2);
-  touch-action:pan-y;user-select:none;
+  touch-action:pan-y;user-select:none;-webkit-user-select:none;
   --pos:50%;
 }
-@media (max-width:767px){.comparateur{aspect-ratio:4/3;max-height:64vh}}
+@media (max-width:767px){.comparateur{aspect-ratio:4/3}}
 
-/* Le format suit celui des tirages (1404 × 682, soit 2,06). On ne rogne
-   que le strict nécessaire — 14 % en 16/9 — car ce sont les extrémités
-   de la pièce, portes à gauche et baie à droite, qui donnent la mesure
-   de ce qui a été repris. */
-.comparateur--couverture{
-  aspect-ratio:16/9;max-height:78vh;
-  border-radius:var(--r-image);
-}
-/* Les étiquettes étaient calées sur la marge de page, pour un bloc
-   pleine largeur. Dans une colonne, elles se rapprochent du bord. */
-.comparateur--couverture .comparateur__etat--apres{left:var(--sp-4)}
-.comparateur--couverture .comparateur__etat--avant{right:var(--sp-4)}
-@media (max-width:767px){
-  .comparateur--couverture .comparateur__etat--apres{left:var(--sp-3)}
-  .comparateur--couverture .comparateur__etat--avant{right:var(--sp-3)}
-}
-@media (max-width:1023px){
-  .comparateur--couverture{aspect-ratio:16/10;max-height:none}
-}
-@media (max-width:767px){
-  .comparateur--couverture{aspect-ratio:4/3}
-}
-
-.comparateur__vue{position:absolute;inset:0}
+.comparateur__vue{position:absolute;inset:0;overflow:hidden}
+.comparateur__vue picture{display:block;width:100%;height:100%}
 .comparateur__vue img{
-  width:100%;height:100%;object-fit:cover;display:block;
+  width:100%;height:100%;object-fit:cover;
   pointer-events:none;-webkit-user-drag:none;
 }
-
-/* L'état d'origine est le fond ; l'état livré se découpe par-dessus,
-   depuis la gauche. La lecture va donc du résultat vers le chantier :
-   on montre d'abord ce que l'on sait faire. */
 .comparateur__vue--avant{z-index:0}
-.comparateur__vue--apres{
-  z-index:1;
-  clip-path:inset(0 calc(100% - var(--pos)) 0 0);
-  will-change:clip-path;
-}
-.comparateur[data-glisse="true"] .comparateur__vue--apres{transition:none}
+.comparateur__vue--apres{z-index:1;transform:translateX(calc(var(--pos) - 100%))}
+.comparateur__vue--apres picture{transform:translateX(calc(100% - var(--pos)))}
 
-/* ---------- Règle de comparaison ---------- */
-/* La règle est tracée au rouge de la marque : elle reste lisible sur
-   les deux tirages, quel que soit leur contraste. Le glyphe reprend le
-   même rouge sur la pastille blanche — il y était jusqu'ici encré à la
-   couleur du fond de page, donc invisible. */
+/* ---------- Poignée ----------
+   Le rail a la largeur du comparateur : une translation de --pos le
+   déplace donc d'autant de pour cent de l'image. La poignée est posée
+   sur son bord gauche. */
+.comparateur__rail{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  transform:translateX(var(--pos));
+}
 .comparateur__poignee{
-  position:absolute;top:0;bottom:0;left:var(--pos);z-index:2;
-  width:3px;margin-left:-1.5px;
-  background:var(--c-signal);
-  cursor:ew-resize;touch-action:none;
+  position:absolute;top:0;bottom:0;left:-24px;width:48px;
+  pointer-events:auto;cursor:ew-resize;touch-action:none;
+}
+.comparateur__poignee::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;
+  background:var(--c-fiche);box-shadow:0 0 0 1px rgba(39,33,28,.18);
 }
 .comparateur__poignee::after{
-  content:"";position:absolute;top:50%;left:50%;
-  width:56px;height:56px;transform:translate(-50%,-50%);
-  border-radius:var(--r-rond);
-  background:var(--c-craie);
-  box-shadow:0 2px 18px rgba(0,0,0,.6);
-  transition:transform var(--d-rapide) var(--e-standard);
+  content:"";position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;
+  background:var(--c-signal);box-shadow:var(--om-1);
+  transition:scale 160ms var(--e-sortie);
 }
 .comparateur__glyphe{
-  position:absolute;top:50%;left:50%;z-index:2;
-  transform:translate(-50%,-50%);
-  display:block;width:26px;height:12px;color:var(--c-signal);
-  pointer-events:none;
+  position:absolute;top:50%;left:50%;z-index:1;width:26px;height:12px;margin:-6px 0 0 -13px;
+  color:var(--c-fiche);pointer-events:none;
 }
 @media (hover:hover) and (pointer:fine){
-  .comparateur__poignee:hover::after{transform:translate(-50%,-50%) scale(1.08)}
+  .comparateur__poignee:hover::after{scale:1.06}
 }
+.comparateur__poignee:active::after{scale:1.1}
 .comparateur__poignee:focus-visible{outline:none}
-.comparateur__poignee:focus-visible::after{
-  outline:2px solid var(--c-signal-sombre);outline-offset:4px;
-}
+.comparateur__poignee:focus-visible::after{outline:2px solid var(--c-fiche);outline-offset:3px}
 @media (max-width:767px){
-  .comparateur__poignee::after{width:48px;height:48px}
+  .comparateur__poignee::after{width:48px;height:48px;margin:-24px 0 0 -24px}
 }
 
-/* ---------- Étiquettes d'état ---------- */
+/* ---------- Étiquettes d'état ----------
+   Posées dans la fenêtre visible : au repos, elles tiennent compte
+   du retrait de l'ouverture ; le script les ramène au bord à mesure
+   que l'image s'élargit. */
 .comparateur__etat{
-  position:absolute;top:var(--sp-5);z-index:3;
-  background:rgba(14,14,14,.78);color:var(--c-craie);
-  border:1px solid rgba(255,255,255,.28);
-  border-radius:var(--r-net);padding:var(--sp-2) var(--sp-4);
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;line-height:1.2;
-  pointer-events:none;
+  position:absolute;top:var(--sp-4);z-index:2;
+  padding:var(--sp-2) var(--sp-3);background:var(--c-fiche);color:var(--c-encre);
+  font-weight:500;font-size:var(--t-etiquette);line-height:1.2;
+  pointer-events:none;will-change:transform;
 }
-.comparateur__etat--apres{left:var(--grille-marge)}
-.comparateur__etat--avant{right:var(--grille-marge)}
-@media (max-width:767px){
-  .comparateur__etat{top:var(--sp-4);padding:var(--sp-1) var(--sp-3)}
-}
-
-/* ---------- Mode d'emploi ----------
-   Le comparateur ayant quitté la section noire pour la couverture,
-   l'aide se lit maintenant sur du papier : elle demande l'encre du
-   contexte, qui s'inverse d'elle-même si le bloc repasse sur fond
-   sombre un jour. */
-.comparaison__aide{
-  display:flex;align-items:center;gap:var(--sp-3);
-  margin-top:var(--sp-5);color:var(--c-encre-40);
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  letter-spacing:.12em;text-transform:uppercase;
-}
-.comparaison__aide i{
-  width:26px;height:1px;background:var(--c-signal-sombre);flex:0 0 auto;
-}
+.comparateur__etat--apres{left:calc(var(--ouv-marge,0px) + var(--sp-4))}
+.comparateur__etat--avant{right:calc(var(--ouv-marge,0px) + var(--sp-4))}

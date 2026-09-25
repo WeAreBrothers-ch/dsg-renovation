@@ -1,204 +1,135 @@
 /* ============================================================
-   DSG RÉNOVATION — 14 · PIÈCES ANNEXES
-   Mise en page des pages de texte suivi : mentions légales,
-   protection des données.
-
-   Ces pages sont les annexes du dossier. Elles n'ont ni couverture
-   ni photographie : rien qu'un en-tête de pièce, un bordereau de
-   renvoi et des articles numérotés en cellules à filets. Le tracé
-   fait tout le travail — c'est la même règle que le pied de page,
-   appliquée à du texte long.
-
-   Aucune valeur n'est écrite en dur : tout vient de 00-jetons.css.
+   DSG RÉNOVATION — 14 · EN-TÊTE DE PAGE ET PIÈCES ANNEXES
+   L'en-tête de toutes les pages intérieures, puis la mise en page
+   du texte suivi : mentions légales, protection des données.
    ============================================================ */
 
 /* ------------------------------------------------------------
-   EN-TÊTE DE PIÈCE
-   L'en-tête du site est fixe : la pièce réserve elle-même sa
-   hauteur, comme le fait la couverture du dossier.
+   EN-TÊTE DE PAGE
+   La même composition que la couverture de l'accueil : le chemin
+   et la nature de la page dans la marge, le titre en grand dans la
+   colonne de droite.
    ------------------------------------------------------------ */
-.piece{padding-top:calc(var(--h-entete) + var(--sp-7))}
-@media (max-width:767px){.piece{padding-top:calc(var(--h-entete) + var(--sp-6))}}
-
+.piece{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
 .piece__entete{
-  --c-trait:var(--c-encre);--e-trait:1.5px;
-  padding-bottom:var(--sp-7);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:var(--sp-5) var(--grille-goutt);padding-bottom:var(--sp-8);
 }
+.piece__marge{grid-column:1/5;display:flex;flex-direction:column;gap:var(--sp-2);padding-top:.5em}
+.piece__tete{grid-column:5/13}
+@media (max-width:1023px){.piece__marge,.piece__tete{grid-column:1/-1}}
+@media (max-width:1023px){.piece__marge{padding-top:0}}
 
-/* Fil d'Ariane : le chemin de retour au dossier, en mono comme
-   toutes les données de service du site. */
 .piece__chemin{
-  display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2);
-  margin-bottom:var(--sp-6);
+  display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--sp-2);
+  font-size:var(--t-petit);color:var(--c-encre-60);
 }
 .piece__chemin a{
-  display:inline-block;padding-block:var(--sp-1);
-  text-decoration:underline;text-underline-offset:3px;
-  transition:color var(--d-rapide) var(--e-standard);
+  display:inline-block;padding-block:var(--sp-2);
+  text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
+  transition:color var(--d-rapide) var(--e-standard),text-decoration-color var(--d-rapide) var(--e-standard);
 }
-.piece__chemin a:hover{color:var(--c-encre)}
-.piece__chemin span[aria-hidden]{color:var(--c-encre-40)}
+.piece__chemin a:hover{color:var(--c-encre);text-decoration-color:currentColor}
+.piece__chemin span:last-child{color:var(--c-encre)}
+/* Le chemin se termine par la page consultée, qui n'est pas un lien :
+   le dernier séparateur n'a rien à séparer. */
+.piece__chemin span[aria-hidden]:last-child{display:none}
+.piece__nature{font-weight:500;color:var(--c-encre)}
 
-/* Le titre d'annexe reste en Archivo 500 : la graisse pleine et les
-   capitales sont réservées au titre de couverture, une seule fois
-   dans tout le site. */
-.piece__titre{
-  margin-top:var(--sp-4);
-  font-size:var(--t-piece);line-height:1.04;letter-spacing:-.03em;
-}
-.piece__chapo{margin-top:var(--sp-5)}
+.piece__titre{font-size:var(--t-piece);line-height:1.02;letter-spacing:-.035em;max-width:10.7em}
+.piece__chapo{margin-top:var(--sp-6)}
+.piece__entete .couverture__actions{width:auto;margin-top:var(--sp-6);flex-direction:row;flex-wrap:wrap}
+@media (max-width:767px){.piece__entete .couverture__actions{flex-direction:column}}
 
-/* Cartouche de mise à jour : deux données, deux cellules. */
-.piece__cote{
-  display:flex;flex-wrap:wrap;gap:var(--sp-5) var(--sp-8);
-  margin-top:var(--sp-6);
-}
-.piece__cote div{display:flex;flex-direction:column;gap:var(--sp-2)}
-.piece__cote dt{
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;color:var(--c-encre-60);
-}
-.piece__cote dd{margin:0;font-family:var(--f-mono);font-size:var(--t-donnee)}
+/* Cartouche de mise à jour des annexes. */
+.piece__cote{display:flex;flex-wrap:wrap;gap:var(--sp-4) var(--sp-8);margin-top:var(--sp-6)}
+.piece__cote div{display:flex;flex-direction:column;gap:var(--sp-1)}
+.piece__cote dt{font-size:var(--t-etiquette);color:var(--c-encre-60)}
+.piece__cote dd{font-weight:500}
 
 /* ------------------------------------------------------------
-   CORPS DE LA PIÈCE
-   Deux colonnes : le bordereau de renvoi tient la marge, les
-   articles occupent la mesure de lecture.
+   CORPS D'UNE ANNEXE
+   Le sommaire tient la marge et reste accroché ; les articles
+   occupent la colonne de lecture.
    ------------------------------------------------------------ */
 .piece__corps{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);
-  gap:var(--grille-goutt);
-  align-items:start;
-  padding-block:var(--sp-8) var(--sp-9);
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:var(--sp-7) var(--grille-goutt);align-items:start;
+  padding-bottom:var(--sp-9);
 }
+.renvoi{grid-column:1/5;position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
+.articles{grid-column:5/13;display:flex;flex-direction:column;border-top:1px solid var(--c-cadre)}
 @media (max-width:1023px){
-  .piece__corps{grid-template-columns:1fr;gap:var(--sp-7)}
+  .renvoi,.articles{grid-column:1/-1}
+  .renvoi{position:static}
 }
-
-/* ---------- Bordereau de renvoi ---------- */
-.renvoi{position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
-/* En colonne unique, le bordereau n'a pas besoin de son propre filet :
-   celui du premier article, juste en dessous, ferait doublon. */
-@media (max-width:1023px){
-  .renvoi{position:static;padding-bottom:var(--sp-2)}
-}
-.renvoi h2{
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;text-transform:uppercase;color:var(--c-encre-60);
-}
-.renvoi ol{margin-top:var(--sp-4);display:flex;flex-direction:column}
+.renvoi h2{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);letter-spacing:0}
+.renvoi ol{margin-top:var(--sp-3);display:flex;flex-direction:column}
 .renvoi a{
-  display:flex;gap:var(--sp-3);align-items:baseline;
-  padding-block:var(--sp-2);
+  display:flex;gap:var(--sp-3);align-items:baseline;padding-block:var(--sp-1);
   font-size:var(--t-petit);color:var(--c-encre-60);
   transition:color var(--d-rapide) var(--e-standard);
 }
 .renvoi a:hover{color:var(--c-encre)}
-.renvoi a .n{
-  flex:0 0 auto;
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  font-variant-numeric:tabular-nums;color:var(--c-encre-40);
-}
+.renvoi a .n{flex:0 0 1.6em;font-variant-numeric:tabular-nums}
 
-/* ---------- Articles ---------- */
-.articles{display:flex;flex-direction:column}
-
-/* Chaque article est une cellule à filet, coiffée de son numéro.
-   Le filet se tire à la règle à l'entrée dans l'écran, comme
-   partout ailleurs dans le dossier. */
-.article{
-  --c-trait:var(--c-ligne);
-  padding-block:var(--sp-7);
-}
-.articles>.article:last-child{
-  border-bottom:var(--bd-fin);
-}
-/* La marge de lecture est bornée à 66 caractères : au-delà, l'œil
-   perd la ligne suivante en revenant à gauche. */
-.article__tete{
-  display:flex;gap:var(--sp-4);align-items:baseline;
-  margin-bottom:var(--sp-5);
-}
-.article__n{
-  flex:0 0 auto;
-  font-family:var(--f-mono);font-weight:500;font-size:var(--t-etiquette);
-  letter-spacing:.14em;color:var(--c-signal-sombre);
-  font-variant-numeric:tabular-nums;
-}
+.article{padding-block:var(--sp-7);border-bottom:1px solid var(--c-cadre)}
+.article__tete{display:flex;gap:var(--sp-4);align-items:baseline;margin-bottom:var(--sp-5)}
+.article__n{flex:0 0 auto;font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-encre-60)}
 .article h2{font-size:var(--t-h3);letter-spacing:-.015em;line-height:1.15}
 
-.article__corps{max-width:66ch;color:var(--c-encre-60)}
+.article__corps{
+  max-width:64ch;font-family:var(--f-lecture);font-size:var(--t-texte);
+  line-height:1.6;color:var(--c-encre-60);
+}
 .article__corps>*+*{margin-top:var(--sp-4)}
 .article__corps h3{
-  font-family:var(--f-texte);font-weight:600;font-size:var(--t-h4);
-  letter-spacing:-.01em;line-height:1.3;color:var(--c-encre);
-  margin-top:var(--sp-6);
+  margin-top:var(--sp-6);font-family:var(--f-titre);font-weight:500;
+  font-size:var(--t-h4);letter-spacing:-.01em;color:var(--c-encre);
 }
 .article__corps strong{color:var(--c-encre);font-weight:600}
-.article__corps a{
-  color:var(--c-signal-sombre);
-  text-decoration:underline;text-underline-offset:3px;
-}
+.article__corps a{color:var(--c-signal-sombre);text-decoration:underline;text-underline-offset:3px}
 .article__corps a:hover{color:var(--c-encre)}
-
-/* Les listes gardent la puce du dossier : un tiret cadratin posé
-   dans la marge, jamais une pastille. */
 .article__corps ul{display:flex;flex-direction:column;gap:var(--sp-3)}
 .article__corps ul li{position:relative;padding-left:var(--sp-5)}
 .article__corps ul li::before{
-  content:"—";position:absolute;left:0;top:0;
-  color:var(--c-encre-40);
+  content:"";position:absolute;left:0;top:.62em;
+  width:var(--repere);height:var(--repere);background:var(--c-encre-40);
 }
 
-/* Relevé de données : le même tableau à filets que le reste du
-   dossier, en deux colonnes sur grand écran, empilé sur téléphone.
-   Les liens y restent à l'encre : une adresse est une donnée, pas une
-   action — le rouge du dossier ne sert qu'à appeler un geste. */
+/* Relevé de données : libellé à gauche, valeur à droite. Une adresse
+   est une donnée, pas une action : ses liens restent à l'encre. */
 .releve-piece{
   display:grid;grid-template-columns:minmax(0,15ch) minmax(0,1fr);
-  gap:var(--sp-3) var(--sp-5);
-  margin-top:var(--sp-4);
+  gap:var(--sp-3) var(--sp-5);margin-top:var(--sp-4);
+  font-family:var(--f-texte);font-size:var(--t-ui);
 }
 @media (max-width:479px){
-  .releve-piece{grid-template-columns:1fr;gap:var(--sp-1)}
+  .releve-piece{grid-template-columns:minmax(0,1fr);gap:var(--sp-1)}
   .releve-piece dd{margin-bottom:var(--sp-4)}
 }
-.releve-piece dt{
-  font-family:var(--f-mono);font-size:var(--t-etiquette);
-  letter-spacing:.12em;text-transform:uppercase;color:var(--c-encre-40);
-  padding-top:.15em;
-}
-.releve-piece dd{margin:0;color:var(--c-encre)}
-/* Spécificité alignée sur .article__corps a, qui pose le rouge. */
-.article__corps .releve-piece a{
-  color:var(--c-encre);text-decoration-color:var(--c-ligne-forte);
-}
+.releve-piece dt{font-size:var(--t-etiquette);color:var(--c-encre-60);padding-top:.15em}
+.releve-piece dd{color:var(--c-encre)}
+.article__corps .releve-piece a{color:var(--c-encre);text-decoration-color:var(--c-ligne-forte)}
 .article__corps .releve-piece a:hover{text-decoration-color:currentColor}
 
 /* ------------------------------------------------------------
-   RENVOI DE FIN — le retour au dossier
+   SORTIE D'ANNEXE
    ------------------------------------------------------------ */
 .piece__sortie{
-  --c-trait:var(--c-encre);--e-trait:1.5px;
-  display:flex;flex-wrap:wrap;align-items:center;
-  justify-content:space-between;gap:var(--sp-5);
-  padding-top:var(--sp-7);padding-bottom:var(--sp-9);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:var(--sp-5);padding-block:var(--sp-7) var(--sp-9);border-top:1px solid var(--c-cadre);
 }
-.piece__sortie p{max-width:46ch;color:var(--c-encre-60)}
+.piece__sortie p{max-width:46ch;font-family:var(--f-lecture);font-size:var(--t-texte);color:var(--c-encre-60)}
 
 /* ------------------------------------------------------------
    DONNÉE À VALIDER
-   Certaines informations légales n'appartiennent qu'au client :
-   numéro IDE, hébergeur, gérant. Plutôt que de les inventer ou de
-   les taire, la page les marque visiblement. Le repère est neutre
-   — pas de rouge : ce n'est pas une action, c'est une lacune.
-   À retirer dès que le client a fourni les valeurs.
+   Les informations qui n'appartiennent qu'au client (numéro IDE,
+   hébergeur, gérant) sont marquées visiblement, sans rouge : ce
+   n'est pas une action, c'est une lacune. À retirer dès réception.
    ------------------------------------------------------------ */
 .a-valider{
-  background:var(--c-papier-2);
-  border-bottom:1px dashed var(--c-ligne-forte);
-  padding:.1em .3em;
-  color:var(--c-encre-60);
-  font-style:italic;
+  background:var(--c-papier-2);color:var(--c-encre-60);
+  border-bottom:1px dashed var(--c-ligne-forte);padding:.1em .3em;
 }
 @media print{.a-valider{background:none}}

@@ -9,7 +9,8 @@ lisible, et chaque métier garde ses mots-clés.
 import briques
 import prestations
 import repli
-from donnees_site import COMMUNES
+import service_liens
+from ouverture import ouverture
 from lausanne_finitions import LOCAL as LOCAL_FINITIONS
 from lausanne_gros_oeuvre import LOCAL as LOCAL_GROS_OEUVRE
 
@@ -17,14 +18,14 @@ LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS)
 
 
 def _tirage(fiche):
-    """Le tirage d'ouverture : une page de métier se montre d'abord."""
-    return f"""
-  <figure class="tirage revele-img">
-    <img src="{fiche['image']}" alt="{fiche['alt']}"
-         width="1600" height="900" fetchpriority="high" decoding="async">
-    <figcaption class="etiquette tirage__legende">Lausanne &amp; arc lémanique</figcaption>
-  </figure>
-"""
+    """Le tirage d'ouverture : une page de métier se montre d'abord.
+
+    Il s'affiche d'emblée — c'est l'image principale de la page — puis
+    s'élargit au défilement, comme le comparateur de l'accueil.
+    """
+    image = f"""<img src="{fiche['image']}" alt="{fiche['alt']}"
+           width="1600" height="900" fetchpriority="high" decoding="async">"""
+    return ouverture(image, "Lausanne &amp; arc lémanique", "tirage") + "\n"
 
 
 def _prestations(fiche):
@@ -49,7 +50,7 @@ def _prestations(fiche):
     return f"""
   <section class="section" aria-labelledby="quoi">
     <div class="zone">
-{briques.intercalaire("N° 01", "Prestations", "Ce que couvre la page",
+{briques.intercalaire("Prestations", "Ce que couvre la page",
                       "Ce que nous|faisons")}
 {repli.onglets(panneaux, "Les lots de cette prestation")}
     </div>
@@ -64,7 +65,7 @@ def _methode(fiche):
     return f"""
   <section class="section" aria-labelledby="comment">
     <div class="zone">
-{briques.intercalaire("N° 02", "Méthode", "Du premier appel à la réception",
+{briques.intercalaire("Méthode", "Du premier appel à la réception",
                       "Comment nous|procédons")}
 {repli.replis(etapes)}
     </div>
@@ -92,34 +93,6 @@ def _reperes(fiche):
 """
 
 
-def _zone(base):
-    villes = "".join("<li>%s</li>" % c for c in COMMUNES)
-    return f"""
-  <section class="section" aria-labelledby="ou">
-    <div class="zone">
-{briques.intercalaire("N° 03", "Zone", "Arc lémanique",
-                      "Où nous|intervenons")}
-      <div class="service__deux revele">
-        <div class="service__texte">
-          <p>Notre atelier est à Lausanne, avenue de Béthusy. Nous
-          intervenons chaque semaine en ville — des immeubles anciens de
-          Sous-Gare et du Vallon aux villas de Chailly et d'Épalinges — et
-          dans les communes de l'agglomération, ainsi que sur La Côte, à
-          Lavaux et jusqu'à Genève.</p>
-          <p>Un chantier proche, c'est une équipe qui arrive à l'heure et
-          qui repasse sans compter quand une reprise est nécessaire. C'est
-          la raison pour laquelle nous ne nous éloignons pas de l'arc
-          lémanique.</p>
-          <p><a href="{base}realisations.html">Voir nos chantiers livrés</a>
-          dans la région.</p>
-        </div>
-        <ul class="lots service__villes">{villes}</ul>
-      </div>
-    </div>
-  </section>
-"""
-
-
 def _local(fiche):
     """Ce que le bâti lausannois impose, un onglet par lot."""
     panneaux = []
@@ -134,7 +107,7 @@ def _local(fiche):
           <div class="service__texte">
             {textes}
           </div>
-          <aside class="encadre trace">
+          <aside class="encadre">
             <p class="etiquette encadre__titre">{bloc['encadre']['titre']}</p>
             <ul class="encadre__liste">
 {points}
@@ -148,32 +121,8 @@ def _local(fiche):
     return f"""
   <section class="section" aria-labelledby="local">
     <div class="zone">
-{briques.intercalaire("N° 04", "Sur le terrain", cote, titre)}
+{briques.intercalaire("Sur le terrain", cote, titre)}
 {repli.onglets(panneaux, "Le bâti lausannois, lot par lot")}
-    </div>
-  </section>
-"""
-
-
-def _voisins(fiche, base):
-    fiches = "\n".join(
-        f"""        <li>
-          <a class="voisin revele trace" href="{base}services/{slug}.html">
-            <span class="voisin__n">{prestations.page(slug)['numero']}</span>
-            <span class="voisin__nom">{prestations.page(slug)['nom']}</span>
-            <span class="voisin__chev" aria-hidden="true"></span>
-          </a>
-        </li>"""
-        for slug in fiche["lies"]
-    )
-    return f"""
-  <section class="section" aria-labelledby="voisins">
-    <div class="zone">
-{briques.intercalaire("N° 06", "Autres prestations", "Souvent menées ensemble",
-                      "Ce qui va|avec ce lot")}
-      <ul class="voisins">
-{fiches}
-      </ul>
     </div>
   </section>
 """
@@ -184,7 +133,7 @@ def corps(fiche, base):
     questions = f"""
   <section class="section" aria-labelledby="questions">
     <div class="zone">
-{briques.intercalaire("N° 05", "Questions", "Sur cette prestation",
+{briques.intercalaire("Questions", "Sur cette prestation",
                       "Ce qu'on nous|demande")}
 {briques.questions_liste(prestations.questions_de(fiche))}
     </div>
@@ -195,14 +144,14 @@ def corps(fiche, base):
         + _prestations(fiche)
         + _methode(fiche)
         + _reperes(fiche)
-        + _zone(base)
+        + service_liens.zone(base)
         + _local(fiche)
         + questions
-        + _voisins(fiche, base)
+        + service_liens.voisins(fiche, base)
         + briques.appel(
             base,
             "Un projet de " + fiche["nom_menu"].lower() + " ?",
             "Nous nous déplaçons, mesurons et vous remettons un devis "
-            "détaillé et gratuit sous 72 heures.",
+            "détaillé et gratuit 72 heures après la visite.",
         )
     )
