@@ -10,7 +10,8 @@
    taille à l'intérieur d'une plage d'écrans (--e) et ne déborde pas
    du bas de la section, qu'il n'occupe que dans sa marge.
    ============================================================ */
-.section:has(> .ouvrier){position:relative}
+/* Les sections où un ouvrier peut se poser (outils/equipe.py). */
+.section[data-sol]{position:relative}
 
 .ouvrier{
   --e:1.1;

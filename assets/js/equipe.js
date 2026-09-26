@@ -4,7 +4,11 @@
    un charpentier cloue, un poseur pose trois carreaux, un électricien
    visse une ampoule qui s'allume, un peintre passe un mur au rouleau.
    Chacun vit à son rythme, sans attendre le défilement : il arrive en
-   marchant, travaille, repart, puis revient.
+   quelques pas, travaille, repart en quelques pas et disparaît ; son
+   ouvrage reste un moment, puis s'efface. Il revient quelques
+   secondes plus tard, ailleurs : un autre sol à l'écran s'il y en a
+   un de libre, sinon une autre place du même. Souvent, c'est un
+   collègue qui vient à sa place.
 
    Décor seulement (aria-hidden). Un bouton du pied de page met toutes
    les animations en pause, et le site s'en souvient d'une page à
@@ -29,9 +33,12 @@
   var PAS = 18;                       /* longueur d'une enjambée */
   var CADENCE = 760;                  /* un double pas, en ms */
   var VITESSE = 2 * PAS / CADENCE;    /* unités par ms : le pied d'appui ne glisse pas */
-  var FONDU = 0.3;                    /* part de la marche passée à apparaître */
   var TRANSITION = 300;               /* de la marche au geste, et retour */
-  var REPOS = 1000;                   /* poste vide avant le retour */
+  var ARRIVEE = 50;                   /* pas faits pour rejoindre son poste */
+  var DEPART = 45;                    /* pas faits avant de disparaître */
+  var RESTE = 1600;                   /* l'ouvrage fini reste visible, */
+  var EFFACE = 600;                   /* puis s'efface avec le poste */
+  var ABSENCE = [3000, 7000];         /* avant de revenir, ailleurs */
 
   function borne(t) { return t < 0 ? 0 : (t > 1 ? 1 : t); }
   function lisse(t) { t = borne(t); return t * t * (3 - 2 * t); }
@@ -149,9 +156,10 @@
     /* Le charpentier : le marteau décrit un arc au-dessus de la tête,
        retombe sur le clou, qui s'enfonce un peu à chaque coup. Le
        marteau prolonge l'avant-bras : sa tête est à 26,5 du coude. Il
-       repart par où il est venu : devant lui, il y a son tréteau. */
+       repart par où il est venu, dès le dernier coup donné : devant
+       lui, il y a son tréteau. */
     marteau: {
-      duree: 4900, fin: 0, demiTour: true,
+      duree: 4900, fin: 0, demiTour: true, brusque: true,
       travail: function (t, p) {
         p.torse = 10; p.y = 0.5;
         p.pieds = [[9, 0], [-8, 0]];
@@ -212,9 +220,10 @@
     },
 
     /* L'électricien : il visse l'ampoule, qui grésille puis s'allume ;
-       il baisse le bras et repart. */
+       il baisse le bras et repart par où il est venu : l'ampoule
+       pend devant lui, à hauteur de tête. */
     ampoule: {
-      duree: 3500, fin: 0,
+      duree: 3500, fin: 0, demiTour: true,
       travail: function (t, p) {
         p.torse = 4; p.y = 0.3;
         p.pieds = [[6, 0], [-6, 0]];
@@ -258,9 +267,9 @@
       decor: function (o, etat, fondu, pose) {
         var m = main(pose, 0), r = pose.outil.rouleau || [m[0] + 6, m[1] - 12];
         o.acc.perche.setAttribute("x1", n(m[0])); o.acc.perche.setAttribute("y1", n(m[1]));
-        o.acc.perche.setAttribute("x2", n(r[0])); o.acc.perche.setAttribute("y2", n(r[1] + 8));
+        o.acc.perche.setAttribute("x2", n(r[0])); o.acc.perche.setAttribute("y2", n(r[1] + 3));
         o.acc.perche.setAttribute("opacity", n(pose.opacite));
-        o.acc.rouleau.setAttribute("x", n(r[0] - 3)); o.acc.rouleau.setAttribute("y", n(r[1] - 8));
+        o.acc.rouleau.setAttribute("x", n(r[0] - 8)); o.acc.rouleau.setAttribute("y", n(r[1] - 3));
         o.acc.rouleau.setAttribute("opacity", n(pose.opacite));
         o.acc.peinture.setAttribute("width", n(etat.peinture || 0));
         o.acc.peinture.setAttribute("opacity", n(fondu));
@@ -272,7 +281,7 @@
 
   /* Avancement du geste montré par le dessin immobile (outils/equipe.py),
      qui est aussi la première image de l'animation. */
-  var AVANCEMENT = { marteau: 0.393, sol: 0.5, ampoule: 0.82, peinture: 0.45 };
+  var AVANCEMENT = { marteau: 0.393, sol: 0.49, ampoule: 0.82, peinture: 0.45 };
 
   function Ouvrier(scene) {
     this.scene = scene;
@@ -290,30 +299,71 @@
       self.acc[el.getAttribute("data-accessoire")] = el;
     });
     this.fini = this.m.arrivee(this.geste(this.m.duree).outil);
-    this.pret = false;
-  }
-
-  /* Distances de marche, de hors champ jusqu'au poste puis au-delà. Le
-     sens de la marche est donné par le dessin retourné (CSS) : le
-     calcul, lui, va toujours vers la droite. */
-  Ouvrier.prototype.mesurer = function () {
-    var largeur = this.scene.clientWidth;
-    var echelle = parseFloat(getComputedStyle(this.scene).getPropertyValue("--e")) || 1;
-    var place = parseFloat(this.poste.style.getPropertyValue("--place")) / 100;
-    var gauche = this.scene.classList.contains("ouvrier--gauche");
-    var avant = (gauche ? 1 - place : place) * largeur / echelle;
-    var apres = (gauche ? place : 1 - place) * largeur / echelle;
-    this.entree = Math.max(50, Math.min(150, avant + 20));
-    this.sortie = this.m.demiTour ? this.entree + this.m.fin
-      : Math.max(50, Math.min(150, apres - this.m.fin + 20));
-    this.dEntree = this.entree / VITESSE;
-    this.dSortie = this.sortie / VITESSE;
-    this.cycle = this.dEntree + this.m.duree + this.dSortie + REPOS;
+    this.section = scene.parentNode;
+    this.place = parseFloat(this.poste.style.getPropertyValue("--place")) || 50;
+    this.absent = false;
+    this.arrive = false;
+    /* Durées d'un passage. Le sens de la marche est donné par le dessin
+       retourné (CSS) : le calcul, lui, va toujours vers la droite. */
+    this.dEntree = ARRIVEE / VITESSE;
+    this.dSortie = DEPART / VITESSE;
+    this.cycle = this.dEntree + this.m.duree + this.dSortie + RESTE + EFFACE;
     /* Au premier affichage, chacun est déjà au milieu de sa tâche :
        c'est aussi la pose du dessin immobile. */
-    if (!this.pret) { this.temps = this.dEntree + this.m.duree * AVANCEMENT[this.metier]; }
-    this.temps %= this.cycle;
-    this.pret = true;
+    this.temps = this.dEntree + this.m.duree * AVANCEMENT[this.metier];
+  }
+
+  /* S'installer dans une section : un côté et une place tirés au
+     hasard, assez loin du bord pour que le mur du peintre ou les
+     carreaux du poseur tiennent dans la largeur, et loin de la place
+     d'avant quand c'est la même section. Il y arrive en marchant.
+     Le changement de place se fait caché, et il ne se montre qu'à
+     l'image suivante : il apparaît, il ne saute pas d'un endroit à
+     l'autre (aucun décalage de mise en page, CLS). */
+  Ouvrier.prototype.installer = function (section) {
+    var gauche, place, essais = 0;
+    this.scene.hidden = true;
+    do {
+      gauche = Math.random() < 0.5;
+      place = (gauche ? 32 : 12) + Math.random() * 56;
+    } while (section === this.section && Math.abs(place - this.place) < 25 && ++essais < 20);
+    if (section !== this.section) {
+      section.insertBefore(this.scene, section.firstChild);
+      this.section = section;
+    }
+    this.place = place;
+    this.scene.classList.toggle("ouvrier--gauche", gauche);
+    this.scene.classList.toggle("ouvrier--droite", !gauche);
+    this.poste.style.setProperty("--place", n(place) + "%");
+    this.absent = false;
+    this.arrive = true;
+    this.temps = 0;
+    this.dessiner(this.instant(0));
+  };
+
+  /* Son absence finie, il revient ailleurs : sur un sol libre à
+     l'écran de préférence, pour que la page vive même sans défiler.
+     Souvent, c'est un collègue resté hors de l'écran qui vient à sa
+     place ; lui prend celle du collègue, où il arrivera quand on
+     passera par là. */
+  Ouvrier.prototype.revenir = function () {
+    var self = this;
+    function autres(liste) { return liste.filter(function (s) { return s !== self.section; }); }
+    var libres = sols.filter(function (s) {
+      return !ouvriers.some(function (o) { return o !== self && o.section === s; });
+    });
+    var vus = libres.filter(aLecran);
+    var choix = [autres(vus), vus, autres(libres), libres].filter(function (l) { return l.length; })[0];
+    var section = auHasard(choix);
+    var venant = auHasard([this].concat(aLecran(section) ? ouvriers.filter(function (o) {
+      return o !== self && !o.absent && visibles.indexOf(o) < 0 && !aLecran(o.section);
+    }) : []));
+    if (venant !== this) {
+      var sienne = venant.section;
+      venant.installer(section);
+      section = sienne;
+    }
+    this.installer(section);
   };
 
   Ouvrier.prototype.geste = function (t) {
@@ -336,32 +386,33 @@
     var m = this.m, e = this.dEntree, w = m.duree, s = this.dSortie, p;
     var retour = m.demiTour ? -1 : 1;
     if (t < e) {
-      p = this.marche(t, -this.entree, 1);
-      p.opacite = lisse(t / (e * FONDU));
-      return { pose: p, etat: m.depart, fondu: 1 };
+      /* Il arrive : le poste apparaît, lui fait quelques pas. */
+      p = this.marche(t, -ARRIVEE, 1);
+      p.opacite = lisse(t / (e * 0.6));
+      return { pose: p, etat: m.depart, fondu: 1, poste: lisse(t / 400) };
     }
     t -= e;
     if (t < w) {
       p = this.geste(t);
       if (t < TRANSITION) {
-        p = melanger(this.marche(e, -this.entree, 1), p, lisse(t / TRANSITION));
-      } else if (t > w - TRANSITION && retour > 0) {
+        p = melanger(this.marche(e, -ARRIVEE, 1), p, lisse(t / TRANSITION));
+      } else if (t > w - TRANSITION && !m.brusque) {
         p = melanger(p, this.marche(0, m.fin, 1), lisse((t - w + TRANSITION) / TRANSITION));
       }
-      return { pose: p, etat: p.outil, fondu: 1 };
+      return { pose: p, etat: p.outil, fondu: 1, poste: 1 };
     }
     t -= w;
     if (t < s) {
+      /* Il repart : quelques pas, et il a disparu. */
       p = this.marche(t, m.fin, retour);
-      p.opacite = 1 - lisse((t - s * (1 - FONDU)) / (s * FONDU));
-      return { pose: p, etat: this.fini, fondu: 1 };
+      p.opacite = 1 - lisse(t / s);
+      return { pose: p, etat: this.fini, fondu: 1, poste: 1 };
     }
-    /* Poste vide : l'ouvrage s'efface, le poste se remet à zéro. */
+    /* L'ouvrage reste un moment, puis s'efface avec le poste. */
     t -= s;
-    p = this.marche(0, m.fin + retour * this.sortie, retour);
+    p = this.marche(0, m.fin + retour * DEPART, retour);
     p.opacite = 0;
-    return t < REPOS / 2 ? { pose: p, etat: this.fini, fondu: 1 - lisse(t / (REPOS / 2)) }
-                         : { pose: p, etat: m.depart, fondu: lisse((t - REPOS / 2) / (REPOS / 2)) };
+    return { pose: p, etat: this.fini, fondu: 1, poste: t < RESTE ? 1 : 1 - lisse((t - RESTE) / EFFACE) };
   };
 
   Ouvrier.prototype.dessiner = function (instant) {
@@ -377,25 +428,62 @@
     rot(os["bras-av"], p.bras[0][0], -60); rot(os["avant-bras-av"], p.bras[0][1], -46);
     rot(os["bras-arr"], p.bras[1][0], -60); rot(os["avant-bras-arr"], p.bras[1][1], -46);
     this.m.decor(this, instant.etat, instant.fondu, p);
+    this.svg.style.opacity = instant.poste < 1 ? n(instant.poste) : "";
   };
 
+  /* Le temps d'un ouvrier : son passage, puis une absence, puis un
+     retour ailleurs. */
   Ouvrier.prototype.avancer = function (dt) {
-    this.temps = (this.temps + dt) % this.cycle;
+    if (this.arrive) {
+      this.arrive = false;
+      this.scene.hidden = false;
+      return;
+    }
+    if (this.absent) {
+      this.absence -= dt;
+      if (this.absence <= 0) { this.revenir(); }
+      return;
+    }
+    this.temps += dt;
+    if (this.temps >= this.cycle) {
+      this.absent = true;
+      this.absence = ABSENCE[0] + Math.random() * (ABSENCE[1] - ABSENCE[0]);
+      this.scene.hidden = true;
+      return;
+    }
     this.dessiner(this.instant(this.temps));
   };
 
+  var sols = Array.prototype.slice.call(document.querySelectorAll("section[data-sol]"));
   var ouvriers = Array.prototype.map.call(scenes, function (scene) { return new Ouvrier(scene); });
   var visibles = [];
   var enPause = false, requete = 0, precedent = 0;
   try { enPause = window.localStorage.getItem(MEMOIRE) === "pause"; } catch (erreur) { enPause = false; }
 
-  function actif() { return !enPause && !document.hidden && !mouvementReduit.matches && visibles.length > 0; }
+  function enAttente(o) { return o.absent || o.arrive; }
+  function auHasard(liste) { return liste[Math.floor(Math.random() * liste.length)]; }
+
+  /* Un sol est à l'écran quand la limite de sa section s'y voit, sous
+     l'en-tête. */
+  function aLecran(section) {
+    var bas = section.getBoundingClientRect().bottom;
+    return bas > window.innerHeight * 0.2 && bas < window.innerHeight + 30;
+  }
+
+  /* Tourne tant qu'un ouvrier est à l'écran, ou qu'un absent attend
+     son retour (il revient même si on ne le regarde pas). */
+  function actif() {
+    return !enPause && !document.hidden && !mouvementReduit.matches &&
+      (visibles.length > 0 || ouvriers.some(enAttente));
+  }
 
   function image(maintenant) {
     requete = 0;
     var dt = precedent ? Math.min(64, maintenant - precedent) : 16;
     precedent = maintenant;
-    visibles.forEach(function (o) { o.avancer(dt); });
+    ouvriers.forEach(function (o) {
+      if (enAttente(o) || visibles.indexOf(o) >= 0) { o.avancer(dt); }
+    });
     if (actif()) { requete = window.requestAnimationFrame(image); }
   }
 
@@ -408,8 +496,6 @@
     }
   }
 
-  function mesurer() { ouvriers.forEach(function (o) { o.mesurer(); }); }
-
   /* Le bouton du pied de page : un seul pour tout le site, mémorisé. */
   function etiqueter() {
     if (!bouton) { return; }
@@ -417,7 +503,6 @@
     bouton.textContent = enPause ? "Relancer les animations" : "Mettre les animations en pause";
   }
 
-  mesurer();
   etiqueter();
   /* Première image : chacun au milieu de sa tâche. Elle reste seule si
      le visiteur demande moins de mouvement ou a mis les animations en
@@ -453,12 +538,6 @@
   if (mouvementReduit.addEventListener) {
     mouvementReduit.addEventListener("change", function () { etiqueter(); basculer(); });
   }
-
-  var attente = 0;
-  window.addEventListener("resize", function () {
-    window.clearTimeout(attente);
-    attente = window.setTimeout(mesurer, 150);
-  });
 
   basculer();
 })();

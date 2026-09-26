@@ -78,7 +78,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
-| `equipe.py`, `equipe_immobile.json` | ouvriers du site : dessin des silhouettes, sections où les poser page par page, pose immobile |
+| `equipe.py`, `equipe_immobile.json` | ouvriers du site : dessin des silhouettes, sections où les poser page par page et sols où ils peuvent revenir (`data-sol`), pose immobile |
 | `confiance.py` | déroulé en quatre temps, logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins |
@@ -150,7 +150,7 @@ dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation |
 | `ouverture.js` | l'image d'ouverture s'élargit au défilement |
-| `equipe.js` | ouvriers du site : des silhouettes çà et là qui travaillent en boucle, chacune à son rythme ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
+| `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier) |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |

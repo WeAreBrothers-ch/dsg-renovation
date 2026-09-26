@@ -4,7 +4,8 @@ Un charpentier cloue une planche sur un tréteau, un poseur de sol pose
 des carreaux, un électricien visse une ampoule, un peintre passe un mur
 au rouleau. Chacun vit seul dans le bas d'une section, sur la limite
 avec la suivante, qui lui sert de sol, et travaille à son rythme : il
-arrive en marchant, travaille, repart, revient (assets/js/equipe.js).
+arrive en marchant, travaille, repart ; son ouvrage s'efface, et il
+revient plus tard, ailleurs sur la page (assets/js/equipe.js).
 Quatre sur l'accueil, deux ou trois sur les autres pages, aucun sur
 les pages légales.
 
@@ -166,7 +167,7 @@ def _accessoires(metier):
             f'<rect class="equipe__peinture" data-accessoire="peinture"{a("peinture", x="16", y="-82", width="0", height="82")}/>'
             '<rect class="equipe__mur" x="16" y="-82" width="68" height="82"/>'
             f'<line class="equipe__perche" data-accessoire="perche"{a("perche")}/>'
-            f'<rect class="equipe__rouleau" data-accessoire="rouleau"{a("rouleau", width="6", height="16", rx="3")}/>'
+            f'<rect class="equipe__rouleau" data-accessoire="rouleau"{a("rouleau", width="16", height="6", rx="3")}/>'
         )
     return ""
 
@@ -228,9 +229,12 @@ def _scenes(html, fichier):
 
 
 def poser(html, fichier):
-    """Pose les ouvriers d'une page dans leurs sections."""
+    """Pose les ouvriers d'une page dans leurs sections, et marque
+    (data-sol) toutes celles où ils pourront réapparaître plus tard."""
     if fichier in SANS_OUVRIERS:
         return html
+    for titre in set(_sections(html)) | {t for t, _, _, _ in _scenes(html, fichier)}:
+        html = re.sub(r'(<section\b[^>]*\baria-labelledby="%s")' % re.escape(titre), r"\1 data-sol", html, count=1)
     for titre, metier, place, sens in _scenes(html, fichier):
         ouverture = re.search(r'<section\b[^>]*\baria-labelledby="%s"[^>]*>' % re.escape(titre), html)
         if ouverture:

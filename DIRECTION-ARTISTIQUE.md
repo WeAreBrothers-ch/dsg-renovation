@@ -283,7 +283,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
-| Ouvriers du site | attributs `transform` du dessin SVG, image par image | boucles indépendantes de 9 à 14 s |
+| Ouvriers du site | attributs `transform` du dessin SVG, image par image | passages de 8 à 10 s, puis 3 à 7 s d'absence |
 
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
@@ -296,10 +296,15 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   sans casque), posées çà et là, chacune seule dans le bas d'une section, sur la limite avec la suivante qui
   lui sert de sol. Quatre sur l'accueil (le peintre dans la bande de l'entreprise, le poseur de sol sous les
   prestations, l'électricien sous la zone, le charpentier sous le déroulé), deux ou trois sur les autres pages,
-  une section sur deux, le métier de la page d'abord ; aucune sur les pages légales. Un sur deux vient de la
-  droite. Chacun vit à son rythme, sans attendre le défilement : il arrive en marchant, travaille, repart,
-  revient ; son ouvrage s'efface avant son retour. Un bouton du pied de page met toutes les animations en
-  pause et le site s'en souvient (WCAG 2.2.2) ; rien ne bouge hors de l'écran ni onglet caché. Décor seul
+  une section sur deux, le métier de la page d'abord ; aucune sur les pages légales. Au départ, un sur deux
+  vient de la droite. Chacun vit à son rythme, sans attendre le défilement : il arrive en quelques pas,
+  travaille, repart en quelques pas et disparaît ; son ouvrage reste un instant, puis s'efface. Il revient 3 à
+  7 s plus tard, jamais à la même place : sur un autre sol libre à l'écran s'il y en a un, sinon ailleurs sur
+  le même, pour que la page vive sans qu'on défile ; souvent, c'est un collègue resté hors de l'écran qui vient
+  à sa place. Jamais deux ouvriers dans une section. Le peintre tient son rouleau à l'horizontale, contre le
+  mur ; l'électricien et le charpentier se retournent pour repartir (l'ampoule, le tréteau sont devant eux).
+  Un bouton du pied de page met toutes les animations en pause et le site s'en souvient (WCAG 2.2.2) ; rien
+  ne bouge hors de l'écran ni onglet caché. Décor seul
   (`aria-hidden`) ; mouvement réduit ou sans JavaScript : chacun saisi au milieu de sa tâche. Silhouette à
   l'encre du fond (claire sur la bande sombre), carreaux, peinture et ampoule en `--c-aplat`, outils en
   `--c-accent`.

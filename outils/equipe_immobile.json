@@ -25,23 +25,23 @@
     "x1": "42.8",
     "y1": "-61.31",
     "x2": "48.8",
-    "y2": "-65.31"
+    "y2": "-70.31"
    },
    "rouleau": {
     "opacity": "1",
-    "width": "6",
-    "x": "45.8",
-    "y": "-81.31"
+    "width": "16",
+    "x": "40.8",
+    "y": "-76.31"
    }
   }
  },
  "sol": {
   "os": {
    "avant-bras-arr": "rotate(-65.31 0 -46)",
-   "avant-bras-av": "rotate(-62.34 0 -46)",
+   "avant-bras-av": "rotate(-66.76 0 -46)",
    "bassin": "translate(0 18.4)",
    "bras-arr": "rotate(-15.67 0 -60)",
-   "bras-av": "rotate(-37.19 0 -60)",
+   "bras-av": "rotate(-34.6 0 -60)",
    "cuisse-arr": "rotate(14 0 -36)",
    "cuisse-av": "rotate(8 0 -36)",
    "marcheur": "translate(16 0)",
@@ -69,7 +69,7 @@
     "y": "-4.5"
    },
    "carreau-main": {
-    "transform": "rotate(41.54 0 -33)",
+    "transform": "rotate(43.36 0 -33)",
     "opacity": "1",
     "width": "16",
     "x": "-8",
