@@ -45,7 +45,7 @@ Après une modification du contenu, des feuilles de style ou du chrome :
 python3 outils/construire.py
 ```
 
-Le script écrit les pages, `assets/css/site.css` (les dix-neuf feuilles
+Le script écrit les pages, `assets/css/site.css` (les vingt feuilles
 sources concaténées et minifiées, avec une empreinte de version dans
 l'adresse), le plan du site daté et `robots.txt`.
 
@@ -78,6 +78,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
+| `equipe.py`, `equipe_immobile.json` | frise de l'accueil : le dessin des quatre ouvriers et leur pose immobile |
 | `confiance.py` | déroulé en quatre temps, logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins |
@@ -149,6 +150,7 @@ dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation |
 | `ouverture.js` | l'image d'ouverture s'élargit au défilement |
+| `equipe.js` | frise de l'accueil : quatre ouvriers au trait arrivent, travaillent, repartent ; bouton pause, arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier) |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |

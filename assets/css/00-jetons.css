@@ -63,6 +63,9 @@
      du seuil des grands textes (3:1). 4.2 sur le blanc, 3.4 sur le
      chocolat. */
   --c-filigrane:#8E766A;
+  /* Aplat vif des dessins (frise de l'accueil) : casques, carreaux,
+     peinture, ampoule allumée. Décor, jamais du texte. */
+  --c-aplat:var(--c-ciel);
 
   /* ---------- Bleu ciel — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur. Le

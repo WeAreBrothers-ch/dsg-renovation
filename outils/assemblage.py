@@ -26,7 +26,7 @@ FEUILLES = [
     "00-jetons.css", "00-polices.css", "01-socle.css", "02-boutons.css",
     "03-fiches.css", "04-formulaires.css", "05-navigation.css",
     "06-haut.css", "07-chantiers.css", "08-bas.css", "10-comparateur.css",
-    "11-lumineuse.css", "13-pile.css", "14-document.css", "15-pages.css",
+    "11-lumineuse.css", "12-equipe.css", "13-pile.css", "14-document.css", "15-pages.css",
     "16-composants.css", "17-repli.css", "18-confiance.css",
     "19-impression.css",
 ]
