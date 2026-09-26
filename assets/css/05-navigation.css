@@ -204,8 +204,8 @@
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE
    Deux cases jointives en pied d'écran : appeler, ou demander un
-   devis. Anthracite (.sur-sombre) : elle se détache de tous les fonds,
-   et le bouton rouge y ressort.
+   devis. Bleu nuit (.sur-sombre) : elle se détache de tous les fonds,
+   et le bouton safran y ressort.
    ------------------------------------------------------------ */
 .barre-mobile{
   display:none;position:fixed;inset:auto 0 0 0;z-index:55;

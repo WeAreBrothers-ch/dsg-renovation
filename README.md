@@ -71,7 +71,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `contenu_questions.py` | vingt questions, groupées par moment du projet |
 | `contenu_divers.py` | ordre des travaux, besoins, familles de biens, collaborations |
 | `assemblage.py` | feuille unique, versions, assemblage et écriture d'une page |
-| `rythme.py` | alternance automatique des fonds blanc / gris |
+| `rythme.py` | alternance automatique des fonds blanc / bleu pâle |
 | `typographie.py` | espaces insécables avant « : ; ? ! » et dans les guillemets |
 | `images.py` | remplace les images Wix par leurs copies locales (srcset compris) |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
@@ -126,14 +126,15 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette tirée du logo (26/09/2026, « Le toit rouge ») — tout est décrit
-dans `DIRECTION-ARTISTIQUE.md`. Le rouge de la ligne de toit pour
-l'action et les repères, le noir des lettres pour l'encre, le gris de
-leur ombre pour les fonds. Quatre fonds alternent : blanc, gris clair,
-une bande anthracite par page, et le renvoi final en rouge. Des cadres
-d'un pixel marqués d'un repère carré à chaque angle, un chevron rouge
-devant chaque intitulé, une grotesque (Archivo) pour les titres et une
-sérif de lecture (Newsreader) pour les phrases.
+Palette « Bleu de plan & safran » (26/09/2026), choisie par le client
+parmi trois ambiances — tout est décrit dans `DIRECTION-ARTISTIQUE.md`.
+Le bleu nuit d'un tirage de plan pour l'encre, le bleu de plan pour les
+liens et les repères écrits, le jaune safran pour l'action. Le logo
+garde ses propres couleurs. Quatre fonds alternent : blanc, bleu pâle,
+une bande bleu nuit par page, et le renvoi final en safran. Des cadres
+d'un pixel marqués d'un repère carré à chaque angle, un chevron devant
+chaque intitulé, une grotesque (Archivo) pour les titres et une sérif de
+lecture (Newsreader) pour les phrases.
 
 Chaque couleur de texte porte son rapport de contraste en commentaire
 dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.

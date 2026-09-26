@@ -117,7 +117,7 @@ def appel(base, titre, texte, travaux=None):
     `travaux` : la prestation à pré-cocher dans le formulaire.
     """
     return f"""
-  <section class="section rappel sur-rouge" aria-labelledby="rappelTitre">
+  <section class="section rappel sur-vif" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
       <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
       <div class="rappel__corps">

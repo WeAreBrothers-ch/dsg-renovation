@@ -1,86 +1,92 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
    Concept : « LE PLAN D'IMPLANTATION »
-   Palette (26/09/2026) : « LE TOIT ROUGE », tirée du logo
+   Palette (26/09/2026) : « BLEU DE PLAN & SAFRAN »
 
    Un chantier de rénovation commence par un relevé : on reporte la
    pièce sur le plan, on pose des repères aux angles, puis on ouvre.
-   Le site en reprend le geste, et prend ses couleurs dans le logo :
-     - le noir des lettres DSG pour l'encre, jamais un noir pur ;
-     - le rouge de la ligne de toit pour l'action et les repères ;
-     - le gris de l'ombre portée pour les fonds de respiration ;
+   Le site en reprend le geste et les couleurs :
+     - le bleu nuit d'un tirage de plan pour l'encre et les bandes
+       sombres, jamais un noir pur ;
+     - le bleu de plan, plus vif, pour ce qui s'écrit en couleur :
+       liens, numéros, puces ;
+     - le jaune safran du matériel de chantier pour l'action : les
+       boutons d'appel et le renvoi final ;
      - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
        comme les piquets d'implantation d'un géomètre.
+   Le logo garde ses propres couleurs ; le site ne les reprend pas.
 
    Quatre fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     blanc · gris clair (.sur-gris) · anthracite (.sur-sombre)
-     · rouge DSG (.sur-rouge, le renvoi final).
+     blanc · bleu pâle (.sur-pale) · bleu nuit (.sur-sombre)
+     · safran (.sur-vif, le renvoi final).
 
    Aucune valeur n'est écrite ailleurs qu'ici (hors cas commenté).
    Chaque couleur de texte porte son contraste mesuré (WCAG 2.1) sur
    les fonds où elle sert. Plancher du site : 4.5:1, seuil AA.
    ============================================================ */
 :root{
-  /* ---------- Couleurs du logo ---------- */
-  --c-rouge:#DE0022;         /* la ligne de toit, mesurée au pixel */
-  --c-rouge-fonce:#A8001A;   /* le même, une ombre plus bas */
-  --c-noir:#1A1A1C;          /* les lettres DSG */
-  --c-gris-logo:#A8A8A8;     /* l'ombre portée des lettres */
+  /* ---------- Les trois couleurs ---------- */
+  --c-nuit:#14213D;          /* bleu nuit : l'encre du plan */
+  --c-bleu:#1F56C8;          /* bleu de plan : ce qui s'écrit en couleur */
+  --c-safran:#F6B828;        /* jaune safran : l'action */
+  --c-safran-fonce:#EAA912;  /* le même, une ombre plus bas */
 
   /* ---------- Surfaces ---------- */
   --c-papier:#FFFFFF;        /* DOMINANTE : blanc */
-  --c-papier-2:#F2F2F3;      /* creux : survols, onglet ouvert, légendes */
+  --c-papier-2:#F0F4FA;      /* creux : survols, onglet ouvert, légendes */
   --c-fiche:#FFFFFF;         /* relief : cellules de formulaire, étiquettes */
-  --c-teinte:#E8E8EA;        /* aplat secondaire */
-  --c-bitume:#1C1C1F;        /* anthracite : bandes sombres, pied, visionneuse */
-  --c-bitume-2:#29292E;      /* surface élevée dans l'anthracite */
+  --c-teinte:#E0E8F5;        /* aplat secondaire */
+  --c-bitume:#14274A;        /* bleu nuit : bandes sombres, pied, visionneuse */
+  --c-bitume-2:#1D3560;      /* surface élevée dans le bleu nuit */
 
   /* Les mêmes teintes en composantes, pour les voiles translucides
      (en-tête dépoli, panneau posé sur photo, ombres). */
   --c-papier-rgb:255,255,255;
-  --c-encre-rgb:26,26,28;
-  --c-nuit-rgb:28,28,31;
-  --c-craie-rgb:244,244,245;
+  --c-encre-rgb:20,33,61;
+  --c-nuit-rgb:20,39,74;
+  --c-craie-rgb:244,247,252;
 
   /* ---------- Textes sur le blanc ----------
-     blanc / creux / gris clair / gris élevé */
-  --c-encre:#1A1A1C;         /* 17.4 / 15.5 / 15.7 / 14.2 */
-  --c-encre-60:#4B4B52;      /*  8.7 /  7.7 /  7.8 /  7.1 */
-  --c-encre-40:#66666D;      /*  5.7 /  5.1 /  5.1 /  4.7 */
-  --c-craie:#F4F4F5;         /* 15.5 sur l'anthracite */
-  --c-craie-60:#B9B9BF;      /*  8.7 sur l'anthracite, 7.4 élevé */
+     blanc / creux / bleu pâle / pâle élevé */
+  --c-encre:var(--c-nuit);   /* 16.0 / 14.5 / 14.2 / 13.0 */
+  --c-encre-60:#45516B;      /*  7.9 /  7.2 /  7.1 /  6.4 */
+  --c-encre-40:#5A6680;      /*  5.8 /  5.2 /  5.1 /  4.7 */
+  --c-craie:#F4F7FC;         /* 13.8 sur le bleu nuit */
+  --c-craie-60:#B8C4DA;      /*  8.4 sur le bleu nuit, 6.9 élevé */
 
-  /* ---------- Rouge DSG — l'action ----------
+  /* ---------- Safran — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur. Le
-     texte posé dessus est blanc : 5.1, et 7.8 au survol. */
-  --c-signal:var(--c-rouge);
-  --c-signal-fonce:var(--c-rouge-fonce);
-  --c-sur-signal:#FFFFFF;
+     texte posé dessus est bleu nuit : 9.0. Au survol, le bleu nuit
+     recouvre le safran et le texte passe au blanc : 16.0. Le safran ne
+     s'écrit jamais sur un fond clair (1.8) : il s'y pose en aplat. */
+  --c-signal:var(--c-safran);
+  --c-signal-fonce:var(--c-nuit);
+  --c-sur-signal:var(--c-nuit);
   --c-sur-signal-survol:#FFFFFF;
 
-  /* ---------- Rouge écrit — l'accent ----------
-     Un cran plus sombre que le rouge du logo, qui ne tiendrait pas
-     4.5 sur le gris (4.2) : liens dans le texte, numéros de séquence,
-     puces, astérisques, « + » des chiffres, repère « vous êtes ici ». */
-  --c-accent:#C4001E;        /*  6.2 /  5.6 /  5.6 /  5.1 */
+  /* ---------- Bleu de plan — l'accent ----------
+     Liens dans le texte, numéros de séquence, puces, astérisques,
+     « + » des chiffres, repère « vous êtes ici », chevron des
+     intitulés. */
+  --c-accent:var(--c-bleu);  /*  6.5 /  5.9 /  5.8 /  5.3 */
 
   /* ---------- États ---------- */
-  --c-valide:#1D7048;        /*  6.1 /  5.4 /  5.5 /  5.0 */
-  --c-alerte:#B42318;        /*  6.6 /  5.9 /  5.9 /  5.4 */
-  --c-focus:#1A1A1C;
+  --c-valide:#1D7048;        /*  6.1 /  5.5 /  5.4 /  4.9 */
+  --c-alerte:#B42318;        /*  6.6 /  6.0 /  5.8 /  5.3 */
+  --c-focus:var(--c-nuit);   /* 16.0 */
 
   /* ---------- Filets ----------
      Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
      une séparation discrète. Le filet doux sert à l'intérieur des blocs. */
   --c-ligne:rgba(var(--c-encre-rgb),.16);
-  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);
+  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.2 */
   --c-cadre:var(--c-encre);
   --bd-fin:1px solid var(--c-ligne);
 
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre.
-     Encre sur les fonds clairs, rouge sur l'anthracite, blanc sur le
-     rouge. */
+     Bleu nuit sur les fonds clairs et sur le safran, safran sur le
+     bleu nuit. */
   --repere:5px;
   --c-repere:var(--c-cadre);
 }
@@ -93,57 +99,62 @@
    ajouter la classe à une section suffit.
    ============================================================ */
 
-/* Gris clair : la respiration entre deux sections blanches. Les
+/* Bleu pâle : la respiration entre deux sections blanches. Les
    textes du blanc y tiennent tous (voir leurs contrastes ci-dessus). */
-.sur-gris{
-  --c-papier:#F3F3F4;
-  --c-papier-2:#E8E8EA;
+.sur-pale{
+  --c-papier:#EDF2FA;
+  --c-papier-2:#E0E8F5;
   --c-fiche:#FFFFFF;
-  --c-papier-rgb:243,243,244;
+  --c-papier-rgb:237,242,250;
   background-color:var(--c-papier);
 }
 
-/* Anthracite : une bande par page, et le pied. */
+/* Bleu nuit : une bande par page, le pied et la barre mobile. Le
+   safran y devient la couleur écrite, et le bouton d'appel garde son
+   aplat : au survol, c'est le blanc qui le recouvre. */
 .sur-sombre{
-  --c-papier:#1C1C1F;
-  --c-papier-2:#29292E;
-  --c-fiche:#29292E;
-  --c-papier-rgb:28,28,31;
-  --c-encre:#F4F4F5;         /* anthracite / élevé : 15.5 / 13.2 */
-  --c-encre-60:#B9B9BF;      /*  8.7 /  7.4 */
-  --c-encre-40:#9A9AA1;      /*  6.1 /  5.2 */
-  --c-accent:#FF6B79;        /*  6.2 /  5.3 — le rouge du logo n'y tient pas (3.3) */
+  --c-papier:#14274A;
+  --c-papier-2:#1D3560;
+  --c-fiche:#1D3560;
+  --c-papier-rgb:20,39,74;
+  --c-encre:#F4F7FC;         /* nuit / élevé : 13.8 / 11.3 */
+  --c-encre-60:#B8C4DA;      /*  8.4 /  6.9 */
+  --c-encre-40:#97A5C0;      /*  6.0 /  4.9 */
+  --c-accent:var(--c-safran);/*  8.3 /  6.8 */
+  --c-signal-fonce:#FFFFFF;
+  --c-sur-signal-survol:var(--c-nuit);   /* 16.0 */
   --c-ligne:rgba(255,255,255,.16);
   --c-ligne-forte:rgba(255,255,255,.5);
-  --c-cadre:rgba(255,255,255,.4);   /* trait de plan : 3.8, seuil des contours 3:1 */
-  --c-repere:var(--c-rouge);        /* 3.3 : un repère graphique, pas un texte */
-  --c-valide:#8FD4AE;
-  --c-alerte:#FF9D8F;
-  --c-focus:#F4F4F5;
+  --c-cadre:rgba(255,255,255,.4);   /* trait de plan : 3.6, seuil des contours 3:1 */
+  --c-repere:var(--c-safran);       /* 8.3 */
+  --c-valide:#8FD4AE;        /*  8.6 /  7.0 */
+  --c-alerte:#FF9D8F;        /*  7.4 /  6.1 */
+  --c-focus:#F4F7FC;
   color:var(--c-encre);
   background-color:var(--c-papier);
 }
 
-/* Rouge DSG : le renvoi final de chaque page. Tout y est blanc (5.1),
-   et le bouton d'appel s'inverse : blanc, texte noir, noir au survol. */
-.sur-rouge{
-  --c-papier:var(--c-rouge);
-  --c-papier-2:#C4001E;
-  --c-fiche:#C4001E;
-  --c-papier-rgb:222,0,34;
-  --c-encre:#FFFFFF;         /* rouge / rouge élevé : 5.1 / 6.2 */
-  --c-encre-60:#FFFFFF;
-  --c-encre-40:#FFFFFF;
-  --c-accent:#FFFFFF;
-  --c-signal:#FFFFFF;
-  --c-signal-fonce:var(--c-noir);
-  --c-sur-signal:var(--c-noir);      /* 17.4 */
-  --c-sur-signal-survol:#FFFFFF;     /* 17.0 */
-  --c-ligne:rgba(255,255,255,.35);
-  --c-ligne-forte:rgba(255,255,255,.75);
-  --c-cadre:#FFFFFF;                 /* 5.1 */
-  --c-repere:#FFFFFF;
-  --c-focus:#FFFFFF;
+/* Safran : le renvoi final de chaque page. Tout y est bleu nuit (9.0),
+   et le bouton d'appel s'inverse : bleu nuit, texte blanc (16.0) ; au
+   survol, le blanc le recouvre et le texte repasse au bleu nuit. */
+.sur-vif{
+  --c-papier:var(--c-safran);
+  --c-papier-2:var(--c-safran-fonce);
+  --c-fiche:var(--c-safran-fonce);
+  --c-papier-rgb:246,184,40;
+  --c-encre:var(--c-nuit);   /* safran / safran foncé : 9.0 / 7.7 */
+  --c-encre-60:var(--c-nuit);
+  --c-encre-40:var(--c-nuit);
+  --c-accent:var(--c-nuit);
+  --c-signal:var(--c-nuit);
+  --c-signal-fonce:#FFFFFF;
+  --c-sur-signal:#FFFFFF;
+  --c-sur-signal-survol:var(--c-nuit);
+  --c-ligne:rgba(var(--c-encre-rgb),.25);
+  --c-ligne-forte:rgba(var(--c-encre-rgb),.6);  /* 3.6 */
+  --c-cadre:var(--c-nuit);
+  --c-repere:var(--c-nuit);
+  --c-focus:var(--c-nuit);
   color:var(--c-encre);
   background-color:var(--c-papier);
 }

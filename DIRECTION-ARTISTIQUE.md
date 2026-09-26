@@ -8,12 +8,13 @@ Date : 25/09/2026 — Statut : **v2**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
 
-**Révision de palette, 26/09/2026 (v2.2) — « Le toit rouge », tirée du logo.** Le client a jugé le plâtre beige
-et la brique ternes, puis a fourni son logo (`assets/images/logo-blanc.avif`) : les couleurs sont désormais celles
-du logo, mesurées au pixel. La structure, la typographie, les cadres et le mouvement ne changent pas ; les
-couleurs, le rythme des fonds, la navigation et quelques composants changent (§ 2, § 2 bis, § 7). Les palettes
-précédentes restent lisibles dans l'historique git (« plâtre et brique » : `0a45b44` ; « bleu de travail, jaune
-de chantier », sans le logo : `9fbd8d8`).
+**Révision de palette, 26/09/2026 (v2.3) — « Bleu de plan & safran ».** Le client a jugé les couleurs du logo
+trop basiques et a choisi cette palette parmi trois ambiances rendues sur le site (bleu et safran, vert et
+moutarde, pétrole et abricot). Le logo garde ses couleurs ; le site ne les reprend plus. La structure, la
+typographie, les cadres et le mouvement ne changent pas ; les couleurs et les noms des fonds changent (§ 2,
+§ 2 bis, § 5, § 7). Les palettes précédentes restent lisibles dans l'historique git (« plâtre et brique » :
+`0a45b44` ; « bleu de travail, jaune de chantier » : `9fbd8d8` ; « le toit rouge », tirée du logo :
+`d604530`).
 
 ---
 
@@ -49,8 +50,8 @@ sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
 - **La photo plein écran d'emblée** (demande explicite du client). Remplacée par l'ouverture cadrée (§ 7).
-- Le gris-bleu froid, et désormais aussi le plâtre beige (v2.2) : le fond est blanc, relayé par le gris de l'ombre
-  du logo ; la chaleur vient des photos de chantier et du rouge.
+- Le plâtre beige : le fond est blanc, relayé par un bleu très pâle, proche du gris-bleu de Tekt ; la chaleur
+  vient des photos de chantier et du safran.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
 
@@ -63,14 +64,15 @@ sur la photo, la retenue générale.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond blanc**, relayé par le **gris clair** de l'ombre portée des lettres du logo ;
-- une **encre noire**, celle des lettres DSG, jamais un noir pur ;
+- un **fond blanc**, relayé par un **bleu très pâle** ;
+- une **encre bleu nuit**, celle d'un tirage de plan, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
-- des **bandes anthracite** qui rythment la page ; les piquets y passent au rouge ;
+- des **bandes bleu nuit** qui rythment la page ; les piquets y passent au safran ;
 - une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme une pièce
   qu'on ouvre après l'avoir relevée ;
-- **le rouge du toit**, la ligne qui coiffe « DSG » dans le logo : il porte l'action, les repères, et un chevron
-  devant chaque intitulé de section.
+- **le jaune safran** du matériel de chantier : il porte l'action, boutons d'appel et renvoi final ;
+- **le bleu de plan** pour ce qui s'écrit en couleur : liens, numéros, et devant chaque intitulé de section un
+  chevron dessiné comme le toit du logo.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le logo et son
 toit rouge, le comparateur avant / après mis au centre de l'accueil, les repères d'angle qui voyagent avec
@@ -78,56 +80,59 @@ l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Le toit rouge » (v2.2)
+## 2. Palette — « Bleu de plan & safran » (v2.3)
 
-Toutes les couleurs viennent du logo, mesurées au pixel sur `assets/images/logo-blanc.avif` : le rouge de la
-ligne de toit, le noir des lettres, le gris de leur ombre portée. Contrastes mesurés (WCAG 2.1), plancher du
-site 4.5:1.
+Trois couleurs, choisies par le client parmi trois ambiances rendues sur le site : le **bleu nuit** d'un tirage
+de plan pour l'encre et les bandes sombres, le **bleu de plan** pour ce qui s'écrit en couleur, le **jaune
+safran** du matériel de chantier pour l'action. Le logo garde ses propres couleurs ; le site ne les reprend pas.
+Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
 
-### Couleurs du logo
-| Jeton | Valeur | Origine |
+### Les trois couleurs
+| Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-rouge` | `#DE0022` | la ligne de toit |
-| `--c-rouge-fonce` | `#A8001A` | le même, une ombre plus bas (survol) |
-| `--c-noir` | `#1A1A1C` | les lettres DSG |
-| `--c-gris-logo` | `#A8A8A8` | l'ombre portée des lettres (décor seulement : 2.3 sur le blanc) |
+| `--c-nuit` | `#14213D` | l'encre du texte et des cadres |
+| `--c-bleu` | `#1F56C8` | l'accent écrit : liens, numéros, puces, chevrons |
+| `--c-safran` | `#F6B828` | l'action : boutons d'appel, poignée du comparateur, renvoi final |
+| `--c-safran-fonce` | `#EAA912` | le même, une ombre plus bas : surface élevée sur la bande safran |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
 | `--c-papier` | `#FFFFFF` | fond dominant |
-| `--c-papier-2` | `#F2F2F3` | creux : survols, onglet ouvert, légendes du formulaire |
+| `--c-papier-2` | `#F0F4FA` | creux : survols, onglet ouvert, légendes du formulaire |
 | `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, étiquettes posées sur photo |
-| `--c-bitume` | `#1C1C1F` | anthracite : bandes sombres, pied de page, visionneuse, barre mobile |
-| `--c-bitume-2` | `#29292E` | surface élevée dans l'anthracite |
+| `--c-teinte` | `#E0E8F5` | aplat secondaire |
+| `--c-bitume` | `#14274A` | bleu nuit : bandes sombres, pied de page, visionneuse, barre mobile |
+| `--c-bitume-2` | `#1D3560` | surface élevée dans le bleu nuit |
 
-### Texte (blanc / creux / gris clair / gris élevé)
+### Texte (blanc / creux / bleu pâle / pâle élevé)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#1A1A1C` | 17.4 / 15.5 / 15.7 / 14.2 |
-| `--c-encre-60` | `#4B4B52` | 8.7 / 7.7 / 7.8 / 7.1 |
-| `--c-encre-40` | `#66666D` | 5.7 / 5.1 / 5.1 / 4.7 |
-| `--c-craie` | `#F4F4F5` | 15.5 sur l'anthracite |
-| `--c-craie-60` | `#B9B9BF` | 8.7 sur l'anthracite, 7.4 élevé |
+| `--c-encre` | `#14213D` | 16.0 / 14.5 / 14.2 / 13.0 |
+| `--c-encre-60` | `#45516B` | 7.9 / 7.2 / 7.1 / 6.4 |
+| `--c-encre-40` | `#5A6680` | 5.8 / 5.2 / 5.1 / 4.7 |
+| `--c-craie` | `#F4F7FC` | 13.8 sur le bleu nuit |
+| `--c-craie-60` | `#B8C4DA` | 8.4 sur le bleu nuit, 6.9 élevé |
 
-### Rouge — l'action et l'accent écrit
+### Safran — l'action ; bleu de plan — l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = rouge du logo | aplat des boutons d'appel, poignée du comparateur, sélection de texte | blanc dessus : 5.1 |
-| `--c-signal-fonce` | `#A8001A` | survol des boutons d'appel | blanc dessus : 7.8 |
-| `--c-accent` | `#C4001E` | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.2 / 5.6 / 5.6 / 5.1 |
+| `--c-signal` | = safran | aplat des boutons d'appel, poignée du comparateur, sélection de texte | bleu nuit dessus : 9.0 |
+| `--c-signal-fonce` | = bleu nuit | survol des boutons d'appel : le bleu nuit recouvre le safran | blanc dessus : 16.0 |
+| `--c-accent` | = bleu de plan | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.5 / 5.9 / 5.8 / 5.3 |
 
-`--c-accent` est un cran plus sombre que le rouge du logo, qui ne tiendrait pas 4.5 sur le gris clair (4.2).
-Sur l'anthracite, il devient un rouge clair `#FF6B79` (6.2) ; sur la bande rouge, il devient blanc.
+Le safran ne s'écrit jamais sur un fond clair (1.8) : il s'y pose en aplat, texte bleu nuit dessus. Sur le bleu
+nuit, il devient la couleur écrite (8.3) et le bouton d'appel garde son aplat ; au survol, c'est le blanc qui le
+recouvre. Sur la bande safran, tout est bleu nuit et le bouton s'inverse : bleu nuit, texte blanc.
 
 ### États
 `--c-valide` `#1D7048` (6.1) · `--c-alerte` `#B42318` (6.6) · `--c-focus` = encre. Chaque fond redéfinit
 localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
-`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %.
-Sur l'anthracite, le cadre est un blanc à 40 % (3.8, au-dessus du seuil 3:1 des contours) ; sur le rouge, blanc
-plein (5.1).
+`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %
+(3.2). Sur le bleu nuit, le cadre est un blanc à 40 % (3.6, au-dessus du seuil 3:1 des contours) ; sur le
+safran, bleu nuit plein (9.0).
 
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, ombres) s'écrivent
@@ -141,13 +146,13 @@ Quatre fonds se relaient ; jamais deux fois le même à la suite.
 | Fond | Classe | Où |
 |---|---|---|
 | **Blanc** | — | couverture, et une section sur deux |
-| **Gris clair** `#F3F3F4` | `.sur-gris` | posé automatiquement une section sur deux par `outils/rythme.py` |
-| **Anthracite** | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
-| **Rouge DSG** | `.sur-rouge` | le renvoi final de chaque page : texte blanc, bouton d'appel inversé (blanc, texte noir, noir au survol) |
+| **Bleu pâle** `#EDF2FA` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` |
+| **Bleu nuit** `#14274A` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Safran** `#F6B828` | `.sur-vif` | le renvoi final de chaque page : texte bleu nuit, bouton d'appel inversé (bleu nuit, texte blanc ; blanc au survol) |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. On ne place jamais
-de logos de partenaires (multipliés sur le fond) ni de formulaire sur l'anthracite ou le rouge. Le logo ne va
-jamais sur le rouge : son toit y disparaîtrait. Sur l'anthracite, on emploie sa déclinaison négative
+de logos de partenaires (multipliés sur le fond) ni de formulaire sur le bleu nuit ou le safran. Le logo ne va
+jamais sur le safran : son toit rouge y jurerait. Sur le bleu nuit, on emploie sa déclinaison négative
 (`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
@@ -218,10 +223,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   (cartes, lots voisins) — jamais de case vide noire.
 - Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
   La liste des blocs concernés est unique, dans `01-socle.css`.
-- Le même carré sert de puce (listes de postes, garanties) et, en rouge, de marque « vous êtes ici »
+- Le même carré sert de puce (listes de postes, garanties) et, en bleu de plan, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Sur l'anthracite, les repères d'angle passent au **rouge** (`--c-repere`), sur la bande rouge au blanc.
-- Chaque intitulé de section est précédé du **toit** : un chevron rouge dessiné comme la ligne du logo.
+- Sur le bleu nuit, les repères d'angle passent au **safran** (`--c-repere`), sur la bande safran au bleu nuit.
+- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en bleu de
+  plan (safran sur le bleu nuit).
 
 ---
 
@@ -248,11 +254,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
 3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le fond blanc).
-4. Sections à intitulé accroché : l'entreprise, **en bande anthracite** (paragraphe d'intention + chiffres en
-   quatre cases, piquets et « + » en rouge), les prestations
+4. Sections à intitulé accroché : l'entreprise, **en bande bleu nuit** (paragraphe d'intention + chiffres en
+   quatre cases, piquets et « + » en safran), les prestations
    (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
-   largeur), la zone, le déroulé en quatre cases — gris et blanc en alternance.
-5. Renvoi final sur une bande rouge, bouton blanc, puis pied de page anthracite (logo négatif) et le nom de
+   largeur), la zone, le déroulé en quatre cases — bleu pâle et blanc en alternance.
+5. Renvoi final sur une bande safran, bouton bleu nuit, puis pied de page bleu nuit (logo négatif) et le nom de
    l'entreprise en enseigne, en filigrane.
 
 Les pages de métier s'ouvrent de la même façon, autour du tirage de chaque métier. Les pages intérieures
@@ -288,9 +294,10 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
-- Noir pur, une couleur étrangère au logo, le rouge du logo écrit sur le gris (utiliser `--c-accent`).
-- Le logo posé sur le rouge (son toit y disparaît) ; le logo clair sur l'anthracite (utiliser le négatif).
-- Plus d'une bande rouge par page : elle est réservée au renvoi final.
+- Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
+- Le safran écrit sur un fond clair (1.8) : il s'y pose en aplat, jamais en texte (utiliser `--c-accent`).
+- Le logo posé sur le safran (son toit rouge y jure) ; le logo clair sur le bleu nuit (utiliser le négatif).
+- Plus d'une bande safran par page : elle est réservée au renvoi final.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
   méthode en cinq temps).

@@ -2,8 +2,8 @@
 
 Une page entièrement blanche se lit comme un seul bloc, et le lecteur
 ne sait plus où finit une section. Quatre fonds se relaient donc dans
-chaque page : blanc, gris clair (.sur-gris), anthracite (.sur-sombre)
-et rouge (.sur-rouge, le renvoi final).
+chaque page : blanc, bleu pâle (.sur-pale), bleu nuit (.sur-sombre)
+et safran (.sur-vif, le renvoi final).
 
 Les deux derniers sont choisis à la main, dans les gabarits : ce sont
 des décisions de mise en page. Les deux premiers se déduisent : une
@@ -18,10 +18,10 @@ _SECTION = re.compile(r'<section class="([^"]*)"')
 
 # Le fond que chaque classe impose, dans l'ordre où on les teste.
 _FONDS_IMPOSES = [
-    ("sur-rouge", "rouge"),
+    ("sur-vif", "vif"),
     ("sur-sombre", "nuit"),
-    ("sur-gris", "gris"),
-    ("partenaires", "gris"),   # bande des références : son propre creux
+    ("sur-pale", "pale"),
+    ("partenaires", "pale"),   # bande des références : son propre creux
     ("couverture", "blanc"),   # la couverture de l'accueil
 ]
 
@@ -34,7 +34,7 @@ def _fond_impose(classes):
 
 
 def rythmer(html):
-    """Pose .sur-gris sur une section sur deux, dans <main> seulement.
+    """Pose .sur-pale sur une section sur deux, dans <main> seulement.
 
     La page commence toujours sur du blanc : la couverture de l'accueil
     et l'en-tête des pages intérieures le sont.
@@ -53,10 +53,10 @@ def rythmer(html):
             return correspondance.group(0)
         if "section" not in classes:
             return correspondance.group(0)
-        fond = "gris" if precedent[0] == "blanc" else "blanc"
+        fond = "pale" if precedent[0] == "blanc" else "blanc"
         precedent[0] = fond
-        if fond == "gris":
-            classes.append("sur-gris")
+        if fond == "pale":
+            classes.append("sur-pale")
         return '<section class="%s"' % " ".join(classes)
 
     corps = _SECTION.sub(poser, html[debut:fin])
