@@ -29,10 +29,11 @@
 }
 .btn:focus-visible::after{transform:scaleX(1)}
 
-/* Le safran ne sert qu'ici : à appeler l'action. Au survol, le bleu
-   nuit le recouvre ; sur la bande nuit, c'est le blanc. Sur la bande
-   safran du renvoi final, le bouton s'inverse (bleu nuit, texte
-   blanc) : les jetons --c-signal et --c-sur-signal y sont redéfinis. */
+/* La couleur d'action (--c-signal) ne sert qu'ici : à appeler
+   l'action. Au survol, l'encre la recouvre ; sur la bande sombre,
+   c'est le blanc. Sur la bande du renvoi final, le bouton s'inverse
+   (encre, texte blanc) : les jetons --c-signal et --c-sur-signal y
+   sont redéfinis (00-jetons.css). */
 .btn--plein{background:var(--c-signal);color:var(--c-sur-signal)}
 .btn--plein::after{background:var(--c-signal-fonce)}
 @media (hover:hover) and (pointer:fine){
@@ -68,8 +69,7 @@
 .intercalaire{margin-bottom:var(--sp-8)}
 .intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-5)}
 /* L'intitulé porte le toit du logo : un chevron, la ligne qui coiffe
-   « DSG ». Bleu de plan sur les fonds clairs, safran sur le bleu
-   nuit, bleu nuit sur la bande safran (--c-accent). */
+   « DSG ». Il prend la couleur d'accent du fond (--c-accent). */
 .intercalaire__nom{
   display:inline-flex;align-items:center;gap:var(--sp-3);
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);

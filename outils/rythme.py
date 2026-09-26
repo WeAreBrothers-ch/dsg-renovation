@@ -2,8 +2,8 @@
 
 Une page entièrement blanche se lit comme un seul bloc, et le lecteur
 ne sait plus où finit une section. Quatre fonds se relaient donc dans
-chaque page : blanc, bleu pâle (.sur-pale), bleu nuit (.sur-sombre)
-et safran (.sur-vif, le renvoi final).
+chaque page : blanc, pâle (.sur-pale), sombre (.sur-sombre) et vif
+(.sur-vif, le renvoi final). Leurs couleurs sont dans 00-jetons.css.
 
 Les deux derniers sont choisis à la main, dans les gabarits : ce sont
 des décisions de mise en page. Les deux premiers se déduisent : une

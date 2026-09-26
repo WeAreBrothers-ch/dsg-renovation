@@ -14,7 +14,7 @@
     --c-accent:#000;
     --c-ligne:rgba(0,0,0,.32);--c-ligne-forte:rgba(0,0,0,.62);--c-cadre:#000;--c-repere:#000;
   }
-  /* Sur papier, le bouton safran devient une case d'encre. */
+  /* Sur papier, le bouton d'appel devient une case d'encre. */
   .btn--plein{box-shadow:inset 0 0 0 1px #000}
   body{background:#fff;color:#000}
   .entete,.barre-mobile,.menu,.filtres,.ouverture__rideau{display:none!important}

@@ -17,7 +17,7 @@ VILLE = "Lausanne"
 # racine ; les gabarits y ajoutent le préfixe de la page).
 #   logo-blanc.avif  l'original fourni, pour fond clair (12 Ko)
 #   logo.webp        le même, pour les navigateurs sans AVIF
-#   logo-negatif     lettres blanches, toit rouge : pour le bleu nuit
+#   logo-negatif     lettres blanches, toit rouge : pour les fonds sombres
 #   logo.png         pour les robots (balisage, réseaux sociaux)
 LOGO_AVIF = "assets/images/logo-blanc.avif"
 LOGO_WEBP = "assets/images/logo.webp"

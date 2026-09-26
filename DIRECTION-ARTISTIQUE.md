@@ -8,13 +8,13 @@ Date : 25/09/2026 — Statut : **v2**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
 
-**Révision de palette, 26/09/2026 (v2.3) — « Bleu de plan & safran ».** Le client a jugé les couleurs du logo
-trop basiques et a choisi cette palette parmi trois ambiances rendues sur le site (bleu et safran, vert et
-moutarde, pétrole et abricot). Le logo garde ses couleurs ; le site ne les reprend plus. La structure, la
-typographie, les cadres et le mouvement ne changent pas ; les couleurs et les noms des fonds changent (§ 2,
-§ 2 bis, § 5, § 7). Les palettes précédentes restent lisibles dans l'historique git (« plâtre et brique » :
-`0a45b44` ; « bleu de travail, jaune de chantier » : `9fbd8d8` ; « le toit rouge », tirée du logo :
-`d604530`).
+**Révision de palette, 26/09/2026 (v2.4) — « Chocolat & ciel ».** Le client a jugé les couleurs du logo trop
+basiques, puis le bleu nuit et safran trop vus ; il a choisi cette palette parmi quatre ambiances rendues sur
+le site (outremer, patine vert-de-gris, chocolat et ciel, graphite et fluo). Le logo garde ses couleurs ; le
+site ne les reprend plus. La structure, la typographie, les cadres et le mouvement ne changent pas ; les
+couleurs et les noms des fonds changent (§ 2, § 2 bis, § 5, § 7). Les palettes précédentes restent lisibles
+dans l'historique git (« plâtre et brique » : `0a45b44` ; « bleu de travail, jaune de chantier » : `9fbd8d8` ;
+« le toit rouge », tirée du logo : `d604530` ; « bleu de plan & safran » : `c322a78`).
 
 ---
 
@@ -50,8 +50,8 @@ sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
 - **La photo plein écran d'emblée** (demande explicite du client). Remplacée par l'ouverture cadrée (§ 7).
-- Le plâtre beige : le fond est blanc, relayé par un bleu très pâle, proche du gris-bleu de Tekt ; la chaleur
-  vient des photos de chantier et du safran.
+- Le plâtre beige : le fond est blanc, relayé par un bleu ciel très pâle, proche du gris-bleu de Tekt ; la
+  chaleur vient des photos de chantier et du brun chocolat.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
 
@@ -64,14 +64,14 @@ sur la photo, la retenue générale.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond blanc**, relayé par un **bleu très pâle** ;
-- une **encre bleu nuit**, celle d'un tirage de plan, jamais un noir pur ;
+- un **fond blanc**, relayé par un **ciel très pâle** ;
+- une **encre brun chocolat**, celle du bois, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
-- des **bandes bleu nuit** qui rythment la page ; les piquets y passent au safran ;
+- des **bandes chocolat** qui rythment la page ; les piquets y passent au bleu ciel ;
 - une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme une pièce
   qu'on ouvre après l'avoir relevée ;
-- **le jaune safran** du matériel de chantier : il porte l'action, boutons d'appel et renvoi final ;
-- **le bleu de plan** pour ce qui s'écrit en couleur : liens, numéros, et devant chaque intitulé de section un
+- **le bleu ciel** d'une pièce rendue à la lumière : il porte l'action, boutons d'appel et renvoi final ;
+- **un bleu profond** pour ce qui s'écrit en couleur : liens, numéros, et devant chaque intitulé de section un
   chevron dessiné comme le toit du logo.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le logo et son
@@ -80,50 +80,54 @@ l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Bleu de plan & safran » (v2.3)
+## 2. Palette — « Chocolat & ciel » (v2.4)
 
-Trois couleurs, choisies par le client parmi trois ambiances rendues sur le site : le **bleu nuit** d'un tirage
-de plan pour l'encre et les bandes sombres, le **bleu de plan** pour ce qui s'écrit en couleur, le **jaune
-safran** du matériel de chantier pour l'action. Le logo garde ses propres couleurs ; le site ne les reprend pas.
+Trois couleurs, choisies par le client parmi quatre ambiances rendues sur le site : le **brun chocolat** du bois
+pour l'encre et les bandes sombres, le **bleu ciel** d'une pièce rendue à la lumière pour l'action, un **bleu
+profond** pour ce qui s'écrit en couleur. Le logo garde ses propres couleurs ; le site ne les reprend pas.
 Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
+
+Les feuilles de composants ne nomment jamais une couleur : elles demandent un rôle (`--c-encre`, `--c-signal`,
+`--c-accent`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
 
 ### Les trois couleurs
 | Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-nuit` | `#14213D` | l'encre du texte et des cadres |
-| `--c-bleu` | `#1F56C8` | l'accent écrit : liens, numéros, puces, chevrons |
-| `--c-safran` | `#F6B828` | l'action : boutons d'appel, poignée du comparateur, renvoi final |
-| `--c-safran-fonce` | `#EAA912` | le même, une ombre plus bas : surface élevée sur la bande safran |
+| `--c-chocolat` | `#2B1B14` | l'encre du texte et des cadres |
+| `--c-bleu` | `#1D64A8` | l'accent écrit : liens, numéros, puces, chevrons |
+| `--c-ciel` | `#9ACDF5` | l'action : boutons d'appel, poignée du comparateur, renvoi final |
+| `--c-ciel-fonce` | `#86C0EE` | le même, une ombre plus bas : surface élevée sur la bande ciel |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
 | `--c-papier` | `#FFFFFF` | fond dominant |
-| `--c-papier-2` | `#F0F4FA` | creux : survols, onglet ouvert, légendes du formulaire |
+| `--c-papier-2` | `#F3F8FD` | creux : survols, onglet ouvert, légendes du formulaire |
 | `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, étiquettes posées sur photo |
-| `--c-teinte` | `#E0E8F5` | aplat secondaire |
-| `--c-bitume` | `#14274A` | bleu nuit : bandes sombres, pied de page, visionneuse, barre mobile |
-| `--c-bitume-2` | `#1D3560` | surface élevée dans le bleu nuit |
+| `--c-teinte` | `#D9E9F8` | aplat secondaire |
+| `--c-bitume` | `#3B2419` | chocolat : bandes sombres, pied de page, visionneuse, barre mobile |
+| `--c-bitume-2` | `#4B3125` | surface élevée dans le chocolat |
 
-### Texte (blanc / creux / bleu pâle / pâle élevé)
+### Texte (blanc / creux / ciel pâle / pâle élevé)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#14213D` | 16.0 / 14.5 / 14.2 / 13.0 |
-| `--c-encre-60` | `#45516B` | 7.9 / 7.2 / 7.1 / 6.4 |
-| `--c-encre-40` | `#5A6680` | 5.8 / 5.2 / 5.1 / 4.7 |
-| `--c-craie` | `#F4F7FC` | 13.8 sur le bleu nuit |
-| `--c-craie-60` | `#B8C4DA` | 8.4 sur le bleu nuit, 6.9 élevé |
+| `--c-encre` | `#2B1B14` | 16.5 / 15.5 / 14.7 / 13.4 |
+| `--c-encre-60` | `#5A4840` | 8.6 / 8.1 / 7.7 / 7.0 |
+| `--c-encre-40` | `#6E5C54` | 6.3 / 5.9 / 5.6 / 5.1 |
+| `--c-craie` | `#FFF7F2` | 13.7 sur le chocolat |
+| `--c-craie-60` | `#DCC8BB` | 9.0 sur le chocolat, 7.4 élevé |
 
-### Safran — l'action ; bleu de plan — l'accent écrit
+### Bleu ciel — l'action ; bleu profond — l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = safran | aplat des boutons d'appel, poignée du comparateur, sélection de texte | bleu nuit dessus : 9.0 |
-| `--c-signal-fonce` | = bleu nuit | survol des boutons d'appel : le bleu nuit recouvre le safran | blanc dessus : 16.0 |
-| `--c-accent` | = bleu de plan | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.5 / 5.9 / 5.8 / 5.3 |
+| `--c-signal` | = ciel | aplat des boutons d'appel, poignée du comparateur, sélection de texte | chocolat dessus : 9.8 |
+| `--c-signal-fonce` | = chocolat | survol des boutons d'appel : le chocolat recouvre le ciel | blanc dessus : 16.5 |
+| `--c-accent` | = bleu profond | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.1 / 5.7 / 5.4 / 4.9 |
 
-Le safran ne s'écrit jamais sur un fond clair (1.8) : il s'y pose en aplat, texte bleu nuit dessus. Sur le bleu
-nuit, il devient la couleur écrite (8.3) et le bouton d'appel garde son aplat ; au survol, c'est le blanc qui le
-recouvre. Sur la bande safran, tout est bleu nuit et le bouton s'inverse : bleu nuit, texte blanc.
+Le ciel ne s'écrit jamais sur un fond clair (1.7) : il s'y pose en aplat, texte chocolat dessus. Sur le
+chocolat, un ciel à peine plus clair (`#A8D4F7`) devient la couleur écrite (9.2) et le bouton d'appel garde son
+aplat ; au survol, c'est le blanc qui le recouvre. Sur la bande ciel, tout est chocolat et le bouton s'inverse :
+chocolat, texte blanc.
 
 ### États
 `--c-valide` `#1D7048` (6.1) · `--c-alerte` `#B42318` (6.6) · `--c-focus` = encre. Chaque fond redéfinit
@@ -131,8 +135,8 @@ localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
 `--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %
-(3.2). Sur le bleu nuit, le cadre est un blanc à 40 % (3.6, au-dessus du seuil 3:1 des contours) ; sur le
-safran, bleu nuit plein (9.0).
+(3.3). Sur le chocolat, le cadre est un blanc à 40 % (3.6, au-dessus du seuil 3:1 des contours) ; sur le ciel,
+chocolat plein (9.8).
 
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, ombres) s'écrivent
@@ -146,13 +150,13 @@ Quatre fonds se relaient ; jamais deux fois le même à la suite.
 | Fond | Classe | Où |
 |---|---|---|
 | **Blanc** | — | couverture, et une section sur deux |
-| **Bleu pâle** `#EDF2FA` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` |
-| **Bleu nuit** `#14274A` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
-| **Safran** `#F6B828` | `.sur-vif` | le renvoi final de chaque page : texte bleu nuit, bouton d'appel inversé (bleu nuit, texte blanc ; blanc au survol) |
+| **Ciel pâle** `#EAF3FC` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` |
+| **Chocolat** `#3B2419` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Bleu ciel** `#9ACDF5` | `.sur-vif` | le renvoi final de chaque page : texte chocolat, bouton d'appel inversé (chocolat, texte blanc ; blanc au survol) |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. On ne place jamais
-de logos de partenaires (multipliés sur le fond) ni de formulaire sur le bleu nuit ou le safran. Le logo ne va
-jamais sur le safran : son toit rouge y jurerait. Sur le bleu nuit, on emploie sa déclinaison négative
+de logos de partenaires (multipliés sur le fond) ni de formulaire sur le chocolat ou le ciel. Le logo ne va
+jamais sur le ciel : son toit rouge y jurerait. Sur le chocolat, on emploie sa déclinaison négative
 (`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
@@ -223,11 +227,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   (cartes, lots voisins) — jamais de case vide noire.
 - Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
   La liste des blocs concernés est unique, dans `01-socle.css`.
-- Le même carré sert de puce (listes de postes, garanties) et, en bleu de plan, de marque « vous êtes ici »
+- Le même carré sert de puce (listes de postes, garanties) et, en bleu profond, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Sur le bleu nuit, les repères d'angle passent au **safran** (`--c-repere`), sur la bande safran au bleu nuit.
-- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en bleu de
-  plan (safran sur le bleu nuit).
+- Sur le chocolat, les repères d'angle passent au **bleu ciel** (`--c-repere`), sur la bande ciel au chocolat.
+- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en bleu
+  profond (bleu ciel sur le chocolat).
 
 ---
 
@@ -254,11 +258,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
 3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le fond blanc).
-4. Sections à intitulé accroché : l'entreprise, **en bande bleu nuit** (paragraphe d'intention + chiffres en
-   quatre cases, piquets et « + » en safran), les prestations
+4. Sections à intitulé accroché : l'entreprise, **en bande chocolat** (paragraphe d'intention + chiffres en
+   quatre cases, piquets et « + » en bleu ciel), les prestations
    (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
-   largeur), la zone, le déroulé en quatre cases — bleu pâle et blanc en alternance.
-5. Renvoi final sur une bande safran, bouton bleu nuit, puis pied de page bleu nuit (logo négatif) et le nom de
+   largeur), la zone, le déroulé en quatre cases — ciel pâle et blanc en alternance.
+5. Renvoi final sur une bande bleu ciel, bouton chocolat, puis pied de page chocolat (logo négatif) et le nom de
    l'entreprise en enseigne, en filigrane.
 
 Les pages de métier s'ouvrent de la même façon, autour du tirage de chaque métier. Les pages intérieures
@@ -295,9 +299,10 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
 - Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
-- Le safran écrit sur un fond clair (1.8) : il s'y pose en aplat, jamais en texte (utiliser `--c-accent`).
-- Le logo posé sur le safran (son toit rouge y jure) ; le logo clair sur le bleu nuit (utiliser le négatif).
-- Plus d'une bande safran par page : elle est réservée au renvoi final.
+- Le bleu ciel écrit sur un fond clair (1.7) : il s'y pose en aplat, jamais en texte (utiliser `--c-accent`).
+- Le logo posé sur le ciel (son toit rouge y jure) ; le logo clair sur le chocolat (utiliser le négatif).
+- Plus d'une bande ciel par page : elle est réservée au renvoi final.
+- Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
   méthode en cinq temps).

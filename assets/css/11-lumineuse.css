@@ -6,9 +6,9 @@
 .lumineuse{
   width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;
   margin:0;padding:0;border:0;overflow:hidden;
-  background:rgba(var(--c-nuit-rgb),.97);color:var(--c-craie);
+  background:rgba(var(--c-sombre-rgb),.97);color:var(--c-craie);
 }
-.lumineuse::backdrop{background:rgba(var(--c-nuit-rgb),.9)}
+.lumineuse::backdrop{background:rgba(var(--c-sombre-rgb),.9)}
 .lumineuse :focus-visible{outline-color:var(--c-craie)}
 
 .lumineuse__cadre{

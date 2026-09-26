@@ -1,25 +1,30 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
    Concept : « LE PLAN D'IMPLANTATION »
-   Palette (26/09/2026) : « BLEU DE PLAN & SAFRAN »
+   Palette (26/09/2026) : « CHOCOLAT & CIEL »
 
    Un chantier de rénovation commence par un relevé : on reporte la
    pièce sur le plan, on pose des repères aux angles, puis on ouvre.
-   Le site en reprend le geste et les couleurs :
-     - le bleu nuit d'un tirage de plan pour l'encre et les bandes
-       sombres, jamais un noir pur ;
-     - le bleu de plan, plus vif, pour ce qui s'écrit en couleur :
-       liens, numéros, puces ;
-     - le jaune safran du matériel de chantier pour l'action : les
-       boutons d'appel et le renvoi final ;
+   Le site en reprend le geste, et prend les couleurs d'une maison
+   qu'on rouvre :
+     - le brun chocolat du bois pour l'encre et les bandes sombres,
+       jamais un noir pur ;
+     - le bleu ciel d'une pièce rendue à la lumière pour l'action :
+       les boutons d'appel et le renvoi final ;
+     - un bleu plus profond pour ce qui s'écrit en couleur : liens,
+       numéros, puces ;
      - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
        comme les piquets d'implantation d'un géomètre.
    Le logo garde ses propres couleurs ; le site ne les reprend pas.
 
    Quatre fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     blanc · bleu pâle (.sur-pale) · bleu nuit (.sur-sombre)
-     · safran (.sur-vif, le renvoi final).
+     blanc · ciel pâle (.sur-pale) · chocolat (.sur-sombre)
+     · bleu ciel (.sur-vif, le renvoi final).
+
+   Les autres feuilles ne nomment jamais une couleur : elles demandent
+   un rôle (--c-encre, --c-signal, --c-accent…). Changer de palette,
+   c'est changer ce fichier.
 
    Aucune valeur n'est écrite ailleurs qu'ici (hors cas commenté).
    Chaque couleur de texte porte son contraste mesuré (WCAG 2.1) sur
@@ -27,66 +32,66 @@
    ============================================================ */
 :root{
   /* ---------- Les trois couleurs ---------- */
-  --c-nuit:#14213D;          /* bleu nuit : l'encre du plan */
-  --c-bleu:#1F56C8;          /* bleu de plan : ce qui s'écrit en couleur */
-  --c-safran:#F6B828;        /* jaune safran : l'action */
-  --c-safran-fonce:#EAA912;  /* le même, une ombre plus bas */
+  --c-chocolat:#2B1B14;      /* brun chocolat : l'encre */
+  --c-bleu:#1D64A8;          /* bleu profond : ce qui s'écrit en couleur */
+  --c-ciel:#9ACDF5;          /* bleu ciel : l'action */
+  --c-ciel-fonce:#86C0EE;    /* le même, une ombre plus bas */
 
   /* ---------- Surfaces ---------- */
   --c-papier:#FFFFFF;        /* DOMINANTE : blanc */
-  --c-papier-2:#F0F4FA;      /* creux : survols, onglet ouvert, légendes */
+  --c-papier-2:#F3F8FD;      /* creux : survols, onglet ouvert, légendes */
   --c-fiche:#FFFFFF;         /* relief : cellules de formulaire, étiquettes */
-  --c-teinte:#E0E8F5;        /* aplat secondaire */
-  --c-bitume:#14274A;        /* bleu nuit : bandes sombres, pied, visionneuse */
-  --c-bitume-2:#1D3560;      /* surface élevée dans le bleu nuit */
+  --c-teinte:#D9E9F8;        /* aplat secondaire */
+  --c-bitume:#3B2419;        /* chocolat : bandes sombres, pied, visionneuse */
+  --c-bitume-2:#4B3125;      /* surface élevée dans le chocolat */
 
   /* Les mêmes teintes en composantes, pour les voiles translucides
-     (en-tête dépoli, panneau posé sur photo, ombres). */
+     (en-tête dépoli, panneau posé sur photo, visionneuse, ombres). */
   --c-papier-rgb:255,255,255;
-  --c-encre-rgb:20,33,61;
-  --c-nuit-rgb:20,39,74;
-  --c-craie-rgb:244,247,252;
+  --c-encre-rgb:43,27,20;
+  --c-sombre-rgb:59,36,25;
+  --c-craie-rgb:255,247,242;
 
   /* ---------- Textes sur le blanc ----------
-     blanc / creux / bleu pâle / pâle élevé */
-  --c-encre:var(--c-nuit);   /* 16.0 / 14.5 / 14.2 / 13.0 */
-  --c-encre-60:#45516B;      /*  7.9 /  7.2 /  7.1 /  6.4 */
-  --c-encre-40:#5A6680;      /*  5.8 /  5.2 /  5.1 /  4.7 */
-  --c-craie:#F4F7FC;         /* 13.8 sur le bleu nuit */
-  --c-craie-60:#B8C4DA;      /*  8.4 sur le bleu nuit, 6.9 élevé */
+     blanc / creux / ciel pâle / pâle élevé */
+  --c-encre:var(--c-chocolat);  /* 16.5 / 15.5 / 14.7 / 13.4 */
+  --c-encre-60:#5A4840;      /*  8.6 /  8.1 /  7.7 /  7.0 */
+  --c-encre-40:#6E5C54;      /*  6.3 /  5.9 /  5.6 /  5.1 */
+  --c-craie:#FFF7F2;         /* 13.7 sur le chocolat */
+  --c-craie-60:#DCC8BB;      /*  9.0 sur le chocolat, 7.4 élevé */
 
-  /* ---------- Safran — l'action ----------
+  /* ---------- Bleu ciel — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur. Le
-     texte posé dessus est bleu nuit : 9.0. Au survol, le bleu nuit
-     recouvre le safran et le texte passe au blanc : 16.0. Le safran ne
-     s'écrit jamais sur un fond clair (1.8) : il s'y pose en aplat. */
-  --c-signal:var(--c-safran);
-  --c-signal-fonce:var(--c-nuit);
-  --c-sur-signal:var(--c-nuit);
+     texte posé dessus est chocolat : 9.8. Au survol, le chocolat
+     recouvre le ciel et le texte passe au blanc : 16.5. Le ciel ne
+     s'écrit jamais sur un fond clair (1.7) : il s'y pose en aplat. */
+  --c-signal:var(--c-ciel);
+  --c-signal-fonce:var(--c-chocolat);
+  --c-sur-signal:var(--c-chocolat);
   --c-sur-signal-survol:#FFFFFF;
 
-  /* ---------- Bleu de plan — l'accent ----------
+  /* ---------- Bleu profond — l'accent ----------
      Liens dans le texte, numéros de séquence, puces, astérisques,
      « + » des chiffres, repère « vous êtes ici », chevron des
      intitulés. */
-  --c-accent:var(--c-bleu);  /*  6.5 /  5.9 /  5.8 /  5.3 */
+  --c-accent:var(--c-bleu);  /*  6.1 /  5.7 /  5.4 /  4.9 */
 
   /* ---------- États ---------- */
-  --c-valide:#1D7048;        /*  6.1 /  5.5 /  5.4 /  4.9 */
-  --c-alerte:#B42318;        /*  6.6 /  6.0 /  5.8 /  5.3 */
-  --c-focus:var(--c-nuit);   /* 16.0 */
+  --c-valide:#1D7048;        /*  6.1 /  5.7 /  5.4 /  4.9 */
+  --c-alerte:#B42318;        /*  6.6 /  6.2 /  5.9 /  5.3 */
+  --c-focus:var(--c-chocolat);  /* 16.5 */
 
   /* ---------- Filets ----------
      Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
      une séparation discrète. Le filet doux sert à l'intérieur des blocs. */
   --c-ligne:rgba(var(--c-encre-rgb),.16);
-  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.2 */
+  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.3 */
   --c-cadre:var(--c-encre);
   --bd-fin:1px solid var(--c-ligne);
 
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre.
-     Bleu nuit sur les fonds clairs et sur le safran, safran sur le
-     bleu nuit. */
+     Chocolat sur les fonds clairs et sur le ciel, bleu ciel sur le
+     chocolat. */
   --repere:5px;
   --c-repere:var(--c-cadre);
 }
@@ -99,62 +104,63 @@
    ajouter la classe à une section suffit.
    ============================================================ */
 
-/* Bleu pâle : la respiration entre deux sections blanches. Les
+/* Ciel pâle : la respiration entre deux sections blanches. Les
    textes du blanc y tiennent tous (voir leurs contrastes ci-dessus). */
 .sur-pale{
-  --c-papier:#EDF2FA;
-  --c-papier-2:#E0E8F5;
+  --c-papier:#EAF3FC;
+  --c-papier-2:#D9E9F8;
   --c-fiche:#FFFFFF;
-  --c-papier-rgb:237,242,250;
+  --c-papier-rgb:234,243,252;
   background-color:var(--c-papier);
 }
 
-/* Bleu nuit : une bande par page, le pied et la barre mobile. Le
-   safran y devient la couleur écrite, et le bouton d'appel garde son
-   aplat : au survol, c'est le blanc qui le recouvre. */
+/* Chocolat : une bande par page, le pied et la barre mobile. Le ciel
+   y devient la couleur écrite, et le bouton d'appel garde son aplat :
+   au survol, c'est le blanc qui le recouvre. */
 .sur-sombre{
-  --c-papier:#14274A;
-  --c-papier-2:#1D3560;
-  --c-fiche:#1D3560;
-  --c-papier-rgb:20,39,74;
-  --c-encre:#F4F7FC;         /* nuit / élevé : 13.8 / 11.3 */
-  --c-encre-60:#B8C4DA;      /*  8.4 /  6.9 */
-  --c-encre-40:#97A5C0;      /*  6.0 /  4.9 */
-  --c-accent:var(--c-safran);/*  8.3 /  6.8 */
+  --c-papier:#3B2419;
+  --c-papier-2:#4B3125;
+  --c-fiche:#4B3125;
+  --c-papier-rgb:59,36,25;
+  --c-encre:#FFF7F2;         /* chocolat / élevé : 13.7 / 11.2 */
+  --c-encre-60:#DCC8BB;      /*  9.0 /  7.4 */
+  --c-encre-40:#C8B2A4;      /*  7.1 /  5.9 */
+  --c-accent:#A8D4F7;        /*  9.2 /  7.6 */
   --c-signal-fonce:#FFFFFF;
-  --c-sur-signal-survol:var(--c-nuit);   /* 16.0 */
+  --c-sur-signal-survol:var(--c-chocolat);   /* 16.5 */
   --c-ligne:rgba(255,255,255,.16);
   --c-ligne-forte:rgba(255,255,255,.5);
   --c-cadre:rgba(255,255,255,.4);   /* trait de plan : 3.6, seuil des contours 3:1 */
-  --c-repere:var(--c-safran);       /* 8.3 */
-  --c-valide:#8FD4AE;        /*  8.6 /  7.0 */
-  --c-alerte:#FF9D8F;        /*  7.4 /  6.1 */
-  --c-focus:#F4F7FC;
+  --c-repere:#A8D4F7;               /* 9.2 */
+  --c-valide:#8FD4AE;        /*  8.4 /  6.9 */
+  --c-alerte:#FF9D8F;        /*  7.2 /  5.9 */
+  --c-focus:#FFF7F2;
   color:var(--c-encre);
   background-color:var(--c-papier);
 }
 
-/* Safran : le renvoi final de chaque page. Tout y est bleu nuit (9.0),
-   et le bouton d'appel s'inverse : bleu nuit, texte blanc (16.0) ; au
-   survol, le blanc le recouvre et le texte repasse au bleu nuit. */
+/* Bleu ciel : le renvoi final de chaque page. Tout y est chocolat
+   (9.8), et le bouton d'appel s'inverse : chocolat, texte blanc
+   (16.5) ; au survol, le blanc le recouvre et le texte repasse au
+   chocolat. */
 .sur-vif{
-  --c-papier:var(--c-safran);
-  --c-papier-2:var(--c-safran-fonce);
-  --c-fiche:var(--c-safran-fonce);
-  --c-papier-rgb:246,184,40;
-  --c-encre:var(--c-nuit);   /* safran / safran foncé : 9.0 / 7.7 */
-  --c-encre-60:var(--c-nuit);
-  --c-encre-40:var(--c-nuit);
-  --c-accent:var(--c-nuit);
-  --c-signal:var(--c-nuit);
+  --c-papier:var(--c-ciel);
+  --c-papier-2:var(--c-ciel-fonce);
+  --c-fiche:var(--c-ciel-fonce);
+  --c-papier-rgb:154,205,245;
+  --c-encre:var(--c-chocolat);  /* ciel / ciel foncé : 9.8 / 8.5 */
+  --c-encre-60:var(--c-chocolat);
+  --c-encre-40:var(--c-chocolat);
+  --c-accent:var(--c-chocolat);
+  --c-signal:var(--c-chocolat);
   --c-signal-fonce:#FFFFFF;
   --c-sur-signal:#FFFFFF;
-  --c-sur-signal-survol:var(--c-nuit);
-  --c-ligne:rgba(var(--c-encre-rgb),.25);
-  --c-ligne-forte:rgba(var(--c-encre-rgb),.6);  /* 3.6 */
-  --c-cadre:var(--c-nuit);
-  --c-repere:var(--c-nuit);
-  --c-focus:var(--c-nuit);
+  --c-sur-signal-survol:var(--c-chocolat);
+  --c-ligne:rgba(var(--c-encre-rgb),.3);
+  --c-ligne-forte:rgba(var(--c-encre-rgb),.65);  /* 4.2 */
+  --c-cadre:var(--c-chocolat);
+  --c-repere:var(--c-chocolat);
+  --c-focus:var(--c-chocolat);
   color:var(--c-encre);
   background-color:var(--c-papier);
 }

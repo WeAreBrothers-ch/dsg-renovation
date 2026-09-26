@@ -71,7 +71,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `contenu_questions.py` | vingt questions, groupées par moment du projet |
 | `contenu_divers.py` | ordre des travaux, besoins, familles de biens, collaborations |
 | `assemblage.py` | feuille unique, versions, assemblage et écriture d'une page |
-| `rythme.py` | alternance automatique des fonds blanc / bleu pâle |
+| `rythme.py` | alternance automatique des fonds blanc / pâle |
 | `typographie.py` | espaces insécables avant « : ; ? ! » et dans les guillemets |
 | `images.py` | remplace les images Wix par leurs copies locales (srcset compris) |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
@@ -126,12 +126,14 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Bleu de plan & safran » (26/09/2026), choisie par le client
-parmi trois ambiances — tout est décrit dans `DIRECTION-ARTISTIQUE.md`.
-Le bleu nuit d'un tirage de plan pour l'encre, le bleu de plan pour les
-liens et les repères écrits, le jaune safran pour l'action. Le logo
-garde ses propres couleurs. Quatre fonds alternent : blanc, bleu pâle,
-une bande bleu nuit par page, et le renvoi final en safran. Des cadres
+Palette « Chocolat & ciel » (26/09/2026), choisie par le client parmi
+quatre ambiances — tout est décrit dans `DIRECTION-ARTISTIQUE.md`. Le
+brun chocolat du bois pour l'encre, le bleu ciel pour l'action, un bleu
+profond pour les liens et les repères écrits. Le logo garde ses propres
+couleurs. Quatre fonds alternent : blanc, ciel pâle, une bande chocolat
+par page, et le renvoi final en bleu ciel. Changer de palette, c'est
+changer `assets/css/00-jetons.css` : les autres feuilles ne demandent
+que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…). Des cadres
 d'un pixel marqués d'un repère carré à chaque angle, un chevron devant
 chaque intitulé, une grotesque (Archivo) pour les titres et une sérif de
 lecture (Newsreader) pour les phrases.

@@ -57,7 +57,7 @@
   .pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
 }
 
-/* Sur le bleu nuit, la déclinaison négative du logo : lettres blanches,
+/* Sur le fond sombre, la déclinaison négative du logo : lettres blanches,
    toit du logo conservé (assets/images/logo-negatif.webp). */
 .pied__marque img{height:40px;width:auto;margin-bottom:var(--sp-4)}
 .pied address{display:flex;flex-direction:column;color:var(--c-encre-60)}
@@ -96,7 +96,7 @@
   margin-top:var(--sp-6);margin-bottom:-.2em;padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;font-size:min(8vw,8rem);
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
-  /* Une enseigne en filigrane : le bleu clair du pied, estompé,
+  /* Une enseigne en filigrane : le texte secondaire du pied, estompé,
      pour qu'elle signe la page sans disputer la lecture au pied. */
   color:var(--c-encre-60);opacity:.22;
 }
