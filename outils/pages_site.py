@@ -17,10 +17,46 @@ import contenu_entreprise as ce
 DOSSIER = os.path.join(os.path.dirname(__file__), "fragments")
 
 
+def _coordonnees():
+    """Les marqueurs que les fragments peuvent employer : une adresse ou
+    un numéro ne s'écrit qu'une fois, dans donnees_site.py."""
+    import donnees_site as d
+    return {
+        "{{TELEPHONE}}": d.TELEPHONE, "{{TELEPHONE_BRUT}}": d.TELEPHONE_BRUT,
+        "{{COURRIEL}}": d.COURRIEL, "{{RUE}}": d.RUE,
+        "{{CODE_POSTAL}}": d.CODE_POSTAL, "{{VILLE}}": d.VILLE,
+        "{{OUVERTURE}}": d.OUVERTURE, "{{FERMETURE}}": d.FERMETURE,
+    }
+
+
 def fragment(nom):
-    """Bloc repris tel quel du dossier d'origine."""
+    """Bloc repris du dossier d'origine, coordonnées remplies."""
     with io.open(os.path.join(DOSSIER, nom + ".html"), encoding="utf-8") as f:
-        return f.read()
+        texte = f.read()
+    for marqueur, valeur in _coordonnees().items():
+        texte = texte.replace(marqueur, valeur)
+    if "{{RESSOURCES_WIX" in texte:
+        texte = _ressources_wix(texte)
+    return texte
+
+
+def _ressources_wix(texte):
+    """Les annexes disent la vérité sur les images encore servies par
+    Wix : la phrase disparaît d'elle-même une fois toutes les images
+    rapatriées (outils/rapatrier_images.py)."""
+    import images
+    reste = images.reste_des_images_wix()
+    long = ("""              <p>
+                Tant que certaines photographies de chantier restent servies
+                depuis l'infrastructure d'images de Wix.com Ltd., leur
+                chargement transmet techniquement votre adresse IP à ce
+                prestataire, comme pour toute ressource distante. Aucune
+                donnée du formulaire ne lui est transmise.
+              </p>""" if reste else "")
+    court = (" Une partie des photographies est encore servie depuis "
+             "l'infrastructure de Wix, ce qui transmet l'adresse IP du "
+             "visiteur à ce prestataire." if reste else "")
+    return texte.replace("{{RESSOURCES_WIX}}", long).replace("{{RESSOURCES_WIX_COURT}}", court)
 
 
 def entreprise(services, base=""):
@@ -58,7 +94,7 @@ def entreprise(services, base=""):
 {briques.intercalaire("Déroulé", "Du premier appel aux clés",
                       "Comment se déroule|un chantier",
                       "Six temps, dans cet ordre, sur tous nos chantiers — "
-                      "qu'il s'agisse d'un seul lot ou d'une rénovation "
+                      "qu'il s'agisse d'un seul métier ou d'une rénovation "
                       "complète.")}
 {repli.replis([(titre, "<p>%s</p>" % texte, cote)
                 for titre, texte, cote in ce.DEROULE])}
@@ -93,12 +129,13 @@ def entreprise(services, base=""):
                       "métier où tout se sait vite.")}
       <div class="service__texte revele" style="margin-bottom:var(--sp-7)">
         <p>Les grandes régies de la place lausannoise nous confient des
-        remises en état entre deux locations, parfois plusieurs logements du
+        <a href="{base}services/remise-en-etat-appartement.html">remises en
+        état entre deux locations</a>, parfois plusieurs logements du
         même immeuble sur une même année. Ce sont des chantiers courts,
-        cadrés par une date de libération, où la fiabilité compte davantage
+        cadrés par une date de remise du logement, où la fiabilité compte davantage
         que le prix : un logement rendu en retard, c'est un mois de loyer
         perdu pour le propriétaire.</p>
-        <p>Les architectes nous confient l'exécution de lots sur descriptif.
+        <p>Les architectes nous confient l'exécution de travaux sur descriptif.
         Les propriétaires privés nous appellent le plus souvent après une
         recommandation de voisinage — et repassent pour la pièce suivante
         deux ans plus tard.</p>
@@ -107,14 +144,7 @@ def entreprise(services, base=""):
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tTemoins">
-    <div class="zone">
-{briques.intercalaire("Retours", "Ce que disent nos clients",
-                      "Trois chantiers,|trois avis")}
-{confiance.temoins()}
-    </div>
-  </section>
-
+{confiance.section_temoins(base)}
   <section class="section" aria-labelledby="tModes">
     <div class="zone">
 {briques.intercalaire("Collaborations", "Selon qui commande",
@@ -128,7 +158,7 @@ def entreprise(services, base=""):
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("Prestations", "Cinq pages, neuf métiers",
+{briques.intercalaire("Prestations", "Tout ce que nous faisons",
                       "Ce que nous|savons faire")}
 {briques.liste_metiers(services, base)}
     </div>

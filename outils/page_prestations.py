@@ -1,7 +1,7 @@
 """Corps de la page pilier des prestations.
 
-Les neuf lots, le besoin auquel chacun répond, l'ordre dans lequel ils
-s'enchaînent, et pourquoi les confier à une seule entreprise.
+Les prestations, le besoin auquel chacune répond, l'ordre dans lequel
+les travaux s'enchaînent, et pourquoi les confier à une seule entreprise.
 """
 
 import briques
@@ -11,16 +11,15 @@ import contenu_divers
 
 
 def savoir_faire(services, base=""):
-    """Page pilier : les neuf lots, leur ordre, et le besoin qu'ils couvrent."""
+    """Page pilier : les prestations, leur ordre, et le besoin qu'elles couvrent."""
     return f"""
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("Les neuf lots", "Une seule entreprise",
-                      "Les lots que|nous menons",
-                      "Cinq pages pour neuf métiers : ceux qui se posent "
-                      "ensemble sur un chantier partagent la leur. Chacune "
-                      "dit ce qu'elle couvre, comment nous procédons et ce "
-                      "que le bâti lausannois lui impose.")}
+{briques.intercalaire("Nos prestations", "Une seule entreprise",
+                      "Toutes nos prestations|de rénovation",
+                      "Chaque page détaille ce que comprend la prestation, "
+                      "comment nous procédons et ce que les immeubles "
+                      "lausannois lui imposent.")}
 {briques.liste_metiers(services, base)}
     </div>
   </section>
@@ -28,10 +27,10 @@ def savoir_faire(services, base=""):
   <section class="section" aria-labelledby="tBesoins">
     <div class="zone">
 {briques.intercalaire("Par besoin", "Ce qu'on nous dit au téléphone",
-                      "Quel lot|pour quel besoin",
+                      "Votre besoin,|la bonne prestation",
                       "Personne n'appelle pour demander « de la plâtrerie ». "
-                      "Voici les phrases que nous entendons vraiment, et le "
-                      "lot qui y répond.")}
+                      "Voici les phrases que nous entendons vraiment, et la "
+                      "prestation qui y répond.")}
 {briques_bis.besoins(contenu_divers.BESOINS, services, base)}
     </div>
   </section>
@@ -39,10 +38,10 @@ def savoir_faire(services, base=""):
   <section class="section sur-sombre" aria-labelledby="tOrdre">
     <div class="zone">
 {briques.intercalaire("L'ordre", "Pourquoi on ne peint pas en premier",
-                      "Dans quel ordre|les lots s'enchaînent",
+                      "Dans quel ordre|se font les travaux",
                       "Un chantier de rénovation ne se compose pas, il se "
-                      "séquence. Inverser deux lots, c'est refaire le "
-                      "premier.")}
+                      "séquence. Inverser deux étapes, c'est refaire la "
+                      "première.")}
 {repli.replis([(titre, "<p>%s</p>" % texte)
                 for titre, texte in contenu_divers.ENCHAINEMENT])}
     </div>
@@ -51,7 +50,7 @@ def savoir_faire(services, base=""):
   <section class="section" aria-labelledby="tPourquoi">
     <div class="zone">
 {briques.intercalaire("Le principe", "Pourquoi une seule entreprise",
-                      "Neuf lots chez nous,|ou neuf entreprises")}
+                      "Une seule entreprise,|ou neuf")}
       <div class="service__deux revele">
         <div class="service__texte">
           <p>Une rénovation qui passe par neuf entreprises différentes, c'est
@@ -70,7 +69,7 @@ def savoir_faire(services, base=""):
           <ul class="encadre__liste">
             <li>La coordination des corps de métier entre eux.</li>
             <li>Les temps de séchage et leur incidence sur le planning.</li>
-            <li>Les reprises entre deux lots, réglées en interne.</li>
+            <li>Les reprises entre deux métiers, réglées en interne.</li>
             <li>L'évacuation des déchets et le nettoyage final.</li>
           </ul>
         </aside>
@@ -79,7 +78,7 @@ def savoir_faire(services, base=""):
   </section>
 """ + briques.appel(
         base,
-        "Un lot, ou le chantier entier",
+        "Un seul poste, ou le chantier entier",
         "Nous intervenons aussi bien sur un seul poste que sur une rénovation "
         "complète. Décrivez votre projet, nous vous disons ce qu'il demande.",
     )

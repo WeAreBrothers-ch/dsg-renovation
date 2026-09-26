@@ -1,4 +1,4 @@
-"""Ce que chaque lot de structure rencontre dans le bâti lausannois.
+"""Ce que chaque métier de structure rencontre dans le bâti lausannois.
 
 C'est le contenu que personne d'autre ne peut copier : il parle des
 immeubles de Sous-Gare, des villas de Chailly et des halles de Sévelin,

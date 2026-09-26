@@ -24,7 +24,7 @@
    */
   function majCompteur(nombre) {
     if (!compteur) { return; }
-    compteur.textContent = nombre + (nombre > 1 ? " fiches affichées" : " fiche affichée");
+    compteur.textContent = nombre + (nombre > 1 ? " chantiers affichés" : " chantier affiché");
   }
 
   /**

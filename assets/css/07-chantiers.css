@@ -47,6 +47,7 @@
 .signature__cadre{display:block;overflow:hidden}
 .signature__media img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
 .signature__tampon{position:absolute;right:var(--sp-4);bottom:var(--sp-4);z-index:2}
+.signature__texte a{color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .signature__texte{
   grid-row:2;padding:var(--sp-5);margin-top:-1px;
   box-shadow:inset 0 0 0 1px var(--c-cadre);background:var(--c-papier);

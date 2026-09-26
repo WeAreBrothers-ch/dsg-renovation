@@ -1,12 +1,12 @@
 """Contenu neuf des pages savoir-faire, réalisations et références.
 
 Trois blocs qui n'existaient pas dans le dossier d'une page : l'ordre
-dans lequel les lots s'enchaînent, les trois types de biens que nous
+dans lequel les travaux s'enchaînent, les trois types de biens que nous
 reprenons à Lausanne, et les trois manières de travailler avec nous.
 """
 
 # ---------------------------------------------------------------- services
-# L'ordre des lots sur un chantier. C'est la question que tout le monde
+# L'ordre des travaux sur un chantier. C'est la question que tout le monde
 # se pose et que personne ne publie.
 ENCHAINEMENT = [
     ("Démolition et dépose",
@@ -15,7 +15,7 @@ ENCHAINEMENT = [
     ("Cloisons et faux plafonds",
      "Les volumes se dessinent. Tout ce qui touche à la géométrie de la pièce "
      "se décide ici, parce qu'après, tout dépend de ces lignes."),
-    ("Lots techniques",
+    ("Électricité et sanitaire",
      "Électricité, sanitaire, ventilation : les réseaux passent dans les "
      "cloisons et les plafonds tant qu'ils sont ouverts."),
     ("Plâtrerie",
@@ -25,17 +25,17 @@ ENCHAINEMENT = [
      "Les pièces d'eau se traitent avant les sols secs : elles demandent des "
      "temps de séchage et salissent."),
     ("Sols",
-     "Ragréage puis pose. Le sol arrive tard pour ne pas être abîmé par les "
-     "lots précédents."),
+     "Mise à niveau (ragréage), puis pose. Le sol arrive tard pour ne pas "
+     "être abîmé par les travaux précédents."),
     ("Peinture et revêtements muraux",
      "L'avant-dernier geste. Les retouches se font après la pose des "
      "plinthes et des portes."),
     ("Nettoyage et réception",
-     "Deux passes, un tour du logement avec vous, la liste des réserves, "
-     "puis les clés."),
+     "Deux passages de nettoyage, un tour du logement avec vous pour "
+     "relever les derniers défauts, puis les clés."),
 ]
 
-# Correspondance entre un besoin exprimé et le lot qui y répond.
+# Correspondance entre un besoin exprimé et la prestation qui y répond.
 BESOINS = [
     ("« Mon appartement est sombre »", "platrerie-cloisons",
      "Éclairage intégré et teintes claires — souvent avec la peinture."),
@@ -43,14 +43,14 @@ BESOINS = [
      "Recouper un volume existant, isolation phonique comprise."),
     ("« Les murs sont fissurés »", "platrerie-cloisons",
      "Traitement des fissures et reprise complète du support."),
-    ("« Ma salle de bains a trente ans »", "carrelage-sols",
+    ("« Ma salle de bains a trente ans »", "renovation-salle-de-bains",
      "Dépose, étanchéité et recarrelage du sol au plafond."),
     ("« La moquette doit partir »", "carrelage-sols",
      "Dépose, ragréage et pose d'un parquet, d'un vinyle ou d'un linoléum."),
-    ("« Je reloue dans six semaines »", "peinture",
+    ("« Je reloue dans six semaines »", "remise-en-etat-appartement",
      "Remise en état entre deux baux, nettoyage compris."),
     ("« Je viens d'acheter, tout est à faire »", "renovation-complete",
-     "Tous les lots coordonnés, un seul devis, une seule date."),
+     "Tous les corps de métier coordonnés, un seul devis, une seule date."),
     ("« Les travaux sont finis, c'est inhabitable »", "nettoyage-fin-de-chantier",
      "Nettoyage de fin de chantier, même après une autre entreprise."),
 ]
@@ -72,11 +72,11 @@ BIENS = [
      "chantier consiste à rouvrir, à éclaircir et à remplacer des "
      "revêtements qui ont quarante ans.",
      ["Cloisons", "Carrelage", "Peinture", "Sols"]),
-    ("L'immeuble de rendement",
+    ("L'immeuble locatif",
      "Toute l'agglomération lausannoise",
      "Des remises en état entre deux locations, souvent logement par "
      "logement, dans un immeuble habité. La contrainte n'est pas technique, "
-     "elle est calendaire : une date de libération ferme, cadrée sur "
+     "elle est calendaire : une date de fin de travaux ferme, calée sur "
      "l'entrée du locataire suivant.",
      ["Peinture", "Plâtrerie", "Sols", "Nettoyage"]),
 ]
@@ -85,8 +85,9 @@ BIENS = [
 SURPRISES = [
     ("Une chape qui n'est pas de niveau",
      "Deux à trois centimètres d'écart sur dix mètres, courant dans les "
-     "immeubles d'avant-guerre. Un ragréage règle la question, mais il "
-     "s'ajoute au devis s'il n'a pas été anticipé à la visite."),
+     "immeubles d'avant-guerre. Une mise à niveau (ragréage) règle la "
+     "question, mais elle "
+     "s'ajoute au devis si elle n'a pas été anticipée à la visite."),
     ("Un plancher bois sous le revêtement",
      "Sous un vieux linoléum, on trouve souvent des lames sur solives qui "
      "jouent. Un panneau de répartition devient nécessaire avant tout "
@@ -96,26 +97,26 @@ SURPRISES = [
      "sommes pas électriciens, mais nous le signalons et nous coordonnons "
      "l'intervention."),
     ("Un mur qui n'est pas celui qu'on croyait",
-     "Porteur alors qu'il paraissait léger, ou l'inverse. Seul un relevé sur "
-     "place tranche, et il vaut mieux le faire avant de vendre une ouverture."),
+     "Porteur alors qu'il paraissait léger, ou l'inverse. Seule une "
+     "vérification sur place tranche, et il vaut mieux le faire avant de vendre une ouverture."),
 ]
 
 # -------------------------------------------------------------- références
 # Trois manières de travailler avec nous, selon qui commande.
 COLLABORATIONS = [
     ("Avec une régie",
-     "Remises en état et site occupé",
-     "Nous établissons des devis par logement, avec une date de libération "
-     "ferme. Sur un immeuble, nous intervenons appartement par appartement "
+     "Remises en état, immeubles habités",
+     "Nous établissons des devis par logement, avec une date de remise du "
+     "logement ferme. Sur un immeuble, nous intervenons appartement par appartement "
      "au fil des relocations, sans bloquer les surfaces encore louées. Le "
-     "nettoyage est compris : le logement est reloueable le jour de la "
+     "nettoyage est compris : le logement est relouable le jour de la "
      "réception.",
-     ["Devis par logement", "Date de libération ferme", "Chantier en site occupé"]),
+     ["Devis par logement", "Date de remise ferme", "Immeuble habité"]),
     ("Avec un architecte",
      "Exécution sur descriptif",
-     "Nous répondons sur descriptif et nous tenons le planning des lots qui "
+     "Nous répondons sur descriptif et nous tenons le planning des travaux qui "
      "nous sont confiés. Les réunions de chantier sont suivies par le même "
-     "responsable du début à la fin, ce qui évite de réexpliquer le dossier "
+     "responsable du début à la fin, ce qui évite de tout réexpliquer "
      "à chaque passage.",
      ["Réponse sur descriptif", "Interlocuteur unique", "Suivi de réunions"]),
     ("Avec un propriétaire",

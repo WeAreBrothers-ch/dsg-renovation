@@ -47,12 +47,15 @@ def onglets(panneaux, etiquette):
     )
 
 
-def replis(entrees, numerote=True):
+def replis(entrees, numerote=True, ouvert=False):
     """Une suite de lignes dépliables.
 
     `entrees` : (intitulé, corps HTML) ou (intitulé, corps, cote).
-    Fermée, chaque ligne se lit comme une ligne de sommaire.
+    Fermée, chaque ligne se lit comme une ligne de sommaire. `ouvert` :
+    les lignes courtes et essentielles (les étapes d'une méthode) se
+    lisent d'emblée ; on peut toujours les refermer.
     """
+    attribut = " open" if ouvert else ""
     lignes = []
     for rang, entree in enumerate(entrees, 1):
         titre, corps = entree[0], entree[1]
@@ -60,7 +63,7 @@ def replis(entrees, numerote=True):
         numero = ('<span class="repli__n" aria-hidden="true">%02d</span>' % rang
                   if numerote else '<span class="repli__n"></span>')
         marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
-        lignes.append(f"""        <details class="repli revele">
+        lignes.append(f"""        <details class="repli revele"{attribut}>
           <summary class="repli__tete">
             {numero}
             <span class="repli__titre">{titre}</span>
@@ -72,12 +75,17 @@ def replis(entrees, numerote=True):
     return '      <div class="replis">\n' + "\n".join(lignes) + "\n      </div>"
 
 
-def repli_liste(titre, items, cote=""):
-    """Une seule ligne dépliable qui cache une liste de postes."""
+def repli_liste(titre, items, cote="", ouvert=False):
+    """Une ligne dépliable qui porte une liste de postes.
+
+    Ouverte par défaut là où la liste dit ce que couvre une prestation :
+    c'est ce que le visiteur vient chercher, on ne le lui cache pas.
+    """
+    attribut = " open" if ouvert else ""
     lignes = "\n".join("            <li>%s</li>" % i for i in items)
     corps = '<ul class="service__liste">\n%s\n          </ul>' % lignes
     marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
-    return f"""        <details class="repli repli--liste revele">
+    return f"""        <details class="repli repli--liste revele"{attribut}>
           <summary class="repli__tete">
             <span class="repli__n"></span>
             <span class="repli__titre">{titre}</span>

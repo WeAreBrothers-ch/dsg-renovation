@@ -8,10 +8,12 @@ Date : 25/09/2026 — Statut : **v2**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
 
-**Révision de palette, 26/09/2026 (v2.1) — « Bleu de travail, jaune de chantier ».** Le client a jugé le plâtre
-beige et la brique ternes. La structure, la typographie, les cadres et le mouvement ne changent pas ; seules les
-couleurs et le rythme des fonds changent (§ 2 et § 2 bis). La palette « plâtre et brique » reste lisible dans
-l'historique git (commit `0a45b44`).
+**Révision de palette, 26/09/2026 (v2.2) — « Le toit rouge », tirée du logo.** Le client a jugé le plâtre beige
+et la brique ternes, puis a fourni son logo (`assets/images/logo-blanc.avif`) : les couleurs sont désormais celles
+du logo, mesurées au pixel. La structure, la typographie, les cadres et le mouvement ne changent pas ; les
+couleurs, le rythme des fonds, la navigation et quelques composants changent (§ 2, § 2 bis, § 7). Les palettes
+précédentes restent lisibles dans l'historique git (« plâtre et brique » : `0a45b44` ; « bleu de travail, jaune
+de chantier », sans le logo : `9fbd8d8`).
 
 ---
 
@@ -47,8 +49,8 @@ sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
 - **La photo plein écran d'emblée** (demande explicite du client). Remplacée par l'ouverture cadrée (§ 7).
-- ~~Le gris-bleu froid~~ — **repris en v2.1**, éclairci : le plâtre beige paraissait terne. Le fond devient un
-  blanc à peine bleuté, plus lumineux ; la chaleur vient des photos de chantier et du jaune.
+- Le gris-bleu froid, et désormais aussi le plâtre beige (v2.2) : le fond est blanc, relayé par le gris de l'ombre
+  du logo ; la chaleur vient des photos de chantier et du rouge.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
 
@@ -61,98 +63,92 @@ sur la photo, la retenue générale.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond blanc de chantier**, net et lumineux — le mur fraîchement repeint, pas le beige d'avant travaux ;
-- une **encre bleu nuit**, celle du bleu de travail et des tirages de plan, jamais un noir pur ;
+- un **fond blanc**, relayé par le **gris clair** de l'ombre portée des lettres du logo ;
+- une **encre noire**, celle des lettres DSG, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
-- des **bandes de nuit** qui rythment la page ; les piquets y passent au jaune ;
+- des **bandes anthracite** qui rythment la page ; les piquets y passent au rouge ;
 - une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme une pièce
   qu'on ouvre après l'avoir relevée ;
-- **un accent d'action, le jaune de chantier** — celui du mètre ruban et de la signalisation : franc, réservé
-  aux boutons d'appel.
+- **le rouge du toit**, la ligne qui coiffe « DSG » dans le logo : il porte l'action, les repères, et un chevron
+  devant chaque intitulé de section.
 
-Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le duo bleu de
-travail et jaune de chantier, le comparateur avant / après mis au centre de l'accueil, les repères d'angle qui
-voyagent avec l'image d'ouverture.
+Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le logo et son
+toit rouge, le comparateur avant / après mis au centre de l'accueil, les repères d'angle qui voyagent avec
+l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Bleu de travail, jaune de chantier » (v2.1)
+## 2. Palette — « Le toit rouge » (v2.2)
 
-Répartition : **65 % blanc · 25 % bleu (encre et bandes) · 5 % jaune.** Le reste, ce sont les photos.
-Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
+Toutes les couleurs viennent du logo, mesurées au pixel sur `assets/images/logo-blanc.avif` : le rouge de la
+ligne de toit, le noir des lettres, le gris de leur ombre portée. Contrastes mesurés (WCAG 2.1), plancher du
+site 4.5:1.
 
-Le bleu est celui du bleu de travail et des tirages de plan : il porte le texte, les traits et les bandes de
-nuit. Le jaune est celui du mètre ruban et de la signalisation de chantier : il porte l'action. Deux couleurs
-du métier, qu'on ne confond avec rien d'autre.
+### Couleurs du logo
+| Jeton | Valeur | Origine |
+|---|---|---|
+| `--c-rouge` | `#DE0022` | la ligne de toit |
+| `--c-rouge-fonce` | `#A8001A` | le même, une ombre plus bas (survol) |
+| `--c-noir` | `#1A1A1C` | les lettres DSG |
+| `--c-gris-logo` | `#A8A8A8` | l'ombre portée des lettres (décor seulement : 2.3 sur le blanc) |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--c-papier` | `#F5F7FA` | fond dominant, blanc de chantier |
-| `--c-papier-2` | `#E6ECF3` | creux : bande des références, survols, onglet ouvert |
+| `--c-papier` | `#FFFFFF` | fond dominant |
+| `--c-papier-2` | `#F2F2F3` | creux : survols, onglet ouvert, légendes du formulaire |
 | `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, étiquettes posées sur photo |
-| `--c-teinte` | `#D9E2ED` | fond de la barre d'action mobile |
-| `--c-bitume` | `#0E1B2D` | nuit : bandes sombres, pied de page, visionneuse |
-| `--c-bitume-2` | `#1A2A40` | surface élevée dans la nuit |
-| `--c-bleu` | `#1C3D74` | bleu de travail : bande du renvoi final |
-| `--c-bleu-2` | `#18346A` | surface élevée dans la bande bleue |
+| `--c-bitume` | `#1C1C1F` | anthracite : bandes sombres, pied de page, visionneuse, barre mobile |
+| `--c-bitume-2` | `#29292E` | surface élevée dans l'anthracite |
 
-### Texte (blanc / creux / fiche / teinte)
+### Texte (blanc / creux / gris clair / gris élevé)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#14233A` | 14.7 / 13.3 / 15.8 / 12.1 |
-| `--c-encre-60` | `#46556B` | 7.1 / 6.4 / 7.6 / 5.8 |
-| `--c-encre-40` | `#5D6A7E` | 5.1 / 4.6 / 5.5 — **jamais sur la teinte (4.2)** |
-| `--c-craie` | `#F5F7FA` | 16.1 sur la nuit |
-| `--c-craie-60` | `#AAB6C6` | 8.4 sur la nuit, 7.1 sur la nuit élevée |
+| `--c-encre` | `#1A1A1C` | 17.4 / 15.5 / 15.7 / 14.2 |
+| `--c-encre-60` | `#4B4B52` | 8.7 / 7.7 / 7.8 / 7.1 |
+| `--c-encre-40` | `#66666D` | 5.7 / 5.1 / 5.1 / 4.7 |
+| `--c-craie` | `#F4F4F5` | 15.5 sur l'anthracite |
+| `--c-craie-60` | `#B9B9BF` | 8.7 sur l'anthracite, 7.4 élevé |
 
-### Jaune de chantier — l'action
+### Rouge — l'action et l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | `#F6B400` | aplat des boutons d'appel, poignée du comparateur, sélection de texte | — |
-| `--c-signal-fonce` | `#E2A200` | survol des boutons d'appel | — |
-| `--c-sur-signal` | `#14233A` | texte posé sur le jaune, sur tous les fonds | 8.6, 7.1 au survol |
+| `--c-signal` | = rouge du logo | aplat des boutons d'appel, poignée du comparateur, sélection de texte | blanc dessus : 5.1 |
+| `--c-signal-fonce` | `#A8001A` | survol des boutons d'appel | blanc dessus : 7.8 |
+| `--c-accent` | `#C4001E` | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.2 / 5.6 / 5.6 / 5.1 |
 
-Le jaune est **un aplat, jamais un texte** sur fond clair : sur le blanc, il ne se lit pas (1.7). Il n'apparaît
-que sur les boutons d'appel, la poignée du comparateur, et — dans la nuit seulement — les repères d'angle, les
-numéros de séquence et les liens. Jamais en fond de section, jamais en titre.
-
-### Bleu de travail — l'accent écrit
-| Jeton | Valeur | Usage | Contraste |
-|---|---|---|---|
-| `--c-accent` | `#1F4FA0` | liens dans le texte, numéros de séquence (01, 02…), puces d'encadré, astérisques, « + » des chiffres, repère « vous êtes ici » (en-tête, onglets) | 7.3 / 6.6 / 7.8 / 6.0 |
-
-Dans la nuit, `--c-accent` devient le jaune `#F6B400` (9.4 / 7.9) ; dans la bande bleue, un jaune plus clair
-`#FFC53D` (6.8).
+`--c-accent` est un cran plus sombre que le rouge du logo, qui ne tiendrait pas 4.5 sur le gris clair (4.2).
+Sur l'anthracite, il devient un rouge clair `#FF6B79` (6.2) ; sur la bande rouge, il devient blanc.
 
 ### États
-`--c-valide` `#1D7048` (5.7) · `--c-alerte` `#B42318` (6.1) · `--c-focus` = encre. Dans la nuit, chaque
-jeton est redéfini localement par `.sur-sombre` : un composant demande `--c-encre` et obtient la bonne.
+`--c-valide` `#1D7048` (6.1) · `--c-alerte` `#B42318` (6.6) · `--c-focus` = encre. Chaque fond redéfinit
+localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
-`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % (séparations internes) ·
-`--c-ligne-forte` encre à 50 % (contours de pastilles, soulignés de liens). Dans la nuit, le cadre est un blanc
-à 42 % (3.8, au-dessus du seuil 3:1 des contours), à 50 % dans la bande bleue (3.7).
+`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %.
+Sur l'anthracite, le cadre est un blanc à 40 % (3.8, au-dessus du seuil 3:1 des contours) ; sur le rouge, blanc
+plein (5.1).
 
 ### Voiles
-Les fonds translucides (en-tête dépoli, panneau du chantier signature, visionneuse, ombres) s'écrivent
+Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, ombres) s'écrivent
 `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`, `rgba(var(--c-nuit-rgb), …)` : aucune
-composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est à 93 % : plus transparent, il virait au
-gris au passage des bandes de nuit.
+composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est à 93 %.
 
 ## 2 bis. Rythme des fonds
 
-Une page entièrement claire se lit comme un seul bloc. Trois registres de fond la découpent :
+Quatre fonds se relaient ; jamais deux fois le même à la suite.
 
-| Registre | Classe | Où |
+| Fond | Classe | Où |
 |---|---|---|
-| **Blanc** | — | par défaut |
-| **Nuit** | `.sur-sombre` sur la section | **une bande par page**, la section de méthode ou de preuve : l'entreprise en chiffres (accueil), la méthode et ses repères, qui ne forment qu'une bande (prestations), l'ordre des lots (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page |
-| **Bleu de travail** | `.sur-sombre.sur-bleu` | le renvoi final de chaque page, où le bouton jaune se détache le mieux |
+| **Blanc** | — | couverture, et une section sur deux |
+| **Gris clair** `#F3F3F4` | `.sur-gris` | posé automatiquement une section sur deux par `outils/rythme.py` |
+| **Anthracite** | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Rouge DSG** | `.sur-rouge` | le renvoi final de chaque page : texte blanc, bouton d'appel inversé (blanc, texte noir, noir au survol) |
 
-Une section de nuit pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. On n'y
-place jamais de logos (ils sont multipliés sur le fond et disparaîtraient) ni de formulaire. Jamais deux bandes
-de nuit à la suite, hors le renvoi final et le pied.
+Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. On ne place jamais
+de logos de partenaires (multipliés sur le fond) ni de formulaire sur l'anthracite ou le rouge. Le logo ne va
+jamais sur le rouge : son toit y disparaîtrait. Sur l'anthracite, on emploie sa déclinaison négative
+(`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
 
@@ -204,9 +200,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   déroulé, formulaire) reprennent les 12 colonnes (`.pleine-largeur`). Sous 1024 px, tout s'empile.
 - **Rythme vertical** : `--y-bloc` `clamp(64px, 7.6vw, 128px)` en haut et en bas de chaque section.
 - **Espacement** : échelle de 4 px (`--sp-1` 4 → `--sp-9` 96).
-- **Rayons** : **zéro**, images comprises. Seule la pastille du curseur est ronde (`--r-rond`).
-- **Ombres** : quasi absentes. `--om-1` sur la poignée du comparateur et la vignette des métiers, `--om-2` sur
-  la vignette qui suit la main. Rien d'autre ne flotte.
+- **Rayons** : **zéro**, images comprises.
+- **Ombres** : quasi absentes. `--om-1` sur la poignée du comparateur et la liste des prestations qui s'ouvre
+  sous « Prestations ». Rien d'autre ne flotte.
+- **Retirés en v2.2** (audit d'ergonomie) : le curseur personnalisé qui remplaçait le pointeur, les boutons
+  « magnétiques », la vignette qui suivait la souris et masquait les descriptions. Les prestations montrent à
+  la place une miniature fixe.
 
 ---
 
@@ -219,10 +218,10 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   (cartes, lots voisins) — jamais de case vide noire.
 - Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
   La liste des blocs concernés est unique, dans `01-socle.css`.
-- Le même carré sert de puce (listes de postes, garanties du formulaire) et, en bleu de travail, de marque
-  « vous êtes ici » (rubrique consultée, onglet actif).
-- Dans les bandes de nuit, les repères d'angle passent au **jaune** (`--c-repere`) : les piquets se voient sur
-  le plan comme sur le terrain.
+- Le même carré sert de puce (listes de postes, garanties) et, en rouge, de marque « vous êtes ici »
+  (rubrique consultée, onglet actif).
+- Sur l'anthracite, les repères d'angle passent au **rouge** (`--c-repere`), sur la bande rouge au blanc.
+- Chaque intitulé de section est précédé du **toit** : un chevron rouge dessiné comme la ligne du logo.
 
 ---
 
@@ -240,20 +239,21 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 
 ## 7. Structure de l'accueil
 
-1. **Couverture** — dans la marge : « Entreprise de rénovation / Lausanne & arc lémanique ». À droite : le h1
-   « Du sol au plafond, tout en maîtrise. » (Archivo 500, jusqu'à 84 px), le chapô en sérif et les deux
-   boutons empilés.
+1. **Couverture** — dans la marge, le slogan « Du sol au plafond, tout en maîtrise. ». À droite : le h1
+   « Entreprise de rénovation à Lausanne » (Archivo 500, jusqu'à 84 px), le chapô en sérif, les deux boutons
+   empilés et trois garanties (visite et devis gratuits, devis 72 h après la visite, sans engagement).
 2. **L'ouverture** — le comparateur avant / après arrive **cadré dans la colonne de la page**, ses angles marqués
-   de repères, visible dès le premier écran. En descendant, deux rideaux couleur du fond s'écartent et l'image
+   de repères, visible dès le premier écran, l'état avant travaux à gauche. En descendant, deux rideaux couleur
+   du fond s'écartent et l'image
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
 3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le fond blanc).
-4. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + relevé en
-   quatre cases, piquets et « + » en jaune), les métiers
-   (lignes de bordereau, vignette qui suit la main), le chantier signature (panneau dépoli sur photo pleine
-   largeur), la zone, le déroulé en quatre cases.
-5. Renvoi final sur une bande de bleu de travail, bouton jaune, puis pied de page de nuit et le nom de
-   l'entreprise en enseigne.
+4. Sections à intitulé accroché : l'entreprise, **en bande anthracite** (paragraphe d'intention + chiffres en
+   quatre cases, piquets et « + » en rouge), les prestations
+   (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
+   largeur), la zone, le déroulé en quatre cases — gris et blanc en alternance.
+5. Renvoi final sur une bande rouge, bouton blanc, puis pied de page anthracite (logo négatif) et le nom de
+   l'entreprise en enseigne, en filigrane.
 
 Les pages de métier s'ouvrent de la même façon, autour du tirage de chaque métier. Les pages intérieures
 reprennent la couverture : chemin et nature dans la marge, h1 à droite.
@@ -288,8 +288,9 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
-- Noir pur, blanc pur en fond de page, jaune écrit sur fond clair, troisième couleur d'accent.
-- Grand aplat jaune (fond de section, bandeau) : le jaune signale l'action, il ne se déroule pas.
+- Noir pur, une couleur étrangère au logo, le rouge du logo écrit sur le gris (utiliser `--c-accent`).
+- Le logo posé sur le rouge (son toit y disparaît) ; le logo clair sur l'anthracite (utiliser le négatif).
+- Plus d'une bande rouge par page : elle est réservée au renvoi final.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
   méthode en cinq temps).

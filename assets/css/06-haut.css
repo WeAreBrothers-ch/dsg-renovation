@@ -29,6 +29,14 @@
 .couverture__chapo{max-width:40ch}
 .couverture__actions{display:flex;flex-direction:column;align-items:stretch;width:max-content;max-width:100%;gap:var(--sp-3)}
 .couverture__actions .btn{min-width:min(100%,260px)}
+/* Trois garanties sous l'appel : ce qu'on obtient en cliquant, en
+   petit, marquées du carré des repères. */
+.couverture__garanties{
+  display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);margin-top:var(--sp-5);
+  font-size:var(--t-petit);color:var(--c-encre-60);
+}
+.couverture__garanties li{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.couverture__garanties li::before{content:"";width:var(--repere);height:var(--repere);background:var(--c-accent)}
 
 @media (max-width:1023px){
   .couverture__nature,.couverture__texte{grid-column:1/-1}

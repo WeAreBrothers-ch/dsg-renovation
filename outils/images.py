@@ -22,8 +22,22 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CORRESPONDANCE = os.path.join(RACINE, "outils", "images_locales.json")
 
 _WIX = re.compile(r'https://static\.wixstatic\.com/media/[^"\'\s)<>]+')
+# Une vraie image : l'adresse se termine par son extension.
+_WIX_FICHIER = re.compile(r'https://static\.wixstatic\.com/media/[^"\'\s)<>]+?\.(?:jpe?g|png|webp|gif|avif)\b')
 _JSONLD = re.compile(r'<script type="application/ld\+json">.*?</script>', re.S)
 _CARTE = None
+
+
+_VARIANTES = {}
+
+# La largeur d'affichage d'une image, d'après le bloc qui la contient :
+# le navigateur choisit alors dans srcset la variante juste assez grande.
+_TAILLES = [
+    ("metiers__vue", "72px"),
+    ("chemise__tirage", "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 66vw"),
+    ("signature__cadre", "100vw"),
+    ("ouverture__cadre", "100vw"),
+]
 
 
 def _carte():
@@ -37,7 +51,31 @@ def _carte():
                     chemin = fiche.get("fichier") if isinstance(fiche, dict) else fiche
                     if chemin and os.path.exists(os.path.join(RACINE, chemin)):
                         _CARTE[url] = chemin
+                        variantes = fiche.get("variantes") if isinstance(fiche, dict) else None
+                        _VARIANTES[url] = sorted(
+                            (int(l), v) for l, v in (variantes or {}).items()
+                            if os.path.exists(os.path.join(RACINE, v)))
     return _CARTE
+
+
+def urls_wix_des_sources():
+    """Toutes les adresses Wix que citent encore les sources du site."""
+    trouvees = set()
+    dossier = os.path.join(RACINE, "outils")
+    for racine, _, fichiers in os.walk(dossier):
+        for nom in fichiers:
+            if nom.endswith((".py", ".html")) and nom != "rapatrier_images.py":
+                with io.open(os.path.join(racine, nom), encoding="utf-8") as f:
+                    texte = f.read()
+                # IMG + "2c1464_…" : le préfixe et le nom sont écrits à part.
+                texte = re.sub(r'IMG\s*\+\s*["\']', "https://static.wixstatic.com/media/", texte)
+                trouvees.update(_WIX_FICHIER.findall(texte))
+    return trouvees
+
+
+def reste_des_images_wix():
+    """Vrai tant qu'une image au moins n'a pas été rapatriée."""
+    return any(not locale(url) for url in urls_wix_des_sources())
 
 
 def locale(url):
@@ -51,10 +89,32 @@ def absolue(url):
     return "%s/%s" % (SITE, chemin) if chemin else url
 
 
+def _img_responsive(balise, url, base, contexte):
+    """Une balise <img> Wix rapatriée : srcset des variantes WebP,
+    src sur la variante moyenne, sizes d'après le bloc qui la contient."""
+    variantes = _VARIANTES.get(url) or []
+    if not variantes or "srcset=" in balise:
+        return balise.replace(url, base + locale(url))
+    tailles = next((t for classe, t in _TAILLES if classe in contexte), "100vw")
+    moyenne = next((v for l, v in variantes if l >= 900), variantes[-1][1])
+    if tailles == "72px":
+        moyenne = variantes[0][1]
+    srcset = ", ".join("%s%s %dw" % (base, v, l) for l, v in variantes)
+    return balise.replace('src="%s"' % url, 'src="%s%s" srcset="%s" sizes="%s"'
+                          % (base, moyenne, srcset, tailles))
+
+
+_IMG = re.compile(r'<img\b[^>]*\bsrc="(https://static\.wixstatic\.com/media/[^"]+)"[^>]*>')
+
+
 def localiser(html, base):
     """Remplace dans une page chaque image Wix rapatriée."""
     if not _carte():
         return html
+    # Les <img> d'abord : elles reçoivent leurs variantes.
+    html = _IMG.sub(lambda m: _img_responsive(m.group(0), m.group(1), base,
+                                              html[max(0, m.start() - 400):m.start()])
+                    if locale(m.group(1)) else m.group(0), html)
     zones_robots = [m.span() for m in _JSONLD.finditer(html)]
 
     def remplacer(correspondance):

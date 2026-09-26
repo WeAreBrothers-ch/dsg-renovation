@@ -76,11 +76,11 @@
                 <dt>Société</dt>
                 <dd>DSG Rénovation Sàrl</dd>
                 <dt>Adresse</dt>
-                <dd>Avenue de Béthusy 60, 1012 Lausanne, Suisse</dd>
+                <dd>{{RUE}}, {{CODE_POSTAL}} {{VILLE}}, Suisse</dd>
                 <dt>Courriel</dt>
-                <dd><a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a></dd>
+                <dd><a href="mailto:{{COURRIEL}}">{{COURRIEL}}</a></dd>
                 <dt>Téléphone</dt>
-                <dd><a href="tel:+41218470202">+41 21 847 02 02</a></dd>
+                <dd><a href="tel:{{TELEPHONE_BRUT}}">{{TELEPHONE}}</a></dd>
               </dl>
               <p>
                 L'entreprise n'a pas désigné de délégué à la protection des
@@ -125,13 +125,18 @@
               </p>
               <dl class="releve-piece">
                 <dt>Obligatoires</dt>
-                <dd>Nom et prénom, adresse de courriel, description du projet, acceptation de la présente politique.</dd>
+                <dd>Nom et prénom, numéro de téléphone, description du projet.</dd>
                 <dt>Facultatives</dt>
-                <dd>Numéro de téléphone, type de bien, nature des travaux, localité, échéance de démarrage souhaitée.</dd>
+                <dd>Adresse de courriel, nature des travaux, type de bien, commune, surface, échéance de démarrage, moment de rappel souhaité, photos du logement.</dd>
               </dl>
               <p>
                 Les champs facultatifs servent uniquement à préparer un devis
                 plus juste. Les laisser vides ne bloque pas l'envoi.
+              </p>
+              <p>
+                Les photos que vous joignez servent à préparer la visite.
+                Évitez d'y faire figurer des personnes ou des documents
+                personnels.
               </p>
               <p>
                 Vous pouvez également nous joindre par téléphone ou par
@@ -148,26 +153,27 @@
             </div>
             <div class="article__corps">
               <p>
-                Ce point mérite d'être détaillé, car il est inhabituel et il
-                joue en votre faveur.
+                Lorsque vous envoyez le formulaire, votre demande et vos
+                éventuelles photos partent, par une connexion chiffrée
+                (HTTPS), vers un petit programme hébergé avec le site chez
+                Infomaniak, en Suisse. Ce programme nous les transmet aussitôt
+                par courriel, à
+                <a href="mailto:{{COURRIEL}}">{{COURRIEL}}</a>.
               </p>
               <p>
-                Le site ne dispose d'aucune base de données et d'aucun serveur
-                applicatif. Lorsque vous validez le formulaire, votre
-                navigateur <strong>ouvre votre propre logiciel de messagerie</strong>
-                avec un courriel déjà rédigé, adressé à
-                <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>.
-                Vous relisez, puis vous envoyez.
+                Le site n'a <strong>aucune base de données</strong> et ne garde
+                aucune copie de votre demande : une fois le courriel parti, les
+                fichiers reçus sont effacés du serveur.
               </p>
               <p>
-                Concrètement : aucune donnée du formulaire ne transite par le
-                site, et rien n'est enregistré tant que vous n'avez pas
-                vous-même expédié le message. Si vous fermez la fenêtre avant
-                l'envoi, aucune trace ne subsiste nulle part.
+                Pour limiter les envois abusifs, le serveur compte pendant dix
+                minutes les demandes envoyées depuis une même connexion. Il ne
+                conserve pas votre adresse IP : seulement une empreinte
+                irréversible, et l'heure des envois.
               </p>
               <p>
-                Votre message circule ensuite comme n'importe quel courriel,
-                par votre fournisseur de messagerie puis par le nôtre.
+                Vous pouvez aussi nous écrire directement ou nous appeler, sans
+                passer par le formulaire.
               </p>
             </div>
           </section>
@@ -192,8 +198,8 @@
               </p>
               <p>
                 Pour les visiteurs résidant dans l'Union européenne, le
-                traitement se fonde sur votre consentement et sur l'exécution
-                de mesures précontractuelles prises à votre demande, au sens de
+                traitement se fonde sur l'exécution de mesures
+                précontractuelles prises à votre demande, au sens de
                 l'article 6 du règlement général sur la protection des données.
               </p>
               <p>
@@ -239,6 +245,7 @@
                 seuls cas suivants :
               </p>
               <ul>
+                <li>l'hébergeur du site, Infomaniak Network SA, en Suisse, dont le serveur transmet votre demande ;</li>
                 <li>le fournisseur de la messagerie professionnelle de l'entreprise, qui héberge les courriels reçus ;</li>
                 <li>les sous-traitants et fournisseurs intervenant sur votre chantier, pour les seules informations nécessaires à leur prestation ;</li>
                 <li>la fiduciaire de l'entreprise, dans le cadre de la tenue de la comptabilité ;</li>
@@ -259,24 +266,11 @@
             </div>
             <div class="article__corps">
               <p>
-                Deux ressources sont servies depuis des infrastructures tierces.
-                Leur chargement transmet techniquement votre adresse IP au
-                prestataire concerné, comme pour toute ressource distante.
+                Les polices de caractères, le logo et les scripts sont servis
+                par le site lui-même : leur chargement ne transmet rien à un
+                tiers.
               </p>
-              <dl class="releve-piece">
-                <dt>Google Fonts</dt>
-                <dd>Polices de caractères du site, servies par Google Ireland Limited. Aucun témoin de connexion n'est déposé par ce service.</dd>
-                <dt>Wix</dt>
-                <dd>Une partie des photographies de chantiers et le logo, servis depuis l'infrastructure d'images de Wix.com Ltd.</dd>
-              </dl>
-              <!-- CONTENU À VALIDER : l'idéal serait d'héberger polices et
-                   images sur le domaine du client, ce qui supprimerait ces
-                   deux transferts. À proposer lors de la mise en ligne. -->
-              <p>
-                Ces appels sont nécessaires à l'affichage de la page et ne
-                servent à aucune finalité publicitaire. Aucune donnée du
-                formulaire ne leur est transmise.
-              </p>
+{{RESSOURCES_WIX}}
             </div>
           </section>
 
@@ -326,7 +320,7 @@
               </ul>
               <p>
                 Pour exercer l'un de ces droits, écrivez à
-                <a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
+                <a href="mailto:{{COURRIEL}}">{{COURRIEL}}</a>
                 ou à l'adresse postale de l'entreprise. Nous répondons dans un
                 délai de trente jours. Une preuve d'identité peut vous être
                 demandée si un doute subsiste sur l'origine de la demande.

@@ -11,20 +11,21 @@ visiblement tant qu'ils n'ont pas été remplacés.
 # promesse nouvelle n'est faite ici.
 ETAPES = [
     ("Vous décrivez le projet",
-     "Par téléphone ou par le bordereau. En quelques minutes, nous vous "
+     "Par téléphone ou par le formulaire en ligne. En quelques minutes, nous vous "
      "disons si le projet entre dans notre métier et dans notre zone.",
      "Premier échange"),
     ("Nous venons mesurer",
-     "Visite sur place, relevé et sondage des supports. Elle est gratuite "
+     "Visite sur place, mesures et état des murs et des sols. Elle est gratuite "
      "et ne vous engage à rien.",
      "Sous une semaine"),
     ("Vous recevez le devis",
      "Poste par poste, protections, évacuation et nettoyage compris. Rien "
      "n'est renvoyé à un « selon besoin ».",
      "72 h après la visite"),
-    ("Nous livrons à la date dite",
+    ("Nous livrons à la date prévue",
      "Planning daté avant le démarrage, un seul responsable de chantier, "
-     "réception pièce par pièce et reprise des réserves sous dix jours.",
+     "visite de fin de chantier pièce par pièce et défauts corrigés sous "
+     "dix jours.",
      "À la date convenue"),
 ]
 
@@ -77,6 +78,29 @@ def bande_references(base):
       {fragment('partenaires')}
       <a class="caution__lien" href="{base}entreprise.html#references">Nos références<span class="fleche" aria-hidden="true"></span></a>
     </div>
+"""
+
+
+def section_temoins(base=""):
+    """La section des témoignages — absente tant qu'ils sont provisoires.
+
+    Un avis étiqueté « provisoire » décrédibilise tout le site, et un avis
+    inventé publié comme réel tombe sous la loi contre la concurrence
+    déloyale. La section n'apparaît donc qu'avec de vrais avis.
+    """
+    if PROVISOIRES:
+        return ("\n  <!-- À FOURNIR PAR LE CLIENT : témoignages réels (voir "
+                "outils/confiance.py). La section s'affichera d'elle-même "
+                "quand PROVISOIRES passera à False. -->\n")
+    import briques
+    return f"""
+  <section class="section" aria-labelledby="tTemoins">
+    <div class="zone">
+{briques.intercalaire("Retours", "Ce que disent nos clients",
+                      "Trois chantiers,|trois avis")}
+{temoins()}
+    </div>
+  </section>
 """
 
 

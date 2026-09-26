@@ -1,6 +1,6 @@
 """Ce qui relie une page de prestation au reste du site.
 
-La zone d'intervention et les lots voisins sont les mêmes blocs d'une
+La zone d'intervention et les prestations voisines sont les mêmes blocs d'une
 page de métier à l'autre : ils vivent ici pour que page_service.py ne
 porte que ce qui est propre à chaque métier.
 """
@@ -10,14 +10,14 @@ import prestations
 from donnees_site import COMMUNES
 
 
-def zone(base):
+def zone(base, fiche):
     """Où nous intervenons : l'atelier, la ville, les communes."""
     villes = "".join("<li>%s</li>" % c for c in COMMUNES)
     return f"""
   <section class="section" aria-labelledby="ou">
     <div class="zone">
-{briques.intercalaire("Zone", "Arc lémanique",
-                      "Où nous|intervenons")}
+{briques.intercalaire("Zone", "Où nous intervenons",
+                      prestations.intertitres_de(fiche)["zone"])}
       <div class="service__deux revele">
         <div class="service__texte">
           <p>Notre atelier est à Lausanne, avenue de Béthusy. Nous
@@ -40,7 +40,7 @@ def zone(base):
 
 
 def voisins(fiche, base):
-    """Le maillage : les pages des lots souvent menés avec celui-ci."""
+    """Le maillage : les prestations souvent menées avec celle-ci."""
     fiches = "\n".join(
         f"""        <li>
           <a class="voisin revele" href="{base}services/{slug}.html">
@@ -55,7 +55,7 @@ def voisins(fiche, base):
   <section class="section" aria-labelledby="voisins">
     <div class="zone">
 {briques.intercalaire("Autres prestations", "Souvent menées ensemble",
-                      "Ce qui va|avec ce lot")}
+                      prestations.intertitres_de(fiche)["voisins"])}
       <ul class="voisins">
 {fiches}
       </ul>

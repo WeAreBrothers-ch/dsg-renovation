@@ -19,22 +19,25 @@ GROUPES = [
              "Genève. Au-delà, appelez-nous : nous étudions la demande au cas "
              "par cas, en fonction de la taille du chantier."),
             ("Le devis est-il vraiment gratuit ?",
-             "Oui, visite et relevé compris, sans aucun engagement. Vous "
+             "Oui, visite et mesures comprises, sans aucun engagement. Vous "
              "recevez un devis détaillé poste par poste sous 72 heures "
              "ouvrables après le passage. Nous ne facturons pas l'étude, "
              "même si vous ne donnez pas suite."),
             ("Sous quel délai pouvez-vous démarrer ?",
              "Comptez généralement quatre à huit semaines entre la signature "
-             "et le premier jour de chantier, selon la saison et la taille "
-             "du lot. Les remises en état entre deux locations se calent plus "
-             "vite, parce qu'elles sont courtes."),
+             "et le premier jour de chantier, selon la saison et l'ampleur "
+             "des travaux. Les <a href=\"services/remise-en-etat-appartement.html\">"
+             "remises en état entre deux locations</a> se calent plus vite, "
+             "parce qu'elles sont courtes."),
             ("Intervenez-vous pour un seul poste, ou seulement en rénovation complète ?",
-             "Les deux. Une remise en peinture seule, un sol à changer, une "
-             "salle de bains à recarreler : ce sont des demandes courantes. "
+             "Les deux. Une <a href=\"services/peinture.html\">remise en "
+             "peinture</a> seule, un <a href=\"services/carrelage-sols.html\">"
+             "sol à changer</a>, une <a href=\"services/renovation-salle-de-bains.html\">"
+             "salle de bains à refaire</a> : ce sont des demandes courantes. "
              "Nous disons franchement quand un chantier est trop petit pour "
              "qu'un déplacement ait du sens."),
             ("Faut-il vider le logement avant votre visite ?",
-             "Non. La visite sert à relever et à comprendre, pas à commencer. "
+             "Non. La visite sert à mesurer et à comprendre, pas à commencer. "
              "Nous avons seulement besoin d'accéder aux pièces concernées et, "
              "si possible, de voir un angle de mur dégagé pour juger l'état "
              "des supports."),
@@ -46,15 +49,18 @@ GROUPES = [
         "titre": "Pendant|les travaux",
         "questions": [
             ("Puis-je rester dans le logement pendant les travaux ?",
-             "Sur un lot isolé — peinture d'une pièce, changement de sol —, "
+             "Pour des travaux ciblés — peinture d'une pièce, changement de "
+             "sol —, "
              "oui sans difficulté. Sur une rénovation complète, c'est "
              "possible en travaillant par zones, mais le chantier dure plus "
              "longtemps et coûte davantage. Libérer les lieux reste la "
              "solution la plus économique."),
             ("Qui coordonne les différents corps de métier ?",
-             "Nous. Un responsable de chantier unique pilote l'ensemble des "
-             "lots et reste votre seul interlocuteur, du devis à la remise "
-             "des clés. Vous n'avez aucun planning à faire coïncider."),
+             "Nous. Un responsable de chantier unique pilote tous les corps "
+             "de métier et reste votre seul interlocuteur, du devis à la "
+             "remise des clés. Vous n'avez aucun planning à faire coïncider : "
+             "c'est tout l'intérêt d'une <a href=\"services/renovation-complete.html\">"
+             "rénovation complète</a> confiée à une seule entreprise."),
             ("Quels sont vos horaires de chantier ?",
              "En règle générale de 8 h à 17 h, du lundi au vendredi. En "
              "immeuble, nous nous alignons sur le règlement de la "
@@ -68,12 +74,13 @@ GROUPES = [
              "Nous arrêtons, nous vous appelons et nous chiffrons l'écart "
              "avant de reprendre. Une chape hors niveau, une gaine non "
              "conforme ou un mur porteur mal identifié se traitent par un "
-             "avenant écrit, jamais par une facture de fin de chantier."),
+             "complément de devis écrit, validé avant les travaux — jamais "
+             "par une facture de fin de chantier."),
         ],
     },
     {
         "nom": "Prix et paiement",
-        "cote": "Devis, avenants, échéances",
+        "cote": "Devis, suppléments, échéances",
         "titre": "Ce que ça|coûte",
         "questions": [
             ("Combien coûte une rénovation complète à Lausanne ?",
@@ -86,12 +93,13 @@ GROUPES = [
             ("Votre devis peut-il augmenter en cours de chantier ?",
              "Pas sans votre accord écrit. Le devis signé fixe les postes et "
              "les quantités. Seuls un imprévu constaté ou une modification "
-             "que vous demandez donnent lieu à un avenant, chiffré et validé "
-             "avant exécution."),
+             "que vous demandez donnent lieu à un complément de devis, chiffré "
+             "et validé avant exécution."),
             ("Comment se déroulent les paiements ?",
-             "Un acompte à la signature, des situations intermédiaires sur "
-             "les chantiers longs, et le solde à la réception une fois les "
-             "réserves levées. Les modalités exactes figurent sur le devis."),
+             "Un acompte à la signature, des factures intermédiaires sur "
+             "les chantiers longs, et le solde à la fin des travaux, une fois "
+             "les derniers défauts corrigés. Les modalités exactes figurent "
+             "sur le devis."),
             ("Faut-il vous fournir les matériaux ?",
              "Non, nous les fournissons et ils figurent au devis. Si vous "
              "préférez acheter vous-même un carrelage ou un parquet précis, "
@@ -107,18 +115,20 @@ GROUPES = [
     },
     {
         "nom": "Après la livraison",
-        "cote": "Réception, réserves, régies",
+        "cote": "Fin des travaux, défauts, régies",
         "titre": "Une fois|le chantier livré",
         "questions": [
             ("Comment se passe la réception du chantier ?",
-             "Par une visite contradictoire, pièce par pièce, avec vous. Ce "
-             "qui ne va pas est noté sur une liste de réserves, que nous "
-             "reprenons sous dix jours. Les clés sont remises une fois les "
-             "réserves levées."),
+             "Par une visite de fin de chantier, pièce par pièce, avec vous. "
+             "Ce qui ne va pas est noté sur une liste, et nous le reprenons "
+             "sous dix jours. Les clés sont remises une fois ces défauts "
+             "corrigés."),
             ("Le nettoyage est-il compris ?",
              "Oui, systématiquement, sur tous nos chantiers. Nous ne rendons "
              "pas un logement à nettoyer : c'est la dernière image que vous "
-             "gardez du travail."),
+             "gardez du travail. Nous le proposons aussi seul : voir le "
+             "<a href=\"services/nettoyage-fin-de-chantier.html\">nettoyage de "
+             "fin de chantier</a>."),
             ("Que faire si un défaut apparaît après la livraison ?",
              "Appelez-nous. Une fissure de retrait, un joint qui se rétracte "
              "ou une porte qui travaille dans les premiers mois relèvent du "
@@ -127,13 +137,15 @@ GROUPES = [
              "par ailleurs."),
             ("Travaillez-vous pour les régies et les propriétaires bailleurs ?",
              "C'est une part importante de notre activité à Lausanne : "
-             "remises en état entre deux locations, rénovations d'immeubles "
-             "en site occupé, interventions planifiées au fil des "
-             "relocations, avec une date de libération ferme."),
+             "<a href=\"services/remise-en-etat-appartement.html\">remises en "
+             "état entre deux locations</a>, rénovations d'immeubles habités, "
+             "interventions planifiées au fil des relocations, avec une date "
+             "de remise du logement ferme."),
             ("Pouvez-vous intervenir sur un logement que vous n'avez pas rénové ?",
-             "Oui, notamment pour un nettoyage de fin de travaux ou une "
-             "remise en état avant état des lieux de sortie, après le passage "
-             "d'une autre entreprise."),
+             "Oui, notamment pour un <a href=\"services/nettoyage-fin-de-chantier.html\">"
+             "nettoyage de fin de travaux</a> ou une remise en état avant "
+             "état des lieux de sortie, après le passage d'une autre "
+             "entreprise."),
         ],
     },
 ]

@@ -13,8 +13,9 @@ import service_liens
 from ouverture import ouverture
 from lausanne_finitions import LOCAL as LOCAL_FINITIONS
 from lausanne_gros_oeuvre import LOCAL as LOCAL_GROS_OEUVRE
+from lausanne_solutions import LOCAL as LOCAL_SOLUTIONS
 
-LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS)
+LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS, **LOCAL_SOLUTIONS)
 
 
 def _tirage(fiche):
@@ -25,7 +26,8 @@ def _tirage(fiche):
     """
     image = f"""<img src="{fiche['image']}" alt="{fiche['alt']}"
            width="1600" height="900" fetchpriority="high" decoding="async">"""
-    return ouverture(image, "Lausanne &amp; arc lémanique", "tirage") + "\n"
+    # La légende dit ce que montre la photo : un lieu, des travaux.
+    return ouverture(image, fiche["alt"], "tirage") + "\n"
 
 
 def _prestations(fiche):
@@ -44,15 +46,15 @@ def _prestations(fiche):
           {textes}
         </div>
         <div class="replis" style="margin-top:var(--sp-6)">
-{repli.repli_liste("Le détail des postes", lot["prestations"],
-                   "%d postes" % len(lot["prestations"]))}
+{repli.repli_liste("Ce que comprend la prestation", lot["prestations"],
+                   "%d postes" % len(lot["prestations"]), ouvert=True)}
         </div>"""))
     return f"""
   <section class="section" aria-labelledby="quoi">
     <div class="zone">
 {briques.intercalaire("Prestations", "Ce que couvre la page",
-                      "Ce que nous|faisons")}
-{repli.onglets(panneaux, "Les lots de cette prestation")}
+                      prestations.intertitres_de(fiche)["quoi"])}
+{repli.onglets(panneaux, "Les travaux de cette page")}
     </div>
   </section>
 """
@@ -65,9 +67,9 @@ def _methode(fiche):
     return f"""
   <section class="section sur-sombre" aria-labelledby="comment">
     <div class="zone">
-{briques.intercalaire("Méthode", "Du premier appel à la réception",
-                      "Comment nous|procédons")}
-{repli.replis(etapes)}
+{briques.intercalaire("Méthode", "Du premier appel à la fin des travaux",
+                      prestations.intertitres_de(fiche)["comment"])}
+{repli.replis(etapes, ouvert=True)}
     </div>
   </section>
 """
@@ -117,12 +119,12 @@ def _local(fiche):
     premier = LOCAL[fiche["lots"][0]]
     seul = len(fiche["lots"]) == 1
     titre = premier["titre"] if seul else "Ce que le bâti|lausannois impose"
-    cote = premier["cote"] if seul else "Lot par lot"
+    cote = premier["cote"] if seul else "Métier par métier"
     return f"""
   <section class="section" aria-labelledby="local">
     <div class="zone">
 {briques.intercalaire("Sur le terrain", cote, titre)}
-{repli.onglets(panneaux, "Le bâti lausannois, lot par lot")}
+{repli.onglets(panneaux, "Le bâti lausannois, métier par métier")}
     </div>
   </section>
 """
@@ -133,8 +135,8 @@ def corps(fiche, base):
     questions = f"""
   <section class="section" aria-labelledby="questions">
     <div class="zone">
-{briques.intercalaire("Questions", "Sur cette prestation",
-                      "Ce qu'on nous|demande")}
+{briques.intercalaire("Questions", "Ce qu'on nous demande",
+                      prestations.intertitres_de(fiche)["questions"])}
 {briques.questions_liste(prestations.questions_de(fiche))}
     </div>
   </section>
@@ -144,7 +146,7 @@ def corps(fiche, base):
         + _prestations(fiche)
         + _methode(fiche)
         + _reperes(fiche)
-        + service_liens.zone(base)
+        + service_liens.zone(base, fiche)
         + _local(fiche)
         + questions
         + service_liens.voisins(fiche, base)

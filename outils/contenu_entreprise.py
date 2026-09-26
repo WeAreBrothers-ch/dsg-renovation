@@ -11,7 +11,7 @@ HISTOIRE = [
     "transmis depuis plus de quarante ans. L'entreprise est jeune, le métier "
     "ne l'est pas.",
     "Nous avons choisi de rester une structure à taille humaine : onze "
-    "professionnels salariés, et un réseau d'une trentaine de partenaires de "
+    "professionnels salariés, et un réseau de plus de trente-cinq partenaires de "
     "la région que nous suivons depuis des années. C'est ce qui nous permet "
     "de tenir un planning, parce que nous savons qui vient et quand.",
     "Notre atelier est à l'avenue de Béthusy, sur les hauts de Lausanne. "
@@ -38,7 +38,7 @@ DEROULE = [
      "notre métier et dans notre zone. Si ce n'est pas le cas, nous le disons "
      "tout de suite plutôt que de faire durer.",
      "Le jour même"),
-    ("La visite et le relevé",
+    ("La visite et les mesures",
      "Nous venons sur place, mesurons, sondons les supports et notons les "
      "contraintes : accès, ascenseur, règlement de l'immeuble, horaires. "
      "C'est là que se jouent les trois quarts de la justesse du devis.",
@@ -53,12 +53,14 @@ DEROULE = [
      "de chaque corps de métier, avec la date de livraison.",
      "À la signature"),
     ("Le chantier",
-     "Un responsable unique pilote les lots et vous rend compte. Les imprévus "
+     "Un responsable unique pilote tous les corps de métier et vous rend "
+     "compte. Les imprévus "
      "sont signalés et chiffrés avant d'être exécutés, jamais après.",
-     "Selon le lot"),
+     "Selon les travaux"),
     ("La réception",
-     "Visite contradictoire pièce par pièce, liste des réserves, reprise sous "
-     "dix jours, nettoyage complet, puis remise des clés.",
+     "Visite de fin de chantier avec vous, pièce par pièce : les défauts "
+     "relevés sont repris sous dix jours, le logement est nettoyé, puis "
+     "nous vous remettons les clés.",
      "Le dernier jour"),
 ]
 
@@ -80,7 +82,8 @@ LIMITES = [
 
 ENGAGEMENTS = [
     ("Un seul interlocuteur",
-     "Un responsable de chantier unique pilote tous les lots, du devis à la "
+     "Un responsable de chantier unique pilote tous les corps de métier, du "
+     "devis à la "
      "remise des clés. Vous ne coordonnez personne."),
     ("Un planning daté",
      "Le calendrier des corps de métier vous est transmis avant le démarrage, "
@@ -89,6 +92,6 @@ ENGAGEMENTS = [
      "Onze professionnels de l'entreprise sur les chantiers. Les mêmes "
      "visages du premier au dernier jour."),
     ("Une réception en règle",
-     "Visite contradictoire, liste des réserves, reprise sous dix jours et "
+     "Visite de fin de chantier avec vous, défauts corrigés sous dix jours, "
      "nettoyage complet inclus."),
 ]

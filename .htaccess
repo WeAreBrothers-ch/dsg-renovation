@@ -1,0 +1,99 @@
+# ============================================================
+# DSG RÉNOVATION — CONFIGURATION DU SERVEUR (Apache, Infomaniak)
+#
+# Une seule adresse par page, des fichiers internes introuvables,
+# une page 404 utile, et des fichiers mis en cache longtemps.
+# ============================================================
+
+Options -Indexes
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+AddType font/woff2 .woff2
+AddType image/avif .avif
+AddType image/webp .webp
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. HTTPS partout. Infomaniak peut chiffrer en amont du serveur : on
+  #    ne redirige que si AUCUN des deux signaux n'indique HTTPS, ce qui
+  #    exclut toute boucle. (Le Manager propose aussi « Forcer HTTPS ».)
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 2. Une seule adresse pour le site : www.dsg-renov.ch, celle des
+  #    balises canonical et du plan du site.
+  RewriteCond %{HTTP_HOST} ^dsg-renov\.ch$ [NC]
+  RewriteRule ^ https://www.dsg-renov.ch%{REQUEST_URI} [R=301,L]
+
+  # 3. /index.html n'est pas une seconde adresse de l'accueil.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+  # 4. Les fichiers de fabrication n'existent pas pour un visiteur :
+  #    générateur, documents de travail, historique git.
+  RewriteRule ^(outils|\.git|\.github)(/|$) - [R=404,L]
+  RewriteRule \.(md|py|pyc|sh)$ - [R=404,L]
+  RewriteRule ^\.gitignore$ - [R=404,L]
+
+  # 5. ANCIENNES ADRESSES DU SITE WIX → nouvelles pages (301).
+  #    À COMPLÉTER AVANT LA BASCULE DU DOMAINE : relever les adresses
+  #    du site Wix (Google Search Console, sitemap Wix, recherche
+  #    « site:dsg-renov.ch ») et en rediriger chacune vers la page qui
+  #    la remplace. Sans ces lignes, le référencement acquis par
+  #    l'ancien site est perdu. Modèles :
+  # RewriteRule ^peinture/?$                /services/peinture.html [R=301,L]
+  # RewriteRule ^platrerie/?$               /services/platrerie-cloisons.html [R=301,L]
+  # RewriteRule ^carrelage/?$               /services/carrelage-sols.html [R=301,L]
+  # RewriteRule ^nettoyage/?$               /services/nettoyage-fin-de-chantier.html [R=301,L]
+  # RewriteRule ^renovation/?$              /services/renovation-complete.html [R=301,L]
+  # RewriteRule ^(services|prestations)/?$  /services.html [R=301,L]
+  # RewriteRule ^(realisations|projets)/?$  /realisations.html [R=301,L]
+  # RewriteRule ^(a-propos|about)/?$        /entreprise.html [R=301,L]
+  # RewriteRule ^(contact|devis)/?$         /devis.html [R=301,L]
+</IfModule>
+
+# ---------- Compression ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json image/svg+xml image/x-icon
+</IfModule>
+
+# ---------- Cache ----------
+# Feuille de style et scripts portent leur version dans l'adresse
+# (?v=…, posée par construire.py) : ils peuvent être gardés un an.
+# Les pages, elles, se revalident à chaque visite.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 week"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/xml "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # ---------- Sécurité ----------
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # À activer une fois le HTTPS vérifié sur www et sans www (un an) :
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>

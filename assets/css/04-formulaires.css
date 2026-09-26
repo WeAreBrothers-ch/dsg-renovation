@@ -58,7 +58,30 @@
   background-position:calc(100% - 12px) 50%,calc(100% - 6px) 50%;
   background-size:6px 6px;background-repeat:no-repeat;
 }
-.champ input::placeholder,.champ textarea::placeholder{color:var(--c-encre-40);opacity:1}
+/* Les exemples sont écrits plus petit et plus clair que les réponses :
+   « ex. : Lausanne » ne doit jamais passer pour une valeur déjà saisie. */
+.champ input::placeholder,.champ textarea::placeholder{
+  color:var(--c-encre-40);opacity:1;
+  font-family:var(--f-texte);font-weight:400;font-size:var(--t-ui);letter-spacing:0;
+}
+.champ__facultatif{font-weight:400;color:var(--c-encre-60);margin-left:var(--sp-1)}
+.champ__facultatif::before{content:"— "}
+
+/* Photos : le sélecteur de fichiers, au dessin des boutons du site. */
+.champ input[type="file"]{
+  min-height:0;padding:var(--sp-2) 0;cursor:pointer;
+  font-family:var(--f-texte);font-weight:400;font-size:var(--t-petit);letter-spacing:0;
+  color:var(--c-encre-60);
+}
+.champ input[type="file"]::file-selector-button{
+  margin-right:var(--sp-4);padding:var(--sp-3) var(--sp-4);border:0;border-radius:0;
+  background:var(--c-encre);color:var(--c-papier);cursor:pointer;
+  font:500 var(--t-petit)/1.2 var(--f-texte);
+  transition:background-color var(--d-rapide) var(--e-standard);
+}
+@media (hover:hover) and (pointer:fine){
+  .champ input[type="file"]:hover::file-selector-button{background:var(--c-accent)}
+}
 .champ__aide{font-family:var(--f-lecture);font-size:var(--t-petit);color:var(--c-encre-60)}
 
 .champ--erreur,.champ--erreur:focus-within{box-shadow:inset 0 0 0 2px var(--c-alerte)}
@@ -95,30 +118,15 @@
 .pastille input:focus-visible+span{outline:2px solid var(--c-focus);outline-offset:2px}
 
 /* ------------------------------------------------------------
-   CONSENTEMENT
-   Le renvoi vers la politique vit hors du label : à l'intérieur,
-   un clic sur le lien cocherait aussi la case.
-   ------------------------------------------------------------ */
-.consentement{
-  display:flex;align-items:flex-start;gap:var(--sp-3);
-  font-size:var(--t-petit);line-height:1.5;color:var(--c-encre-60);
-}
-.champ .consentement input{
-  width:22px;height:22px;min-height:0;flex:0 0 auto;margin-top:1px;
-  accent-color:var(--c-encre);cursor:pointer;
-}
-.consentement label{cursor:pointer}
-.consentement__renvoi{padding-left:calc(22px + var(--sp-3));font-size:var(--t-petit)}
-.consentement__renvoi a{
-  display:inline-block;padding-block:var(--sp-2);
-  color:var(--c-accent);text-decoration:underline;text-underline-offset:3px;
-}
-
-/* ------------------------------------------------------------
    ENVOI ET RETOUR
    ------------------------------------------------------------ */
 .formulaire__envoi{width:100%;min-height:60px}
 .formulaire__envoi[disabled]{opacity:.6;cursor:progress}
+.formulaire__mention{
+  margin-top:var(--sp-4);max-width:70ch;
+  font-size:var(--t-petit);line-height:1.5;color:var(--c-encre-60);
+}
+.formulaire__mention a{color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .formulaire__garanties{
   display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);margin-top:var(--sp-4);
   font-size:var(--t-petit);color:var(--c-encre-60);

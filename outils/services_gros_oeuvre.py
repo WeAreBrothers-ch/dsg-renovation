@@ -1,4 +1,4 @@
-"""Les quatre lots qui touchent à la structure et aux volumes.
+"""Les quatre métiers qui touchent à la structure et aux volumes.
 
 Chaque service porte son propre contenu rédactionnel et ses mots-clés
 de recherche locale. Rien n'est dupliqué d'un service à l'autre : deux
@@ -11,7 +11,7 @@ IMG = "https://static.wixstatic.com/media/"
 SERVICES = [
     {
         "slug": "renovation-complete",
-        "resume": 'Appartement, maison ou immeuble repris de fond en comble, tous lots coordonnés.',
+        "resume": 'Appartement, maison ou immeuble repris de fond en comble, tous corps de métier coordonnés.',
         "numero": "01",
         "nom": "Rénovation totale",
         "nom_menu": "Rénovation totale",
@@ -40,7 +40,7 @@ SERVICES = [
             "seul numéro à appeler pendant toute la durée des travaux.",
             "Nous intervenons sur des appartements de Lausanne et de ses "
             "communes voisines, sur des villas de Pully, Lutry ou Épalinges, "
-            "et sur des immeubles de rendement pour le compte de régies "
+            "et sur des immeubles locatifs pour le compte de régies "
             "lausannoises.",
         ],
         "prestations": [
@@ -49,26 +49,26 @@ SERVICES = [
             "Reprise complète des murs et des plafonds, enduits et lissage",
             "Pose des sols : parquet, carrelage, vinyle, linoléum",
             "Mise en peinture de l'ensemble des surfaces et des boiseries",
-            "Coordination des lots techniques : électricité, sanitaire, cuisine",
+            "Coordination de l'électricité, du sanitaire et de la cuisine avec nos partenaires",
             "Nettoyage de fin de chantier et remise des clés",
         ],
         "etapes": [
-            ("Visite et relevé", "Nous nous déplaçons, mesurons et relevons "
+            ("Visite et mesures", "Nous nous déplaçons, mesurons et notons "
              "l'état existant. La visite est gratuite et sans engagement."),
             ("Devis détaillé", "72 heures après la visite, vous recevez un devis poste "
              "par poste, avec les quantités et les finitions retenues."),
             ("Planning daté", "Avant le premier coup de marteau, vous avez "
              "le calendrier semaine par semaine de tous les corps de métier."),
-            ("Chantier suivi", "Un responsable unique pilote les lots et "
-             "vous rend compte. Le chantier est rangé chaque soir."),
-            ("Réception", "Visite contradictoire, liste des réserves, "
-             "reprise sous dix jours, puis remise des clés."),
+            ("Chantier suivi", "Un responsable unique pilote tous les corps de "
+             "métier et vous rend compte. Le chantier est rangé chaque soir."),
+            ("Fin des travaux", "Visite pièce par pièce avec vous, défauts "
+             "corrigés sous dix jours, puis remise des clés."),
         ],
         "reperes": [
             ("Durée type", "5 à 8 semaines pour 100 m²"),
             ("Maison ou immeuble", "10 à 14 semaines"),
             ("Devis", "Gratuit, 72 h après visite"),
-            ("Réserves", "Reprises sous 10 jours"),
+            ("Défauts relevés", "Repris sous 10 jours"),
         ],
         "questions": [
             ("Puis-je rester dans le logement pendant une rénovation totale ?",
@@ -98,26 +98,26 @@ SERVICES = [
         "h1": ["Plâtrerie", "et enduits"],
         "chapo": (
             "Un mur mal préparé se voit sous n'importe quelle peinture. La "
-            "plâtrerie est le lot qui décide de la qualité de toutes les "
+            "plâtrerie est le métier qui décide de la qualité de toutes les "
             "finitions qui suivent."
         ),
         "image": IMG + "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg",
         "alt": "Mur repris en plâtrerie avant mise en peinture dans un appartement lausannois",
         "intro": [
             "Fissures, anciens papiers peints arrachés, trous de chevilles, "
-            "angles épaufrés, plafonds fatigués : la plupart des logements "
+            "angles écornés, plafonds fatigués : la plupart des logements "
             "anciens de Lausanne demandent une reprise sérieuse des supports "
             "avant toute mise en teinte.",
             "Nous travaillons les fonds jusqu'à obtenir une surface plane et "
             "régulière. Selon l'état du support et la finition visée, cela va "
-            "du simple rebouchage au ratissage complet en pâte à lisser.",
-            "Ce lot est presque toujours couplé à la peinture. Le confier à la "
+            "du simple rebouchage à l'enduit lissé sur tout le mur (ratissage).",
+            "La plâtrerie va presque toujours avec la peinture. La confier à la "
             "même entreprise évite la discussion classique de fin de chantier, "
             "où le peintre reproche au plâtrier un fond mal dressé.",
         ],
         "prestations": [
             "Rebouchage des fissures, trous et saignées",
-            "Ratissage et lissage intégral des murs et plafonds",
+            "Enduit et lissage intégral des murs et plafonds (ratissage)",
             "Reprise des angles, arêtes et tableaux de fenêtre",
             "Enduits de finition, du grain fin au lissé miroir",
             "Traitement des supports après dépose de papier peint",
@@ -134,15 +134,15 @@ SERVICES = [
              "que la première couche ne soit appliquée."),
         ],
         "reperes": [
-            ("Finitions", "Q2 à Q4 selon l'exigence"),
+            ("Finition des murs", "Prêts à peindre ou lissés parfaits"),
             ("Pièce courante", "1 à 3 jours"),
             ("Couplage", "Le plus souvent avec la peinture"),
             ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [
             ("Faut-il lisser tous les murs avant de repeindre ?",
-             "Non. Un mur sain et déjà lisse demande un simple rebouchage. Le "
-             "ratissage complet se justifie sur un support marqué, après "
+             "Non. Un mur sain et déjà lisse demande un simple rebouchage. "
+             "L'enduit lissé sur tout le mur se justifie sur un support marqué, après "
              "dépose de papier peint, ou pour une finition très tendue en "
              "lumière rasante."),
             ("Combien de temps faut-il attendre avant de peindre ?",
@@ -263,7 +263,7 @@ SERVICES = [
         "etapes": [
             ("Relevé des contraintes", "Hauteur disponible, position des "
              "gaines, points d'alimentation : tout se décide avant la pose."),
-            ("Plan de calepinage", "Position des spots arrêtée avec vous, "
+            ("Plan d'éclairage", "Position des spots arrêtée avec vous, "
              "sur plan, avant le premier perçage."),
             ("Ossature et isolant", "Suspentes, fourrures, laine acoustique "
              "si la pièce le demande."),
@@ -273,7 +273,7 @@ SERVICES = [
         "reperes": [
             ("Perte de hauteur", "de 8 à 15 cm selon le cas"),
             ("Pièce courante", "3 à 5 jours"),
-            ("Éclairage", "Calepinage validé avant pose"),
+            ("Éclairage", "Plan des spots validé avant pose"),
             ("Devis", "Gratuit, 72 h après visite"),
         ],
         "questions": [

@@ -18,21 +18,21 @@ def realisations(services, base=""):
     return f"""
   <section class="section" aria-labelledby="tFiches">
     <div class="zone">
-{briques.intercalaire("Registre", "Six chantiers livrés",
-                      "Le registre|des chantiers",
-                      "Chaque fiche donne le relevé complet du chantier. "
-                      "Dépliez-la pour lire le détail des travaux, ou "
-                      "agrandissez la vue.")}
+{briques.intercalaire("Réalisations", "Six chantiers livrés",
+                      "Nos derniers chantiers|de rénovation",
+                      "Pour chaque chantier : la surface, la durée et les "
+                      "travaux réalisés. Cliquez sur une photo pour "
+                      "l'agrandir.")}
       {fragment('filtres')}
       {fragment('chantiers')}
-      <p class="chantiers__vide chapo pleine-largeur" id="aucunChantier" hidden>Aucune fiche ne correspond à ce filtre pour le moment.</p>
+      <p class="chantiers__vide chapo pleine-largeur" id="aucunChantier" hidden>Aucun chantier ne correspond à ce filtre pour le moment.</p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tSignature">
     <div class="zone">
-{briques.intercalaire("Pièce jointe", "Chantier signature",
-                      "Six appartements,|en site occupé")}
+{briques.intercalaire("À la une", "Un immeuble habité",
+                      "Six appartements rénovés,|locataires en place")}
       {fragment('signature')}
     </div>
   </section>
@@ -42,7 +42,7 @@ def realisations(services, base=""):
 {briques.intercalaire("Familles", "Ce que nous reprenons dans la région",
                       "Trois types de biens,|trois chantiers différents",
                       "Un appartement de Sous-Gare, une villa de Chailly et "
-                      "un immeuble de rendement ne se rénovent pas de la "
+                      "un immeuble locatif ne se rénovent pas de la "
                       "même façon, ni pour les mêmes raisons.")}
 {briques_bis.cartes(div.BIENS)}
     </div>
@@ -93,13 +93,12 @@ def devis(services, base=""):
         for groupe in cq.GROUPES
     )
     return f"""
-  <section class="section" aria-labelledby="tBordereau">
+  <section class="section" aria-labelledby="tDemande">
     <div class="zone">
-{briques.intercalaire("Demande", "Visite gratuite, sans engagement",
-                      "Le bordereau|de demande",
-                      "Décrivez votre projet en une minute. Nous nous "
-                      "déplaçons, mesurons et vous remettons un devis détaillé "
-                      "et gratuit.")}
+{briques.intercalaire("Votre demande", "Visite gratuite, sans engagement",
+                      "Décrivez|votre projet",
+                      "Une minute suffit. Nous nous déplaçons, mesurons et "
+                      "vous remettons un devis détaillé et gratuit.")}
 
       <div class="grille12 demande__grille pleine-largeur">
         {fragment('formulaire')}

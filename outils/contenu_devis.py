@@ -7,12 +7,13 @@ et celui que cherchent réellement les gens avant de signer.
 
 CONTIENT = [
     ("Le détail poste par poste",
-     "Chaque lot apparaît séparément, avec ses quantités : mètres carrés de "
+     "Chaque métier apparaît séparément, avec ses quantités : mètres carrés de "
      "mur à reprendre, mètres carrés de sol à poser, nombre de portes à "
      "laquer. Un devis en une seule ligne « rénovation appartement » ne se "
      "vérifie pas."),
     ("La préparation des supports",
-     "Rebouchage, ponçage, ragréage, fixateur. C'est le poste le plus souvent "
+     "Rebouchage, ponçage, mise à niveau des sols (ragréage), fixateur. "
+     "C'est le poste le plus souvent "
      "absent des devis bon marché, et celui qui décide de la tenue du "
      "résultat."),
     ("Les protections et l'évacuation",
@@ -26,7 +27,7 @@ CONTIENT = [
      "Une durée en semaines et une date d'achèvement, pas une estimation "
      "verbale."),
     ("Les conditions de paiement",
-     "Acompte, situations intermédiaires et solde à la réception, écrits noir "
+     "Acompte, factures intermédiaires et solde à la fin des travaux, écrits noir "
      "sur blanc."),
 ]
 
@@ -61,7 +62,7 @@ PREPARER = [
      "claire."),
     ("Votre échéance réelle",
      "Une date d'emménagement, une fin de bail, une entrée de locataire. "
-     "C'est elle qui dicte l'ordre des lots."),
+     "C'est elle qui dicte l'ordre des travaux."),
     ("Le règlement de l'immeuble",
      "Horaires de travaux autorisés, usage de l'ascenseur, accès. Mieux vaut "
      "le savoir avant de planifier que le découvrir le premier matin."),

@@ -20,15 +20,15 @@ LEGENDE_COMPARATEUR = (
 
 
 def accueil(services, base=""):
-    """Page d'accueil : la preuve, les chiffres, les lots, le déroulé."""
+    """Page d'accueil : la preuve, les chiffres, les prestations, le déroulé."""
     villes = "".join("<li>%s</li>" % c for c in COMMUNES)
     return f"""
   <section class="couverture" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
-      <p class="couverture__nature">Entreprise de rénovation
-        <span>Lausanne &amp; arc lémanique</span></p>
+      <p class="couverture__nature">Du sol au plafond,
+        <span>tout en maîtrise.</span></p>
       <div class="couverture__texte">
-        <h1 id="t01">Du sol au plafond, tout en maîtrise.</h1>
+        <h1 id="t01">Entreprise de rénovation à Lausanne</h1>
         <div class="couverture__pied">
           <p class="chapo couverture__chapo">Rénovation totale d'appartements,
           de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
@@ -39,6 +39,11 @@ def accueil(services, base=""):
             <a class="btn btn--cadre" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
           </div>
         </div>
+        <ul class="couverture__garanties">
+          <li>Visite et devis gratuits</li>
+          <li>Devis détaillé 72 h après la visite</li>
+          <li>Sans engagement</li>
+        </ul>
       </div>
     </div>
 
@@ -52,8 +57,8 @@ def accueil(services, base=""):
 
   <section class="section sur-sombre" aria-labelledby="tEntreprise">
     <div class="zone">
-{briques.intercalaire("L'entreprise", "Relevé arrêté en janvier 2026",
-                      "Professionnalisme,|fiabilité et passion")}
+{briques.intercalaire("L'entreprise", "Chiffres à janvier 2026",
+                      "Quarante ans de métier,|une équipe lausannoise")}
       <p class="declaration entreprise__intro revele">Fondée en <span class="nb">2019</span>
       sur un savoir-faire transmis depuis plus de <span class="nb">40</span> ans,
       DSG Rénovation intervient à Lausanne, Genève et sur tout l'arc lémanique.
@@ -65,29 +70,29 @@ def accueil(services, base=""):
 
   <section class="section" aria-labelledby="tLots">
     <div class="zone">
-{briques.intercalaire("Prestations", "Neuf métiers · cinq pages",
-                      "Neuf métiers,|un seul chantier",
-                      "Tous nos lots sont réalisés par des salariés de "
+{briques.intercalaire("Prestations", "Tous les corps de métier",
+                      "Nos travaux de rénovation,|un seul interlocuteur",
+                      "Tous nos travaux sont réalisés par des salariés de "
                       "l'entreprise ou par des partenaires que nous suivons "
                       "depuis des années.")}
 {briques.liste_metiers(services, base)}
-      <p class="suite revele"><a href="{base}services.html">Voir le détail de chaque lot<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite revele"><a href="{base}services.html">Voir toutes nos prestations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tChantier">
     <div class="zone">
-{briques.intercalaire("Réalisations", "Extrait du registre des chantiers",
-                      "Un chantier,|en détail")}
+{briques.intercalaire("Réalisations", "Un chantier récent",
+                      "Une rénovation lausannoise,|en détail")}
       {fragment('signature')}
-      <p class="suite revele"><a href="{base}realisations.html">Voir les six fiches de chantier<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite revele"><a href="{base}realisations.html">Voir toutes nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="tZone">
     <div class="zone">
 {briques.intercalaire("Zone", "Atelier à Lausanne, avenue de Béthusy",
-                      "Où nous|intervenons",
+                      "Rénovation à Lausanne|et sur l'arc lémanique",
                       "Nous restons sur l'arc lémanique. Un chantier proche, "
                       "c'est une équipe qui arrive à l'heure et qui repasse "
                       "sans compter quand une reprise est nécessaire.")}
@@ -120,7 +125,7 @@ def accueil(services, base=""):
   </section>
 """ + briques.appel(
         base,
-        "Ouvrez votre dossier",
+        "Demandez votre devis gratuit",
         "Décrivez votre projet en une minute. Nous nous déplaçons, mesurons "
         "et vous remettons un devis détaillé et gratuit 72 heures après la "
         "visite.",

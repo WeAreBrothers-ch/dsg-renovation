@@ -155,9 +155,8 @@ def construire_annexes():
          "applicable."),
         ("confidentialite.html",
          "Politique de confidentialité — DSG Rénovation",
-         "Comment DSG Rénovation Sàrl traite les données personnelles "
-         "transmises depuis son site : données collectées, finalité, "
-         "conservation et droits des personnes concernées."),
+         "Comment DSG Rénovation Sàrl traite les données transmises depuis "
+         "son site : données collectées, finalité, conservation et droits."),
     ]:
         page = {
             "titre": titre,

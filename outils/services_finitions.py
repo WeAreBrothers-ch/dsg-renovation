@@ -1,6 +1,6 @@
-"""Les cinq lots de finition : ce que le client voit et touche.
+"""Les cinq métiers de finition : ce que le client voit et touche.
 
-Même structure que les lots de gros œuvre. Voir services_gros_oeuvre.py
+Même structure que les métiers de gros œuvre. Voir services_gros_oeuvre.py
 pour le détail des champs.
 """
 
@@ -28,10 +28,11 @@ SERVICES = [
         "image": IMG + "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg",
         "alt": "Dégagement et cuisine remis en peinture dans une villa lausannoise",
         "intro": [
-            "Remise en peinture d'un appartement avant emménagement, reprise "
-            "complète d'une villa, rafraîchissement entre deux locations pour "
-            "une régie : la peinture est notre lot le plus demandé à Lausanne "
-            "et sur la Riviera.",
+            "Peintre en bâtiment à Lausanne, nous remettons en peinture des "
+            "appartements avant emménagement, reprenons des villas entières et "
+            "rafraîchissons des logements entre deux locations pour les "
+            "régies : c'est notre métier le plus demandé, à Lausanne comme sur "
+            "la Riviera.",
             "Nous préparons les fonds avant de peindre, systématiquement. "
             "Rebouchage, ponçage, fixateur adapté au support : c'est ce "
             "travail invisible qui fait qu'une teinte tient dix ans au lieu "
@@ -81,7 +82,9 @@ SERVICES = [
             ("Intervenez-vous pour une remise en état entre deux locataires ?",
              "C'est une part importante de notre activité pour les régies "
              "lausannoises. Nous intervenons entre deux baux, avec une date de "
-             "libération ferme."),
+             "remise du logement ferme : voir la <a href=\"{base}services/"
+             "remise-en-etat-appartement.html\">remise en état entre deux "
+             "locations</a>."),
         ],
         "lies": ["platrerie", "revetements-muraux", "renovation-complete", "nettoyage-fin-de-chantier"],
     },
@@ -117,14 +120,14 @@ SERVICES = [
         ],
         "prestations": [
             "Pose de papier peint intissé, vinyle et traditionnel",
-            "Panoramiques et lés numérotés, calepinés avant pose",
+            "Panoramiques et lés numérotés, placés sur plan avant pose",
             "Toile de verre à peindre sur supports fissurés",
             "Revêtements décoratifs et effets de matière",
             "Dépose des anciens revêtements et reprise du fond",
             "Traitement des angles, tableaux et retours de fenêtre",
         ],
         "etapes": [
-            ("Calepinage", "Nous plaçons les raccords aux endroits les moins "
+            ("Plan de pose", "Nous plaçons les raccords aux endroits les moins "
              "visibles et démarrons depuis l'angle le plus vu."),
             ("Préparation du fond", "Dépose, rebouchage, ponçage et primaire "
              "d'accrochage : un intissé ne rattrape aucun défaut."),
@@ -135,7 +138,7 @@ SERVICES = [
         ],
         "reperes": [
             ("Pièce courante", "1 à 2 jours"),
-            ("Panoramique", "Calepinage validé avant commande"),
+            ("Panoramique", "Plan de pose validé avant commande"),
             ("Toile de verre", "Peinte après pose, 2 couches"),
             ("Devis", "Gratuit, 72 h après visite"),
         ],
@@ -171,11 +174,11 @@ SERVICES = [
         "image": IMG + "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg",
         "alt": "Salle d'eau carrelée du sol au plafond dans un duplex rénové",
         "intro": [
-            "Salle de bains reprise du sol au plafond, cuisine recarrelée, "
-            "grand format posé dans une zone de jour : le carrelage est le "
-            "revêtement le plus durable, à condition que le support et le "
-            "tracé soient justes.",
-            "Nous étudions le calepinage avant de poser : où tombe la coupe, "
+            "Carreleur à Lausanne, nous reprenons des salles de bains du sol "
+            "au plafond, recarrelons des cuisines et posons du grand format "
+            "dans les pièces de vie : le carrelage est le revêtement le plus "
+            "durable, à condition que le support et le tracé soient justes.",
+            "Nous étudions le plan de pose (le calepinage) avant de poser : où tombe la coupe, "
             "comment se centre le motif, où passent les joints de "
             "fractionnement. C'est ce travail sur plan qui fait la différence "
             "entre une pose correcte et une pose soignée.",
@@ -187,7 +190,7 @@ SERVICES = [
             "Carrelage de sol : grès cérame, pierre, grand format",
             "Faïence murale, salles de bains et crédences de cuisine",
             "Étanchéité sous carrelage des zones humides",
-            "Ragréage et préparation des supports avant pose",
+            "Mise à niveau (ragréage) et préparation des supports avant pose",
             "Pose droite, à joints décalés, en chevron ou en diagonale",
             "Plinthes, seuils, profilés d'angle et joints de finition",
             "Réfection de joints et remplacement de carreaux cassés",
@@ -195,7 +198,7 @@ SERVICES = [
         "etapes": [
             ("Contrôle du support", "Planéité, humidité, tenue : un support "
              "qui bouge fissure le carrelage, quel que soit le collage."),
-            ("Calepinage", "Tracé des axes et position des coupes arrêtés "
+            ("Plan de pose", "Tracé des axes et position des coupes arrêtés "
              "avec vous avant la pose."),
             ("Étanchéité", "Natte ou résine sous les douches, les bacs et "
              "les zones de projection."),
@@ -242,11 +245,11 @@ SERVICES = [
         "alt": "Sol posé dans une cuisine rénovée, raccords et plinthes ajustés",
         "intro": [
             "Parquet chêne dans un appartement lausannois, vinyle grand "
-            "passage dans un logement de rendement, linoléum dans une pièce "
+            "passage dans un logement locatif, linoléum dans une pièce "
             "d'eau : le choix du revêtement dépend moins du goût que de "
             "l'usage de la pièce.",
             "Nous préparons systématiquement le support : dépose de l'ancien "
-            "sol, contrôle de l'humidité de la chape, ragréage autolissant. "
+            "sol, contrôle de l'humidité de la chape, mise à niveau autolissante (ragréage). "
             "Un sol posé sur un support irrégulier s'entend à chaque pas et "
             "s'use en priorité aux points hauts.",
             "Les plinthes et les seuils sont assortis et posés dans la foulée. "
@@ -306,7 +309,7 @@ SERVICES = [
         "h1": ["Nettoyage", "de fin de chantier"],
         "chapo": (
             "La poussière de plâtre se dépose trois fois avant de disparaître. "
-            "Un nettoyage de chantier n'est pas un ménage, c'est un lot."
+            "Un nettoyage de chantier n'est pas un ménage, c'est un métier."
         ),
         "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
         "alt": "Logement nettoyé après travaux, prêt à être occupé",
@@ -314,11 +317,11 @@ SERVICES = [
             "Un chantier propre le dernier jour n'est pas un chantier fini. La "
             "poussière fine reste en suspension, retombe sur les plinthes, "
             "dans les rails de fenêtre, sur le dessus des portes.",
-            "Nous traitons le nettoyage comme un lot à part entière, avec ses "
-            "passes successives : décapage des traces de colle et de peinture, "
+            "Nous traitons le nettoyage comme un métier à part entière, avec ses "
+            "passages successifs : décapage des traces de colle et de peinture, "
             "dépoussiérage complet, vitres et encadrements, sanitaires et "
             "robinetterie, puis sols.",
-            "Sur nos rénovations, ce lot est compris dans le devis. Nous "
+            "Sur nos rénovations, le nettoyage est compris dans le devis. Nous "
             "intervenons aussi seuls, après les travaux d'une autre "
             "entreprise ou avant un état des lieux de sortie.",
         ],

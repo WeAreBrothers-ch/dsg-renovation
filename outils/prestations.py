@@ -1,4 +1,4 @@
-"""Les cinq pages de prestation, et les lots qu'elles regroupent.
+"""Les pages de prestation, et les lots qu'elles regroupent.
 
 Les fiches de lot restent où elles sont : ce fichier ne fait que dire
 lesquels partagent une page, et rédige ce qui leur est commun — titre,
@@ -9,12 +9,18 @@ chantier se cherchent ensemble sur un moteur. Une page dense qui
 couvre la plâtrerie, les cloisons et les faux plafonds se positionne
 mieux que trois pages moyennes, et elle répond mieux au visiteur, qui
 a rarement besoin d'un seul de ces trois lots.
+
+Cinq pages de métier, puis deux pages de situation (pages_solutions.py) :
+relouer un logement, refaire une salle de bains. Ce sont les deux
+demandes que les clients formulent sans nommer de métier.
 """
 
+import pages_solutions
 from services_finitions import SERVICES as FINITIONS
 from services_gros_oeuvre import SERVICES as GROS_OEUVRE
+from services_solutions import SERVICES as SOLUTIONS
 
-LOTS = {s["slug"]: s for s in GROS_OEUVRE + FINITIONS}
+LOTS = {s["slug"]: s for s in GROS_OEUVRE + FINITIONS + SOLUTIONS}
 
 IMG = "https://static.wixstatic.com/media/"
 
@@ -25,13 +31,13 @@ PAGES = [
         "nom": "Rénovation complète",
         "nom_menu": "Rénovation complète",
         "resume": "Appartement, maison ou immeuble repris de fond en comble, "
-                  "tous lots coordonnés.",
+                  "tous corps de métier coordonnés.",
         "lots": ["renovation-complete"],
         "titre": "Rénovation complète d'appartement et de maison à Lausanne",
         "description": (
-            "Rénovation totale clé en main à Lausanne et dans l'arc lémanique : "
-            "tous les corps de métier coordonnés par un seul interlocuteur. "
-            "Devis gratuit 72 h après la visite."
+            "Rénovation complète d'appartement ou de maison à Lausanne : tous "
+            "les corps de métier coordonnés, un seul responsable. Devis "
+            "gratuit 72 h après visite."
         ),
         "h1": ["Rénovation complète", "à Lausanne"],
         "chapo": "Appartement, maison ou immeuble repris de fond en comble. "
@@ -44,7 +50,7 @@ PAGES = [
             ("Durée type", "5 à 8 semaines pour 100 m²"),
             ("Maison ou immeuble", "10 à 14 semaines"),
             ("Devis", "Gratuit, 72 h après visite"),
-            ("Réserves", "Reprises sous 10 jours"),
+            ("Défauts relevés", "Repris sous 10 jours"),
         ],
         "lies": ["platrerie-cloisons", "peinture", "carrelage-sols",
                  "nettoyage-fin-de-chantier"],
@@ -59,11 +65,11 @@ PAGES = [
         "lots": ["peinture", "revetements-muraux"],
         "titre": "Peintre à Lausanne — peinture et papier peint",
         "description": (
-            "Entreprise de peinture à Lausanne : préparation des fonds, mise "
-            "en teinte intérieure et extérieure, pose de papier peint et de "
-            "toile de verre. Devis gratuit 72 h après la visite."
+            "Peintre à Lausanne : préparation des fonds, peinture intérieure "
+            "et extérieure, papier peint et toile de verre, teintes testées "
+            "sur place. Devis gratuit."
         ),
-        "h1": ["Peinture et", "revêtements muraux"],
+        "h1": ["Peintre à Lausanne :", "peinture et revêtements muraux"],
         "chapo": "Une belle peinture, c'est quatre-vingts pour cent de "
                  "préparation. Un papier peint se juge à ses raccords. Dans "
                  "les deux cas, tout se joue sur le fond.",
@@ -77,7 +83,7 @@ PAGES = [
             ("Devis", "Gratuit, 72 h après visite"),
         ],
         "lies": ["platrerie-cloisons", "renovation-complete", "carrelage-sols",
-                 "nettoyage-fin-de-chantier"],
+                 "remise-en-etat-appartement"],
     },
     {
         "slug": "platrerie-cloisons",
@@ -89,19 +95,19 @@ PAGES = [
         "lots": ["platrerie", "cloisons", "faux-plafonds"],
         "titre": "Plâtrier à Lausanne — cloisons, enduits et faux plafonds",
         "description": (
-            "Plâtrerie, pose de cloisons placo et alba, faux plafonds à "
-            "Lausanne : enduits, lissage, création de volumes et éclairage "
-            "intégré. Devis gratuit."
+            "Plâtrier à Lausanne : enduits et lissage, cloisons placo ou "
+            "alba, faux plafonds avec éclairage intégré. Devis gratuit 72 h "
+            "après la visite."
         ),
-        "h1": ["Plâtrerie, cloisons", "et faux plafonds"],
-        "chapo": "Trois lots qui dessinent la pièce : ce qui tient les murs, "
+        "h1": ["Plâtrier à Lausanne :", "plâtrerie, cloisons, faux plafonds"],
+        "chapo": "Trois métiers qui dessinent la pièce : ce qui tient les murs, "
                  "ce qui les déplace, et ce qui ferme le dessus. Ils se "
                  "posent presque toujours ensemble.",
         "image": IMG + "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg",
         "alt": "Mur repris en plâtrerie avant mise en peinture dans un "
                "appartement lausannois",
         "reperes": [
-            ("Finitions", "Q2 à Q4 selon l'exigence"),
+            ("Finition des murs", "Prêts à peindre ou lissés parfaits"),
             ("Cloison simple", "2 à 3 jours, finition comprise"),
             ("Perte de hauteur", "8 à 15 cm sous faux plafond"),
             ("Devis", "Gratuit, 72 h après visite"),
@@ -119,14 +125,14 @@ PAGES = [
         "lots": ["carrelage", "pose-de-sol"],
         "titre": "Carreleur à Lausanne — carrelage, parquet et vinyle",
         "description": (
-            "Pose de carrelage et de sols à Lausanne : salles de bains, "
-            "cuisines, grès cérame grand format, parquet, vinyle et linoléum, "
-            "ragréage compris. Devis gratuit."
+            "Carreleur à Lausanne : salles de bains, cuisines, grès cérame "
+            "grand format, parquet, vinyle et linoléum posés sur un sol "
+            "préparé. Devis gratuit."
         ),
-        "h1": ["Carrelage", "et sols"],
-        "chapo": "Ce sur quoi on marche supporte tout le reste. Le "
-                 "calepinage et le ragréage se décident avant la première "
-                 "colle, jamais après.",
+        "h1": ["Carreleur à Lausanne :", "carrelage et sols"],
+        "chapo": "Ce sur quoi on marche supporte tout le reste. Le plan de "
+                 "pose des carreaux et la mise à niveau du sol se décident "
+                 "avant la première colle, jamais après.",
         "image": IMG + "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg",
         "alt": "Salle d'eau carrelée du sol au plafond dans un duplex rénové",
         "reperes": [
@@ -135,8 +141,8 @@ PAGES = [
             ("En immeuble", "Sous-couche acoustique systématique"),
             ("Devis", "Gratuit, 72 h après visite"),
         ],
-        "lies": ["renovation-complete", "platrerie-cloisons", "peinture",
-                 "nettoyage-fin-de-chantier"],
+        "lies": ["renovation-salle-de-bains", "renovation-complete",
+                 "platrerie-cloisons", "peinture"],
     },
     {
         "slug": "nettoyage-fin-de-chantier",
@@ -149,25 +155,84 @@ PAGES = [
         "titre": "Nettoyage de fin de chantier à Lausanne",
         "description": (
             "Nettoyage de fin de travaux à Lausanne : poussière de chantier, "
-            "vitres, sanitaires et sols. Logement rendu immédiatement "
-            "habitable, avant état des lieux ou relocation."
+            "vitres, sanitaires, sols. Logement habitable, prêt pour l'état "
+            "des lieux. Devis gratuit."
         ),
-        "h1": ["Nettoyage", "de fin de chantier"],
+        "h1": ["Nettoyage de fin de chantier", "à Lausanne"],
         "chapo": "La poussière de plâtre se dépose trois fois avant de "
                  "disparaître. Un nettoyage de chantier n'est pas un ménage, "
-                 "c'est un lot.",
+                 "c'est un métier.",
         "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
         "alt": "Logement nettoyé après travaux, prêt à être occupé",
         "reperes": [
             ("Appartement 100 m²", "1 à 2 jours"),
-            ("Passes", "2 au minimum, poussière oblige"),
+            ("Passages", "2 au minimum, poussière oblige"),
             ("Sur nos chantiers", "Compris dans le devis"),
             ("Seul", "Possible après une autre entreprise"),
         ],
-        "lies": ["renovation-complete", "peinture", "carrelage-sols",
-                 "platrerie-cloisons"],
+        "lies": ["renovation-complete", "remise-en-etat-appartement",
+                 "peinture", "carrelage-sols"],
     },
 ]
+
+PAGES += pages_solutions.PAGES
+
+
+# Les intertitres propres à chaque page. Sept pages qui titrent toutes
+# « Ce que nous faisons » ou « Où nous intervenons » se ressemblent aux
+# yeux d'un moteur ; chacune porte ici son métier et sa ville.
+INTERTITRES = {
+    "renovation-complete": {
+        "quoi": "Une rénovation complète,|tous corps de métier",
+        "comment": "Comment se déroule|une rénovation complète",
+        "zone": "Rénovation complète à Lausanne|et sur l'arc lémanique",
+        "questions": "Vos questions sur|la rénovation complète",
+        "voisins": "Les métiers d'une|rénovation complète",
+    },
+    "peinture": {
+        "quoi": "Nos travaux de peinture|et de revêtements",
+        "comment": "Un chantier de peinture,|étape par étape",
+        "zone": "Peintre à Lausanne|et sur l'arc lémanique",
+        "questions": "Vos questions|sur la peinture",
+        "voisins": "Souvent réalisé|avec la peinture",
+    },
+    "platrerie-cloisons": {
+        "quoi": "Plâtrerie, cloisons|et faux plafonds",
+        "comment": "Un chantier de plâtrerie,|étape par étape",
+        "zone": "Plâtrier à Lausanne|et sur l'arc lémanique",
+        "questions": "Vos questions sur la|plâtrerie et les cloisons",
+        "voisins": "Souvent réalisé|avec la plâtrerie",
+    },
+    "carrelage-sols": {
+        "quoi": "Carrelage, parquet|et sols souples",
+        "comment": "Une pose de carrelage,|étape par étape",
+        "zone": "Carreleur à Lausanne|et sur l'arc lémanique",
+        "questions": "Vos questions sur|le carrelage et les sols",
+        "voisins": "Souvent réalisé|avec le carrelage",
+    },
+    "nettoyage-fin-de-chantier": {
+        "quoi": "Un nettoyage de chantier,|pas un ménage",
+        "comment": "Un nettoyage de fin de chantier,|étape par étape",
+        "zone": "Nettoyage de chantier à Lausanne|et sur l'arc lémanique",
+        "questions": "Vos questions sur|le nettoyage de chantier",
+        "voisins": "Souvent réalisé|avant le nettoyage",
+    },
+}
+
+
+INTERTITRES.update(pages_solutions.INTERTITRES)
+
+
+def intertitres_de(fiche):
+    """Les intertitres d'une page, avec un repli générique pour une page
+    qui n'aurait pas encore les siens."""
+    return INTERTITRES.get(fiche["slug"], {
+        "quoi": "Ce que comprend|la prestation",
+        "comment": "Comment|nous procédons",
+        "zone": "À Lausanne et|sur l'arc lémanique",
+        "questions": "Vos questions|sur cette prestation",
+        "voisins": "Souvent réalisé|avec cette prestation",
+    })
 
 
 def page(slug):

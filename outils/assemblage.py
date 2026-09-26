@@ -13,6 +13,7 @@ import gabarit
 import images
 import prestations
 import rythme
+import typographie
 
 SERVICES = prestations.PAGES
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,7 +73,9 @@ def _minifier(css):
         elif c.isspace():
             while i < n and css[i].isspace():
                 i += 1
-            sortie.append(" ")
+            # Un commentaire retiré entre deux blancs en laisserait deux.
+            if not sortie or sortie[-1] != " ":
+                sortie.append(" ")
         else:
             sortie.append(c)
             i += 1
@@ -120,6 +123,9 @@ def assembler(page, corps, base, modules, schemas):
         + gabarit.pied(base, page["courante"], SERVICES)
         + gabarit.scripts(base, modules, version_script)
     )
+    # Les textes de contenu écrivent leurs liens internes « {base}… » :
+    # ils ignorent à quelle profondeur ils seront publiés.
+    html = html.replace("{base}", base)
     html = rythme.rythmer(html)
     html = images.localiser(html, base)
-    return images.preconnexion(html)
+    return typographie.espacer(images.preconnexion(html))

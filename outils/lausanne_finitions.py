@@ -1,4 +1,4 @@
-"""Ce que chaque lot de finition rencontre dans le bâti lausannois.
+"""Ce que chaque métier de finition rencontre dans le bâti lausannois.
 
 Voir lausanne_gros_oeuvre.py pour le principe : du contenu que seule
 une entreprise qui travaille ici peut écrire.
@@ -18,7 +18,7 @@ LOCAL = {
             "lattis des immeubles d'avant-guerre boit énormément : sans "
             "primaire adapté, la première couche disparaît dans le mur et la "
             "teinte finit inégale.",
-            "Dans les logements de rendement remis en état entre deux baux, "
+            "Dans les logements locatifs remis en état entre deux baux, "
             "nous travaillons en blanc cassé ou en teintes claires : elles "
             "supportent les retouches localisées, là où une teinte soutenue "
             "impose de refaire le pan entier au premier choc.",
@@ -42,7 +42,7 @@ LOCAL = {
             "Dans un immeuble lausannois ancien, aucun angle n'est à "
             "quatre-vingt-dix degrés et aucun mur n'est d'aplomb sur toute sa "
             "hauteur. Un lé posé au fil à plomb dérive visiblement en trois "
-            "mètres si le calepinage n'a pas été pensé avant.",
+            "mètres si le plan de pose n'a pas été pensé avant.",
             "C'est pourquoi nous partons de l'angle le plus vu de la pièce, "
             "généralement celui qu'on découvre en entrant, et nous reportons "
             "le rattrapage dans l'angle le plus discret, souvent derrière la "
@@ -123,7 +123,7 @@ LOCAL = {
         "cote": "État des lieux et relocation",
         "paragraphes": [
             "Sur le marché lausannois, un logement se reloue vite : la date "
-            "de libération est souvent calée sur l'entrée du locataire "
+            "de remise du logement est souvent calée sur l'entrée du locataire "
             "suivant, à quelques jours près. Le nettoyage n'est pas la "
             "dernière ligne du devis, c'est ce qui rend la date tenable.",
             "Un état des lieux de sortie se joue sur des détails que la "
@@ -132,7 +132,7 @@ LOCAL = {
             "précisément les points que nous reprenons en seconde passe.",
             "Nous intervenons aussi pour des régies sur des logements que "
             "nous n'avons pas rénovés, entre deux baux, avec un tour du "
-            "logement contradictoire avant remise des clés.",
+            "logement en commun avant la remise des clés.",
         ],
         "encadre": {
             "titre": "Ce que regarde un état des lieux",
