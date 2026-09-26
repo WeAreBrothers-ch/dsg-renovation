@@ -7,15 +7,17 @@
    EN-TÊTE
    Une rangée de cases d'un pixel : la marque occupe la grande case
    de gauche, chaque rubrique la sienne à droite. Le fond reste
-   presque opaque pour garder son contraste au-dessus des images.
+   presque opaque pour garder son contraste au-dessus des images, et
+   pour rester blanc au passage des bandes de nuit : à 82 %, il y
+   virait au gris.
    ------------------------------------------------------------ */
 .entete{
   position:fixed;inset:0 0 auto 0;z-index:60;
   padding-top:var(--sp-3);
-  background:rgba(238,235,229,.94);
+  background:rgba(var(--c-papier-rgb),.97);
 }
 @supports (backdrop-filter:blur(1px)){
-  .entete{background:rgba(238,235,229,.82);backdrop-filter:blur(12px)}
+  .entete{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
 }
 .entete__inner{
   display:flex;align-items:stretch;
@@ -43,10 +45,10 @@
   .nav a:hover{color:var(--c-encre);background:var(--c-papier-2)}
 }
 .nav a:focus-visible{outline-offset:-4px}
-/* La rubrique consultée : le seul repère en brique de l'en-tête. */
+/* La rubrique consultée : le seul repère en couleur de l'en-tête. */
 .nav a[aria-current]{color:var(--c-encre)}
 .nav a[aria-current]::before{
-  content:"";width:var(--repere);height:var(--repere);background:var(--c-signal);
+  content:"";width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
 
 .entete__actions{display:flex;align-items:stretch;flex:0 0 auto;box-shadow:none!important}
@@ -70,7 +72,7 @@
 
 /* ------------------------------------------------------------
    MENU PLEIN ÉCRAN
-   Le même plâtre que la page : on change de pièce, pas d'univers.
+   Le même blanc que la page : on change de pièce, pas d'univers.
    ------------------------------------------------------------ */
 .menu{
   position:fixed;inset:0;z-index:70;

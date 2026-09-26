@@ -153,9 +153,12 @@ sans valeur pour la recherche.
 ## Direction artistique
 
 Version du 25/09/2026, « Le plan d'implantation », inspirée de
-tekt.com.au — tout est décrit dans `DIRECTION-ARTISTIQUE.md`.
+tekt.com.au ; palette révisée le 26/09/2026, « bleu de travail, jaune
+de chantier » — tout est décrit dans `DIRECTION-ARTISTIQUE.md`.
 
-Plâtre frais, encre terre d'ombre, brique réservée à l'action. Des
+Blanc de chantier, encre bleu nuit, jaune de chantier réservé à
+l'action. Une bande de nuit par page, où les repères d'angle passent au
+jaune, et le renvoi final sur une bande de bleu de travail. Des
 cadres d'un pixel marqués d'un repère carré à chaque angle, une
 grotesque (Archivo) pour les titres et une sérif de lecture
 (Newsreader) pour les phrases. Chaque section range son intitulé dans
@@ -167,7 +170,10 @@ descend. Sur l'accueil, c'est le comparateur avant / après.
 
 Les blocs sombres redéfinissent la gamme d'encres localement
 (`.sur-sombre`) : aucun composant n'a à connaître la couleur de son
-fond, il demande `--c-encre` et obtient la bonne.
+fond, il demande `--c-encre` et obtient la bonne. La classe pose aussi
+le fond : pour passer une section en bande de nuit, il suffit de
+l'ajouter à la `<section>` dans le générateur. `.sur-bleu`, ajoutée à
+`.sur-sombre`, en fait la bande bleue du renvoi final.
 
 Chaque couleur de texte porte son rapport de contraste en commentaire.
 Le plancher du site est de 4,5:1 — seuil AA.
@@ -202,7 +208,7 @@ JavaScript.
 ## À compléter avant mise en ligne
 
 Les annexes signalent visiblement les informations qui n'appartiennent
-qu'au client, au moyen de la classe `.a-valider` — un fond gris et un
+qu'au client, au moyen de la classe `.a-valider` — un fond bleuté et un
 soulignement tireté, jamais de rouge. À obtenir puis à remplacer :
 
 - le numéro IDE de la société et l'identité du gérant responsable ;

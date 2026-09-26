@@ -6,9 +6,9 @@
 .lumineuse{
   width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;
   margin:0;padding:0;border:0;overflow:hidden;
-  background:rgba(39,33,28,.97);color:var(--c-craie);
+  background:rgba(var(--c-nuit-rgb),.97);color:var(--c-craie);
 }
-.lumineuse::backdrop{background:rgba(39,33,28,.9)}
+.lumineuse::backdrop{background:rgba(var(--c-nuit-rgb),.9)}
 .lumineuse :focus-visible{outline-color:var(--c-craie)}
 
 .lumineuse__cadre{
@@ -36,7 +36,7 @@
 /* ---------- Commandes : des cases d'un pixel ---------- */
 .lumineuse__fermer,.lumineuse__nav{
   position:absolute;z-index:3;width:52px;height:52px;
-  box-shadow:inset 0 0 0 1px rgba(238,235,229,.34);color:var(--c-craie);
+  box-shadow:inset 0 0 0 1px rgba(var(--c-craie-rgb),.42);color:var(--c-craie);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
 .lumineuse__fermer{
@@ -53,7 +53,7 @@
 .lumineuse__nav--suiv{right:var(--sp-4)}
 .lumineuse__nav--suiv::before{transform:translate(-70%,-50%) rotate(45deg)}
 @media (hover:hover) and (pointer:fine){
-  .lumineuse__fermer:hover,.lumineuse__nav:hover{background:rgba(238,235,229,.12)}
+  .lumineuse__fermer:hover,.lumineuse__nav:hover{background:rgba(var(--c-craie-rgb),.12)}
 }
 @media (max-width:767px){
   .lumineuse__nav{width:44px;height:44px;margin-top:-22px}

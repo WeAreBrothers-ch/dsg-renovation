@@ -37,7 +37,7 @@ def realisations(services, base=""):
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tBiens">
+  <section class="section sur-sombre" aria-labelledby="tBiens">
     <div class="zone">
 {briques.intercalaire("Familles", "Ce que nous reprenons dans la région",
                       "Trois types de biens,|trois chantiers différents",
@@ -108,7 +108,7 @@ def devis(services, base=""):
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tContient">
+  <section class="section sur-sombre" aria-labelledby="tContient">
     <div class="zone">
 {briques.intercalaire("Le devis", "Ce qui doit y figurer",
                       "Ce que contient|notre devis",

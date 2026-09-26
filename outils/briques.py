@@ -111,7 +111,7 @@ def releve_chiffre():
 def appel(base, titre, texte):
     """Le renvoi de fin de page vers la demande de devis."""
     return f"""
-  <section class="section rappel" aria-labelledby="rappelTitre">
+  <section class="section rappel sur-sombre sur-bleu" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
       <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
       <div class="rappel__corps">

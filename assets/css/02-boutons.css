@@ -29,9 +29,10 @@
 }
 .btn:focus-visible::after{transform:scaleX(1)}
 
-/* La brique ne sert qu'ici : à appeler l'action. */
-.btn--plein{background:var(--c-signal);color:var(--c-fiche)}
-.btn--plein::after{background:var(--c-signal-sombre)}
+/* Le jaune de chantier ne sert qu'ici : à appeler l'action. Son texte
+   reste bleu nuit sur tous les fonds, bandes de nuit comprises. */
+.btn--plein{background:var(--c-signal);color:var(--c-sur-signal)}
+.btn--plein::after{background:var(--c-signal-fonce)}
 
 .btn--cadre{box-shadow:inset 0 0 0 1px var(--c-cadre);color:var(--c-encre)}
 .btn--cadre::after{background:var(--c-papier-2)}

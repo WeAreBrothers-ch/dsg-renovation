@@ -35,7 +35,7 @@ summary::-webkit-details-marker{display:none}
 address{font-style:normal}
 
 :focus-visible{outline:2px solid var(--c-focus);outline-offset:3px}
-::selection{background:var(--c-encre);color:var(--c-papier)}
+::selection{background:var(--c-signal);color:var(--c-sur-signal)}
 
 /* ---------- Accès clavier ---------- */
 .saut{
@@ -112,21 +112,22 @@ h1,h2,h3{
 /* ------------------------------------------------------------
    REPÈRES D'ANGLE — la signature du site
    Un cadre d'un pixel, et à chacun de ses quatre coins un petit
-   carré d'encre posé à cheval sur le trait : le piquet d'un
-   géomètre, la poignée d'un plan qu'on ajuste. Le pseudo-élément
-   déborde du cadre de la moitié du repère pour le centrer sur
-   l'angle. Il ne capte aucun clic. La liste ci-dessous est celle
-   de tous les blocs cadrés du site.
+   carré posé à cheval sur le trait : le piquet d'un géomètre, la
+   poignée d'un plan qu'on ajuste. Encre sur le blanc, jaune dans
+   les bandes de nuit (--c-repere). Le pseudo-élément déborde du
+   cadre de la moitié du repère pour le centrer sur l'angle. Il ne
+   capte aucun clic. La liste ci-dessous est celle de tous les
+   blocs cadrés du site.
    ------------------------------------------------------------ */
 :is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche){position:relative}
 :is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche)::before{
   content:"";position:absolute;pointer-events:none;z-index:1;
   inset:calc(var(--repere) / -2 - 1px);
   background:
-    linear-gradient(var(--c-cadre),var(--c-cadre)) top left / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-cadre),var(--c-cadre)) top right / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-cadre),var(--c-cadre)) bottom left / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-cadre),var(--c-cadre)) bottom right / var(--repere) var(--repere) no-repeat;
+    linear-gradient(var(--c-repere),var(--c-repere)) top left / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-repere),var(--c-repere)) top right / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-repere),var(--c-repere)) bottom left / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-repere),var(--c-repere)) bottom right / var(--repere) var(--repere) no-repeat;
 }
 
 /* ------------------------------------------------------------

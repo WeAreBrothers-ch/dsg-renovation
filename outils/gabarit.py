@@ -36,7 +36,7 @@ def tete(page, base, feuilles, schemas):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{page['titre']}</title>
 <meta name="description" content="{page['description']}">
-<meta name="theme-color" content="#EEEBE5">
+<meta name="theme-color" content="#F5F7FA">
 <link rel="canonical" href="{page['canonique']}">
 <link rel="icon" href="{LOGO}" type="image/png">
 <link rel="apple-touch-icon" href="{LOGO}">

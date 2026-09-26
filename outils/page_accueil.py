@@ -50,7 +50,7 @@ def accueil(services, base=""):
 {confiance.bande_references(base)}
   </section>
 
-  <section class="section" aria-labelledby="tEntreprise">
+  <section class="section sur-sombre" aria-labelledby="tEntreprise">
     <div class="zone">
 {briques.intercalaire("L'entreprise", "Relevé arrêté en janvier 2026",
                       "Professionnalisme,|fiabilité et passion")}

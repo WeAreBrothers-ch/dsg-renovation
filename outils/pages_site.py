@@ -53,7 +53,7 @@ def entreprise(services, base=""):
     </div>
   </section>
 
-  <section class="section" id="deroule" aria-labelledby="tDeroule">
+  <section class="section sur-sombre" id="deroule" aria-labelledby="tDeroule">
     <div class="zone">
 {briques.intercalaire("Déroulé", "Du premier appel aux clés",
                       "Comment se déroule|un chantier",

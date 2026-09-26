@@ -57,7 +57,8 @@
   .pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
 }
 
-.pied__marque img{height:34px;width:auto;margin-bottom:var(--sp-4);filter:brightness(0) invert(.93) sepia(.1)}
+/* Le logo passe en blanc de chantier sur la nuit (≈ --c-craie). */
+.pied__marque img{height:34px;width:auto;margin-bottom:var(--sp-4);filter:brightness(0) invert(.96)}
 .pied address{display:flex;flex-direction:column;color:var(--c-encre-60)}
 .pied address a,.pied address span{display:inline-block;padding-block:var(--sp-2)}
 .pied address a{transition:color var(--d-rapide) var(--e-standard)}

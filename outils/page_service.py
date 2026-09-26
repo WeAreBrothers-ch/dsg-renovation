@@ -63,7 +63,7 @@ def _methode(fiche):
     etapes = [(titre, "<p>%s</p>" % texte)
               for titre, texte in prestations.etapes_de(fiche)]
     return f"""
-  <section class="section" aria-labelledby="comment">
+  <section class="section sur-sombre" aria-labelledby="comment">
     <div class="zone">
 {briques.intercalaire("Méthode", "Du premier appel à la réception",
                       "Comment nous|procédons")}
@@ -83,7 +83,7 @@ def _reperes(fiche):
         for nom, valeur in fiche["reperes"]
     )
     return f"""
-  <section class="section section--serre" aria-label="Repères de la prestation">
+  <section class="section section--serre sur-sombre" aria-label="Repères de la prestation">
     <div class="zone">
       <ul class="preuves preuves--quatre">
 {cellules}

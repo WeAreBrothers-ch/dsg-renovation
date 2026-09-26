@@ -5,7 +5,7 @@
 
 /* ------------------------------------------------------------
    COUVERTURE
-   Du texte d'abord, sur le plâtre : la nature de l'entreprise dans
+   Du texte d'abord, sur le blanc : la nature de l'entreprise dans
    la marge, la promesse en grand dans la colonne de droite. L'image
    vient ensuite, cadrée — elle ne s'impose pas d'un coup.
    ------------------------------------------------------------ */
@@ -66,7 +66,7 @@
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-chiffre);
   letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;
 }
-.preuve__plus{font-weight:500;font-size:1.25rem;line-height:1;color:var(--c-signal-sombre)}
+.preuve__plus{font-weight:500;font-size:1.25rem;line-height:1;color:var(--c-accent)}
 .preuve__texte{
   font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.5;
   color:var(--c-encre-60);max-width:40ch;
@@ -101,7 +101,7 @@
 .metiers__n{
   flex:0 0 auto;width:2.2em;
   font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;
-  color:var(--c-encre-60);
+  color:var(--c-accent);
 }
 .metiers__titre{
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-h3);

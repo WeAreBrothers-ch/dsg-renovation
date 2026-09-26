@@ -53,7 +53,7 @@
   display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-3);
   font-size:var(--t-etiquette);
 }
-.etape__n{font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-encre)}
+.etape__n{font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-accent)}
 .etape__cote{color:var(--c-encre-60);text-align:right}
 .etape__titre{
   padding-top:var(--sp-7);
@@ -82,6 +82,6 @@
 }
 .suite-demande li::before{
   content:counter(suite,decimal-leading-zero);
-  font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-encre);
+  font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-accent);
 }
 .suite-demande b{color:var(--c-encre);font-weight:500}

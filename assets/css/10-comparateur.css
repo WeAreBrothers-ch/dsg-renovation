@@ -9,7 +9,7 @@
    relevée sur plan.
 
    Le geste ne touche ni la taille ni la position de l'image : deux
-   « rideaux » couleur plâtre masquent ses bords et s'écartent en
+   « rideaux » couleur du fond masquent ses bords et s'écartent en
    `transform` (assets/js/ouverture.js). Aucune mise en page n'est
    recalculée, aucun décalage n'est possible, et sans script ou en
    mouvement réduit l'image reste simplement cadrée.
@@ -39,8 +39,8 @@
 .ouverture__rideau::after{
   content:"";position:absolute;top:0;bottom:0;width:var(--repere);
   background:
-    linear-gradient(var(--c-cadre),var(--c-cadre)) top / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-cadre),var(--c-cadre)) bottom / var(--repere) var(--repere) no-repeat;
+    linear-gradient(var(--c-repere),var(--c-repere)) top / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-repere),var(--c-repere)) bottom / var(--repere) var(--repere) no-repeat;
 }
 .ouverture__rideau--g::after{right:calc(var(--repere) / -2)}
 .ouverture__rideau--d::after{left:calc(var(--repere) / -2)}
@@ -94,7 +94,7 @@
 }
 .comparateur__poignee::before{
   content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;
-  background:var(--c-fiche);box-shadow:0 0 0 1px rgba(39,33,28,.18);
+  background:var(--c-fiche);box-shadow:0 0 0 1px rgba(var(--c-encre-rgb),.18);
 }
 .comparateur__poignee::after{
   content:"";position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;
@@ -103,7 +103,7 @@
 }
 .comparateur__glyphe{
   position:absolute;top:50%;left:50%;z-index:1;width:26px;height:12px;margin:-6px 0 0 -13px;
-  color:var(--c-fiche);pointer-events:none;
+  color:var(--c-sur-signal);pointer-events:none;
 }
 @media (hover:hover) and (pointer:fine){
   .comparateur__poignee:hover::after{scale:1.06}

@@ -39,7 +39,7 @@
 /* ------------------------------------------------------------
    CHANTIER SIGNATURE
    Le tirage occupe toute la largeur ; la fiche se pose dessus, dans
-   un panneau de plâtre dépoli, comme une étiquette sur une maquette.
+   un panneau de blanc dépoli, comme une étiquette sur une maquette.
    Sur téléphone, la fiche passe simplement sous l'image.
    ------------------------------------------------------------ */
 .signature{display:grid;grid-template-columns:minmax(0,1fr)}
@@ -57,19 +57,19 @@
   .signature__texte{
     z-index:2;align-self:start;justify-self:start;
     width:min(460px,42%);margin:var(--sp-6);padding:var(--sp-6);
-    background:rgba(238,235,229,.9);
+    background:rgba(var(--c-papier-rgb),.9);
   }
   @supports (backdrop-filter:blur(1px)){
-    .signature__texte{background:rgba(238,235,229,.78);backdrop-filter:blur(14px) saturate(1.1)}
+    .signature__texte{background:rgba(var(--c-papier-rgb),.78);backdrop-filter:blur(14px) saturate(1.1)}
   }
 }
 
 /* ------------------------------------------------------------
    RÉFÉRENCES — logos des régies et architectes
-   Sur la page entreprise, la section se pose dans un creux de
-   plâtre : c'est la preuve extérieure, elle se détache du récit.
+   Sur la page entreprise, la section se pose dans un creux bleuté :
+   c'est la preuve extérieure, elle se détache du récit.
    Passés en gris puis multipliés sur le fond : le blanc de leurs
-   fichiers disparaît dans le plâtre sans toucher à l'encre.
+   fichiers disparaît dans le fond sans toucher à l'encre.
    ------------------------------------------------------------ */
 .partenaires{padding-block:var(--sec-y);background:var(--c-papier-2)}
 .partenaires__grille{

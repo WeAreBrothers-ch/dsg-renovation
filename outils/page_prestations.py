@@ -36,7 +36,7 @@ def savoir_faire(services, base=""):
     </div>
   </section>
 
-  <section class="section" aria-labelledby="tOrdre">
+  <section class="section sur-sombre" aria-labelledby="tOrdre">
     <div class="zone">
 {briques.intercalaire("L'ordre", "Pourquoi on ne peint pas en premier",
                       "Dans quel ordre|les lots s'enchaînent",

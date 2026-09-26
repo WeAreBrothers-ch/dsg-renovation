@@ -38,7 +38,7 @@
 }
 .service__texte>*+*{margin-top:var(--sp-4)}
 .service__texte a{
-  color:var(--c-signal-sombre);
+  color:var(--c-accent);
   text-decoration:underline;text-underline-offset:3px;
 }
 .service__texte a:hover{color:var(--c-encre)}
@@ -78,7 +78,7 @@
 }
 @media (hover:hover) and (pointer:fine){.voisin:hover{background:var(--c-papier-2)}}
 .voisin:focus-visible{outline:2px solid var(--c-focus);outline-offset:-1px}
-.voisin__n{font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;color:var(--c-encre-60)}
+.voisin__n{font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;color:var(--c-accent)}
 .voisin__nom{font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;line-height:1.25}
 .voisin__chev{
   margin-left:auto;flex:0 0 auto;width:15px;height:10px;background:currentColor;
@@ -110,15 +110,18 @@
 }
 .encadre__liste li::before{
   content:"";position:absolute;left:0;top:.6em;
-  width:var(--repere);height:var(--repere);background:var(--c-signal-sombre);
+  width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
 
 /* ------------------------------------------------------------
    RENVOI DE FIN DE PAGE
-   Un creux de plâtre plutôt qu'un aplat noir : la page se referme
-   sur la question qu'on attend du visiteur.
+   Une bande de bleu de travail (.sur-sombre.sur-bleu, posée par le
+   générateur) : la page se referme sur la question qu'on attend du
+   visiteur, et le bouton jaune s'y détache mieux que partout ailleurs.
+   Sans ces classes, la bande retombe sur le creux du blanc.
    ------------------------------------------------------------ */
 .rappel{background:var(--c-papier-2)}
+.rappel.sur-sombre{background:var(--c-papier)}
 .rappel__grille{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:var(--sp-5) var(--grille-goutt);align-items:start;

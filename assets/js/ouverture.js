@@ -2,7 +2,7 @@
    DSG RÉNOVATION — OUVERTURE
    L'image d'ouverture arrive cadrée dans la colonne de la page,
    puis s'élargit jusqu'aux bords de l'écran à mesure qu'on
-   descend : deux rideaux couleur plâtre s'écartent.
+   descend : deux rideaux couleur du fond s'écartent.
 
    Tout passe par `transform` : aucune mise en page n'est
    recalculée pendant le défilement, et rien ne peut se décaler.
