@@ -96,9 +96,10 @@
   margin-top:var(--sp-6);margin-bottom:-.2em;padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;font-size:min(8vw,8rem);
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
-  /* Une enseigne en filigrane : le texte secondaire du pied, estompé,
-     pour qu'elle signe la page sans disputer la lecture au pied. */
-  color:var(--c-encre-60);opacity:.22;
+  /* Une enseigne en filigrane : une teinte sourde, pour qu'elle signe
+     la page sans disputer la lecture au pied (3.4, seuil des grands
+     textes 3:1). */
+  color:var(--c-filigrane);
 }
 @media (max-width:767px){
   .pied{padding-top:var(--sp-6)}

@@ -59,6 +59,10 @@
   --c-encre-40:#6E5C54;      /*  6.3 /  5.9 /  5.6 /  5.1 */
   --c-craie:#FFF7F2;         /* 13.7 sur le chocolat */
   --c-craie-60:#DCC8BB;      /*  9.0 sur le chocolat, 7.4 élevé */
+  /* Grand texte décoratif (l'enseigne du pied) : discret, mais au-dessus
+     du seuil des grands textes (3:1). 4.2 sur le blanc, 3.4 sur le
+     chocolat. */
+  --c-filigrane:#8E766A;
 
   /* ---------- Bleu ciel — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur. Le
