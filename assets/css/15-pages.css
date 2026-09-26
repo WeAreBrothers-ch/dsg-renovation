@@ -115,13 +115,12 @@
 
 /* ------------------------------------------------------------
    RENVOI DE FIN DE PAGE
-   Une bande de bleu de travail (.sur-sombre.sur-bleu, posée par le
-   générateur) : la page se referme sur la question qu'on attend du
-   visiteur, et le bouton jaune s'y détache mieux que partout ailleurs.
-   Sans ces classes, la bande retombe sur le creux du blanc.
+   Une bande au rouge du logo (.sur-rouge, posée par le générateur) :
+   la page se referme sur la question qu'on attend du visiteur. Le
+   fond vient de la classe de contexte ; sans elle, la bande est
+   blanche.
    ------------------------------------------------------------ */
-.rappel{background:var(--c-papier-2)}
-.rappel.sur-sombre{background:var(--c-papier)}
+.rappel{background:var(--c-papier)}
 .rappel__grille{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:var(--sp-5) var(--grille-goutt);align-items:start;

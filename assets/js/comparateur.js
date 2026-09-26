@@ -51,9 +51,11 @@
       position = Math.max(0, Math.min(100, valeur));
       bloc.style.setProperty("--pos", position.toFixed(2) + "%");
       poignee.setAttribute("aria-valuenow", String(Math.round(position)));
-      /* C'est l'état livré qui se découvre depuis la gauche : le
-         pourcentage annoncé est donc celui de la vue après travaux. */
-      poignee.setAttribute("aria-valuetext", Math.round(position) + " % de la vue après travaux");
+      /* L'état avant travaux occupe la gauche de la poignée, l'état
+         livré la droite : on annonce la part de chacun. */
+      var gauche = Math.round(position);
+      poignee.setAttribute("aria-valuetext",
+        "Avant travaux à gauche : " + gauche + " %, après travaux à droite : " + (100 - gauche) + " %");
     }
 
     /**

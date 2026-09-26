@@ -6,6 +6,7 @@ quels garantit qu'une page de service ressemble au reste du site.
 """
 
 from donnees_site import RELEVE, TELEPHONE, TELEPHONE_BRUT
+from gabarit_liens import accueil, vers_devis
 
 
 def couverture(page, base, fil, action=None):
@@ -13,21 +14,23 @@ def couverture(page, base, fil, action=None):
 
     `action` remplace le bouton de devis là où il pointerait vers la page
     consultée : un bouton qui renvoie où l'on se trouve déjà est un
-    bouton mort.
+    bouton mort. Dans `fil`, « / » désigne l'accueil, une adresse vide
+    la page consultée (qui n'est pas un lien).
     """
     miettes = "\n          ".join(
-        ('<a href="%s%s">%s</a>\n          <span aria-hidden="true">/</span>'
-         % (base, url, nom)) if url else "<span>%s</span>" % nom
+        ('<a href="%s">%s</a>\n          <span aria-hidden="true">/</span>'
+         % (accueil(base) if url == "/" else base + url, nom)) if url
+        else "<span>%s</span>" % nom
         for nom, url in fil
     )
     # Le titre de page s'affiche d'emblée, sans révélation : c'est
     # souvent le plus grand élément du premier écran, et le retarder
     # retarderait d'autant le premier affichage utile (LCP).
     titre = " ".join(page["h1"])
-    principale = action or (
-        '<a class="btn btn--plein" href="%sdevis.html" data-magnetique>'
+    principale = action if action is not None else (
+        '<a class="btn btn--plein" href="%s">'
         'Demander un devis gratuit<span class="fleche" aria-hidden="true">'
-        "</span></a>" % base
+        "</span></a>" % vers_devis(base, page["courante"], page.get("travaux"))
     )
     return f"""
   <header class="piece">
@@ -60,7 +63,7 @@ def intercalaire(nom, cote, titre, chapo=""):
     un saut de ligne : l'antislash se perdrait d'un niveau
     d'échappement à l'autre en traversant les f-strings.
     """
-    lignes = titre.replace("|", "<br>")
+    lignes = titre.replace("|", " <br>")
     texte = ('<p class="chapo intercalaire__chapo">%s</p>' % chapo) if chapo else ""
     return f"""      <div class="intercalaire">
         <div class="intercalaire__marge revele">
@@ -89,7 +92,7 @@ def liste_metiers(services, base, courant=None):
             <span class="metiers__vue" aria-hidden="true"><img src="{s['image']}" alt="" width="316" height="395" loading="lazy" decoding="async"></span>
           </a>
         </li>""")
-    return ('      <ul class="metiers revele" data-suivi-vignette>\n'
+    return ('      <ul class="metiers revele">\n'
             + "\n".join(lignes) + "\n      </ul>")
 
 
@@ -108,17 +111,20 @@ def releve_chiffre():
     return '      <ul class="preuves">\n' + cellules + "\n      </ul>"
 
 
-def appel(base, titre, texte):
-    """Le renvoi de fin de page vers la demande de devis."""
+def appel(base, titre, texte, travaux=None):
+    """Le renvoi de fin de page vers la demande de devis.
+
+    `travaux` : la prestation à pré-cocher dans le formulaire.
+    """
     return f"""
-  <section class="section rappel sur-sombre sur-bleu" aria-labelledby="rappelTitre">
+  <section class="section rappel sur-rouge" aria-labelledby="rappelTitre">
     <div class="zone rappel__grille">
       <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
       <div class="rappel__corps">
         <h2 class="rappel__titre" id="rappelTitre">{titre}</h2>
         <p class="chapo">{texte}</p>
         <div class="rappel__actions">
-          <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="btn btn--plein" href="{vers_devis(base, '', travaux)}">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
           <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
         </div>
       </div>

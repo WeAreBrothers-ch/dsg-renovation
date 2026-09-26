@@ -4,22 +4,22 @@
    non composant par composant.
    ============================================================ */
 @media print{
-  :root,.sur-sombre,.sur-bleu{
+  :root,.sur-gris,.sur-sombre,.sur-rouge{
     --c-papier:#fff;--c-papier-2:#fff;--c-fiche:#fff;--c-teinte:#fff;
-    --c-bitume:#fff;--c-bitume-2:#fff;--c-bleu:#fff;--c-bleu-2:#fff;
+    --c-bitume:#fff;--c-bitume-2:#fff;
     --c-papier-rgb:255,255,255;
     --c-encre:#000;--c-encre-60:#333;--c-encre-40:#555;
     --c-craie:#000;--c-craie-60:#333;
-    --c-signal:#fff;--c-signal-fonce:#fff;--c-sur-signal:#000;--c-accent:#000;
+    --c-signal:#fff;--c-signal-fonce:#fff;--c-sur-signal:#000;--c-sur-signal-survol:#000;
+    --c-accent:#000;
     --c-ligne:rgba(0,0,0,.32);--c-ligne-forte:rgba(0,0,0,.62);--c-cadre:#000;--c-repere:#000;
   }
-  /* Sur papier, le bouton jaune devient une case d'encre. */
+  /* Sur papier, le bouton rouge devient une case d'encre. */
   .btn--plein{box-shadow:inset 0 0 0 1px #000}
   body{background:#fff;color:#000}
   .entete,.barre-mobile,.menu,.filtres,.ouverture__rideau{display:none!important}
   .section{padding-block:24px;break-inside:avoid}
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:10px}
   .chemise,.temoin{break-inside:avoid}
-  .marque img,.pied__marque img,.menu__haut img{filter:none}
   .partenaires__grille img{filter:grayscale(1);opacity:1}
 }

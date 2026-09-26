@@ -7,27 +7,48 @@ après une modification du contenu ou du chrome :
 
     python3 outils/construire.py
 
-Ouvrir index.html suffit toujours pour consulter le site.
+Il écrit les pages, la feuille unique assets/css/site.css, le plan du
+site et robots.txt. Pour consulter le site en local :
+
+    python3 -m http.server   (puis http://localhost:8000)
 """
 
+import datetime
 import os
+import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import briques
 import catalogue
+import images
 import page_service
 import page_accueil
 import page_prestations
 import pages_site
+import pages_speciales
 import seo
 import prestations
-from assemblage import (BASE_JS, FEUILLES, FEUILLES_ANNEXE, assembler,
-                        ecrire)
+from assemblage import BASE_JS, RACINE, assembler, ecrire
 from donnees_site import SITE
 
 SERVICES = prestations.PAGES
+
+# Pages utiles au visiteur mais sans valeur pour la recherche : hors du
+# plan du site, et marquées noindex.
+NOINDEX = '<meta name="robots" content="noindex, follow">'
+
+
+def _image_partage(url, alt):
+    """La photo d'une page pour les réseaux sociaux, si elle est locale.
+
+    Une photo encore servie par Wix disparaîtra avec l'ancien site : on
+    lui préfère alors l'image de partage de la marque (gabarit.py).
+    """
+    if url and images.locale(url):
+        return {"image_og": images.absolue(url), "image_og_alt": alt}
+    return {}
 
 
 def page_simple(fichier, titre, description, etiquette, h1, chapo,
@@ -42,46 +63,44 @@ def page_simple(fichier, titre, description, etiquette, h1, chapo,
         "h1": h1,
         "chapo": chapo,
     }
-    if image:
-        page["image_og"] = image
+    page.update(_image_partage(image, titre))
     corps = briques.couverture(
-        page, "", [("Accueil", "index.html"), (etiquette, "")], action
+        page, "", [("Accueil", "/"), (etiquette, "")], action
     ) + corps_fn(SERVICES, "")
-    schemas = [seo.entreprise(), seo.fil([("Accueil", ""), (titre, fichier)])]
+    schemas = [seo.entreprise(), seo.fil([("Accueil", ""), (etiquette, fichier)])]
     schemas += fil_seo
-    return ecrire(fichier, assembler(page, corps, "", FEUILLES, modules, schemas))
+    return ecrire(fichier, assembler(page, corps, "", modules, schemas))
 
 
 def construire_accueil():
     page = {
-        "titre": "DSG Rénovation — Entreprise de rénovation à Lausanne",
+        "titre": "Entreprise de rénovation à Lausanne | DSG Rénovation",
         "description": (
-            "Entreprise de rénovation clé en main à Lausanne et sur l'arc "
-            "lémanique : rénovation totale, peinture, plâtrerie, carrelage et "
-            "sols. 600 chantiers livrés. Devis gratuit 72 h après la visite."
+            "Rénovation clé en main à Lausanne et sur l'arc lémanique : "
+            "peinture, plâtrerie, carrelage, sols. 600 chantiers livrés. "
+            "Devis gratuit 72 h après la visite."
         ),
         "canonique": SITE + "/",
         "courante": "index.html",
-        "image_og": SERVICES[0]["image"],
     }
     corps = page_accueil.accueil(SERVICES, "")
-    schemas = [seo.entreprise()]
-    modules = BASE_JS + ["comparateur.js", "vignette.js", "ouverture.js"]
-    return ecrire("index.html", assembler(page, corps, "", FEUILLES, modules, schemas))
+    schemas = [seo.site_web(), seo.entreprise()]
+    modules = BASE_JS + ["comparateur.js", "ouverture.js"]
+    return ecrire("index.html", assembler(page, corps, "", modules, schemas))
 
 
 def construire_services():
-    """La page pilier et les neuf pages de lot."""
+    """La page pilier et les pages de prestation."""
     faits = [page_simple(
         "services.html",
-        "Nos prestations de rénovation à Lausanne",
-        "Les neuf lots de DSG Rénovation à Lausanne : rénovation totale, "
-        "peinture, plâtrerie, cloisons, revêtements muraux, faux plafonds, "
-        "carrelage, sols et nettoyage de fin de chantier.",
-        "Prestations", ["Neuf métiers,", "un seul chantier"],
-        "Chaque lot est mené par des salariés de l'entreprise ou par des "
-        "partenaires que nous suivons depuis des années.",
-        page_prestations.savoir_faire, BASE_JS + ["vignette.js"], [])]
+        "Travaux de rénovation à Lausanne : peinture, plâtrerie, sols",
+        "Rénovation complète, peinture, plâtrerie, cloisons, faux plafonds, "
+        "carrelage, sols et nettoyage à Lausanne : un seul interlocuteur "
+        "pour tout le chantier.",
+        "Prestations", ["Travaux de rénovation", "à Lausanne"],
+        "Tous nos travaux sont réalisés par des salariés de l'entreprise ou "
+        "par des partenaires que nous suivons depuis des années.",
+        page_prestations.savoir_faire, BASE_JS, [])]
 
     for service in SERVICES:
         fichier = "services/%s.html" % service["slug"]
@@ -91,13 +110,14 @@ def construire_services():
             "titre": service["titre"],
             "description": service["description"],
             "canonique": "%s/%s" % (SITE, fichier),
-            "courante": "services.html",
+            "courante": fichier,
             "etiquette": service["nom"],
             "h1": service["h1"],
             "chapo": service["chapo"],
-            "image_og": service["image"],
+            "travaux": service["slug"],
         }
-        fil = [("Accueil", "index.html"), ("Prestations", "services.html"),
+        page.update(_image_partage(service["image"], service["alt"]))
+        fil = [("Accueil", "/"), ("Prestations", "services.html"),
                (service["nom"], "")]
         corps = (briques.couverture(page, "../", fil)
                  + page_service.corps(service, "../"))
@@ -113,12 +133,12 @@ def construire_services():
                      (service["nom"], fichier)]),
         ]
         faits.append(ecrire(fichier, assembler(
-            page, corps, "../", FEUILLES, BASE_JS + ["ouverture.js"], schemas)))
+            page, corps, "../", BASE_JS + ["ouverture.js"], schemas)))
     return faits
 
 
 def construire_pages():
-    """Les cinq pages de contenu de la racine, prises au catalogue."""
+    """Les pages de contenu de la racine, prises au catalogue."""
     balisage = seo.questions(catalogue.LISTE_QUESTIONS)
     return [page_simple(*fiche)
             for fiche in catalogue.pages(BASE_JS, balisage)]
@@ -144,27 +164,65 @@ def construire_annexes():
             "description": description,
             "canonique": "%s/%s" % (SITE, fichier),
             "courante": fichier,
-            "robots": '<meta name="robots" content="noindex, follow">',
+            "robots": NOINDEX,
         }
         corps = pages_site.fragment("annexe-" + fichier.replace(".html", ""))
         schemas = [seo.entreprise()]
-        faits.append(ecrire(fichier, assembler(
-            page, corps, "", FEUILLES_ANNEXE, BASE_JS, schemas)))
+        faits.append(ecrire(fichier, assembler(page, corps, "", BASE_JS, schemas)))
     return faits
+
+
+def construire_speciales():
+    """Page introuvable et page de remerciement : noindex, hors plan.
+
+    La page 404 est servie par le serveur à n'importe quelle adresse, à
+    n'importe quelle profondeur : ses liens partent donc de la racine
+    (« / »), pas du dossier courant.
+    """
+    faits = []
+    for fichier, base, titre, description, corps_fn in pages_speciales.PAGES:
+        page = {
+            "titre": titre,
+            "description": description,
+            "canonique": "%s/%s" % (SITE, fichier),
+            "courante": fichier,
+            "robots": NOINDEX,
+        }
+        faits.append(ecrire(fichier, assembler(
+            page, corps_fn(SERVICES, base), base, BASE_JS, [])))
+    return faits
+
+
+def _date_de_modification(fichier):
+    """Date de dernière modification réelle d'une page, pour lastmod.
+
+    Si le fichier diffère de sa version enregistrée dans git (ou n'y est
+    pas encore), il change aujourd'hui ; sinon, c'est la date du dernier
+    commit qui l'a touché. Un lastmod qui bougerait à chaque
+    construction ne voudrait plus rien dire, et Google cesserait de le
+    lire.
+    """
+    aujourdhui = datetime.date.today().isoformat()
+    try:
+        suivi = subprocess.run(["git", "ls-files", "--error-unmatch", fichier],
+                               cwd=RACINE, capture_output=True).returncode == 0
+        modifie = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", fichier],
+                                 cwd=RACINE, capture_output=True).returncode != 0
+        if not suivi or modifie:
+            return aujourdhui
+        date = subprocess.run(["git", "log", "-1", "--format=%cs", "--", fichier],
+                              cwd=RACINE, capture_output=True, text=True).stdout.strip()
+        return date or aujourdhui
+    except OSError:
+        return aujourdhui
 
 
 def construire_plan(pages):
     """Plan du site et directives d'exploration."""
-    priorites = {"index.html": ("weekly", "1.0"), "devis.html": ("monthly", "0.9"),
-                 "services.html": ("monthly", "0.9")}
-    urls = []
-    for p in pages:
-        if p.startswith("mentions") or p.startswith("confidentialite"):
-            continue
-        freq, prio = priorites.get(p, ("monthly", "0.7"))
-        if p.startswith("services/"):
-            freq, prio = "monthly", "0.8"
-        urls.append(("" if p == "index.html" else p, freq, prio))
+    exclues = ("mentions-legales.html", "confidentialite.html") + tuple(
+        fichier for fichier, *_ in pages_speciales.PAGES)
+    urls = [("" if p == "index.html" else p, _date_de_modification(p))
+            for p in pages if p not in exclues]
     ecrire("sitemap.xml", seo.plan_du_site(urls))
     ecrire("robots.txt", seo.robots())
 
@@ -174,6 +232,7 @@ def main():
     pages += construire_services()
     pages += construire_pages()
     pages += construire_annexes()
+    pages += construire_speciales()
     construire_plan(pages)
     print("%d pages écrites :" % len(pages))
     for p in sorted(pages):

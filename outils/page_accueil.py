@@ -35,7 +35,7 @@ def accueil(services, base=""):
           seul interlocuteur, tous les corps de métier, un chantier livré
           propre et dans les délais.</p>
           <div class="couverture__actions">
-            <a class="btn btn--plein" href="{base}devis.html" data-magnetique>Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+            <a class="btn btn--plein" href="{base}devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
             <a class="btn btn--cadre" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
           </div>
         </div>

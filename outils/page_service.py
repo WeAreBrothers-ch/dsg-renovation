@@ -153,5 +153,6 @@ def corps(fiche, base):
             "Un projet de " + fiche["nom_menu"].lower() + " ?",
             "Nous nous déplaçons, mesurons et vous remettons un devis "
             "détaillé et gratuit 72 heures après la visite.",
+            travaux=fiche["slug"],
         )
     )

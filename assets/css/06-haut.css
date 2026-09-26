@@ -120,29 +120,22 @@
 @media (hover:hover) and (pointer:fine){
   .metiers__ligne:hover .metiers__chev{transform:translateX(4px)}
 }
-.metiers__vue{
-  position:absolute;right:14%;top:50%;z-index:3;
-  width:168px;aspect-ratio:4/5;pointer-events:none;overflow:hidden;box-shadow:var(--om-1);
-  opacity:0;transform:translateY(-50%) scale(.96);
-  transition:opacity var(--d-normal) var(--e-sortie),transform var(--d-normal) var(--e-sortie);
-}
-.metiers__vue img{width:100%;height:100%;object-fit:cover}
-@media (hover:hover) and (pointer:fine){
-  .metiers__ligne:hover .metiers__vue{opacity:1;transform:translateY(-50%) scale(1)}
-}
-/* Sans survol, la vignette prend sa place dans la ligne et se découvre
-   quand celle-ci entre dans l'écran. L'emplacement est réservé : le
+/* Chaque ligne montre une petite photo du métier, à sa place, sans
+   bouger : on reconnaît la prestation d'un coup d'œil, et rien ne
+   passe devant le texte. L'emplacement est réservé (carré fixe) : le
    défilement ne saute jamais. */
+.metiers__vue{
+  flex:0 0 auto;order:1;width:72px;aspect-ratio:1/1;overflow:hidden;
+  background:var(--c-papier-2);pointer-events:none;
+}
+.metiers__vue img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--e-sortie)}
+.metiers__chev{order:2}
+@media (hover:hover) and (pointer:fine){
+  .metiers__ligne:hover .metiers__vue img{transform:scale(1.06)}
+}
 @media (max-width:1023px){
   .metiers__desc{display:none}
   .metiers__ligne{gap:var(--sp-3);min-height:72px;padding-block:var(--sp-3)}
   .metiers__titre{flex:1;min-width:0;font-size:var(--t-h4)}
-  .metiers__vue{
-    position:static;order:1;flex:0 0 auto;width:52px;aspect-ratio:1/1;box-shadow:none;
-    opacity:0;transform:translateX(12px);
-    transition:opacity var(--d-ample) var(--e-sortie),transform var(--d-ample) var(--e-sortie);
-  }
-  .metiers__chev{order:2}
-  .metiers__ligne[data-vue-visible="true"] .metiers__vue,
-  html:not(.js) .metiers__vue{opacity:1;transform:none}
+  .metiers__vue{width:52px}
 }

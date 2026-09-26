@@ -29,10 +29,15 @@
 }
 .btn:focus-visible::after{transform:scaleX(1)}
 
-/* Le jaune de chantier ne sert qu'ici : à appeler l'action. Son texte
-   reste bleu nuit sur tous les fonds, bandes de nuit comprises. */
+/* Le rouge du logo ne sert qu'ici : à appeler l'action. Sur la bande
+   rouge du renvoi final, le bouton s'inverse (blanc, texte noir) :
+   les jetons --c-signal et --c-sur-signal y sont redéfinis. */
 .btn--plein{background:var(--c-signal);color:var(--c-sur-signal)}
 .btn--plein::after{background:var(--c-signal-fonce)}
+@media (hover:hover) and (pointer:fine){
+  .btn--plein:hover{color:var(--c-sur-signal-survol)}
+}
+.btn--plein:focus-visible{color:var(--c-sur-signal-survol)}
 
 .btn--cadre{box-shadow:inset 0 0 0 1px var(--c-cadre);color:var(--c-encre)}
 .btn--cadre::after{background:var(--c-papier-2)}
@@ -61,9 +66,18 @@
    ------------------------------------------------------------ */
 .intercalaire{margin-bottom:var(--sp-8)}
 .intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-5)}
+/* L'intitulé porte le toit du logo : un chevron rouge, la ligne qui
+   coiffe « DSG ». Rouge sur les fonds clairs, rouge clair sur
+   l'anthracite, blanc sur la bande rouge (--c-accent). */
 .intercalaire__nom{
+  display:inline-flex;align-items:center;gap:var(--sp-3);
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);
   color:var(--c-encre);
+}
+.intercalaire__nom::before{
+  content:"";flex:0 0 auto;width:18px;height:10px;background:var(--c-accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 .intercalaire__cote{
   font-family:var(--f-texte);font-size:var(--t-ui);color:var(--c-encre-60);
@@ -88,6 +102,10 @@
   .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
   /* Les blocs qui ont besoin de toute la largeur la reprennent. */
   .zone:has(>.intercalaire)>.pleine-largeur{grid-column:1/-1;grid-row:auto}
+  /* Une section qui contient un tel bloc ne peut pas garder sa marge
+     accrochée : le bloc passerait dessous. L'intitulé reste alors à
+     sa place, à côté du titre. */
+  .zone:has(>.pleine-largeur) .intercalaire__marge{grid-row:1;position:static}
 }
 
 /* ------------------------------------------------------------

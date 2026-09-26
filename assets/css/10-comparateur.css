@@ -76,9 +76,12 @@
   width:100%;height:100%;object-fit:cover;
   pointer-events:none;-webkit-user-drag:none;
 }
-.comparateur__vue--avant{z-index:0}
-.comparateur__vue--apres{z-index:1;transform:translateX(calc(var(--pos) - 100%))}
-.comparateur__vue--apres picture{transform:translateX(calc(100% - var(--pos)))}
+/* Le calque du dessus se découvre depuis la gauche : il porte l'état
+   avant travaux, qu'on lit en premier ; l'état livré est dessous, à
+   droite de la poignée. */
+.comparateur__vue--dessous{z-index:0}
+.comparateur__vue--dessus{z-index:1;transform:translateX(calc(var(--pos) - 100%))}
+.comparateur__vue--dessus picture{transform:translateX(calc(100% - var(--pos)))}
 
 /* ---------- Poignée ----------
    Le rail a la largeur du comparateur : une translation de --pos le
@@ -125,5 +128,5 @@
   font-weight:500;font-size:var(--t-etiquette);line-height:1.2;
   pointer-events:none;will-change:transform;
 }
-.comparateur__etat--apres{left:calc(var(--ouv-marge,0px) + var(--sp-4))}
-.comparateur__etat--avant{right:calc(var(--ouv-marge,0px) + var(--sp-4))}
+.comparateur__etat--gauche{left:calc(var(--ouv-marge,0px) + var(--sp-4))}
+.comparateur__etat--droite{right:calc(var(--ouv-marge,0px) + var(--sp-4))}

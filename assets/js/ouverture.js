@@ -45,8 +45,8 @@
         !(droite instanceof HTMLElement)) { return null; }
 
     /* Les étiquettes du comparateur suivent le bord de la fenêtre. */
-    var etatGauche = bloc.querySelector(".comparateur__etat--apres");
-    var etatDroite = bloc.querySelector(".comparateur__etat--avant");
+    var etatGauche = bloc.querySelector(".comparateur__etat--gauche");
+    var etatDroite = bloc.querySelector(".comparateur__etat--droite");
 
     var debut = 0;
     var fin = 1;

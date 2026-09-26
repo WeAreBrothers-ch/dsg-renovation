@@ -6,9 +6,10 @@ d'appeler : l'adresse, les horaires et le chemin jusqu'à l'atelier.
 """
 
 from gabarit_liens import vers_devis
-from donnees_site import (ANNEXES, COURRIEL, HORAIRES, ITINERAIRE, LOGO,
-                          MARQUE, NAVIGATION, RUE, TELEPHONE, TELEPHONE_BRUT,
-                          VILLE, ZONES_PIED)
+from donnees_site import (ANNEXES, CODE_POSTAL, COURRIEL, HORAIRES,
+                          ITINERAIRE, LOGO_HAUTEUR, LOGO_LARGEUR,
+                          LOGO_NEGATIF, MARQUE, NAVIGATION, RUE, TELEPHONE,
+                          TELEPHONE_BRUT, VILLE, ZONES_PIED)
 
 
 def pied(base, courante, services):
@@ -33,9 +34,9 @@ def pied(base, courante, services):
   <div class="zone">
     <div class="pied__grille">
       <div class="pied__marque">
-        <img src="{LOGO}" alt="{MARQUE}" width="73" height="38" loading="lazy" decoding="async">
+        <img src="{base}{LOGO_NEGATIF}" alt="{MARQUE}" width="{LOGO_LARGEUR}" height="{LOGO_HAUTEUR}" loading="lazy" decoding="async">
         <address class="donnee">
-          <span>{RUE}<br>1012 {VILLE}, Suisse</span>
+          <span>{RUE}<br>{CODE_POSTAL} {VILLE}, Suisse</span>
           <a href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a>
           <a href="mailto:{COURRIEL}">{COURRIEL}</a>
         </address>
@@ -75,7 +76,7 @@ def pied(base, courante, services):
   <p class="pied__logotype" aria-hidden="true">{MARQUE}</p>
 </footer>
 
-<div class="barre-mobile" id="barreMobile" data-visible="false">
+<div class="barre-mobile sur-sombre" id="barreMobile" data-visible="false">
   <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">Appeler</a>
   <a class="btn btn--plein" href="{vers_devis(base, courante)}">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>

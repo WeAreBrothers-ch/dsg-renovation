@@ -14,7 +14,7 @@ from contenu_questions import toutes as LISTE_QUESTIONS_FN
 LISTE_QUESTIONS = LISTE_QUESTIONS_FN()
 
 ACTION_BORDEREAU = (
-    '<a class="btn btn--plein" href="#bordereau" data-magnetique>'
+    '<a class="btn btn--plein" href="#bordereau">'
     'Remplir le bordereau<span class="fleche" aria-hidden="true"></span></a>'
 )
 
@@ -36,7 +36,7 @@ def pages(base_js, questions_balisees):
          "L'entreprise", ["Quarante ans de métier,", "une entreprise jeune"],
          "Onze professionnels salariés, un réseau de partenaires de la "
          "région, et un seul métier : la rénovation.",
-         pages_site.entreprise, base_js + ["vignette.js"], [], None),
+         pages_site.entreprise, base_js, [], None),
 
         ("realisations.html",
          "Nos réalisations de rénovation à Lausanne",

@@ -13,7 +13,22 @@ COURRIEL = "contact@dsg-renov.ch"
 RUE = "Avenue de Béthusy 60"
 CODE_POSTAL = "1012"
 VILLE = "Lausanne"
-LOGO = "https://static.wixstatic.com/media/2c1464_3db14001d9184097989203ad9a2f559e~mv2.png"
+# Le logo et ses déclinaisons, servis par le site (chemins depuis la
+# racine ; les gabarits y ajoutent le préfixe de la page).
+#   logo-blanc.avif  l'original fourni, pour fond clair (12 Ko)
+#   logo.webp        le même, pour les navigateurs sans AVIF
+#   logo-negatif     lettres blanches, toit rouge : pour l'anthracite
+#   logo.png         pour les robots (balisage, réseaux sociaux)
+LOGO_AVIF = "assets/images/logo-blanc.avif"
+LOGO_WEBP = "assets/images/logo.webp"
+LOGO_NEGATIF = "assets/images/logo-negatif.webp"
+LOGO_PNG = "assets/images/logo.png"
+LOGO_LARGEUR, LOGO_HAUTEUR = 314, 166
+
+# Image de partage (réseaux sociaux, messageries), 1200 × 630.
+IMAGE_PARTAGE = "assets/images/partage.jpg"
+IMAGE_PARTAGE_ALT = ("DSG Rénovation, entreprise de rénovation à Lausanne : "
+                     "séjour et cuisine après rénovation")
 
 # Villes citées dans les textes et le balisage. L'ordre va du plus proche
 # au plus lointain : c'est celui dans lequel l'entreprise se déplace.
@@ -49,7 +64,14 @@ ANNEXES = [
 ]
 
 # Horaires du bureau. CONTENU À VALIDER : à confirmer avec le client.
-HORAIRES = "Lundi – vendredi, 08:00 – 17:00"
+# Une seule source : le texte affiché et le balisage structuré en
+# découlent tous deux, ils ne peuvent plus diverger.
+OUVERTURE, FERMETURE = "08:00", "17:00"
+JOURS_OUVRES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+HORAIRES = "Lundi – vendredi, %s – %s" % (OUVERTURE, FERMETURE)
+
+FONDATION = "2019"
+EFFECTIF = 11
 
 # Itinéraire vers l'atelier : un lien de recherche, qui ne dépend d'aucune
 # fiche d'établissement. À remplacer par le lien de la fiche Google

@@ -6,6 +6,11 @@
 (function () {
   "use strict";
 
+  /* Ce fichier s'exécute : les blocs masqués en attente de révélation
+     le seront bien. Sans cette classe, la page les réaffiche d'office
+     au chargement (voir SCRIPT_JS dans outils/gabarit.py). */
+  document.documentElement.classList.add("motion");
+
   var mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Année du copyright ---------- */
@@ -19,9 +24,12 @@
   Array.prototype.forEach.call(titres, function (titre) {
     var lignes = titre.innerHTML.split(/<br\s*\/?>/i);
     if (lignes.length < 1) { return; }
+    /* Les lignes sont jointes par une espace : en blocs, elles vont à
+       la ligne à l'écran, mais le texte du titre (celui que lisent
+       Google et les lecteurs d'écran) garde ses mots séparés. */
     titre.innerHTML = lignes.map(function (ligne) {
       return '<span class="ligne"><span>' + ligne + "</span></span>";
-    }).join("");
+    }).join(" ");
   });
 
   /* ---------- Révélations ---------- */
