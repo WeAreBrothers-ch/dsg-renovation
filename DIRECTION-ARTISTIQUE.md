@@ -283,7 +283,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
-| Ouvriers de l'accueil | attributs `transform` du dessin SVG, image par image | liés au défilement, amorti de 110 ms |
+| Ouvriers du site | attributs `transform` du dessin SVG, image par image | boucles indépendantes de 9 à 14 s |
 
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
@@ -292,12 +292,14 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 %.
 - Aucune librairie d'animation ni de défilement.
-- **Les ouvriers de l'accueil** : quatre silhouettes pleines (grosse tête ronde, membres épais aux bouts
-  arrondis, sans casque), chacune seule dans le bas d'une section, sur la limite avec la suivante qui lui sert
-  de sol : le peintre dans la bande de l'entreprise, le poseur de sol sous les prestations, l'électricien sous
-  la zone, le charpentier sous le déroulé. Un sur deux vient de la droite. Le défilement les fait vivre : à
-  mesure que sa section monte, l'ouvrier arrive en marchant (ses pieds avancent de la distance parcourue),
-  travaille, puis repart ; remonter le fait revenir sur ses pas. Rien ne bouge sans défilement. Décor seul
+- **Les ouvriers du site** : des silhouettes pleines (grosse tête ronde, membres épais aux bouts arrondis,
+  sans casque), posées çà et là, chacune seule dans le bas d'une section, sur la limite avec la suivante qui
+  lui sert de sol. Quatre sur l'accueil (le peintre dans la bande de l'entreprise, le poseur de sol sous les
+  prestations, l'électricien sous la zone, le charpentier sous le déroulé), deux ou trois sur les autres pages,
+  une section sur deux, le métier de la page d'abord ; aucune sur les pages légales. Un sur deux vient de la
+  droite. Chacun vit à son rythme, sans attendre le défilement : il arrive en marchant, travaille, repart,
+  revient ; son ouvrage s'efface avant son retour. Un bouton du pied de page met toutes les animations en
+  pause et le site s'en souvient (WCAG 2.2.2) ; rien ne bouge hors de l'écran ni onglet caché. Décor seul
   (`aria-hidden`) ; mouvement réduit ou sans JavaScript : chacun saisi au milieu de sa tâche. Silhouette à
   l'encre du fond (claire sur la bande sombre), carreaux, peinture et ampoule en `--c-aplat`, outils en
   `--c-accent`.

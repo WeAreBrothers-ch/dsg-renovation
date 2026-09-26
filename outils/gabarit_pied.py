@@ -71,6 +71,7 @@ def pied(base, courante, services):
       <span>© <span class="nb" id="annee">2026</span> {MARQUE} Sàrl — {VILLE}</span>
       <span>Professionnalisme, fiabilité et passion</span>
       {legal}
+      <button class="pied__animations" type="button" data-animations hidden>Mettre les animations en pause</button>
     </div>
   </div>
   <p class="pied__logotype" aria-hidden="true">{MARQUE}</p>

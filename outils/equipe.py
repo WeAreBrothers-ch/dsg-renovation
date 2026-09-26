@@ -1,12 +1,12 @@
-"""Les ouvriers de l'accueil : quatre silhouettes pleines, chacune dans
-sa section.
+"""Les ouvriers du site : des silhouettes pleines, posées çà et là.
 
 Un charpentier cloue une planche sur un tréteau, un poseur de sol pose
 des carreaux, un électricien visse une ampoule, un peintre passe un mur
 au rouleau. Chacun vit seul dans le bas d'une section, sur la limite
-avec la suivante, qui lui sert de sol. Il avance avec le défilement de
-la page : il arrive en marchant, travaille, repart
-(assets/js/equipe.js).
+avec la suivante, qui lui sert de sol, et travaille à son rythme : il
+arrive en marchant, travaille, repart, revient (assets/js/equipe.js).
+Quatre sur l'accueil, deux ou trois sur les autres pages, aucun sur
+les pages légales.
 
 Le style : une silhouette pleine, grosse tête ronde, membres épais aux
 bouts arrondis, sans casque ; l'encre du fond où elle se trouve.
@@ -37,15 +37,30 @@ RELEVE = """copy(JSON.stringify(Object.fromEntries([...document.querySelectorAll
 [...e.attributes].filter(a => /^(transform|opacity|width|x|y|x1|y1|x2|y2)$/.test(a.name)
 || a.name === "class" && a.value.includes("est-allume")).map(a => [a.name, a.value]))]))}])), null, 1))"""
 
-# Où vit chaque ouvrier : la section (son titre), le métier, sa place
-# dans la largeur, et le sens de sa marche. Un ouvrier sur deux vient
-# de la droite, pour qu'aucun ne suive le précédent.
-SCENES = [
+# L'accueil, placé à la main : la section (son titre), le métier, la
+# place dans la largeur, et le sens de la marche. Un ouvrier sur deux
+# vient de la droite, pour qu'aucun ne suive le précédent.
+ACCUEIL = [
     ("tEntreprise", "peinture", 70, "gauche"),
     ("tLots", "sol", 18, "droite"),
     ("tZone", "ampoule", 80, "gauche"),
     ("tEtapes", "marteau", 24, "droite"),
 ]
+
+# Ailleurs, une section sur deux (trois ouvriers au plus), le métier de
+# la page d'abord.
+METIERS = ["peinture", "sol", "ampoule", "marteau"]
+PREFERES = {
+    "services/peinture.html": ["peinture", "ampoule", "marteau"],
+    "services/carrelage-sols.html": ["sol", "marteau", "peinture"],
+    "services/platrerie-cloisons.html": ["marteau", "peinture", "ampoule"],
+    "services/renovation-salle-de-bains.html": ["sol", "ampoule", "peinture"],
+    "services/remise-en-etat-appartement.html": ["peinture", "sol", "marteau"],
+    "services/nettoyage-fin-de-chantier.html": ["sol", "peinture", "ampoule"],
+    "services/renovation-complete.html": ["marteau", "ampoule", "sol"],
+}
+PLACES = [(22, "droite"), (76, "gauche"), (30, "droite")]
+SANS_OUVRIERS = ("mentions-legales.html", "confidentialite.html")
 
 with io.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "equipe_immobile.json"),
              encoding="utf-8") as _f:
@@ -171,9 +186,52 @@ def scene(metier, place, sens):
     )
 
 
-def poser(html):
-    """Pose chaque ouvrier dans sa section, s'il la trouve dans la page."""
-    for titre, metier, place, sens in SCENES:
+def _fond(classes):
+    for fond in ("sur-sombre", "sur-pale", "sur-vif", "partenaires"):
+        if fond in classes:
+            return fond
+    return "blanc"
+
+
+def _sections(html):
+    """Les titres des sections qui peuvent accueillir un ouvrier : pas
+    le renvoi final, ni les sections resserrées, ni une section suivie
+    d'une autre du même fond, où la limite qui lui sert de sol ne se
+    verrait pas."""
+    balises = []
+    for balise in re.findall(r"<section\b[^>]*>", html):
+        classes = re.search(r'class="([^"]*)"', balise)
+        titre = re.search(r'aria-labelledby="([^"]*)"', balise)
+        balises.append((set(classes.group(1).split()) if classes else set(),
+                        titre.group(1) if titre else None))
+    titres = []
+    for i, (c, titre) in enumerate(balises):
+        suivante = balises[i + 1][0] if i + 1 < len(balises) else {"sur-sombre"}
+        if (titre and "section" in c and not c & {"rappel", "sur-vif", "section--serre"}
+                and _fond(c) != _fond(suivante)):
+            titres.append(titre)
+    return titres
+
+
+def _scenes(html, fichier):
+    if fichier == "index.html":
+        return ACCUEIL
+    titres = _sections(html)
+    retenus = titres[1::2][:len(PLACES)] or titres[:1]
+    ordre = PREFERES.get(fichier)
+    if not ordre:
+        # Un ordre propre à chaque page, stable d'une construction à l'autre.
+        decalage = sum(map(ord, fichier)) % len(METIERS)
+        ordre = METIERS[decalage:] + METIERS[:decalage]
+    return [(titre, ordre[i % len(ordre)], PLACES[i][0], PLACES[i][1])
+            for i, titre in enumerate(retenus)]
+
+
+def poser(html, fichier):
+    """Pose les ouvriers d'une page dans leurs sections."""
+    if fichier in SANS_OUVRIERS:
+        return html
+    for titre, metier, place, sens in _scenes(html, fichier):
         ouverture = re.search(r'<section\b[^>]*\baria-labelledby="%s"[^>]*>' % re.escape(titre), html)
         if ouverture:
             html = html[:ouverture.end()] + scene(metier, place, sens) + html[ouverture.end():]

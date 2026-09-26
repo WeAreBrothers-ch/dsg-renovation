@@ -9,6 +9,7 @@ import os
 import re
 
 import accessibilite
+import equipe
 import gabarit
 import images
 import prestations
@@ -32,7 +33,7 @@ FEUILLES = [
 ]
 FEUILLE_SITE = "assets/css/site.css"
 
-BASE_JS = ["nav.js", "motion.js", "onglets.js"]
+BASE_JS = ["nav.js", "motion.js", "onglets.js", "equipe.js"]
 
 
 def ecrire(chemin, contenu):
@@ -128,4 +129,6 @@ def assembler(page, corps, base, modules, schemas):
     html = html.replace("{base}", base)
     html = rythme.rythmer(html)
     html = images.localiser(html, base)
-    return typographie.espacer(images.preconnexion(html))
+    html = typographie.espacer(images.preconnexion(html))
+    # Les ouvriers se posent dans leurs sections (outils/equipe.py).
+    return equipe.poser(html, page["courante"])

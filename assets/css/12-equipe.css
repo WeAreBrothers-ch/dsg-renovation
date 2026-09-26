@@ -1,8 +1,8 @@
 /* ============================================================
-   DSG RÉNOVATION — 12 · LES OUVRIERS DE L'ACCUEIL
-   Quatre silhouettes pleines, chacune dans le bas d'une section : la
+   DSG RÉNOVATION — 12 · LES OUVRIERS DU SITE
+   Des silhouettes pleines, chacune dans le bas d'une section : la
    limite avec la section suivante leur sert de sol. Le dessin vient de
-   outils/equipe.py ; le défilement les fait marcher et travailler
+   outils/equipe.py ; elles travaillent à leur rythme
    (assets/js/equipe.js).
 
    Elles prennent l'encre du fond où elles se trouvent : sombres sur
@@ -56,3 +56,13 @@
 .equipe__peinture{fill:var(--c-aplat);stroke:none}
 .equipe__perche{stroke-width:3}
 .equipe__rouleau{fill:var(--c-accent);stroke:none}
+
+/* Le bouton du pied de page qui met toutes les animations en pause :
+   il se lit comme les liens légaux voisins. */
+.pied__animations{
+  display:inline-block;padding-block:var(--sp-2);
+  background:none;border:0;font:inherit;color:inherit;cursor:pointer;
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;
+  transition:color var(--d-rapide) var(--e-standard);
+}
+@media (hover:hover) and (pointer:fine){.pied__animations:hover{color:var(--c-encre)}}

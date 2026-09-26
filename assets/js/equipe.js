@@ -1,18 +1,16 @@
 /* ============================================================
-   DSG RÉNOVATION — LES OUVRIERS DE L'ACCUEIL
-   Quatre silhouettes, chacune dans le bas d'une section : un
-   charpentier cloue, un poseur pose trois carreaux, un électricien
+   DSG RÉNOVATION — LES OUVRIERS DU SITE
+   Des silhouettes posées çà et là, chacune dans le bas d'une section :
+   un charpentier cloue, un poseur pose trois carreaux, un électricien
    visse une ampoule qui s'allume, un peintre passe un mur au rouleau.
+   Chacun vit à son rythme, sans attendre le défilement : il arrive en
+   marchant, travaille, repart, puis revient.
 
-   Le défilement les fait vivre : à mesure que la section monte dans
-   l'écran, l'ouvrier arrive en marchant, travaille, puis repart. Ses
-   pieds avancent exactement de la distance parcourue ; qui s'arrête de
-   défiler l'arrête, qui remonte le fait revenir sur ses pas. Un léger
-   amorti adoucit le mouvement.
-
-   Décor seulement (aria-hidden). Rien ne bouge si le visiteur demande
-   moins de mouvement ; sans ce fichier, chacun reste saisi au milieu de
-   sa tâche (outils/equipe.py).
+   Décor seulement (aria-hidden). Un bouton du pied de page met toutes
+   les animations en pause, et le site s'en souvient d'une page à
+   l'autre (WCAG 2.2.2). Rien ne bouge hors de l'écran, onglet caché,
+   ni si le visiteur demande moins de mouvement ; sans ce fichier,
+   chacun reste saisi au milieu de sa tâche (outils/equipe.py).
 
    Repères d'un ouvrier : pieds en (0, 0), hanche à -36, épaules 24
    plus haut sur le torse. Angles en degrés, sens du SVG : un membre
@@ -22,16 +20,18 @@
   "use strict";
 
   var scenes = document.querySelectorAll("[data-ouvrier]");
+  var bouton = document.querySelector("[data-animations]");
   if (!scenes.length || !window.requestAnimationFrame) { return; }
   var mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var MEMOIRE = "dsg-animations";
 
   var RAD = Math.PI / 180;
   var PAS = 18;                       /* longueur d'une enjambée */
-  var AMORTI = 110;                   /* ms : délai de l'amorti */
-
-  /* Le parcours d'un ouvrier, en part du défilement de sa section :
-     il entre, travaille, sort. */
-  var ENTREE = 0.04, TRAVAIL = 0.34, SORTIE = 0.7, FIN = 0.96, FONDU = 0.03;
+  var CADENCE = 760;                  /* un double pas, en ms */
+  var VITESSE = 2 * PAS / CADENCE;    /* unités par ms : le pied d'appui ne glisse pas */
+  var FONDU = 0.3;                    /* part de la marche passée à apparaître */
+  var TRANSITION = 300;               /* de la marche au geste, et retour */
+  var REPOS = 1000;                   /* poste vide avant le retour */
 
   function borne(t) { return t < 0 ? 0 : (t > 1 ? 1 : t); }
   function lisse(t) { t = borne(t); return t * t * (3 - 2 * t); }
@@ -142,15 +142,16 @@
   }
 
   /* ---------- Les quatre gestes ----------
-     Chaque geste reçoit son avancement (en ms de geste) et la pose à
+     Chaque geste reçoit le temps passé à son poste et la pose à
      remplir ; il y range aussi l'état des accessoires (p.outil). */
   var METIERS = {
 
     /* Le charpentier : le marteau décrit un arc au-dessus de la tête,
        retombe sur le clou, qui s'enfonce un peu à chaque coup. Le
-       marteau prolonge l'avant-bras : sa tête est à 26,5 du coude. */
+       marteau prolonge l'avant-bras : sa tête est à 26,5 du coude. Il
+       repart par où il est venu : devant lui, il y a son tréteau. */
     marteau: {
-      duree: 4200, fin: 0, demiTour: true,
+      duree: 4900, fin: 0, demiTour: true,
       travail: function (t, p) {
         p.torse = 10; p.y = 0.5;
         p.pieds = [[9, 0], [-8, 0]];
@@ -168,8 +169,9 @@
         p.outil.clou = enfonce;
         p.outil.impact = u >= 0.72 && u < 0.9 ? 1 - (u - 0.72) / 0.18 : 0;
       },
-      decor: function (o, etat) {
+      decor: function (o, etat, fondu) {
         o.acc.clou.setAttribute("transform", "translate(0 " + n(etat.clou || 0) + ")");
+        o.acc.clou.setAttribute("opacity", n(fondu));
         o.acc.impact.setAttribute("opacity", n(etat.impact || 0));
       },
       depart: { clou: 0, impact: 0 },
@@ -196,9 +198,9 @@
         p.outil.poses = i + (u >= 0.5 ? 1 : 0);
         p.outil.enMain = u < 0.5 || u > 0.9 && i < 2 ? 1 : 0;
       },
-      decor: function (o, etat, pose) {
+      decor: function (o, etat, fondu, pose) {
         for (var i = 0; i < 3; i++) {
-          o.acc["carreau-" + i].setAttribute("opacity", i < (etat.poses || 0) ? 1 : 0);
+          o.acc["carreau-" + i].setAttribute("opacity", i < (etat.poses || 0) ? n(fondu) : 0);
         }
         /* Le carreau reste à plat dans la main, quel que soit le bras. */
         var penche = pose.torse + pose.bras[0][0] + pose.bras[0][1];
@@ -209,23 +211,25 @@
       arrivee: function (e) { return { poses: e.poses, enMain: 0 }; }
     },
 
-    /* L'électricien : il visse l'ampoule, qui grésille puis s'allume. */
+    /* L'électricien : il visse l'ampoule, qui grésille puis s'allume ;
+       il baisse le bras et repart. */
     ampoule: {
-      duree: 5000, fin: 0,
+      duree: 3500, fin: 0,
       travail: function (t, p) {
         p.torse = 4; p.y = 0.3;
         p.pieds = [[6, 0], [-6, 0]];
-        var allumage = 2800, vis = t < allumage ? Math.sin(t / 130) : 0;
-        viser(p, 0, [19 + 1.2 * vis, -74]);
+        var allumage = 2400, vis = t < allumage ? Math.sin(t / 130) : 0;
+        var baisse = lisse((t - allumage - 450) / 350);
+        viser(p, 0, [mix(19 + 1.2 * vis, 8, baisse), mix(-74, -36, baisse)]);
         p.bras[1] = [12, -20];
         p.outil.tourne = 8 * vis;
         var d = t - allumage;
         p.outil.lumiere = d < 0 ? 0 : (d < 90 ? 1 : (d < 180 ? 0.15 : (d < 300 ? 1 : (d < 380 ? 0.4 : 1))));
       },
-      decor: function (o, etat) {
+      decor: function (o, etat, fondu) {
         o.acc.ampoule.setAttribute("transform", "rotate(" + n(etat.tourne || 0) + " 20 -91)");
-        o.acc.halo.setAttribute("opacity", n(etat.lumiere || 0));
-        o.acc.verre.classList.toggle("est-allume", (etat.lumiere || 0) > 0.5);
+        o.acc.halo.setAttribute("opacity", n((etat.lumiere || 0) * fondu));
+        o.acc.verre.classList.toggle("est-allume", (etat.lumiere || 0) * fondu > 0.5);
       },
       depart: { tourne: 0, lumiere: 0 },
       arrivee: function (e) { return { tourne: 0, lumiere: e.lumiere }; }
@@ -251,7 +255,7 @@
         var m = main(p, 0);
         p.outil.rouleau = [m[0] + 6, m[1] - 12];
       },
-      decor: function (o, etat, pose) {
+      decor: function (o, etat, fondu, pose) {
         var m = main(pose, 0), r = pose.outil.rouleau || [m[0] + 6, m[1] - 12];
         o.acc.perche.setAttribute("x1", n(m[0])); o.acc.perche.setAttribute("y1", n(m[1]));
         o.acc.perche.setAttribute("x2", n(r[0])); o.acc.perche.setAttribute("y2", n(r[1] + 8));
@@ -259,14 +263,16 @@
         o.acc.rouleau.setAttribute("x", n(r[0] - 3)); o.acc.rouleau.setAttribute("y", n(r[1] - 8));
         o.acc.rouleau.setAttribute("opacity", n(pose.opacite));
         o.acc.peinture.setAttribute("width", n(etat.peinture || 0));
+        o.acc.peinture.setAttribute("opacity", n(fondu));
       },
       depart: { peinture: 0 },
       arrivee: function (e) { return { peinture: e.peinture }; }
     }
   };
 
-  /* Avancement du geste montré par le dessin immobile (outils/equipe.py). */
-  var AVANCEMENT = { marteau: 0.458, sol: 0.5, ampoule: 0.7, peinture: 0.45 };
+  /* Avancement du geste montré par le dessin immobile (outils/equipe.py),
+     qui est aussi la première image de l'animation. */
+  var AVANCEMENT = { marteau: 0.393, sol: 0.5, ampoule: 0.82, peinture: 0.45 };
 
   function Ouvrier(scene) {
     this.scene = scene;
@@ -284,14 +290,12 @@
       self.acc[el.getAttribute("data-accessoire")] = el;
     });
     this.fini = this.m.arrivee(this.geste(this.m.duree).outil);
-    this.cible = this.montre = -1;
-    this.entree = this.sortie = 120;
+    this.pret = false;
   }
 
-  /* Distances de marche : de hors champ jusqu'au poste, puis au-delà.
-     Le sens de la marche (vers la droite ou la gauche) est donné par
-     le dessin retourné (CSS) : le calcul, lui, va toujours vers la
-     droite. */
+  /* Distances de marche, de hors champ jusqu'au poste puis au-delà. Le
+     sens de la marche est donné par le dessin retourné (CSS) : le
+     calcul, lui, va toujours vers la droite. */
   Ouvrier.prototype.mesurer = function () {
     var largeur = this.scene.clientWidth;
     var echelle = parseFloat(getComputedStyle(this.scene).getPropertyValue("--e")) || 1;
@@ -299,8 +303,17 @@
     var gauche = this.scene.classList.contains("ouvrier--gauche");
     var avant = (gauche ? 1 - place : place) * largeur / echelle;
     var apres = (gauche ? place : 1 - place) * largeur / echelle;
-    this.entree = Math.max(60, Math.min(260, avant + 30));
-    this.sortie = Math.max(60, Math.min(260, apres - this.m.fin + 30));
+    this.entree = Math.max(50, Math.min(150, avant + 20));
+    this.sortie = this.m.demiTour ? this.entree + this.m.fin
+      : Math.max(50, Math.min(150, apres - this.m.fin + 20));
+    this.dEntree = this.entree / VITESSE;
+    this.dSortie = this.sortie / VITESSE;
+    this.cycle = this.dEntree + this.m.duree + this.dSortie + REPOS;
+    /* Au premier affichage, chacun est déjà au milieu de sa tâche :
+       c'est aussi la pose du dessin immobile. */
+    if (!this.pret) { this.temps = this.dEntree + this.m.duree * AVANCEMENT[this.metier]; }
+    this.temps %= this.cycle;
+    this.pret = true;
   };
 
   Ouvrier.prototype.geste = function (t) {
@@ -309,49 +322,46 @@
     return p;
   };
 
-  /* La marche à la position x (depuis le poste) : l'enjambée suit la
-     distance parcourue, le pied d'appui ne glisse pas. */
-  Ouvrier.prototype.marche = function (x, depart) {
+  /* La marche depuis x0, t ms après le départ, dans un sens ou l'autre. */
+  Ouvrier.prototype.marche = function (t, x0, sens) {
     var p = poseDebout();
-    marcher(p, (x - depart) / (2 * PAS));
-    p.x = x;
+    marcher(p, t / CADENCE);
+    p.x = x0 + sens * VITESSE * t;
     if (this.m.porte) { this.m.porte(p); }
+    if (sens < 0) { p.demiTour = true; }
     return p;
   };
 
-  /* L'instant qui correspond à un avancement du défilement (0 à 1). */
-  Ouvrier.prototype.instant = function (q) {
-    var m = this.m, p, k, a, b;
-    if (q < TRAVAIL) {
-      k = borne((q - ENTREE) / (TRAVAIL - ENTREE));
-      p = this.marche(-this.entree * (1 - k), -this.entree);
-      p.opacite = lisse(k / 0.25);
-      return { pose: p, etat: m.depart };
+  Ouvrier.prototype.instant = function (t) {
+    var m = this.m, e = this.dEntree, w = m.duree, s = this.dSortie, p;
+    var retour = m.demiTour ? -1 : 1;
+    if (t < e) {
+      p = this.marche(t, -this.entree, 1);
+      p.opacite = lisse(t / (e * FONDU));
+      return { pose: p, etat: m.depart, fondu: 1 };
     }
-    if (q < SORTIE) {
-      k = (q - TRAVAIL) / (SORTIE - TRAVAIL);
-      p = this.geste(k * m.duree);
-      if (q < TRAVAIL + FONDU) {
-        a = this.marche(0, -this.entree);
-        p = melanger(a, p, lisse((q - TRAVAIL) / FONDU));
-      } else if (q > SORTIE - FONDU) {
-        b = this.marche(m.fin, m.fin);
-        p = melanger(p, b, lisse((q - SORTIE + FONDU) / FONDU));
+    t -= e;
+    if (t < w) {
+      p = this.geste(t);
+      if (t < TRANSITION) {
+        p = melanger(this.marche(e, -this.entree, 1), p, lisse(t / TRANSITION));
+      } else if (t > w - TRANSITION && retour > 0) {
+        p = melanger(p, this.marche(0, m.fin, 1), lisse((t - w + TRANSITION) / TRANSITION));
       }
-      return { pose: p, etat: p.outil };
+      return { pose: p, etat: p.outil, fondu: 1 };
     }
-    k = borne((q - SORTIE) / (FIN - SORTIE));
-    if (m.demiTour) {
-      /* Demi-tour : il repart par où il est venu. */
-      var retour = this.entree + m.fin;
-      p = this.marche(m.fin + retour * k, m.fin);
-      p.x = m.fin - retour * k;
-      p.demiTour = true;
-    } else {
-      p = this.marche(m.fin + this.sortie * k, m.fin);
+    t -= w;
+    if (t < s) {
+      p = this.marche(t, m.fin, retour);
+      p.opacite = 1 - lisse((t - s * (1 - FONDU)) / (s * FONDU));
+      return { pose: p, etat: this.fini, fondu: 1 };
     }
-    p.opacite = 1 - lisse((k - 0.75) / 0.25);
-    return { pose: p, etat: this.fini };
+    /* Poste vide : l'ouvrage s'efface, le poste se remet à zéro. */
+    t -= s;
+    p = this.marche(0, m.fin + retour * this.sortie, retour);
+    p.opacite = 0;
+    return t < REPOS / 2 ? { pose: p, etat: this.fini, fondu: 1 - lisse(t / (REPOS / 2)) }
+                         : { pose: p, etat: m.depart, fondu: lisse((t - REPOS / 2) / (REPOS / 2)) };
   };
 
   Ouvrier.prototype.dessiner = function (instant) {
@@ -366,81 +376,89 @@
     rot(os.torse, p.torse, -36);
     rot(os["bras-av"], p.bras[0][0], -60); rot(os["avant-bras-av"], p.bras[0][1], -46);
     rot(os["bras-arr"], p.bras[1][0], -60); rot(os["avant-bras-arr"], p.bras[1][1], -46);
-    this.m.decor(this, instant.etat, p);
+    this.m.decor(this, instant.etat, instant.fondu, p);
   };
 
-  /* Avancement visé : 0 quand le sol de l'ouvrier entre par le bas de
-     l'écran, 1 quand il sort par le haut. */
-  Ouvrier.prototype.viser = function (hauteur) {
-    var sol = this.scene.getBoundingClientRect().bottom;
-    this.cible = borne((hauteur - sol) / hauteur);
-  };
-
-  /* Rapproche l'avancement montré de l'avancement visé ; vrai tant
-     qu'il reste du chemin. */
   Ouvrier.prototype.avancer = function (dt) {
-    if (this.montre < 0) { this.montre = this.cible; }
-    var ecart = this.cible - this.montre;
-    this.montre = Math.abs(ecart) < 0.0005 ? this.cible : this.montre + ecart * (1 - Math.exp(-dt / AMORTI));
-    this.dessiner(this.instant(this.montre));
-    return this.montre !== this.cible;
+    this.temps = (this.temps + dt) % this.cycle;
+    this.dessiner(this.instant(this.temps));
   };
 
   var ouvriers = Array.prototype.map.call(scenes, function (scene) { return new Ouvrier(scene); });
-  var visibles = ouvriers.slice();
-  var requete = 0, precedent = 0;
+  var visibles = [];
+  var enPause = false, requete = 0, precedent = 0;
+  try { enPause = window.localStorage.getItem(MEMOIRE) === "pause"; } catch (erreur) { enPause = false; }
+
+  function actif() { return !enPause && !document.hidden && !mouvementReduit.matches && visibles.length > 0; }
 
   function image(maintenant) {
     requete = 0;
     var dt = precedent ? Math.min(64, maintenant - precedent) : 16;
     precedent = maintenant;
-    var hauteur = window.innerHeight, encore = false;
-    visibles.forEach(function (o) {
-      o.viser(hauteur);
-      if (o.avancer(dt)) { encore = true; }
+    visibles.forEach(function (o) { o.avancer(dt); });
+    if (actif()) { requete = window.requestAnimationFrame(image); }
+  }
+
+  function basculer() {
+    if (actif()) {
+      if (!requete) { precedent = 0; requete = window.requestAnimationFrame(image); }
+    } else if (requete) {
+      window.cancelAnimationFrame(requete);
+      requete = 0;
+    }
+  }
+
+  function mesurer() { ouvriers.forEach(function (o) { o.mesurer(); }); }
+
+  /* Le bouton du pied de page : un seul pour tout le site, mémorisé. */
+  function etiqueter() {
+    if (!bouton) { return; }
+    bouton.hidden = mouvementReduit.matches;
+    bouton.textContent = enPause ? "Relancer les animations" : "Mettre les animations en pause";
+  }
+
+  mesurer();
+  etiqueter();
+  /* Première image : chacun au milieu de sa tâche. Elle reste seule si
+     le visiteur demande moins de mouvement ou a mis les animations en
+     pause. */
+  ouvriers.forEach(function (o) { o.dessiner(o.instant(o.temps)); });
+
+  if (bouton) {
+    bouton.addEventListener("click", function () {
+      enPause = !enPause;
+      try { window.localStorage.setItem(MEMOIRE, enPause ? "pause" : "marche"); } catch (erreur) { /* navigation privée */ }
+      etiqueter();
+      basculer();
     });
-    if (encore) { requete = window.requestAnimationFrame(image); } else { precedent = 0; }
   }
 
-  function demander() {
-    if (!requete && !mouvementReduit.matches) { requete = window.requestAnimationFrame(image); }
-  }
-
-  function mesurer() {
-    ouvriers.forEach(function (o) { o.mesurer(); });
-    demander();
-  }
-
-  function demarrer() {
-    mesurer();
-    if (mouvementReduit.matches) {
-      /* Une seule image, chacun au milieu de sa tâche : c'est aussi le
-         dessin immobile écrit par outils/equipe.py. */
-      ouvriers.forEach(function (o) {
-        o.dessiner(o.instant(TRAVAIL + AVANCEMENT[o.metier] * (SORTIE - TRAVAIL)));
+  /* Seuls les ouvriers à l'écran bougent. */
+  if ("IntersectionObserver" in window) {
+    var observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        var o = ouvriers.filter(function (x) { return x.scene === e.target; })[0];
+        var i = visibles.indexOf(o);
+        if (e.isIntersecting && i < 0) { visibles.push(o); }
+        if (!e.isIntersecting && i >= 0) { visibles.splice(i, 1); }
       });
-      return;
-    }
-    /* Seuls les ouvriers proches de l'écran sont recalculés. */
-    if ("IntersectionObserver" in window) {
-      var observateur = new IntersectionObserver(function (entrees) {
-        entrees.forEach(function (e) {
-          var o = ouvriers.filter(function (x) { return x.scene === e.target; })[0];
-          var i = visibles.indexOf(o);
-          if (e.isIntersecting && i < 0) { visibles.push(o); }
-          if (!e.isIntersecting && i >= 0) { visibles.splice(i, 1); }
-        });
-        demander();
-      }, { rootMargin: "25% 0px" });
-      ouvriers.forEach(function (o) { observateur.observe(o.scene); });
-    }
-    window.addEventListener("scroll", demander, { passive: true });
-    var attente = 0;
-    window.addEventListener("resize", function () {
-      window.clearTimeout(attente);
-      attente = window.setTimeout(mesurer, 150);
+      basculer();
     });
+    ouvriers.forEach(function (o) { observateur.observe(o.scene); });
+  } else {
+    visibles = ouvriers.slice();
   }
 
-  demarrer();
+  document.addEventListener("visibilitychange", basculer);
+  if (mouvementReduit.addEventListener) {
+    mouvementReduit.addEventListener("change", function () { etiqueter(); basculer(); });
+  }
+
+  var attente = 0;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(attente);
+    attente = window.setTimeout(mesurer, 150);
+  });
+
+  basculer();
 })();

@@ -22,7 +22,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import briques
 import catalogue
-import equipe
 import images
 import page_service
 import page_accueil
@@ -86,9 +85,8 @@ def construire_accueil():
     }
     corps = page_accueil.accueil(SERVICES, "")
     schemas = [seo.site_web(), seo.entreprise()]
-    modules = BASE_JS + ["comparateur.js", "ouverture.js", "equipe.js"]
-    # Les ouvriers se posent dans leurs sections (outils/equipe.py).
-    return ecrire("index.html", equipe.poser(assembler(page, corps, "", modules, schemas)))
+    modules = BASE_JS + ["comparateur.js", "ouverture.js"]
+    return ecrire("index.html", assembler(page, corps, "", modules, schemas))
 
 
 def construire_services():
