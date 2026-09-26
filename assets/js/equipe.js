@@ -1,14 +1,18 @@
 /* ============================================================
-   DSG RÉNOVATION — L'ÉQUIPE AU TRAVAIL
-   La frise de l'accueil : quatre ouvriers dessinés au trait arrivent à
-   leur poste en marchant, travaillent, puis repartent. Un charpentier
-   cloue, un poseur pose trois carreaux, un électricien visse une
-   ampoule qui s'allume, un peintre passe un mur au rouleau.
+   DSG RÉNOVATION — LES OUVRIERS DE L'ACCUEIL
+   Quatre silhouettes, chacune dans le bas d'une section : un
+   charpentier cloue, un poseur pose trois carreaux, un électricien
+   visse une ampoule qui s'allume, un peintre passe un mur au rouleau.
 
-   Décor seulement (aria-hidden) : un bouton met l'animation en pause.
-   Elle ne tourne pas hors de l'écran, ni onglet caché, ni si le
-   visiteur demande moins de mouvement ; sans ce fichier, la frise
-   reste une illustration immobile (outils/equipe.py).
+   Le défilement les fait vivre : à mesure que la section monte dans
+   l'écran, l'ouvrier arrive en marchant, travaille, puis repart. Ses
+   pieds avancent exactement de la distance parcourue ; qui s'arrête de
+   défiler l'arrête, qui remonte le fait revenir sur ses pas. Un léger
+   amorti adoucit le mouvement.
+
+   Décor seulement (aria-hidden). Rien ne bouge si le visiteur demande
+   moins de mouvement ; sans ce fichier, chacun reste saisi au milieu de
+   sa tâche (outils/equipe.py).
 
    Repères d'un ouvrier : pieds en (0, 0), hanche à -36, épaules 24
    plus haut sur le torse. Angles en degrés, sens du SVG : un membre
@@ -17,18 +21,17 @@
 (function () {
   "use strict";
 
-  var frise = document.querySelector("[data-equipe]");
-  if (!frise || !window.requestAnimationFrame) { return; }
-  var bouton = document.querySelector("[data-equipe-pause]");
+  var scenes = document.querySelectorAll("[data-ouvrier]");
+  if (!scenes.length || !window.requestAnimationFrame) { return; }
   var mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   var RAD = Math.PI / 180;
   var PAS = 18;                       /* longueur d'une enjambée */
-  var CADENCE = 760;                  /* un double pas, en ms */
-  var VITESSE = 2 * PAS / CADENCE;    /* unités par ms : le pied d'appui ne glisse pas */
-  var FONDU = 0.3;                    /* part de la marche passée à apparaître */
-  var TRANSITION = 300;               /* de la marche au geste, et retour */
-  var REPOS = 1400;                   /* poste vide avant le retour */
+  var AMORTI = 110;                   /* ms : délai de l'amorti */
+
+  /* Le parcours d'un ouvrier, en part du défilement de sa section :
+     il entre, travaille, sort. */
+  var ENTREE = 0.04, TRAVAIL = 0.34, SORTIE = 0.7, FIN = 0.96, FONDU = 0.03;
 
   function borne(t) { return t < 0 ? 0 : (t > 1 ? 1 : t); }
   function lisse(t) { t = borne(t); return t * t * (3 - 2 * t); }
@@ -70,7 +73,7 @@
 
   function poseDebout() {
     return { x: 0, y: 0, torse: 3, opacite: 1,
-             pieds: [[4, 0], [-4, 0]], chevilles: [0, 0],
+             pieds: [[4, 0], [-4, 0]],
              bras: [[8, -12], [-8, -12]],
              outil: {} };
   }
@@ -87,11 +90,11 @@
     p.pieds = [pied(phase), pied(phase + 0.5)];
     p.y = 0.6 * (1 - Math.cos(4 * Math.PI * (phase - 0.25)));
     p.torse = 4;
-    var balancier = 22 * Math.cos(2 * Math.PI * phase);
-    p.bras = [[balancier, -16], [-balancier, -16]];
+    var balancier = 24 * Math.cos(2 * Math.PI * phase);
+    p.bras = [[balancier, -18], [-balancier, -18]];
   }
 
-  /* Angles des deux jambes : donnés par la pose (genou au sol), ou
+  /* Angles des deux jambes : donnés par la pose (genoux au sol), ou
      calculés pour que les pieds touchent leur place. */
   function jambes(p) {
     var r = [];
@@ -109,7 +112,6 @@
     p.x = mix(a.x, b.x, t); p.y = mix(a.y, b.y, t);
     p.torse = mix(a.torse, b.torse, t); p.opacite = mix(a.opacite, b.opacite, t);
     for (var i = 0; i < 2; i++) {
-      p.chevilles[i] = mix(a.chevilles[i], b.chevilles[i], t);
       p.pieds[i] = [mix(a.pieds[i][0], b.pieds[i][0], t), mix(a.pieds[i][1], b.pieds[i][1], t)];
       p.bras[i] = [mix(a.bras[i][0], b.bras[i][0], t), mix(a.bras[i][1], b.bras[i][1], t)];
     }
@@ -128,10 +130,6 @@
     return p;
   }
 
-  /* ---------- Les quatre gestes ----------
-     Chaque geste reçoit le temps écoulé à son poste et la pose à
-     remplir ; il y range aussi l'état des accessoires (p.outil). */
-
   function distance(a, b) { return Math.sqrt((b[0] - a[0]) * (b[0] - a[0]) + (b[1] - a[1]) * (b[1] - a[1])); }
 
   /* Un point qui tourne autour de l'épaule, de a vers b, par le haut. */
@@ -143,33 +141,35 @@
     return [centre[0] + rayon * Math.cos(angle), centre[1] + rayon * Math.sin(angle)];
   }
 
+  /* ---------- Les quatre gestes ----------
+     Chaque geste reçoit son avancement (en ms de geste) et la pose à
+     remplir ; il y range aussi l'état des accessoires (p.outil). */
   var METIERS = {
 
     /* Le charpentier : le marteau décrit un arc au-dessus de la tête,
        retombe sur le clou, qui s'enfonce un peu à chaque coup. Le
-       marteau prolonge l'avant-bras : la tête est à 25 du coude. */
+       marteau prolonge l'avant-bras : sa tête est à 26,5 du coude. */
     marteau: {
-      duree: 5400, fin: 0,
+      duree: 4200, fin: 0, demiTour: true,
       travail: function (t, p) {
         p.torse = 10; p.y = 0.5;
         p.pieds = [[9, 0], [-8, 0]];
-        viser(p, 1, [16, -31]);
+        viser(p, 1, [16, -32]);
         var periode = 700, u = (t % periode) / periode;
         var coups = Math.floor(t / periode) + (u >= 0.72 ? 1 : 0);
-        var enfonce = Math.min(6, coups * 1.1);
-        var e = epaule(p), leve = [-16, -86], clou = [27, -40 + enfonce], k, cible;
+        var enfonce = Math.min(6, coups * 1.2);
+        var e = epaule(p), leve = [-26, -80], clou = [27, -42 + enfonce], k, cible;
         if (u < 0.56) { k = 1 - lisse(u / 0.56); }
         else if (u < 0.72) { k = (u - 0.56) / 0.16; k *= k; }
         else { k = 1; }
         cible = arc(e, leve, clou, k);
-        var a = articuler(e[0], e[1], cible[0], cible[1], 14, 25, -1);
+        var a = articuler(e[0], e[1], cible[0], cible[1], 14, 26.5, -1);
         p.bras[0] = [a[0] - p.torse, a[1]];
         p.outil.clou = enfonce;
         p.outil.impact = u >= 0.72 && u < 0.9 ? 1 - (u - 0.72) / 0.18 : 0;
       },
-      decor: function (o, etat, fondu) {
-        o.acc.clou.setAttribute("transform", "translate(0 " + n(etat.clou) + ")");
-        o.acc.clou.setAttribute("opacity", n(fondu));
+      decor: function (o, etat) {
+        o.acc.clou.setAttribute("transform", "translate(0 " + n(etat.clou || 0) + ")");
         o.acc.impact.setAttribute("opacity", n(etat.impact || 0));
       },
       depart: { clou: 0, impact: 0 },
@@ -186,20 +186,19 @@
         p.x = i === 0 ? 0 : 16 * (i - 1) + 16 * lisse(u / 0.2);
         p.y = 18.4; p.torse = 58;
         p.jambes = [[8, 82], [14, 76]];
-        p.chevilles = [90, 90];
-        var poitrine = [p.x + 14, -24], sol = [p.x + 24, -4], k;
+        var poitrine = [p.x + 14, -26], sol = [p.x + 24, -7.5], k;
         if (u < 0.2) { k = 0; }
         else if (u < 0.5) { k = lisse((u - 0.2) / 0.3); }
         else if (u < 0.62) { k = 1; }
         else { k = 1 - lisse((u - 0.62) / 0.3); }
-        viser(p, 0, [mix(poitrine[0], sol[0], k), mix(poitrine[1], sol[1], k) + (u > 0.5 && u < 0.62 ? 0.8 : 0)]);
-        viser(p, 1, [p.x + 16, -6]);
+        viser(p, 0, [mix(poitrine[0], sol[0], k), mix(poitrine[1], sol[1], k)]);
+        viser(p, 1, [p.x + 16, -8]);
         p.outil.poses = i + (u >= 0.5 ? 1 : 0);
         p.outil.enMain = u < 0.5 || u > 0.9 && i < 2 ? 1 : 0;
       },
-      decor: function (o, etat, fondu, pose) {
+      decor: function (o, etat, pose) {
         for (var i = 0; i < 3; i++) {
-          o.acc["carreau-" + i].setAttribute("opacity", i < (etat.poses || 0) ? n(fondu) : 0);
+          o.acc["carreau-" + i].setAttribute("opacity", i < (etat.poses || 0) ? 1 : 0);
         }
         /* Le carreau reste à plat dans la main, quel que soit le bras. */
         var penche = pose.torse + pose.bras[0][0] + pose.bras[0][1];
@@ -212,21 +211,21 @@
 
     /* L'électricien : il visse l'ampoule, qui grésille puis s'allume. */
     ampoule: {
-      duree: 5600, fin: 0,
+      duree: 5000, fin: 0,
       travail: function (t, p) {
         p.torse = 4; p.y = 0.3;
         p.pieds = [[6, 0], [-6, 0]];
-        var allumage = 3100, vis = t < allumage ? Math.sin(t / 130) : 0;
-        viser(p, 0, [19 + 1.2 * vis, -77.8]);
+        var allumage = 2800, vis = t < allumage ? Math.sin(t / 130) : 0;
+        viser(p, 0, [19 + 1.2 * vis, -74]);
         p.bras[1] = [12, -20];
         p.outil.tourne = 8 * vis;
         var d = t - allumage;
         p.outil.lumiere = d < 0 ? 0 : (d < 90 ? 1 : (d < 180 ? 0.15 : (d < 300 ? 1 : (d < 380 ? 0.4 : 1))));
       },
-      decor: function (o, etat, fondu) {
-        o.acc.ampoule.setAttribute("transform", "rotate(" + n(etat.tourne || 0) + " 20 -90)");
-        o.acc.halo.setAttribute("opacity", n((etat.lumiere || 0) * fondu));
-        o.acc.verre.classList.toggle("est-allume", (etat.lumiere || 0) * fondu > 0.5);
+      decor: function (o, etat) {
+        o.acc.ampoule.setAttribute("transform", "rotate(" + n(etat.tourne || 0) + " 20 -91)");
+        o.acc.halo.setAttribute("opacity", n(etat.lumiere || 0));
+        o.acc.verre.classList.toggle("est-allume", (etat.lumiere || 0) > 0.5);
       },
       depart: { tourne: 0, lumiere: 0 },
       arrivee: function (e) { return { tourne: 0, lumiere: e.lumiere }; }
@@ -235,9 +234,9 @@
     /* Le peintre : il longe le mur, le rouleau monte et descend, la
        couleur suit le rouleau. */
     peinture: {
-      duree: 6800, fin: 64,
+      duree: 6000, fin: 64,
       travail: function (t, p) {
-        p.x = mix(0, 64, t / 6800);
+        p.x = mix(0, 64, t / 6000);
         marcher(p, p.x / (2 * PAS));
         p.y = Math.min(p.y, 0.8); p.torse = 5;
         var rx = p.x + 20, ry = -60 + 14 * Math.sin(t / 1000 * 2 * Math.PI);
@@ -250,66 +249,58 @@
         /* En marchant, il tient le rouleau levé devant lui. */
         p.bras[0] = [-40, -60];
         var m = main(p, 0);
-        p.outil.rouleau = [m[0] + 6, m[1] - 10];
+        p.outil.rouleau = [m[0] + 6, m[1] - 12];
       },
-      decor: function (o, etat, fondu, pose) {
-        var m = main(pose, 0), r = pose.outil.rouleau || [m[0] + 6, m[1] - 10];
+      decor: function (o, etat, pose) {
+        var m = main(pose, 0), r = pose.outil.rouleau || [m[0] + 6, m[1] - 12];
         o.acc.perche.setAttribute("x1", n(m[0])); o.acc.perche.setAttribute("y1", n(m[1]));
-        o.acc.perche.setAttribute("x2", n(r[0])); o.acc.perche.setAttribute("y2", n(r[1] + 6));
+        o.acc.perche.setAttribute("x2", n(r[0])); o.acc.perche.setAttribute("y2", n(r[1] + 8));
         o.acc.perche.setAttribute("opacity", n(pose.opacite));
-        o.acc.rouleau.setAttribute("x", n(r[0] - 2)); o.acc.rouleau.setAttribute("y", n(r[1] - 6));
+        o.acc.rouleau.setAttribute("x", n(r[0] - 3)); o.acc.rouleau.setAttribute("y", n(r[1] - 8));
         o.acc.rouleau.setAttribute("opacity", n(pose.opacite));
         o.acc.peinture.setAttribute("width", n(etat.peinture || 0));
-        o.acc.peinture.setAttribute("opacity", n(fondu));
       },
       depart: { peinture: 0 },
       arrivee: function (e) { return { peinture: e.peinture }; }
     }
   };
 
-  /* Largeur occupée par chaque poste à droite de sa place (unités) :
-     de quoi faire marcher chacun sans traverser son voisin. */
-  var EMPRISE = { marteau: 56, sol: 66, ampoule: 28, peinture: 86 };
-  var AVANCEMENT = { marteau: 0.318, sol: 0.5, ampoule: 0.7, peinture: 0.45 };
+  /* Avancement du geste montré par le dessin immobile (outils/equipe.py). */
+  var AVANCEMENT = { marteau: 0.458, sol: 0.5, ampoule: 0.7, peinture: 0.45 };
 
-  function Ouvrier(svg) {
-    this.svg = svg;
-    this.metier = svg.getAttribute("data-metier");
+  function Ouvrier(scene) {
+    this.scene = scene;
+    this.svg = scene.querySelector("svg[data-metier]");
+    this.poste = this.svg.parentNode;
+    this.metier = this.svg.getAttribute("data-metier");
     this.m = METIERS[this.metier];
     this.os = {};
     this.acc = {};
     var self = this;
-    Array.prototype.forEach.call(svg.querySelectorAll("[data-os]"), function (el) {
+    Array.prototype.forEach.call(this.svg.querySelectorAll("[data-os]"), function (el) {
       self.os[el.getAttribute("data-os")] = el;
     });
-    Array.prototype.forEach.call(svg.querySelectorAll("[data-accessoire]"), function (el) {
+    Array.prototype.forEach.call(this.svg.querySelectorAll("[data-accessoire]"), function (el) {
       self.acc[el.getAttribute("data-accessoire")] = el;
     });
-    this.entree = this.sortie = 100;
-    this.temps = 0;
+    this.fini = this.m.arrivee(this.geste(this.m.duree).outil);
+    this.cible = this.montre = -1;
+    this.entree = this.sortie = 120;
   }
 
-  Ouvrier.prototype.regler = function (arrivee, depart) {
-    this.entree = arrivee;
-    this.sortie = depart;
-    this.dEntree = arrivee / VITESSE;
-    this.dSortie = depart / VITESSE;
-    this.cycle = this.dEntree + this.m.duree + this.dSortie + REPOS;
-    this.fini = this.m.arrivee(this.geste(this.m.duree).outil);
-    /* Au premier affichage, chacun est déjà au milieu de sa tâche :
-       c'est aussi la pose du dessin immobile. */
-    if (!this.pret) { this.temps = this.dEntree + this.m.duree * AVANCEMENT[this.metier]; }
-    this.temps %= this.cycle;
-    this.pret = true;
-  };
-
-  Ouvrier.prototype.marche = function (t, x0, apparition) {
-    var p = poseDebout();
-    marcher(p, t / CADENCE);
-    p.x = x0 + VITESSE * t;
-    if (this.m.porte) { this.m.porte(p); }
-    p.opacite = apparition;
-    return p;
+  /* Distances de marche : de hors champ jusqu'au poste, puis au-delà.
+     Le sens de la marche (vers la droite ou la gauche) est donné par
+     le dessin retourné (CSS) : le calcul, lui, va toujours vers la
+     droite. */
+  Ouvrier.prototype.mesurer = function () {
+    var largeur = this.scene.clientWidth;
+    var echelle = parseFloat(getComputedStyle(this.scene).getPropertyValue("--e")) || 1;
+    var place = parseFloat(this.poste.style.getPropertyValue("--place")) / 100;
+    var gauche = this.scene.classList.contains("ouvrier--gauche");
+    var avant = (gauche ? 1 - place : place) * largeur / echelle;
+    var apres = (gauche ? place : 1 - place) * largeur / echelle;
+    this.entree = Math.max(60, Math.min(260, avant + 30));
+    this.sortie = Math.max(60, Math.min(260, apres - this.m.fin + 30));
   };
 
   Ouvrier.prototype.geste = function (t) {
@@ -318,139 +309,138 @@
     return p;
   };
 
-  Ouvrier.prototype.pose = function (t) {
-    var m = this.m, e = this.dEntree, w = m.duree, s = this.dSortie, p, a, b;
-    if (t < e) {
-      p = this.marche(t, -this.entree, lisse(t / (e * FONDU)));
-      return { pose: p, etat: m.depart, fondu: 1 };
+  /* La marche à la position x (depuis le poste) : l'enjambée suit la
+     distance parcourue, le pied d'appui ne glisse pas. */
+  Ouvrier.prototype.marche = function (x, depart) {
+    var p = poseDebout();
+    marcher(p, (x - depart) / (2 * PAS));
+    p.x = x;
+    if (this.m.porte) { this.m.porte(p); }
+    return p;
+  };
+
+  /* L'instant qui correspond à un avancement du défilement (0 à 1). */
+  Ouvrier.prototype.instant = function (q) {
+    var m = this.m, p, k, a, b;
+    if (q < TRAVAIL) {
+      k = borne((q - ENTREE) / (TRAVAIL - ENTREE));
+      p = this.marche(-this.entree * (1 - k), -this.entree);
+      p.opacite = lisse(k / 0.25);
+      return { pose: p, etat: m.depart };
     }
-    t -= e;
-    if (t < w) {
-      p = this.geste(t);
-      if (t < TRANSITION) {
-        a = this.marche(e, -this.entree, 1);
-        p = melanger(a, p, lisse(t / TRANSITION));
-      } else if (t > w - TRANSITION) {
-        b = this.marche(0, m.fin, 1);
-        p = melanger(p, b, lisse((t - w + TRANSITION) / TRANSITION));
+    if (q < SORTIE) {
+      k = (q - TRAVAIL) / (SORTIE - TRAVAIL);
+      p = this.geste(k * m.duree);
+      if (q < TRAVAIL + FONDU) {
+        a = this.marche(0, -this.entree);
+        p = melanger(a, p, lisse((q - TRAVAIL) / FONDU));
+      } else if (q > SORTIE - FONDU) {
+        b = this.marche(m.fin, m.fin);
+        p = melanger(p, b, lisse((q - SORTIE + FONDU) / FONDU));
       }
-      return { pose: p, etat: p.outil, fondu: 1 };
+      return { pose: p, etat: p.outil };
     }
-    t -= w;
-    var fini = this.fini;
-    if (t < s) {
-      p = this.marche(t, m.fin, 1 - lisse((t - s * (1 - FONDU)) / (s * FONDU)));
-      return { pose: p, etat: fini, fondu: 1 };
+    k = borne((q - SORTIE) / (FIN - SORTIE));
+    if (m.demiTour) {
+      /* Demi-tour : il repart par où il est venu. */
+      var retour = this.entree + m.fin;
+      p = this.marche(m.fin + retour * k, m.fin);
+      p.x = m.fin - retour * k;
+      p.demiTour = true;
+    } else {
+      p = this.marche(m.fin + this.sortie * k, m.fin);
     }
-    /* Poste vide : l'ouvrage s'efface, le poste se remet à zéro. */
-    t -= s;
-    p = this.marche(0, m.fin + this.sortie, 0);
-    return t < REPOS / 2 ? { pose: p, etat: fini, fondu: 1 - lisse(t / (REPOS / 2)) }
-                         : { pose: p, etat: m.depart, fondu: lisse((t - REPOS / 2) / (REPOS / 2)) };
+    p.opacite = 1 - lisse((k - 0.75) / 0.25);
+    return { pose: p, etat: this.fini };
   };
 
   Ouvrier.prototype.dessiner = function (instant) {
     var os = this.os, p = instant.pose;
     function rot(el, angle, y) { el.setAttribute("transform", "rotate(" + n(angle) + " 0 " + y + ")"); }
-    os.marcheur.setAttribute("transform", "translate(" + n(p.x) + " 0)");
+    os.marcheur.setAttribute("transform", "translate(" + n(p.x) + " 0)" + (p.demiTour ? " scale(-1 1)" : ""));
     os.marcheur.setAttribute("opacity", n(p.opacite));
     os.bassin.setAttribute("transform", "translate(0 " + n(p.y) + ")");
-    var j = jambes(p), av = j[0], arr = j[1];
-    rot(os["cuisse-av"], av[0], -36); rot(os["tibia-av"], av[1], -18);
-    rot(os["cuisse-arr"], arr[0], -36); rot(os["tibia-arr"], arr[1], -18);
-    rot(os["pied-av"], p.chevilles[0], 0); rot(os["pied-arr"], p.chevilles[1], 0);
+    var j = jambes(p);
+    rot(os["cuisse-av"], j[0][0], -36); rot(os["tibia-av"], j[0][1], -18);
+    rot(os["cuisse-arr"], j[1][0], -36); rot(os["tibia-arr"], j[1][1], -18);
     rot(os.torse, p.torse, -36);
     rot(os["bras-av"], p.bras[0][0], -60); rot(os["avant-bras-av"], p.bras[0][1], -46);
     rot(os["bras-arr"], p.bras[1][0], -60); rot(os["avant-bras-arr"], p.bras[1][1], -46);
-    this.m.decor(this, instant.etat, instant.fondu, p);
+    this.m.decor(this, instant.etat, p);
   };
 
+  /* Avancement visé : 0 quand le sol de l'ouvrier entre par le bas de
+     l'écran, 1 quand il sort par le haut. */
+  Ouvrier.prototype.viser = function (hauteur) {
+    var sol = this.scene.getBoundingClientRect().bottom;
+    this.cible = borne((hauteur - sol) / hauteur);
+  };
+
+  /* Rapproche l'avancement montré de l'avancement visé ; vrai tant
+     qu'il reste du chemin. */
   Ouvrier.prototype.avancer = function (dt) {
-    this.temps = (this.temps + dt) % this.cycle;
-    this.dessiner(this.pose(this.temps));
+    if (this.montre < 0) { this.montre = this.cible; }
+    var ecart = this.cible - this.montre;
+    this.montre = Math.abs(ecart) < 0.0005 ? this.cible : this.montre + ecart * (1 - Math.exp(-dt / AMORTI));
+    this.dessiner(this.instant(this.montre));
+    return this.montre !== this.cible;
   };
 
-  var ouvriers = Array.prototype.map.call(frise.querySelectorAll("[data-metier]"), function (svg) {
-    return new Ouvrier(svg);
-  });
-
-  /* Les distances de marche suivent la largeur de la frise. */
-  function mesurer() {
-    var largeur = frise.clientWidth;
-    var echelle = parseFloat(getComputedStyle(frise).getPropertyValue("--e")) || 1;
-    var places = ouvriers.map(function (o) {
-      return parseFloat(o.svg.parentNode.style.getPropertyValue("--place")) / 100 * largeur;
-    });
-    ouvriers.forEach(function (o, i) {
-      var gauche = i === 0 ? places[0] / echelle + 30
-        : (places[i] - places[i - 1]) / echelle - EMPRISE[ouvriers[i - 1].metier] - 14;
-      var droite = i === ouvriers.length - 1
-        ? (largeur - places[i]) / echelle - o.m.fin + 30
-        : (places[i + 1] - places[i]) / echelle - o.m.fin - 26;
-      o.regler(Math.max(24, Math.min(150, gauche)), Math.max(24, Math.min(150, droite)));
-    });
-  }
-
-  /* ---------- Horloge : pause, hors écran, onglet caché ---------- */
-  var enPause = false, visible = true, requete = 0, precedent = 0;
-
-  function actif() { return !enPause && visible && !document.hidden && !mouvementReduit.matches; }
+  var ouvriers = Array.prototype.map.call(scenes, function (scene) { return new Ouvrier(scene); });
+  var visibles = ouvriers.slice();
+  var requete = 0, precedent = 0;
 
   function image(maintenant) {
     requete = 0;
     var dt = precedent ? Math.min(64, maintenant - precedent) : 16;
     precedent = maintenant;
-    ouvriers.forEach(function (o) { o.avancer(dt); });
-    if (actif()) { requete = window.requestAnimationFrame(image); }
+    var hauteur = window.innerHeight, encore = false;
+    visibles.forEach(function (o) {
+      o.viser(hauteur);
+      if (o.avancer(dt)) { encore = true; }
+    });
+    if (encore) { requete = window.requestAnimationFrame(image); } else { precedent = 0; }
   }
 
-  function relancer() {
-    if (actif() && !requete) { precedent = 0; requete = window.requestAnimationFrame(image); }
+  function demander() {
+    if (!requete && !mouvementReduit.matches) { requete = window.requestAnimationFrame(image); }
   }
 
-  function arreter() {
-    if (requete) { window.cancelAnimationFrame(requete); requete = 0; }
+  function mesurer() {
+    ouvriers.forEach(function (o) { o.mesurer(); });
+    demander();
   }
 
-  function basculer() { if (actif()) { relancer(); } else { arreter(); } }
-
-  mesurer();
-
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entrees) {
-      visible = entrees[entrees.length - 1].isIntersecting;
-      basculer();
-    }).observe(frise);
-  }
-  document.addEventListener("visibilitychange", basculer);
-
-  var attente = 0;
-  window.addEventListener("resize", function () {
-    window.clearTimeout(attente);
-    attente = window.setTimeout(mesurer, 150);
-  });
-
-  if (bouton) {
-    bouton.addEventListener("click", function () {
-      enPause = !enPause;
-      bouton.setAttribute("aria-pressed", enPause ? "true" : "false");
-      basculer();
+  function demarrer() {
+    mesurer();
+    if (mouvementReduit.matches) {
+      /* Une seule image, chacun au milieu de sa tâche : c'est aussi le
+         dessin immobile écrit par outils/equipe.py. */
+      ouvriers.forEach(function (o) {
+        o.dessiner(o.instant(TRAVAIL + AVANCEMENT[o.metier] * (SORTIE - TRAVAIL)));
+      });
+      return;
+    }
+    /* Seuls les ouvriers proches de l'écran sont recalculés. */
+    if ("IntersectionObserver" in window) {
+      var observateur = new IntersectionObserver(function (entrees) {
+        entrees.forEach(function (e) {
+          var o = ouvriers.filter(function (x) { return x.scene === e.target; })[0];
+          var i = visibles.indexOf(o);
+          if (e.isIntersecting && i < 0) { visibles.push(o); }
+          if (!e.isIntersecting && i >= 0) { visibles.splice(i, 1); }
+        });
+        demander();
+      }, { rootMargin: "25% 0px" });
+      ouvriers.forEach(function (o) { observateur.observe(o.scene); });
+    }
+    window.addEventListener("scroll", demander, { passive: true });
+    var attente = 0;
+    window.addEventListener("resize", function () {
+      window.clearTimeout(attente);
+      attente = window.setTimeout(mesurer, 150);
     });
   }
 
-  function preference() {
-    if (bouton) { bouton.hidden = mouvementReduit.matches; }
-    if (mouvementReduit.matches) {
-      arreter();
-      /* Une seule image : chacun au milieu de sa tâche. */
-      ouvriers.forEach(function (o) {
-        o.temps = o.dEntree + o.m.duree * AVANCEMENT[o.metier];
-        o.dessiner(o.pose(o.temps));
-      });
-    } else {
-      basculer();
-    }
-  }
-  if (mouvementReduit.addEventListener) { mouvementReduit.addEventListener("change", preference); }
-  preference();
+  demarrer();
 })();

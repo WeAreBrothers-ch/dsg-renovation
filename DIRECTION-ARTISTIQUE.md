@@ -252,7 +252,6 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 1. **Couverture** — dans la marge, le slogan « Du sol au plafond, tout en maîtrise. ». À droite : le h1
    « Entreprise de rénovation à Lausanne » (Archivo 500, jusqu'à 84 px), le chapô en sérif, les deux boutons
    empilés et trois garanties (visite et devis gratuits, devis 72 h après la visite, sans engagement).
-   Dessous, **la frise de l'équipe** : quatre ouvriers au trait qui arrivent, travaillent et repartent (§ 8).
 2. **L'ouverture** — le comparateur avant / après arrive **cadré dans la colonne de la page**, ses angles marqués
    de repères, visible dès le premier écran, l'état avant travaux à gauche. En descendant, deux rideaux couleur
    du fond s'écartent et l'image
@@ -284,7 +283,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
-| Frise de l'équipe (accueil) | attributs `transform` du dessin SVG, image par image | boucle de 12 à 16 s par ouvrier |
+| Ouvriers de l'accueil | attributs `transform` du dessin SVG, image par image | liés au défilement, amorti de 110 ms |
 
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
@@ -293,13 +292,15 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 %.
 - Aucune librairie d'animation ni de défilement.
-- **La frise de l'équipe** est la seule animation qui dure : quatre ouvriers dessinés au trait, sur une ligne
-  de sol marquée de deux repères, sous la couverture de l'accueil. Un charpentier cloue une planche, un poseur
-  pose trois carreaux à genoux, un électricien visse une ampoule qui s'allume, un peintre passe un mur au
-  rouleau ; chacun arrive en marchant, travaille, repart, et son ouvrage s'efface avant son retour. Décor seul
-  (`aria-hidden`), bouton pause sous la ligne de sol (WCAG 2.2.2), arrêt hors écran et onglet caché. Mouvement
-  réduit ou sans JavaScript : l'illustration immobile, chacun au milieu de sa tâche. Traits d'encre, casques,
-  carreaux et peinture en `--c-aplat`, outils en `--c-accent`.
+- **Les ouvriers de l'accueil** : quatre silhouettes pleines (grosse tête ronde, membres épais aux bouts
+  arrondis, sans casque), chacune seule dans le bas d'une section, sur la limite avec la suivante qui lui sert
+  de sol : le peintre dans la bande de l'entreprise, le poseur de sol sous les prestations, l'électricien sous
+  la zone, le charpentier sous le déroulé. Un sur deux vient de la droite. Le défilement les fait vivre : à
+  mesure que sa section monte, l'ouvrier arrive en marchant (ses pieds avancent de la distance parcourue),
+  travaille, puis repart ; remonter le fait revenir sur ses pas. Rien ne bouge sans défilement. Décor seul
+  (`aria-hidden`) ; mouvement réduit ou sans JavaScript : chacun saisi au milieu de sa tâche. Silhouette à
+  l'encre du fond (claire sur la bande sombre), carreaux, peinture et ampoule en `--c-aplat`, outils en
+  `--c-accent`.
 
 ---
 

@@ -1,84 +1,58 @@
 /* ============================================================
-   DSG RÉNOVATION — 12 · L'ÉQUIPE AU TRAVAIL
-   La frise de l'accueil : quatre ouvriers dessinés au trait, sur une
-   ligne de sol marquée d'un repère à chaque bout. Le dessin vient de
-   outils/equipe.py, le mouvement de assets/js/equipe.js.
+   DSG RÉNOVATION — 12 · LES OUVRIERS DE L'ACCUEIL
+   Quatre silhouettes pleines, chacune dans le bas d'une section : la
+   limite avec la section suivante leur sert de sol. Le dessin vient de
+   outils/equipe.py ; le défilement les fait marcher et travailler
+   (assets/js/equipe.js).
 
-   Chaque poste est un petit SVG posé à sa place dans la largeur ; le
-   dessin garde la même taille quelle que soit la largeur de l'écran
-   (--e), seuls les écarts entre les postes changent.
+   Elles prennent l'encre du fond où elles se trouvent : sombres sur
+   le clair, claires sur la bande sombre. Le dessin garde la même
+   taille à l'intérieur d'une plage d'écrans (--e) et ne déborde pas
+   du bas de la section, qu'il n'occupe que dans sa marge.
    ============================================================ */
-.equipe-cadre{padding-bottom:56px}
-.couverture__grille:has(+ .equipe-cadre){padding-bottom:var(--sp-4)}
+.section:has(> .ouvrier){position:relative}
 
-.equipe{
+.ouvrier{
   --e:1.1;
-  position:relative;height:calc(132px * var(--e));
-  overflow:hidden;
+  position:absolute;left:0;right:0;bottom:0;height:var(--sec-y);
+  overflow-x:clip;pointer-events:none;
 }
-@media (max-width:1023px){.equipe{--e:.82}}
-@media (max-width:639px){.equipe{--e:.64}}
+@media (min-width:1440px){.ouvrier{--e:1.2}}
+@media (max-width:1279px){.ouvrier{--e:.88}}
+@media (max-width:1023px){.ouvrier{--e:.72}}
+@media (max-width:639px){.ouvrier{--e:.58}}
 
-/* La ligne de sol, et un repère carré à chaque bout. */
-.equipe::before,.equipe::after{
-  content:"";position:absolute;left:0;right:0;bottom:calc(4px * var(--e));
-}
-.equipe::before{border-top:1px solid var(--c-cadre)}
-.equipe::after{
-  height:var(--repere);margin-bottom:calc(var(--repere) / -2 + .5px);
-  background:
-    linear-gradient(var(--c-repere),var(--c-repere)) left center/var(--repere) 100% no-repeat,
-    linear-gradient(var(--c-repere),var(--c-repere)) right center/var(--repere) 100% no-repeat;
-}
-
-.equipe__poste{
+.ouvrier__zone{height:100%}
+.ouvrier__poste{
   position:absolute;bottom:0;left:var(--place);
   width:calc(120px * var(--e));height:calc(132px * var(--e));
   margin-left:calc(-40px * var(--e));
 }
+/* Un ouvrier sur deux marche vers la gauche : son dessin est retourné
+   autour de son poste. */
+.ouvrier--gauche .equipe__dessin{
+  transform:scaleX(-1);transform-origin:calc(40px * var(--e)) 50%;
+}
+
 .equipe__dessin{
   display:block;width:100%;height:100%;overflow:visible;
-  fill:none;stroke:var(--c-encre);stroke-width:2.4;
-  stroke-linecap:round;stroke-linejoin:round;
+  fill:none;stroke:var(--c-encre);stroke-linecap:round;stroke-linejoin:round;
 }
-/* La tête cache ce qui passe derrière elle (un bras levé). */
-.equipe__dessin circle{fill:var(--c-papier)}
-.equipe__casque{fill:var(--c-aplat);stroke-width:1.6}
+/* La silhouette : membres épais aux bouts arrondis, tête pleine. */
+.equipe__corps{stroke-width:7}
+.equipe__corps circle{fill:var(--c-encre);stroke:none}
 
-/* Les accessoires : trait plus fin, et plus clair pour le décor. */
-.equipe__decor{stroke:var(--c-encre-40);stroke-width:1.6}
-.equipe__decor rect{fill:var(--c-papier)}
-.equipe__outil{stroke-width:1.8}
-.equipe__outil rect{fill:var(--c-accent);stroke:var(--c-accent)}
-.equipe__clou{stroke-width:1.6}
-.equipe__impact,.equipe__halo{stroke:var(--c-accent);stroke-width:1.6}
-.equipe__carreau{fill:var(--c-aplat);stroke-width:1.2}
-.equipe__ampoule{stroke-width:1.6}
+/* Les accessoires, plus fins que le corps. */
+.equipe__outil line{stroke:var(--c-accent);stroke-width:3.5}
+.equipe__outil rect{fill:var(--c-accent);stroke:none}
+.equipe__decor{stroke:var(--c-encre-40);stroke-width:3}
+.equipe__decor rect{fill:var(--c-encre-40);stroke:none}
+.equipe__clou{stroke-width:2.5}
+.equipe__impact,.equipe__halo{stroke:var(--c-accent);stroke-width:3}
+.equipe__carreau{fill:var(--c-aplat);stroke-width:1.5}
+.equipe__ampoule{fill:var(--c-papier);stroke-width:2.5}
 .equipe__ampoule.est-allume{fill:var(--c-aplat)}
-.equipe__mur{stroke:var(--c-encre-40);stroke-width:1.2}
+.equipe__mur{stroke:var(--c-encre-40);stroke-width:2}
 .equipe__peinture{fill:var(--c-aplat);stroke:none}
-.equipe__perche{stroke-width:1.8}
+.equipe__perche{stroke-width:3}
 .equipe__rouleau{fill:var(--c-accent);stroke:none}
-
-/* Pause : obligatoire pour une animation qui dure (WCAG 2.2.2). Le
-   bouton n'apparaît que si l'animation tourne (equipe.js) ; il se
-   range sous la ligne de sol, à droite, hors du dessin. */
-.equipe__pause{
-  position:absolute;bottom:12px;right:var(--grille-marge);
-  width:32px;height:32px;display:grid;place-items:center;
-  color:var(--c-encre-60);background:var(--c-papier);
-  box-shadow:inset 0 0 0 1px var(--c-ligne-forte);
-  transition:color var(--d-rapide) var(--e-standard),box-shadow var(--d-rapide) var(--e-standard);
-}
-.equipe__pause::before{
-  content:"";width:9px;height:11px;
-  border-inline:3px solid currentColor;
-}
-.equipe__pause[aria-pressed="true"]::before{
-  width:0;height:0;border-inline:0;
-  border-left:10px solid currentColor;border-block:6px solid transparent;
-  margin-left:3px;
-}
-@media (hover:hover) and (pointer:fine){
-  .equipe__pause:hover{color:var(--c-encre);box-shadow:inset 0 0 0 1px var(--c-cadre)}
-}

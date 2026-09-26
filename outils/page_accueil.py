@@ -7,7 +7,6 @@ concurrencent dans les résultats de recherche au lieu de s'additionner.
 
 import briques
 import confiance
-import equipe
 from donnees_site import COMMUNES
 from ouverture import ouverture
 from pages_site import fragment
@@ -47,7 +46,7 @@ def accueil(services, base=""):
         </ul>
       </div>
     </div>
-{equipe.frise()}
+
 {ouverture(fragment('comparateur'), LEGENDE_COMPARATEUR)}
 
     <div class="zone couverture__cartouche">
