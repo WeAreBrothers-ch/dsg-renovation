@@ -251,6 +251,13 @@
   .sommaire{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
 }
 .sommaire.est-anime{transition:transform var(--d-normal) var(--e-sortie)}
+/* Le fil de lecture : sous la rangée, un trait de brique s'allonge à
+   mesure qu'on avance dans la page (nav.js). Il s'étire, il ne pousse
+   rien. */
+.sommaire::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:var(--c-accent);transform-origin:0 50%;transform:scaleX(var(--lu,0));
+}
 .sommaire__liste{
   position:relative;display:flex;overflow-x:auto;scrollbar-width:none;
   padding:var(--sp-2) var(--grille-marge);scroll-padding-inline:var(--grille-marge);

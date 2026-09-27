@@ -16,19 +16,19 @@
   padding-block:var(--sp-7) 0;
 }
 .caution__titre{grid-column:1/-1;font-weight:500;color:var(--c-encre)}
-/* Au téléphone, quatre logos par rangée : deux rangées au lieu de trois. */
+/* Au téléphone, trois logos par rangée, à une taille où on les lit. */
 .caution .partenaires__grille{
   grid-column:1/-1;
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;justify-items:start;
   gap:var(--sp-3) var(--sp-4);
 }
 .caution .partenaires__grille li{height:40px}
-.caution .partenaires__grille img{max-height:24px;max-width:72px}
-.caution .partenaires__carre img{width:72px;height:24px;max-height:none}
+.caution .partenaires__grille img{max-height:26px;max-width:100%}
+.caution .partenaires__carre img{width:96px;height:26px;max-height:none}
 @media (min-width:480px){
-  .caution .partenaires__grille{gap:var(--sp-3) var(--sp-5)}
-  .caution .partenaires__grille img{max-width:96px}
-  .caution .partenaires__carre img{width:96px}
+  .caution .partenaires__grille{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:var(--sp-3) var(--sp-5)}
+  .caution .partenaires__grille img{max-height:24px;max-width:96px}
+  .caution .partenaires__carre img{height:24px}
 }
 .caution__lien{
   grid-column:1/-1;justify-self:start;

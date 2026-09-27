@@ -125,12 +125,17 @@
   });
 
   /* ---------- Barre mobile ----------
-     Elle n'apparaît qu'une fois la couverture passée : en haut de page,
-     les boutons de la couverture font déjà ce travail. Elle s'efface
+     À l'accueil, elle n'apparaît qu'une fois la couverture passée : en
+     haut de page, le bouton de la couverture fait déjà ce travail. Sur
+     les pages intérieures, au téléphone, elle est là dès l'arrivée, à
+     la place du bouton d'en-tête (14-document.css). Elle s'efface
      pendant qu'on remplit un champ : elle masquerait ce qu'on écrit. */
+  var couverture = document.querySelector(".couverture");
+  var appelEnTete = window.matchMedia("(min-width: 768px)");
   function mettreAJourBarre() {
     if (!barreMobile) { return; }
-    var visible = window.scrollY > 480 && !saisieEnCours;
+    var desLArrivee = !couverture && !appelEnTete.matches;
+    var visible = (desLArrivee || window.scrollY > 480) && !saisieEnCours;
     barreMobile.setAttribute("data-visible", visible ? "true" : "false");
   }
 
@@ -264,12 +269,20 @@
     }
   }
 
+  /* Le fil de lecture, sous la rangée : la part de la page déjà lue. */
+  function mesurerLecture() {
+    var course = document.documentElement.scrollHeight - window.innerHeight;
+    var lu = course > 0 ? Math.min(1, Math.max(0, window.scrollY / course)) : 0;
+    sommaire.style.setProperty("--lu", lu.toFixed(4));
+  }
+
   function auDefilement() {
     mettreAJourBarre();
     mettreAJourEntete();
     if (sommaire) {
       placerSommaire();
       marquerSection();
+      mesurerLecture();
     }
     enAttente = false;
   }

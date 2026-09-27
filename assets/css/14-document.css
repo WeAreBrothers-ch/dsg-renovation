@@ -8,12 +8,28 @@
    EN-TÊTE DE PAGE
    La même composition que la couverture de l'accueil : le chemin
    et la nature de la page dans la marge, le titre en grand dans la
-   colonne de droite.
+   colonne de droite. Au téléphone, l'en-tête se resserre : le contenu
+   de la page arrive dans le premier écran.
    ------------------------------------------------------------ */
-.piece{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+.piece{padding-top:calc(var(--h-entete) + var(--sp-5))}
 .piece__entete{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
-  gap:var(--sp-5) var(--grille-goutt);padding-bottom:var(--sp-8);
+  gap:var(--sp-4) var(--grille-goutt);padding-bottom:var(--sp-6);
+}
+@media (min-width:768px){
+  .piece{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+  .piece__entete{gap:var(--sp-5) var(--grille-goutt);padding-bottom:var(--sp-8)}
+}
+/* Une page de prestation s'ouvre, au téléphone, sur la photo de son
+   métier, juste sous l'en-tête : on voit de quoi il s'agit avant de
+   lire. L'ordre ne change qu'à l'œil ; le document garde le sien. */
+main:has(>.ouverture--tirage){display:flex;flex-direction:column}
+main:has(>.ouverture--tirage)>.ouverture--tirage{order:-1;margin-top:var(--h-entete)}
+main:has(>.ouverture--tirage)>.piece{padding-top:var(--sp-5)}
+@media (min-width:768px){
+  main:has(>.ouverture--tirage){display:block}
+  main:has(>.ouverture--tirage)>.ouverture--tirage{margin-top:var(--sp-8)}
+  main:has(>.ouverture--tirage)>.piece{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
 }
 .piece__marge{grid-column:1/-1;display:flex;flex-direction:column;gap:var(--sp-2);padding-top:0}
 .piece__tete{grid-column:1/-1}
@@ -39,9 +55,19 @@
 .piece__nature{font-weight:500;color:var(--c-encre)}
 
 .piece__titre{font-size:var(--t-piece);line-height:1.02;letter-spacing:-.035em;max-width:10.7em}
-.piece__chapo{margin-top:var(--sp-6)}
-.piece__entete .couverture__actions{width:auto;margin-top:var(--sp-6);flex-direction:column;flex-wrap:wrap}
-@media (min-width:768px){.piece__entete .couverture__actions{flex-direction:row}}
+.piece__chapo{margin-top:var(--sp-4);font-size:var(--t-texte)}
+.piece__entete .couverture__actions{width:auto;margin-top:var(--sp-5);flex-direction:column;flex-wrap:wrap}
+@media (min-width:768px){
+  .piece__chapo{margin-top:var(--sp-6);font-size:var(--t-chapo)}
+  .piece__entete .couverture__actions{margin-top:var(--sp-6);flex-direction:row}
+}
+/* Au téléphone, la barre d'action du bas d'écran est là dès l'arrivée
+   sur les pages intérieures (nav.js) : l'appel de l'en-tête, qui mène
+   au même devis, lui laisse la place, et le contenu monte d'autant.
+   Les autres appels (retour à l'accueil, formulaire de la page)
+   restent, et sans script, la barre n'existant pas, celui-ci aussi. */
+.js .piece__entete .couverture__actions:has(>.btn--plein[href*="devis.html"]){display:none}
+@media (min-width:768px){.js .piece__entete .couverture__actions:has(>.btn--plein[href*="devis.html"]){display:flex}}
 
 /* Cartouche de mise à jour des annexes. */
 .piece__cote{display:flex;flex-wrap:wrap;gap:var(--sp-4) var(--sp-8);margin-top:var(--sp-6)}

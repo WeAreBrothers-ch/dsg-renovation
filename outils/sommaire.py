@@ -21,6 +21,7 @@ _NOM = re.compile(r'<p class="intercalaire__nom[^"]*">(.*?)</p>', re.S)
 _TITRE = re.compile(r"<h2\b([^>]*)>")
 _ID = re.compile(r'\bid="([^"]+)"')
 _GRILLE_COUVERTURE = re.compile(r'<div class="[^"]*\bcouverture__grille\b[^"]*"[^>]*>')
+_OUVERTURE = re.compile(r'<figure class="ouverture\b[^"]*"[^>]*>')
 
 # Les sections qui n'ont pas leur case : la couverture de l'accueil,
 # la bande de chiffres sans titre, et l'appel final, que la barre
@@ -91,23 +92,27 @@ def _entrees(corps, prises):
 
 def _placer(corps, sommaire):
     """Pose le sommaire juste sous l'en-tête de la page, dès le premier
-    écran : sous l'en-tête des pages intérieures (avant leur photo
-    d'ouverture) ; à l'accueil, sous le texte de la couverture, avant
-    son image. Il doit rester un enfant de <main> pour coller en haut
+    écran : sous l'en-tête des pages intérieures ; à l'accueil, sous la
+    couverture (texte, image avant / après, appel), avant les
+    références. Il doit rester un enfant de <main> pour coller en haut
     de l'écran jusqu'au bout de la page : la couverture est donc coupée
-    après son texte, et sa suite (image, références) passe dans un
+    après son image, et sa suite (cartouche, références) passe dans un
     simple bloc, sans rien changer à l'écran large."""
     premiere = _SECTION.search(corps)
     if premiere and "couverture" in _classes(premiere.group(0)):
         fin = _fin_de_bloc(corps, premiere.start())
+        image = _OUVERTURE.search(corps, premiere.end(), fin)
         grille = _GRILLE_COUVERTURE.search(corps, premiere.end(), fin)
-        if grille is None:
+        if image:
+            coupe = _fin_de_bloc(corps, image.start(), "figure")
+        elif grille:
+            coupe = _fin_de_bloc(corps, grille.start(), "div")
+        else:
             return corps[:fin] + sommaire + corps[fin:]
-        apres_texte = _fin_de_bloc(corps, grille.start(), "div")
-        fermeture = corps.rfind("</section>", apres_texte, fin)
-        return (corps[:apres_texte] + "\n  </section>" + sommaire
+        fermeture = corps.rfind("</section>", coupe, fin)
+        return (corps[:coupe] + "\n  </section>" + sommaire
                 + '  <div class="couverture__suite">'
-                + corps[apres_texte:fermeture] + "</div>"
+                + corps[coupe:fermeture] + "</div>"
                 + corps[fermeture + len("</section>"):])
     fin_entete = corps.find("</header>")
     if fin_entete != -1 and (premiere is None or fin_entete < premiere.start()):

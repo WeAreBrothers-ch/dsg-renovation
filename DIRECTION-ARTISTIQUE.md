@@ -21,6 +21,12 @@ document : tout déplié, du texte d'un bout à l'autre, rien pour aller droit �
 parcourt désormais par ses intitulés (§ 4, « Au téléphone ») : sommaire collant, premier paragraphe seul,
 suites à faire glisser, pied de page court, titres plus marqués. Le bureau n'a pas changé.
 
+**Premiers écrans du téléphone, 27/09/2026 (v2.8).** Chaque page s'ouvrait au téléphone sur le même écran de
+texte — fond plâtre, titre, paragraphe gris, bouton — sans une image : rien ne donnait envie de continuer.
+L'image passe dans le premier écran : l'avant / après sous le titre de l'accueil, la photo du métier en tête de
+chaque page de prestation. Les métiers se présentent en vignettes photographiques ; un fil de lecture et des
+points disent où l'on en est. Le bureau n'a toujours pas changé d'un pixel.
+
 ---
 
 ## 0. Référence : Tekt (tekt.com.au)
@@ -246,6 +252,21 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
     chapô ; intitulé et titre plus proches, sections plus serrées.
   - **Pied de page** : logo, adresse, téléphone et courriel en boutons, horaires, itinéraire ; les trois
     listes (le site, les prestations, les zones) repliées sous leur intitulé. Il tient en moins d'un écran.
+  - **Premier écran de l'accueil** : la devise (coiffée du toit du logo), le titre, puis l'avant / après,
+    visible en entier, puis l'appel et ses garanties. Le chapô, que les sections suivantes développent,
+    attend la tablette. L'ordre ne change qu'à l'œil (le document garde titre, appel, image).
+  - **Premier écran d'une page de prestation** : la photo du métier, juste sous l'en-tête du site, puis le
+    chemin, le titre et le chapô ; la légende de la photo attend la tablette.
+  - **En-têtes des pages intérieures** : resserrés ; leur bouton de devis laisse la place à la barre
+    d'action, présente dès l'arrivée (à l'accueil, elle attend que la couverture soit passée). La première
+    section d'une page intérieure garde son titre mais laisse son chapô, que l'en-tête vient de dire.
+  - **Métiers en vignettes** : la photo de chaque métier (4:3), son numéro et son nom, deux par ligne dans
+    un même cadre ; le premier prend toute la largeur (2:1) quand ils sont en nombre impair.
+  - **Où l'on en est** : sous le sommaire, un fil de brique s'allonge avec la lecture de la page ; sous
+    chaque suite à faire glisser, un point par case, celui de la case à l'écran en brique (leur taille ne
+    change jamais).
+  - **Révélations** : un bloc plus haut que la moitié de l'écran se révèle dès qu'il y entre, sans
+    attendre qu'on en voie 15 % : une grille de vignettes n'arrive jamais vide sous les yeux.
   - Le formulaire montre les photos choisies en vignettes, et la touche Entrée du clavier mène au champ
     suivant.
 - **Retirés en v2.2** (audit d'ergonomie) : le curseur personnalisé qui remplaçait le pointeur, les boutons
@@ -295,10 +316,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
 3. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur le
-   plâtre). Au téléphone, le sommaire de page se glisse entre le texte de la couverture et l'image.
+   plâtre ; trois par rangée au téléphone). Au téléphone, la couverture se compose autour de l'image (devise,
+   titre, avant / après, appel) et le sommaire de page la suit, avant les références.
 4. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
    quatre cases, « + » en brique claire), les prestations
-   (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
+   (une ligne par prestation, avec sa miniature fixe ; en vignettes photographiques au téléphone), le chantier à la une (panneau dépoli sur photo pleine
    largeur), la zone, le déroulé en quatre cases — creux et plâtre en alternance.
 5. Renvoi final sur la teinte, bouton d'appel en brique, puis pied de page de nuit (logo négatif) et le nom de
    l'entreprise en enseigne, en filigrane.
@@ -365,6 +387,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
 - Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.
 - Un sommaire de page écrit à la main : il se déduit des intitulés de section.
+- Au téléphone, un premier écran sans image à l'accueil ou sur une page de prestation.
 - Au téléphone, un élément qui change de largeur ou de hauteur pendant la lecture sans qu'on l'ait touché.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,

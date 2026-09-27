@@ -58,6 +58,23 @@
     window.addEventListener("resize", focaliserSuites);
   }
 
+  /* Les points sous chaque suite (outils/suites.py) suivent la case à
+     l'écran. */
+  Array.prototype.forEach.call(document.querySelectorAll(".etapes, .cartes, .besoins"), function (suite) {
+    var points = suite.nextElementSibling;
+    if (!points || !points.classList.contains("points")) { return; }
+    var marques = Array.prototype.slice.call(points.children);
+    var actif = 0;
+    suite.addEventListener("scroll", function () {
+      var course = suite.scrollWidth - suite.clientWidth;
+      var rang = course > 0 ? Math.round(suite.scrollLeft / course * (marques.length - 1)) : 0;
+      if (rang === actif || !marques[rang]) { return; }
+      marques[actif].classList.remove("est-actif");
+      marques[rang].classList.add("est-actif");
+      actif = rang;
+    }, { passive: true });
+  });
+
   var jeux = document.querySelectorAll("[data-onglets]");
   if (!jeux.length) { return; }
 

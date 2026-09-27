@@ -87,10 +87,16 @@
 /* Au téléphone, le chapeau se lit à la taille du texte : le titre
    domine, et l'on arrive plus vite au contenu. */
 .intercalaire__chapo{margin-top:var(--sp-4);font-size:var(--t-texte)}
+/* La première section d'une page intérieure suit l'en-tête de la page,
+   dont le chapô vient de présenter la même chose : au téléphone, elle
+   garde son titre et laisse le sien, pour que son contenu (prestations,
+   chantiers, formulaire) arrive plus vite. */
+.sommaire+.section .intercalaire__chapo{display:none}
 @media (min-width:768px){
   .intercalaire{margin-bottom:var(--sp-8)}
   .intercalaire__marge{margin-bottom:var(--sp-5)}
   .intercalaire__chapo{margin-top:var(--sp-5);font-size:var(--t-chapo)}
+  .sommaire+.section .intercalaire__chapo{display:block}
 }
 
 @media (min-width:1024px){
@@ -139,6 +145,10 @@
   padding-inline:var(--grille-marge);
 }
 .filtres::-webkit-scrollbar{display:none}
+/* La rangée n'existe que si le script de tri tourne ; sa place est
+   gardée dès le premier affichage, pour que les fiches ne descendent
+   pas sous les yeux quand elle apparaît. */
+.js .filtres[hidden]{display:flex!important;visibility:hidden}
 .filtre{
   flex:0 0 auto;min-height:44px;padding:0 var(--sp-4);
   box-shadow:inset 0 0 0 1px var(--c-cadre);margin-right:-1px;

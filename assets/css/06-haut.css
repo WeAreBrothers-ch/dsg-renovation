@@ -8,14 +8,58 @@
    Du texte d'abord, sur le blanc : la nature de l'entreprise dans
    la marge, la promesse en grand dans la colonne de droite. L'image
    vient ensuite, cadrée — elle ne s'impose pas d'un coup.
+
+   Au téléphone, la couverture se compose autour de l'image : la
+   devise et le titre, puis l'avant / après, dans le premier écran,
+   puis l'appel et ses garanties. Le chapô, que les sections suivantes
+   développent, attend la tablette. L'ordre ne change qu'à l'œil : le
+   document garde le sien (titre, appel, image), celui du grand écran,
+   que suivent aussi le clavier et les lecteurs d'écran.
    ------------------------------------------------------------ */
-.couverture{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+.couverture{
+  display:flex;flex-direction:column;
+  padding-top:calc(var(--h-entete) + var(--sp-5));padding-bottom:var(--sp-6);
+}
+.couverture__grille,.couverture__texte,.couverture__pied{display:contents}
+.couverture__nature,.couverture h1,.couverture .couverture__actions,.couverture__garanties{margin-inline:var(--grille-marge)}
+.couverture__nature{order:1}
+.couverture h1{order:2;margin-top:var(--sp-4)}
+.couverture>.ouverture{order:3;margin-top:var(--sp-6)}
+.couverture .couverture__actions{order:4;margin-top:var(--sp-5)}
+.couverture__garanties{order:5}
+.couverture__chapo{display:none}
+@media (min-width:768px){
+  .couverture{display:block;padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+  .couverture__grille{display:grid}
+  .couverture__texte{display:block}
+  .couverture__pied{display:flex}
+  .couverture__nature,.couverture h1,.couverture .couverture__actions,.couverture__garanties{margin-inline:0}
+  .couverture h1,.couverture>.ouverture,.couverture .couverture__actions{margin-top:0}
+  .couverture__nature,.couverture h1,.couverture>.ouverture,.couverture .couverture__actions,.couverture__garanties{order:0}
+  .couverture__chapo{display:block}
+}
+/* Sur grand écran, l'image est suivie du cartouche, dans le même bloc. */
+@media (min-width:1024px){.couverture{padding-bottom:0}}
 .couverture__grille{row-gap:var(--sp-5);padding-bottom:clamp(40px,5vw,72px)}
+/* La devise porte le toit du logo, comme l'intitulé de chaque section.
+   Au téléphone, elle tient sur une ligne. */
 .couverture__nature{
   grid-column:1/-1;padding-top:0;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .3em;
   font-weight:500;font-size:var(--t-ui);line-height:1.4;color:var(--c-encre);
 }
-.couverture__nature span{display:block;color:var(--c-encre-60);font-weight:400}
+.couverture__nature::before{
+  content:"";flex:0 0 auto;align-self:center;width:18px;height:10px;margin-right:var(--sp-2);
+  background:var(--c-accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.couverture__nature span{color:var(--c-encre-60);font-weight:400}
+@media (min-width:768px){
+  .couverture__nature{display:block}
+  .couverture__nature::before{content:none}
+  .couverture__nature span{display:block}
+}
 .couverture__texte{grid-column:1/-1}
 .couverture h1{
   font-size:var(--t-couverture);letter-spacing:-.035em;line-height:1;
@@ -23,11 +67,11 @@
 }
 .couverture__pied{
   margin-top:clamp(28px,3.4vw,48px);
-  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
   gap:var(--sp-5) var(--sp-7);
 }
 .couverture__chapo{max-width:40ch}
-.couverture__actions{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:100%;gap:var(--sp-3)}
+.couverture__actions{display:flex;flex-direction:column;align-items:stretch;max-width:100%;gap:var(--sp-3)}
 .couverture__actions .btn{min-width:min(100%,260px)}
 /* Trois garanties sous l'appel : ce qu'on obtient en cliquant, en
    petit, marquées du carré des repères. */
@@ -39,8 +83,7 @@
 .couverture__garanties li::before{content:"";width:var(--repere);height:var(--repere);background:var(--c-accent)}
 
 /* Au téléphone, la barre d'action fixe propose déjà « Appeler » : la
-   couverture ne garde que l'appel principal, pleine largeur, pour que
-   l'image arrive plus vite. */
+   couverture ne garde que l'appel principal, pleine largeur. */
 .couverture__actions .btn--cadre{display:none}
 @media (min-width:768px){
   .couverture__actions{width:max-content}
@@ -110,30 +153,40 @@
 
 /* ------------------------------------------------------------
    INDEX DES MÉTIERS
-   Des lignes de bordereau empilées dans un même cadre : numéro et
-   intitulé à gauche, résumé à droite. Au survol, la ligne se creuse
-   et un tirage suit la main.
+   Au téléphone, des vignettes : la photo de chaque métier, son
+   numéro et son nom, deux par ligne dans un même cadre ; le premier
+   prend toute la largeur quand ils sont en nombre impair. On voit
+   d'un coup d'œil ce que fait l'entreprise, et toute la vignette est
+   le lien. Dès la tablette, des lignes de bordereau empilées dans un
+   même cadre : numéro et intitulé à gauche, résumé à droite. Au
+   survol, la ligne se creuse.
    ------------------------------------------------------------ */
-.metiers{position:relative;border-top:1px solid var(--c-cadre)}
-.metiers__ligne{
+.metiers{
   position:relative;
-  display:flex;align-items:center;gap:var(--sp-3);
-  min-height:72px;padding:var(--sp-3) var(--sp-4) var(--sp-3) 0;
-  border-bottom:1px solid var(--c-cadre);
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;padding:1px;
+}
+.metiers>li{display:flex}
+.metiers>li:first-child:nth-last-child(odd){grid-column:1/-1}
+.metiers__ligne{
+  position:relative;flex:1;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto 1fr;
+  grid-template-areas:"vue vue" "n chev" "titre titre";
+  align-items:center;gap:var(--sp-2) var(--sp-3);
+  padding-bottom:var(--sp-4);outline:1px solid var(--c-cadre);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
 @media (hover:hover) and (pointer:fine){
   .metiers__ligne:hover{background:var(--c-papier-2)}
 }
 .metiers__n{
-  flex:0 0 auto;width:2.2em;
+  grid-area:n;padding-left:var(--sp-3);
   font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;
   color:var(--c-accent);
 }
 .metiers__titre{
-  flex:1;min-width:0;
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);
-  letter-spacing:-.02em;line-height:1.15;
+  grid-area:titre;align-self:start;padding-inline:var(--sp-3);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-ui);
+  letter-spacing:-.01em;line-height:1.2;
 }
 /* Le résumé de chaque métier ne tient qu'à côté de l'intitulé, sur
    grand écran. */
@@ -142,7 +195,8 @@
   font-family:var(--f-lecture);font-size:var(--t-petit);line-height:1.45;color:var(--c-encre-60);
 }
 .metiers__chev{
-  flex:0 0 auto;width:15px;height:10px;background:currentColor;
+  grid-area:chev;margin-right:var(--sp-3);
+  width:15px;height:10px;background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
   transition:transform var(--d-normal) var(--e-sortie);
@@ -150,18 +204,33 @@
 @media (hover:hover) and (pointer:fine){
   .metiers__ligne:hover .metiers__chev{transform:translateX(4px)}
 }
-/* Chaque ligne montre une petite photo du métier, à sa place, sans
-   bouger : on reconnaît la prestation d'un coup d'œil, et rien ne
-   passe devant le texte. L'emplacement est réservé (carré fixe) : le
+/* Chaque métier montre sa photo, à sa place, sans bouger : on
+   reconnaît la prestation d'un coup d'œil, et rien ne passe devant le
+   texte. L'emplacement est réservé (proportions fixes) : le
    défilement ne saute jamais. */
 .metiers__vue{
-  flex:0 0 auto;order:1;width:52px;aspect-ratio:1/1;overflow:hidden;
+  grid-area:vue;display:block;aspect-ratio:4/3;overflow:hidden;
   background:var(--c-papier-2);pointer-events:none;
 }
+.metiers>li:first-child:nth-last-child(odd) .metiers__vue{aspect-ratio:2/1}
 .metiers__vue img{width:100%;height:100%;object-fit:cover;transition:transform 600ms var(--e-sortie)}
-.metiers__chev{order:2}
 @media (hover:hover) and (pointer:fine){
   .metiers__ligne:hover .metiers__vue img{transform:scale(1.06)}
+}
+@media (min-width:768px){
+  .metiers{display:block;padding:0;border-top:1px solid var(--c-cadre)}
+  .metiers>li{display:list-item}
+  .metiers>li:first-child:nth-last-child(odd){grid-column:auto}
+  .metiers__ligne{
+    display:flex;align-items:center;gap:var(--sp-3);
+    min-height:72px;padding:var(--sp-3) var(--sp-4) var(--sp-3) 0;
+    outline:0;border-bottom:1px solid var(--c-cadre);
+  }
+  .metiers__n{flex:0 0 auto;width:2.2em;padding-left:0}
+  .metiers__titre{flex:1;min-width:0;align-self:auto;padding-inline:0;font-size:var(--t-h4);letter-spacing:-.02em;line-height:1.15}
+  .metiers__chev{flex:0 0 auto;order:2;margin-right:0}
+  .metiers__vue{flex:0 0 auto;order:1;width:52px;aspect-ratio:1/1}
+  .metiers>li:first-child:nth-last-child(odd) .metiers__vue{aspect-ratio:1/1}
 }
 @media (min-width:1024px){
   .metiers__desc{display:block}

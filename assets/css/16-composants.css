@@ -86,7 +86,17 @@
 :is(.etapes,.besoins)::before{content:none}
 .js :is(.etapes,.cartes,.besoins)>.revele{opacity:1;transform:none}
 :is(.etapes,.cartes,.besoins):focus-visible{outline:2px solid var(--c-focus);outline-offset:2px}
+/* Les points de la suite (outils/suites.py) : un par case, celui de
+   la case à l'écran prend la couleur. Leur taille ne change jamais. */
+.points{display:none}
+.js .points{display:flex;justify-content:center;gap:var(--sp-2);margin-top:var(--sp-4)}
+.points span{
+  width:var(--repere);height:var(--repere);background:var(--c-ligne-forte);
+  transition:background-color var(--d-rapide) var(--e-standard);
+}
+.points .est-actif{background:var(--c-accent)}
 @media (min-width:600px){
+  .js .points{display:none}
   :is(.etapes,.cartes,.besoins){overflow:visible;scroll-snap-type:none}
   :is(.etapes,.besoins)::before{content:""}
   .js :is(.etapes,.cartes,.besoins)>.revele{opacity:0;transform:translateY(16px)}

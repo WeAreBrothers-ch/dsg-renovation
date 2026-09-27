@@ -16,6 +16,7 @@ import lecture
 import prestations
 import rythme
 import sommaire
+import suites
 import typographie
 
 SERVICES = prestations.PAGES
@@ -133,6 +134,8 @@ def assembler(page, corps, base, modules, schemas):
     html = sommaire.poser(html)
     # Au téléphone, les textes longs montrent leur premier paragraphe.
     html = lecture.plier(html)
+    # Sous chaque suite à faire glisser, ses points.
+    html = suites.pointer(html)
     html = rythme.rythmer(html)
     html = images.localiser(html, base)
     html = typographie.espacer(images.preconnexion(html))

@@ -45,17 +45,33 @@
 .ouverture__rideau--g::after{right:calc(var(--repere) / -2)}
 .ouverture__rideau--d::after{left:calc(var(--repere) / -2)}
 
+/* Au téléphone, la légende se resserre sous l'image : ce qu'elle
+   montre, puis, plus bas et plus petit, comment s'en servir. */
 .ouverture__legende{
   display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;
-  gap:var(--sp-2) var(--sp-6);padding-top:var(--sp-4);
-  font-size:var(--t-petit);color:var(--c-encre-60);
+  gap:var(--sp-1) var(--sp-6);padding-top:var(--sp-3);
+  font-size:var(--t-petit);line-height:1.4;color:var(--c-encre-60);
+}
+.ouverture__legende>span+span{font-size:var(--t-etiquette)}
+@media (min-width:768px){
+  .ouverture__legende{gap:var(--sp-2) var(--sp-6);padding-top:var(--sp-4);line-height:inherit}
+  .ouverture__legende>span+span{font-size:inherit}
 }
 .ouverture__legende b{font-weight:500;color:var(--c-encre)}
 
-/* Tirage d'ouverture des pages de prestation. */
+/* Tirage d'ouverture des pages de prestation. Au téléphone, il ouvre
+   la page (14-document.css) : un peu moins haut, pour que le titre
+   et l'appel tiennent dans le même écran. */
 .ouverture--tirage{margin-top:var(--sp-8)}
 .ouverture--tirage .ouverture__cadre img{
-  width:100%;height:clamp(280px,46vw,640px);object-fit:cover;
+  width:100%;height:240px;object-fit:cover;
+}
+/* Sa légende attend la tablette : au téléphone, le titre de la page
+   suit directement la photo (le texte de remplacement la décrit). */
+.ouverture--tirage .ouverture__legende{display:none}
+@media (min-width:768px){
+  .ouverture--tirage .ouverture__cadre img{height:clamp(280px,46vw,640px)}
+  .ouverture--tirage .ouverture__legende{display:flex}
 }
 
 /* ------------------------------------------------------------

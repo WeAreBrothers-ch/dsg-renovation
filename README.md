@@ -75,6 +75,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `rythme.py` | alternance automatique des fonds blanc / pâle |
 | `sommaire.py` | sommaire de page du téléphone, déduit des intitulés de section |
 | `lecture.py` | « Lire la suite » : au téléphone, un texte long montre son premier paragraphe |
+| `suites.py` | les points sous chaque suite à faire glisser (déroulé, cartes, besoins) |
 | `typographie.py` | espaces insécables avant « : ; ? ! » et dans les guillemets |
 | `images.py` | remplace les images Wix par leurs copies locales (srcset compris) |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
@@ -178,6 +179,12 @@ bout à l'autre :
   repliées sous leur intitulé (`nav.js`).
 - **Titres plus marqués** : titres de section à 30 px, chapô à la
   taille du texte, sections plus serrées.
+- **L'image dès le premier écran** : l'accueil montre l'avant / après
+  sous son titre, chaque page de prestation s'ouvre sur la photo de son
+  métier ; les métiers se présentent en vignettes photographiques.
+- **Où l'on en est** : un fil de lecture sous le sommaire, des points
+  sous chaque suite à faire glisser ; sur les pages intérieures, la
+  barre d'action (Appeler, Devis gratuit) est là dès l'arrivée.
 
 Les pages ont raccourci d'un quart à deux cinquièmes à 390 px de
 large (accueil 8 874 → 6 704 px, prestations 7 027 → 4 867,

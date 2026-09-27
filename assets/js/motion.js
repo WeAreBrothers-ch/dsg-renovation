@@ -44,10 +44,16 @@
   if (!("IntersectionObserver" in window)) {
     toutAfficher();
   } else {
+    /* Un bloc se révèle quand 15 % de sa hauteur est à l'écran ; un
+       bloc plus haut que la moitié de l'écran (une grille de vignettes
+       au téléphone), dès qu'il y entre : sinon, son haut resterait vide
+       sous les yeux tant qu'on n'a pas défilé. */
     var observateur = new IntersectionObserver(function (entrees) {
       var rang = 0;
       entrees.forEach(function (entree) {
         if (!entree.isIntersecting) { return; }
+        var haut = entree.boundingClientRect.height > window.innerHeight * 0.5;
+        if (entree.intersectionRatio < 0.15 && !haut) { return; }
         var element = entree.target;
         if (element instanceof HTMLElement) {
           element.style.transitionDelay = (mouvementReduit ? 0 : Math.min(rang, 5) * 70) + "ms";
@@ -56,7 +62,7 @@
         rang += 1;
         observateur.unobserve(element);
       });
-    }, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" });
+    }, { threshold: [0, 0.15], rootMargin: "0px 0px -5% 0px" });
 
     Array.prototype.forEach.call(aReveler, function (element) { observateur.observe(element); });
   }
