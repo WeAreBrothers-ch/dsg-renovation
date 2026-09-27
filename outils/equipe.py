@@ -1,8 +1,8 @@
 """Les ouvriers du site : des silhouettes pleines, posées çà et là.
 
-Un charpentier cloue une planche sur un tréteau, un poseur de sol pose
-des carreaux, un électricien visse une ampoule, un peintre passe un mur
-au rouleau. Chacun vit seul dans le bas d'une section, sur la limite
+Un charpentier cloue une planche sur un tréteau, un poseur de sol
+déroule un rouleau de revêtement en le poussant, un électricien visse
+une ampoule, un peintre passe un mur au rouleau. Chacun vit seul dans le bas d'une section, sur la limite
 avec la suivante, qui lui sert de sol, et travaille à son rythme : il
 arrive en marchant, travaille, repart ; son ouvrage s'efface, et il
 revient plus tard, ailleurs sur la page (assets/js/equipe.js).
@@ -27,6 +27,7 @@ hanche à -36, épaules à -60, tête centrée à -75.
 
 import io
 import json
+import math
 import os
 import re
 
@@ -71,11 +72,31 @@ with io.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "equipe_im
 MARTEAU = ('<g class="equipe__outil"><line x1="0" y1="-33" x2="0" y2="-22"/>'
            '<rect x="-6.5" y="-23" width="13" height="7" rx="2"/></g>')
 
+# Le rouleau du poseur de sol, dessiné plein (rayon 14) autour de son
+# centre : la tranche et la spirale du revêtement enroulé, qui montre
+# qu'il tourne. Le script le place, le fait tourner et le réduit à
+# mesure qu'il se déroule ; la bande posée part de son premier point
+# d'appui (SOL.depart, SOL.plein dans equipe.js).
+SOL_DEPART, SOL_PLEIN = 40, 14
+
+
+def _spirale(debut=3.0, fin=12.2, tours=2.25, pas=15):
+    points = []
+    for i in range(int(tours * 360 / pas) + 1):
+        angle = math.radians(i * pas)
+        rayon = debut + (fin - debut) * i * pas / (tours * 360)
+        points.append("%.1f %.1f" % (rayon * math.cos(angle), rayon * math.sin(angle)))
+    return ("M" + " ".join(points)).replace("-0.0 ", "0.0 ")
+
+
+SPIRALE = _spirale()
+
 
 # Ce que le script fait varier sur chaque accessoire : seuls ces
 # attributs viennent de l'image immobile, le reste est du dessin fixe.
 ANIMES = {
-    "clou": ("transform",), "impact": ("opacity",), "carreau-main": ("transform", "opacity"),
+    "clou": ("transform",), "impact": ("opacity",),
+    "rouleau-sol": ("transform",), "revetement": ("width",),
     "ampoule": ("transform",), "halo": ("opacity",), "peinture": ("width",),
     "perche": ("x1", "y1", "x2", "y2", "opacity"), "rouleau": ("x", "y", "opacity"),
 }
@@ -85,7 +106,7 @@ def _attributs(metier, nom, **defauts):
     """Les attributs d'un accessoire dans l'image immobile."""
     valeurs = dict(defauts)
     releve = IMMOBILE.get(metier, {}).get("accessoires", {}).get(nom, {})
-    animes = ANIMES.get(nom, ("opacity",) if nom.startswith("carreau-") else ())
+    animes = ANIMES.get(nom, ())
     valeurs.update({cle: v for cle, v in releve.items() if cle in animes})
     return "".join(' %s="%s"' % (cle, valeur) for cle, valeur in valeurs.items())
 
@@ -130,7 +151,7 @@ def _ouvrier(metier, outil_av=""):
 
 
 def _accessoires(metier):
-    """Ce qui reste au poste : tréteau, carreaux, ampoule, mur."""
+    """Ce qui reste au poste : tréteau, rouleau et revêtement, ampoule, mur."""
     a = lambda nom, **d: _attributs(metier, nom, **d)
     if metier == "marteau":
         return (
@@ -142,12 +163,13 @@ def _accessoires(metier):
             '<path d="M18 -44l-4 -3M36 -44l4 -3M27 -48v-4"/></g>'
         )
     if metier == "sol":
-        carreaux = "".join(
-            '<rect class="equipe__carreau" data-accessoire="carreau-%d"%s/>'
-            % (i, a("carreau-%d" % i, x=x, y="-4.5", width="16", height="4.5"))
-            for i, x in enumerate((16, 32, 48))
+        return (
+            f'<rect class="equipe__revetement" data-accessoire="revetement"'
+            f'{a("revetement", x=SOL_DEPART, y="-3.5", width="0", height="3.5")}/>'
+            f'<g class="equipe__rouleau-sol" data-accessoire="rouleau-sol"'
+            f'{a("rouleau-sol", transform="translate(%d -%d)" % (SOL_DEPART, SOL_PLEIN))}>'
+            f'<circle r="{SOL_PLEIN}"/><path d="{SPIRALE}"/></g>'
         )
-        return f'<g>{carreaux}</g>'
     if metier == "ampoule":
         rayons = "".join(
             '<line x1="0" y1="-11" x2="0" y2="-16" transform="rotate(%d)"/>' % angle
@@ -175,9 +197,6 @@ def _accessoires(metier):
 def scene(metier, place, sens):
     """Un ouvrier, posé dans le bas d'une section."""
     outil = MARTEAU if metier == "marteau" else ""
-    if metier == "sol":
-        outil = ('<rect class="equipe__carreau" data-accessoire="carreau-main"%s/>'
-                 % _attributs(metier, "carreau-main", x="-8", y="-30", width="16", height="4.5"))
     return (
         f'<div class="ouvrier ouvrier--{sens}" data-ouvrier aria-hidden="true">'
         f'<div class="zone ouvrier__zone"><div class="ouvrier__poste" style="--place:{place}%">'
@@ -188,7 +207,11 @@ def scene(metier, place, sens):
 
 
 def _fond(classes):
-    for fond in ("sur-sombre", "sur-pale", "sur-vif", "partenaires"):
+    """Le fond d'une section. La bande des références a celui du creux
+    (outils/rythme.py)."""
+    if "partenaires" in classes:
+        return "sur-pale"
+    for fond in ("sur-sombre", "sur-pale", "sur-vif"):
         if fond in classes:
             return fond
     return "blanc"

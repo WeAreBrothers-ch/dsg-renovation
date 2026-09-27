@@ -1,26 +1,24 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
    Concept : « LE PLAN D'IMPLANTATION »
-   Palette (26/09/2026) : « CHOCOLAT & CIEL »
+   Palette : « PLÂTRE & BRIQUE », les couleurs d'origine du site
+   (rétablies le 27/09/2026, après quatre autres essais)
 
    Un chantier de rénovation commence par un relevé : on reporte la
    pièce sur le plan, on pose des repères aux angles, puis on ouvre.
-   Le site en reprend le geste, et prend les couleurs d'une maison
-   qu'on rouvre :
-     - le brun chocolat du bois pour l'encre et les bandes sombres,
-       jamais un noir pur ;
-     - le bleu ciel d'une pièce rendue à la lumière pour l'action :
-       les boutons d'appel et le renvoi final ;
-     - un bleu plus profond pour ce qui s'écrit en couleur : liens,
-       numéros, puces ;
+   Le site en reprend la matière et le geste :
+     - un fond de plâtre frais, chaud et mat — pas de blanc clinique ;
+     - une encre terre d'ombre, jamais un noir pur ;
      - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
-       comme les piquets d'implantation d'un géomètre.
-   Le logo garde ses propres couleurs ; le site ne les reprend pas.
+       comme les piquets d'implantation d'un géomètre ;
+     - un seul accent, la brique : rare, sourd, réservé à l'action ;
+       elle ne couvre jamais un fond.
+   Le logo garde ses propres couleurs.
 
    Quatre fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     blanc · ciel pâle (.sur-pale) · chocolat (.sur-sombre)
-     · bleu ciel (.sur-vif, le renvoi final).
+     plâtre · creux (.sur-pale) · nuit (.sur-sombre)
+     · teinte (.sur-vif, le renvoi final).
 
    Les autres feuilles ne nomment jamais une couleur : elles demandent
    un rôle (--c-encre, --c-signal, --c-accent…). Changer de palette,
@@ -31,74 +29,73 @@
    les fonds où elle sert. Plancher du site : 4.5:1, seuil AA.
    ============================================================ */
 :root{
-  /* ---------- Les trois couleurs ---------- */
-  --c-chocolat:#2B1B14;      /* brun chocolat : l'encre */
-  --c-bleu:#1D64A8;          /* bleu profond : ce qui s'écrit en couleur */
-  --c-ciel:#9ACDF5;          /* bleu ciel : l'action */
-  --c-ciel-fonce:#86C0EE;    /* le même, une ombre plus bas */
+  /* ---------- Les couleurs ---------- */
+  --c-platre:#EEEBE5;        /* plâtre frais : le fond */
+  --c-terre:#27211C;         /* terre d'ombre : l'encre et la nuit */
+  --c-brique:#9A3324;        /* brique : l'action */
+  --c-brique-sombre:#86291C; /* la brique écrite sur le plâtre, et son survol */
+  --c-brique-claire:#E29A86; /* la brique écrite sur la nuit */
 
   /* ---------- Surfaces ---------- */
-  --c-papier:#FFFFFF;        /* DOMINANTE : blanc */
-  --c-papier-2:#F3F8FD;      /* creux : survols, onglet ouvert, légendes */
-  --c-fiche:#FFFFFF;         /* relief : cellules de formulaire, étiquettes */
-  --c-teinte:#D9E9F8;        /* aplat secondaire */
-  --c-bitume:#3B2419;        /* chocolat : bandes sombres, pied, visionneuse */
-  --c-bitume-2:#4B3125;      /* surface élevée dans le chocolat */
+  --c-papier:var(--c-platre);   /* DOMINANTE */
+  --c-papier-2:#E3DFD7;      /* creux : bandes, survols, sections en retrait */
+  --c-fiche:#F7F5F1;         /* relief : cellules de formulaire, étiquettes */
+  --c-teinte:#DAD4C9;        /* aplat d'action : le renvoi final */
+  --c-bitume:var(--c-terre); /* nuit : bandes sombres, pied, visionneuse */
+  --c-bitume-2:#342C26;      /* surface élevée dans la nuit */
 
   /* Les mêmes teintes en composantes, pour les voiles translucides
      (en-tête dépoli, panneau posé sur photo, visionneuse, ombres). */
-  --c-papier-rgb:255,255,255;
-  --c-encre-rgb:43,27,20;
-  --c-sombre-rgb:59,36,25;
-  --c-craie-rgb:255,247,242;
+  --c-papier-rgb:238,235,229;
+  --c-encre-rgb:39,33,28;
+  --c-sombre-rgb:39,33,28;
+  --c-craie-rgb:238,235,229;
 
-  /* ---------- Textes sur le blanc ----------
-     blanc / creux / ciel pâle / pâle élevé */
-  --c-encre:var(--c-chocolat);  /* 16.5 / 15.5 / 14.7 / 13.4 */
-  --c-encre-60:#5A4840;      /*  8.6 /  8.1 /  7.7 /  7.0 */
-  --c-encre-40:#6E5C54;      /*  6.3 /  5.9 /  5.6 /  5.1 */
-  --c-craie:#FFF7F2;         /* 13.7 sur le chocolat */
-  --c-craie-60:#DCC8BB;      /*  9.0 sur le chocolat, 7.4 élevé */
+  /* ---------- Textes sur le plâtre ----------
+     plâtre / creux / fiche / teinte */
+  --c-encre:var(--c-terre);  /* 13.4 / 12.0 / 14.6 / 10.8 */
+  --c-encre-60:#574F47;      /*  6.8 /  6.0 /  7.4 /  5.5 */
+  --c-encre-40:#6A6158;      /*  5.1 /  4.6 /  5.6 — JAMAIS sur la teinte (4.1) */
+  --c-craie:var(--c-platre); /* 13.4 sur la nuit */
+  --c-craie-60:#B8AFA4;      /*  7.4 sur la nuit, 6.3 sur la nuit élevée */
   /* Grand texte décoratif (l'enseigne du pied) : discret, mais au-dessus
-     du seuil des grands textes (3:1). 4.2 sur le blanc, 3.4 sur le
-     chocolat. */
-  --c-filigrane:#8E766A;
-  /* Aplat vif des dessins (frise de l'accueil) : casques, carreaux,
-     peinture, ampoule allumée. Décor, jamais du texte. */
-  --c-aplat:var(--c-ciel);
+     du seuil des grands textes (3:1). 3.4 sur la nuit. */
+  --c-filigrane:#7E7368;
+  /* Aplat des dessins (les ouvriers) : peinture, revêtement de sol,
+     ampoule allumée. Une brique claire, terre cuite. Décor, jamais du
+     texte. */
+  --c-aplat:var(--c-brique-claire);
 
-  /* ---------- Bleu ciel — l'action ----------
-     L'aplat des boutons d'appel et de la poignée du comparateur. Le
-     texte posé dessus est chocolat : 9.8. Au survol, le chocolat
-     recouvre le ciel et le texte passe au blanc : 16.5. Le ciel ne
-     s'écrit jamais sur un fond clair (1.7) : il s'y pose en aplat. */
-  --c-signal:var(--c-ciel);
-  --c-signal-fonce:var(--c-chocolat);
-  --c-sur-signal:var(--c-chocolat);
-  --c-sur-signal-survol:#FFFFFF;
+  /* ---------- Brique — l'action ----------
+     L'aplat des boutons d'appel et de la poignée du comparateur, texte
+     clair posé dessus : 6.7. Au survol, la brique sombre recouvre la
+     brique : 8.2. */
+  --c-signal:var(--c-brique);
+  --c-signal-fonce:var(--c-brique-sombre);
+  --c-sur-signal:#F7F5F1;
+  --c-sur-signal-survol:#F7F5F1;
 
-  /* ---------- Bleu profond — l'accent ----------
+  /* ---------- Brique sombre — l'accent ----------
      Liens dans le texte, numéros de séquence, puces, astérisques,
      « + » des chiffres, repère « vous êtes ici », chevron des
-     intitulés. */
-  --c-accent:var(--c-bleu);  /*  6.1 /  5.7 /  5.4 /  4.9 */
+     intitulés, outils des ouvriers. */
+  --c-accent:var(--c-brique-sombre);  /*  7.5 /  6.7 /  8.2 /  6.1 */
 
   /* ---------- États ---------- */
-  --c-valide:#1D7048;        /*  6.1 /  5.7 /  5.4 /  4.9 */
-  --c-alerte:#B42318;        /*  6.6 /  6.2 /  5.9 /  5.3 */
-  --c-focus:var(--c-chocolat);  /* 16.5 */
+  --c-valide:#2F6B4A;        /*  5.3 /  4.8 /  5.8 */
+  --c-alerte:#8E3B12;        /*  6.3 /  5.7 /  6.9 /  5.1 */
+  --c-focus:var(--c-terre);  /* 13.4 */
 
   /* ---------- Filets ----------
      Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
      une séparation discrète. Le filet doux sert à l'intérieur des blocs. */
   --c-ligne:rgba(var(--c-encre-rgb),.16);
-  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.3 */
+  --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.0 */
   --c-cadre:var(--c-encre);
   --bd-fin:1px solid var(--c-ligne);
 
-  /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre.
-     Chocolat sur les fonds clairs et sur le ciel, bleu ciel sur le
-     chocolat. */
+  /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
+     de la couleur du cadre. */
   --repere:5px;
   --c-repere:var(--c-cadre);
 }
@@ -111,64 +108,56 @@
    ajouter la classe à une section suffit.
    ============================================================ */
 
-/* Ciel pâle : la respiration entre deux sections blanches. Les
-   textes du blanc y tiennent tous (voir leurs contrastes ci-dessus). */
+/* Creux : la respiration entre deux sections de plâtre. Les textes du
+   plâtre y tiennent tous (voir leurs contrastes ci-dessus) ; le survol
+   y descend d'un cran, à la teinte, où il n'y a jamais d'encre-40. */
 .sur-pale{
-  --c-papier:#EAF3FC;
-  --c-papier-2:#D9E9F8;
-  --c-fiche:#FFFFFF;
-  --c-papier-rgb:234,243,252;
+  --c-papier:#E3DFD7;
+  --c-papier-2:#DAD4C9;
+  --c-fiche:#F7F5F1;
+  --c-papier-rgb:227,223,215;
   background-color:var(--c-papier);
 }
 
-/* Chocolat : une bande par page, le pied et la barre mobile. Le ciel
-   y devient la couleur écrite, et le bouton d'appel garde son aplat :
-   au survol, c'est le blanc qui le recouvre. */
+/* Nuit : une bande par page, le pied et la barre mobile. La brique
+   claire y devient la couleur écrite, et le bouton d'appel garde son
+   aplat de brique : au survol, c'est le plâtre qui le recouvre. */
 .sur-sombre{
-  --c-papier:#3B2419;
-  --c-papier-2:#4B3125;
-  --c-fiche:#4B3125;
-  --c-papier-rgb:59,36,25;
-  --c-encre:#FFF7F2;         /* chocolat / élevé : 13.7 / 11.2 */
-  --c-encre-60:#DCC8BB;      /*  9.0 /  7.4 */
-  --c-encre-40:#C8B2A4;      /*  7.1 /  5.9 */
-  --c-accent:#A8D4F7;        /*  9.2 /  7.6 */
-  --c-signal-fonce:#FFFFFF;
-  --c-sur-signal-survol:var(--c-chocolat);   /* 16.5 */
-  --c-ligne:rgba(255,255,255,.16);
-  --c-ligne-forte:rgba(255,255,255,.5);
-  --c-cadre:rgba(255,255,255,.4);   /* trait de plan : 3.6, seuil des contours 3:1 */
-  --c-repere:#A8D4F7;               /* 9.2 */
-  --c-valide:#8FD4AE;        /*  8.4 /  6.9 */
-  --c-alerte:#FF9D8F;        /*  7.2 /  5.9 */
-  --c-focus:#FFF7F2;
+  --c-papier:var(--c-terre);
+  --c-papier-2:#342C26;
+  --c-fiche:#342C26;
+  --c-papier-rgb:39,33,28;
+  --c-encre:var(--c-platre); /* nuit / élevée : 13.4 / 11.5 */
+  --c-encre-60:#B8AFA4;      /*  7.4 /  6.3 */
+  --c-encre-40:#A0968A;      /*  5.5 /  4.7 */
+  --c-accent:var(--c-brique-claire);  /*  7.0 /  6.0 */
+  --c-aplat:#C8705A;         /* terre cuite plus sourde : la peinture se
+                                distingue du rouleau (brique claire) */
+  --c-signal-fonce:var(--c-platre);
+  --c-sur-signal-survol:var(--c-terre);   /* 13.4 */
+  --c-ligne:rgba(var(--c-craie-rgb),.16);
+  --c-ligne-forte:rgba(var(--c-craie-rgb),.5);
+  --c-cadre:rgba(var(--c-craie-rgb),.4);  /* trait de plan : 3.3, seuil des contours 3:1 */
+  /* Redit ici : un jeton qui en cite un autre se résout là où il est
+     déclaré, et le repère hériterait sinon de l'encre du plâtre. */
+  --c-repere:var(--c-cadre);
+  --c-valide:#9CCDAE;        /*  8.9 /  7.7 */
+  --c-alerte:#F0A07A;        /*  7.6 /  6.5 */
+  --c-focus:var(--c-platre);
   color:var(--c-encre);
   background-color:var(--c-papier);
 }
 
-/* Bleu ciel : le renvoi final de chaque page. Tout y est chocolat
-   (9.8), et le bouton d'appel s'inverse : chocolat, texte blanc
-   (16.5) ; au survol, le blanc le recouvre et le texte repasse au
-   chocolat. */
+/* Teinte : le renvoi final de chaque page, l'aplat d'action du
+   plâtre. Un cran sous le creux, il se détache de la section qui le
+   précède, plâtre ou creux, au moins autant que le creux du plâtre.
+   Les textes du plâtre y tiennent (colonne teinte ci-dessus) ; l'encre-40
+   n'y sert pas. Le survol y remonte au creux. */
 .sur-vif{
-  --c-papier:var(--c-ciel);
-  --c-papier-2:var(--c-ciel-fonce);
-  --c-fiche:var(--c-ciel-fonce);
-  --c-papier-rgb:154,205,245;
-  --c-encre:var(--c-chocolat);  /* ciel / ciel foncé : 9.8 / 8.5 */
-  --c-encre-60:var(--c-chocolat);
-  --c-encre-40:var(--c-chocolat);
-  --c-accent:var(--c-chocolat);
-  --c-signal:var(--c-chocolat);
-  --c-signal-fonce:#FFFFFF;
-  --c-sur-signal:#FFFFFF;
-  --c-sur-signal-survol:var(--c-chocolat);
-  --c-ligne:rgba(var(--c-encre-rgb),.3);
-  --c-ligne-forte:rgba(var(--c-encre-rgb),.65);  /* 4.2 */
-  --c-cadre:var(--c-chocolat);
-  --c-repere:var(--c-chocolat);
-  --c-focus:var(--c-chocolat);
-  color:var(--c-encre);
+  --c-papier:var(--c-teinte);
+  --c-papier-2:#E3DFD7;
+  --c-fiche:#F7F5F1;
+  --c-papier-rgb:218,212,201;
   background-color:var(--c-papier);
 }
 

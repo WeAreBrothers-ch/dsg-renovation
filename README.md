@@ -127,14 +127,15 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Chocolat & ciel » (26/09/2026), choisie par le client parmi
-quatre ambiances — tout est décrit dans `DIRECTION-ARTISTIQUE.md`. Le
-brun chocolat du bois pour l'encre, le bleu ciel pour l'action, un bleu
-profond pour les liens et les repères écrits. Le logo garde ses propres
-couleurs. Quatre fonds alternent : blanc, ciel pâle, une bande chocolat
-par page, et le renvoi final en bleu ciel. Changer de palette, c'est
-changer `assets/css/00-jetons.css` : les autres feuilles ne demandent
-que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…). Des cadres
+Palette « Plâtre & brique », les couleurs d'origine du site, rétablies
+le 27/09/2026 à la demande du client après quatre autres essais — tout
+est décrit dans `DIRECTION-ARTISTIQUE.md`. Un fond de plâtre frais, une
+encre terre d'ombre, et un seul accent, la brique : les boutons d'appel,
+les liens et les repères écrits, jamais un fond de section. Le logo
+garde ses propres couleurs. Quatre fonds alternent : plâtre, creux, une
+bande de nuit par page, et le renvoi final sur la teinte. Changer de
+palette, c'est changer `assets/css/00-jetons.css` : les autres feuilles
+ne demandent que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…). Des cadres
 d'un pixel marqués d'un repère carré à chaque angle, un chevron devant
 chaque intitulé, une grotesque (Archivo) pour les titres et une sérif de
 lecture (Newsreader) pour les phrases.

@@ -8,13 +8,13 @@ Date : 25/09/2026 — Statut : **v2**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
 
-**Révision de palette, 26/09/2026 (v2.4) — « Chocolat & ciel ».** Le client a jugé les couleurs du logo trop
-basiques, puis le bleu nuit et safran trop vus ; il a choisi cette palette parmi quatre ambiances rendues sur
-le site (outremer, patine vert-de-gris, chocolat et ciel, graphite et fluo). Le logo garde ses couleurs ; le
-site ne les reprend plus. La structure, la typographie, les cadres et le mouvement ne changent pas ; les
-couleurs et les noms des fonds changent (§ 2, § 2 bis, § 5, § 7). Les palettes précédentes restent lisibles
-dans l'historique git (« plâtre et brique » : `0a45b44` ; « bleu de travail, jaune de chantier » : `9fbd8d8` ;
-« le toit rouge », tirée du logo : `d604530` ; « bleu de plan & safran » : `c322a78`).
+**Retour aux couleurs d'origine, 27/09/2026 (v2.5) — « Plâtre & brique ».** Après quatre autres palettes
+(bleu de travail et jaune de chantier, couleurs du logo, bleu de plan et safran, chocolat et ciel), le client a
+demandé les couleurs de départ du site : le plâtre, la terre d'ombre et la brique de la v2 (`0a45b44`). Elles
+reviennent à l'identique. Ce qui a été gagné depuis reste : quatre fonds rythment la page (§ 2 bis), l'action et
+l'accent écrit ont chacun leur jeton, les ouvriers du site prennent la brique (§ 8). Les palettes essayées restent
+lisibles dans l'historique git (« bleu de travail, jaune de chantier » : `9fbd8d8` ; « le toit rouge », tirée du
+logo : `d604530` ; « bleu de plan & safran » : `c322a78` ; « chocolat & ciel » : `0d52c52`).
 
 ---
 
@@ -50,8 +50,7 @@ sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
 - **La photo plein écran d'emblée** (demande explicite du client). Remplacée par l'ouverture cadrée (§ 7).
-- Le plâtre beige : le fond est blanc, relayé par un bleu ciel très pâle, proche du gris-bleu de Tekt ; la
-  chaleur vient des photos de chantier et du brun chocolat.
+- Le gris-bleu froid : DSG rénove des intérieurs, sa matière est le plâtre et le bois, pas l'acier.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
 
@@ -64,83 +63,80 @@ sur la photo, la retenue générale.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond blanc**, relayé par un **ciel très pâle** ;
-- une **encre brun chocolat**, celle du bois, jamais un noir pur ;
+- un **fond de plâtre frais**, chaud et mat, relayé par un **creux** d'un ton plus bas ;
+- une **encre terre d'ombre**, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
-- des **bandes chocolat** qui rythment la page ; les piquets y passent au bleu ciel ;
+- des **bandes de nuit**, la terre d'ombre en fond, qui rythment la page ;
 - une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme une pièce
   qu'on ouvre après l'avoir relevée ;
-- **le bleu ciel** d'une pièce rendue à la lumière : il porte l'action, boutons d'appel et renvoi final ;
-- **un bleu profond** pour ce qui s'écrit en couleur : liens, numéros, et devant chaque intitulé de section un
-  chevron dessiné comme le toit du logo.
+- **un seul accent, la brique** : rare, sourd, réservé à l'action — les boutons d'appel — et à ce qui s'écrit en
+  couleur : liens, numéros, et devant chaque intitulé de section un chevron dessiné comme le toit du logo.
 
-Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le logo et son
-toit rouge, le comparateur avant / après mis au centre de l'accueil, les repères d'angle qui voyagent avec
-l'image d'ouverture.
+Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), la brique
+(héritière du rouge DSG), le logo et son toit rouge, le comparateur avant / après mis au centre de l'accueil, les
+repères d'angle qui voyagent avec l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Chocolat & ciel » (v2.4)
+## 2. Palette — « Plâtre & brique » (v2.5, les couleurs d'origine)
 
-Trois couleurs, choisies par le client parmi quatre ambiances rendues sur le site : le **brun chocolat** du bois
-pour l'encre et les bandes sombres, le **bleu ciel** d'une pièce rendue à la lumière pour l'action, un **bleu
-profond** pour ce qui s'écrit en couleur. Le logo garde ses propres couleurs ; le site ne les reprend pas.
-Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
+Répartition : **70 % plâtre · 25 % encre · 5 % brique.** Le logo garde ses propres couleurs. Contrastes mesurés
+(WCAG 2.1), plancher du site 4.5:1.
 
 Les feuilles de composants ne nomment jamais une couleur : elles demandent un rôle (`--c-encre`, `--c-signal`,
 `--c-accent`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
 
-### Les trois couleurs
+### Les couleurs
 | Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-chocolat` | `#2B1B14` | l'encre du texte et des cadres |
-| `--c-bleu` | `#1D64A8` | l'accent écrit : liens, numéros, puces, chevrons |
-| `--c-ciel` | `#9ACDF5` | l'action : boutons d'appel, poignée du comparateur, renvoi final |
-| `--c-ciel-fonce` | `#86C0EE` | le même, une ombre plus bas : surface élevée sur la bande ciel |
+| `--c-platre` | `#EEEBE5` | le fond, plâtre frais |
+| `--c-terre` | `#27211C` | terre d'ombre : l'encre, et la nuit des bandes sombres |
+| `--c-brique` | `#9A3324` | l'action : aplat des boutons d'appel, poignée du comparateur |
+| `--c-brique-sombre` | `#86291C` | la brique écrite sur le plâtre, et le survol des boutons |
+| `--c-brique-claire` | `#E29A86` | la brique écrite sur la nuit ; terre cuite des dessins |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--c-papier` | `#FFFFFF` | fond dominant |
-| `--c-papier-2` | `#F3F8FD` | creux : survols, onglet ouvert, légendes du formulaire |
-| `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, étiquettes posées sur photo |
-| `--c-teinte` | `#D9E9F8` | aplat secondaire |
-| `--c-bitume` | `#3B2419` | chocolat : bandes sombres, pied de page, visionneuse, barre mobile |
-| `--c-bitume-2` | `#4B3125` | surface élevée dans le chocolat |
+| `--c-papier` | `#EEEBE5` | fond dominant, plâtre frais |
+| `--c-papier-2` | `#E3DFD7` | creux : sections en retrait, bande des références, survols, onglet ouvert |
+| `--c-fiche` | `#F7F5F1` | relief : cases du formulaire, étiquettes posées sur photo |
+| `--c-teinte` | `#DAD4C9` | aplat d'action : le renvoi final de chaque page |
+| `--c-bitume` | `#27211C` | nuit : bandes sombres, pied de page, visionneuse, barre mobile |
+| `--c-bitume-2` | `#342C26` | surface élevée dans la nuit |
 
-### Texte (blanc / creux / ciel pâle / pâle élevé)
+### Texte (plâtre / creux / fiche / teinte)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#2B1B14` | 16.5 / 15.5 / 14.7 / 13.4 |
-| `--c-encre-60` | `#5A4840` | 8.6 / 8.1 / 7.7 / 7.0 |
-| `--c-encre-40` | `#6E5C54` | 6.3 / 5.9 / 5.6 / 5.1 |
-| `--c-craie` | `#FFF7F2` | 13.7 sur le chocolat |
-| `--c-craie-60` | `#DCC8BB` | 9.0 sur le chocolat, 7.4 élevé |
+| `--c-encre` | `#27211C` | 13.4 / 12.0 / 14.6 / 10.8 |
+| `--c-encre-60` | `#574F47` | 6.8 / 6.0 / 7.4 / 5.5 |
+| `--c-encre-40` | `#6A6158` | 5.1 / 4.6 / 5.6 — **jamais sur la teinte (4.1)** |
+| `--c-craie` | `#EEEBE5` | 13.4 sur la nuit |
+| `--c-craie-60` | `#B8AFA4` | 7.4 sur la nuit, 6.3 sur la nuit élevée |
+| `--c-filigrane` | `#7E7368` | l'enseigne du pied, grand texte décoratif : 3.4 sur la nuit |
 
-### Bleu ciel — l'action ; bleu profond — l'accent écrit
+### Brique — l'action et l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = ciel | aplat des boutons d'appel, poignée du comparateur, sélection de texte | chocolat dessus : 9.8 |
-| `--c-signal-fonce` | = chocolat | survol des boutons d'appel : le chocolat recouvre le ciel | blanc dessus : 16.5 |
-| `--c-accent` | = bleu profond | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.1 / 5.7 / 5.4 / 4.9 |
+| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte clair dessus : 6.7 |
+| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte clair dessus : 8.2 |
+| `--c-accent` | = brique sombre | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici », outils des ouvriers | 7.5 / 6.7 / 8.2 / 6.1 |
 
-Le ciel ne s'écrit jamais sur un fond clair (1.7) : il s'y pose en aplat, texte chocolat dessus. Sur le
-chocolat, un ciel à peine plus clair (`#A8D4F7`) devient la couleur écrite (9.2) et le bouton d'appel garde son
-aplat ; au survol, c'est le blanc qui le recouvre. Sur la bande ciel, tout est chocolat et le bouton s'inverse :
-chocolat, texte blanc.
+Dans la nuit, la brique claire devient la couleur écrite (7.0) et le bouton d'appel garde son aplat de brique ;
+au survol, c'est le plâtre qui le recouvre, texte terre d'ombre (13.4). La brique **ne couvre jamais un fond de
+section** et ne s'écrit jamais en titre : elle reste aux boutons, aux marques et aux liens.
 
 ### États
-`--c-valide` `#1D7048` (6.1) · `--c-alerte` `#B42318` (6.6) · `--c-focus` = encre. Chaque fond redéfinit
+`--c-valide` `#2F6B4A` (5.3) · `--c-alerte` `#8E3B12` (6.3) · `--c-focus` = encre. Chaque fond redéfinit
 localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
 `--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %
-(3.3). Sur le chocolat, le cadre est un blanc à 40 % (3.6, au-dessus du seuil 3:1 des contours) ; sur le ciel,
-chocolat plein (9.8).
+(3.0). Dans la nuit, le cadre est un plâtre à 40 % (3.3, au-dessus du seuil 3:1 des contours).
 
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, ombres) s'écrivent
-`rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`, `rgba(var(--c-nuit-rgb), …)` : aucune
+`rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`, `rgba(var(--c-sombre-rgb), …)` : aucune
 composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est à 93 %.
 
 ## 2 bis. Rythme des fonds
@@ -149,14 +145,15 @@ Quatre fonds se relaient ; jamais deux fois le même à la suite.
 
 | Fond | Classe | Où |
 |---|---|---|
-| **Blanc** | — | couverture, et une section sur deux |
-| **Ciel pâle** `#EAF3FC` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` |
-| **Chocolat** `#3B2419` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
-| **Bleu ciel** `#9ACDF5` | `.sur-vif` | le renvoi final de chaque page : texte chocolat, bouton d'appel inversé (chocolat, texte blanc ; blanc au survol) |
+| **Plâtre** `#EEEBE5` | — | couverture, et une section sur deux |
+| **Creux** `#E3DFD7` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références |
+| **Nuit** `#27211C` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Teinte** `#DAD4C9` | `.sur-vif` | le renvoi final de chaque page : un cran sous le creux, texte encre, bouton d'appel en brique |
 
-Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. On ne place jamais
-de logos de partenaires (multipliés sur le fond) ni de formulaire sur le chocolat ou le ciel. Le logo ne va
-jamais sur le ciel : son toit rouge y jurerait. Sur le chocolat, on emploie sa déclinaison négative
+Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. Une suite de
+sections libres qui finirait sur le fond de la section imposée qui la suit part de l'autre fond (`rythme.py`) :
+ainsi la bande des références ne suit jamais un creux. On ne place jamais de logos de partenaires (multipliés sur
+le fond) ni de formulaire dans la nuit. Dans la nuit, on emploie la déclinaison négative du logo
 (`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
@@ -227,11 +224,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   (cartes, lots voisins) — jamais de case vide noire.
 - Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
   La liste des blocs concernés est unique, dans `01-socle.css`.
-- Le même carré sert de puce (listes de postes, garanties) et, en bleu profond, de marque « vous êtes ici »
+- Le même carré sert de puce (listes de postes, garanties) et, en brique, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Sur le chocolat, les repères d'angle passent au **bleu ciel** (`--c-repere`), sur la bande ciel au chocolat.
-- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en bleu
-  profond (bleu ciel sur le chocolat).
+- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, le plâtre à
+  40 % dans la nuit.
+- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en brique
+  sombre (brique claire dans la nuit).
 
 ---
 
@@ -239,8 +237,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 
 - Angles vifs, aucun arrondi, aucun filtre de couleur : les photos de chantier sont montrées telles quelles.
 - Formats : 16/9 et 16/8 (ouverture, chantier signature), 3/2 et 1/1 (fiches alternées), 4/3 (téléphone).
-- Étiquettes posées sur photo : case blanche `--c-fiche`, texte encre, sans ombre.
-- Le panneau d'un chantier signature est un **blanc dépoli** (blanc à 78 % + flou 14 px), cadré, repères aux
+- Étiquettes posées sur photo : case claire `--c-fiche`, texte encre, sans ombre.
+- Le panneau d'un chantier signature est un **plâtre dépoli** (plâtre à 78 % + flou 14 px), cadré, repères aux
   angles. C'est le seul verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
   `fetchpriority="high"`, toutes les autres en `loading="lazy"`.
@@ -257,12 +255,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    du fond s'écartent et l'image
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
-3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le fond blanc).
-4. Sections à intitulé accroché : l'entreprise, **en bande chocolat** (paragraphe d'intention + chiffres en
-   quatre cases, piquets et « + » en bleu ciel), les prestations
+3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le plâtre).
+4. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
+   quatre cases, « + » en brique claire), les prestations
    (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
-   largeur), la zone, le déroulé en quatre cases — ciel pâle et blanc en alternance.
-5. Renvoi final sur une bande bleu ciel, bouton chocolat, puis pied de page chocolat (logo négatif) et le nom de
+   largeur), la zone, le déroulé en quatre cases — creux et plâtre en alternance.
+5. Renvoi final sur la teinte, bouton d'appel en brique, puis pied de page de nuit (logo négatif) et le nom de
    l'entreprise en enseigne, en filigrane.
 
 Les pages de métier s'ouvrent de la même façon, autour du tirage de chaque métier. Les pages intérieures
@@ -302,12 +300,16 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   7 s plus tard, jamais à la même place : sur un autre sol libre à l'écran s'il y en a un, sinon ailleurs sur
   le même, pour que la page vive sans qu'on défile ; souvent, c'est un collègue resté hors de l'écran qui vient
   à sa place. Jamais deux ouvriers dans une section. Le peintre tient son rouleau à l'horizontale, contre le
-  mur ; l'électricien et le charpentier se retournent pour repartir (l'ampoule, le tréteau sont devant eux).
+  mur. Le poseur de sol, penché, pousse à petits pas un gros rouleau de revêtement : le rouleau roule, maigrit
+  à mesure qu'il se déroule, et la bande posée s'allonge derrière lui, d'un seul mouvement continu (il ne pose
+  plus de carreaux un à un). Le poseur, l'électricien et le charpentier se retournent pour repartir (le
+  rouleau, l'ampoule, le tréteau sont devant eux).
   Un bouton du pied de page met toutes les animations en pause et le site s'en souvient (WCAG 2.2.2) ; rien
   ne bouge hors de l'écran ni onglet caché. Décor seul
   (`aria-hidden`) ; mouvement réduit ou sans JavaScript : chacun saisi au milieu de sa tâche. Silhouette à
-  l'encre du fond (claire sur la bande sombre), carreaux, peinture et ampoule en `--c-aplat`, outils en
-  `--c-accent`.
+  l'encre du fond (claire dans la nuit) ; peinture, revêtement et ampoule allumée en `--c-aplat`, une terre
+  cuite (brique claire, plus sourde dans la nuit pour que la peinture se détache du rouleau) ; outils et
+  spirale du rouleau en `--c-accent`, la brique. Aucun bleu.
 
 ---
 
@@ -316,9 +318,9 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
 - Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
-- Le bleu ciel écrit sur un fond clair (1.7) : il s'y pose en aplat, jamais en texte (utiliser `--c-accent`).
-- Le logo posé sur le ciel (son toit rouge y jure) ; le logo clair sur le chocolat (utiliser le négatif).
-- Plus d'une bande ciel par page : elle est réservée au renvoi final.
+- La brique en fond de section ou en titre : elle reste aux boutons d'appel, aux marques et aux liens.
+- Le logo clair dans la nuit (utiliser le négatif).
+- Plus d'une bande de teinte par page : elle est réservée au renvoi final.
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,

@@ -37,43 +37,26 @@
  },
  "sol": {
   "os": {
-   "avant-bras-arr": "rotate(-65.31 0 -46)",
-   "avant-bras-av": "rotate(-66.76 0 -46)",
-   "bassin": "translate(0 18.4)",
-   "bras-arr": "rotate(-15.67 0 -60)",
-   "bras-av": "rotate(-34.6 0 -60)",
-   "cuisse-arr": "rotate(14 0 -36)",
-   "cuisse-av": "rotate(8 0 -36)",
-   "marcheur": "translate(16 0)",
-   "tibia-arr": "rotate(76 0 -18)",
-   "tibia-av": "rotate(82 0 -18)",
-   "torse": "rotate(58 0 -36)"
+   "avant-bras-arr": "rotate(-3.12 0 -46)",
+   "avant-bras-av": "rotate(-10.45 0 -46)",
+   "bassin": "translate(0 5.42)",
+   "bras-arr": "rotate(-74.6 0 -60)",
+   "bras-av": "rotate(-80.67 0 -60)",
+   "cuisse-arr": "rotate(-29.52 0 -36)",
+   "cuisse-av": "rotate(-36.87 0 -36)",
+   "marcheur": "translate(19.95 0)",
+   "tibia-arr": "rotate(70.42 0 -18)",
+   "tibia-av": "rotate(62.85 0 -18)",
+   "torse": "rotate(53.31 0 -36)"
   },
   "accessoires": {
-   "carreau-0": {
-    "opacity": "1",
-    "width": "16",
-    "x": "16",
-    "y": "-4.5"
+   "revetement": {
+    "width": "19.6",
+    "x": "40",
+    "y": "-3.5"
    },
-   "carreau-1": {
-    "opacity": "0",
-    "width": "16",
-    "x": "32",
-    "y": "-4.5"
-   },
-   "carreau-2": {
-    "opacity": "0",
-    "width": "16",
-    "x": "48",
-    "y": "-4.5"
-   },
-   "carreau-main": {
-    "transform": "rotate(43.36 0 -33)",
-    "opacity": "1",
-    "width": "16",
-    "x": "-8",
-    "y": "-30"
+   "rouleau-sol": {
+    "transform": "translate(59.6 -12.01) rotate(86.36) scale(0.86)"
    }
   }
  },

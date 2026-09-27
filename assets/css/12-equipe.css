@@ -50,7 +50,12 @@
 .equipe__decor rect{fill:var(--c-encre-40);stroke:none}
 .equipe__clou{stroke-width:2.5}
 .equipe__impact,.equipe__halo{stroke:var(--c-accent);stroke-width:3}
-.equipe__carreau{fill:var(--c-aplat);stroke-width:1.5}
+/* Le rouleau du poseur de sol et la bande qu'il déroule. Le script
+   réduit le rouleau à mesure : ses traits gardent leur épaisseur. */
+.equipe__revetement{fill:var(--c-aplat);stroke:none}
+.equipe__rouleau-sol circle{fill:var(--c-aplat);stroke:var(--c-accent);stroke-width:2}
+.equipe__rouleau-sol path{stroke:var(--c-accent);stroke-width:1.5}
+.equipe__rouleau-sol *{vector-effect:non-scaling-stroke}
 .equipe__ampoule{fill:var(--c-papier);stroke-width:2.5}
 .equipe__ampoule.est-allume{fill:var(--c-aplat)}
 .equipe__mur{stroke:var(--c-encre-40);stroke-width:2}

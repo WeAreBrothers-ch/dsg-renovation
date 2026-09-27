@@ -1,8 +1,9 @@
 /* ============================================================
    DSG RÉNOVATION — LES OUVRIERS DU SITE
    Des silhouettes posées çà et là, chacune dans le bas d'une section :
-   un charpentier cloue, un poseur pose trois carreaux, un électricien
-   visse une ampoule qui s'allume, un peintre passe un mur au rouleau.
+   un charpentier cloue, un poseur de sol pousse un rouleau de
+   revêtement qui se déroule, un électricien visse une ampoule qui
+   s'allume, un peintre passe un mur au rouleau.
    Chacun vit à son rythme, sans attendre le défilement : il arrive en
    quelques pas, travaille, repart en quelques pas et disparaît ; son
    ouvrage reste un moment, puis s'efface. Il revient quelques
@@ -86,13 +87,15 @@
   }
 
   /* La marche : pied d'appui fixe au sol, pied libre en arc, bassin
-     qui monte au passage de la jambe, bras en balancier. */
-  function marcher(p, phase) {
+     qui monte au passage de la jambe, bras en balancier. `pas` :
+     l'enjambée, PAS par défaut. */
+  function marcher(p, phase, pas) {
+    pas = pas || PAS;
     function pied(q) {
       q -= Math.floor(q);
-      if (q < 0.5) { return [PAS / 2 - q * 2 * PAS, 0]; }
+      if (q < 0.5) { return [pas / 2 - q * 2 * pas, 0]; }
       var u = (q - 0.5) * 2;
-      return [-PAS / 2 + u * PAS, -5 * Math.sin(Math.PI * u)];
+      return [-pas / 2 + u * pas, -5 * Math.sin(Math.PI * u) * pas / PAS];
     }
     p.pieds = [pied(phase), pied(phase + 0.5)];
     p.y = 0.6 * (1 - Math.cos(4 * Math.PI * (phase - 0.25)));
@@ -129,7 +132,7 @@
       if (typeof va === "number" && typeof vb === "number") {
         p.outil[cle] = mix(va, vb, t);
       } else if (Array.isArray(va) && Array.isArray(vb)) {
-        p.outil[cle] = [mix(va[0], vb[0], t), mix(va[1], vb[1], t)];
+        p.outil[cle] = va.map(function (v, k) { return mix(v, vb[k], t); });
       } else {
         p.outil[cle] = vb === undefined || (t < 0.5 && va !== undefined) ? va : vb;
       }
@@ -146,6 +149,26 @@
     while (ab < aa) { ab += 2 * Math.PI; }
     var angle = mix(aa, ab, k), rayon = mix(distance(centre, a), distance(centre, b), k);
     return [centre[0] + rayon * Math.cos(angle), centre[1] + rayon * Math.sin(angle)];
+  }
+
+  /* Le rouleau du poseur de sol : son centre part de `depart` et
+     avance de `course` ; son rayon passe de `plein` à `vide`, selon la
+     loi d'un rouleau qui se déroule (la surface de sa tranche diminue
+     comme la longueur posée augmente). Le poseur se penche d'autant plus
+     que le rouleau est bas, bras tendus vers l'avant, les mains posées
+     en arrière du sommet. `k` : la part du déroulé, de 0 à 1. Au départ,
+     ses pieds sont en 0, là où sa marche l'a amené. */
+  var SOL = { depart: 40, course: 40, plein: 14, vide: 9.5, pas: 9 };
+  function poseur(k) {
+    var r = Math.sqrt(SOL.plein * SOL.plein - (SOL.plein * SOL.plein - SOL.vide * SOL.vide) * k);
+    var bas = (SOL.plein - r) / (SOL.plein - SOL.vide);
+    var torse = mix(48, 60, bas), cx = SOL.depart + SOL.course * k;
+    return {
+      r: r, cx: cx, torse: torse, baisse: mix(3, 6.5, bas),
+      /* Il roule sans glisser : angle = longueur roulée / rayon. */
+      tour: 2 * SOL.course * (SOL.plein - r) / (SOL.plein * SOL.plein - SOL.vide * SOL.vide) / RAD,
+      x: cx - 24 * Math.sin(torse * RAD) - 12 - 0.7 * r
+    };
   }
 
   /* ---------- Les quatre gestes ----------
@@ -186,37 +209,33 @@
       arrivee: function (e) { return { clou: e.clou, impact: 0 }; }
     },
 
-    /* Le poseur : à genoux, assis sur ses talons, il pose trois
-       carreaux et avance d'une longueur entre chacun. */
+    /* Le poseur de sol : penché sur un gros rouleau de revêtement, les
+       deux mains dessus, il le pousse à petits pas. Le rouleau roule,
+       maigrit à mesure qu'il se déroule, et la bande posée s'allonge
+       derrière lui : rien ne saute, tout avance d'un même mouvement.
+       Il repart par où il est venu, sur la bande neuve : devant lui,
+       il y a le rouleau. */
     sol: {
-      duree: 5700, fin: 32,
+      duree: 5200, fin: poseur(1).x, demiTour: true,
       travail: function (t, p) {
-        var periode = 1900, i = Math.min(2, Math.floor(t / periode));
-        var u = (t - i * periode) / periode;
-        p.x = i === 0 ? 0 : 16 * (i - 1) + 16 * lisse(u / 0.2);
-        p.y = 18.4; p.torse = 58;
-        p.jambes = [[8, 82], [14, 76]];
-        var poitrine = [p.x + 14, -26], sol = [p.x + 24, -7.5], k;
-        if (u < 0.2) { k = 0; }
-        else if (u < 0.5) { k = lisse((u - 0.2) / 0.3); }
-        else if (u < 0.62) { k = 1; }
-        else { k = 1 - lisse((u - 0.62) / 0.3); }
-        viser(p, 0, [mix(poitrine[0], sol[0], k), mix(poitrine[1], sol[1], k)]);
-        viser(p, 1, [p.x + 16, -8]);
-        p.outil.poses = i + (u >= 0.5 ? 1 : 0);
-        p.outil.enMain = u < 0.5 || u > 0.9 && i < 2 ? 1 : 0;
+        var q = poseur(t / 5200);
+        p.x = q.x;
+        marcher(p, (p.x - poseur(0).x) / (2 * SOL.pas), SOL.pas);
+        p.torse = q.torse;
+        p.y += q.baisse;
+        viser(p, 0, [q.cx - 0.5 * q.r, -1.85 * q.r]);
+        viser(p, 1, [q.cx - 0.8 * q.r, -1.6 * q.r]);
+        p.outil.rouleau = [q.cx, q.r, q.tour];
+        p.outil.bande = q.cx - SOL.depart;
       },
-      decor: function (o, etat, fondu, pose) {
-        for (var i = 0; i < 3; i++) {
-          o.acc["carreau-" + i].setAttribute("opacity", i < (etat.poses || 0) ? n(fondu) : 0);
-        }
-        /* Le carreau reste à plat dans la main, quel que soit le bras. */
-        var penche = pose.torse + pose.bras[0][0] + pose.bras[0][1];
-        o.acc["carreau-main"].setAttribute("transform", "rotate(" + n(-penche) + " 0 -33)");
-        o.acc["carreau-main"].setAttribute("opacity", etat.enMain ? 1 : 0);
+      decor: function (o, etat) {
+        var r = etat.rouleau || [SOL.depart, SOL.plein, 0];
+        o.acc["rouleau-sol"].setAttribute("transform", "translate(" + n(r[0]) + " " + n(-r[1]) +
+          ") rotate(" + n(r[2]) + ") scale(" + n(r[1] / SOL.plein) + ")");
+        o.acc.revetement.setAttribute("width", n(Math.max(0, etat.bande || 0)));
       },
-      depart: { poses: 0, enMain: 0 },
-      arrivee: function (e) { return { poses: e.poses, enMain: 0 }; }
+      depart: { rouleau: [SOL.depart, SOL.plein, 0], bande: 0 },
+      arrivee: function (e) { return { rouleau: e.rouleau, bande: e.bande }; }
     },
 
     /* L'électricien : il visse l'ampoule, qui grésille puis s'allume ;
@@ -314,8 +333,8 @@
   }
 
   /* S'installer dans une section : un côté et une place tirés au
-     hasard, assez loin du bord pour que le mur du peintre ou les
-     carreaux du poseur tiennent dans la largeur, et loin de la place
+     hasard, assez loin du bord pour que le mur du peintre ou le
+     rouleau du poseur tiennent dans la largeur, et loin de la place
      d'avant quand c'est la même section. Il y arrive en marchant.
      Le changement de place se fait caché, et il ne se montre qu'à
      l'image suivante : il apparaît, il ne saute pas d'un endroit à
