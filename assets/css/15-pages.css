@@ -74,9 +74,10 @@
 .voisins>li{display:flex}
 .voisin{
   flex:1;display:flex;align-items:center;gap:var(--sp-4);
-  min-height:88px;padding:var(--sp-4) var(--sp-5);outline:1px solid var(--c-cadre);
+  min-height:64px;padding:var(--sp-3) var(--sp-4);outline:1px solid var(--c-cadre);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
+@media (min-width:600px){.voisin{min-height:88px;padding:var(--sp-4) var(--sp-5)}}
 @media (hover:hover) and (pointer:fine){.voisin:hover{background:var(--c-papier-2)}}
 .voisin:focus-visible{outline:2px solid var(--c-focus);outline-offset:-1px}
 .voisin__n{font-weight:500;font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;color:var(--c-accent)}

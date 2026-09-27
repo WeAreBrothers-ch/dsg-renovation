@@ -82,10 +82,12 @@ h1,h2,h3{
 /* Déclaration : un paragraphe porté à la voix des titres, qui dit en
    une phrase ce que la section va prouver. */
 .declaration{
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-declaration);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-chapo);
   letter-spacing:-.015em;line-height:1.22;max-width:22.8em;color:var(--c-encre);
   text-wrap:pretty;
 }
+/* Au téléphone, elle cède la voix au titre qui la précède. */
+@media (min-width:768px){.declaration{font-size:var(--t-declaration)}}
 
 /* Intitulé de service : une ligne de grotesque, casse normale. */
 .etiquette{

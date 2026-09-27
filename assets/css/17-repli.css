@@ -91,3 +91,26 @@
 
 /* Liste repliable : les postes d'un lot sous une seule ligne. */
 .repli--liste .repli__corps{max-width:none;font-family:var(--f-texte)}
+
+/* ------------------------------------------------------------
+   LIRE LA SUITE (outils/lecture.py)
+   Au téléphone, un texte de plusieurs paragraphes montre le premier ;
+   le reste vient d'une touche, et le bouton s'efface. Le repli tient
+   dès le premier affichage (.js) : rien ne bouge à l'arrivée du
+   script. Sans script, et dès la tablette, tout se lit d'un tenant.
+   ------------------------------------------------------------ */
+.plie__bouton{
+  display:none;align-items:center;gap:var(--sp-3);
+  min-height:44px;padding:0;background:none;border:0;cursor:pointer;
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre);
+  text-decoration:underline;text-decoration-color:var(--c-ligne-forte);
+  text-decoration-thickness:1px;text-underline-offset:5px;
+  transition:text-decoration-color var(--d-rapide) var(--e-standard);
+}
+.js [data-plie]:not(.est-deplie)>p:not(:first-child){display:none}
+.js [data-plie]:not(.est-deplie)>.plie__bouton{display:inline-flex}
+@media (hover:hover) and (pointer:fine){.plie__bouton:hover{text-decoration-color:currentColor}}
+@media (min-width:768px){
+  .js [data-plie]:not(.est-deplie)>p:not(:first-child){display:block}
+  .js [data-plie]:not(.est-deplie)>.plie__bouton{display:none}
+}

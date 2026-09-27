@@ -28,7 +28,7 @@
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com">
-<link rel="stylesheet" href="assets/css/site.css?v=9444f454">
+<link rel="stylesheet" href="assets/css/site.css?v=2960f686">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 
 <script type="application/ld+json">
@@ -236,6 +236,17 @@
         </ul>
       </div>
     </div>
+  </section>
+<nav class="sommaire" aria-label="Sur cette page" data-sommaire>
+  <ul class="sommaire__liste">
+    <li><a href="#tEntreprise">L'entreprise</a></li>
+    <li><a href="#tLots">Prestations</a></li>
+    <li><a href="#tChantier">Réalisations</a></li>
+    <li><a href="#tZone">Zone</a></li>
+    <li><a href="#tEtapes">Déroulé</a></li>
+  </ul>
+</nav>
+  <div class="couverture__suite">
 
   <figure class="ouverture" data-ouverture>
     <div class="ouverture__cadre">
@@ -301,7 +312,7 @@
       <a class="caution__lien" href="entreprise.html#references">Nos références<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-  </section>
+  </div>
 
   <section class="section sur-sombre" aria-labelledby="tEntreprise" data-sol><div class="ouvrier ouvrier--gauche" data-ouvrier aria-hidden="true"><div class="zone ouvrier__zone"><div class="ouvrier__poste" style="--place:70%"><svg class="equipe__dessin" data-metier="peinture" viewBox="-40 -128 120 132" focusable="false"><rect class="equipe__peinture" data-accessoire="peinture" x="16" y="-82" width="32.8" height="82"/><rect class="equipe__mur" x="16" y="-82" width="68" height="82"/><line class="equipe__perche" data-accessoire="perche" opacity="1" x1="42.8" y1="-61.31" x2="48.8" y2="-70.31"/><rect class="equipe__rouleau" data-accessoire="rouleau" width="16" height="6" rx="3" opacity="1" x="40.8" y="-76.31"/><g data-os="marcheur" transform="translate(28.8 0)"><g data-os="bassin" transform="translate(0 0.11)"><g class="equipe__corps"><g data-os="cuisse-arr" transform="rotate(-0.69 0 -36)"><line x1="0" y1="-36" x2="0" y2="-18"/><g data-os="tibia-arr" transform="rotate(7.12 0 -18)"><line x1="0" y1="-18" x2="0" y2="0"/></g></g><g data-os="torse" transform="rotate(5 0 -36)"><g data-os="bras-arr" transform="rotate(6.06 0 -60)"><line x1="0" y1="-60" x2="0" y2="-46"/><g data-os="avant-bras-arr" transform="rotate(-18 0 -46)"><line x1="0" y1="-46" x2="0" y2="-33"/></g></g><line x1="0" y1="-36" x2="0" y2="-64"/><circle cx="0" cy="-75" r="11"/><g data-os="bras-av" transform="rotate(-42.88 0 -60)"><line x1="0" y1="-60" x2="0" y2="-46"/><g data-os="avant-bras-av" transform="rotate(-127.36 0 -46)"><line x1="0" y1="-46" x2="0" y2="-33"/></g></g></g><g data-os="cuisse-av" transform="rotate(-33.29 0 -36)"><line x1="0" y1="-36" x2="0" y2="-18"/><g data-os="tibia-av" transform="rotate(59.97 0 -18)"><line x1="0" y1="-18" x2="0" y2="0"/></g></g></g></g></g></svg></div></div></div>
     <div class="zone">
@@ -486,7 +497,7 @@
         </div>
       </div>
       <div class="service__deux revele">
-        <div class="service__texte">
+        <div class="service__texte" data-plie>
           <p>À Lausanne, nous travaillons aussi bien dans les immeubles
           anciens de Sous-Gare, de Chauderon et du Vallon que dans les
           logements d'après-guerre de Bellevaux, de Montoie et de Vennes, et
@@ -495,7 +506,7 @@
           Prilly, Renens, Ecublens et Lutry, ainsi que sur La Côte, à Lavaux
           et jusqu'à Genève.</p>
           <p><a href="realisations.html">Voir les chantiers livrés</a>
-          dans la région.</p>
+          dans la région.</p><button class="plie__bouton" type="button">Lire la suite<span class="depliant__signe" aria-hidden="true"></span></button>
         </div>
         <ul class="lots service__villes"><li>Lausanne</li><li>Pully</li><li>Prilly</li><li>Renens</li><li>Ecublens</li><li>Épalinges</li><li>Lutry</li><li>Morges</li><li>Nyon</li><li>Vevey</li><li>Montreux</li><li>Genève</li></ul>
       </div>
@@ -570,9 +581,9 @@
         <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
-      <nav class="pied__col" aria-labelledby="piedNav">
+      <nav class="pied__col" aria-labelledby="piedNav" data-volet>
         <h3 id="piedNav">Le site</h3>
-        <ul>
+        <ul id="piedListeSite">
           <li><a href="services.html">Prestations</a></li>
           <li><a href="realisations.html">Réalisations</a></li>
           <li><a href="entreprise.html">L'entreprise</a></li>
@@ -580,9 +591,9 @@
         </ul>
       </nav>
 
-      <nav class="pied__col" aria-labelledby="piedLots">
+      <nav class="pied__col" aria-labelledby="piedLots" data-volet>
         <h3 id="piedLots">Nos prestations</h3>
-        <ul>
+        <ul id="piedListeLots">
           <li><a href="services/renovation-complete.html">Rénovation complète</a></li>
           <li><a href="services/peinture.html">Peinture &amp; revêtements</a></li>
           <li><a href="services/platrerie-cloisons.html">Plâtrerie &amp; cloisons</a></li>
@@ -593,9 +604,9 @@
         </ul>
       </nav>
 
-      <div class="pied__col">
+      <div class="pied__col" data-volet>
         <h3>Zone d'intervention</h3>
-        <ul>
+        <ul id="piedListeZones">
           <li>Lausanne &amp; Lavaux</li>
           <li>Genève</li>
           <li>Morges &amp; Nyon</li>
@@ -607,7 +618,7 @@
 
     <div class="pied__legal">
       <span>© <span class="nb" id="annee">2026</span> DSG Rénovation Sàrl — Lausanne</span>
-      <span>Professionnalisme, fiabilité et passion</span>
+      <span class="pied__devise">Professionnalisme, fiabilité et passion</span>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="confidentialite.html">Confidentialité</a>
       <button class="pied__animations" type="button" data-animations hidden>Mettre les animations en pause</button>
@@ -620,9 +631,9 @@
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
   <a class="btn btn--plein" href="devis.html#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
-<script src="assets/js/nav.js?v=21a34e98" defer></script>
+<script src="assets/js/nav.js?v=b4067ac4" defer></script>
 <script src="assets/js/motion.js?v=25ba3032" defer></script>
-<script src="assets/js/onglets.js?v=999eb74f" defer></script>
+<script src="assets/js/onglets.js?v=21de9295" defer></script>
 <script src="assets/js/equipe.js?v=4fc33c5b" defer></script>
 <script src="assets/js/comparateur.js?v=128a69bc" defer></script>
 <script src="assets/js/ouverture.js?v=cd21c479" defer></script>

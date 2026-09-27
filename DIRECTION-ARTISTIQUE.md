@@ -16,6 +16,11 @@ l'accent écrit ont chacun leur jeton, les ouvriers du site prennent la brique (
 lisibles dans l'historique git (« bleu de travail, jaune de chantier » : `9fbd8d8` ; « le toit rouge », tirée du
 logo : `d604530` ; « bleu de plan & safran » : `c322a78` ; « chocolat & ciel » : `0d52c52`).
 
+**Architecture du téléphone repensée, 27/09/2026 (v2.7).** Au téléphone, le site se lisait comme un long
+document : tout déplié, du texte d'un bout à l'autre, rien pour aller droit à une information. Une page s'y
+parcourt désormais par ses intitulés (§ 4, « Au téléphone ») : sommaire collant, premier paragraphe seul,
+suites à faire glisser, pied de page court, titres plus marqués. Le bureau n'a pas changé.
+
 ---
 
 ## 0. Référence : Tekt (tekt.com.au)
@@ -179,7 +184,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 |---|---|---|
 | `--t-couverture` | 2.5 → 5.25 rem | h1 de l'accueil, interlignage 1, crénage −0.035 em |
 | `--t-piece` | 2.25 → 4.25 rem | h1 des pages intérieures, titre du renvoi final |
-| `--t-h2` | 1.75 → 2.875 rem | titres de section |
+| `--t-h2` | 1.875 → 2.875 rem | titres de section (30 px au téléphone, pour qu'ils dominent le texte) |
 | `--t-h3` | 1.375 → 1.75 rem | titres de fiche, dépliant ouvert |
 | `--t-h4` | 1.125 → 1.3125 rem | lignes de dépliant, cartouche |
 | `--t-declaration` | 1.375 → 2 rem | paragraphe d'intention (grotesque), citations (sérif) |
@@ -209,7 +214,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - **Section type** (≥ 1024 px) : l'intitulé et sa cote dans les colonnes 1–4, **accrochés** pendant la lecture
   de la section ; titre et contenu dans les colonnes 5–12. Les blocs larges (registre, chantier signature,
   déroulé, formulaire) reprennent les 12 colonnes (`.pleine-largeur`). Sous 1024 px, tout s'empile.
-- **Rythme vertical** : `--y-bloc` `clamp(64px, 7.6vw, 128px)` en haut et en bas de chaque section.
+- **Rythme vertical** : `--y-bloc` `clamp(52px, 7.6vw, 128px)` en haut et en bas de chaque section (52 px au
+  téléphone, inchangé sur grand écran).
 - **Espacement** : échelle de 4 px (`--sp-1` 4 → `--sp-9` 96).
 - **Rayons** : **zéro**, images comprises.
 - **Ombres** : quasi absentes. `--om-1` sur la poignée du comparateur et la liste des prestations qui s'ouvre
@@ -219,10 +225,29 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   toucher, un voile de l'encre du fond répond (`-webkit-tap-highlight-color`) ; les lignes qui se creusent au
   survol se creusent aussi sous le doigt.
 - **Au téléphone** : l'en-tête s'efface quand on descend et revient dès qu'on remonte ; la barre d'action
-  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. Les chiffres se lisent
-  en deux colonnes. Les étapes d'une méthode, sauf la première, et le détail de chaque réalisation partent
-  fermés : la page se lit en intitulés, on ouvre ce qu'on veut lire (sans script, tout reste ouvert). Le
-  formulaire montre les photos choisies en vignettes, et la touche Entrée du clavier mène au champ suivant.
+  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. Une page se parcourt
+  par ses intitulés, on ouvre ce qu'on veut lire — sans script, tout reste ouvert :
+  - **Sommaire de page** : sous l'en-tête de toute page de trois sections ou plus (à l'accueil, sous le texte
+    de la couverture, avant l'image), une rangée de cases jointives reprend l'intitulé de marge de chaque
+    section. Elle colle en haut de l'écran, se loge sous l'en-tête quand il revient (un décalage, jamais un
+    changement de mise en page), porte le repère de brique sur la section en cours et mène droit à une
+    section. Chaque case a son repère, gris au repos : marquer une case ne change pas sa largeur. Elle se
+    déduit des intitulés (`outils/sommaire.py`) ; dès 1024 px, l'intitulé accroché dans la marge la remplace.
+  - **Lire la suite** : un texte courant de plusieurs paragraphes montre le premier ; le reste vient d'une
+    touche, et le focus passe au paragraphe révélé (`outils/lecture.py`). Dès la tablette, tout est déplié.
+  - **Suites à faire glisser** (sous 600 px) : le déroulé, les cartes et les besoins défilent de côté dans
+    leur cadre, chaque case calée à gauche, la suivante dépassant à droite ; les repères d'angle ne s'y
+    posent pas.
+  - **Compacité** : les chiffres gardent leur intitulé et leur valeur, sans phrase ; les réalisations passent
+    à deux par ligne ; les références à quatre logos par ligne ; le cartouche d'identité de la couverture,
+    qui répète les garanties et les chiffres, attend la tablette. Les étapes d'une méthode, sauf la première,
+    et le détail de chaque réalisation partent fermés.
+  - **Titres** : titre de section à 30 px, chapô à la taille du texte, paragraphe d'intention à celle du
+    chapô ; intitulé et titre plus proches, sections plus serrées.
+  - **Pied de page** : logo, adresse, téléphone et courriel en boutons, horaires, itinéraire ; les trois
+    listes (le site, les prestations, les zones) repliées sous leur intitulé. Il tient en moins d'un écran.
+  - Le formulaire montre les photos choisies en vignettes, et la touche Entrée du clavier mène au champ
+    suivant.
 - **Retirés en v2.2** (audit d'ergonomie) : le curseur personnalisé qui remplaçait le pointeur, les boutons
   « magnétiques », la vignette qui suivait la souris et masquait les descriptions. Les prestations montrent à
   la place une miniature fixe.
@@ -269,7 +294,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    du fond s'écartent et l'image
    s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
    pour montrer qu'elle se déplace. Légende sous l'image.
-3. Cartouche d'identité en quatre cases, puis bande des références (logos multipliés sur le plâtre).
+3. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur le
+   plâtre). Au téléphone, le sommaire de page se glisse entre le texte de la couverture et l'image.
 4. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
    quatre cases, « + » en brique claire), les prestations
    (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
@@ -338,6 +364,8 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
 - Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.
+- Un sommaire de page écrit à la main : il se déduit des intitulés de section.
+- Au téléphone, un élément qui change de largeur ou de hauteur pendant la lecture sans qu'on l'ait touché.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
   méthode en cinq temps).

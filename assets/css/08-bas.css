@@ -17,7 +17,14 @@
 }
 
 .coordonnees{display:flex;flex-direction:column;box-shadow:inset 0 0 0 1px var(--c-cadre)}
-.coordonnees__bloc{padding:var(--sp-5)}
+.coordonnees__bloc{padding:var(--sp-4)}
+/* Au téléphone, la zone d'intervention est au pied de la page et dans
+   les questions : le bloc attend la tablette. */
+.coordonnees__bloc:has(.coordonnees__zones){display:none}
+@media (min-width:768px){
+  .coordonnees__bloc{padding:var(--sp-5)}
+  .coordonnees__bloc:has(.coordonnees__zones){display:block}
+}
 .coordonnees__bloc+.coordonnees__bloc{border-top:1px solid var(--c-cadre)}
 .coordonnees h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
 .coordonnees address{display:flex;flex-direction:column;gap:var(--sp-1);color:var(--c-encre-60)}
@@ -41,20 +48,20 @@
   padding-top:var(--sp-6);padding-bottom:calc(var(--h-barre-mobile) + env(safe-area-inset-bottom));
   overflow:hidden;position:relative;
 }
-/* Au téléphone, deux colonnes plutôt qu'une pile : le pied reste
-   court. Les zones, sans lien, se lisent en une ligne. Trois colonnes
-   dès 600 px, quatre sur grand écran. */
+/* Au téléphone, une seule colonne, et courte : les coordonnées d'abord,
+   téléphone et courriel en boutons ; les trois listes se replient sous
+   leur intitulé (nav.js pose les boutons, la feuille les replie dès le
+   premier affichage pour que rien ne bouge). Trois colonnes ouvertes
+   dès 768 px, quatre sur grand écran. */
 .pied__grille{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
 .pied__grille>*{padding:var(--sp-4);background:var(--c-bitume)}
-.pied__marque{grid-column:1/-1}
-.pied__col:last-child{grid-column:1/-1}
-@media (min-width:600px){
+@media (min-width:768px){
   .pied__grille{grid-template-columns:repeat(3,minmax(0,1fr))}
   .pied__grille>*{padding:var(--sp-5)}
-  .pied__col:last-child{grid-column:auto}
+  .pied__marque{grid-column:1/-1}
 }
 @media (min-width:1024px){
   .pied__grille{grid-template-columns:1.6fr 1fr 1fr 1fr}
@@ -63,16 +70,28 @@
 
 /* Sur le fond sombre, la déclinaison négative du logo : lettres blanches,
    toit du logo conservé (assets/images/logo-negatif.webp). */
-.pied__marque img{height:40px;width:auto;margin-bottom:var(--sp-4)}
-.pied address{display:flex;flex-direction:column;color:var(--c-encre-60)}
-.pied address a,.pied address span{display:inline-block;padding-block:var(--sp-2)}
-.pied address a{display:inline-flex;align-items:center}
-.pied address a{transition:color var(--d-rapide) var(--e-standard)}
-.pied address a:hover{color:var(--c-encre)}
+.pied__marque img{height:32px;width:auto;margin-bottom:var(--sp-3)}
+.pied address{
+  display:flex;flex-wrap:wrap;gap:var(--sp-2);color:var(--c-encre-60);
+}
+.pied address span{flex:0 0 100%;padding-bottom:var(--sp-1)}
+.pied address a{
+  display:inline-flex;align-items:center;padding:var(--sp-2) 10px;
+  border:1px solid var(--c-ligne-forte);color:var(--c-encre);
+  transition:color var(--d-rapide) var(--e-standard),border-color var(--d-rapide) var(--e-standard);
+}
+.pied address a:hover{color:var(--c-encre);border-color:currentColor}
+@media (min-width:768px){
+  .pied__marque img{height:40px;margin-bottom:var(--sp-4)}
+  .pied address{flex-direction:column;flex-wrap:nowrap;gap:0}
+  .pied address a,.pied address span{display:inline-block;flex:initial;padding:var(--sp-2) 0;border:0;color:inherit}
+  .pied address a{display:inline-flex;align-items:center}
+  .pied address a:hover{color:var(--c-encre)}
+}
 .pied__col h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
 .pied__col ul{margin-top:var(--sp-3);display:flex;flex-direction:column}
 .pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
-@media (min-width:600px){.pied__col:last-child ul{flex-direction:column;flex-wrap:nowrap;gap:normal}}
+@media (min-width:768px){.pied__col:last-child ul{flex-direction:column;flex-wrap:nowrap;gap:normal}}
 .pied__col li{font-size:var(--t-petit);color:var(--c-encre-60)}
 .pied__col li:not(:has(a)){padding-block:var(--sp-1)}
 .pied__col a{
@@ -80,22 +99,57 @@
   transition:color var(--d-rapide) var(--e-standard);
 }
 .pied__col a:hover,.pied__col a[aria-current]{color:var(--c-encre)}
-.pied__horaires{margin-top:var(--sp-4);color:var(--c-encre-60)}
+
+/* Les volets du téléphone : l'intitulé devient un bouton sur toute la
+   largeur de sa case, la liste se déplie dessous. */
+.js .pied__col[data-volet]{padding-block:0}
+.js .pied__col[data-volet]:not(.est-ouvert) ul{display:none}
+.js .pied__col[data-volet] ul{margin-top:0;padding-bottom:var(--sp-3)}
+.pied__bascule{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
+  width:100%;min-height:52px;padding:0;background:none;border:0;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+}
+.pied__signe{position:relative;width:12px;height:12px;flex:0 0 auto}
+.pied__signe::before,.pied__signe::after{
+  content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;
+  background:currentColor;transition:transform var(--d-normal) var(--e-sortie);
+}
+.pied__signe::after{transform:rotate(90deg)}
+.est-ouvert .pied__signe::after{transform:rotate(0)}
+@media (min-width:768px){
+  .js .pied__col[data-volet]{padding-block:var(--sp-5)}
+  .js .pied__col[data-volet]:not(.est-ouvert) ul{display:flex}
+  .js .pied__col[data-volet] ul{margin-top:var(--sp-3);padding-bottom:0}
+}
+
+.pied__horaires{margin-top:var(--sp-3);color:var(--c-encre-60)}
 .pied__itineraire{
-  display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);padding-block:var(--sp-2);
+  display:inline-flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-1);padding-block:var(--sp-2);
   font-size:var(--t-petit);color:var(--c-encre);
   text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
   transition:text-decoration-color var(--d-rapide) var(--e-standard);
 }
 .pied__itineraire:hover{text-decoration-color:currentColor}
+@media (min-width:768px){
+  .pied__horaires{margin-top:var(--sp-4)}
+  .pied__itineraire{margin-top:var(--sp-2)}
+}
 
 .pied__legal{
-  margin-top:var(--sp-4);
-  display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-2) var(--sp-5);justify-content:space-between;
+  margin-top:var(--sp-3);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--sp-5);justify-content:flex-start;
   font-size:var(--t-petit);color:var(--c-encre-60);
 }
+.pied__legal>span:first-child{flex:0 0 100%;padding-block:var(--sp-2)}
+.pied__devise{display:none}
 .pied__legal a{display:inline-flex;align-items:center;padding-block:var(--sp-2);transition:color var(--d-rapide) var(--e-standard)}
 .pied__legal a:hover,.pied__legal a[aria-current]{color:var(--c-encre)}
+@media (min-width:768px){
+  .pied__legal{margin-top:var(--sp-4);gap:var(--sp-2) var(--sp-5);justify-content:space-between}
+  .pied__legal>span:first-child{flex:initial;padding-block:0}
+  .pied__devise{display:inline}
+}
 
 /* Le nom de l'entreprise, à l'échelle d'une enseigne. Il ferme le
    pied sur toute la largeur et se laisse rogner par le bas. */

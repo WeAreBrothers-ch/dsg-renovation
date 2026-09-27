@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=9444f454">
+<link rel="stylesheet" href="assets/css/site.css?v=2960f686">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 
 <script type="application/ld+json">
@@ -407,6 +407,19 @@
       </div>
     </div>
   </header>
+<nav class="sommaire" aria-label="Sur cette page" data-sommaire>
+  <ul class="sommaire__liste">
+    <li><a href="#tDemande">Votre demande</a></li>
+    <li><a href="#tContient">Le devis</a></li>
+    <li><a href="#tComparer">Comparer</a></li>
+    <li><a href="#tPreparer">La visite</a></li>
+    <li><a href="#avant-le-devis">Avant le devis</a></li>
+    <li><a href="#pendant-le-chantier">Pendant le chantier</a></li>
+    <li><a href="#prix-et-paiement">Prix et paiement</a></li>
+    <li><a href="#apres-la-livraison">Après la livraison</a></li>
+  </ul>
+</nav>
+
 
   <section class="section sur-pale" aria-labelledby="tDemande" data-sol>
     <div class="zone">
@@ -771,7 +784,7 @@
           <p class="intercalaire__cote">Zone, gratuité, délais</p>
         </div>
         <div class="intercalaire__corps revele">
-          <h2 class="h2" data-lignes>Avant de <br>nous appeler</h2>
+          <h2 id="avant-le-devis" class="h2" data-lignes>Avant de <br>nous appeler</h2>
           
         </div>
       </div>
@@ -833,7 +846,7 @@
           <p class="intercalaire__cote">Organisation, nuisances, présence</p>
         </div>
         <div class="intercalaire__corps revele">
-          <h2 class="h2" data-lignes>Pendant <br>les travaux</h2>
+          <h2 id="pendant-le-chantier" class="h2" data-lignes>Pendant <br>les travaux</h2>
           
         </div>
       </div>
@@ -895,7 +908,7 @@
           <p class="intercalaire__cote">Devis, suppléments, échéances</p>
         </div>
         <div class="intercalaire__corps revele">
-          <h2 class="h2" data-lignes>Ce que ça <br>coûte</h2>
+          <h2 id="prix-et-paiement" class="h2" data-lignes>Ce que ça <br>coûte</h2>
           
         </div>
       </div>
@@ -957,7 +970,7 @@
           <p class="intercalaire__cote">Fin des travaux, défauts, régies</p>
         </div>
         <div class="intercalaire__corps revele">
-          <h2 class="h2" data-lignes>Une fois <br>le chantier livré</h2>
+          <h2 id="apres-la-livraison" class="h2" data-lignes>Une fois <br>le chantier livré</h2>
           
         </div>
       </div>
@@ -1027,9 +1040,9 @@
         <a class="pied__itineraire" href="https://www.google.com/maps/search/?api=1&amp;query=Avenue+de+B%C3%A9thusy+60%2C+1012+Lausanne" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
-      <nav class="pied__col" aria-labelledby="piedNav">
+      <nav class="pied__col" aria-labelledby="piedNav" data-volet>
         <h3 id="piedNav">Le site</h3>
-        <ul>
+        <ul id="piedListeSite">
           <li><a href="services.html">Prestations</a></li>
           <li><a href="realisations.html">Réalisations</a></li>
           <li><a href="entreprise.html">L'entreprise</a></li>
@@ -1037,9 +1050,9 @@
         </ul>
       </nav>
 
-      <nav class="pied__col" aria-labelledby="piedLots">
+      <nav class="pied__col" aria-labelledby="piedLots" data-volet>
         <h3 id="piedLots">Nos prestations</h3>
-        <ul>
+        <ul id="piedListeLots">
           <li><a href="services/renovation-complete.html">Rénovation complète</a></li>
           <li><a href="services/peinture.html">Peinture &amp; revêtements</a></li>
           <li><a href="services/platrerie-cloisons.html">Plâtrerie &amp; cloisons</a></li>
@@ -1050,9 +1063,9 @@
         </ul>
       </nav>
 
-      <div class="pied__col">
+      <div class="pied__col" data-volet>
         <h3>Zone d'intervention</h3>
-        <ul>
+        <ul id="piedListeZones">
           <li>Lausanne &amp; Lavaux</li>
           <li>Genève</li>
           <li>Morges &amp; Nyon</li>
@@ -1064,7 +1077,7 @@
 
     <div class="pied__legal">
       <span>© <span class="nb" id="annee">2026</span> DSG Rénovation Sàrl — Lausanne</span>
-      <span>Professionnalisme, fiabilité et passion</span>
+      <span class="pied__devise">Professionnalisme, fiabilité et passion</span>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="confidentialite.html">Confidentialité</a>
       <button class="pied__animations" type="button" data-animations hidden>Mettre les animations en pause</button>
@@ -1077,9 +1090,9 @@
   <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
   <a class="btn btn--plein" href="#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
-<script src="assets/js/nav.js?v=21a34e98" defer></script>
+<script src="assets/js/nav.js?v=b4067ac4" defer></script>
 <script src="assets/js/motion.js?v=25ba3032" defer></script>
-<script src="assets/js/onglets.js?v=999eb74f" defer></script>
+<script src="assets/js/onglets.js?v=21de9295" defer></script>
 <script src="assets/js/equipe.js?v=4fc33c5b" defer></script>
 <script src="assets/js/formulaire.js?v=89c0c50e" defer></script>
 </body>

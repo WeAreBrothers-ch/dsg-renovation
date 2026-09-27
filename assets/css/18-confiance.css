@@ -16,14 +16,20 @@
   padding-block:var(--sp-7) 0;
 }
 .caution__titre{grid-column:1/-1;font-weight:500;color:var(--c-encre)}
+/* Au téléphone, quatre logos par rangée : deux rangées au lieu de trois. */
 .caution .partenaires__grille{
   grid-column:1/-1;
   display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;
-  gap:var(--sp-3) var(--sp-5);
+  gap:var(--sp-3) var(--sp-4);
 }
 .caution .partenaires__grille li{height:40px}
-.caution .partenaires__grille img{max-height:24px;max-width:96px}
-.caution .partenaires__carre img{width:96px;height:24px;max-height:none}
+.caution .partenaires__grille img{max-height:24px;max-width:72px}
+.caution .partenaires__carre img{width:72px;height:24px;max-height:none}
+@media (min-width:480px){
+  .caution .partenaires__grille{gap:var(--sp-3) var(--sp-5)}
+  .caution .partenaires__grille img{max-width:96px}
+  .caution .partenaires__carre img{width:96px}
+}
 .caution__lien{
   grid-column:1/-1;justify-self:start;
   display:inline-flex;align-items:center;gap:var(--sp-3);min-height:44px;
@@ -42,14 +48,18 @@
    DÉROULÉ EN QUATRE TEMPS
    Quatre cases d'un même cadre, repères aux angles : le rang et
    le délai en tête, puis ce qui se passe.
+   Au téléphone, les cases défilent de côté dans le cadre (voir
+   « Suites à faire glisser », 16-composants.css) : un temps et le
+   bord du suivant à l'écran, plutôt que quatre cases empilées. Deux
+   par ligne dès 600 px, quatre sur grand écran.
    ------------------------------------------------------------ */
 .etapes{
-  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
+  display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
 .etape{
   display:flex;flex-direction:column;gap:var(--sp-3);
-  min-height:0;padding:var(--sp-5) var(--sp-5) var(--sp-6);background:var(--c-papier);
+  min-height:0;padding:var(--sp-4) var(--sp-4) var(--sp-5);background:var(--c-papier);
 }
 .etape__tete{
   display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-3);
@@ -64,8 +74,8 @@
 }
 .etape__texte{font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.5;color:var(--c-encre-60)}
 @media (min-width:600px){
-  .etapes{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .etape{min-height:280px}
+  .etapes{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .etape{min-height:280px;padding:var(--sp-5) var(--sp-5) var(--sp-6)}
   .etape__titre{padding-top:var(--sp-7)}
 }
 @media (min-width:1024px){.etapes{grid-template-columns:repeat(4,minmax(0,1fr))}}

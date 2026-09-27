@@ -3,6 +3,9 @@
 Séparé du gabarit pour que chaque fichier reste lisible d'une traite.
 Le pied porte ce qu'un visiteur cherche en dernier recours avant
 d'appeler : l'adresse, les horaires et le chemin jusqu'à l'atelier.
+Au téléphone, ces coordonnées restent en vue et les trois listes
+(data-volet) se replient sous leur intitulé (nav.js) : le pied tient
+en un écran.
 """
 
 from gabarit_liens import vers_devis
@@ -45,23 +48,23 @@ def pied(base, courante, services):
         <a class="pied__itineraire" href="{ITINERAIRE}" target="_blank" rel="noopener">Itinéraire vers l'atelier<span class="visuellement-cache"> (nouvel onglet)</span><span class="fleche" aria-hidden="true"></span></a>
       </div>
 
-      <nav class="pied__col" aria-labelledby="piedNav">
+      <nav class="pied__col" aria-labelledby="piedNav" data-volet>
         <h3 id="piedNav">Le site</h3>
-        <ul>
+        <ul id="piedListeSite">
           {sommaire}
         </ul>
       </nav>
 
-      <nav class="pied__col" aria-labelledby="piedLots">
+      <nav class="pied__col" aria-labelledby="piedLots" data-volet>
         <h3 id="piedLots">Nos prestations</h3>
-        <ul>
+        <ul id="piedListeLots">
           {lots}
         </ul>
       </nav>
 
-      <div class="pied__col">
+      <div class="pied__col" data-volet>
         <h3>Zone d'intervention</h3>
-        <ul>
+        <ul id="piedListeZones">
           {zones}
         </ul>
       </div>
@@ -69,7 +72,7 @@ def pied(base, courante, services):
 
     <div class="pied__legal">
       <span>© <span class="nb" id="annee">2026</span> {MARQUE} Sàrl — {VILLE}</span>
-      <span>Professionnalisme, fiabilité et passion</span>
+      <span class="pied__devise">Professionnalisme, fiabilité et passion</span>
       {legal}
       <button class="pied__animations" type="button" data-animations hidden>Mettre les animations en pause</button>
     </div>

@@ -6,7 +6,9 @@
 
 /* ------------------------------------------------------------
    REGISTRE DES RÉALISATIONS
-   Une fiche par ligne au téléphone, deux dès 640 px. Sur grand écran,
+   Deux fiches par ligne dès le téléphone : quatre chantiers à
+   l'écran, en photos, plutôt qu'un et demi ; la fiche s'y resserre
+   et son détail s'ouvre à la demande. Sur grand écran,
    les fiches n'ont pas toutes le même poids : la grille alterne une
    fiche large et une étroite, puis s'inverse.
    ------------------------------------------------------------ */
@@ -16,11 +18,27 @@
 }
 .chantiers__compte{font-size:var(--t-petit);color:var(--c-encre-60)}
 .chantiers__grille{
-  display:grid;grid-template-columns:minmax(0,1fr);
-  column-gap:var(--grille-goutt);row-gap:var(--sp-7);align-items:start;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:var(--sp-3);row-gap:var(--sp-5);align-items:start;
 }
 .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
-@media (min-width:640px){.chantiers__grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chantiers__grille .chemise__onglet{padding:var(--sp-1) var(--sp-2)}
+.chantiers__grille .chemise__fiche{gap:var(--sp-3);padding:var(--sp-3)}
+.chantiers__grille .chemise__fiche .h4{font-size:var(--t-ui)}
+.chantiers__grille .chemise__meta{font-size:var(--t-etiquette)}
+.chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-2);font-size:var(--t-etiquette)}
+.chantiers__grille .depliant__tete{font-size:var(--t-etiquette)}
+.chantiers__grille .depliant__corps p{font-size:var(--t-petit)}
+@media (min-width:640px){
+  .chantiers__grille{column-gap:var(--grille-goutt);row-gap:var(--sp-7)}
+  .chantiers__grille .chemise__onglet{padding:var(--sp-2) var(--sp-3)}
+  .chantiers__grille .chemise__fiche{gap:var(--sp-4);padding:var(--sp-5)}
+  .chantiers__grille .chemise__fiche .h4{font-size:var(--t-h4)}
+  .chantiers__grille .chemise__meta{font-size:var(--t-petit)}
+  .chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-3);font-size:var(--t-petit)}
+  .chantiers__grille .depliant__tete{font-size:var(--t-petit)}
+  .chantiers__grille .depliant__corps p{font-size:var(--t-texte)}
+}
 @media (min-width:1024px){
   .chantiers__grille{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:var(--sp-8)}
   .chantiers__grille>.chemise{grid-column:span 2}
@@ -69,21 +87,26 @@
    fichiers disparaît dans le fond sans toucher à l'encre.
    ------------------------------------------------------------ */
 .partenaires{padding-block:var(--sec-y);background:var(--c-papier-2)}
-/* Deux logos par ligne au téléphone, quatre dès 480 px, sept sur
-   grand écran. */
+/* Quatre logos par ligne dès le téléphone, plus petits : deux rangées
+   plutôt que quatre. Sept sur grand écran. */
 .partenaires__grille{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:var(--sp-6) var(--sp-5);align-items:center;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--sp-4) var(--sp-3);align-items:center;
 }
-.partenaires__grille li{display:grid;place-items:center;height:50px}
+.partenaires__grille li{display:grid;place-items:center;height:40px}
 .partenaires__grille img{
-  max-height:44px;max-width:100%;width:auto;object-fit:contain;
+  max-height:32px;max-width:100%;width:auto;object-fit:contain;
   filter:grayscale(1) contrast(1.15);mix-blend-mode:multiply;opacity:.72;
   transition:opacity var(--d-rapide) var(--e-standard);
 }
-.partenaires__carre img{width:160px;height:44px;max-width:100%;object-fit:cover}
+.partenaires__carre img{width:160px;height:32px;max-width:100%;object-fit:cover}
 @media (hover:hover) and (pointer:fine){.partenaires__grille li:hover img{opacity:1}}
-@media (min-width:480px){.partenaires__grille{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:480px){
+  .partenaires__grille{gap:var(--sp-6) var(--sp-5)}
+  .partenaires__grille li{height:50px}
+  .partenaires__grille img{max-height:44px}
+  .partenaires__carre img{height:44px}
+}
 @media (min-width:1024px){.partenaires__grille{grid-template-columns:repeat(7,minmax(0,1fr))}}
 
 /* ------------------------------------------------------------

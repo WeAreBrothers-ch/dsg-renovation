@@ -73,6 +73,8 @@ python3 -m http.server     # puis http://localhost:8000
 | `contenu_divers.py` | ordre des travaux, besoins, familles de biens, collaborations |
 | `assemblage.py` | feuille unique, versions, assemblage et écriture d'une page |
 | `rythme.py` | alternance automatique des fonds blanc / pâle |
+| `sommaire.py` | sommaire de page du téléphone, déduit des intitulés de section |
+| `lecture.py` | « Lire la suite » : au téléphone, un texte long montre son premier paragraphe |
 | `typographie.py` | espaces insécables avant « : ; ? ! » et dans les guillemets |
 | `images.py` | remplace les images Wix par leurs copies locales (srcset compris) |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
@@ -156,13 +158,39 @@ Vérifié à 320, 360, 390, 414 px, en paysage et sur tablette : aucun
 débordement, décalage de mise en page nul, accessibilité et
 référencement à 100 dans Lighthouse (mobile).
 
+Au téléphone, une page se parcourt par ses intitulés plutôt que d'un
+bout à l'autre :
+
+- **Sommaire de page** (`sommaire.py`, `nav.js`) : sous l'en-tête de
+  chaque page de trois sections ou plus — à l'accueil, sous le texte de
+  la couverture —, une rangée de cases reprend l'intitulé de chaque
+  section. Elle reste en haut de l'écran, marque la section en cours et
+  mène droit à celle qu'on touche. Elle disparaît dès 1024 px, où
+  l'intitulé accroché dans la marge fait ce travail.
+- **Lire la suite** (`lecture.py`, `onglets.js`) : un texte de plusieurs
+  paragraphes montre le premier ; le reste vient d'une touche. Tout le
+  texte reste dans la page, pour Google comme sans script.
+- **Suites à faire glisser** : le déroulé, les cartes et les besoins
+  défilent de côté ; les réalisations passent à deux par ligne, les
+  références à quatre logos par ligne, les chiffres à leur seul
+  intitulé.
+- **Pied de page court** : coordonnées en boutons, les trois listes
+  repliées sous leur intitulé (`nav.js`).
+- **Titres plus marqués** : titres de section à 30 px, chapô à la
+  taille du texte, sections plus serrées.
+
+Les pages ont raccourci d'un quart à deux cinquièmes à 390 px de
+large (accueil 8 874 → 6 704 px, prestations 7 027 → 4 867,
+réalisations 9 526 → 5 751, pied de page 1 179 → 708) ; le bureau n'a
+pas bougé d'un pixel.
+
 ## Comportements
 
 | Fichier | Rôle |
 |---|---|
-| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone |
+| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone, sommaire de page (position, section en cours, saut), volets du pied de page |
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
-| `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`) |
+| `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `ouverture.js` | l'image d'ouverture s'élargit au défilement |
 | `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier) |

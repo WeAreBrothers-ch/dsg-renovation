@@ -66,8 +66,8 @@
    grand écran, l'intitulé reste accroché pendant la lecture de
    la section : on sait toujours où l'on est.
    ------------------------------------------------------------ */
-.intercalaire{margin-bottom:var(--sp-8)}
-.intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-5)}
+.intercalaire{margin-bottom:var(--sp-6)}
+.intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-3)}
 /* L'intitulé porte le toit du logo : un chevron, la ligne qui coiffe
    « DSG ». Il prend la couleur d'accent du fond (--c-accent). */
 .intercalaire__nom{
@@ -84,7 +84,14 @@
   font-family:var(--f-texte);font-size:var(--t-ui);color:var(--c-encre-60);
 }
 .intercalaire h2{font-size:var(--t-h2);max-width:14.8em}
-.intercalaire__chapo{margin-top:var(--sp-5)}
+/* Au téléphone, le chapeau se lit à la taille du texte : le titre
+   domine, et l'on arrive plus vite au contenu. */
+.intercalaire__chapo{margin-top:var(--sp-4);font-size:var(--t-texte)}
+@media (min-width:768px){
+  .intercalaire{margin-bottom:var(--sp-8)}
+  .intercalaire__marge{margin-bottom:var(--sp-5)}
+  .intercalaire__chapo{margin-top:var(--sp-5);font-size:var(--t-chapo)}
+}
 
 @media (min-width:1024px){
   .zone:has(>.intercalaire){

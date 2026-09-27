@@ -231,3 +231,68 @@
 .barre-mobile .btn{flex:1;min-height:var(--h-barre-mobile);padding-inline:var(--sp-4);gap:var(--sp-3);font-size:var(--t-petit)}
 .barre-mobile .btn--cadre{box-shadow:none;background:var(--c-papier)}
 @media (min-width:1024px){.barre-mobile{display:none}}
+
+/* ------------------------------------------------------------
+   SOMMAIRE DE PAGE (outils/sommaire.py)
+   Au téléphone et sur tablette, les sections de la page en cases
+   jointives, comme l'en-tête : on voit d'un coup d'œil ce que la page
+   contient, et l'on va droit à ce qu'on cherche. La rangée se loge
+   sous l'en-tête et y reste ; quand l'en-tête s'efface, elle monte à
+   sa place (nav.js la décale, sans rien pousser). La section en cours
+   porte le repère de couleur. La rangée défile d'un geste ; un fondu
+   dit, de chaque côté, qu'il y a d'autres cases.
+   ------------------------------------------------------------ */
+.sommaire{
+  position:sticky;top:calc(var(--h-entete) - var(--sp-2));z-index:50;
+  background:rgba(var(--c-papier-rgb),.97);
+  border-bottom:1px solid var(--c-ligne);
+}
+@supports (backdrop-filter:blur(1px)){
+  .sommaire{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
+}
+.sommaire.est-anime{transition:transform var(--d-normal) var(--e-sortie)}
+.sommaire__liste{
+  position:relative;display:flex;overflow-x:auto;scrollbar-width:none;
+  padding:var(--sp-2) var(--grille-marge);scroll-padding-inline:var(--grille-marge);
+}
+.sommaire__liste::-webkit-scrollbar{display:none}
+.sommaire__liste.a-droite{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 48px),transparent)}
+.sommaire__liste.a-gauche{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 48px),transparent)}
+.sommaire__liste.a-gauche.a-droite{
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 48px,#000 calc(100% - 48px),transparent);
+  mask-image:linear-gradient(to right,transparent,#000 48px,#000 calc(100% - 48px),transparent);
+}
+.sommaire__liste li{flex:0 0 auto}
+.sommaire__liste a{
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  min-height:44px;padding:0 var(--sp-4);margin-right:-1px;
+  box-shadow:inset 0 0 0 1px var(--c-cadre);
+  font-weight:500;font-size:var(--t-nav);color:var(--c-encre-60);white-space:nowrap;
+  transition:color var(--d-rapide) var(--e-standard),background-color var(--d-rapide) var(--e-standard);
+}
+/* Chaque case a son repère, gris ; celui de la section en cours
+   prend la couleur. Il est toujours là : marquer une case ne change
+   pas sa largeur, et la rangée ne bouge pas pendant la lecture. */
+.sommaire__liste a::before{
+  content:"";width:var(--repere);height:var(--repere);background:var(--c-ligne-forte);
+  transition:background-color var(--d-rapide) var(--e-standard);
+}
+.sommaire__liste a[aria-current]{color:var(--c-encre);background:var(--c-papier-2)}
+.sommaire__liste a[aria-current]::before{background:var(--c-accent)}
+@media (hover:hover) and (pointer:fine){
+  .sommaire__liste a:hover{color:var(--c-encre);background:var(--c-papier-2)}
+}
+.sommaire__liste a:focus-visible{outline-offset:-4px}
+/* Collée juste sous les cases de l'en-tête (sa hauteur, moins l'air
+   qu'il laisse sous elles) ; les ancres atterrissent sous les deux. */
+html:has(.sommaire){scroll-padding-top:calc(var(--h-entete) + 61px + var(--sp-4))}
+/* Téléphone couché : l'écran est trop court pour une rangée de plus
+   en haut ; elle reste à sa place dans la page. */
+@media (orientation:landscape) and (max-height:500px) and (hover:none){
+  .sommaire{position:relative;top:auto}
+  html:has(.sommaire){scroll-padding-top:calc(var(--h-entete) + var(--sp-6))}
+}
+@media (min-width:1024px){
+  .sommaire{display:none}
+  html:has(.sommaire){scroll-padding-top:calc(var(--h-entete) + var(--sp-6))}
+}
