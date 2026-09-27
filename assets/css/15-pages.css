@@ -8,13 +8,14 @@
 
 /* ------------------------------------------------------------
    DEUX COLONNES — texte tenu à la mesure, liste à côté
+   Au téléphone et sur tablette, la liste passe sous le texte.
    ------------------------------------------------------------ */
 .service__deux{
-  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
-  gap:var(--grille-goutt) var(--sp-8);align-items:start;
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:var(--sp-7);align-items:start;
 }
-@media (max-width:1023px){
-  .service__deux{grid-template-columns:minmax(0,1fr);gap:var(--sp-7)}
+@media (min-width:1024px){
+  .service__deux{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--grille-goutt) var(--sp-8)}
 }
 .service__texte{
   max-width:62ch;font-family:var(--f-lecture);font-size:var(--t-texte);
@@ -115,21 +116,25 @@
 
 /* ------------------------------------------------------------
    RENVOI DE FIN DE PAGE
-   Une bande de la couleur d'action (.sur-vif, posée par le générateur) :
-   la page se referme sur la question qu'on attend du visiteur. Le
-   fond vient de la classe de contexte ; sans elle, la bande est
-   blanche.
+   Une bande de teinte, l'aplat d'action (.sur-vif, posée par le
+   générateur) : la page se referme sur la question qu'on attend du
+   visiteur. Le fond vient de la classe de contexte ; sans elle, la
+   bande prend celui de la page. Au téléphone, les boutons s'empilent,
+   pleine largeur, sous le pouce.
    ------------------------------------------------------------ */
 .rappel{background:var(--c-papier)}
 .rappel__grille{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:var(--sp-5) var(--grille-goutt);align-items:start;
 }
-.rappel__marge{grid-column:1/5;padding-top:.6em}
-.rappel__corps{grid-column:5/13}
+.rappel__marge{grid-column:1/-1;padding-top:.6em}
+.rappel__corps{grid-column:1/-1}
 .rappel__titre{font-size:var(--t-piece);letter-spacing:-.035em;line-height:1.02;max-width:10.7em}
 .rappel .chapo{margin-top:var(--sp-5)}
-.rappel__actions{margin-top:var(--sp-6);display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+.rappel__actions{margin-top:var(--sp-6);display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--sp-3)}
 .rappel__actions .btn{min-width:min(100%,260px)}
-@media (max-width:1023px){.rappel__marge,.rappel__corps{grid-column:1/-1}}
-@media (max-width:767px){.rappel__actions{flex-direction:column}}
+@media (min-width:768px){.rappel__actions{flex-direction:row}}
+@media (min-width:1024px){
+  .rappel__marge{grid-column:1/5}
+  .rappel__corps{grid-column:5/13}
+}

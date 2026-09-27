@@ -200,7 +200,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 
 ## 4. Grille, espacement, rayons, ombres
 
-- **Grille** : 12 colonnes, gouttière 24 / 20 / 16 px, contenu 1600 px max, marge `clamp(16px, 3.3vw, 48px)`.
+- **Mobile d'abord** (v2.6, 27/09/2026) : chaque feuille décrit d'abord le téléphone ; les écrans plus larges
+  s'ajoutent par `min-width`, jamais l'inverse (aucune requête `max-width` pour la mise en page). Paliers :
+  400, 480, 600, 640, 768, 1024, 1280, 1440 px. Le bureau n'a pas bougé d'un pixel dans la réécriture.
+- **Grille** : 4 colonnes au téléphone, 8 dès 768 px, 12 dès 1024 px ; gouttière 16 / 20 / 24 px (768, 1280) ;
+  contenu 1600 px max ; marge `clamp(16px, 3.3vw, 48px)`, élargie s'il le faut pour que rien ne passe sous
+  l'encoche d'un téléphone couché (`env(safe-area-inset-*)`, `viewport-fit=cover`).
 - **Section type** (≥ 1024 px) : l'intitulé et sa cote dans les colonnes 1–4, **accrochés** pendant la lecture
   de la section ; titre et contenu dans les colonnes 5–12. Les blocs larges (registre, chantier signature,
   déroulé, formulaire) reprennent les 12 colonnes (`.pleine-largeur`). Sous 1024 px, tout s'empile.
@@ -209,6 +214,15 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - **Rayons** : **zéro**, images comprises.
 - **Ombres** : quasi absentes. `--om-1` sur la poignée du comparateur et la liste des prestations qui s'ouvre
   sous « Prestations ». Rien d'autre ne flotte.
+- **Au doigt** : toute cible qui se touche seule (hors d'un lien pris dans une phrase) mesure **44 px** de
+  haut au moins sur un écran tactile ; avec une souris, les listes reprennent leur espacement serré. Au
+  toucher, un voile de l'encre du fond répond (`-webkit-tap-highlight-color`) ; les lignes qui se creusent au
+  survol se creusent aussi sous le doigt.
+- **Au téléphone** : l'en-tête s'efface quand on descend et revient dès qu'on remonte ; la barre d'action
+  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. Les chiffres se lisent
+  en deux colonnes. Les étapes d'une méthode, sauf la première, et le détail de chaque réalisation partent
+  fermés : la page se lit en intitulés, on ouvre ce qu'on veut lire (sans script, tout reste ouvert). Le
+  formulaire montre les photos choisies en vignettes, et la touche Entrée du clavier mène au champ suivant.
 - **Retirés en v2.2** (audit d'ergonomie) : le curseur personnalisé qui remplaçait le pointeur, les boutons
   « magnétiques », la vignette qui suivait la souris et masquait les descriptions. Les prestations montrent à
   la place une miniature fixe.
@@ -322,6 +336,8 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Le logo clair dans la nuit (utiliser le négatif).
 - Plus d'une bande de teinte par page : elle est réservée au renvoi final.
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
+- Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
+- Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
   méthode en cinq temps).

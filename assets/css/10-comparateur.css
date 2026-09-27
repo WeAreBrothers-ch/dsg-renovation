@@ -61,14 +61,16 @@
 /* ------------------------------------------------------------
    COMPARATEUR
    ------------------------------------------------------------ */
+/* Plus haut que large au téléphone (4/3) : la pièce se lit mieux dans
+   un écran étroit ; panoramique (16/9) dès la tablette. */
 .comparateur{
   position:relative;overflow:hidden;
-  aspect-ratio:16/9;max-height:min(82vh,860px);width:100%;
+  aspect-ratio:4/3;max-height:min(82vh,860px);width:100%;
   background:var(--c-bitume-2);
   touch-action:pan-y;user-select:none;-webkit-user-select:none;
   --pos:50%;
 }
-@media (max-width:767px){.comparateur{aspect-ratio:4/3}}
+@media (min-width:768px){.comparateur{aspect-ratio:16/9}}
 
 .comparateur__vue{position:absolute;inset:0;overflow:hidden}
 .comparateur__vue picture{display:block;width:100%;height:100%}
@@ -100,7 +102,7 @@
   background:var(--c-fiche);box-shadow:0 0 0 1px rgba(var(--c-encre-rgb),.18);
 }
 .comparateur__poignee::after{
-  content:"";position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px 0 0 -28px;
+  content:"";position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;
   background:var(--c-signal);box-shadow:var(--om-1);
   transition:scale 160ms var(--e-sortie);
 }
@@ -114,8 +116,8 @@
 .comparateur__poignee:active::after{scale:1.1}
 .comparateur__poignee:focus-visible{outline:none}
 .comparateur__poignee:focus-visible::after{outline:2px solid var(--c-fiche);outline-offset:3px}
-@media (max-width:767px){
-  .comparateur__poignee::after{width:48px;height:48px;margin:-24px 0 0 -24px}
+@media (min-width:768px){
+  .comparateur__poignee::after{width:56px;height:56px;margin:-28px 0 0 -28px}
 }
 
 /* ---------- Étiquettes d'état ----------

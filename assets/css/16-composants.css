@@ -31,17 +31,17 @@
    calé en pied de case. Toute la case mène à la fiche du lot.
    ------------------------------------------------------------ */
 .besoins{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
 .besoin{
   position:relative;display:flex;flex-direction:column;gap:var(--sp-3);
-  min-height:220px;padding:var(--sp-5) var(--sp-5) 0;background:var(--c-papier);
+  min-height:0;padding:var(--sp-4) var(--sp-5) 0;background:var(--c-papier);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
-@media (max-width:599px){
-  .besoins{grid-template-columns:minmax(0,1fr)}
-  .besoin{min-height:0;padding-top:var(--sp-4)}
+@media (min-width:600px){
+  .besoins{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .besoin{min-height:220px;padding-top:var(--sp-5)}
 }
 @media (hover:hover) and (pointer:fine){
   .besoin:hover{background:var(--c-papier-2)}

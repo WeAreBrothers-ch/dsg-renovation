@@ -6,12 +6,14 @@
 /* ------------------------------------------------------------
    DEMANDE
    ------------------------------------------------------------ */
+/* Au téléphone, le formulaire d'abord, les coordonnées ensuite ; sur
+   grand écran, les coordonnées restent accrochées dans la marge. */
 .demande__grille{align-items:start}
-.demande__form{grid-column:5/13}
-.demande__contact{grid-column:1/5;grid-row:1;position:sticky;top:calc(var(--h-entete) + var(--sp-6))}
-@media (max-width:1023px){
-  .demande__form,.demande__contact{grid-column:1/-1}
-  .demande__contact{grid-row:auto;position:static;margin-top:var(--sp-7)}
+.demande__form{grid-column:1/-1}
+.demande__contact{grid-column:1/-1;margin-top:var(--sp-7)}
+@media (min-width:1024px){
+  .demande__form{grid-column:5/13}
+  .demande__contact{grid-column:1/5;grid-row:1;position:sticky;top:calc(var(--h-entete) + var(--sp-6));margin-top:0}
 }
 
 .coordonnees{display:flex;flex-direction:column;box-shadow:inset 0 0 0 1px var(--c-cadre)}
@@ -20,7 +22,7 @@
 .coordonnees h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
 .coordonnees address{display:flex;flex-direction:column;gap:var(--sp-1);color:var(--c-encre-60)}
 .coordonnees a{
-  display:inline-block;padding-block:var(--sp-2);color:var(--c-encre);
+  display:inline-flex;align-items:center;padding-block:var(--sp-2);color:var(--c-encre);
   text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
   transition:text-decoration-color var(--d-rapide) var(--e-standard);
 }
@@ -36,25 +38,27 @@
    ------------------------------------------------------------ */
 .pied{
   background:var(--c-bitume);color:var(--c-encre);
-  padding-top:var(--sp-7);padding-bottom:var(--h-barre-mobile);
+  padding-top:var(--sp-6);padding-bottom:calc(var(--h-barre-mobile) + env(safe-area-inset-bottom));
   overflow:hidden;position:relative;
 }
+/* Au téléphone, deux colonnes plutôt qu'une pile : le pied reste
+   court. Les zones, sans lien, se lisent en une ligne. Trois colonnes
+   dès 600 px, quatre sur grand écran. */
 .pied__grille{
-  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:1px;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
-.pied__grille>*{padding:var(--sp-5);background:var(--c-bitume)}
-@media (max-width:1023px){
+.pied__grille>*{padding:var(--sp-4);background:var(--c-bitume)}
+.pied__marque{grid-column:1/-1}
+.pied__col:last-child{grid-column:1/-1}
+@media (min-width:600px){
   .pied__grille{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .pied__marque{grid-column:1/-1}
+  .pied__grille>*{padding:var(--sp-5)}
+  .pied__col:last-child{grid-column:auto}
 }
-/* Sur téléphone, deux colonnes plutôt qu'une pile : le pied reste
-   court. Les zones, sans lien, se lisent en une ligne. */
-@media (max-width:599px){
-  .pied__grille{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .pied__grille>*{padding:var(--sp-4)}
-  .pied__col:last-child{grid-column:1/-1}
-  .pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
+@media (min-width:1024px){
+  .pied__grille{grid-template-columns:1.6fr 1fr 1fr 1fr}
+  .pied__marque{grid-column:auto}
 }
 
 /* Sur le fond sombre, la déclinaison négative du logo : lettres blanches,
@@ -62,14 +66,17 @@
 .pied__marque img{height:40px;width:auto;margin-bottom:var(--sp-4)}
 .pied address{display:flex;flex-direction:column;color:var(--c-encre-60)}
 .pied address a,.pied address span{display:inline-block;padding-block:var(--sp-2)}
+.pied address a{display:inline-flex;align-items:center}
 .pied address a{transition:color var(--d-rapide) var(--e-standard)}
 .pied address a:hover{color:var(--c-encre)}
 .pied__col h3{font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);color:var(--c-encre)}
 .pied__col ul{margin-top:var(--sp-3);display:flex;flex-direction:column}
+.pied__col:last-child ul{flex-direction:row;flex-wrap:wrap;gap:0 var(--sp-3)}
+@media (min-width:600px){.pied__col:last-child ul{flex-direction:column;flex-wrap:nowrap;gap:normal}}
 .pied__col li{font-size:var(--t-petit);color:var(--c-encre-60)}
 .pied__col li:not(:has(a)){padding-block:var(--sp-1)}
 .pied__col a{
-  display:block;padding-block:var(--sp-2);
+  display:flex;align-items:center;padding-block:var(--sp-2);
   transition:color var(--d-rapide) var(--e-standard);
 }
 .pied__col a:hover,.pied__col a[aria-current]{color:var(--c-encre)}
@@ -87,21 +94,21 @@
   display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-2) var(--sp-5);justify-content:space-between;
   font-size:var(--t-petit);color:var(--c-encre-60);
 }
-.pied__legal a{display:inline-block;padding-block:var(--sp-2);transition:color var(--d-rapide) var(--e-standard)}
+.pied__legal a{display:inline-flex;align-items:center;padding-block:var(--sp-2);transition:color var(--d-rapide) var(--e-standard)}
 .pied__legal a:hover,.pied__legal a[aria-current]{color:var(--c-encre)}
 
 /* Le nom de l'entreprise, à l'échelle d'une enseigne. Il ferme le
    pied sur toute la largeur et se laisse rogner par le bas. */
 .pied__logotype{
-  margin-top:var(--sp-6);margin-bottom:-.2em;padding-inline:var(--grille-marge);
-  font-family:var(--f-titre);font-weight:500;font-size:min(8vw,8rem);
+  margin-top:var(--sp-5);margin-bottom:-.2em;padding-inline:var(--grille-marge);
+  font-family:var(--f-titre);font-weight:500;font-size:12.4vw;
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
   /* Une enseigne en filigrane : une teinte sourde, pour qu'elle signe
      la page sans disputer la lecture au pied (3.4, seuil des grands
      textes 3:1). */
   color:var(--c-filigrane);
 }
-@media (max-width:767px){
-  .pied{padding-top:var(--sp-6)}
-  .pied__logotype{margin-top:var(--sp-5);font-size:12.4vw}
+@media (min-width:768px){
+  .pied{padding-top:var(--sp-7)}
+  .pied__logotype{margin-top:var(--sp-6);font-size:min(8vw,8rem)}
 }

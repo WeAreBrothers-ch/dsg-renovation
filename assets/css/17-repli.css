@@ -7,12 +7,17 @@
 
 /* ------------------------------------------------------------
    ONGLETS — des cases jointives, comme les rubriques de l'en-tête.
-   La case consultée porte le repère de couleur.
+   La case consultée porte le repère de couleur. Au téléphone, la
+   rangée défile d'un geste plutôt que de passer à la ligne.
    ------------------------------------------------------------ */
-.jeu__barre{display:flex;flex-wrap:wrap;margin-bottom:var(--sp-7)}
+.jeu__barre{
+  display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:1px;
+  margin-bottom:var(--sp-7);
+}
+.jeu__barre::-webkit-scrollbar{display:none}
 .jeu__onglet{
   display:inline-flex;align-items:center;gap:var(--sp-2);
-  min-height:48px;padding:0 var(--sp-5);margin:0 -1px -1px 0;
+  min-height:48px;padding:0 var(--sp-4);margin:0 -1px -1px 0;
   box-shadow:inset 0 0 0 1px var(--c-cadre);
   font-weight:500;font-size:var(--t-nav);color:var(--c-encre-60);white-space:nowrap;
   transition:color var(--d-rapide) var(--e-standard),
@@ -35,24 +40,23 @@
 /* Sans script, les panneaux se suivent : ils ont besoin d'air. */
 .jeu__panneau+.jeu__panneau{margin-top:var(--sp-8)}
 .js .jeu__panneau+.jeu__panneau{margin-top:0}
-@media (max-width:479px){
-  .jeu__barre{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
-  .jeu__barre::-webkit-scrollbar{display:none}
-  .jeu__onglet{padding-inline:var(--sp-4)}
+@media (min-width:480px){
+  .jeu__barre{flex-wrap:wrap;overflow-x:visible;scrollbar-width:auto;padding-bottom:0}
+  .jeu__onglet{padding-inline:var(--sp-5)}
 }
 
 /* ------------------------------------------------------------
    DÉPLIANT DE BORDEREAU
    Une ligne dans un cadre : numéro, intitulé, cote, et le signe
    d'ouverture. Fermée, c'est une ligne de sommaire ; ouverte,
-   c'est un paragraphe.
+   c'est un paragraphe. Au téléphone, la cote passe sous l'intitulé.
    ------------------------------------------------------------ */
 .replis{display:flex;flex-direction:column;border:1px solid var(--c-cadre)}
 .repli+.repli{border-top:1px solid var(--c-cadre)}
 .repli__tete{
-  display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;
-  gap:var(--sp-4);align-items:baseline;
-  min-height:60px;padding:var(--sp-4) var(--sp-5);
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  gap:var(--sp-1) var(--sp-4);align-items:baseline;
+  min-height:60px;padding:var(--sp-4);
   cursor:pointer;list-style:none;
   transition:background-color var(--d-rapide) var(--e-standard);
 }
@@ -61,8 +65,9 @@
 .repli__n{font-weight:500;font-size:var(--t-ui);font-variant-numeric:tabular-nums;color:var(--c-accent)}
 .repli__titre{font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;line-height:1.3}
 .repli[open] .repli__titre{font-size:var(--t-h3);letter-spacing:-.02em}
-.repli__cote{font-size:var(--t-petit);color:var(--c-encre-60);white-space:nowrap}
-.repli__signe{position:relative;width:14px;height:14px;flex:0 0 auto;align-self:center}
+.repli__cote{grid-column:2;grid-row:2;font-size:var(--t-petit);color:var(--c-encre-60);white-space:nowrap}
+.repli__signe{grid-column:3;grid-row:1;position:relative;width:14px;height:14px;flex:0 0 auto;align-self:center}
+.repli__tete>span:not([class]){display:none}
 .repli__signe::before,.repli__signe::after{
   content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;
   background:var(--c-encre);transition:transform var(--d-normal) var(--e-sortie);
@@ -70,19 +75,18 @@
 .repli__signe::after{transform:rotate(90deg)}
 .repli[open] .repli__signe::after{transform:rotate(0)}
 .repli__corps{
-  padding:0 var(--sp-5) var(--sp-6);max-width:calc(64ch + var(--sp-5) * 2);
+  padding:0 var(--sp-4) var(--sp-6);max-width:calc(64ch + var(--sp-5) * 2);
   font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.6;color:var(--c-encre-60);
 }
 .repli__corps>*+*{margin-top:var(--sp-4)}
 .repli__corps a{color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .repli__corps a:hover{color:var(--c-encre)}
 .repli__corps strong{color:var(--c-encre);font-weight:600}
-@media (max-width:767px){
-  .repli__tete{grid-template-columns:auto minmax(0,1fr) auto;row-gap:var(--sp-1);padding-inline:var(--sp-4)}
-  .repli__cote{grid-column:2;grid-row:2}
-  .repli__signe{grid-column:3;grid-row:1}
-  .repli__tete>span:not([class]){display:none}
-  .repli__corps{padding-inline:var(--sp-4)}
+@media (min-width:768px){
+  .repli__tete{grid-template-columns:auto minmax(0,1fr) auto auto;row-gap:var(--sp-4);padding-inline:var(--sp-5)}
+  .repli__cote,.repli__signe{grid-column:auto;grid-row:auto}
+  .repli__tete>span:not([class]){display:block}
+  .repli__corps{padding-inline:var(--sp-5)}
 }
 
 /* Liste repliable : les postes d'un lot sous une seule ligne. */

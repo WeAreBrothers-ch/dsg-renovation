@@ -48,13 +48,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="lieu">Commune du bien</label>
-                <input type="text" id="lieu" maxlength="200" name="lieu" autocomplete="address-level2" placeholder="ex. : Lausanne" aria-describedby="lieuErreur">
+                <input type="text" id="lieu" maxlength="200" name="lieu" autocomplete="address-level2" enterkeyhint="next" placeholder="ex. : Lausanne" aria-describedby="lieuErreur">
                 <p class="champ__erreur" id="lieuErreur" aria-live="polite"></p>
               </div>
 
               <div class="champ">
                 <label class="champ__label" for="surface">Surface approximative</label>
-                <input type="text" id="surface" maxlength="200" name="surface" inputmode="numeric" placeholder="ex. : 90 m²" aria-describedby="surfaceErreur">
+                <input type="text" id="surface" maxlength="200" name="surface" inputmode="numeric" enterkeyhint="next" placeholder="ex. : 90 m²" aria-describedby="surfaceErreur">
                 <p class="champ__erreur" id="surfaceErreur" aria-live="polite"></p>
               </div>
 
@@ -73,6 +73,7 @@
               <div class="champ formulaire__large">
                 <label class="champ__label" for="photos">Photos du logement <span class="champ__facultatif">facultatif</span></label>
                 <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosAide photosErreur">
+                <ul class="photos-apercu" id="photosApercu" aria-label="Photos choisies" hidden></ul>
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
                 <p class="champ__erreur" id="photosErreur" aria-live="polite"></p>
               </div>
@@ -83,13 +84,13 @@
 
               <div class="champ formulaire__large">
                 <label class="champ__label" for="nom">Nom et prénom <span aria-hidden="true">*</span></label>
-                <input type="text" id="nom" maxlength="200" name="nom" autocomplete="name" required placeholder="ex. : Marie Dupont" aria-describedby="nomErreur">
+                <input type="text" id="nom" maxlength="200" name="nom" autocomplete="name" enterkeyhint="next" required placeholder="ex. : Marie Dupont" aria-describedby="nomErreur">
                 <p class="champ__erreur" id="nomErreur" aria-live="polite"></p>
               </div>
 
               <div class="champ">
                 <label class="champ__label" for="telephone">Téléphone <span aria-hidden="true">*</span></label>
-                <input type="tel" id="telephone" maxlength="200" name="telephone" autocomplete="tel" required placeholder="ex. : 079 123 45 67" aria-describedby="telephoneErreur">
+                <input type="tel" id="telephone" maxlength="200" name="telephone" autocomplete="tel" enterkeyhint="next" required placeholder="ex. : 079 123 45 67" aria-describedby="telephoneErreur">
                 <p class="champ__erreur" id="telephoneErreur" aria-live="polite"></p>
               </div>
 
@@ -107,7 +108,7 @@
 
               <div class="champ formulaire__large">
                 <label class="champ__label" for="email">Courriel <span class="champ__facultatif">facultatif, pour recevoir le devis par e-mail</span></label>
-                <input type="email" id="email" maxlength="254" name="email" autocomplete="email" placeholder="ex. : marie.dupont@exemple.ch" aria-describedby="emailErreur">
+                <input type="email" id="email" maxlength="254" name="email" autocomplete="email" enterkeyhint="send" placeholder="ex. : marie.dupont@exemple.ch" aria-describedby="emailErreur">
                 <p class="champ__erreur" id="emailErreur" aria-live="polite"></p>
               </div>
 

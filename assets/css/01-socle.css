@@ -7,10 +7,14 @@
 
 html{
   -webkit-text-size-adjust:100%;
+  /* Au toucher, un voile léger de l'encre du fond (voir .sur-sombre) :
+     chaque cible répond, sans le rectangle bleu du navigateur. */
+  -webkit-tap-highlight-color:rgba(var(--c-encre-rgb),.1);
   scroll-behavior:smooth;
   scroll-padding-top:calc(var(--h-entete) + var(--sp-6));
   scrollbar-color:var(--c-ligne-forte) var(--c-papier);
 }
+.sur-sombre{-webkit-tap-highlight-color:rgba(var(--c-craie-rgb),.16)}
 
 body{
   margin:0;
@@ -105,16 +109,18 @@ h1,h2,h3{
   position:relative;
 }
 .section{padding-block:var(--sec-y);position:relative}
-.grille12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--grille-goutt)}
-@media (max-width:1023px){.grille12{grid-template-columns:repeat(8,minmax(0,1fr))}}
-@media (max-width:767px){.grille12{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* La grille : quatre colonnes au téléphone, huit sur tablette, douze
+   sur grand écran. */
+.grille12{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--grille-goutt)}
+@media (min-width:768px){.grille12{grid-template-columns:repeat(8,minmax(0,1fr))}}
+@media (min-width:1024px){.grille12{grid-template-columns:repeat(12,minmax(0,1fr))}}
 
 /* ------------------------------------------------------------
    REPÈRES D'ANGLE — la signature du site
    Un cadre d'un pixel, et à chacun de ses quatre coins un petit
    carré posé à cheval sur le trait : le piquet d'un géomètre, la
-   poignée d'un plan qu'on ajuste. Encre sur le blanc, jaune dans
-   les bandes de nuit (--c-repere). Le pseudo-élément déborde du
+   poignée d'un plan qu'on ajuste. Encre sur les fonds clairs, plâtre
+   à 40 % dans les bandes de nuit (--c-repere). Le pseudo-élément déborde du
    cadre de la moitié du repère pour le centrer sur l'angle. Il ne
    capte aucun clic. La liste ci-dessous est celle de tous les
    blocs cadrés du site.
@@ -135,6 +141,27 @@ h1,h2,h3{
    On agit sur `scale` et non sur `transform` : l'enfoncement se
    compose avec le léger déplacement magnétique des boutons.
    ------------------------------------------------------------ */
+/* Au doigt, 44 px au moins : tout ce qui se touche seul — hors des
+   liens pris dans une phrase — offre une cible de 44 px de haut, texte
+   centré. Avec une souris, les listes reprennent leur espacement
+   serré. */
+:is(.pied__col a,.pied address a,.pied__itineraire,.pied__legal a,.pied__animations,
+    .piece__chemin a,.coordonnees a,.renvoi a,.menu__liste .menu__sous a,.menu__pied .donnee,.lots a,
+    .releve-piece a){
+  min-height:44px;
+}
+@media (hover:hover) and (pointer:fine){
+  :is(.pied__col a,.pied address a,.pied__itineraire,.pied__legal a,.pied__animations,
+      .piece__chemin a,.coordonnees a,.renvoi a,.menu__liste .menu__sous a,.menu__pied .donnee,.lots a,
+      .releve-piece a){
+    min-height:0;
+  }
+}
+/* Les lignes qui se creusent au survol se creusent aussi sous le doigt. */
+@media (hover:none){
+  :is(.metiers__ligne,.voisin,.besoin,.repli__tete,.lots a,.jeu__onglet):active{background:var(--c-papier-2)}
+}
+
 .btn,.filtre,.burger,.menu__fermer,.lumineuse__fermer,.lumineuse__nav,
 .depliant__tete,.jeu__onglet{
   transition-property:scale;transition-duration:160ms;

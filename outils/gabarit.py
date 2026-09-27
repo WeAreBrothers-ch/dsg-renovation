@@ -47,7 +47,7 @@ def tete(page, base, feuille, schemas):
 <html lang="fr-CH">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{page['titre']}</title>
 <meta name="description" content="{page['description']}">
 <link rel="canonical" href="{page['canonique']}">
@@ -56,6 +56,8 @@ def tete(page, base, feuille, schemas):
 <link rel="icon" href="{base}favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="{base}assets/images/icone-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="{base}apple-touch-icon.png">
+<link rel="manifest" href="{base}site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="{MARQUE}">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">

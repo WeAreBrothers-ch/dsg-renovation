@@ -213,8 +213,10 @@
   --x-marge:clamp(16px,3.3vw,48px);
   --y-bloc:clamp(64px,7.6vw,128px);
   --grille-contenu:1600px;
-  --grille-goutt:24px;
-  --grille-marge:var(--x-marge);
+  --grille-goutt:16px;
+  /* Téléphone couché : la marge s'écarte assez pour que rien ne passe
+     sous l'encoche ni sous les coins arrondis de l'écran. */
+  --grille-marge:max(var(--x-marge),env(safe-area-inset-left),env(safe-area-inset-right));
   --sec-y:var(--y-bloc);
 
   /* ---------- Rayons ----------
@@ -239,19 +241,26 @@
   --d-normal:240ms;
   --d-ample:800ms;
 
-  /* ---------- Mesures d'interface ---------- */
+  /* ---------- Mesures d'interface ----------
+     Sur téléphone et tablette, la barre d'action fixe occupe le bas de
+     l'écran : le pied de page réserve sa hauteur pour ne rien laisser
+     dessous. Elle disparaît avec la navigation complète, dès 1024 px. */
   --h-entete:64px;
-  --h-barre-mobile:0px;
+  --h-barre-mobile:64px;
 }
 
-@media (max-width:1279px){
+/* Les écrans plus larges s'ajoutent au téléphone, jamais l'inverse. */
+/* Téléphone couché : la barre d'action se fait plus basse, pour laisser
+   la hauteur au contenu. */
+@media (orientation:landscape) and (max-height:500px) and (hover:none){
+  :root{--h-barre-mobile:52px}
+}
+@media (min-width:768px){
   :root{--grille-goutt:20px}
 }
-/* Sous 1024 px, la barre d'action fixe occupe le bas de l'écran : le
-   pied de page réserve sa hauteur pour ne rien laisser dessous. */
-@media (max-width:1023px){
-  :root{--h-barre-mobile:64px}
+@media (min-width:1024px){
+  :root{--h-barre-mobile:0px}
 }
-@media (max-width:767px){
-  :root{--grille-goutt:16px}
+@media (min-width:1280px){
+  :root{--grille-goutt:24px}
 }

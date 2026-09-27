@@ -21,6 +21,7 @@ merci.html            après l'envoi du formulaire (noindex)
 envoi.php             reçoit le formulaire et l'envoie par e-mail, photos jointes
 .htaccess             HTTPS, www, redirections, cache, 404, fichiers internes bloqués
 favicon.ico, apple-touch-icon.png   icônes du site
+site.webmanifest      nom et icône quand on ajoute le site à l'écran d'accueil
 sitemap.xml, robots.txt             régénérés avec les pages
 assets/css/           feuilles sources numérotées ; site.css = leur version livrée
 assets/js/            un module par comportement
@@ -143,19 +144,31 @@ lecture (Newsreader) pour les phrases.
 Chaque couleur de texte porte son rapport de contraste en commentaire
 dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 
+## Mobile d'abord
+
+Les feuilles de style décrivent d'abord le téléphone ; tablette et
+bureau s'ajoutent par `min-width` (400, 480, 600, 640, 768, 1024, 1280,
+1440 px). Sur écran tactile, toute cible fait 44 px de haut au moins ;
+l'en-tête s'efface à la lecture et la barre d'action reste sous le
+pouce ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
+s'ajoute à l'écran d'accueil avec son icône (`site.webmanifest`).
+Vérifié à 320, 360, 390, 414 px, en paysage et sur tablette : aucun
+débordement, décalage de mise en page nul, accessibilité et
+référencement à 100 dans Lighthouse (mobile).
+
 ## Comportements
 
 | Fichier | Rôle |
 |---|---|
-| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile |
+| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone |
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
-| `onglets.js` | jeux d'onglets des pages de prestation |
+| `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`) |
 | `ouverture.js` | l'image d'ouverture s'élargit au défilement |
 | `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier) |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |
-| `formulaire.js` | vérification, prestation pré-cochée, photos, envoi vers `envoi.php` |
+| `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |
 
 Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans

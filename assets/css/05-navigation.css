@@ -15,7 +15,12 @@
   position:fixed;inset:0 0 auto 0;z-index:60;
   padding-top:var(--sp-3);
   background:rgba(var(--c-papier-rgb),.97);
+  transition:transform var(--d-normal) var(--e-sortie);
 }
+/* Au téléphone et sur tablette, l'en-tête s'efface quand on descend et
+   revient dès qu'on remonte (nav.js) : la lecture garde toute la
+   hauteur de l'écran, et la barre d'action reste sous le pouce. */
+.entete[data-cache="true"]{transform:translateY(-100%)}
 @supports (backdrop-filter:blur(1px)){
   .entete{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
 }
@@ -31,11 +36,11 @@
   padding-inline:var(--sp-4);
 }
 .marque picture{display:block}
-.marque img{height:36px;width:auto;object-fit:contain}
-@media (max-width:767px){.marque img{height:32px}}
+.marque img{height:32px;width:auto;object-fit:contain}
+@media (min-width:768px){.marque img{height:36px}}
 
 /* ---------- Rubriques : visibles dès 1024 px ---------- */
-.nav{display:flex;align-items:stretch;box-shadow:none!important}
+.nav{display:none;align-items:stretch;box-shadow:none!important}
 .nav>a,.nav__groupe>a{
   position:relative;display:flex;align-items:center;gap:var(--sp-2);
   min-width:clamp(112px,9.5vw,168px);padding:0 var(--sp-4);margin-left:-1px;
@@ -99,7 +104,7 @@
   font-weight:500;font-size:var(--t-nav);color:var(--c-accent);
 }
 
-.entete__actions{display:flex;align-items:stretch;flex:0 0 auto;box-shadow:none!important}
+.entete__actions{display:none;align-items:stretch;flex:0 0 auto;box-shadow:none!important}
 .entete__tel{
   display:flex;align-items:center;padding:0 var(--sp-4);margin-left:-1px;
   box-shadow:inset 0 0 0 1px var(--c-cadre);
@@ -109,12 +114,13 @@
 @media (hover:hover) and (pointer:fine){.entete__tel:hover{background:var(--c-papier-2)}}
 .entete__actions .btn{min-height:0;height:100%}
 
-/* ---------- Sous 1024 px : Appeler et Menu ----------
+/* ---------- Au téléphone et sur tablette : Appeler et Menu ----------
    Le téléphone reste à un geste dès l'arrivée : c'est le premier
-   réflexe de quelqu'un qui cherche un artisan sur son téléphone. */
+   réflexe de quelqu'un qui cherche un artisan sur son téléphone. Sous
+   400 px, les deux cases se resserrent pour laisser la marque lisible. */
 .entete__appel{
-  display:none;align-items:center;justify-content:center;gap:var(--sp-2);
-  padding:0 var(--sp-4);
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  min-width:0;padding:0 var(--sp-3);
   font-weight:500;font-size:var(--t-nav);color:var(--c-encre);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
@@ -127,16 +133,18 @@
 
 /* Bouton menu : un mot, dans sa case. */
 .burger{
-  display:none;align-items:center;justify-content:center;
-  min-width:88px;padding:0 var(--sp-4);
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:0;padding:0 var(--sp-3);
   font-weight:500;font-size:var(--t-nav);
 }
-@media (max-width:1023px){
-  .nav,.entete__actions{display:none}
-  .burger,.entete__appel{display:inline-flex}
+@media (min-width:400px){
+  .entete__appel{min-width:auto;padding-inline:var(--sp-4)}
+  .burger{min-width:88px;padding-inline:var(--sp-4)}
 }
-@media (max-width:399px){
-  .entete__appel,.burger{min-width:0;padding-inline:var(--sp-3)}
+/* Dès 1024 px, les rubriques et le devis prennent leur place. */
+@media (min-width:1024px){
+  .nav,.entete__actions{display:flex}
+  .burger,.entete__appel{display:none}
 }
 
 /* ------------------------------------------------------------
@@ -146,12 +154,15 @@
 .menu{
   position:fixed;inset:0;z-index:70;
   background:var(--c-papier);color:var(--c-encre);
-  display:flex;flex-direction:column;overflow-y:auto;
-  padding:var(--sp-3) var(--grille-marge) var(--sp-7);
+  display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
+  padding:var(--sp-3) var(--grille-marge) calc(var(--sp-7) + env(safe-area-inset-bottom));
   opacity:0;visibility:hidden;
   transition:opacity 260ms var(--e-sortie),visibility 0s linear 260ms;
 }
 .menu[data-ouvert="true"]{opacity:1;visibility:visible;transition-delay:0s}
+/* Plus haut que l'écran, le menu défile : ses parties ne se tassent
+   pas (la case « Fermer » garderait sinon la hauteur du logo). */
+.menu>*{flex-shrink:0}
 .menu__haut{
   display:flex;align-items:stretch;
   height:calc(var(--h-entete) - var(--sp-3) - var(--sp-2));
@@ -193,12 +204,13 @@
 .menu__sous{display:flex;flex-direction:column;padding:0 0 var(--sp-4) var(--sp-4)}
 .menu__liste .menu__sous li{border:0;opacity:1;transform:none}
 .menu__liste .menu__sous a{
+  display:flex;align-items:center;
   padding:var(--sp-2) 0;font-family:var(--f-texte);font-size:var(--t-ui);
   letter-spacing:0;color:var(--c-encre-60);
 }
 .menu__liste .menu__sous a::after{display:none}
 .menu__pied{margin-top:auto;padding-top:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-3)}
-.menu__pied .donnee{display:inline-block;padding-block:var(--sp-1);color:var(--c-encre-60)}
+.menu__pied .donnee{display:inline-flex;align-items:center;padding-block:var(--sp-1);color:var(--c-encre-60)}
 .menu__pied .btn{width:100%;margin-top:var(--sp-3)}
 
 /* ------------------------------------------------------------
@@ -208,12 +220,14 @@
    les fonds, et le bouton d'appel y ressort.
    ------------------------------------------------------------ */
 .barre-mobile{
-  display:none;position:fixed;inset:auto 0 0 0;z-index:55;
-  padding:0 0 env(safe-area-inset-bottom);
+  display:flex;position:fixed;inset:auto 0 0 0;z-index:55;
+  padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   transform:translateY(110%);
   transition:transform var(--d-normal) var(--e-sortie);
 }
 .barre-mobile[data-visible="true"]{transform:none}
-.barre-mobile .btn{flex:1;min-height:var(--h-barre-mobile);font-size:var(--t-petit)}
+/* Des marges plus courtes que les autres boutons : « Devis gratuit »
+   tient sur une ligne jusque sur les écrans de 320 px. */
+.barre-mobile .btn{flex:1;min-height:var(--h-barre-mobile);padding-inline:var(--sp-4);gap:var(--sp-3);font-size:var(--t-petit)}
 .barre-mobile .btn--cadre{box-shadow:none;background:var(--c-papier)}
-@media (max-width:1023px){.barre-mobile{display:flex}}
+@media (min-width:1024px){.barre-mobile{display:none}}

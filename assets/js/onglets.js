@@ -8,6 +8,17 @@
 (function () {
   "use strict";
 
+  /* Au téléphone, les dépliants marqués data-replie-telephone partent
+     fermés : la page se lit en intitulés, on ouvre ce qu'on veut lire.
+     Ils sont tous sous le premier écran : les refermer ne fait rien
+     bouger sous les yeux. Sans script, ou sur un écran plus large, ils
+     restent ouverts. */
+  if (!window.matchMedia("(min-width: 768px)").matches) {
+    Array.prototype.forEach.call(document.querySelectorAll("details[data-replie-telephone]"), function (depliant) {
+      depliant.open = false;
+    });
+  }
+
   var jeux = document.querySelectorAll("[data-onglets]");
   if (!jeux.length) { return; }
 

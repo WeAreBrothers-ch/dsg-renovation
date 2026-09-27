@@ -14,9 +14,10 @@
 }
 .formulaire__requis{color:var(--c-accent)}
 
+/* Une case par ligne au téléphone ; deux côte à côte dès 600 px. */
 .formulaire__partie{
   min-width:0;margin:0;padding:0;
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
 /* Flottante, la légende devient une case ordinaire de la grille. */
@@ -29,7 +30,7 @@
 .formulaire__n{font-variant-numeric:tabular-nums;color:var(--c-accent)}
 .formulaire__n::before{content:"0"}
 .formulaire__large{grid-column:1/-1}
-@media (max-width:599px){.formulaire__partie{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:600px){.formulaire__partie{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* ------------------------------------------------------------
    CHAMP — une case
@@ -74,15 +75,27 @@
   color:var(--c-encre-60);
 }
 .champ input[type="file"]::file-selector-button{
-  margin-right:var(--sp-4);padding:var(--sp-3) var(--sp-4);border:0;border-radius:0;
+  min-height:44px;margin-right:var(--sp-4);padding:var(--sp-3) var(--sp-4);border:0;border-radius:0;
   background:var(--c-encre);color:var(--c-papier);cursor:pointer;
   font:500 var(--t-petit)/1.2 var(--f-texte);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
 @media (hover:hover) and (pointer:fine){
+  .champ input[type="file"]::file-selector-button{min-height:auto}
   .champ input[type="file"]:hover::file-selector-button{background:var(--c-accent)}
 }
 .champ__aide{font-family:var(--f-lecture);font-size:var(--t-petit);color:var(--c-encre-60)}
+/* Les photos choisies, en vignettes carrées sous le bouton : au
+   téléphone, on voit d'un coup d'œil ce qu'on envoie. Une photo que le
+   navigateur ne sait pas montrer garde son nom. */
+.photos-apercu{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-block:var(--sp-2) var(--sp-3)}
+.photos-apercu li{
+  width:72px;height:72px;display:grid;place-items:center;overflow:hidden;padding:var(--sp-1);
+  background:var(--c-papier-2);box-shadow:inset 0 0 0 1px var(--c-ligne);
+  font-size:var(--t-etiquette);line-height:1.2;color:var(--c-encre-60);text-align:center;word-break:break-all;
+}
+.photos-apercu li:has(img){padding:0}
+.photos-apercu img{width:100%;height:100%;object-fit:cover}
 
 .champ--erreur,.champ--erreur:focus-within{box-shadow:inset 0 0 0 2px var(--c-alerte)}
 .champ__erreur{font-weight:500;font-size:var(--t-etiquette);color:var(--c-alerte)}

@@ -6,8 +6,9 @@
 
 /* ------------------------------------------------------------
    REGISTRE DES RÉALISATIONS
-   Les fiches n'ont pas toutes le même poids : la grille alterne
-   une fiche large et une étroite, puis s'inverse.
+   Une fiche par ligne au téléphone, deux dès 640 px. Sur grand écran,
+   les fiches n'ont pas toutes le même poids : la grille alterne une
+   fiche large et une étroite, puis s'inverse.
    ------------------------------------------------------------ */
 .chantiers__barre{
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
@@ -15,25 +16,20 @@
 }
 .chantiers__compte{font-size:var(--t-petit);color:var(--c-encre-60)}
 .chantiers__grille{
-  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
-  column-gap:var(--grille-goutt);row-gap:var(--sp-8);align-items:start;
+  display:grid;grid-template-columns:minmax(0,1fr);
+  column-gap:var(--grille-goutt);row-gap:var(--sp-7);align-items:start;
 }
-.chantiers__grille>.chemise{grid-column:span 2}
-.chantiers__grille>.chemise:nth-of-type(4n+1),
-.chantiers__grille>.chemise:nth-of-type(4n+4){grid-column:span 4}
-.chantiers__grille>.chemise .chemise__tirage{aspect-ratio:1/1}
-.chantiers__grille>.chemise:nth-of-type(4n+1) .chemise__tirage,
-.chantiers__grille>.chemise:nth-of-type(4n+4) .chemise__tirage{aspect-ratio:3/2}
-@media (max-width:1023px){
-  .chantiers__grille{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-7)}
-  .chantiers__grille>.chemise,
+.chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
+@media (min-width:640px){.chantiers__grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){
+  .chantiers__grille{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:var(--sp-8)}
+  .chantiers__grille>.chemise{grid-column:span 2}
   .chantiers__grille>.chemise:nth-of-type(4n+1),
-  .chantiers__grille>.chemise:nth-of-type(4n+4){grid-column:span 1}
-  .chantiers__grille>.chemise .chemise__tirage,
+  .chantiers__grille>.chemise:nth-of-type(4n+4){grid-column:span 4}
+  .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:1/1}
   .chantiers__grille>.chemise:nth-of-type(4n+1) .chemise__tirage,
-  .chantiers__grille>.chemise:nth-of-type(4n+4) .chemise__tirage{aspect-ratio:4/3}
+  .chantiers__grille>.chemise:nth-of-type(4n+4) .chemise__tirage{aspect-ratio:3/2}
 }
-@media (max-width:639px){.chantiers__grille{grid-template-columns:minmax(0,1fr)}}
 .chantiers__vide{grid-column:1/-1;padding:var(--sp-8) 0;text-align:center;color:var(--c-encre-60)}
 
 /* ------------------------------------------------------------
@@ -67,14 +63,16 @@
 
 /* ------------------------------------------------------------
    RÉFÉRENCES — logos des régies et architectes
-   Sur la page entreprise, la section se pose dans un creux bleuté :
-   c'est la preuve extérieure, elle se détache du récit.
+   Sur la page entreprise, la section se pose dans le creux : c'est
+   la preuve extérieure, elle se détache du récit.
    Passés en gris puis multipliés sur le fond : le blanc de leurs
    fichiers disparaît dans le fond sans toucher à l'encre.
    ------------------------------------------------------------ */
 .partenaires{padding-block:var(--sec-y);background:var(--c-papier-2)}
+/* Deux logos par ligne au téléphone, quatre dès 480 px, sept sur
+   grand écran. */
 .partenaires__grille{
-  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:var(--sp-6) var(--sp-5);align-items:center;
 }
 .partenaires__grille li{display:grid;place-items:center;height:50px}
@@ -85,8 +83,8 @@
 }
 .partenaires__carre img{width:160px;height:44px;max-width:100%;object-fit:cover}
 @media (hover:hover) and (pointer:fine){.partenaires__grille li:hover img{opacity:1}}
-@media (max-width:1023px){.partenaires__grille{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (max-width:479px){.partenaires__grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:480px){.partenaires__grille{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1024px){.partenaires__grille{grid-template-columns:repeat(7,minmax(0,1fr))}}
 
 /* ------------------------------------------------------------
    TÉMOIGNAGES — lignes de registre
@@ -94,8 +92,8 @@
    ------------------------------------------------------------ */
 .temoins{border-top:1px solid var(--c-cadre)}
 .temoin{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);
-  gap:var(--sp-3) var(--sp-6);padding-block:var(--sp-6);
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:var(--sp-3) var(--sp-6);padding-block:var(--sp-5);
   border-bottom:1px solid var(--c-cadre);
 }
 .temoin blockquote{
@@ -105,4 +103,4 @@
 .temoin__qui{display:block;font-weight:500;color:var(--c-encre)}
 .temoin__quoi{display:block;margin-top:var(--sp-1);font-size:var(--t-petit);color:var(--c-encre-60)}
 .temoin__statut{display:inline-block;margin-top:var(--sp-4);font-size:var(--t-petit)}
-@media (max-width:767px){.temoin{grid-template-columns:minmax(0,1fr);padding-block:var(--sp-5)}}
+@media (min-width:768px){.temoin{grid-template-columns:minmax(0,1fr) minmax(0,2fr);padding-block:var(--sp-6)}}

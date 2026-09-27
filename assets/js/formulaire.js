@@ -150,6 +150,57 @@
     );
   }
 
+  /* Au téléphone, la touche Entrée du clavier s'intitule « Suivant »
+     (enterkeyhint) : elle mène au champ suivant au lieu d'envoyer une
+     demande à moitié remplie. Sur le dernier champ, « Envoyer ». */
+  formulaire.addEventListener("keydown", function (evenement) {
+    var champ = evenement.target;
+    if (evenement.key !== "Enter" || !(champ instanceof HTMLInputElement) ||
+        champ.getAttribute("enterkeyhint") !== "next") { return; }
+    evenement.preventDefault();
+    var champs = controles().filter(function (element) {
+      return element.type !== "checkbox" && element.type !== "file" && element.tabIndex >= 0 &&
+        !element.disabled && element.getClientRects().length > 0;
+    });
+    var suivant = champs[champs.indexOf(champ) + 1];
+    if (suivant) { suivant.focus(); }
+  });
+
+  /* Les photos choisies, en vignettes sous le bouton. */
+  var photos = formulaire.querySelector('input[type="file"]');
+  var apercu = document.getElementById("photosApercu");
+  var adresses = [];
+  function montrerPhotos() {
+    if (!(photos instanceof HTMLInputElement) || !apercu) { return; }
+    adresses.forEach(function (adresse) { URL.revokeObjectURL(adresse); });
+    adresses = [];
+    apercu.textContent = "";
+    var fichiers = Array.prototype.slice.call(photos.files || []).slice(0, PHOTOS_MAX);
+    apercu.hidden = fichiers.length === 0;
+    fichiers.forEach(function (fichier) {
+      var vignette = document.createElement("li");
+      var nom = document.createTextNode(fichier.name);
+      if (fichier.type.indexOf("image/") === 0 && window.URL && URL.createObjectURL) {
+        var image = document.createElement("img");
+        var adresse = URL.createObjectURL(fichier);
+        adresses.push(adresse);
+        image.alt = fichier.name;
+        image.width = 72;
+        image.height = 72;
+        image.decoding = "async";
+        /* Format que le navigateur ne lit pas (HEIC hors Safari) : le nom. */
+        image.addEventListener("error", function () { vignette.textContent = ""; vignette.appendChild(nom); });
+        image.src = adresse;
+        vignette.appendChild(image);
+      } else {
+        vignette.appendChild(nom);
+      }
+      apercu.appendChild(vignette);
+    });
+  }
+  if (photos) { photos.addEventListener("change", montrerPhotos); }
+  formulaire.addEventListener("reset", function () { window.setTimeout(montrerPhotos, 0); });
+
   /* Efface l'erreur dès que le visiteur corrige. */
   controles().forEach(function (controle) {
     var evenement = controle instanceof HTMLInputElement && controle.type === "file" ? "change" : "input";

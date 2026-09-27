@@ -84,7 +84,7 @@
 }
 .lots li:has(>a){padding:0}
 .lots a{
-  display:block;padding:var(--sp-1) var(--sp-3);color:var(--c-encre);
+  display:flex;align-items:center;padding:var(--sp-1) var(--sp-3);color:var(--c-encre);
   transition:background-color var(--d-rapide) var(--e-standard),color var(--d-rapide) var(--e-standard);
 }
 @media (hover:hover) and (pointer:fine){.lots a:hover{background:var(--c-papier-2);color:var(--c-accent)}}

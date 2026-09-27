@@ -53,11 +53,13 @@ def replis(entrees, numerote=True, ouvert=False):
     `entrees` : (intitulé, corps HTML) ou (intitulé, corps, cote).
     Fermée, chaque ligne se lit comme une ligne de sommaire. `ouvert` :
     les lignes courtes et essentielles (les étapes d'une méthode) se
-    lisent d'emblée ; on peut toujours les refermer.
+    lisent d'emblée ; on peut toujours les refermer. Au téléphone, seule
+    la première reste ouverte (data-replie-telephone, onglets.js) : la
+    suite se lit en intitulés, sur un écran au lieu de deux.
     """
-    attribut = " open" if ouvert else ""
     lignes = []
     for rang, entree in enumerate(entrees, 1):
+        attribut = (" open" + (" data-replie-telephone" if rang > 1 else "")) if ouvert else ""
         titre, corps = entree[0], entree[1]
         cote = entree[2] if len(entree) > 2 else ""
         numero = ('<span class="repli__n" aria-hidden="true">%02d</span>' % rang
