@@ -37,6 +37,19 @@ typographie, les cadres et leurs repères ; elle change le reste :
   articles).
 Les inspirations de cette version sont au § 0 bis.
 
+**Finition, 30/09/2026 (v3.1).** Deuxième retour du client : le bandeau brique avant le pied « n'est pas joli »,
+et les pages de prestation gardaient une photo pleine largeur avec une bande de légende dessous. Revue page par
+page, au bureau et au téléphone :
+- **plus aucun fond brique** : le renvoi final devient un cadre à repères sur le fond de la section — la question
+  et les deux boutons à gauche, comment nous joindre (téléphone, courriel, horaires, atelier) à droite (§ 7) ;
+- **toutes les pages principales s'ouvrent comme l'accueil** : le texte à gauche, un chantier réel à droite, à la
+  hauteur de l'écran ; sous le chapô, quatre repères de la page (durées, conditions, horaires) (§ 7) ;
+- **la légende vit dans la photo**, en bas, sur un voile d'encre (`briques.vue`) : plus de bande de texte entre
+  l'image et la section suivante (§ 6) ;
+- l'image d'ouverture à rideaux, le cartouche d'identité de l'accueil (redit plus bas) et la bande de repères des
+  prestations (montés dans l'en-tête) disparaissent ; les communes deviennent une liste à deux colonnes, les
+  étiquettes de travaux des pastilles pleines sans trait, les prestations voisines deux par ligne.
+
 ---
 
 ## 0. Référence : Tekt (tekt.com.au)
@@ -71,7 +84,7 @@ sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
 - **La photo plein écran d'emblée** (demande explicite du client). Remplacée à l'accueil par la couverture
-  côte à côte — le titre, l'image cadrée dans la grille (§ 7) —, sur les pages de métier par l'ouverture cadrée.
+  côte à côte — le titre, l'image cadrée dans la grille (§ 7) —, reprise par toutes les pages principales.
 - Le gris-bleu froid : DSG rénove des intérieurs, sa matière est le plâtre et le bois, pas l'acier.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
@@ -114,11 +127,9 @@ angles, puis on ouvre. Le site en reprend la matière et le geste :
 - une **encre terre d'ombre**, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
 - des **bandes de nuit**, la terre d'ombre en fond, qui rythment la page ;
-- **la preuve dès le premier écran** : à l'accueil, le chantier avant / après à côté du titre ; sur les pages
-  de métier, une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme
-  une pièce qu'on ouvre après l'avoir relevée ;
-- **un seul accent, la brique** : réservé à l'action — les boutons d'appel, et une bande par page, le renvoi
-  final — et à ce qui s'écrit en couleur : liens, numéros d'étape, et devant chaque intitulé de section un
+- **la preuve dès le premier écran** : à l'accueil, le chantier avant / après à côté du titre ; sur les autres
+  pages principales, un chantier réel à côté du titre, sa légende posée dans l'image ;
+- **un seul accent, la brique** : réservé à l'action — les boutons d'appel — et à ce qui s'écrit en couleur : liens, numéros d'étape, et devant chaque intitulé de section un
   chevron dessiné comme le toit du logo.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), la brique
@@ -195,14 +206,13 @@ Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionn
 
 ## 2 bis. Rythme des fonds
 
-Quatre fonds se relaient ; jamais deux fois le même à la suite.
+Trois fonds se relaient ; jamais deux fois le même à la suite. La brique ne couvre jamais un fond (v3.1).
 
 | Fond | Classe | Où |
 |---|---|---|
 | **Chaux** `#F5F2EC` | — | couverture, et une section sur deux |
 | **Blanc** `#FFFFFF` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références (page entreprise) |
 | **Nuit** `#27211C` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
-| **Brique** `#9A3324` | `.sur-vif` | le renvoi final de chaque page, et lui seul : la page se referme sur la couleur du logo, là où l'on attend une décision |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. Une suite de
 sections libres qui finirait sur le fond de la section imposée qui la suit part de l'autre fond (`rythme.py`) :
@@ -331,12 +341,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   « Après » du comparateur (un voile d'encre à 66 %, texte blanc : 5.0 au pire, sur un mur blanc), et, au
   survol d'une souris, le **viseur** d'une photo de réalisation — quatre angles blancs sur un voile d'encre,
   les repères du site — qui dit qu'elle s'agrandit. Plus de numéro de registre, plus de tampon.
-- **Légende en deux voix** (`.legende`, `10-comparateur.css`) : le **lieu** en grotesque, à l'encre (« Villa de
-  Chailly, Lausanne ») ; **ce qu'on voit** en romain de lecture, un ton plus bas (« Dégagement et cuisine
-  remis en peinture ») — séparés d'un tiret dès la tablette ; et, à droite, **« Voir le chantier »** vers la
-  fiche de la réalisation quand la photo en a une (ancre `realisations.html#villa-de-chailly`). La légende
-  appartient à l'image : elle garde de l'air sous elle avant la section suivante. Jamais un texte alternatif
-  recopié sous la photo. La visionneuse des réalisations parle de la même façon.
+- **Légende en deux voix, dans la photo** (`.vue`, `briques.vue`, `10-comparateur.css`) : en bas de l'image,
+  sur un voile d'encre qui monte du pied (78 % → 0, texte blanc lisible sur un mur blanc), le **lieu** en
+  grotesque (« Villa de Chailly, Lausanne ») puis **ce qu'on voit** en romain de lecture (« Dégagement et
+  cuisine remis en peinture ») ; à droite, **« Voir le chantier »** vers la fiche de la réalisation quand la
+  photo en a une (ancre `realisations.html#villa-de-chailly`). Aucune bande de légende sous une photo. Jamais
+  un texte alternatif recopié. La visionneuse des réalisations parle de la même façon.
 - Le panneau d'un chantier signature est une **chaux dépolie** (à 78 % + flou 14 px), cadrée, repères aux
   angles. C'est le seul verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
@@ -363,12 +373,16 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    quatre cases, « + » en brique claire), les prestations (une ligne par prestation, sa photo en tête, sans
    numéro), le chantier à la une (panneau dépoli sur photo pleine largeur), la zone, le déroulé en quatre
    cases — chaux et blanc en alternance.
-4. Renvoi final **sur la brique**, bouton d'appel inversé (chaux, texte brique), puis pied de page de nuit
-   (logo négatif) et le nom de l'entreprise en enseigne, en filigrane.
+4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en brique et le téléphone à
+   gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page de nuit (logo négatif) et le
+   nom de l'entreprise en enseigne, en filigrane.
 
-Les pages de métier s'ouvrent sur leur titre, puis leur tirage : cadré dans la colonne, il s'élargit au
-défilement jusqu'aux bords de l'écran (deux rideaux couleur du fond s'écartent), sa légende en deux voix
-dessous. Les pages intérieures reprennent la composition : chemin dans la marge, h1 à droite.
+**Pages intérieures principales** (prestations, entreprise, réalisations, devis, et chaque page de métier) :
+la composition de l'accueil. Dès 1024 px, à gauche le chemin, le h1 (`--t-piece-colonne`), le chapô, quatre
+repères propres à la page (`.piece__faits` : durées, conditions, horaires, zone — tirés des données du site)
+et les deux boutons, calés au pied ; à droite, un chantier réel à la hauteur de l'écran, sa légende posée
+dedans. Au téléphone, la photo suit les boutons. Les annexes (mentions, confidentialité, merci, 404) gardent
+l'en-tête sans photo.
 
 ---
 
@@ -424,10 +438,9 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
 - Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
-- La brique en titre, ou en fond d'autre chose que le renvoi final : ailleurs, elle reste aux boutons d'appel,
-  aux marques et aux liens.
+- La brique en titre ou en fond de section : elle reste aux boutons d'appel, aux marques et aux liens.
 - Le logo clair dans la nuit (utiliser le négatif).
-- Plus d'une bande de brique par page : elle est réservée au renvoi final.
+- Une bande de légende sous une photo : la légende se pose dans l'image.
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
 - Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.

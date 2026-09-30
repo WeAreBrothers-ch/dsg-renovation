@@ -9,8 +9,38 @@ from donnees_site import RELEVE, TELEPHONE, TELEPHONE_BRUT
 from gabarit_liens import accueil, vers_devis
 
 
+def vue(media, base, classe="", priorite=True):
+    """Une photo et sa légende posée dedans, en bas : le lieu, ce qu'on
+    voit, et le chemin vers la fiche du chantier quand il y en a une.
+
+    `media` : src, alt, lieu, quoi, et facultativement ancre (fiche de la
+    page des réalisations), largeur, hauteur. La légende vit dans
+    l'image, sur un voile d'encre : aucune bande de texte ne flotte entre
+    la photo et la section suivante.
+    """
+    chargement = ('fetchpriority="high"' if priorite
+                  else 'loading="lazy"')
+    lien = ""
+    if media.get("ancre"):
+        lien = (f'<a class="vue__lien" href="{base}realisations.html#{media["ancre"]}">'
+                'Voir le chantier<span class="fleche" aria-hidden="true"></span></a>')
+    src = media["src"]
+    if not src.startswith("http"):
+        src = base + src
+    return f"""<figure class="vue {classe}">
+          <img src="{src}" alt="{media['alt']}"
+               width="{media.get('largeur', 1600)}" height="{media.get('hauteur', 1000)}" {chargement} decoding="async">
+          <figcaption class="vue__legende">
+            <span class="vue__texte"><span class="vue__lieu">{media['lieu']}</span><span class="vue__quoi">{media['quoi']}</span></span>
+            {lien}
+          </figcaption>
+        </figure>"""
+
+
 def couverture(page, base, fil, action=None):
-    """En-tête de page : fil d'Ariane, titre, chapô, actions.
+    """En-tête de page : fil d'Ariane, titre, chapô, actions — et, quand
+    la page a sa photo (`page["media"]`), la photo à droite, comme la
+    couverture de l'accueil.
 
     `action` remplace le bouton de devis là où il pointerait vers la page
     consultée : un bouton qui renvoie où l'on se trouve déjà est un
@@ -32,8 +62,18 @@ def couverture(page, base, fil, action=None):
         'Demander un devis gratuit<span class="fleche" aria-hidden="true">'
         "</span></a>" % vers_devis(base, page["courante"], page.get("travaux"))
     )
+    media = page.get("media")
+    classe = "piece piece--vue" if media else "piece"
+    # Quatre repères au pied du texte : ce qu'on veut savoir avant
+    # d'appeler (durées, conditions, horaires), lu d'un coup d'œil.
+    faits = ""
+    if page.get("faits"):
+        faits = ('<dl class="piece__faits">' + "".join(
+            "<div><dt>%s</dt><dd>%s</dd></div>" % f for f in page["faits"])
+            + "</dl>")
+    photo = vue(media, base, "piece__vue") if media else ""
     return f"""
-  <header class="piece">
+  <header class="{classe}">
     <div class="zone">
       <div class="piece__entete">
         <div class="piece__marge">
@@ -44,11 +84,13 @@ def couverture(page, base, fil, action=None):
         <div class="piece__tete">
           <h1 class="piece__titre">{titre}</h1>
           <p class="chapo piece__chapo">{page['chapo']}</p>
+          {faits}
           <div class="couverture__actions">
           {principale}
           <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
           </div>
         </div>
+        {photo}
       </div>
     </div>
   </header>
@@ -113,19 +155,32 @@ def releve_chiffre():
 def appel(base, titre, texte, travaux=None):
     """Le renvoi de fin de page vers la demande de devis.
 
+    Un cadre à repères, comme les blocs du plan : à gauche, la question
+    et les deux façons d'y répondre ; à droite, comment nous joindre —
+    téléphone, courriel, horaires, atelier. La page se referme sur une
+    décision facile, avec tout ce qu'il faut pour la prendre.
     `travaux` : la prestation à pré-cocher dans le formulaire.
     """
+    import donnees_site as d
     return f"""
-  <section class="section rappel sur-vif" aria-labelledby="rappelTitre">
-    <div class="zone rappel__grille">
-      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
-      <div class="rappel__corps">
-        <h2 class="rappel__titre" id="rappelTitre">{titre}</h2>
-        <p class="chapo">{texte}</p>
-        <div class="rappel__actions">
-          <a class="btn btn--plein" href="{vers_devis(base, '', travaux)}">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
+  <section class="section rappel" aria-labelledby="rappelTitre">
+    <div class="zone">
+      <div class="rappel__cadre revele">
+        <div class="rappel__corps">
+          <p class="intercalaire__nom">Prochaine étape</p>
+          <h2 class="rappel__titre" id="rappelTitre">{titre}</h2>
+          <p class="chapo">{texte}</p>
+          <div class="rappel__actions">
+            <a class="btn btn--plein" href="{vers_devis(base, '', travaux)}">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+            <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
+        <dl class="rappel__joindre">
+          <div><dt>Téléphone</dt><dd><a href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a></dd></div>
+          <div><dt>Courriel</dt><dd><a href="mailto:{d.COURRIEL}">{d.COURRIEL}</a></dd></div>
+          <div><dt>Horaires</dt><dd>{d.HORAIRES}</dd></div>
+          <div><dt>Atelier</dt><dd>{d.RUE}, {d.CODE_POSTAL} {d.VILLE}</dd></div>
+        </dl>
       </div>
     </div>
   </section>

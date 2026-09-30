@@ -12,14 +12,13 @@
      - une encre terre d'ombre, jamais un noir pur ;
      - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
        comme les piquets d'implantation d'un géomètre ;
-     - un accent, la brique : l'action, les marques écrites, et une
-       seule bande par page, le renvoi final.
+     - un seul accent, la brique : l'action et les marques écrites ;
+       elle ne couvre jamais un fond de section.
    Le logo garde ses propres couleurs.
 
-   Quatre fonds rythment chaque page, jamais deux fois le même à la
+   Trois fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     chaux · blanc (.sur-pale) · nuit (.sur-sombre)
-     · brique (.sur-vif, le renvoi final).
+     chaux · blanc (.sur-pale) · nuit (.sur-sombre, une bande par page).
 
    Les autres feuilles ne nomment jamais une couleur : elles demandent
    un rôle (--c-encre, --c-signal, --c-accent…). Changer de palette,
@@ -34,7 +33,7 @@
   --c-chaux:#F5F2EC;         /* blanc de chaux : le fond */
   --c-blanc:#FFFFFF;         /* blanc : une section sur deux, les cases */
   --c-terre:#27211C;         /* terre d'ombre : l'encre et la nuit */
-  --c-brique:#9A3324;        /* brique : l'action, le renvoi final */
+  --c-brique:#9A3324;        /* brique : l'action */
   --c-brique-sombre:#86291C; /* la brique écrite sur le clair, et son survol */
   --c-brique-claire:#E29A86; /* la brique écrite sur la nuit */
 
@@ -51,6 +50,7 @@
   --c-encre-rgb:39,33,28;
   --c-sombre-rgb:39,33,28;
   --c-craie-rgb:245,242,236;
+  --c-blanc-rgb:255,255,255;
 
   /* ---------- Textes sur le clair ----------
      chaux / blanc / creux */
@@ -102,7 +102,7 @@
 }
 
 /* ============================================================
-   LES QUATRE FONDS
+   LES TROIS FONDS
    Un bloc redéfinit la gamme pour lui et tout ce qu'il contient :
    aucun composant n'a à connaître la couleur de son fond, il demande
    --c-encre et obtient la bonne. Le bloc pose lui-même son fond :
@@ -150,33 +150,6 @@
   background-color:var(--c-papier);
 }
 
-/* Brique : le renvoi final de chaque page, et lui seul. La page se
-   referme sur la couleur du logo, là où l'on attend une décision. Le
-   texte y est blanc (7.3) ; le bouton d'appel s'inverse — un aplat de
-   chaux, texte brique sombre (8.0) — et la terre le recouvre au
-   survol, texte chaux (14.2). Aucun texte secondaire sous 5:1. */
-.sur-vif{
-  --c-papier:var(--c-brique);
-  --c-papier-2:var(--c-brique-sombre);
-  --c-fiche:var(--c-brique-sombre);
-  --c-papier-rgb:154,51,36;
-  --c-encre:var(--c-blanc);  /* brique : 7.3 */
-  --c-encre-60:#F6DDD6;      /*  5.7 */
-  --c-encre-40:#F6DDD6;      /*  5.7 */
-  --c-accent:var(--c-blanc);
-  --c-signal:var(--c-chaux);
-  --c-signal-fonce:var(--c-terre);
-  --c-sur-signal:var(--c-brique-sombre);   /* 8.0 */
-  --c-sur-signal-survol:var(--c-chaux);    /* 14.2 */
-  --c-ligne:rgba(255,255,255,.22);
-  --c-ligne-forte:rgba(255,255,255,.6);   /* 3.6 */
-  --c-cadre:rgba(255,255,255,.72);  /* trait de plan : 4.6 */
-  --c-repere:var(--c-cadre);
-  --c-focus:var(--c-blanc);
-  color:var(--c-encre);
-  background-color:var(--c-papier);
-}
-
 /* Polices de secours calibrées : tant que les polices du site ne sont
    pas arrivées, le texte s'affiche dans une police locale de même
    chasse, pour qu'il ne se recompose pas à leur arrivée — c'est ce qui
@@ -206,6 +179,8 @@
      de l'image : il se règle sur elle, et non plus sur l'écran. */
   --t-couverture-colonne:clamp(3rem,4.7vw,5rem);
   --t-piece:clamp(2.25rem,4.6vw,4.25rem);
+  /* Dès 1024 px, le h1 d'une page à photo tient six colonnes. */
+  --t-piece-colonne:clamp(2.5rem,3.7vw,3.875rem);
   --t-h2:clamp(1.875rem,3.1vw,2.875rem);
   --t-h3:clamp(1.375rem,2vw,1.75rem);
   --t-h4:clamp(1.125rem,1.35vw,1.3125rem);

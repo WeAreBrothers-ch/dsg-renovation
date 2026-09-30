@@ -52,8 +52,11 @@ def _image_partage(url, alt):
 
 
 def page_simple(fichier, titre, description, etiquette, h1, chapo,
-                corps_fn, modules, fil_seo, image=None, action=None):
-    """Une page de la racine : fil d'Ariane, couverture, corps, pied."""
+                corps_fn, modules, fil_seo, image=None, action=None,
+                media=None, faits=None):
+    """Une page de la racine : fil d'Ariane, couverture, corps, pied.
+
+    `media` : la photo de la couverture et sa légende (briques.vue)."""
     page = {
         "titre": titre,
         "description": description,
@@ -62,14 +65,23 @@ def page_simple(fichier, titre, description, etiquette, h1, chapo,
         "etiquette": etiquette,
         "h1": h1,
         "chapo": chapo,
+        "media": media,
+        "faits": faits,
     }
-    page.update(_image_partage(image, titre))
+    page.update(_image_partage(image or (media or {}).get("src"), titre))
     corps = briques.couverture(
         page, "", [("Accueil", "/"), (etiquette, "")], action
     ) + corps_fn(SERVICES, "")
     schemas = [seo.entreprise(), seo.fil([("Accueil", ""), (etiquette, fichier)])]
     schemas += fil_seo
     return ecrire(fichier, assembler(page, corps, "", modules, schemas))
+
+
+def _media_service(service):
+    """La photo d'une page de prestation, sa légende et sa fiche."""
+    lieu, quoi, ancre = service["legende"]
+    return {"src": service["image"], "alt": service["alt"],
+            "lieu": lieu, "quoi": quoi, "ancre": ancre}
 
 
 def construire_accueil():
@@ -100,7 +112,8 @@ def construire_services():
         "Prestations", ["Travaux de rénovation", "à Lausanne"],
         "Tous nos travaux sont réalisés par des salariés de l'entreprise ou "
         "par des partenaires que nous suivons depuis des années.",
-        page_prestations.savoir_faire, BASE_JS, [])]
+        page_prestations.savoir_faire, BASE_JS, [],
+        media=catalogue.PHOTO_PRESTATIONS, faits=catalogue.FAITS_PRESTATIONS)]
 
     for service in SERVICES:
         fichier = "services/%s.html" % service["slug"]
@@ -115,6 +128,8 @@ def construire_services():
             "h1": service["h1"],
             "chapo": service["chapo"],
             "travaux": service["slug"],
+            "media": _media_service(service),
+            "faits": service["reperes"],
         }
         page.update(_image_partage(service["image"], service["alt"]))
         fil = [("Accueil", "/"), ("Prestations", "services.html"),
@@ -133,7 +148,7 @@ def construire_services():
                      (service["nom"], fichier)]),
         ]
         faits.append(ecrire(fichier, assembler(
-            page, corps, "../", BASE_JS + ["ouverture.js"], schemas)))
+            page, corps, "../", BASE_JS, schemas)))
     return faits
 
 

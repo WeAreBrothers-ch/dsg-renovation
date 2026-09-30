@@ -28,7 +28,7 @@
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com">
-<link rel="stylesheet" href="assets/css/site.css?v=8120b9ad">
+<link rel="stylesheet" href="assets/css/site.css?v=a0c79d32">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 
 <script type="application/ld+json">
@@ -219,7 +219,7 @@
 
 <main id="contenu">
 
-  <header class="piece">
+  <header class="piece piece--vue">
     <div class="zone">
       <div class="piece__entete">
         <div class="piece__marge">
@@ -232,11 +232,20 @@
         <div class="piece__tete">
           <h1 class="piece__titre">Quarante ans de métier, une entreprise lausannoise</h1>
           <p class="chapo piece__chapo">Onze professionnels salariés, un réseau de partenaires de la région, et un seul métier : la rénovation.</p>
+          <dl class="piece__faits"><div><dt>Atelier</dt><dd>Lausanne, av. de Béthusy</dd></div><div><dt>Horaires</dt><dd>Lundi – vendredi, 08:00 – 17:00</dd></div><div><dt>Zone</dt><dd>Lausanne et arc lémanique</dd></div><div><dt>Devis</dt><dd>Gratuit, 72 h après visite</dd></div></dl>
           <div class="couverture__actions">
           <a class="btn btn--plein" href="devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
           <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
           </div>
         </div>
+        <figure class="vue piece__vue">
+          <img src="https://static.wixstatic.com/media/2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg" alt="Cuisine et dégagement d'un appartement de l'immeuble Béthusy après reprise des murs, plafonds et sols"
+               width="1600" height="1000" fetchpriority="high" decoding="async">
+          <figcaption class="vue__legende">
+            <span class="vue__texte"><span class="vue__lieu">Immeuble Béthusy, Lausanne</span><span class="vue__quoi">Six appartements rénovés, locataires en place</span></span>
+            
+          </figcaption>
+        </figure>
       </div>
     </div>
   </header>
@@ -647,16 +656,24 @@
     </div>
   </section>
 
-  <section class="section rappel sur-vif" aria-labelledby="rappelTitre">
-    <div class="zone rappel__grille">
-      <p class="intercalaire__nom rappel__marge">Prochaine étape</p>
-      <div class="rappel__corps">
-        <h2 class="rappel__titre" id="rappelTitre">Parlons de votre projet</h2>
-        <p class="chapo">Un appel suffit pour savoir si nous sommes la bonne entreprise pour votre chantier. Nous le disons franchement quand ce n'est pas le cas.</p>
-        <div class="rappel__actions">
-          <a class="btn btn--plein" href="devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-          <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+  <section class="section rappel" aria-labelledby="rappelTitre">
+    <div class="zone">
+      <div class="rappel__cadre revele">
+        <div class="rappel__corps">
+          <p class="intercalaire__nom">Prochaine étape</p>
+          <h2 class="rappel__titre" id="rappelTitre">Parlons de votre projet</h2>
+          <p class="chapo">Un appel suffit pour savoir si nous sommes la bonne entreprise pour votre chantier. Nous le disons franchement quand ce n'est pas le cas.</p>
+          <div class="rappel__actions">
+            <a class="btn btn--plein" href="devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+            <a class="btn btn--cadre" href="tel:+41218470202">+41 21 847 02 02<span class="fleche" aria-hidden="true"></span></a>
+          </div>
         </div>
+        <dl class="rappel__joindre">
+          <div><dt>Téléphone</dt><dd><a href="tel:+41218470202">+41 21 847 02 02</a></dd></div>
+          <div><dt>Courriel</dt><dd><a href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a></dd></div>
+          <div><dt>Horaires</dt><dd>Lundi – vendredi, 08:00 – 17:00</dd></div>
+          <div><dt>Atelier</dt><dd>Avenue de Béthusy 60, 1012 Lausanne</dd></div>
+        </dl>
       </div>
     </div>
   </section>

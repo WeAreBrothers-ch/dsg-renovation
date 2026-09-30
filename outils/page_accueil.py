@@ -10,15 +10,16 @@ import confiance
 from donnees_site import COMMUNES
 from pages_site import fragment
 
-# La légende reprend ce que montrent les deux tirages (voir leurs
-# textes alternatifs) : aucune information nouvelle n'est avancée. Les
-# deux boutons montrent un état entier d'un geste — au doigt, c'est plus
+# La légende, posée dans l'image comme toutes celles du site (briques.vue),
+# reprend ce que montrent les deux tirages (voir leurs textes
+# alternatifs) : aucune information nouvelle n'est avancée. Les deux
+# boutons montrent un état entier d'un geste — au doigt, c'est plus
 # sûr qu'une poignée à saisir. Ils attendent le script (comparateur.js
 # retire `hidden`) : sans lui, ils ne feraient rien.
 LEGENDE_COMPARATEUR = """<figcaption class="legende legende--comparateur">
-          <span class="legende__texte">
-            <span class="legende__lieu">Séjour traversant</span>
-            <span class="legende__quoi">De la chape brute au parquet chêne</span>
+          <span class="vue__texte">
+            <span class="vue__lieu">Séjour traversant</span>
+            <span class="vue__quoi">De la chape brute au parquet chêne</span>
           </span>
           <span class="bascule" role="group" aria-label="Montrer un état entier" data-bascule hidden>
             <button class="bascule__choix" type="button" data-comparer="100" aria-pressed="false">Avant</button>
@@ -58,9 +59,6 @@ def accueil(services, base=""):
       </figure>
     </div>
 
-    <div class="zone couverture__cartouche">
-    {fragment('identite')}
-    </div>
 {confiance.bande_references(base)}
   </section>
 

@@ -37,7 +37,7 @@ _TAILLES = [
     ("voisin__vue", "64px"),
     ("chemise__tirage", "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 66vw"),
     ("signature__cadre", "100vw"),
-    ("ouverture__cadre", "100vw"),
+    ("piece__vue", "(min-width: 1024px) 50vw, 100vw"),
 ]
 
 

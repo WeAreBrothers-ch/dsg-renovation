@@ -4,7 +4,7 @@
    non composant par composant.
    ============================================================ */
 @media print{
-  :root,.sur-pale,.sur-sombre,.sur-vif{
+  :root,.sur-pale,.sur-sombre{
     --c-papier:#fff;--c-papier-2:#fff;--c-fiche:#fff;
     --c-bitume:#fff;--c-bitume-2:#fff;
     --c-papier-rgb:255,255,255;
@@ -17,7 +17,7 @@
   /* Sur papier, le bouton d'appel devient une case d'encre. */
   .btn--plein{box-shadow:inset 0 0 0 1px #000}
   body{background:#fff;color:#000}
-  .entete,.barre-mobile,.menu,.filtres,.ouverture__rideau,.sommaire,.plie__bouton,.pied__signe{display:none!important}
+  .entete,.barre-mobile,.menu,.filtres,.sommaire,.plie__bouton,.pied__signe{display:none!important}
   /* Sur papier, tout se lit : textes dépliés, listes du pied ouvertes. */
   [data-plie]>p{display:block!important}
   [data-volet] ul{display:flex!important}

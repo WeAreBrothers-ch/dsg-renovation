@@ -84,18 +84,18 @@
   color:var(--c-encre-60);
 }
 
-/* Travaux réalisés : de petites cases jointives. Quand une case mène
-   à la page de sa prestation, toute la case est le lien. */
-.lots{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
+/* Travaux réalisés : de petites cases pleines, sans trait — un aplat
+   d'un ton sous le fond, comme une étiquette de plan. Quand une case
+   mène à la page de sa prestation, toute la case est le lien. */
+.lots{display:flex;flex-wrap:wrap;gap:6px}
 .lots li{
-  padding:var(--sp-1) var(--sp-3);
-  box-shadow:inset 0 0 0 1px var(--c-ligne-forte);
-  font-size:var(--t-etiquette);color:var(--c-encre-60);
+  padding:var(--sp-1) var(--sp-3);background:var(--c-papier-2);
+  font-size:var(--t-etiquette);line-height:1.5;color:var(--c-encre-60);
 }
 .lots li:has(>a){padding:0}
 .lots a{
   display:flex;align-items:center;padding:var(--sp-1) var(--sp-3);color:var(--c-encre);
   transition:background-color var(--d-rapide) var(--e-standard),color var(--d-rapide) var(--e-standard);
 }
-@media (hover:hover) and (pointer:fine){.lots a:hover{background:var(--c-papier-2);color:var(--c-accent)}}
+@media (hover:hover) and (pointer:fine){.lots a:hover{background:var(--c-encre);color:var(--c-papier)}}
 .lots a:focus-visible{outline-offset:1px}

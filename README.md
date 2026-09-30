@@ -46,7 +46,7 @@ Après une modification du contenu, des feuilles de style ou du chrome :
 python3 outils/construire.py
 ```
 
-Le script écrit les pages, `assets/css/site.css` (les vingt feuilles
+Le script écrit les pages, `assets/css/site.css` (les dix-neuf feuilles
 sources concaténées et minifiées, avec une empreinte de version dans
 l'adresse), le plan du site daté et `robots.txt`.
 
@@ -115,7 +115,7 @@ construction.
   n'est balisé : seuls de vrais avis vérifiables pourraient l'être.
 - **Maillage** : chaque chantier des réalisations renvoie vers ses
   prestations, et chaque prestation vers le chantier que montre sa
-  photo d'ouverture (« Voir le chantier », ancre de la fiche) ; les
+  photo d'en-tête (« Voir le chantier », ancre de la fiche) ; les
   réponses de la page devis vers les pages qu'elles évoquent, chaque
   prestation vers ses voisines.
 - **Contenu local** : la section « sur le terrain » de chaque prestation
@@ -136,9 +136,9 @@ Palette « Chaux & brique » (v3, 30/09/2026) — tout est décrit dans
 `DIRECTION-ARTISTIQUE.md`. L'encre terre d'ombre et la brique, les
 couleurs du logo, ne changent pas ; le fond s'éclaircit, à la demande
 du client qui trouvait le site « mort » : une chaux claire et chaude,
-le blanc franc une section sur deux, une bande de nuit par page, et le
-renvoi final sur la brique. Ailleurs, la brique reste à l'action (les
-boutons d'appel) et aux marques écrites. Le logo garde ses propres
+le blanc franc une section sur deux, une bande de nuit par page. La
+brique reste à l'action (les boutons d'appel) et aux marques écrites ;
+elle ne couvre jamais un fond. Le logo garde ses propres
 couleurs. Changer de palette, c'est changer `assets/css/00-jetons.css` :
 les autres feuilles ne demandent que des rôles (`--c-encre`,
 `--c-signal`, `--c-accent`…). Des cadres d'un pixel marqués d'un repère
@@ -151,9 +151,13 @@ Ce que la v3 a changé, en bref :
 - **Couverture de l'accueil** : le titre à gauche, le chantier avant /
   après à droite, à la hauteur de l'écran ; deux boutons « Avant » /
   « Après » sous l'image montrent un état entier d'un geste.
-- **Légendes en deux voix** : le lieu (« Villa de Chailly, Lausanne »),
-  puis ce qu'on voit, et « Voir le chantier » vers sa fiche — au lieu
-  du texte alternatif recopié sous la photo.
+- **En-têtes des pages** : comme l'accueil, le texte et quatre repères
+  à gauche, un chantier réel à droite.
+- **Légendes dans la photo** : le lieu (« Villa de Chailly, Lausanne »),
+  puis ce qu'on voit, et « Voir le chantier » vers sa fiche — posés en
+  bas de l'image, plus de bande de texte dessous.
+- **Fin de page** : un cadre à repères, l'appel et comment nous joindre
+  (plus de bandeau de couleur).
 - **Plus de numéros qui ne comptent rien** : ni « N° 005 » sur les
   photos des réalisations, ni « 01 … 07 » devant les prestations, qui
   montrent leur photo à la place.
@@ -206,7 +210,6 @@ pas bougé d'un pixel.
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone, sommaire de page (position, section en cours, saut), volets du pied de page |
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
-| `ouverture.js` | pages de prestation : l'image d'ouverture s'élargit au défilement |
 | `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |

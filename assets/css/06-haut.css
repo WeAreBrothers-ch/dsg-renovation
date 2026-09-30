@@ -53,7 +53,7 @@
 
 /* L'image de la couverture : le comparateur, repères aux angles (voir
    01-socle.css), sa légende dessous. */
-.couverture__media{grid-column:1/-1;margin:0}
+.couverture__media{grid-column:1/-1;margin:0;position:relative}
 .couverture__cadre{display:block}
 
 /* Dès 1024 px, côte à côte. Le texte tient cinq colonnes, l'image les
@@ -77,13 +77,6 @@
     height:clamp(460px,calc(100svh - var(--h-entete) - 136px),780px);
   }
 }
-
-/* Le cartouche d'identité suit l'image d'ouverture. Au téléphone, ses
-   quatre repères sont déjà dits un peu plus bas (garanties de la
-   couverture, relevé chiffré, adresse de l'atelier) : il attend la
-   tablette pour ne pas allonger le premier défilement. */
-.couverture__cartouche{display:none;padding-top:var(--sp-7)}
-@media (min-width:768px){.couverture__cartouche{display:block}}
 
 /* ------------------------------------------------------------
    RELEVÉ CHIFFRÉ — quatre cases d'un même bordereau

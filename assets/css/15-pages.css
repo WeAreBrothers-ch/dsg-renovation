@@ -56,7 +56,20 @@
   background:var(--c-encre-40);transform:translateY(-2px);
 }
 .service__liste li:last-child{border-bottom:var(--bd-fin)}
-.service__villes{align-content:start}
+/* Les communes : une liste de lieux, pas des étiquettes. Deux colonnes
+   d'un filet à l'autre, comme les postes d'un bordereau. */
+.lots.service__villes{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--sp-5);
+  align-content:start;border-top:1px solid var(--c-cadre);
+}
+.lots.service__villes li{
+  display:flex;align-items:center;gap:var(--sp-3);
+  padding:var(--sp-3) 0;background:none;border-bottom:var(--bd-fin);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-ui);color:var(--c-encre);
+}
+.lots.service__villes li::before{
+  content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);background:var(--c-accent);
+}
 
 .section--serre{padding-block:0 var(--sec-y)}
 
@@ -67,10 +80,13 @@
 /* Chaque case trace son propre contour, qui déborde d'un pixel dans
    l'interstice : deux contours voisins s'y superposent en un seul
    trait. Une rangée incomplète ne laisse donc jamais de case vide. */
+/* Une colonne au téléphone, deux ensuite : les quatre voisines font
+   toujours des rangées pleines. */
 .voisins{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));
+  display:grid;grid-template-columns:minmax(0,1fr);
   gap:1px;padding:1px;
 }
+@media (min-width:640px){.voisins{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .voisins>li{display:flex}
 .voisin{
   flex:1;display:flex;align-items:center;gap:var(--sp-4);
@@ -120,25 +136,53 @@
 
 /* ------------------------------------------------------------
    RENVOI DE FIN DE PAGE
-   Une bande de teinte, l'aplat d'action (.sur-vif, posée par le
-   générateur) : la page se referme sur la question qu'on attend du
-   visiteur. Le fond vient de la classe de contexte ; sans elle, la
-   bande prend celui de la page. Au téléphone, les boutons s'empilent,
-   pleine largeur, sous le pouce.
+   Un cadre à repères, sur le fond de la section (le rythme le choisit)
+   et en relief d'une case : à gauche la question et les deux façons
+   d'y répondre, à droite comment nous joindre. La
+   page se referme sur une décision facile, pas sur un aplat de
+   couleur. Au téléphone, tout s'empile, les boutons pleine largeur.
    ------------------------------------------------------------ */
-.rappel{background:var(--c-papier)}
-.rappel__grille{
-  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
-  gap:var(--sp-5) var(--grille-goutt);align-items:start;
+.rappel__cadre{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  background:var(--c-fiche);box-shadow:inset 0 0 0 1px var(--c-cadre);
 }
-.rappel__marge{grid-column:1/-1;padding-top:.6em}
-.rappel__corps{grid-column:1/-1}
-.rappel__titre{font-size:var(--t-piece);letter-spacing:-.035em;line-height:1.02;max-width:10.7em}
+.rappel__corps{padding:var(--sp-6) var(--sp-5)}
+.rappel__titre{
+  margin-top:var(--sp-5);font-size:var(--t-piece);
+  letter-spacing:-.035em;line-height:1.02;max-width:10.7em;
+}
 .rappel .chapo{margin-top:var(--sp-5)}
 .rappel__actions{margin-top:var(--sp-6);display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--sp-3)}
 .rappel__actions .btn{min-width:min(100%,260px)}
-@media (min-width:768px){.rappel__actions{flex-direction:row}}
+/* Comment nous joindre : quatre lignes d'un filet à l'autre. */
+.rappel__joindre{
+  display:flex;flex-direction:column;
+  padding:var(--sp-2) var(--sp-5) var(--sp-5);border-top:1px solid var(--c-cadre);
+}
+.rappel__joindre div{padding-block:var(--sp-4);border-bottom:var(--bd-fin)}
+.rappel__joindre div:last-child{border-bottom:0}
+.rappel__joindre dt{font-size:var(--t-etiquette);color:var(--c-encre-60)}
+.rappel__joindre dd{
+  margin-top:var(--sp-1);font-family:var(--f-titre);font-weight:500;
+  font-size:var(--t-h4);letter-spacing:-.01em;line-height:1.3;overflow-wrap:anywhere;
+}
+.rappel__joindre a{
+  display:inline-flex;align-items:center;min-height:44px;
+  text-decoration:underline;text-decoration-color:var(--c-ligne-forte);text-underline-offset:4px;
+}
+@media (hover:hover) and (pointer:fine){
+  .rappel__joindre a{min-height:0}
+  .rappel__joindre a:hover{color:var(--c-accent);text-decoration-color:currentColor}
+}
+@media (min-width:768px){
+  .rappel__actions{flex-direction:row}
+  .rappel__corps{padding:var(--sp-8) var(--sp-7)}
+  .rappel__joindre{padding:var(--sp-4) var(--sp-7) var(--sp-7)}
+}
 @media (min-width:1024px){
-  .rappel__marge{grid-column:1/5}
-  .rappel__corps{grid-column:5/13}
+  .rappel__cadre{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .rappel__joindre{
+    justify-content:center;padding:var(--sp-7);
+    border-top:0;border-left:1px solid var(--c-cadre);
+  }
 }

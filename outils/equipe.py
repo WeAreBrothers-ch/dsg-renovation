@@ -211,7 +211,7 @@ def _fond(classes):
     sections pâles, le blanc (outils/rythme.py)."""
     if "partenaires" in classes:
         return "sur-pale"
-    for fond in ("sur-sombre", "sur-pale", "sur-vif"):
+    for fond in ("sur-sombre", "sur-pale"):
         if fond in classes:
             return fond
     return "blanc"
@@ -231,7 +231,7 @@ def _sections(html):
     titres = []
     for i, (c, titre) in enumerate(balises):
         suivante = balises[i + 1][0] if i + 1 < len(balises) else {"sur-sombre"}
-        if (titre and "section" in c and not c & {"rappel", "sur-vif", "section--serre"}
+        if (titre and "section" in c and not c & {"rappel", "section--serre"}
                 and _fond(c) != _fond(suivante)):
             titres.append(titre)
     return titres

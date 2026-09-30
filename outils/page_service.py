@@ -10,34 +10,11 @@ import briques
 import prestations
 import repli
 import service_liens
-from ouverture import ouverture
 from lausanne_finitions import LOCAL as LOCAL_FINITIONS
 from lausanne_gros_oeuvre import LOCAL as LOCAL_GROS_OEUVRE
 from lausanne_solutions import LOCAL as LOCAL_SOLUTIONS
 
 LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS, **LOCAL_SOLUTIONS)
-
-
-def _legende(fiche, base):
-    """Ce que montre le tirage : le lieu, puis les travaux qu'on y voit,
-    et le chemin vers la fiche du chantier quand il en a une."""
-    lieu, quoi, chantier = fiche["legende"]
-    lien = (f'<a class="legende__lien" href="{base}realisations.html#{chantier}">'
-            'Voir le chantier<span class="fleche" aria-hidden="true"></span></a>'
-            if chantier else "")
-    return (f'<span class="legende__texte"><span class="legende__lieu">{lieu}</span>'
-            f'<span class="legende__quoi">{quoi}</span></span>{lien}')
-
-
-def _tirage(fiche, base):
-    """Le tirage d'ouverture : une page de métier se montre d'abord.
-
-    Il s'affiche d'emblée — c'est l'image principale de la page — puis
-    s'élargit au défilement.
-    """
-    image = f"""<img src="{fiche['image']}" alt="{fiche['alt']}"
-           width="1600" height="900" fetchpriority="high" decoding="async">"""
-    return ouverture(image, _legende(fiche, base), "tirage") + "\n"
 
 
 def _prestations(fiche):
@@ -80,26 +57,6 @@ def _methode(fiche):
 {briques.intercalaire("Méthode", "Du premier appel à la fin des travaux",
                       prestations.intertitres_de(fiche)["comment"])}
 {repli.replis(etapes, ouvert=True)}
-    </div>
-  </section>
-"""
-
-
-def _reperes(fiche):
-    """Quatre repères de la page, dans la chemise du relevé général."""
-    cellules = "\n".join(
-        f"""        <li class="preuve revele">
-          <span class="preuve__onglet etiquette">{nom}</span>
-          <p class="preuve__note">{valeur}</p>
-        </li>"""
-        for nom, valeur in fiche["reperes"]
-    )
-    return f"""
-  <section class="section section--serre sur-sombre" aria-label="Repères de la prestation">
-    <div class="zone">
-      <ul class="preuves preuves--quatre">
-{cellules}
-      </ul>
     </div>
   </section>
 """
@@ -152,10 +109,8 @@ def corps(fiche, base):
   </section>
 """
     return (
-        _tirage(fiche, base)
-        + _prestations(fiche)
+        _prestations(fiche)
         + _methode(fiche)
-        + _reperes(fiche)
         + service_liens.zone(base, fiche)
         + _local(fiche)
         + questions

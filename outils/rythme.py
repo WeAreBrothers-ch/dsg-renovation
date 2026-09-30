@@ -1,14 +1,13 @@
 """Le rythme des fonds : jamais deux sections de même fond à la suite.
 
 Une page d'un seul fond se lit comme un seul bloc, et le lecteur ne
-sait plus où finit une section. Quatre fonds se relaient donc dans
+sait plus où finit une section. Trois fonds se relaient donc dans
 chaque page : le fond de la page (« blanc » ci-dessous : la chaux),
-pâle (.sur-pale : le blanc franc), sombre (.sur-sombre, la nuit) et vif
-(.sur-vif, la brique du renvoi final). Leurs couleurs sont dans
-00-jetons.css.
+pâle (.sur-pale : le blanc franc) et sombre (.sur-sombre, la nuit).
+Leurs couleurs sont dans 00-jetons.css.
 
-Les deux derniers sont choisis à la main, dans les gabarits : ce sont
-des décisions de mise en page. Les deux premiers se déduisent : une
+Le dernier est choisi à la main, dans les gabarits : c'est une
+décision de mise en page. Les deux premiers se déduisent : une
 section sans fond déclaré prend le contraire de celle qui la précède.
 Ajouter, retirer ou déplacer une section ne demande donc jamais de
 recalculer l'alternance à la main.
@@ -25,7 +24,6 @@ _SECTION = re.compile(r'<section class="([^"]*)"')
 
 # Le fond que chaque classe impose, dans l'ordre où on les teste.
 _FONDS_IMPOSES = [
-    ("sur-vif", "vif"),
     ("sur-sombre", "nuit"),
     ("sur-pale", "pale"),
     ("partenaires", "pale"),   # bande des références : le blanc
