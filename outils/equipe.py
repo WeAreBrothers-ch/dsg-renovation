@@ -207,8 +207,8 @@ def scene(metier, place, sens):
 
 
 def _fond(classes):
-    """Le fond d'une section. La bande des références a celui du creux
-    (outils/rythme.py)."""
+    """Le fond d'une section. La bande des références a celui des
+    sections pâles, le blanc (outils/rythme.py)."""
     if "partenaires" in classes:
         return "sur-pale"
     for fond in ("sur-sombre", "sur-pale", "sur-vif"):

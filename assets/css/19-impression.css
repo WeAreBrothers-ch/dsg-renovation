@@ -5,7 +5,7 @@
    ============================================================ */
 @media print{
   :root,.sur-pale,.sur-sombre,.sur-vif{
-    --c-papier:#fff;--c-papier-2:#fff;--c-fiche:#fff;--c-teinte:#fff;
+    --c-papier:#fff;--c-papier-2:#fff;--c-fiche:#fff;
     --c-bitume:#fff;--c-bitume-2:#fff;
     --c-papier-rgb:255,255,255;
     --c-encre:#000;--c-encre-60:#333;--c-encre-40:#555;

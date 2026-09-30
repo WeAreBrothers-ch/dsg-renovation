@@ -26,12 +26,17 @@
 }
 .lumineuse[data-charge="true"] .lumineuse__img{opacity:1;transform:none}
 
+/* La légende des pages (voir « Légende », 10-comparateur.css) : le
+   lieu en grotesque, ce qu'on voit en romain, puis le rang de la vue. */
 .lumineuse__legende{
   display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;
-  gap:var(--sp-2) var(--sp-5);text-align:center;font-size:var(--t-petit);
+  gap:var(--sp-2) var(--sp-5);text-align:center;
 }
-.lumineuse__texte{color:var(--c-craie)}
-.lumineuse__compte{color:var(--c-craie-60);font-variant-numeric:tabular-nums}
+.lumineuse__texte{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 var(--sp-3)}
+.lumineuse__lieu{font-weight:500;font-size:var(--t-petit);color:var(--c-craie)}
+.lumineuse__quoi{font-family:var(--f-lecture);font-size:var(--t-texte);color:var(--c-craie-60)}
+.lumineuse__quoi:not(:empty)::before{content:"— "}
+.lumineuse__compte{font-size:var(--t-petit);color:var(--c-craie-60);font-variant-numeric:tabular-nums}
 
 /* ---------- Commandes : des cases d'un pixel ---------- */
 .lumineuse__fermer,.lumineuse__nav{

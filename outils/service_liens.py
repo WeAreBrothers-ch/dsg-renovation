@@ -44,7 +44,7 @@ def voisins(fiche, base):
     fiches = "\n".join(
         f"""        <li>
           <a class="voisin revele" href="{base}services/{slug}.html">
-            <span class="voisin__n">{prestations.page(slug)['numero']}</span>
+            <span class="voisin__vue" aria-hidden="true"><img src="{prestations.page(slug)['image']}" alt="" width="316" height="237" loading="lazy" decoding="async"></span>
             <span class="voisin__nom">{prestations.page(slug)['nom']}</span>
             <span class="voisin__chev" aria-hidden="true"></span>
           </a>

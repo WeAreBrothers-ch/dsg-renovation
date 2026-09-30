@@ -52,7 +52,7 @@ def tete(page, base, feuille, schemas):
 <meta name="description" content="{page['description']}">
 <link rel="canonical" href="{page['canonique']}">
 {page.get('robots', '')}
-<meta name="theme-color" content="#EEEBE5">
+<meta name="theme-color" content="#F5F2EC">
 <link rel="icon" href="{base}favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="{base}assets/images/icone-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="{base}apple-touch-icon.png">
@@ -90,10 +90,10 @@ def _lien_nav(entree, base, courante):
 def _sous_menu(base, services, courante):
     """Les prestations, une par ligne, sous l'entrée « Prestations »."""
     lignes = "\n            ".join(
-        '<li><a href="%sservices/%s.html"%s><span class="sous-menu__n">%s</span>%s</a></li>'
+        '<li><a href="%sservices/%s.html"%s>%s</a></li>'
         % (base, s["slug"], ' aria-current="page"'
            if courante == "services/%s.html" % s["slug"] else "",
-           s["numero"], s["nom_menu"])
+           s["nom_menu"])
         for s in services
     )
     return f"""<div class="sous-menu" id="sousMenu">

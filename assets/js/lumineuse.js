@@ -17,7 +17,8 @@
     '<button class="lumineuse__fermer" type="button" aria-label="Fermer la vue">&times;</button>' +
     '<figure class="lumineuse__cadre">' +
       '<img class="lumineuse__img" alt="">' +
-      '<figcaption class="lumineuse__legende"><span class="lumineuse__texte"></span>' +
+      '<figcaption class="lumineuse__legende"><span class="lumineuse__texte">' +
+      '<span class="lumineuse__lieu"></span><span class="lumineuse__quoi"></span></span>' +
       '<span class="lumineuse__compte"></span></figcaption>' +
     "</figure>" +
     '<button class="lumineuse__nav lumineuse__nav--prec" type="button" aria-label="Vue précédente"></button>' +
@@ -25,7 +26,8 @@
   document.body.appendChild(boite);
 
   var image = boite.querySelector(".lumineuse__img");
-  var texte = boite.querySelector(".lumineuse__texte");
+  var lieu = boite.querySelector(".lumineuse__lieu");
+  var quoi = boite.querySelector(".lumineuse__quoi");
   var compte = boite.querySelector(".lumineuse__compte");
 
   /** @type {Element[]} */
@@ -47,7 +49,12 @@
     boite.setAttribute("data-charge", "false");
     image.src = lien.getAttribute("href") || "";
     image.alt = (vignette && vignette.getAttribute("alt")) || "";
-    texte.textContent = lien.getAttribute("data-legende") || "";
+    /* La légende parle en deux voix, comme celles du site : le lieu,
+       puis ce qu'on voit — le dernier segment de « data-legende ». */
+    var morceaux = (lien.getAttribute("data-legende") || "").split(" · ");
+    var vu = morceaux.length > 1 ? morceaux.pop() : "";
+    lieu.textContent = morceaux.join(" · ");
+    quoi.textContent = vu;
     compte.textContent = (rang + 1) + " / " + groupe.length;
   }
 

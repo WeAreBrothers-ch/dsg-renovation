@@ -18,16 +18,26 @@ from lausanne_solutions import LOCAL as LOCAL_SOLUTIONS
 LOCAL = dict(LOCAL_GROS_OEUVRE, **LOCAL_FINITIONS, **LOCAL_SOLUTIONS)
 
 
-def _tirage(fiche):
+def _legende(fiche, base):
+    """Ce que montre le tirage : le lieu, puis les travaux qu'on y voit,
+    et le chemin vers la fiche du chantier quand il en a une."""
+    lieu, quoi, chantier = fiche["legende"]
+    lien = (f'<a class="legende__lien" href="{base}realisations.html#{chantier}">'
+            'Voir le chantier<span class="fleche" aria-hidden="true"></span></a>'
+            if chantier else "")
+    return (f'<span class="legende__texte"><span class="legende__lieu">{lieu}</span>'
+            f'<span class="legende__quoi">{quoi}</span></span>{lien}')
+
+
+def _tirage(fiche, base):
     """Le tirage d'ouverture : une page de métier se montre d'abord.
 
     Il s'affiche d'emblée — c'est l'image principale de la page — puis
-    s'élargit au défilement, comme le comparateur de l'accueil.
+    s'élargit au défilement.
     """
     image = f"""<img src="{fiche['image']}" alt="{fiche['alt']}"
            width="1600" height="900" fetchpriority="high" decoding="async">"""
-    # La légende dit ce que montre la photo : un lieu, des travaux.
-    return ouverture(image, fiche["alt"], "tirage") + "\n"
+    return ouverture(image, _legende(fiche, base), "tirage") + "\n"
 
 
 def _prestations(fiche):
@@ -142,7 +152,7 @@ def corps(fiche, base):
   </section>
 """
     return (
-        _tirage(fiche)
+        _tirage(fiche, base)
         + _prestations(fiche)
         + _methode(fiche)
         + _reperes(fiche)

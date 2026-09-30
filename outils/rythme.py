@@ -2,9 +2,10 @@
 
 Une page d'un seul fond se lit comme un seul bloc, et le lecteur ne
 sait plus où finit une section. Quatre fonds se relaient donc dans
-chaque page : le fond de la page (« blanc », le plâtre), pâle
-(.sur-pale, le creux), sombre (.sur-sombre) et vif (.sur-vif, le renvoi
-final). Leurs couleurs sont dans 00-jetons.css.
+chaque page : le fond de la page (« blanc » ci-dessous : la chaux),
+pâle (.sur-pale : le blanc franc), sombre (.sur-sombre, la nuit) et vif
+(.sur-vif, la brique du renvoi final). Leurs couleurs sont dans
+00-jetons.css.
 
 Les deux derniers sont choisis à la main, dans les gabarits : ce sont
 des décisions de mise en page. Les deux premiers se déduisent : une
@@ -13,8 +14,8 @@ Ajouter, retirer ou déplacer une section ne demande donc jamais de
 recalculer l'alternance à la main.
 
 Une suite de sections libres qui finirait sur le fond de la section
-imposée qui la suit (la bande des références, pâle elle aussi) part de
-l'autre fond, quand la section qui la précède le permet : après une
+imposée qui la suit (la bande des références, blanche elle aussi) part
+de l'autre fond, quand la section qui la précède le permet : après une
 bande sombre, les deux départs se valent.
 """
 
@@ -27,7 +28,7 @@ _FONDS_IMPOSES = [
     ("sur-vif", "vif"),
     ("sur-sombre", "nuit"),
     ("sur-pale", "pale"),
-    ("partenaires", "pale"),   # bande des références : son propre creux
+    ("partenaires", "pale"),   # bande des références : le blanc
     ("couverture", "blanc"),   # la couverture de l'accueil
 ]
 

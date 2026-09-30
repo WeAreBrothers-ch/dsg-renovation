@@ -114,8 +114,10 @@ construction.
   les pages de prestation, fil d'Ariane partout. Aucun avis ni note
   n'est balisé : seuls de vrais avis vérifiables pourraient l'être.
 - **Maillage** : chaque chantier des réalisations renvoie vers ses
-  prestations, les réponses de la page devis vers les pages qu'elles
-  évoquent, chaque prestation vers ses voisines.
+  prestations, et chaque prestation vers le chantier que montre sa
+  photo d'ouverture (« Voir le chantier », ancre de la fiche) ; les
+  réponses de la page devis vers les pages qu'elles évoquent, chaque
+  prestation vers ses voisines.
 - **Contenu local** : la section « sur le terrain » de chaque prestation
   décrit ce que le bâti lausannois impose (plâtre sur lattis, hauteurs
   sous plafond, accès de Sous-Gare, immeubles locatifs habités). C'est le
@@ -130,18 +132,31 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Plâtre & brique », les couleurs d'origine du site, rétablies
-le 27/09/2026 à la demande du client après quatre autres essais — tout
-est décrit dans `DIRECTION-ARTISTIQUE.md`. Un fond de plâtre frais, une
-encre terre d'ombre, et un seul accent, la brique : les boutons d'appel,
-les liens et les repères écrits, jamais un fond de section. Le logo
-garde ses propres couleurs. Quatre fonds alternent : plâtre, creux, une
-bande de nuit par page, et le renvoi final sur la teinte. Changer de
-palette, c'est changer `assets/css/00-jetons.css` : les autres feuilles
-ne demandent que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…). Des cadres
-d'un pixel marqués d'un repère carré à chaque angle, un chevron devant
-chaque intitulé, une grotesque (Archivo) pour les titres et une sérif de
-lecture (Newsreader) pour les phrases.
+Palette « Chaux & brique » (v3, 30/09/2026) — tout est décrit dans
+`DIRECTION-ARTISTIQUE.md`. L'encre terre d'ombre et la brique, les
+couleurs du logo, ne changent pas ; le fond s'éclaircit, à la demande
+du client qui trouvait le site « mort » : une chaux claire et chaude,
+le blanc franc une section sur deux, une bande de nuit par page, et le
+renvoi final sur la brique. Ailleurs, la brique reste à l'action (les
+boutons d'appel) et aux marques écrites. Le logo garde ses propres
+couleurs. Changer de palette, c'est changer `assets/css/00-jetons.css` :
+les autres feuilles ne demandent que des rôles (`--c-encre`,
+`--c-signal`, `--c-accent`…). Des cadres d'un pixel marqués d'un repère
+carré à chaque angle, un chevron devant chaque intitulé, une grotesque
+(Archivo) pour les titres et une sérif de lecture (Newsreader) pour les
+phrases.
+
+Ce que la v3 a changé, en bref :
+
+- **Couverture de l'accueil** : le titre à gauche, le chantier avant /
+  après à droite, à la hauteur de l'écran ; deux boutons « Avant » /
+  « Après » sous l'image montrent un état entier d'un geste.
+- **Légendes en deux voix** : le lieu (« Villa de Chailly, Lausanne »),
+  puis ce qu'on voit, et « Voir le chantier » vers sa fiche — au lieu
+  du texte alternatif recopié sous la photo.
+- **Plus de numéros qui ne comptent rien** : ni « N° 005 » sur les
+  photos des réalisations, ni « 01 … 07 » devant les prestations, qui
+  montrent leur photo à la place.
 
 Chaque couleur de texte porte son rapport de contraste en commentaire
 dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
@@ -162,8 +177,8 @@ Au téléphone, une page se parcourt par ses intitulés plutôt que d'un
 bout à l'autre :
 
 - **Sommaire de page** (`sommaire.py`, `nav.js`) : sous l'en-tête de
-  chaque page de trois sections ou plus — à l'accueil, sous le texte de
-  la couverture —, une rangée de cases reprend l'intitulé de chaque
+  chaque page de trois sections ou plus — à l'accueil, sous la
+  couverture —, une rangée de cases reprend l'intitulé de chaque
   section. Elle reste en haut de l'écran, marque la section en cours et
   mène droit à celle qu'on touche. Elle disparaît dès 1024 px, où
   l'intitulé accroché dans la marge fait ce travail.
@@ -191,9 +206,9 @@ pas bougé d'un pixel.
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone, sommaire de page (position, section en cours, saut), volets du pied de page |
 | `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
-| `ouverture.js` | l'image d'ouverture s'élargit au défilement |
+| `ouverture.js` | pages de prestation : l'image d'ouverture s'élargit au défilement |
 | `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
-| `comparateur.js` | glissière avant / après (souris, tactile, clavier) |
+| `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |
 | `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |

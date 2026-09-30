@@ -1,24 +1,25 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
    Concept : « LE PLAN D'IMPLANTATION »
-   Palette : « PLÂTRE & BRIQUE », les couleurs d'origine du site
-   (rétablies le 27/09/2026, après quatre autres essais)
+   Palette : « CHAUX & BRIQUE » (v3, 30/09/2026) — l'encre et la
+   brique de toujours, celles du logo ; le fond, lui, s'éclaircit.
 
    Un chantier de rénovation commence par un relevé : on reporte la
    pièce sur le plan, on pose des repères aux angles, puis on ouvre.
    Le site en reprend la matière et le geste :
-     - un fond de plâtre frais, chaud et mat — pas de blanc clinique ;
+     - un fond de chaux, clair et chaud : le mur qu'on vient de
+       reprendre, pas le plâtre qui sèche ;
      - une encre terre d'ombre, jamais un noir pur ;
      - des cadres d'un pixel, marqués à chaque angle d'un repère carré,
        comme les piquets d'implantation d'un géomètre ;
-     - un seul accent, la brique : rare, sourd, réservé à l'action ;
-       elle ne couvre jamais un fond.
+     - un accent, la brique : l'action, les marques écrites, et une
+       seule bande par page, le renvoi final.
    Le logo garde ses propres couleurs.
 
    Quatre fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     plâtre · creux (.sur-pale) · nuit (.sur-sombre)
-     · teinte (.sur-vif, le renvoi final).
+     chaux · blanc (.sur-pale) · nuit (.sur-sombre)
+     · brique (.sur-vif, le renvoi final).
 
    Les autres feuilles ne nomment jamais une couleur : elles demandent
    un rôle (--c-encre, --c-signal, --c-accent…). Changer de palette,
@@ -30,33 +31,33 @@
    ============================================================ */
 :root{
   /* ---------- Les couleurs ---------- */
-  --c-platre:#EEEBE5;        /* plâtre frais : le fond */
+  --c-chaux:#F5F2EC;         /* blanc de chaux : le fond */
+  --c-blanc:#FFFFFF;         /* blanc : une section sur deux, les cases */
   --c-terre:#27211C;         /* terre d'ombre : l'encre et la nuit */
-  --c-brique:#9A3324;        /* brique : l'action */
-  --c-brique-sombre:#86291C; /* la brique écrite sur le plâtre, et son survol */
+  --c-brique:#9A3324;        /* brique : l'action, le renvoi final */
+  --c-brique-sombre:#86291C; /* la brique écrite sur le clair, et son survol */
   --c-brique-claire:#E29A86; /* la brique écrite sur la nuit */
 
   /* ---------- Surfaces ---------- */
-  --c-papier:var(--c-platre);   /* DOMINANTE */
-  --c-papier-2:#E3DFD7;      /* creux : bandes, survols, sections en retrait */
-  --c-fiche:#F7F5F1;         /* relief : cellules de formulaire, étiquettes */
-  --c-teinte:#DAD4C9;        /* aplat d'action : le renvoi final */
+  --c-papier:var(--c-chaux);   /* DOMINANTE */
+  --c-papier-2:#EBE6DD;      /* creux : survols, onglet ouvert, emplacement d'image */
+  --c-fiche:var(--c-blanc);  /* relief : cellules de formulaire, étiquettes */
   --c-bitume:var(--c-terre); /* nuit : bandes sombres, pied, visionneuse */
   --c-bitume-2:#342C26;      /* surface élevée dans la nuit */
 
   /* Les mêmes teintes en composantes, pour les voiles translucides
      (en-tête dépoli, panneau posé sur photo, visionneuse, ombres). */
-  --c-papier-rgb:238,235,229;
+  --c-papier-rgb:245,242,236;
   --c-encre-rgb:39,33,28;
   --c-sombre-rgb:39,33,28;
-  --c-craie-rgb:238,235,229;
+  --c-craie-rgb:245,242,236;
 
-  /* ---------- Textes sur le plâtre ----------
-     plâtre / creux / fiche / teinte */
-  --c-encre:var(--c-terre);  /* 13.4 / 12.0 / 14.6 / 10.8 */
-  --c-encre-60:#574F47;      /*  6.8 /  6.0 /  7.4 /  5.5 */
-  --c-encre-40:#6A6158;      /*  5.1 /  4.6 /  5.6 — JAMAIS sur la teinte (4.1) */
-  --c-craie:var(--c-platre); /* 13.4 sur la nuit */
+  /* ---------- Textes sur le clair ----------
+     chaux / blanc / creux */
+  --c-encre:var(--c-terre);  /* 14.2 / 15.9 / 12.8 */
+  --c-encre-60:#574F47;      /*  7.2 /  8.0 /  6.5 */
+  --c-encre-40:#6A6158;      /*  5.4 /  6.1 /  4.9 */
+  --c-craie:var(--c-chaux);  /* 14.2 sur la nuit */
   --c-craie-60:#B8AFA4;      /*  7.4 sur la nuit, 6.3 sur la nuit élevée */
   /* Grand texte décoratif (l'enseigne du pied) : discret, mais au-dessus
      du seuil des grands textes (3:1). 3.4 sur la nuit. */
@@ -68,28 +69,28 @@
 
   /* ---------- Brique — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur, texte
-     clair posé dessus : 6.7. Au survol, la brique sombre recouvre la
-     brique : 8.2. */
+     blanc posé dessus : 7.3. Au survol, la brique sombre recouvre la
+     brique : 9.0. */
   --c-signal:var(--c-brique);
   --c-signal-fonce:var(--c-brique-sombre);
-  --c-sur-signal:#F7F5F1;
-  --c-sur-signal-survol:#F7F5F1;
+  --c-sur-signal:var(--c-blanc);
+  --c-sur-signal-survol:var(--c-blanc);
 
   /* ---------- Brique sombre — l'accent ----------
-     Liens dans le texte, numéros de séquence, puces, astérisques,
+     Liens dans le texte, numéros d'étape, puces, astérisques,
      « + » des chiffres, repère « vous êtes ici », chevron des
      intitulés, outils des ouvriers. */
-  --c-accent:var(--c-brique-sombre);  /*  7.5 /  6.7 /  8.2 /  6.1 */
+  --c-accent:var(--c-brique-sombre);  /*  8.0 /  9.0 /  7.2 */
 
   /* ---------- États ---------- */
-  --c-valide:#2F6B4A;        /*  5.3 /  4.8 /  5.8 */
-  --c-alerte:#8E3B12;        /*  6.3 /  5.7 /  6.9 /  5.1 */
-  --c-focus:var(--c-terre);  /* 13.4 */
+  --c-valide:#2F6B4A;        /*  5.7 /  6.3 /  5.1 */
+  --c-alerte:#8E3B12;        /*  6.8 /  7.5 /  6.1 */
+  --c-focus:var(--c-terre);  /* 14.2 */
 
   /* ---------- Filets ----------
      Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
      une séparation discrète. Le filet doux sert à l'intérieur des blocs. */
-  --c-ligne:rgba(var(--c-encre-rgb),.16);
+  --c-ligne:rgba(var(--c-encre-rgb),.14);
   --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.0 */
   --c-cadre:var(--c-encre);
   --bd-fin:1px solid var(--c-ligne);
@@ -108,56 +109,71 @@
    ajouter la classe à une section suffit.
    ============================================================ */
 
-/* Creux : la respiration entre deux sections de plâtre. Les textes du
-   plâtre y tiennent tous (voir leurs contrastes ci-dessus) ; le survol
-   y descend d'un cran, à la teinte, où il n'y a jamais d'encre-40. */
+/* Blanc : une section sur deux. Le blanc franc à côté de la chaux
+   marque le passage d'une section à l'autre sans l'assombrir : la page
+   reste lumineuse d'un bout à l'autre. Les textes du clair y tiennent
+   tous (colonne blanc ci-dessus) ; les cases y prennent la chaux. */
 .sur-pale{
-  --c-papier:#E3DFD7;
-  --c-papier-2:#DAD4C9;
-  --c-fiche:#F7F5F1;
-  --c-papier-rgb:227,223,215;
+  --c-papier:var(--c-blanc);
+  --c-papier-2:var(--c-chaux);
+  --c-fiche:var(--c-chaux);
+  --c-papier-rgb:255,255,255;
   background-color:var(--c-papier);
 }
 
 /* Nuit : une bande par page, le pied et la barre mobile. La brique
    claire y devient la couleur écrite, et le bouton d'appel garde son
-   aplat de brique : au survol, c'est le plâtre qui le recouvre. */
+   aplat de brique : au survol, c'est la chaux qui le recouvre. */
 .sur-sombre{
   --c-papier:var(--c-terre);
   --c-papier-2:#342C26;
   --c-fiche:#342C26;
   --c-papier-rgb:39,33,28;
-  --c-encre:var(--c-platre); /* nuit / élevée : 13.4 / 11.5 */
+  --c-encre:var(--c-chaux);  /* nuit / élevée : 14.2 / 12.3 */
   --c-encre-60:#B8AFA4;      /*  7.4 /  6.3 */
   --c-encre-40:#A0968A;      /*  5.5 /  4.7 */
   --c-accent:var(--c-brique-claire);  /*  7.0 /  6.0 */
   --c-aplat:#C8705A;         /* terre cuite plus sourde : la peinture se
                                 distingue du rouleau (brique claire) */
-  --c-signal-fonce:var(--c-platre);
-  --c-sur-signal-survol:var(--c-terre);   /* 13.4 */
+  --c-signal-fonce:var(--c-chaux);
+  --c-sur-signal-survol:var(--c-terre);   /* 14.2 */
   --c-ligne:rgba(var(--c-craie-rgb),.16);
   --c-ligne-forte:rgba(var(--c-craie-rgb),.5);
   --c-cadre:rgba(var(--c-craie-rgb),.4);  /* trait de plan : 3.3, seuil des contours 3:1 */
   /* Redit ici : un jeton qui en cite un autre se résout là où il est
-     déclaré, et le repère hériterait sinon de l'encre du plâtre. */
+     déclaré, et le repère hériterait sinon de l'encre du clair. */
   --c-repere:var(--c-cadre);
   --c-valide:#9CCDAE;        /*  8.9 /  7.7 */
   --c-alerte:#F0A07A;        /*  7.6 /  6.5 */
-  --c-focus:var(--c-platre);
+  --c-focus:var(--c-chaux);
   color:var(--c-encre);
   background-color:var(--c-papier);
 }
 
-/* Teinte : le renvoi final de chaque page, l'aplat d'action du
-   plâtre. Un cran sous le creux, il se détache de la section qui le
-   précède, plâtre ou creux, au moins autant que le creux du plâtre.
-   Les textes du plâtre y tiennent (colonne teinte ci-dessus) ; l'encre-40
-   n'y sert pas. Le survol y remonte au creux. */
+/* Brique : le renvoi final de chaque page, et lui seul. La page se
+   referme sur la couleur du logo, là où l'on attend une décision. Le
+   texte y est blanc (7.3) ; le bouton d'appel s'inverse — un aplat de
+   chaux, texte brique sombre (8.0) — et la terre le recouvre au
+   survol, texte chaux (14.2). Aucun texte secondaire sous 5:1. */
 .sur-vif{
-  --c-papier:var(--c-teinte);
-  --c-papier-2:#E3DFD7;
-  --c-fiche:#F7F5F1;
-  --c-papier-rgb:218,212,201;
+  --c-papier:var(--c-brique);
+  --c-papier-2:var(--c-brique-sombre);
+  --c-fiche:var(--c-brique-sombre);
+  --c-papier-rgb:154,51,36;
+  --c-encre:var(--c-blanc);  /* brique : 7.3 */
+  --c-encre-60:#F6DDD6;      /*  5.7 */
+  --c-encre-40:#F6DDD6;      /*  5.7 */
+  --c-accent:var(--c-blanc);
+  --c-signal:var(--c-chaux);
+  --c-signal-fonce:var(--c-terre);
+  --c-sur-signal:var(--c-brique-sombre);   /* 8.0 */
+  --c-sur-signal-survol:var(--c-chaux);    /* 14.2 */
+  --c-ligne:rgba(255,255,255,.22);
+  --c-ligne-forte:rgba(255,255,255,.6);   /* 3.6 */
+  --c-cadre:rgba(255,255,255,.72);  /* trait de plan : 4.6 */
+  --c-repere:var(--c-cadre);
+  --c-focus:var(--c-blanc);
+  color:var(--c-encre);
   background-color:var(--c-papier);
 }
 
@@ -186,6 +202,9 @@
   --f-lecture:"Newsreader","Newsreader repli",Georgia,serif;
 
   --t-couverture:clamp(2.5rem,5.6vw,5.25rem);
+  /* Dès 1024 px, le h1 de l'accueil tient une colonne de cinq, à côté
+     de l'image : il se règle sur elle, et non plus sur l'écran. */
+  --t-couverture-colonne:clamp(3rem,4.7vw,5rem);
   --t-piece:clamp(2.25rem,4.6vw,4.25rem);
   --t-h2:clamp(1.875rem,3.1vw,2.875rem);
   --t-h3:clamp(1.375rem,2vw,1.75rem);

@@ -7,6 +7,10 @@
    retour lent : on comprend qu'elle se déplace avant même d'y
    toucher. Le geste s'interrompt au premier contact, et n'a pas
    lieu si le visiteur demande moins de mouvement.
+
+   Sous l'image, deux boutons « Avant » et « Après » montrent un état
+   entier d'un geste : au doigt, c'est plus sûr qu'une poignée à
+   saisir. Ils restent cachés sans ce script, qui les fait vivre.
    ============================================================ */
 (function () {
   "use strict";
@@ -20,6 +24,8 @@
   var DEMO_ETAPES = [50, 34, 64, 50];
   var DEMO_DUREE_ETAPE = 700;
   var DEMO_DELAI = 450;
+  /* Trajet de la poignée jusqu'à un état entier, depuis les boutons. */
+  var BASCULE_DUREE = 650;
 
   /**
    * Courbe symétrique : départ et arrivée en douceur.
@@ -42,6 +48,12 @@
     var enCours = false;
     var demoEnCours = false;
     var demoFaite = false;
+    /* Jeton du trajet en cours : un nouveau geste annule le précédent. */
+    var trajet = 0;
+
+    var figure = bloc.closest("figure");
+    var bascule = figure ? figure.querySelector("[data-bascule]") : null;
+    var choix = bascule ? bascule.querySelectorAll("[data-comparer]") : [];
 
     /**
      * Applique une position en pourcentage, bornée à [0, 100].
@@ -56,6 +68,20 @@
       var gauche = Math.round(position);
       poignee.setAttribute("aria-valuetext",
         "Avant travaux à gauche : " + gauche + " %, après travaux à droite : " + (100 - gauche) + " %");
+      /* Un état montré entier : l'étiquette de l'autre s'efface, elle
+         nommerait une moitié qui n'est plus à l'écran. */
+      if (position >= 99.5) {
+        bloc.setAttribute("data-entier", "avant");
+      } else if (position <= 0.5) {
+        bloc.setAttribute("data-entier", "apres");
+      } else {
+        bloc.removeAttribute("data-entier");
+      }
+      /* Un bouton reste enfoncé tant que son état est montré entier. */
+      Array.prototype.forEach.call(choix, function (bouton) {
+        var cible = Number(bouton.getAttribute("data-comparer"));
+        bouton.setAttribute("aria-pressed", String(Math.abs(position - cible) < 0.5));
+      });
     }
 
     /**
@@ -72,6 +98,28 @@
     function arreterDemo() {
       demoEnCours = false;
       demoFaite = true;
+      trajet += 1;
+    }
+
+    /**
+     * Conduit la poignée jusqu'à `cible`, en douceur ; d'un coup si le
+     * visiteur demande moins de mouvement.
+     * @param {number} cible pourcentage, entre 0 et 100
+     */
+    function allerA(cible) {
+      arreterDemo();
+      if (mouvementReduit) { placer(cible); return; }
+      var jeton = trajet;
+      var depart = position;
+      var debut = null;
+      function pas(horodatage) {
+        if (jeton !== trajet) { return; }
+        if (debut === null) { debut = horodatage; }
+        var t = Math.min((horodatage - debut) / BASCULE_DUREE, 1);
+        placer(depart + (cible - depart) * adoucir(t));
+        if (t < 1) { window.requestAnimationFrame(pas); }
+      }
+      window.requestAnimationFrame(pas);
     }
 
     function lancerDemo() {
@@ -143,6 +191,13 @@
         placer(100);
       }
     });
+
+    Array.prototype.forEach.call(choix, function (bouton) {
+      bouton.addEventListener("click", function () {
+        allerA(Number(bouton.getAttribute("data-comparer")));
+      });
+    });
+    if (bascule instanceof HTMLElement) { bascule.hidden = false; }
 
     placer(50);
 

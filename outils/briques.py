@@ -85,11 +85,10 @@ def liste_metiers(services, base, courant=None):
             continue
         lignes.append(f"""        <li>
           <a class="metiers__ligne" href="{base}services/{s['slug']}.html">
-            <span class="metiers__n">{s['numero']}</span>
+            <span class="metiers__vue" aria-hidden="true"><img src="{s['image']}" alt="" width="316" height="237" loading="lazy" decoding="async"></span>
             <span class="metiers__titre">{s['nom']}</span>
             <span class="metiers__desc">{s['resume']}</span>
             <span class="metiers__chev" aria-hidden="true"></span>
-            <span class="metiers__vue" aria-hidden="true"><img src="{s['image']}" alt="" width="316" height="395" loading="lazy" decoding="async"></span>
           </a>
         </li>""")
     return ('      <ul class="metiers revele">\n'

@@ -33,7 +33,8 @@ _VARIANTES = {}
 # La largeur d'affichage d'une image, d'après le bloc qui la contient :
 # le navigateur choisit alors dans srcset la variante juste assez grande.
 _TAILLES = [
-    ("metiers__vue", "72px"),
+    ("metiers__vue", "(min-width: 1024px) 112px, 72px"),
+    ("voisin__vue", "64px"),
     ("chemise__tirage", "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 66vw"),
     ("signature__cadre", "100vw"),
     ("ouverture__cadre", "100vw"),

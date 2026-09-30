@@ -22,7 +22,6 @@
   column-gap:var(--sp-3);row-gap:var(--sp-5);align-items:start;
 }
 .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
-.chantiers__grille .chemise__onglet{padding:var(--sp-1) var(--sp-2)}
 .chantiers__grille .chemise__fiche{gap:var(--sp-3);padding:var(--sp-3)}
 .chantiers__grille .chemise__fiche .h4{font-size:var(--t-ui)}
 .chantiers__grille .chemise__meta{font-size:var(--t-etiquette)}
@@ -31,7 +30,6 @@
 .chantiers__grille .depliant__corps p{font-size:var(--t-petit)}
 @media (min-width:640px){
   .chantiers__grille{column-gap:var(--grille-goutt);row-gap:var(--sp-7)}
-  .chantiers__grille .chemise__onglet{padding:var(--sp-2) var(--sp-3)}
   .chantiers__grille .chemise__fiche{gap:var(--sp-4);padding:var(--sp-5)}
   .chantiers__grille .chemise__fiche .h4{font-size:var(--t-h4)}
   .chantiers__grille .chemise__meta{font-size:var(--t-petit)}
@@ -60,7 +58,6 @@
 .signature__media{position:relative;grid-row:1}
 .signature__cadre{display:block;overflow:hidden}
 .signature__media img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
-.signature__tampon{position:absolute;right:var(--sp-4);bottom:var(--sp-4);z-index:2}
 .signature__texte a{color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .signature__texte{
   grid-row:2;padding:var(--sp-5);margin-top:-1px;
@@ -81,12 +78,13 @@
 
 /* ------------------------------------------------------------
    RÉFÉRENCES — logos des régies et architectes
-   Sur la page entreprise, la section se pose dans le creux : c'est
-   la preuve extérieure, elle se détache du récit.
+   Sur la page entreprise, la section se pose sur le blanc
+   (.sur-pale, posée dans le gabarit) : c'est la preuve extérieure,
+   elle se détache du récit.
    Passés en gris puis multipliés sur le fond : le blanc de leurs
    fichiers disparaît dans le fond sans toucher à l'encre.
    ------------------------------------------------------------ */
-.partenaires{padding-block:var(--sec-y);background:var(--c-papier-2)}
+.partenaires{padding-block:var(--sec-y)}
 /* Quatre logos par ligne dès le téléphone, plus petits : deux rangées
    plutôt que quatre. Sept sur grand écran. */
 .partenaires__grille{

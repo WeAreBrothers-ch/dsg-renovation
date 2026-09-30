@@ -6,15 +6,6 @@
 
 .chemise{position:relative;display:flex;flex-direction:column}
 
-/* Numéro de registre : posé sur le tirage, à la manière d'une cote. */
-.chemise__onglet{
-  position:absolute;left:0;top:0;z-index:2;
-  padding:var(--sp-2) var(--sp-3);
-  background:var(--c-papier);color:var(--c-encre-60);
-  font-family:var(--f-texte);font-weight:500;font-size:var(--t-etiquette);
-  font-variant-numeric:tabular-nums;line-height:1.2;
-}
-
 .chemise__tirage{
   display:block;position:relative;overflow:hidden;
   aspect-ratio:4/3;background:var(--c-papier-2);
@@ -25,6 +16,25 @@
 }
 @media (hover:hover) and (pointer:fine){
   .chemise:hover .chemise__tirage img{transform:scale(1.03)}
+}
+/* Rien n'est posé sur la photo au repos. Au survol d'une souris, un
+   viseur — quatre angles, les repères du site — dit qu'elle s'agrandit :
+   un voile d'encre, le dessin en blanc. Au doigt, toute la photo se
+   touche, et le viseur n'a pas lieu d'être. */
+.chemise__tirage::before,.chemise__tirage::after{
+  content:"";position:absolute;right:var(--sp-3);bottom:var(--sp-3);z-index:2;
+  width:40px;height:40px;opacity:0;pointer-events:none;
+  transition:opacity var(--d-normal) var(--e-sortie);
+}
+.chemise__tirage::before{background:rgba(var(--c-sombre-rgb),.66)}
+.chemise__tirage::after{
+  background:var(--c-blanc);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M13 18v-5h5M22 13h5v5M27 22v5h-5M18 27h-5v-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M13 18v-5h5M22 13h5v5M27 22v5h-5M18 27h-5v-5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+@media (hover:hover) and (pointer:fine){
+  .chemise:hover .chemise__tirage::before,.chemise:hover .chemise__tirage::after,
+  .chemise__tirage:focus-visible::before,.chemise__tirage:focus-visible::after{opacity:1}
 }
 
 .chemise__fiche{

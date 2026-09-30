@@ -117,17 +117,6 @@
 }
 
 /* ------------------------------------------------------------
-   TAMPON — la mention de réception posée sur un tirage
-   Un simple cartouche d'encre, droit : un procès-verbal, pas un
-   coup de tampon.
-   ------------------------------------------------------------ */
-.tampon{
-  display:inline-block;padding:var(--sp-2) var(--sp-3);
-  background:var(--c-fiche);color:var(--c-encre);
-  font-family:var(--f-texte);font-weight:500;font-size:var(--t-etiquette);line-height:1.3;
-}
-
-/* ------------------------------------------------------------
    FILTRES — tri des réalisations
    Une rangée de cellules jointives, comme les cases d'un plan. Au
    téléphone, elle défile d'un geste du pouce, d'un bord à l'autre de

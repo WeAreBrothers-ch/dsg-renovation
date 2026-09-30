@@ -94,7 +94,6 @@
   font-weight:500;font-size:var(--t-ui);color:var(--c-encre);
   transition:background-color var(--d-rapide) var(--e-standard),color var(--d-rapide) var(--e-standard);
 }
-.sous-menu__n{font-size:var(--t-etiquette);font-variant-numeric:tabular-nums;color:var(--c-accent)}
 @media (hover:hover) and (pointer:fine){.sous-menu__liste a:hover{background:var(--c-papier-2)}}
 .sous-menu__liste a[aria-current]{background:var(--c-papier-2)}
 .sous-menu__liste a:focus-visible,.sous-menu__tout:focus-visible{outline-offset:-3px}

@@ -120,7 +120,7 @@ def entreprise(services, base=""):
     </div>
   </section>
 
-  <section class="partenaires" id="references" aria-labelledby="tPartenaires">
+  <section class="partenaires sur-pale" id="references" aria-labelledby="tPartenaires">
     <div class="zone">
 {briques.intercalaire("Références", "Régies, propriétaires et architectes",
                       "Ils nous confient|leurs biens",

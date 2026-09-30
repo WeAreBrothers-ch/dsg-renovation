@@ -16,9 +16,11 @@ assemblage.assembler() qui remplace `{base}` par le préfixe de la page
 dans tout le document ; seo.questions() retire les balises des réponses
 pour le balisage FAQPage.
 
-L'image d'ouverture affiche son texte alternatif comme légende visible
-(page_service._tirage) : les deux `alt` ci-dessous sont repris tels
-quels des pages existantes qui utilisent la même photo.
+L'image d'ouverture porte une légende en deux voix, le lieu puis ce
+qu'on voit (page_service._tirage), et renvoie à la fiche du chantier
+qu'elle montre : les `alt` et les légendes ci-dessous sont repris des
+pages existantes et des fiches de réalisations qui utilisent la même
+photo.
 """
 
 IMG = "https://static.wixstatic.com/media/"
@@ -44,6 +46,9 @@ PAGES = [
                  "pour l'état des lieux d'entrée.",
         "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
         "alt": "Logement nettoyé après travaux, prêt à être occupé",
+        "legende": ("Immeuble Rue de Bourg, Lausanne",
+                    "Hall d'un logement remis en état",
+                    "immeuble-rue-de-bourg"),
         "reperes": [
             ("Visite", "Sous une semaine"),
             ("Appartement 100 m²", "1 à 2 semaines de peinture"),
@@ -62,7 +67,7 @@ PAGES = [
     #     locations.
     #   prestations.py:160 ; fragments/chantiers.html:160-162 — photo et texte
     #     alternatif repris tels quels de la page nettoyage ; c'est le logement
-    #     remis en état de la rue de Bourg (fiche N° 006).
+    #     remis en état de la rue de Bourg (fiche « Immeuble Rue de Bourg »).
     #   contenu_entreprise.py:45 ; confiance.py:20 ; services_finitions.py:66 ;
     #     services_finitions.py:348 ; services_finitions.py:69 — repères :
     #     visite sous une semaine ; peinture 1 à 2 semaines et nettoyage 1 à 2
@@ -87,6 +92,9 @@ PAGES = [
                  "se voit plus une fois le chantier fini.",
         "image": IMG + "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg",
         "alt": "Salle d'eau carrelée du sol au plafond dans un duplex rénové",
+        "legende": ("Duplex des Eaux-Vives, Genève",
+                    "Salle d'eau recarrelée du sol au plafond",
+                    "duplex-des-eaux-vives"),
         "reperes": [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
             ("Dépose et évacuation", "1 à 2 jours selon l'étage"),
@@ -107,7 +115,8 @@ PAGES = [
     #   services_finitions.py:190-191 — carrelage de sol et faïence murale.
     #   prestations.py:131 ; fragments/chantiers.html:40-42 — photo et texte
     #     alternatif repris tels quels de la page carrelage ; c'est une salle
-    #     d'eau du duplex des Eaux-Vives, à Genève (fiche N° 002).
+    #     d'eau du duplex des Eaux-Vives, à Genève (fiche « Duplex des
+    #     Eaux-Vives »).
     #   services_finitions.py:209 ; lausanne_finitions.py:86-88 ;
     #     services_finitions.py:69 — repères : 1 à 2 semaines étanchéité
     #     comprise ; dépose 1 à 2 jours selon l'étage ; support et étanchéité 2

@@ -10,7 +10,7 @@
    et la nature de la page dans la marge, le titre en grand dans la
    colonne de droite.
    ------------------------------------------------------------ */
-.piece{padding-top:calc(var(--h-entete) + clamp(40px,6vw,88px))}
+.piece{padding-top:calc(var(--h-entete) + clamp(32px,4.4vw,64px))}
 .piece__entete{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:var(--sp-5) var(--grille-goutt);padding-bottom:var(--sp-8);

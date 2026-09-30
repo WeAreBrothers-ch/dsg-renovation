@@ -127,8 +127,8 @@ h1,h2,h3{
    capte aucun clic. La liste ci-dessous est celle de tous les
    blocs cadrés du site.
    ------------------------------------------------------------ */
-:is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche){position:relative}
-:is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche)::before{
+:is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche,.couverture__cadre){position:relative}
+:is(.identite,.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche,.couverture__cadre)::before{
   content:"";position:absolute;pointer-events:none;z-index:1;
   inset:calc(var(--repere) / -2 - 1px);
   background:

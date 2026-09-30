@@ -46,6 +46,9 @@ PAGES = [
         "image": IMG + "2c1464_593f3a927ebd420ab56d4d306a4e6aa5~mv2.jpg",
         "alt": "Séjour et cuisine ouverte après rénovation complète d'un "
                "appartement à Lausanne",
+        "legende": ("Appartement Beaulieu, Lausanne",
+                    "Séjour et cuisine ouverte après rénovation complète",
+                    "appartement-beaulieu"),
         "reperes": [
             ("Durée type", "5 à 8 semaines pour 100 m²"),
             ("Maison ou immeuble", "10 à 14 semaines"),
@@ -76,6 +79,9 @@ PAGES = [
         "image": IMG + "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg",
         "alt": "Dégagement et cuisine remis en peinture dans une villa "
                "lausannoise",
+        "legende": ("Villa de Chailly, Lausanne",
+                    "Dégagement et cuisine remis en peinture",
+                    "villa-de-chailly"),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 semaines"),
             ("Couches de finition", "2 au minimum"),
@@ -106,6 +112,8 @@ PAGES = [
         "image": IMG + "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg",
         "alt": "Mur repris en plâtrerie avant mise en peinture dans un "
                "appartement lausannois",
+        "legende": ("Appartement lausannois",
+                    "Mur repris en plâtrerie avant mise en peinture", None),
         "reperes": [
             ("Finition des murs", "Prêts à peindre ou lissés parfaits"),
             ("Cloison simple", "2 à 3 jours, finition comprise"),
@@ -135,6 +143,9 @@ PAGES = [
                  "avant la première colle, jamais après.",
         "image": IMG + "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg",
         "alt": "Salle d'eau carrelée du sol au plafond dans un duplex rénové",
+        "legende": ("Duplex des Eaux-Vives, Genève",
+                    "Salle d'eau carrelée du sol au plafond",
+                    "duplex-des-eaux-vives"),
         "reperes": [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
             ("Appartement 100 m²", "3 à 5 jours de sol"),
@@ -164,6 +175,9 @@ PAGES = [
                  "c'est un métier.",
         "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
         "alt": "Logement nettoyé après travaux, prêt à être occupé",
+        "legende": ("Immeuble Rue de Bourg, Lausanne",
+                    "Logement nettoyé après travaux, prêt à être occupé",
+                    "immeuble-rue-de-bourg"),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 jours"),
             ("Passages", "2 au minimum, poussière oblige"),

@@ -8,15 +8,23 @@ concurrencent dans les résultats de recherche au lieu de s'additionner.
 import briques
 import confiance
 from donnees_site import COMMUNES
-from ouverture import ouverture
 from pages_site import fragment
 
 # La légende reprend ce que montrent les deux tirages (voir leurs
-# textes alternatifs) : aucune information nouvelle n'est avancée.
-LEGENDE_COMPARATEUR = (
-    '<span><b>Séjour traversant</b> — de la chape brute au parquet chêne</span>'
-    '<span>Faites glisser la poignée pour comparer</span>'
-)
+# textes alternatifs) : aucune information nouvelle n'est avancée. Les
+# deux boutons montrent un état entier d'un geste — au doigt, c'est plus
+# sûr qu'une poignée à saisir. Ils attendent le script (comparateur.js
+# retire `hidden`) : sans lui, ils ne feraient rien.
+LEGENDE_COMPARATEUR = """<figcaption class="legende legende--comparateur">
+          <span class="legende__texte">
+            <span class="legende__lieu">Séjour traversant</span>
+            <span class="legende__quoi">De la chape brute au parquet chêne</span>
+          </span>
+          <span class="bascule" role="group" aria-label="Montrer un état entier" data-bascule hidden>
+            <button class="bascule__choix" type="button" data-comparer="100" aria-pressed="false">Avant</button>
+            <button class="bascule__choix" type="button" data-comparer="0" aria-pressed="false">Après</button>
+          </span>
+        </figcaption>"""
 
 
 def accueil(services, base=""):
@@ -25,19 +33,16 @@ def accueil(services, base=""):
     return f"""
   <section class="couverture" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
-      <p class="couverture__nature">Du sol au plafond,
-        <span>tout en maîtrise.</span></p>
       <div class="couverture__texte">
+        <p class="intercalaire__nom couverture__nature">Du sol au plafond, tout en maîtrise.</p>
         <h1 id="t01">Entreprise de rénovation à Lausanne</h1>
-        <div class="couverture__pied">
-          <p class="chapo couverture__chapo">Rénovation totale d'appartements,
-          de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
-          seul interlocuteur, tous les corps de métier, un chantier livré
-          propre et dans les délais.</p>
-          <div class="couverture__actions">
-            <a class="btn btn--plein" href="{base}devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
-            <a class="btn btn--cadre" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
-          </div>
+        <p class="chapo couverture__chapo">Rénovation totale d'appartements,
+        de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
+        seul interlocuteur, tous les corps de métier, un chantier livré
+        propre et dans les délais.</p>
+        <div class="couverture__actions">
+          <a class="btn btn--plein" href="{base}devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+          <a class="couverture__lien" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
         </div>
         <ul class="couverture__garanties">
           <li>Visite et devis gratuits</li>
@@ -45,9 +50,13 @@ def accueil(services, base=""):
           <li>Sans engagement</li>
         </ul>
       </div>
+      <figure class="couverture__media">
+        <div class="couverture__cadre">
+        {fragment('comparateur')}
+        </div>
+        {LEGENDE_COMPARATEUR}
+      </figure>
     </div>
-
-{ouverture(fragment('comparateur'), LEGENDE_COMPARATEUR)}
 
     <div class="zone couverture__cartouche">
     {fragment('identite')}

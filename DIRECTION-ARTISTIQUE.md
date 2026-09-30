@@ -4,7 +4,7 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 25/09/2026 — Statut : **v2**, en production.
+Date : 30/09/2026 — Statut : **v3**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
 
@@ -20,6 +20,22 @@ logo : `d604530` ; « bleu de plan & safran » : `c322a78` ; « chocolat & ciel 
 document : tout déplié, du texte d'un bout à l'autre, rien pour aller droit à une information. Une page s'y
 parcourt désormais par ses intitulés (§ 4, « Au téléphone ») : sommaire collant, premier paragraphe seul,
 suites à faire glisser, pied de page court, titres plus marqués. Le bureau n'a pas changé.
+
+**Un site qui vit, 30/09/2026 (v3) — « Chaux & brique ».** Retour du client : le site « fait mort ». La
+couverture n'était que du texte sur un fond gris-beige, l'image n'arrivait qu'au défilement ; les légendes
+reprenaient le texte alternatif, en petit gris, sur une bande étroite ; les numéros « N° 005 » posés sur les
+photos faisaient registre administratif. La v3 garde l'encre et la brique (les couleurs du logo), la
+typographie, les cadres et leurs repères ; elle change le reste :
+- **le fond s'éclaircit** : la chaux (`#F5F2EC`) remplace le plâtre, une section sur deux passe au blanc franc,
+  et le renvoi final prend la brique (§ 2, § 2 bis) ;
+- **la couverture montre le chantier** : le titre à gauche, le comparateur avant / après à droite, à la hauteur
+  de l'écran, avec deux boutons « Avant » / « Après » (§ 7) ;
+- **les légendes parlent en deux voix** : le lieu, puis ce qu'on voit, et le lien vers la fiche du chantier
+  (§ 6) ;
+- **plus de numéros qui ne comptent rien** : ni « N° 005 » sur les réalisations, ni « 01 … 07 » devant les
+  prestations — une photo les remplace (§ 9). Les numéros restent aux vraies suites (étapes, méthode,
+  articles).
+Les inspirations de cette version sont au § 0 bis.
 
 ---
 
@@ -54,10 +70,35 @@ grotesque + sérif de lecture, la casse normale, l'accordéon numéroté, le for
 sur la photo, la retenue générale.
 
 ### Ce qu'on écarte
-- **La photo plein écran d'emblée** (demande explicite du client). Remplacée par l'ouverture cadrée (§ 7).
+- **La photo plein écran d'emblée** (demande explicite du client). Remplacée à l'accueil par la couverture
+  côte à côte — le titre, l'image cadrée dans la grille (§ 7) —, sur les pages de métier par l'ouverture cadrée.
 - Le gris-bleu froid : DSG rénove des intérieurs, sa matière est le plâtre et le bois, pas l'acier.
 - Le bouton flottant sur grand écran : l'en-tête porte déjà « Devis gratuit ».
 - Le défilement lissé par librairie : poids de script et sensation de latence, sans bénéfice pour le visiteur.
+
+## 0 bis. Références Awwwards (v3, 30/09/2026)
+
+Recherche menée sur awwwards.com : sites de rénovation, de construction, d'artisans et d'architectes primés
+(mention d'honneur ou site du jour). Le navigateur de l'environnement de travail n'avait pas accès au domaine :
+les fiches ont été repérées par la recherche web, **sans être feuilletées écran par écran**. Le tableau ne dit
+donc que ce qu'en disent leur fiche et, pour RS.D, l'agence qui l'a conçu ; à regarder de près avant
+d'en tirer davantage.
+
+| Référence | Distinction | Ce qu'on en sait (fiche Awwwards, agence) |
+|---|---|---|
+| RS.D Agencements & Rénovation (Lyon) | mention d'honneur | rénovation d'appartements, cuisines, salles de bains ; chantiers racontés jusqu'au résultat, mise en page aérée, animations discrètes — le métier le plus proche de DSG |
+| Apex Transformations | mention d'honneur | entreprise de rénovation et de construction |
+| GM Construction (Écosse, Studio Form) | mention d'honneur | entreprise générale et spécialiste du bois, fondée en 1989 |
+| Siegesmund | mention d'honneur | menuiserie, mobilier fait main |
+| a-rr architecture (Lausanne) | mention d'honneur | bureau d'architecture lausannois |
+| Kononenko Architectural Bureau | site du jour | minimalisme, typographie franche, structure réfléchie |
+
+Ce qu'on en tire, et que la v3 applique — une lecture de ce qui revient chez les meilleurs sites du métier,
+pas la copie de l'un d'eux : **la preuve dans le premier écran** (le comparateur à côté du titre), **des
+légendes courtes qui nomment un lieu** plutôt qu'un numéro, **un fond clair qui laisse la couleur aux
+photos**, **une seule couleur forte**, gardée pour l'action. Ce qu'on écarte : le plein écran vidéo, les
+défilements scénarisés, les curseurs personnalisés — beaux sur Awwwards, lents et déroutants pour quelqu'un
+qui cherche un artisan.
 
 ---
 
@@ -68,14 +109,17 @@ sur la photo, la retenue générale.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond de plâtre frais**, chaud et mat, relayé par un **creux** d'un ton plus bas ;
+- un **fond de chaux**, clair et chaud — le mur qu'on vient de reprendre —, relayé une section sur deux par
+  le **blanc franc** ;
 - une **encre terre d'ombre**, jamais un noir pur ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
 - des **bandes de nuit**, la terre d'ombre en fond, qui rythment la page ;
-- une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme une pièce
-  qu'on ouvre après l'avoir relevée ;
-- **un seul accent, la brique** : rare, sourd, réservé à l'action — les boutons d'appel — et à ce qui s'écrit en
-  couleur : liens, numéros, et devant chaque intitulé de section un chevron dessiné comme le toit du logo.
+- **la preuve dès le premier écran** : à l'accueil, le chantier avant / après à côté du titre ; sur les pages
+  de métier, une **image d'ouverture qui s'élargit** du cadre de la colonne jusqu'aux bords de l'écran, comme
+  une pièce qu'on ouvre après l'avoir relevée ;
+- **un seul accent, la brique** : réservé à l'action — les boutons d'appel, et une bande par page, le renvoi
+  final — et à ce qui s'écrit en couleur : liens, numéros d'étape, et devant chaque intitulé de section un
+  chevron dessiné comme le toit du logo.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), la brique
 (héritière du rouge DSG), le logo et son toit rouge, le comparateur avant / après mis au centre de l'accueil, les
@@ -83,10 +127,12 @@ repères d'angle qui voyagent avec l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Plâtre & brique » (v2.5, les couleurs d'origine)
+## 2. Palette — « Chaux & brique » (v3)
 
-Répartition : **70 % plâtre · 25 % encre · 5 % brique.** Le logo garde ses propres couleurs. Contrastes mesurés
-(WCAG 2.1), plancher du site 4.5:1.
+L'encre et la brique de toujours, celles du logo ; le fond s'éclaircit. Le plâtre (`#EEEBE5`) et son creux
+(`#E3DFD7`), gris-beige, faisaient paraître sales les murs blancs des photos : la chaux et le blanc les laissent
+respirer. Répartition : **70 % chaux et blanc · 25 % encre · 5 % brique.** Le logo garde ses propres couleurs.
+Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
 
 Les feuilles de composants ne nomment jamais une couleur : elles demandent un rôle (`--c-encre`, `--c-signal`,
 `--c-accent`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
@@ -94,55 +140,58 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 ### Les couleurs
 | Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-platre` | `#EEEBE5` | le fond, plâtre frais |
+| `--c-chaux` | `#F5F2EC` | le fond, blanc de chaux |
+| `--c-blanc` | `#FFFFFF` | une section sur deux, les cases du formulaire |
 | `--c-terre` | `#27211C` | terre d'ombre : l'encre, et la nuit des bandes sombres |
-| `--c-brique` | `#9A3324` | l'action : aplat des boutons d'appel, poignée du comparateur |
-| `--c-brique-sombre` | `#86291C` | la brique écrite sur le plâtre, et le survol des boutons |
+| `--c-brique` | `#9A3324` | l'action : aplat des boutons d'appel, poignée du comparateur, renvoi final |
+| `--c-brique-sombre` | `#86291C` | la brique écrite sur le clair, et le survol des boutons |
 | `--c-brique-claire` | `#E29A86` | la brique écrite sur la nuit ; terre cuite des dessins |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--c-papier` | `#EEEBE5` | fond dominant, plâtre frais |
-| `--c-papier-2` | `#E3DFD7` | creux : sections en retrait, bande des références, survols, onglet ouvert |
-| `--c-fiche` | `#F7F5F1` | relief : cases du formulaire, étiquettes posées sur photo |
-| `--c-teinte` | `#DAD4C9` | aplat d'action : le renvoi final de chaque page |
+| `--c-papier` | `#F5F2EC` | fond dominant, la chaux (le blanc dans `.sur-pale`) |
+| `--c-papier-2` | `#EBE6DD` | creux : survols, onglet ouvert, emplacement d'une image qui charge |
+| `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, sous-menu (la chaux sur le blanc) |
 | `--c-bitume` | `#27211C` | nuit : bandes sombres, pied de page, visionneuse, barre mobile |
 | `--c-bitume-2` | `#342C26` | surface élevée dans la nuit |
 
-### Texte (plâtre / creux / fiche / teinte)
+### Texte (chaux / blanc / creux)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#27211C` | 13.4 / 12.0 / 14.6 / 10.8 |
-| `--c-encre-60` | `#574F47` | 6.8 / 6.0 / 7.4 / 5.5 |
-| `--c-encre-40` | `#6A6158` | 5.1 / 4.6 / 5.6 — **jamais sur la teinte (4.1)** |
-| `--c-craie` | `#EEEBE5` | 13.4 sur la nuit |
+| `--c-encre` | `#27211C` | 14.2 / 15.9 / 12.8 |
+| `--c-encre-60` | `#574F47` | 7.2 / 8.0 / 6.5 |
+| `--c-encre-40` | `#6A6158` | 5.4 / 6.1 / 4.9 |
+| `--c-craie` | `#F5F2EC` | 14.2 sur la nuit |
 | `--c-craie-60` | `#B8AFA4` | 7.4 sur la nuit, 6.3 sur la nuit élevée |
 | `--c-filigrane` | `#7E7368` | l'enseigne du pied, grand texte décoratif : 3.4 sur la nuit |
 
 ### Brique — l'action et l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte clair dessus : 6.7 |
-| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte clair dessus : 8.2 |
-| `--c-accent` | = brique sombre | liens, numéros de séquence (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici », outils des ouvriers | 7.5 / 6.7 / 8.2 / 6.1 |
+| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 7.3 |
+| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte blanc dessus : 9.0 |
+| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici », outils des ouvriers | 8.0 / 9.0 / 7.2 |
 
 Dans la nuit, la brique claire devient la couleur écrite (7.0) et le bouton d'appel garde son aplat de brique ;
-au survol, c'est le plâtre qui le recouvre, texte terre d'ombre (13.4). La brique **ne couvre jamais un fond de
-section** et ne s'écrit jamais en titre : elle reste aux boutons, aux marques et aux liens.
+au survol, c'est la chaux qui le recouvre, texte terre d'ombre (14.2). Sur la brique du renvoi final, le texte
+est blanc (7.3), le texte secondaire rosé `#F6DDD6` (5.7) ; le bouton d'appel s'inverse — aplat de chaux,
+texte brique sombre (8.0) — et la terre le recouvre au survol. La brique ne s'écrit jamais en titre.
 
 ### États
-`--c-valide` `#2F6B4A` (5.3) · `--c-alerte` `#8E3B12` (6.3) · `--c-focus` = encre. Chaque fond redéfinit
+`--c-valide` `#2F6B4A` (5.7) · `--c-alerte` `#8E3B12` (6.8) · `--c-focus` = encre. Chaque fond redéfinit
 localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
-`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 16 % · `--c-ligne-forte` encre à 50 %
-(3.0). Dans la nuit, le cadre est un plâtre à 40 % (3.3, au-dessus du seuil 3:1 des contours).
+`--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 14 % · `--c-ligne-forte` encre à 50 %
+(3.0). Dans la nuit, le cadre est une chaux à 40 % (3.3, au-dessus du seuil 3:1 des contours) ; sur la brique,
+un blanc à 72 % (4.6).
 
 ### Voiles
-Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, ombres) s'écrivent
-`rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`, `rgba(var(--c-sombre-rgb), …)` : aucune
-composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est à 93 %.
+Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, étiquettes « Avant » /
+« Après », ombres) s'écrivent `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`,
+`rgba(var(--c-sombre-rgb), …)` : aucune composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est
+à 93 %.
 
 ## 2 bis. Rythme des fonds
 
@@ -150,16 +199,16 @@ Quatre fonds se relaient ; jamais deux fois le même à la suite.
 
 | Fond | Classe | Où |
 |---|---|---|
-| **Plâtre** `#EEEBE5` | — | couverture, et une section sur deux |
-| **Creux** `#E3DFD7` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références |
+| **Chaux** `#F5F2EC` | — | couverture, et une section sur deux |
+| **Blanc** `#FFFFFF` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références (page entreprise) |
 | **Nuit** `#27211C` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
-| **Teinte** `#DAD4C9` | `.sur-vif` | le renvoi final de chaque page : un cran sous le creux, texte encre, bouton d'appel en brique |
+| **Brique** `#9A3324` | `.sur-vif` | le renvoi final de chaque page, et lui seul : la page se referme sur la couleur du logo, là où l'on attend une décision |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. Une suite de
 sections libres qui finirait sur le fond de la section imposée qui la suit part de l'autre fond (`rythme.py`) :
-ainsi la bande des références ne suit jamais un creux. On ne place jamais de logos de partenaires (multipliés sur
-le fond) ni de formulaire dans la nuit. Dans la nuit, on emploie la déclinaison négative du logo
-(`logo-negatif.webp` : lettres blanches, toit rouge).
+ainsi la bande des références ne suit jamais une section blanche. On ne place jamais de logos de partenaires
+(multipliés sur le fond) ni de formulaire dans la nuit ou sur la brique. Dans la nuit, on emploie la déclinaison
+négative du logo (`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
 
@@ -182,7 +231,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 ### Échelle (fluide, `clamp`)
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--t-couverture` | 2.5 → 5.25 rem | h1 de l'accueil, interlignage 1, crénage −0.035 em |
+| `--t-couverture` | 2.5 → 5.25 rem | h1 de l'accueil, interlignage 1, crénage −0.035 em ; dès 1024 px, 3 → 5 rem, à la mesure de sa colonne |
 | `--t-piece` | 2.25 → 4.25 rem | h1 des pages intérieures, titre du renvoi final |
 | `--t-h2` | 1.875 → 2.875 rem | titres de section (30 px au téléphone, pour qu'ils dominent le texte) |
 | `--t-h3` | 1.375 → 1.75 rem | titres de fiche, dépliant ouvert |
@@ -227,8 +276,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - **Au téléphone** : l'en-tête s'efface quand on descend et revient dès qu'on remonte ; la barre d'action
   (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. Une page se parcourt
   par ses intitulés, on ouvre ce qu'on veut lire — sans script, tout reste ouvert :
-  - **Sommaire de page** : sous l'en-tête de toute page de trois sections ou plus (à l'accueil, sous le texte
-    de la couverture, avant l'image), une rangée de cases jointives reprend l'intitulé de marge de chaque
+  - **Sommaire de page** : sous l'en-tête de toute page de trois sections ou plus (à l'accueil, sous la
+    couverture, texte et image), une rangée de cases jointives reprend l'intitulé de marge de chaque
     section. Elle colle en haut de l'écran, se loge sous l'en-tête quand il revient (un décalage, jamais un
     changement de mise en page), porte le repère de brique sur la section en cours et mène droit à une
     section. Chaque case a son repère, gris au repos : marquer une case ne change pas sa largeur. Elle se
@@ -250,14 +299,15 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
     suivant.
 - **Retirés en v2.2** (audit d'ergonomie) : le curseur personnalisé qui remplaçait le pointeur, les boutons
   « magnétiques », la vignette qui suivait la souris et masquait les descriptions. Les prestations montrent à
-  la place une miniature fixe.
+  la place une photo fixe, en tête de ligne depuis la v3.
 
 ---
 
 ## 5. Le cadre et ses repères — signature du site
 
 - Tout bloc structurant est **cadré d'un pixel d'encre** : en-tête (une case par rubrique), cartouche
-  d'identité, relevé chiffré, déroulé, dépliants, formulaire, coordonnées, lots voisins, pied de page.
+  d'identité, relevé chiffré, déroulé, dépliants, formulaire, coordonnées, lots voisins, pied de page. L'image
+  de la couverture porte les repères sans le trait : ses quatre angles suffisent à la poser sur le plan.
 - Les grilles de cases se tracent par **interstice d'un pixel sur fond d'encre** (`gap: 1px`) quand le nombre
   de cases est fixe ; par **contour propre à chaque case** (`outline`) quand une rangée peut rester incomplète
   (cartes, lots voisins) — jamais de case vide noire.
@@ -265,8 +315,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   La liste des blocs concernés est unique, dans `01-socle.css`.
 - Le même carré sert de puce (listes de postes, garanties) et, en brique, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, le plâtre à
-  40 % dans la nuit.
+- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, la chaux à
+  40 % dans la nuit, le blanc à 72 % sur la brique.
 - Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en brique
   sombre (brique claire dans la nuit).
 
@@ -275,9 +325,19 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 ## 6. Imagerie
 
 - Angles vifs, aucun arrondi, aucun filtre de couleur : les photos de chantier sont montrées telles quelles.
-- Formats : 16/9 et 16/8 (ouverture, chantier signature), 3/2 et 1/1 (fiches alternées), 4/3 (téléphone).
-- Étiquettes posées sur photo : case claire `--c-fiche`, texte encre, sans ombre.
-- Le panneau d'un chantier signature est un **plâtre dépoli** (plâtre à 78 % + flou 14 px), cadré, repères aux
+- Formats : 16/9 et 16/8 (ouverture, chantier signature), 3/2 et 1/1 (fiches alternées), 4/3 (téléphone,
+  photos des prestations) ; la couverture de l'accueil prend la hauteur de l'écran.
+- **Rien n'est posé sur une photo au repos.** Deux exceptions, qui ont une fonction : les états « Avant » /
+  « Après » du comparateur (un voile d'encre à 66 %, texte blanc : 5.0 au pire, sur un mur blanc), et, au
+  survol d'une souris, le **viseur** d'une photo de réalisation — quatre angles blancs sur un voile d'encre,
+  les repères du site — qui dit qu'elle s'agrandit. Plus de numéro de registre, plus de tampon.
+- **Légende en deux voix** (`.legende`, `10-comparateur.css`) : le **lieu** en grotesque, à l'encre (« Villa de
+  Chailly, Lausanne ») ; **ce qu'on voit** en romain de lecture, un ton plus bas (« Dégagement et cuisine
+  remis en peinture ») — séparés d'un tiret dès la tablette ; et, à droite, **« Voir le chantier »** vers la
+  fiche de la réalisation quand la photo en a une (ancre `realisations.html#villa-de-chailly`). La légende
+  appartient à l'image : elle garde de l'air sous elle avant la section suivante. Jamais un texte alternatif
+  recopié sous la photo. La visionneuse des réalisations parle de la même façon.
+- Le panneau d'un chantier signature est une **chaux dépolie** (à 78 % + flou 14 px), cadrée, repères aux
   angles. C'est le seul verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
   `fetchpriority="high"`, toutes les autres en `loading="lazy"`.
@@ -286,25 +346,29 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 
 ## 7. Structure de l'accueil
 
-1. **Couverture** — dans la marge, le slogan « Du sol au plafond, tout en maîtrise. ». À droite : le h1
-   « Entreprise de rénovation à Lausanne » (Archivo 500, jusqu'à 84 px), le chapô en sérif, les deux boutons
-   empilés et trois garanties (visite et devis gratuits, devis 72 h après la visite, sans engagement).
-2. **L'ouverture** — le comparateur avant / après arrive **cadré dans la colonne de la page**, ses angles marqués
-   de repères, visible dès le premier écran, l'état avant travaux à gauche. En descendant, deux rideaux couleur
-   du fond s'écartent et l'image
-   s'élargit jusqu'aux bords de l'écran. À sa première apparition, la poignée fait seule un aller-retour lent
-   pour montrer qu'elle se déplace. Légende sous l'image.
-3. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur le
-   plâtre). Au téléphone, le sommaire de page se glisse entre le texte de la couverture et l'image.
-4. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
-   quatre cases, « + » en brique claire), les prestations
-   (une ligne par prestation, avec sa miniature fixe), le chantier à la une (panneau dépoli sur photo pleine
-   largeur), la zone, le déroulé en quatre cases — creux et plâtre en alternance.
-5. Renvoi final sur la teinte, bouton d'appel en brique, puis pied de page de nuit (logo négatif) et le nom de
-   l'entreprise en enseigne, en filigrane.
+1. **Couverture : la promesse et la preuve dans le même écran.** Dès 1024 px, deux colonnes :
+   - à gauche (cinq colonnes), le slogan coiffé du toit (« Du sol au plafond, tout en maîtrise. »), le h1
+     « Entreprise de rénovation à Lausanne » (Archivo 500, jusqu'à 80 px), le chapô en sérif ; au pied, calés
+     sur le bas de l'image, les trois garanties en liste (visite et devis gratuits, devis 72 h après la visite,
+     sans engagement) puis l'appel en brique et un renvoi souligné « Voir nos réalisations » ;
+   - à droite (sept colonnes), le **comparateur avant / après**, repères aux angles, à la hauteur de l'écran
+     (460 à 780 px). À l'arrivée, la poignée fait seule un aller-retour lent. Sous l'image, la légende en deux
+     voix (« Séjour traversant — De la chape brute au parquet chêne ») et deux cases jointives **« Avant » /
+     « Après »** qui montrent un état entier d'un geste — au doigt, c'est plus sûr qu'une poignée ; l'étiquette
+     de l'état caché s'efface.
+   Au téléphone et sur tablette, le texte puis l'image, l'appel pleine largeur, le renvoi dessous.
+2. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur la
+   chaux). Au téléphone, le sommaire de page se glisse sous la couverture.
+3. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
+   quatre cases, « + » en brique claire), les prestations (une ligne par prestation, sa photo en tête, sans
+   numéro), le chantier à la une (panneau dépoli sur photo pleine largeur), la zone, le déroulé en quatre
+   cases — chaux et blanc en alternance.
+4. Renvoi final **sur la brique**, bouton d'appel inversé (chaux, texte brique), puis pied de page de nuit
+   (logo négatif) et le nom de l'entreprise en enseigne, en filigrane.
 
-Les pages de métier s'ouvrent de la même façon, autour du tirage de chaque métier. Les pages intérieures
-reprennent la couverture : chemin et nature dans la marge, h1 à droite.
+Les pages de métier s'ouvrent sur leur titre, puis leur tirage : cadré dans la colonne, il s'élargit au
+défilement jusqu'aux bords de l'écran (deux rideaux couleur du fond s'écartent), sa légende en deux voix
+dessous. Les pages intérieures reprennent la composition : chemin dans la marge, h1 à droite.
 
 ---
 
@@ -316,6 +380,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 |---|---|---|
 | Ouverture de l'image au défilement | `transform` des rideaux et des étiquettes | liée au défilement, adoucie (cubique) |
 | Démonstration du comparateur (une fois) | `transform` des calques | 3 × 700 ms, entrée-sortie |
+| Boutons « Avant » / « Après » | `transform` des calques, jusqu'à l'état entier | 650 ms, entrée-sortie |
 | Comparateur | double translation `transform` (calque + image) | instantané, suit le doigt |
 | Apparitions au défilement | `opacity` + `translateY(16px)` | 800 ms `--e-sortie` |
 | Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
@@ -326,9 +391,10 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
-  seule, les apparitions deviennent de simples fondus courts.
+  seule, les boutons « Avant » / « Après » la placent d'un coup, les apparitions deviennent de simples fondus
+  courts.
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
-  cadrée, le comparateur est coupé à 50 %.
+  cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
 - **Les ouvriers du site** : des silhouettes pleines (grosse tête ronde, membres épais aux bouts arrondis,
   sans casque), posées çà et là, chacune seule dans le bas d'une section, sur la limite avec la suivante qui
@@ -358,16 +424,20 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte.
 - Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
-- La brique en fond de section ou en titre : elle reste aux boutons d'appel, aux marques et aux liens.
+- La brique en titre, ou en fond d'autre chose que le renvoi final : ailleurs, elle reste aux boutons d'appel,
+  aux marques et aux liens.
 - Le logo clair dans la nuit (utiliser le négatif).
-- Plus d'une bande de teinte par page : elle est réservée au renvoi final.
+- Plus d'une bande de brique par page : elle est réservée au renvoi final.
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
 - Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.
 - Un sommaire de page écrit à la main : il se déduit des intitulés de section.
 - Au téléphone, un élément qui change de largeur ou de hauteur pendant la lecture sans qu'on l'ait touché.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
-- Numérotation de sections (« N° 01 ») : les numéros sont réservés aux séquences réelles (étapes, articles,
-  méthode en cinq temps).
+- Un numéro qui ne compte rien : numéro de section (« N° 01 »), de registre sur une photo (« N° 005 »), de
+  rang devant une prestation (« 01 … 07 »). Les numéros sont réservés aux séquences réelles (étapes, articles,
+  méthode en cinq temps, rang d'une vue dans la visionneuse).
+- Une étiquette posée sur une photo au repos (hors états du comparateur) ; un texte alternatif recopié en
+  légende.
 - Défilant perpétuel (marquee) : il a été retiré avec cette version.
 - Toute animation qui touche à la taille ou à la position dans la mise en page.

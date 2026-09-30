@@ -45,18 +45,72 @@
 .ouverture__rideau--g::after{right:calc(var(--repere) / -2)}
 .ouverture__rideau--d::after{left:calc(var(--repere) / -2)}
 
-.ouverture__legende{
-  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;
-  gap:var(--sp-2) var(--sp-6);padding-top:var(--sp-4);
-  font-size:var(--t-petit);color:var(--c-encre-60);
-}
-.ouverture__legende b{font-weight:500;color:var(--c-encre)}
-
-/* Tirage d'ouverture des pages de prestation. */
-.ouverture--tirage{margin-top:var(--sp-8)}
+/* Tirage d'ouverture des pages de prestation. La légende appartient
+   à l'image : elle garde de l'air sous elle avant la section suivante,
+   au lieu de flotter sur une bande étroite. */
+.ouverture--tirage{padding-bottom:clamp(40px,5vw,72px)}
 .ouverture--tirage .ouverture__cadre img{
   width:100%;height:clamp(280px,46vw,640px);object-fit:cover;
 }
+
+/* ------------------------------------------------------------
+   LÉGENDE — ce que montre une image, en deux voix
+   Le lieu en grotesque, à l'encre ; ce qu'on voit en romain de
+   lecture, plus bas d'un ton — comme les deux voix du site, le plan
+   et la notice. Le lien vers la fiche du chantier, quand il y en a
+   une, se range à droite, avec la flèche des renvois. Une légende
+   dit un lieu et des travaux : jamais une phrase de texte
+   alternatif posée telle quelle sous la photo.
+   ------------------------------------------------------------ */
+.legende{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;gap:var(--sp-1) var(--sp-5);
+  padding-top:var(--sp-3);
+}
+.legende__texte{display:flex;flex-direction:column;gap:2px;min-width:0}
+.legende__lieu{
+  font-family:var(--f-texte);font-weight:500;font-size:var(--t-petit);
+  line-height:1.35;color:var(--c-encre);
+}
+.legende__quoi{
+  font-family:var(--f-lecture);font-size:var(--t-texte);
+  line-height:1.4;color:var(--c-encre-60);text-wrap:pretty;
+}
+@media (min-width:1024px){.legende__lieu{font-size:var(--t-ui)}}
+.legende__lien{
+  display:inline-flex;align-items:center;gap:var(--sp-3);min-height:44px;
+  font-weight:500;font-size:var(--t-petit);white-space:nowrap;
+  border-bottom:1px solid var(--c-cadre);
+}
+@media (hover:hover) and (pointer:fine){.legende__lien{min-height:0;padding-block:var(--sp-1)}}
+/* Dès la tablette, le lieu et ce qu'on voit tiennent sur une ligne,
+   séparés d'un tiret. */
+@media (min-width:768px){
+  .legende{padding-top:var(--sp-4)}
+  .legende__texte{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:0 var(--sp-3)}
+  .legende__quoi::before{content:"— ";color:var(--c-encre-40)}
+}
+
+/* Montrer un état entier : deux cases jointives, comme les filtres des
+   réalisations. La case de l'état montré passe à l'encre. */
+.bascule{display:flex}
+/* Tant que le script ne l'a pas réveillée, la bascule garde sa place
+   sans se montrer : son arrivée ne décale rien. Sans script du tout,
+   elle n'existe pas. */
+.js .bascule[hidden]{display:flex!important;visibility:hidden}
+.bascule__choix{
+  min-height:44px;padding:0 var(--sp-4);margin-left:-1px;
+  box-shadow:inset 0 0 0 1px var(--c-cadre);
+  font-weight:500;font-size:var(--t-etiquette);color:var(--c-encre-60);
+  transition:background-color var(--d-rapide) var(--e-standard),color var(--d-rapide) var(--e-standard),scale 160ms var(--e-sortie);
+}
+.bascule__choix:first-child{margin-left:0}
+.bascule__choix:active{scale:.97}
+@media (hover:hover) and (pointer:fine){
+  .bascule__choix{min-height:36px}
+  .bascule__choix:hover{color:var(--c-encre);background:var(--c-papier-2)}
+}
+.bascule__choix[aria-pressed="true"]{background:var(--c-encre);color:var(--c-papier)}
 
 /* ------------------------------------------------------------
    COMPARATEUR
@@ -124,11 +178,21 @@
    Posées dans la fenêtre visible : au repos, elles tiennent compte
    du retrait de l'ouverture ; le script les ramène au bord à mesure
    que l'image s'élargit. */
+/* Un voile d'encre, texte blanc : l'étiquette se lit sur le mur blanc
+   d'une pièce livrée (5.0 au pire, voile à 66 % sur blanc) sans poser
+   une pastille claire sur la photo. */
 .comparateur__etat{
   position:absolute;top:var(--sp-4);z-index:2;
-  padding:var(--sp-2) var(--sp-3);background:var(--c-fiche);color:var(--c-encre);
+  padding:6px var(--sp-3);
+  background:rgba(var(--c-sombre-rgb),.72);color:var(--c-blanc);
   font-weight:500;font-size:var(--t-etiquette);line-height:1.2;
   pointer-events:none;will-change:transform;
 }
+@supports (backdrop-filter:blur(1px)){
+  .comparateur__etat{background:rgba(var(--c-sombre-rgb),.66);backdrop-filter:blur(8px)}
+}
 .comparateur__etat--gauche{left:calc(var(--ouv-marge,0px) + var(--sp-4))}
 .comparateur__etat--droite{right:calc(var(--ouv-marge,0px) + var(--sp-4))}
+.comparateur__etat{transition:opacity var(--d-normal) var(--e-standard)}
+.comparateur[data-entier="avant"] .comparateur__etat--droite,
+.comparateur[data-entier="apres"] .comparateur__etat--gauche{opacity:0}
