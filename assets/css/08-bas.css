@@ -153,16 +153,8 @@
 
 /* Le nom de l'entreprise, à l'échelle d'une enseigne. Il ferme le
    pied sur toute la largeur et se laisse rogner par le bas. */
-/* L'enseigne : le nom, coiffé du toit comme dans le logo — le trait
-   monte depuis le « D » et redescend après le « n ». */
-.pied__enseigne{
-  margin-top:var(--sp-7);padding-inline:var(--grille-marge);
-  width:max-content;max-width:100%;
-}
-.toit--enseigne{height:clamp(18px,3.4vw,52px);margin-bottom:.5em}
-.toit--enseigne path{stroke:var(--c-filigrane);stroke-width:1.5px}
 .pied__logotype{
-  margin-bottom:-.2em;
+  margin-top:var(--sp-5);margin-bottom:-.2em;padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;font-size:12.4vw;
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
   /* Une enseigne en filigrane : une teinte sourde, pour qu'elle signe
@@ -172,5 +164,5 @@
 }
 @media (min-width:768px){
   .pied{padding-top:var(--sp-7)}
-  .pied__logotype{font-size:min(8vw,8rem)}
+  .pied__logotype{margin-top:var(--sp-6);font-size:min(8vw,8rem)}
 }

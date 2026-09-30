@@ -8,7 +8,6 @@ Au téléphone, ces coordonnées restent en vue et les trois listes
 en un écran.
 """
 
-from briques import toit
 from gabarit_liens import vers_devis
 from donnees_site import (ANNEXES, CODE_POSTAL, COURRIEL, HORAIRES,
                           ITINERAIRE, LOGO_HAUTEUR, LOGO_LARGEUR,
@@ -77,10 +76,7 @@ def pied(base, courante, services):
       {legal}
     </div>
   </div>
-  <div class="pied__enseigne" aria-hidden="true">
-    {toit("toit--enseigne")}
-    <p class="pied__logotype">{MARQUE}</p>
-  </div>
+  <p class="pied__logotype" aria-hidden="true">{MARQUE}</p>
 </footer>
 
 <div class="barre-mobile sur-sombre" id="barreMobile" data-visible="false">

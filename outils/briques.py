@@ -9,20 +9,6 @@ from donnees_site import RELEVE, TELEPHONE, TELEPHONE_BRUT
 from gabarit_liens import accueil, vers_devis
 
 
-def toit(classe=""):
-    """Le toit du logo, tracé en grand : un trait fin qui monte jusqu'au
-    faîte et redescend. Il coiffe les photos d'en-tête, veille en
-    filigrane sur les bandes de nuit et sur l'enseigne du pied.
-
-    Le trait garde son épaisseur quelle que soit la largeur
-    (vector-effect) ; il se dessine à son arrivée (motion.js, .revele).
-    Décor seul : caché aux lecteurs d'écran.
-    """
-    return (f'<svg class="toit {classe}" viewBox="0 0 1000 100" preserveAspectRatio="none" '
-            'aria-hidden="true" focusable="false"><path d="M0 100 L500 0 L1000 100" '
-            'pathLength="1" vector-effect="non-scaling-stroke"/></svg>')
-
-
 def vue(media, base, classe="", priorite=True):
     """Une photo et sa légende posée dedans, en bas : le lieu, ce qu'on
     voit, et le chemin vers la fiche du chantier quand il y en a une.
@@ -85,8 +71,8 @@ def couverture(page, base, fil, action=None):
         faits = ('<dl class="piece__faits">' + "".join(
             "<div><dt>%s</dt><dd>%s</dd></div>" % f for f in page["faits"])
             + "</dl>")
-    photo = (f'<div class="piece__vue">{toit("toit--photo revele")}'
-             f'{vue(media, base, "piece__image")}</div>') if media else ""
+    photo = (f'<div class="piece__vue">{vue(media, base, "piece__image")}</div>'
+             if media else "")
     return f"""
   <header class="{classe}">
     <div class="zone">

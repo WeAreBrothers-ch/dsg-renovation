@@ -37,8 +37,9 @@ typographie, les cadres et leurs repères ; elle change le reste :
   articles).
 Les inspirations de cette version sont au § 0 bis.
 
-**Signature et mouvement, 30/09/2026 (v3.3).** Les ouvriers animés disparaissent ; les photos, les
-chiffres et le toit du logo prennent le relais (§ 5, § 8). Une photo par prestation, aucune grande photo
+**Signature et mouvement, 30/09/2026 (v3.3).** Les ouvriers animés disparaissent ; les photos et les
+chiffres prennent le relais (§ 8). Le toit du logo tracé en grand a été essayé puis retiré à la demande du
+client : il reste le petit chevron devant les intitulés. Une photo par prestation, aucune grande photo
 répétée sur une page ; `BRIEF-PHOTOS.md` pour la suite.
 
 **Finition, 30/09/2026 (v3.1).** Deuxième retour du client : le bandeau brique avant le pied « n'est pas joli »,
@@ -343,11 +344,6 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   40 % dans la nuit, le blanc à 72 % sur la brique.
 - Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en brique
   sombre (brique claire dans la nuit).
-- **Le toit en grand** (v3.3, `briques.toit`) : le trait qui coiffe « DSG » dans le logo, fin (1,5 px, épaisseur
-  constante), en brique. Il **coiffe les photos d'en-tête** (accueil et pages principales) comme il coiffe les
-  lettres, ses deux pieds sur les repères d'angle ; il **coiffe l'enseigne** « DSG Rénovation » du pied, dans le
-  ton du filigrane ; dans chaque **bande de nuit**, sur grand écran, un pignon entier à 14 % de la chaux se pose
-  au pied de la colonne de marge. Jamais ailleurs : c'est une signature, pas un motif.
 
 ---
 
@@ -421,7 +417,6 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Photos qui se dévoilent | `clip-path` du cadre + `scale` de la photo | 1,1 s et 1,6 s `--e-sortie` |
 | Chiffres qui défilent | texte, une fois | 1,4 s, sortie cubique |
 | Profondeur des grandes photos | `transform` de la photo | liée au défilement, ±4 % |
-| Toit qui se dessine | `stroke-dashoffset` | 1,6 s |
 
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
@@ -436,7 +431,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   (`clip-path`, la photo recule d'un rien, 1,1 s), les vignettes des prestations l'une après l'autre ; **les
   chiffres de l'entreprise défilent** de zéro à leur valeur (1,4 s, la valeur reste écrite dans la page) ;
   **les grandes photos** (en-têtes, chantier à la une) glissent de ±4 % dans leur cadre au défilement ;
-  **le toit** des photos d'en-tête se dessine d'un bord à l'autre (1,6 s). Tout est coupé en mouvement réduit.
+  tout est coupé en mouvement réduit.
 ---
 
 ## 9. Interdits

@@ -139,22 +139,6 @@ h1,h2,h3{
 }
 
 /* ------------------------------------------------------------
-   LE TOIT — la seconde signature du site
-   Le trait qui coiffe « DSG » dans le logo, tracé en grand : fin,
-   en brique, il monte jusqu'au faîte et redescend. Il coiffe les
-   photos d'en-tête comme le toit coiffe les lettres (briques.toit).
-   Son épaisseur ne dépend pas de sa largeur. À son arrivée, il se
-   dessine d'un bord à l'autre ; en mouvement réduit ou sans script,
-   il est simplement là.
-   ------------------------------------------------------------ */
-.toit{display:block;width:100%;overflow:visible;pointer-events:none}
-.toit path{fill:none;stroke:var(--c-accent);stroke-width:1.5px;stroke-linejoin:miter}
-.toit--photo{height:clamp(24px,3.6vw,52px);margin-bottom:-1px}
-.js .toit.revele{opacity:1;transform:none}
-.js .toit.revele path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--e-sortie) .15s}
-.js .toit.revele.est-vu path{stroke-dashoffset:0}
-
-/* ------------------------------------------------------------
    RÉPONSE À LA PRESSION
    On agit sur `scale` et non sur `transform` : l'enfoncement se
    compose avec le léger déplacement magnétique des boutons.
@@ -247,7 +231,6 @@ h1,h2,h3{
     transition-property:opacity,color,background-color,border-color!important;
   }
   .js .revele{transform:none!important}
-  .js .toit.revele path{stroke-dashoffset:0!important}
   .js [data-lignes] .ligne>span{transform:none!important}
   .js :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue){clip-path:none!important}
   .js :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue) img{scale:1!important}

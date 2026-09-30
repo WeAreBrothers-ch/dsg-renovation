@@ -149,8 +149,6 @@ Ce que la v3 a changé, en bref :
 
 - **Plus de bonshommes animés** : les photos se dévoilent, les chiffres
   défilent, les grandes photos glissent d'un rien au défilement.
-- **Le toit du logo** en signature : il coiffe les photos d'en-tête et
-  l'enseigne du pied, et veille en filigrane sur les bandes sombres.
 - **Photos** : une par prestation, aucune grande photo répétée sur une
   page ; `BRIEF-PHOTOS.md` dit quoi faire photographier.
 
