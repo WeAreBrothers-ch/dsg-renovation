@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=a0c79d32">
+<link rel="stylesheet" href="assets/css/site.css?v=f19064ff">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 
 <script type="application/ld+json">
@@ -518,7 +518,11 @@
 
               <div class="champ formulaire__large">
                 <label class="champ__label" for="photos">Photos du logement <span class="champ__facultatif">facultatif</span></label>
-                <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosAide photosErreur">
+                <div class="fichier">
+                  <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosEtat photosAide photosErreur">
+                  <label class="fichier__bouton" for="photos"><span class="fichier__icone" aria-hidden="true"></span>Ajouter des photos</label>
+                  <span class="fichier__etat" id="photosEtat" aria-live="polite">Aucune photo choisie</span>
+                </div>
                 <ul class="photos-apercu" id="photosApercu" aria-label="Photos choisies" hidden></ul>
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
                 <p class="champ__erreur" id="photosErreur" aria-live="polite"></p>
@@ -1096,13 +1100,13 @@
 </footer>
 
 <div class="barre-mobile sur-sombre" id="barreMobile" data-visible="false">
-  <a class="btn btn--cadre" href="tel:+41218470202">Appeler</a>
+  <a class="btn btn--cadre" href="tel:+41218470202"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
   <a class="btn btn--plein" href="#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/nav.js?v=b4067ac4" defer></script>
 <script src="assets/js/motion.js?v=25ba3032" defer></script>
 <script src="assets/js/onglets.js?v=21de9295" defer></script>
 <script src="assets/js/equipe.js?v=4fc33c5b" defer></script>
-<script src="assets/js/formulaire.js?v=89c0c50e" defer></script>
+<script src="assets/js/formulaire.js?v=f2de0581" defer></script>
 </body>
 </html>

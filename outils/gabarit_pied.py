@@ -81,7 +81,7 @@ def pied(base, courante, services):
 </footer>
 
 <div class="barre-mobile sur-sombre" id="barreMobile" data-visible="false">
-  <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}">Appeler</a>
+  <a class="btn btn--cadre" href="tel:{TELEPHONE_BRUT}"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
   <a class="btn btn--plein" href="{vers_devis(base, courante)}">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 """

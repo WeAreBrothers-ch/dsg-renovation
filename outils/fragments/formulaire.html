@@ -72,7 +72,11 @@
 
               <div class="champ formulaire__large">
                 <label class="champ__label" for="photos">Photos du logement <span class="champ__facultatif">facultatif</span></label>
-                <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosAide photosErreur">
+                <div class="fichier">
+                  <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosEtat photosAide photosErreur">
+                  <label class="fichier__bouton" for="photos"><span class="fichier__icone" aria-hidden="true"></span>Ajouter des photos</label>
+                  <span class="fichier__etat" id="photosEtat" aria-live="polite">Aucune photo choisie</span>
+                </div>
                 <ul class="photos-apercu" id="photosApercu" aria-label="Photos choisies" hidden></ul>
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
                 <p class="champ__erreur" id="photosErreur" aria-live="polite"></p>

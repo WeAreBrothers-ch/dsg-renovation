@@ -303,6 +303,16 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
     et le détail de chaque réalisation partent fermés.
   - **Titres** : titre de section à 30 px, chapô à la taille du texte, paragraphe d'intention à celle du
     chapô ; intitulé et titre plus proches, sections plus serrées.
+  - **Haut de page (v3.2)** : un seul fil — accroche ou chemin, titre, chapô, **puis la photo tout de suite**,
+    les repères et l'appel pleine largeur. Le premier écran montre un chantier et le bouton. Le bouton
+    téléphone de l'en-tête de page s'efface : « Appeler » est déjà dans l'en-tête du site.
+  - **Comparateur** : légende sur une ligne (le lieu, les boutons « Avant » / « Après ») ; ce qu'on voit
+    attend la tablette.
+  - **Réalisations** : une fiche par ligne, photo 3/2 pleine largeur, surface et durée côte à côte.
+  - **Fin de page** : la question et ses deux boutons ; les coordonnées sont dans le pied qui suit.
+  - **Communes** en trois colonnes serrées ; **photos du formulaire** : un bouton du site « Ajouter des
+    photos » et une ligne d'état en français à la place du sélecteur natif ; **barre du bas** : le combiné
+    devant « Appeler ».
   - **Pied de page** : logo, adresse, téléphone et courriel en boutons, horaires, itinéraire ; les trois
     listes (le site, les prestations, les zones) repliées sous leur intitulé. Il tient en moins d'un écran.
   - Le formulaire montre les photos choisies en vignettes, et la touche Entrée du clavier mène au champ

@@ -12,8 +12,19 @@
    téléphone, le texte d'abord, l'image juste dessous.
    ------------------------------------------------------------ */
 .couverture{padding-top:calc(var(--h-entete) + clamp(28px,3.4vw,48px))}
-.couverture__grille{row-gap:var(--sp-7);padding-bottom:clamp(40px,5vw,72px)}
-.couverture__texte{grid-column:1/-1;display:flex;flex-direction:column}
+/* Au téléphone, un seul fil : l'accroche, le titre, le chapô, puis
+   tout de suite la preuve — l'avant / après —, l'appel sous le pouce
+   et les garanties. Le premier écran montre le chantier et le bouton.
+   Le bloc de texte s'efface (display:contents) pour que ses éléments
+   se rangent autour de l'image. */
+.couverture__grille{display:flex;flex-direction:column;padding-bottom:clamp(40px,5vw,72px)}
+.couverture__texte{display:contents}
+.couverture__nature{order:1}
+.couverture h1{order:2}
+.couverture__chapo{order:3}
+.couverture__media{order:4;margin-top:var(--sp-5)}
+.couverture__actions{order:5}
+.couverture__garanties{order:6}
 /* La nature de l'entreprise porte l'intitulé de section
    (.intercalaire__nom) : coiffée du toit du logo, comme lui. */
 .couverture__nature{line-height:1.4}
@@ -22,10 +33,10 @@
   font-size:var(--t-couverture);letter-spacing:-.035em;line-height:1;
   max-width:8.7em;
 }
-.couverture__chapo{margin-top:clamp(20px,2.4vw,32px);max-width:40ch}
+.couverture__chapo{margin-top:clamp(16px,2.4vw,32px);max-width:40ch}
 .couverture__actions{
   display:flex;flex-direction:column;align-items:stretch;gap:var(--sp-2) var(--sp-5);
-  width:100%;margin-top:clamp(28px,3vw,40px);
+  width:100%;margin-top:var(--sp-5);
 }
 .couverture__actions .btn{min-width:min(100%,260px)}
 /* Le second choix est un renvoi, pas un second bouton : l'appel
@@ -37,7 +48,7 @@
 /* Trois garanties sous l'appel : ce qu'on obtient en cliquant, en
    petit, marquées du carré des repères. */
 .couverture__garanties{
-  display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-5);margin-top:var(--sp-5);
+  display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-4);margin-top:var(--sp-4);
   font-size:var(--t-petit);color:var(--c-encre-60);
 }
 .couverture__garanties li{display:inline-flex;align-items:center;gap:var(--sp-2)}
@@ -53,15 +64,17 @@
 
 /* L'image de la couverture : le comparateur, repères aux angles (voir
    01-socle.css), sa légende dessous. */
-.couverture__media{grid-column:1/-1;margin:0;position:relative}
+.couverture__media{grid-column:1/-1;margin-inline:0;margin-bottom:0;position:relative}
 .couverture__cadre{display:block}
 
 /* Dès 1024 px, côte à côte. Le texte tient cinq colonnes, l'image les
    sept autres, à la hauteur de l'écran moins l'en-tête et la légende :
    rien de la couverture ne demande de défiler. */
 @media (min-width:1024px){
-  .couverture__grille{row-gap:0;align-items:stretch}
-  .couverture__texte{grid-column:1/6;padding-right:var(--sp-5)}
+  .couverture__grille{display:grid;row-gap:0;align-items:stretch}
+  .couverture__texte{grid-column:1/6;padding-right:var(--sp-5);display:flex;flex-direction:column}
+  .couverture__nature,.couverture h1,.couverture__chapo{order:0}
+  .couverture__media{margin-top:0}
   .couverture h1{margin-top:clamp(24px,3vw,44px);font-size:var(--t-couverture-colonne)}
   /* Les garanties montent au-dessus de l'appel, en liste : la promesse,
      puis le bouton qui la tient. Le bloc se cale au pied de l'image. */

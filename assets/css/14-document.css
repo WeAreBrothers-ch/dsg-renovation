@@ -44,7 +44,7 @@
    l'autre — l'intitulé en petit, la valeur à la voix des titres. */
 .piece__faits{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--sp-5);
-  margin-top:var(--sp-6);border-top:1px solid var(--c-cadre);
+  margin-top:var(--sp-5);border-top:1px solid var(--c-cadre);
 }
 .piece__faits div{padding:var(--sp-3) 0 var(--sp-4);border-bottom:var(--bd-fin)}
 .piece__faits dt{font-size:var(--t-etiquette);color:var(--c-encre-60)}
@@ -61,11 +61,23 @@
    Au téléphone, la photo suit le texte. Les pages annexes (mentions,
    confidentialité, merci, 404) gardent l'en-tête sans photo.
    ------------------------------------------------------------ */
-.piece--vue .piece__entete{padding-bottom:clamp(40px,5vw,72px)}
-.piece__vue{grid-column:1/-1;aspect-ratio:4/3;margin-top:var(--sp-3)}
+/* Au téléphone, un seul fil : le chemin, le titre, le chapô, la photo
+   tout de suite, puis les repères et l'appel. Le bloc de texte s'efface
+   (display:contents) pour que ses éléments se rangent autour d'elle. */
+.piece--vue .piece__entete{display:flex;flex-direction:column;gap:0;padding-bottom:clamp(40px,5vw,72px)}
+.piece--vue .piece__tete{display:contents}
+.piece--vue .piece__marge{order:1}
+.piece--vue .piece__titre{order:2;margin-top:var(--sp-5)}
+.piece--vue .piece__chapo{order:3;margin-top:var(--sp-4)}
+.piece__vue{order:4;grid-column:1/-1;aspect-ratio:4/3;margin:var(--sp-5) 0 0}
+.piece--vue .piece__faits{order:5}
+.piece--vue .couverture__actions{order:6}
 @media (min-width:768px){.piece__vue{aspect-ratio:16/10}}
 @media (min-width:1024px){
-  .piece--vue .piece__entete{grid-template-rows:auto 1fr;row-gap:var(--sp-6)}
+  .piece--vue .piece__entete{display:grid;grid-template-rows:auto 1fr;row-gap:var(--sp-6)}
+  .piece--vue .piece__tete{display:flex}
+  .piece--vue .piece__titre{margin-top:0}
+  .piece--vue .piece__chapo{margin-top:var(--sp-6)}
   .piece--vue .piece__marge{grid-column:1/7;grid-row:1;padding-top:0}
   .piece--vue .piece__tete{
     grid-column:1/7;grid-row:2;padding-right:var(--sp-6);
@@ -83,8 +95,14 @@
   }
 }
 .piece__chapo{margin-top:var(--sp-6)}
-.piece__entete .couverture__actions{width:auto;margin-top:var(--sp-6);flex-direction:column;flex-wrap:wrap}
-@media (min-width:768px){.piece__entete .couverture__actions{flex-direction:row}}
+.piece__entete .couverture__actions{width:auto;margin-top:var(--sp-5);flex-direction:column;flex-wrap:wrap}
+/* Au téléphone, « Appeler » est déjà dans l'en-tête, en haut de
+   l'écran : l'en-tête de page garde son seul appel, pleine largeur. */
+.piece__entete .couverture__actions .btn--cadre{display:none}
+@media (min-width:768px){
+  .piece__entete .couverture__actions{flex-direction:row}
+  .piece__entete .couverture__actions .btn--cadre{display:inline-flex}
+}
 
 /* Cartouche de mise à jour des annexes. */
 .piece__cote{display:flex;flex-wrap:wrap;gap:var(--sp-4) var(--sp-8);margin-top:var(--sp-6)}

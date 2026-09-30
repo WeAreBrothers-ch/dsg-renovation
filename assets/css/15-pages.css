@@ -59,13 +59,17 @@
 /* Les communes : une liste de lieux, pas des étiquettes. Deux colonnes
    d'un filet à l'autre, comme les postes d'un bordereau. */
 .lots.service__villes{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--sp-5);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 var(--sp-3);
   align-content:start;border-top:1px solid var(--c-cadre);
 }
 .lots.service__villes li{
-  display:flex;align-items:center;gap:var(--sp-3);
-  padding:var(--sp-3) 0;background:none;border-bottom:var(--bd-fin);
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-ui);color:var(--c-encre);
+  display:flex;align-items:center;gap:var(--sp-2);min-width:0;
+  padding:10px 0;background:none;border-bottom:var(--bd-fin);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-petit);color:var(--c-encre);
+}
+@media (min-width:1024px){
+  .lots.service__villes{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--sp-5)}
+  .lots.service__villes li{gap:var(--sp-3);padding:var(--sp-3) 0;font-size:var(--t-ui)}
 }
 .lots.service__villes li::before{
   content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);background:var(--c-accent);
@@ -154,9 +158,11 @@
 .rappel .chapo{margin-top:var(--sp-5)}
 .rappel__actions{margin-top:var(--sp-6);display:flex;flex-direction:column;flex-wrap:wrap;gap:var(--sp-3)}
 .rappel__actions .btn{min-width:min(100%,260px)}
-/* Comment nous joindre : quatre lignes d'un filet à l'autre. */
+/* Comment nous joindre : quatre lignes d'un filet à l'autre. Au
+   téléphone et sur tablette, le pied de page qui suit les donne déjà,
+   en boutons : le cadre garde la question et ses deux réponses. */
 .rappel__joindre{
-  display:flex;flex-direction:column;
+  display:none;flex-direction:column;
   padding:var(--sp-2) var(--sp-5) var(--sp-5);border-top:1px solid var(--c-cadre);
 }
 .rappel__joindre div{padding-block:var(--sp-4);border-bottom:var(--bd-fin)}
@@ -182,6 +188,7 @@
 @media (min-width:1024px){
   .rappel__cadre{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
   .rappel__joindre{
+    display:flex;
     justify-content:center;padding:var(--sp-7);
     border-top:0;border-left:1px solid var(--c-cadre);
   }

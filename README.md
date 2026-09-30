@@ -197,6 +197,9 @@ bout à l'autre :
   repliées sous leur intitulé (`nav.js`).
 - **Titres plus marqués** : titres de section à 30 px, chapô à la
   taille du texte, sections plus serrées.
+- **La photo dès le premier écran** : sur chaque page, titre, chapô,
+  photo, puis l'appel ; réalisations une par ligne ; formulaire en
+  français jusqu'au bouton des photos.
 
 Les pages ont raccourci d'un quart à deux cinquièmes à 390 px de
 large (accueil 8 874 → 6 704 px, prestations 7 027 → 4 867,

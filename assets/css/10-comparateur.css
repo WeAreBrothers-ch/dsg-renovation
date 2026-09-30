@@ -53,8 +53,20 @@
 }
 
 /* La légende du comparateur se pose dans l'image comme les autres ;
-   elle laisse passer le doigt, sauf sur ses deux boutons. */
-.legende--comparateur{padding-top:var(--sp-8);pointer-events:none}
+   elle laisse passer le doigt, sauf sur ses deux boutons. Au
+   téléphone, l'image est petite : une seule ligne, le lieu et les deux
+   boutons ; ce qu'on voit attend la tablette. */
+.legende--comparateur{
+  flex-wrap:nowrap;align-items:center;
+  padding:var(--sp-7) var(--sp-3) var(--sp-3);pointer-events:none;
+}
+.legende--comparateur .vue__quoi{display:none}
+.legende--comparateur .bascule__choix{min-height:40px;padding-inline:var(--sp-3)}
+@media (min-width:768px){
+  .legende--comparateur{align-items:flex-end;padding:var(--sp-8) var(--sp-6) var(--sp-5)}
+  .legende--comparateur .vue__quoi{display:block}
+  .legende--comparateur .bascule__choix{padding-inline:var(--sp-4)}
+}
 .legende--comparateur .bascule{pointer-events:auto;text-shadow:none}
 
 /* Montrer un état entier : deux cases jointives, blanches sur le voile.

@@ -177,6 +177,12 @@
     apercu.textContent = "";
     var fichiers = Array.prototype.slice.call(photos.files || []).slice(0, PHOTOS_MAX);
     apercu.hidden = fichiers.length === 0;
+    var etat = document.getElementById("photosEtat");
+    var nombre = (photos.files || []).length;
+    if (etat) {
+      etat.textContent = nombre === 0 ? "Aucune photo choisie"
+        : nombre === 1 ? "1 photo choisie" : nombre + " photos choisies";
+    }
     fichiers.forEach(function (fichier) {
       var vignette = document.createElement("li");
       var nom = document.createTextNode(fichier.name);

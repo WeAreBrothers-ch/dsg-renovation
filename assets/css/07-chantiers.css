@@ -17,25 +17,26 @@
   gap:var(--sp-4);margin-bottom:var(--sp-7);
 }
 .chantiers__compte{font-size:var(--t-petit);color:var(--c-encre-60)}
+/* Au téléphone, une fiche par ligne, la photo en grand : on fait
+   défiler des chantiers comme des photos, et chaque texte a la
+   largeur de l'écran. La surface et la durée se lisent côte à côte,
+   sous le nom. Deux fiches par ligne dès 640 px. */
 .chantiers__grille{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  column-gap:var(--sp-3);row-gap:var(--sp-5);align-items:start;
+  display:grid;grid-template-columns:minmax(0,1fr);
+  column-gap:var(--grille-goutt);row-gap:var(--sp-6);align-items:start;
 }
-.chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
-.chantiers__grille .chemise__fiche{gap:var(--sp-3);padding:var(--sp-3)}
-.chantiers__grille .chemise__fiche .h4{font-size:var(--t-ui)}
-.chantiers__grille .chemise__meta{font-size:var(--t-etiquette)}
-.chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-2);font-size:var(--t-etiquette)}
-.chantiers__grille .depliant__tete{font-size:var(--t-etiquette)}
-.chantiers__grille .depliant__corps p{font-size:var(--t-petit)}
+.chantiers__grille>.chemise .chemise__tirage{aspect-ratio:3/2}
+.chantiers__grille .chemise__fiche{gap:var(--sp-4);padding:var(--sp-4) var(--sp-4) var(--sp-3)}
+.chantiers__grille .releve--regle{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto;grid-auto-flow:column;column-gap:var(--sp-4)}
+.chantiers__grille .releve--regle dt{padding-block:var(--sp-3) 0}
+.chantiers__grille .releve--regle dd{padding-block:2px var(--sp-3);border-top:0;text-align:left;font-size:var(--t-ui)}
 @media (min-width:640px){
-  .chantiers__grille{column-gap:var(--grille-goutt);row-gap:var(--sp-7)}
-  .chantiers__grille .chemise__fiche{gap:var(--sp-4);padding:var(--sp-5)}
-  .chantiers__grille .chemise__fiche .h4{font-size:var(--t-h4)}
-  .chantiers__grille .chemise__meta{font-size:var(--t-petit)}
-  .chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-3);font-size:var(--t-petit)}
-  .chantiers__grille .depliant__tete{font-size:var(--t-petit)}
-  .chantiers__grille .depliant__corps p{font-size:var(--t-texte)}
+  .chantiers__grille{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-7)}
+  .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
+  .chantiers__grille .chemise__fiche{padding:var(--sp-5)}
+  .chantiers__grille .releve--regle{grid-template-columns:auto 1fr;grid-template-rows:none;grid-auto-flow:row;column-gap:var(--sp-4)}
+  .chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-3);border-top:var(--bd-fin)}
+  .chantiers__grille .releve--regle dd{text-align:right;font-size:var(--t-petit)}
 }
 @media (min-width:1024px){
   .chantiers__grille{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:var(--sp-8)}
