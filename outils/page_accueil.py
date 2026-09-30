@@ -52,6 +52,7 @@ def accueil(services, base=""):
         </ul>
       </div>
       <figure class="couverture__media">
+        {briques.toit("toit--photo revele")}
         <div class="couverture__cadre">
         {fragment('comparateur')}
         </div>

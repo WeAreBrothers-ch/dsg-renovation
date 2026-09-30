@@ -37,6 +37,10 @@ typographie, les cadres et leurs repères ; elle change le reste :
   articles).
 Les inspirations de cette version sont au § 0 bis.
 
+**Signature et mouvement, 30/09/2026 (v3.3).** Les ouvriers animés disparaissent ; les photos, les
+chiffres et le toit du logo prennent le relais (§ 5, § 8). Une photo par prestation, aucune grande photo
+répétée sur une page ; `BRIEF-PHOTOS.md` pour la suite.
+
 **Finition, 30/09/2026 (v3.1).** Deuxième retour du client : le bandeau brique avant le pied « n'est pas joli »,
 et les pages de prestation gardaient une photo pleine largeur avec une bande de légende dessous. Revue page par
 page, au bureau et au téléphone :
@@ -182,7 +186,7 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 |---|---|---|---|
 | `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 7.3 |
 | `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte blanc dessus : 9.0 |
-| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici », outils des ouvriers | 8.0 / 9.0 / 7.2 |
+| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 8.0 / 9.0 / 7.2 |
 
 Dans la nuit, la brique claire devient la couleur écrite (7.0) et le bouton d'appel garde son aplat de brique ;
 au survol, c'est la chaux qui le recouvre, texte terre d'ombre (14.2). Sur la brique du renvoi final, le texte
@@ -339,6 +343,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   40 % dans la nuit, le blanc à 72 % sur la brique.
 - Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en brique
   sombre (brique claire dans la nuit).
+- **Le toit en grand** (v3.3, `briques.toit`) : le trait qui coiffe « DSG » dans le logo, fin (1,5 px, épaisseur
+  constante), en brique. Il **coiffe les photos d'en-tête** (accueil et pages principales) comme il coiffe les
+  lettres, ses deux pieds sur les repères d'angle ; il **coiffe l'enseigne** « DSG Rénovation » du pied, dans le
+  ton du filigrane ; dans chaque **bande de nuit**, sur grand écran, un pignon entier à 14 % de la chaux se pose
+  au pied de la colonne de marge. Jamais ailleurs : c'est une signature, pas un motif.
 
 ---
 
@@ -402,7 +411,6 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 
 | Geste | Propriétés | Durée / courbe |
 |---|---|---|
-| Ouverture de l'image au défilement | `transform` des rideaux et des étiquettes | liée au défilement, adoucie (cubique) |
 | Démonstration du comparateur (une fois) | `transform` des calques | 3 × 700 ms, entrée-sortie |
 | Boutons « Avant » / « Après » | `transform` des calques, jusqu'à l'état entier | 650 ms, entrée-sortie |
 | Comparateur | double translation `transform` (calque + image) | instantané, suit le doigt |
@@ -410,7 +418,10 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
-| Ouvriers du site | attributs `transform` du dessin SVG, image par image | passages de 8 à 10 s, puis 3 à 7 s d'absence |
+| Photos qui se dévoilent | `clip-path` du cadre + `scale` de la photo | 1,1 s et 1,6 s `--e-sortie` |
+| Chiffres qui défilent | texte, une fois | 1,4 s, sortie cubique |
+| Profondeur des grandes photos | `transform` de la photo | liée au défilement, ±4 % |
+| Toit qui se dessine | `stroke-dashoffset` | 1,6 s |
 
 - Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
@@ -420,27 +431,12 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
-- **Les ouvriers du site** : des silhouettes pleines (grosse tête ronde, membres épais aux bouts arrondis,
-  sans casque), posées çà et là, chacune seule dans le bas d'une section, sur la limite avec la suivante qui
-  lui sert de sol. Quatre sur l'accueil (le peintre dans la bande de l'entreprise, le poseur de sol sous les
-  prestations, l'électricien sous la zone, le charpentier sous le déroulé), deux ou trois sur les autres pages,
-  une section sur deux, le métier de la page d'abord ; aucune sur les pages légales. Au départ, un sur deux
-  vient de la droite. Chacun vit à son rythme, sans attendre le défilement : il arrive en quelques pas,
-  travaille, repart en quelques pas et disparaît ; son ouvrage reste un instant, puis s'efface. Il revient 3 à
-  7 s plus tard, jamais à la même place : sur un autre sol libre à l'écran s'il y en a un, sinon ailleurs sur
-  le même, pour que la page vive sans qu'on défile ; souvent, c'est un collègue resté hors de l'écran qui vient
-  à sa place. Jamais deux ouvriers dans une section. Le peintre tient son rouleau à l'horizontale, contre le
-  mur. Le poseur de sol, penché, pousse à petits pas un gros rouleau de revêtement : le rouleau roule, maigrit
-  à mesure qu'il se déroule, et la bande posée s'allonge derrière lui, d'un seul mouvement continu (il ne pose
-  plus de carreaux un à un). Le poseur, l'électricien et le charpentier se retournent pour repartir (le
-  rouleau, l'ampoule, le tréteau sont devant eux).
-  Un bouton du pied de page met toutes les animations en pause et le site s'en souvient (WCAG 2.2.2) ; rien
-  ne bouge hors de l'écran ni onglet caché. Décor seul
-  (`aria-hidden`) ; mouvement réduit ou sans JavaScript : chacun saisi au milieu de sa tâche. Silhouette à
-  l'encre du fond (claire dans la nuit) ; peinture, revêtement et ampoule allumée en `--c-aplat`, une terre
-  cuite (brique claire, plus sourde dans la nuit pour que la peinture se détache du rouleau) ; outils et
-  spirale du rouleau en `--c-accent`, la brique. Aucun bleu.
-
+- **Plus de dessins animés** (v3.3) : les ouvriers du site, jugés bas de gamme par le client, sont retirés.
+  Ce qui bouge désormais sert la lecture : **les photos se dévoilent** de haut en bas quand leur bloc arrive
+  (`clip-path`, la photo recule d'un rien, 1,1 s), les vignettes des prestations l'une après l'autre ; **les
+  chiffres de l'entreprise défilent** de zéro à leur valeur (1,4 s, la valeur reste écrite dans la page) ;
+  **les grandes photos** (en-têtes, chantier à la une) glissent de ±4 % dans leur cadre au défilement ;
+  **le toit** des photos d'en-tête se dessine d'un bord à l'autre (1,6 s). Tout est coupé en mouvement réduit.
 ---
 
 ## 9. Interdits

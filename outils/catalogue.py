@@ -18,22 +18,18 @@ IMG = "https://static.wixstatic.com/media/"
 
 # La photo de couverture de chaque page : un chantier réel, repris des
 # fiches de réalisations (fragments/chantiers.html, signature.html).
+# Aucune grande photo ne se répète sur une page : la liste des
+# prestations (entreprise, prestations) montre déjà les sept photos des
+# métiers, les réalisations leurs sept chantiers.
 PHOTO_ENTREPRISE = {
-    "src": IMG + "2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg",
-    "alt": "Cuisine et dégagement d'un appartement de l'immeuble Béthusy "
-           "après reprise des murs, plafonds et sols",
-    "lieu": "Immeuble Béthusy, Lausanne",
-    "quoi": "Six appartements rénovés, locataires en place",
+    "src": "assets/images/sejour-apres.jpg",
+    "alt": "Séjour traversant livré : cuisine blanche ouverte, parquet chêne "
+           "et murs repris",
+    "lieu": "Séjour traversant",
+    "quoi": "Livré par nos équipes, tous corps de métier",
+    "largeur": 1404, "hauteur": 682,
 }
 PHOTO_REALISATIONS = {
-    "src": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
-    "alt": "Pièce de vie du loft de Sévelin après travaux, grand volume "
-           "ouvert, comptoir blanc et parquet clair",
-    "lieu": "Loft de Sévelin, Lausanne",
-    "quoi": "Un ancien local industriel devenu logement",
-    "ancre": "loft-de-sevelin",
-}
-PHOTO_DEVIS = {
     "src": "assets/images/sejour-apres.jpg",
     "alt": "Séjour traversant livré : cuisine blanche ouverte, parquet chêne "
            "et murs repris",
@@ -41,14 +37,22 @@ PHOTO_DEVIS = {
     "quoi": "De la chape brute au parquet chêne",
     "largeur": 1404, "hauteur": 682,
 }
+PHOTO_DEVIS = {
+    "src": "assets/images/sejour-avant.jpg",
+    "alt": "Avant travaux : cloison porteuse mise à nu, gaines apparentes et "
+           "chape brute avant reprise",
+    "lieu": "Séjour traversant, avant travaux",
+    "quoi": "Ce que nous relevons à la visite, et chiffrons poste par poste",
+    "largeur": 1404, "hauteur": 682,
+}
 
 PHOTO_PRESTATIONS = {
-    "src": IMG + "2c1464_ce05ed0a65a14673bd0dcfe6d34744e1~mv2.jpg",
-    "alt": "Cuisine rénovée de la maison de Pully, façades blanches et sol "
-           "en grès cérame gris grand format",
-    "lieu": "Maison de Pully",
-    "quoi": "Cuisine et sol en grès cérame, la famille sur place",
-    "ancre": "maison-de-pully",
+    "src": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
+    "alt": "Pièce de vie du loft de Sévelin après travaux, grand volume "
+           "ouvert, comptoir blanc et parquet clair",
+    "lieu": "Loft de Sévelin, Lausanne",
+    "quoi": "Cloisons, plâtrerie, peinture et sol : tous les métiers",
+    "ancre": "loft-de-sevelin",
 }
 
 # Les repères de l'en-tête de chaque page : des faits déjà écrits

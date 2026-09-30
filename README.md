@@ -81,7 +81,6 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
-| `equipe.py`, `equipe_immobile.json` | ouvriers du site : dessin des silhouettes, sections où les poser page par page et sols où ils peuvent revenir (`data-sol`), pose immobile |
 | `confiance.py` | déroulé en quatre temps, logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins |
@@ -148,6 +147,13 @@ phrases.
 
 Ce que la v3 a changé, en bref :
 
+- **Plus de bonshommes animés** : les photos se dévoilent, les chiffres
+  défilent, les grandes photos glissent d'un rien au défilement.
+- **Le toit du logo** en signature : il coiffe les photos d'en-tête et
+  l'enseigne du pied, et veille en filigrane sur les bandes sombres.
+- **Photos** : une par prestation, aucune grande photo répétée sur une
+  page ; `BRIEF-PHOTOS.md` dit quoi faire photographier.
+
 - **Couverture de l'accueil** : le titre à gauche, le chantier avant /
   après à droite, à la hauteur de l'écran ; deux boutons « Avant » /
   « Après » sous l'image montrent un état entier d'un geste.
@@ -211,9 +217,8 @@ pas bougé d'un pixel.
 | Fichier | Rôle |
 |---|---|
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone, sommaire de page (position, section en cours, saut), volets du pied de page |
-| `motion.js` | révélations au défilement ; sans lui, la page s'affiche quand même |
+| `motion.js` | révélations au défilement, photos qui se dévoilent, chiffres qui défilent, profondeur des grandes photos ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
-| `equipe.js` | ouvriers du site : des silhouettes çà et là qui arrivent, travaillent, repartent en quelques pas et reviennent ailleurs quelques secondes plus tard, de préférence à l'écran ; pause générale dans le pied de page (mémorisée), arrêt hors écran |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |

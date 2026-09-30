@@ -1,6 +1,7 @@
 /* ============================================================
    DSG RÉNOVATION — MOUVEMENT
-   Révélations au défilement, vignettes des métiers, année courante.
+   Révélations au défilement, photos qui se dévoilent, chiffres qui
+   défilent, profondeur des grandes photos, année courante.
    Tout contenu reste lisible si ce fichier ne s'exécute pas.
    ============================================================ */
 (function () {
@@ -59,6 +60,64 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" });
 
     Array.prototype.forEach.call(aReveler, function (element) { observateur.observe(element); });
+  }
+
+  /* ---------- Chiffres qui défilent ----------
+     Les chiffres de l'entreprise montent de zéro à leur valeur quand
+     ils arrivent à l'écran. La valeur est écrite dans la page : Google,
+     les lecteurs d'écran et un visiteur sans script la lisent telle
+     quelle. Chiffres tabulaires : la largeur ne bouge pas. */
+  var chiffres = document.querySelectorAll(".preuve__val");
+  if (chiffres.length && !mouvementReduit && "IntersectionObserver" in window) {
+    var observateurChiffres = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (entree) {
+        if (!entree.isIntersecting) { return; }
+        observateurChiffres.unobserve(entree.target);
+        var element = entree.target;
+        var cible = parseInt(element.textContent, 10);
+        if (!(cible > 0)) { return; }
+        var debut = null;
+        var duree = 1400;
+        function pas(horodatage) {
+          if (debut === null) { debut = horodatage; }
+          var t = Math.min((horodatage - debut) / duree, 1);
+          element.textContent = String(Math.round(cible * (1 - Math.pow(1 - t, 3))));
+          if (t < 1) { window.requestAnimationFrame(pas); }
+        }
+        element.textContent = "0";
+        window.requestAnimationFrame(pas);
+      });
+    }, { threshold: 0.6 });
+    Array.prototype.forEach.call(chiffres, function (element) { observateurChiffres.observe(element); });
+  }
+
+  /* ---------- Profondeur des grandes photos ----------
+     Les photos d'en-tête et du chantier à la une glissent d'un rien
+     dans leur cadre pendant le défilement : la page gagne de la
+     profondeur sans que rien ne bouge dans la mise en page (transform
+     seul). Coupé en mouvement réduit. */
+  var profondes = document.querySelectorAll(".piece__image img, .signature__cadre img");
+  if (profondes.length && !mouvementReduit) {
+    var attente = false;
+    var peindreProfondeur = function () {
+      attente = false;
+      var hauteur = window.innerHeight;
+      Array.prototype.forEach.call(profondes, function (image) {
+        var cadre = image.parentElement.getBoundingClientRect();
+        if (cadre.bottom < 0 || cadre.top > hauteur) { return; }
+        /* -1 quand le cadre entre par le bas, +1 quand il sort par le haut. */
+        var avance = ((hauteur - cadre.top) / (hauteur + cadre.height)) * 2 - 1;
+        image.style.transform = "translate3d(0," + (avance * -4).toFixed(2) + "%,0) scale(1.1)";
+      });
+    };
+    var demanderProfondeur = function () {
+      if (attente) { return; }
+      attente = true;
+      window.requestAnimationFrame(peindreProfondeur);
+    };
+    window.addEventListener("scroll", demanderProfondeur, { passive: true });
+    window.addEventListener("resize", demanderProfondeur, { passive: true });
+    peindreProfondeur();
   }
 
   /* ---------- Vignettes des savoir-faire (tactile) ----------

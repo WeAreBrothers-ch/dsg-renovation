@@ -141,11 +141,14 @@ PAGES = [
         "chapo": "Ce sur quoi on marche supporte tout le reste. Le plan de "
                  "pose des carreaux et la mise à niveau du sol se décident "
                  "avant la première colle, jamais après.",
-        "image": IMG + "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg",
-        "alt": "Salle d'eau carrelée du sol au plafond dans un duplex rénové",
-        "legende": ("Duplex des Eaux-Vives, Genève",
-                    "Salle d'eau carrelée du sol au plafond",
-                    "duplex-des-eaux-vives"),
+        # Une photo par prestation : la salle d'eau du duplex illustre la
+        # page salle de bains ; le carrelage montre le sol de Pully.
+        "image": IMG + "2c1464_ce05ed0a65a14673bd0dcfe6d34744e1~mv2.jpg",
+        "alt": "Cuisine rénovée de la maison de Pully, façades blanches et sol "
+               "en grès cérame gris grand format",
+        "legende": ("Maison de Pully",
+                    "Sol en grès cérame grand format, cuisine reprise",
+                    "maison-de-pully"),
         "reperes": [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
             ("Appartement 100 m²", "3 à 5 jours de sol"),
@@ -173,11 +176,15 @@ PAGES = [
         "chapo": "La poussière de plâtre se dépose trois fois avant de "
                  "disparaître. Un nettoyage de chantier n'est pas un ménage, "
                  "c'est un métier.",
-        "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
-        "alt": "Logement nettoyé après travaux, prêt à être occupé",
-        "legende": ("Immeuble Rue de Bourg, Lausanne",
-                    "Logement nettoyé après travaux, prêt à être occupé",
-                    "immeuble-rue-de-bourg"),
+        # Le chantier Béthusy : chaque logement nettoyé à fond avant sa
+        # remise (fragments/signature.html). Rue de Bourg illustre la
+        # remise en état.
+        "image": IMG + "2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg",
+        "alt": "Cuisine et dégagement d'un appartement de l'immeuble Béthusy "
+               "après reprise des murs, plafonds et sols",
+        "legende": ("Immeuble Béthusy, Lausanne",
+                    "Chaque logement nettoyé à fond avant sa remise",
+                    None),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 jours"),
             ("Passages", "2 au minimum, poussière oblige"),

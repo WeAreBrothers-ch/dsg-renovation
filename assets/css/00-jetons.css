@@ -62,10 +62,6 @@
   /* Grand texte décoratif (l'enseigne du pied) : discret, mais au-dessus
      du seuil des grands textes (3:1). 3.4 sur la nuit. */
   --c-filigrane:#7E7368;
-  /* Aplat des dessins (les ouvriers) : peinture, revêtement de sol,
-     ampoule allumée. Une brique claire, terre cuite. Décor, jamais du
-     texte. */
-  --c-aplat:var(--c-brique-claire);
 
   /* ---------- Brique — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur, texte
@@ -79,7 +75,7 @@
   /* ---------- Brique sombre — l'accent ----------
      Liens dans le texte, numéros d'étape, puces, astérisques,
      « + » des chiffres, repère « vous êtes ici », chevron des
-     intitulés, outils des ouvriers. */
+     intitulés. */
   --c-accent:var(--c-brique-sombre);  /*  8.0 /  9.0 /  7.2 */
 
   /* ---------- États ---------- */
@@ -133,8 +129,6 @@
   --c-encre-60:#B8AFA4;      /*  7.4 /  6.3 */
   --c-encre-40:#A0968A;      /*  5.5 /  4.7 */
   --c-accent:var(--c-brique-claire);  /*  7.0 /  6.0 */
-  --c-aplat:#C8705A;         /* terre cuite plus sourde : la peinture se
-                                distingue du rouleau (brique claire) */
   --c-signal-fonce:var(--c-chaux);
   --c-sur-signal-survol:var(--c-terre);   /* 14.2 */
   --c-ligne:rgba(var(--c-craie-rgb),.16);
@@ -148,6 +142,21 @@
   --c-focus:var(--c-chaux);
   color:var(--c-encre);
   background-color:var(--c-papier);
+}
+
+/* Dans chaque bande de nuit, le toit du logo en grand, à peine
+   visible, posé entier au pied de la colonne de marge : la bande se lit
+   comme le pignon d'une maison. Sur grand écran seulement — au
+   téléphone, le contenu occupe toute la largeur et le trait passerait
+   dessous. Décor. */
+@media (min-width:1024px){
+  .section.sur-sombre::before{
+    content:"";position:absolute;bottom:0;pointer-events:none;
+    left:var(--grille-marge);width:min(30%,480px);aspect-ratio:1000/440;
+    background:rgba(var(--c-craie-rgb),.14);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 440'%3E%3Cpath d='M1 440 500 2 999 440' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 440'%3E%3Cpath d='M1 440 500 2 999 440' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  }
 }
 
 /* Polices de secours calibrées : tant que les polices du site ne sont

@@ -87,7 +87,7 @@
   .couverture__media{grid-column:6/13}
   .couverture .comparateur{
     aspect-ratio:auto;max-height:none;
-    height:clamp(460px,calc(100svh - var(--h-entete) - 136px),780px);
+    height:clamp(440px,calc(100svh - var(--h-entete) - 180px),740px);
   }
 }
 
