@@ -95,7 +95,7 @@
 /* ------------------------------------------------------------
    LIRE LA SUITE (outils/lecture.py)
    Au téléphone, un texte de plusieurs paragraphes montre le premier ;
-   le reste vient d'une touche, et le bouton s'efface. Le repli tient
+   le reste vient d'une touche, et se replie de même. Le repli tient
    dès le premier affichage (.js) : rien ne bouge à l'arrivée du
    script. Sans script, et dès la tablette, tout se lit d'un tenant.
    ------------------------------------------------------------ */
@@ -108,9 +108,11 @@
   transition:text-decoration-color var(--d-rapide) var(--e-standard);
 }
 .js [data-plie]:not(.est-deplie)>p:not(:first-child){display:none}
-.js [data-plie]:not(.est-deplie)>.plie__bouton{display:inline-flex}
+/* Le bouton reste sous le texte ouvert : « Réduire » le replie. */
+.js [data-plie]>.plie__bouton{display:inline-flex}
+[data-plie].est-deplie .depliant__signe::after{transform:rotate(0)}
 @media (hover:hover) and (pointer:fine){.plie__bouton:hover{text-decoration-color:currentColor}}
 @media (min-width:768px){
   .js [data-plie]:not(.est-deplie)>p:not(:first-child){display:block}
-  .js [data-plie]:not(.est-deplie)>.plie__bouton{display:none}
+  .js [data-plie]>.plie__bouton{display:none}
 }

@@ -33,9 +33,9 @@
   --c-chaux:#F5F2EC;         /* blanc de chaux : le fond */
   --c-blanc:#FFFFFF;         /* blanc : une section sur deux, les cases */
   --c-terre:#27211C;         /* terre d'ombre : l'encre et la nuit */
-  --c-brique:#9A3324;        /* brique : l'action */
-  --c-brique-sombre:#86291C; /* la brique écrite sur le clair, et son survol */
-  --c-brique-claire:#E29A86; /* la brique écrite sur la nuit */
+  --c-brique:#B2341F;        /* brique vive : l'action */
+  --c-brique-sombre:#962C1C; /* la brique écrite sur le clair, et son survol */
+  --c-brique-claire:#EF8F74; /* la brique écrite sur la nuit */
 
   /* ---------- Surfaces ---------- */
   --c-papier:var(--c-chaux);   /* DOMINANTE */
@@ -65,8 +65,8 @@
 
   /* ---------- Brique — l'action ----------
      L'aplat des boutons d'appel et de la poignée du comparateur, texte
-     blanc posé dessus : 7.3. Au survol, la brique sombre recouvre la
-     brique : 9.0. */
+     blanc posé dessus : 6.2. Au survol, la brique sombre recouvre la
+     brique : 7.9. */
   --c-signal:var(--c-brique);
   --c-signal-fonce:var(--c-brique-sombre);
   --c-sur-signal:var(--c-blanc);
@@ -76,7 +76,7 @@
      Liens dans le texte, numéros d'étape, puces, astérisques,
      « + » des chiffres, repère « vous êtes ici », chevron des
      intitulés. */
-  --c-accent:var(--c-brique-sombre);  /*  8.0 /  9.0 /  7.2 */
+  --c-accent:var(--c-brique-sombre);  /*  7.0 /  7.9 /  6.3 */
 
   /* ---------- États ---------- */
   --c-valide:#2F6B4A;        /*  5.7 /  6.3 /  5.1 */
@@ -128,7 +128,7 @@
   --c-encre:var(--c-chaux);  /* nuit / élevée : 14.2 / 12.3 */
   --c-encre-60:#B8AFA4;      /*  7.4 /  6.3 */
   --c-encre-40:#A0968A;      /*  5.5 /  4.7 */
-  --c-accent:var(--c-brique-claire);  /*  7.0 /  6.0 */
+  --c-accent:var(--c-brique-claire);  /*  6.7 /  5.8 */
   --c-signal-fonce:var(--c-chaux);
   --c-sur-signal-survol:var(--c-terre);   /* 14.2 */
   --c-ligne:rgba(var(--c-craie-rgb),.16);

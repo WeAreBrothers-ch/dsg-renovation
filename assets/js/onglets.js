@@ -19,18 +19,27 @@
     });
   }
 
-  /* Lire la suite (outils/lecture.py) : le texte se déplie en entier,
-     le bouton s'efface, et le focus passe au premier paragraphe
-     révélé, d'où le clavier et les lecteurs d'écran reprennent. */
+  /* Lire la suite (outils/lecture.py) : le texte se déplie en entier
+     et le bouton devient « Réduire » ; à l'ouverture, le focus passe
+     au premier paragraphe révélé. Replié, le texte ramène l'écran à
+     son début s'il était passé au-dessus. */
   Array.prototype.forEach.call(document.querySelectorAll("[data-plie]"), function (bloc) {
     var bouton = bloc.querySelector(".plie__bouton");
-    if (!bouton) { return; }
+    var libelle = bloc.querySelector(".plie__texte");
+    if (!bouton || !libelle) { return; }
     bouton.addEventListener("click", function () {
-      bloc.classList.add("est-deplie");
-      var suite = bloc.children[1];
-      if (suite instanceof HTMLElement) {
-        suite.setAttribute("tabindex", "-1");
-        suite.focus({ preventScroll: true });
+      var ouvrir = !bloc.classList.contains("est-deplie");
+      bloc.classList.toggle("est-deplie", ouvrir);
+      bouton.setAttribute("aria-expanded", String(ouvrir));
+      libelle.textContent = ouvrir ? "Réduire" : "Lire la suite";
+      if (ouvrir) {
+        var suite = bloc.children[1];
+        if (suite instanceof HTMLElement) {
+          suite.setAttribute("tabindex", "-1");
+          suite.focus({ preventScroll: true });
+        }
+      } else if (bloc.getBoundingClientRect().top < 0) {
+        bloc.scrollIntoView({ block: "start" });
       }
     });
   });

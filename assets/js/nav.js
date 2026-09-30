@@ -125,12 +125,18 @@
   });
 
   /* ---------- Barre mobile ----------
-     Elle n'apparaît qu'une fois la couverture passée : en haut de page,
-     les boutons de la couverture font déjà ce travail. Elle s'efface
-     pendant qu'on remplit un champ : elle masquerait ce qu'on écrit. */
+     Elle n'apparaît qu'une fois sorti de l'écran l'appel de la
+     couverture : tant qu'il est visible, il fait ce travail, et deux
+     « Devis gratuit » l'un sous l'autre se disputeraient le pouce. Elle
+     s'efface pendant qu'on remplit un champ : elle masquerait ce qu'on
+     écrit. */
+  var appelCouverture = document.querySelector(".couverture__actions .btn--plein");
   function mettreAJourBarre() {
     if (!barreMobile) { return; }
-    var visible = window.scrollY > 480 && !saisieEnCours;
+    var passee = appelCouverture
+      ? appelCouverture.getBoundingClientRect().bottom < 0
+      : window.scrollY > 480;
+    var visible = passee && !saisieEnCours;
     barreMobile.setAttribute("data-visible", visible ? "true" : "false");
   }
 

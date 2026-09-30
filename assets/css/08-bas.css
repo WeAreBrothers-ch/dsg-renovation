@@ -153,8 +153,10 @@
 
 /* Le nom de l'entreprise, à l'échelle d'une enseigne. Il ferme le
    pied sur toute la largeur et se laisse rogner par le bas. */
+/* Au téléphone, l'enseigne se lit entière au-dessus de la barre
+   d'action ; dès la tablette, elle se laisse rogner par le bas. */
 .pied__logotype{
-  margin-top:var(--sp-5);margin-bottom:-.2em;padding-inline:var(--grille-marge);
+  margin-top:var(--sp-5);margin-bottom:var(--sp-4);padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;font-size:12.4vw;
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
   /* Une enseigne en filigrane : une teinte sourde, pour qu'elle signe
@@ -164,5 +166,5 @@
 }
 @media (min-width:768px){
   .pied{padding-top:var(--sp-7)}
-  .pied__logotype{margin-top:var(--sp-6);font-size:min(8vw,8rem)}
+  .pied__logotype{margin-top:var(--sp-6);margin-bottom:-.2em;font-size:min(8vw,8rem)}
 }

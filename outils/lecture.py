@@ -3,7 +3,7 @@
 Trois paragraphes de sérif tiennent un écran entier de téléphone, et
 une page de prestation en compte une demi-douzaine : on fait défiler du
 texte sans voir ce qui suit. Le premier paragraphe dit l'essentiel ; le
-reste vient d'une touche, « Lire la suite ».
+reste vient d'une touche, « Lire la suite », et se replie de même, « Réduire ».
 
 Le pliage est posé ici, sur la page assemblée, plutôt que dans chaque
 gabarit : il vaut pour tout bloc de texte courant (.service__texte) qui
@@ -22,7 +22,8 @@ _ENFANT = re.compile(r"<(?!/)(?!a\b|b\b|i\b|em\b|strong\b|span\b|br\b|abbr\b)([a
 # En deçà, replier ferait gagner deux lignes pour une touche de plus.
 SUITE_MINIMALE = 200
 
-BOUTON = ('<button class="plie__bouton" type="button">Lire la suite'
+BOUTON = ('<button class="plie__bouton" type="button" aria-expanded="false">'
+          '<span class="plie__texte">Lire la suite</span>'
           '<span class="depliant__signe" aria-hidden="true"></span></button>')
 
 

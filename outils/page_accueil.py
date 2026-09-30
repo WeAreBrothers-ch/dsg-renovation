@@ -38,17 +38,17 @@ def accueil(services, base=""):
         <p class="intercalaire__nom couverture__nature">Du sol au plafond, tout en maîtrise.</p>
         <h1 id="t01">Entreprise de rénovation à Lausanne</h1>
         <p class="chapo couverture__chapo">Rénovation totale d'appartements,
-        de maisons et d'immeubles à Lausanne et sur l'arc lémanique. Un
+        de maisons et d'immeubles à Lausanne et sur l'arc lémanique.<span class="couverture__chapo-suite"> Un
         seul interlocuteur, tous les corps de métier, un chantier livré
-        propre et dans les délais.</p>
+        propre et dans les délais.</span></p>
         <div class="couverture__actions">
           <a class="btn btn--plein" href="{base}devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
           <a class="couverture__lien" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
         </div>
         <ul class="couverture__garanties">
-          <li>Visite et devis gratuits</li>
-          <li>Devis détaillé 72 h après la visite</li>
-          <li>Sans engagement</li>
+          <li>Visite et devis <span>gratuits</span></li>
+          <li>Devis détaillé <span>72 h après la visite</span></li>
+          <li>Sans <span>engagement</span></li>
         </ul>
       </div>
       <figure class="couverture__media">

@@ -42,6 +42,9 @@ chiffres prennent le relais (§ 8). Le toit du logo tracé en grand a été essa
 client : il reste le petit chevron devant les intitulés. Une photo par prestation, aucune grande photo
 répétée sur une page ; `BRIEF-PHOTOS.md` pour la suite.
 
+**Brique plus vive, 30/09/2026 (v3.4).** À la demande du client, la brique passe de `#9A3324` à `#B2341F`
+(texte blanc dessus : 6.2), la brique écrite à `#962C1C` (7.0 sur la chaux), la brique claire à `#EF8F74`.
+
 **Finition, 30/09/2026 (v3.1).** Deuxième retour du client : le bandeau brique avant le pied « n'est pas joli »,
 et les pages de prestation gardaient une photo pleine largeur avec une bande de légende dessous. Revue page par
 page, au bureau et au téléphone :
@@ -159,9 +162,9 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 | `--c-chaux` | `#F5F2EC` | le fond, blanc de chaux |
 | `--c-blanc` | `#FFFFFF` | une section sur deux, les cases du formulaire |
 | `--c-terre` | `#27211C` | terre d'ombre : l'encre, et la nuit des bandes sombres |
-| `--c-brique` | `#9A3324` | l'action : aplat des boutons d'appel, poignée du comparateur, renvoi final |
-| `--c-brique-sombre` | `#86291C` | la brique écrite sur le clair, et le survol des boutons |
-| `--c-brique-claire` | `#E29A86` | la brique écrite sur la nuit ; terre cuite des dessins |
+| `--c-brique` | `#B2341F` | l'action : aplat des boutons d'appel, poignée du comparateur, renvoi final |
+| `--c-brique-sombre` | `#962C1C` | la brique écrite sur le clair, et le survol des boutons |
+| `--c-brique-claire` | `#EF8F74` | la brique écrite sur la nuit ; terre cuite des dessins |
 
 ### Surfaces
 | Jeton | Valeur | Usage |
@@ -185,11 +188,11 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 ### Brique — l'action et l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 7.3 |
-| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte blanc dessus : 9.0 |
-| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 8.0 / 9.0 / 7.2 |
+| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 6.2 |
+| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte blanc dessus : 7.9 |
+| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 7.0 / 7.9 / 6.3 |
 
-Dans la nuit, la brique claire devient la couleur écrite (7.0) et le bouton d'appel garde son aplat de brique ;
+Dans la nuit, la brique claire devient la couleur écrite (6.7) et le bouton d'appel garde son aplat de brique ;
 au survol, c'est la chaux qui le recouvre, texte terre d'ombre (14.2). Sur la brique du renvoi final, le texte
 est blanc (7.3), le texte secondaire rosé `#F6DDD6` (5.7) ; le bouton d'appel s'inverse — aplat de chaux,
 texte brique sombre (8.0) — et la terre le recouvre au survol. La brique ne s'écrit jamais en titre.
@@ -308,6 +311,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
     et le détail de chaque réalisation partent fermés.
   - **Titres** : titre de section à 30 px, chapô à la taille du texte, paragraphe d'intention à celle du
     chapô ; intitulé et titre plus proches, sections plus serrées.
+  - **Couverture de l'accueil (v3.4)** : l'accroche, le titre, une seule phrase de chapô (la suite attend la
+    tablette), puis l'avant / après **bord à bord**, sur toute la largeur de l'écran (4/3 sous 400 px, 5/4
+    au-delà) ; l'appel pleine largeur, le renvoi, puis les trois garanties en bandeau de trois cases. La
+    barre du bas n'apparaît qu'une fois cet appel sorti de l'écran : jamais deux « Devis gratuit » à la fois.
+  - **Lire la suite** se replie : le bouton devient « Réduire » une fois le texte ouvert.
+  - **Pied** : l'enseigne se lit entière au-dessus de la barre d'action.
   - **Haut de page (v3.2)** : un seul fil — accroche ou chemin, titre, chapô, **puis la photo tout de suite**,
     les repères et l'appel pleine largeur. Le premier écran montre un chantier et le bouton. Le bouton
     téléphone de l'en-tête de page s'efface : « Appeler » est déjà dans l'en-tête du site.
