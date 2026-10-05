@@ -238,7 +238,11 @@ s'active quand la source de Pages est « GitHub Actions » (Settings →
 Pages → Source). `.nojekyll` : le dépôt est publié tel quel, sans
 Jekyll. Quand GitHub Actions est ralenti (githubstatus.com), une mise
 en ligne peut attendre plusieurs minutes : la dernière version passe
-quand même, inutile de pousser à nouveau.
+quand même, inutile de pousser à nouveau. Quand GitHub n'attribue plus
+de machines du tout, lancer la mise en ligne à la main depuis le Mac de
+l'agence : Actions → Mise en ligne → Run workflow → machine « mac » (le
+Mac doit être enregistré comme machine de déploiement : Settings →
+Actions → Runners → New self-hosted runner, macOS ARM64).
 
 ## Mise en ligne chez Infomaniak
 

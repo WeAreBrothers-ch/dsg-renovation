@@ -8,16 +8,28 @@
 # push ne coupe jamais une mise en ligne commencée : le suivant attend son
 # tour, puis publie la dernière version.
 #
+# Machine : à chaque push, une machine de GitHub. Quand GitHub n'en
+# attribue plus (panne d'Actions, githubstatus.com), lancer ce workflow à
+# la main (Actions → Mise en ligne → Run workflow) avec la machine « mac » :
+# il tourne alors sur le Mac de l'agence, enregistré comme machine de
+# déploiement (self-hosted, macOS, ARM64). Chaque machine a sa file : une
+# mise en ligne coincée chez GitHub ne bloque pas celle du Mac.
+#
 # Actif quand la source de Pages est « GitHub Actions »
-# (Settings → Pages → Build and deployment → Source). Tant qu'elle reste
-# « Deploy from a branch », il vérifie la source et s'arrête sans rien
-# publier : la publication par branche continue seule, sans doublon.
+# (Settings → Pages → Build and deployment → Source). Sinon, il vérifie la
+# source et s'arrête sans rien publier.
 name: Mise en ligne
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      machine:
+        description: "Machine qui publie"
+        type: choice
+        options: [github, mac]
+        default: github
 
 permissions:
   contents: read
@@ -25,12 +37,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ inputs.machine || 'github' }}
   cancel-in-progress: false
 
 jobs:
   publier:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.machine == 'mac' && fromJSON('["self-hosted","macOS","ARM64"]') || 'ubuntu-latest' }}
     timeout-minutes: 20
     environment:
       name: github-pages
@@ -38,6 +50,7 @@ jobs:
     steps:
       - name: Source de Pages
         id: source
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -56,10 +69,21 @@ jobs:
       - uses: actions/configure-pages@v5
         if: steps.source.outputs.type == 'workflow'
 
-      - uses: actions/upload-pages-artifact@v3
+      # L'archive que Pages attend (artifact.tar, artefact « github-pages »),
+      # faite à la main : la même commande sert au tar de Linux et à celui
+      # de macOS, sans rien installer sur le Mac.
+      - name: Archive du site
+        if: steps.source.outputs.type == 'workflow'
+        shell: bash
+        run: tar -h -cf "$RUNNER_TEMP/artifact.tar" --exclude=.git --exclude=.github -C "$GITHUB_WORKSPACE" .
+
+      - uses: actions/upload-artifact@v4
         if: steps.source.outputs.type == 'workflow'
         with:
-          path: .
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - id: publication
         uses: actions/deploy-pages@v4
