@@ -44,7 +44,7 @@
    et le nom de l'entreprise s'y inscrit en très grand.
    ------------------------------------------------------------ */
 .pied{
-  background:var(--c-bitume);color:var(--c-encre);
+  color:var(--c-encre);
   padding-top:var(--sp-6);padding-bottom:calc(var(--h-barre-mobile) + env(safe-area-inset-bottom));
   overflow:hidden;position:relative;
 }
@@ -53,11 +53,17 @@
    leur intitulé (nav.js pose les boutons, la feuille les replie dès le
    premier affichage pour que rien ne bouge). Trois colonnes ouvertes
    dès 768 px, quatre sur grand écran. */
+/* Les cases sont transparentes : le nacré du pied passe dessous.
+   Chacune trace son bord droit et son bord bas, la grille les deux
+   autres — un seul trait entre deux cases. */
 .pied__grille{
-  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
-  background:var(--c-cadre);border:1px solid var(--c-cadre);
+  display:grid;grid-template-columns:minmax(0,1fr);
+  border-top:1px solid var(--c-cadre);border-left:1px solid var(--c-cadre);
 }
-.pied__grille>*{padding:var(--sp-4);background:var(--c-bitume)}
+.pied__grille>*{
+  padding:var(--sp-4);
+  border-right:1px solid var(--c-cadre);border-bottom:1px solid var(--c-cadre);
+}
 @media (min-width:768px){
   .pied__grille{grid-template-columns:repeat(3,minmax(0,1fr))}
   .pied__grille>*{padding:var(--sp-5)}
@@ -159,10 +165,17 @@
   margin-top:var(--sp-5);margin-bottom:var(--sp-4);padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;font-size:12.4vw;
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
-  /* Une enseigne en filigrane : une teinte sourde, pour qu'elle signe
-     la page sans disputer la lecture au pied (3.4, seuil des grands
-     textes 3:1). */
+  /* Une enseigne en filigrane, en lettres nacrées : elle signe la
+     page sans disputer la lecture au pied (4.0 au plus sombre, seuil
+     des grands textes 3:1). */
   color:var(--c-filigrane);
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .pied__logotype{
+    background:var(--nacre-texte);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+  }
 }
 @media (min-width:768px){
   .pied{padding-top:var(--sp-7)}

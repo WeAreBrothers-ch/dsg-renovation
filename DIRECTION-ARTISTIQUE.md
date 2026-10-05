@@ -4,9 +4,18 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 30/09/2026 — Statut : **v3**, en production.
+Date : 05/10/2026 — Statut : **v4**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Noir nacré & rouge DSG, 05/10/2026 (v4).** À la demande du client, le site prend les couleurs du logo, et
+elles seules : son noir (`#1B1B1B`, ramené au noir nacré `#121214`), le rouge du toit (`#DD0022`), le gris
+d'ombre des lettres (`#A6A4A5`), le blanc. Pour que le noir ne fasse pas « basique », il est **nacré** sur les
+bandes sombres, le pied et la barre mobile : trois reflets à peine teintés (bleu froid, rose, vert d'eau) sur
+un noir qui tourne d'un rien, comme l'intérieur d'une coquille. Le survol des boutons rouges passe au noir
+nacré ; l'enseigne du pied s'écrit en lettres nacrées. La chaux chaude devient un blanc perle neutre
+(`#F3F3F4`). Le même jour, le sommaire collant du téléphone est retiré : le client le trouvait lourd (§ 4).
+La palette « Chaux & brique » reste lisible dans l'historique git (`d148c82`).
 
 **Retour aux couleurs d'origine, 27/09/2026 (v2.5) — « Plâtre & brique ».** Après quatre autres palettes
 (bleu de travail et jaune de chantier, couleurs du logo, bleu de plan et safran, chocolat et ciel), le client a
@@ -130,28 +139,27 @@ qui cherche un artisan.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond de chaux**, clair et chaud — le mur qu'on vient de reprendre —, relayé une section sur deux par
-  le **blanc franc** ;
-- une **encre terre d'ombre**, jamais un noir pur ;
+- un **fond perle**, clair et neutre — le blanc du logo à peine voilé de gris —, relayé une section sur
+  deux par le **blanc franc** ;
+- une **encre noire**, celle des lettres du logo ;
 - des **cadres d'un pixel marqués aux angles** — les piquets du géomètre ;
-- des **bandes de nuit**, la terre d'ombre en fond, qui rythment la page ;
+- des **bandes de noir nacré** qui rythment la page : un noir à reflets, jamais un aplat mort ;
 - **la preuve dès le premier écran** : à l'accueil, le chantier avant / après à côté du titre ; sur les autres
   pages principales, un chantier réel à côté du titre, sa légende posée dans l'image ;
-- **un seul accent, la brique** : réservé à l'action — les boutons d'appel — et à ce qui s'écrit en couleur : liens, numéros d'étape, et devant chaque intitulé de section un
+- **un seul accent, le rouge du toit** : réservé à l'action — les boutons d'appel — et à ce qui s'écrit en couleur : liens, numéros d'étape, et devant chaque intitulé de section un
   chevron dessiné comme le toit du logo.
 
-Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), la brique
-(héritière du rouge DSG), le logo et son toit rouge, le comparateur avant / après mis au centre de l'accueil, les
+Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le rouge
+DSG, le noir nacré, le logo et son toit rouge, le comparateur avant / après mis au centre de l'accueil, les
 repères d'angle qui voyagent avec l'image d'ouverture.
 
 ---
 
-## 2. Palette — « Chaux & brique » (v3)
+## 2. Palette — « Noir nacré & rouge DSG » (v4)
 
-L'encre et la brique de toujours, celles du logo ; le fond s'éclaircit. Le plâtre (`#EEEBE5`) et son creux
-(`#E3DFD7`), gris-beige, faisaient paraître sales les murs blancs des photos : la chaux et le blanc les laissent
-respirer. Répartition : **70 % chaux et blanc · 25 % encre · 5 % brique.** Le logo garde ses propres couleurs.
-Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
+Les couleurs du logo, et elles seules : son noir, son rouge, son gris d'ombre, le blanc. Le noir est nacré
+partout où il fait fond. Répartition : **70 % perle et blanc · 25 % noir · 5 % rouge.** Le logo garde ses
+propres couleurs. Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
 
 Les feuilles de composants ne nomment jamais une couleur : elles demandent un rôle (`--c-encre`, `--c-signal`,
 `--c-accent`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
@@ -159,43 +167,55 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 ### Les couleurs
 | Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-chaux` | `#F5F2EC` | le fond, blanc de chaux |
+| `--c-perle` | `#F3F3F4` | le fond, blanc perle |
 | `--c-blanc` | `#FFFFFF` | une section sur deux, les cases du formulaire |
-| `--c-terre` | `#27211C` | terre d'ombre : l'encre, et la nuit des bandes sombres |
-| `--c-brique` | `#B2341F` | l'action : aplat des boutons d'appel, poignée du comparateur, renvoi final |
-| `--c-brique-sombre` | `#962C1C` | la brique écrite sur le clair, et le survol des boutons |
-| `--c-brique-claire` | `#EF8F74` | la brique écrite sur la nuit ; terre cuite des dessins |
+| `--c-noir` | `#121214` | noir nacré : l'encre, et la nuit des bandes sombres |
+| `--c-noir-2` | `#1E1E23` | noir élevé : cases posées sur la nuit |
+| `--c-gris` | `#A6A4A5` | gris d'ombre du logo : le texte secondaire de la nuit |
+| `--c-rouge` | `#DD0022` | rouge du toit : aplat des boutons d'appel, poignée du comparateur |
+| `--c-rouge-sombre` | `#B3001B` | le rouge écrit sur le clair |
+| `--c-rouge-clair` | `#FF6B78` | le rouge écrit sur la nuit |
+
+### Le nacré
+`--nacre` : trois dégradés radiaux à peine teintés — bleu froid `rgba(196,206,255,.11)` en haut à gauche, rose
+`rgba(255,196,226,.08)` au pied à droite, vert d'eau `rgba(190,245,235,.06)` en haut à droite — sur un dégradé
+de noir (`#19191E` → `#121214` → `#16151A`, 155°). Il couvre le fond de `.sur-sombre` (bandes, pied, barre
+mobile) et le survol des boutons rouges. Au plus clair, il atteint `#2C2D37` : chaque texte de la nuit y garde
+son seuil (troisième valeur ci-dessous). Les cases posées sur la nuit restent d'un noir mat, comme des pièces
+sur une table laquée ; celles du pied sont transparentes, le nacré passe dessous.
+
+`--nacre-texte` : le même nacré en lettres (`#73737E` → `#A3A0B4` → `#86989A` → `#AA97A6`), pour l'enseigne du
+pied (4.0 au plus sombre, seuil des grands textes 3:1).
 
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--c-papier` | `#F5F2EC` | fond dominant, la chaux (le blanc dans `.sur-pale`) |
-| `--c-papier-2` | `#EBE6DD` | creux : survols, onglet ouvert, emplacement d'une image qui charge |
-| `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, sous-menu (la chaux sur le blanc) |
-| `--c-bitume` | `#27211C` | nuit : bandes sombres, pied de page, visionneuse, barre mobile |
-| `--c-bitume-2` | `#342C26` | surface élevée dans la nuit |
+| `--c-papier` | `#F3F3F4` | fond dominant, le perle (le blanc dans `.sur-pale`) |
+| `--c-papier-2` | `#E7E7EA` | creux : survols, onglet ouvert, emplacement d'une image qui charge |
+| `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, sous-menu (le perle sur le blanc) |
+| `--c-bitume` | `#121214` | nuit : bandes sombres, pied de page, visionneuse, barre mobile (nacrée) |
+| `--c-bitume-2` | `#1E1E23` | surface élevée dans la nuit |
 
-### Texte (chaux / blanc / creux)
+### Texte (perle / blanc / creux)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#27211C` | 14.2 / 15.9 / 12.8 |
-| `--c-encre-60` | `#574F47` | 7.2 / 8.0 / 6.5 |
-| `--c-encre-40` | `#6A6158` | 5.4 / 6.1 / 4.9 |
-| `--c-craie` | `#F5F2EC` | 14.2 sur la nuit |
-| `--c-craie-60` | `#B8AFA4` | 7.4 sur la nuit, 6.3 sur la nuit élevée |
-| `--c-filigrane` | `#7E7368` | l'enseigne du pied, grand texte décoratif : 3.4 sur la nuit |
+| `--c-encre` | `#121214` | 16.9 / 18.7 / 15.2 |
+| `--c-encre-60` | `#505057` | 7.2 / 8.0 / 6.5 |
+| `--c-encre-40` | `#64646B` | 5.3 / 5.9 / 4.8 |
+| `--c-craie` | `#F3F3F4` | 16.9 sur la nuit, 12.3 au reflet le plus clair |
+| `--c-craie-60` | `#A6A4A5` | 7.6 sur la nuit, 6.7 sur la nuit élevée, 5.5 au reflet |
+| `--c-filigrane` | `#73737E` | l'enseigne du pied sans nacré en lettres : 4.0 sur la nuit |
 
-### Brique — l'action et l'accent écrit
+### Rouge — l'action et l'accent écrit
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
-| `--c-signal` | = brique | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 6.2 |
-| `--c-signal-fonce` | = brique sombre | survol des boutons d'appel : la brique sombre recouvre la brique | texte blanc dessus : 7.9 |
-| `--c-accent` | = brique sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 7.0 / 7.9 / 6.3 |
+| `--c-signal` | = rouge | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 5.1 |
+| `--c-signal-fonce` | = noir | survol des boutons d'appel : le noir nacré (`--fond-survol-signal`) recouvre le rouge | texte blanc dessus : 18.7 |
+| `--c-accent` | = rouge sombre | liens, numéros d'étape (01, 02…), chevrons des intitulés, puces, astérisques, « + » des chiffres, repère « vous êtes ici » | 6.5 / 7.2 / 5.8 |
 
-Dans la nuit, la brique claire devient la couleur écrite (6.7) et le bouton d'appel garde son aplat de brique ;
-au survol, c'est la chaux qui le recouvre, texte terre d'ombre (14.2). Sur la brique du renvoi final, le texte
-est blanc (7.3), le texte secondaire rosé `#F6DDD6` (5.7) ; le bouton d'appel s'inverse — aplat de chaux,
-texte brique sombre (8.0) — et la terre le recouvre au survol. La brique ne s'écrit jamais en titre.
+Dans la nuit, le rouge clair devient la couleur écrite (6.8, 5.0 au reflet) et le bouton d'appel garde son
+aplat rouge ; au survol, c'est le perle qui le recouvre, texte noir (16.9). Le rouge ne s'écrit jamais en
+titre.
 
 ### États
 `--c-valide` `#2F6B4A` (5.7) · `--c-alerte` `#8E3B12` (6.8) · `--c-focus` = encre. Chaque fond redéfinit
@@ -203,8 +223,7 @@ localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
 `--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 14 % · `--c-ligne-forte` encre à 50 %
-(3.0). Dans la nuit, le cadre est une chaux à 40 % (3.3, au-dessus du seuil 3:1 des contours) ; sur la brique,
-un blanc à 72 % (4.6).
+(3.5). Dans la nuit, le cadre est un perle à 40 % (3.6, au-dessus du seuil 3:1 des contours).
 
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, étiquettes « Avant » /
@@ -214,18 +233,18 @@ Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionn
 
 ## 2 bis. Rythme des fonds
 
-Trois fonds se relaient ; jamais deux fois le même à la suite. La brique ne couvre jamais un fond (v3.1).
+Trois fonds se relaient ; jamais deux fois le même à la suite. Le rouge ne couvre jamais un fond.
 
 | Fond | Classe | Où |
 |---|---|---|
-| **Chaux** `#F5F2EC` | — | couverture, et une section sur deux |
+| **Perle** `#F3F3F4` | — | couverture, et une section sur deux |
 | **Blanc** `#FFFFFF` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références (page entreprise) |
-| **Nuit** `#27211C` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Noir nacré** `#121214` + `--nacre` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode et ses repères (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. Une suite de
 sections libres qui finirait sur le fond de la section imposée qui la suit part de l'autre fond (`rythme.py`) :
 ainsi la bande des références ne suit jamais une section blanche. On ne place jamais de logos de partenaires
-(multipliés sur le fond) ni de formulaire dans la nuit ou sur la brique. Dans la nuit, on emploie la déclinaison
+(multipliés sur le fond) ni de formulaire dans la nuit. Dans la nuit, on emploie la déclinaison
 négative du logo (`logo-negatif.webp` : lettres blanches, toit rouge).
 
 ---
@@ -292,14 +311,9 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   toucher, un voile de l'encre du fond répond (`-webkit-tap-highlight-color`) ; les lignes qui se creusent au
   survol se creusent aussi sous le doigt.
 - **Au téléphone** : l'en-tête s'efface quand on descend et revient dès qu'on remonte ; la barre d'action
-  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. Une page se parcourt
-  par ses intitulés, on ouvre ce qu'on veut lire — sans script, tout reste ouvert :
-  - **Sommaire de page** : sous l'en-tête de toute page de trois sections ou plus (à l'accueil, sous la
-    couverture, texte et image), une rangée de cases jointives reprend l'intitulé de marge de chaque
-    section. Elle colle en haut de l'écran, se loge sous l'en-tête quand il revient (un décalage, jamais un
-    changement de mise en page), porte le repère de brique sur la section en cours et mène droit à une
-    section. Chaque case a son repère, gris au repos : marquer une case ne change pas sa largeur. Elle se
-    déduit des intitulés (`outils/sommaire.py`) ; dès 1024 px, l'intitulé accroché dans la marge la remplace.
+  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
+  - **Pas de sommaire collant** (retiré le 05/10/2026) : aucune rangée ne s'accroche en haut de l'écran
+    pendant la lecture ; seul l'en-tête revient quand on remonte.
   - **Lire la suite** : un texte courant de plusieurs paragraphes montre le premier ; le reste vient d'une
     touche, et le focus passe au paragraphe révélé (`outils/lecture.py`). Dès la tablette, tout est déplié.
   - **Suites à faire glisser** (sous 600 px) : le déroulé, les cartes et les besoins défilent de côté dans
@@ -347,12 +361,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   (cartes, lots voisins) — jamais de case vide noire.
 - Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
   La liste des blocs concernés est unique, dans `01-socle.css`.
-- Le même carré sert de puce (listes de postes, garanties) et, en brique, de marque « vous êtes ici »
+- Le même carré sert de puce (listes de postes, garanties) et, en rouge, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, la chaux à
-  40 % dans la nuit, le blanc à 72 % sur la brique.
-- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en brique
-  sombre (brique claire dans la nuit).
+- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, le perle à
+  40 % dans la nuit.
+- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en rouge
+  sombre (rouge clair dans la nuit).
 
 ---
 
@@ -371,7 +385,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   cuisine remis en peinture ») ; à droite, **« Voir le chantier »** vers la fiche de la réalisation quand la
   photo en a une (ancre `realisations.html#villa-de-chailly`). Aucune bande de légende sous une photo. Jamais
   un texte alternatif recopié. La visionneuse des réalisations parle de la même façon.
-- Le panneau d'un chantier signature est une **chaux dépolie** (à 78 % + flou 14 px), cadrée, repères aux
+- Le panneau d'un chantier signature est un **perle dépoli** (à 78 % + flou 14 px), cadrée, repères aux
   angles. C'est le seul verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
   `fetchpriority="high"`, toutes les autres en `loading="lazy"`.
@@ -384,22 +398,22 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    - à gauche (cinq colonnes), le slogan coiffé du toit (« Du sol au plafond, tout en maîtrise. »), le h1
      « Entreprise de rénovation à Lausanne » (Archivo 500, jusqu'à 80 px), le chapô en sérif ; au pied, calés
      sur le bas de l'image, les trois garanties en liste (visite et devis gratuits, devis 72 h après la visite,
-     sans engagement) puis l'appel en brique et un renvoi souligné « Voir nos réalisations » ;
+     sans engagement) puis l'appel en rouge et un renvoi souligné « Voir nos réalisations » ;
    - à droite (sept colonnes), le **comparateur avant / après**, repères aux angles, à la hauteur de l'écran
      (460 à 780 px). À l'arrivée, la poignée fait seule un aller-retour lent. Sous l'image, la légende en deux
      voix (« Séjour traversant — De la chape brute au parquet chêne ») et deux cases jointives **« Avant » /
      « Après »** qui montrent un état entier d'un geste — au doigt, c'est plus sûr qu'une poignée ; l'étiquette
      de l'état caché s'efface.
    Au téléphone et sur tablette, le texte puis l'image, l'appel pleine largeur, le renvoi dessous.
-2. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur la
-   chaux). Au téléphone, le sommaire de page se glisse sous la couverture.
-3. Sections à intitulé accroché : l'entreprise, **en bande de nuit** (paragraphe d'intention + chiffres en
-   quatre cases, « + » en brique claire), les prestations (une ligne par prestation, sa photo en tête, sans
+2. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur le
+   perle).
+3. Sections à intitulé accroché : l'entreprise, **en bande de noir nacré** (paragraphe d'intention + chiffres en
+   quatre cases, « + » en rouge clair), les prestations (une ligne par prestation, sa photo en tête, sans
    numéro), le chantier à la une (panneau dépoli sur photo pleine largeur), la zone, le déroulé en quatre
-   cases — chaux et blanc en alternance.
-4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en brique et le téléphone à
-   gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page de nuit (logo négatif) et le
-   nom de l'entreprise en enseigne, en filigrane.
+   cases — perle et blanc en alternance.
+4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en rouge et le téléphone à
+   gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page en noir nacré (logo négatif)
+   et le nom de l'entreprise en enseigne, en lettres nacrées.
 
 **Pages intérieures principales** (prestations, entreprise, réalisations, devis, et chaque page de métier) :
 la composition de l'accueil. Dès 1024 px, à gauche le chemin, le h1 (`--t-piece-colonne`), le chapô, quatre
@@ -446,15 +460,16 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 ## 9. Interdits
 
 - Photo plein écran brute en ouverture.
-- Capitales décoratives, italique, titre bicolore, dégradé de texte.
-- Noir pur ; une couleur hors de la palette ; le rouge du logo ailleurs que dans le logo.
-- La brique en titre ou en fond de section : elle reste aux boutons d'appel, aux marques et aux liens.
+- Capitales décoratives, italique, titre bicolore, dégradé de texte (seule exception : l'enseigne nacrée du
+  pied).
+- Un aplat de noir mort en fond de section (la nuit est nacrée) ; une couleur hors de la palette du logo.
+- Le rouge en titre ou en fond de section : il reste aux boutons d'appel, aux marques et aux liens.
 - Le logo clair dans la nuit (utiliser le négatif).
 - Une bande de légende sous une photo : la légende se pose dans l'image.
 - Un nom de couleur dans une feuille de composant : demander un rôle (`--c-encre`, `--c-signal`…).
 - Une requête `max-width` pour la mise en page : le téléphone est la base, les écrans plus larges s'ajoutent.
 - Une cible tactile de moins de 44 px de haut, hors d'un lien pris dans une phrase.
-- Un sommaire de page écrit à la main : il se déduit des intitulés de section.
+- Une barre de navigation collée en haut de l'écran au téléphone, en plus de l'en-tête.
 - Au téléphone, un élément qui change de largeur ou de hauteur pendant la lecture sans qu'on l'ait touché.
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Un numéro qui ne compte rien : numéro de section (« N° 01 »), de registre sur une photo (« N° 005 »), de

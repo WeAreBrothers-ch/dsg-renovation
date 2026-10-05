@@ -130,19 +130,21 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Chaux & brique » (v3, 30/09/2026) — tout est décrit dans
-`DIRECTION-ARTISTIQUE.md`. L'encre terre d'ombre et la brique, les
-couleurs du logo, ne changent pas ; le fond s'éclaircit, à la demande
-du client qui trouvait le site « mort » : une chaux claire et chaude,
-le blanc franc une section sur deux, une bande de nuit par page. La
-brique reste à l'action (les boutons d'appel) et aux marques écrites ;
-elle ne couvre jamais un fond. Le logo garde ses propres
-couleurs. Changer de palette, c'est changer `assets/css/00-jetons.css` :
-les autres feuilles ne demandent que des rôles (`--c-encre`,
-`--c-signal`, `--c-accent`…). Des cadres d'un pixel marqués d'un repère
-carré à chaque angle, un chevron devant chaque intitulé, une grotesque
-(Archivo) pour les titres et une sérif de lecture (Newsreader) pour les
-phrases.
+Palette « Noir nacré & rouge DSG » (v4, 05/10/2026) — tout est décrit
+dans `DIRECTION-ARTISTIQUE.md`. Les couleurs du logo, et elles seules :
+son noir, le rouge du toit, le gris d'ombre de ses lettres, le blanc.
+Le fond est un blanc perle neutre, le blanc franc une section sur
+deux, une bande de noir par page. Ce noir est **nacré** (`--nacre`) :
+de légers reflets froids, rosés et verts qui le font vivre — sur les
+bandes sombres, le pied, la barre mobile et le survol des boutons ;
+l'enseigne du pied s'écrit en lettres nacrées. Le rouge reste à
+l'action (les boutons d'appel) et aux marques écrites ; il ne couvre
+jamais un fond. Le logo garde ses propres couleurs. Changer de palette,
+c'est changer `assets/css/00-jetons.css` : les autres feuilles ne
+demandent que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…).
+Des cadres d'un pixel marqués d'un repère carré à chaque angle, un
+chevron devant chaque intitulé, une grotesque (Archivo) pour les titres
+et une sérif de lecture (Newsreader) pour les phrases.
 
 Ce que la v3 a changé, en bref :
 

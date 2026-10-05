@@ -30,12 +30,10 @@
 .btn:focus-visible::after{transform:scaleX(1)}
 
 /* La couleur d'action (--c-signal) ne sert qu'ici : à appeler
-   l'action. Au survol, l'encre la recouvre ; sur la bande sombre,
-   c'est le blanc. Sur la bande du renvoi final, le bouton s'inverse
-   (encre, texte blanc) : les jetons --c-signal et --c-sur-signal y
-   sont redéfinis (00-jetons.css). */
+   l'action. Au survol, le noir nacré la recouvre ; sur la bande
+   sombre, c'est le perle (--fond-survol-signal, 00-jetons.css). */
 .btn--plein{background:var(--c-signal);color:var(--c-sur-signal)}
-.btn--plein::after{background:var(--c-signal-fonce)}
+.btn--plein::after{background:var(--c-signal-fonce);background-image:var(--fond-survol-signal)}
 @media (hover:hover) and (pointer:fine){
   .btn--plein:hover{color:var(--c-sur-signal-survol)}
 }
