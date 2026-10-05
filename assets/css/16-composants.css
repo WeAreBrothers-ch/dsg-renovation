@@ -47,6 +47,14 @@
   .besoins{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
   .besoin{min-height:220px;padding-top:var(--sp-5)}
 }
+/* Comme le déroulé : les cases d'une rangée partagent leurs lignes, la
+   phrase, la note et le lien s'alignent d'une case à l'autre. */
+@supports (grid-template-rows:subgrid){
+  @media (min-width:600px){
+    .besoin{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:var(--sp-3);min-height:0}
+    .besoin__lot{margin-top:var(--sp-4);align-self:end}
+  }
+}
 @media (hover:hover) and (pointer:fine){
   .besoin:hover{background:var(--c-papier-2)}
 }

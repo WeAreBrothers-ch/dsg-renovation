@@ -106,7 +106,7 @@ SERVICES = [
             "là, et nulle part ailleurs, qu'on voit qui l'a posé."
         ),
         "image": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
-        "alt": "Séjour de la villa de Chailly après travaux : murs repris, faux plafond lumineux et parquet clair",
+        "alt": "Pièce de vie du loft de Sévelin après travaux : murs lissés, faux plafond éclairé et parquet clair",
         "intro": [
             "Le papier peint est revenu, et il ne ressemble plus à celui des "
             "années soixante-dix. Panoramiques, intissés texturés, fibres "

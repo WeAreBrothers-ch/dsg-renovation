@@ -393,7 +393,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   cuisine remis en peinture ») ; à droite, **« Voir le chantier »** vers la fiche de la réalisation quand la
   photo en a une (ancre `realisations.html#villa-de-chailly`). Aucune bande de légende sous une photo. Jamais
   un texte alternatif recopié. La visionneuse des réalisations parle de la même façon.
-- Le panneau d'un chantier signature est un **perle dépoli** (à 78 % + flou 14 px), cadrée, repères aux
+- Le panneau d'un chantier signature est un **perle dépoli** (à 92 % + flou 14 px), cadrée, repères aux
   angles. C'est le seul verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
   `fetchpriority="high"`, toutes les autres en `loading="lazy"`.

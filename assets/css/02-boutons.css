@@ -108,6 +108,10 @@
   .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
   /* Les blocs qui ont besoin de toute la largeur la reprennent. */
   .zone:has(>.intercalaire)>.pleine-largeur{grid-column:1/-1;grid-row:auto}
+  /* Ce qui suit un tel bloc s'aligne sur lui, au bord gauche de la
+     page : laissé dans la colonne de droite, un lien de fin de section
+     (« Voir toutes nos réalisations ») flottait au milieu de l'écran. */
+  .zone:has(>.intercalaire)>.pleine-largeur~*{grid-column:1/-1}
   /* Une section qui contient un tel bloc ne peut pas garder sa marge
      accrochée : le bloc passerait dessous. L'intitulé reste alors à
      sa place, à côté du titre. */

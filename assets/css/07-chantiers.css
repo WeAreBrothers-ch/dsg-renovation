@@ -81,7 +81,9 @@
     background:rgba(var(--c-papier-rgb),.9);
   }
   @supports (backdrop-filter:blur(1px)){
-    .signature__texte{background:rgba(var(--c-papier-rgb),.78);backdrop-filter:blur(14px) saturate(1.1)}
+    /* À 78 %, le sol gris de la photo traversait le panneau en taches
+       floues : à 92 %, le panneau reste net, la photo devinée dessous. */
+    .signature__texte{background:rgba(var(--c-papier-rgb),.92);backdrop-filter:blur(14px) saturate(1.1)}
   }
 }
 

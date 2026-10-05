@@ -102,7 +102,7 @@ SERVICES = [
             "finitions qui suivent."
         ),
         "image": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
-        "alt": "Séjour de la villa de Chailly après travaux : murs repris et lissés sous un faux plafond lumineux",
+        "alt": "Pièce de vie du loft de Sévelin après travaux : murs lissés sous un faux plafond éclairé",
         "intro": [
             "Fissures, anciens papiers peints arrachés, trous de chevilles, "
             "angles écornés, plafonds fatigués : la plupart des logements "

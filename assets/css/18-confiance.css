@@ -75,6 +75,14 @@
   .etape__titre{padding-top:var(--sp-7)}
 }
 @media (min-width:1024px){.etapes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Les cases d'une même rangée partagent leurs lignes (subgrid) : un
+   titre sur deux lignes ne fait plus descendre le texte de sa seule
+   case, les textes démarrent tous à la même hauteur. */
+@supports (grid-template-rows:subgrid){
+  @media (min-width:600px){
+    .etape{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:var(--sp-3);min-height:0}
+  }
+}
 
 /* ------------------------------------------------------------
    APRÈS L'ENVOI — le visiteur sait ce qu'il déclenche

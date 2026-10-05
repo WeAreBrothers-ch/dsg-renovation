@@ -84,10 +84,10 @@ NOMS = {
     # Nettoyage : page, vignette ; chantier à la une, immeuble Béthusy.
     "2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg":
         "faux-plafond-cuisine-immeuble-bethusy-lausanne",
-    # Plâtrerie, cloisons et faux plafonds : page, vignette ; villa de
-    # Chailly, séjour sous son faux plafond lumineux.
+    # Plâtrerie, cloisons et faux plafonds : page, vignette ; page des
+    # prestations ; loft de Sévelin, pièce de vie et ses deux chambres.
     "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg":
-        "faux-plafond-sejour-villa-chailly-lausanne",
+        "cloisons-sejour-cuisine-loft-sevelin-lausanne",
     # Lot pose de sol ; réalisation n° 003, maison de Pully.
     "2c1464_ce05ed0a65a14673bd0dcfe6d34744e1~mv2.jpg":
         "pose-de-sol-cuisine-gres-cerame-pully",

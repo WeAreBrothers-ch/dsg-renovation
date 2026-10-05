@@ -4,8 +4,8 @@ Le site tient aujourd'hui avec neuf photos, prises dans six pièces
 seulement : les sept prestations, les réalisations et les en-têtes se les
 partagent. Plusieurs fichiers de l'ancien site montraient la même pièce
 sous deux noms de chantier ; depuis le 05/10/2026, une pièce n'appartient
-plus qu'à un chantier, et la fiche « Loft de Sévelin », faute d'une photo
-qui lui corresponde, a été retirée. Une photo d'avant travaux de l'immeuble
+plus qu'à un chantier, et la fiche « Villa de Chailly », faute d'une photo
+à elle, a été retirée. Une photo d'avant travaux de l'immeuble
 Béthusy (murs tachés d'humidité, même cadrage que la photo de la page
 peinture) est gardée dans `assets/images/` pour un futur avant / après.
 
@@ -43,8 +43,8 @@ s'intègrent sans retouche au site.
 | Page | Photo attendue |
 |---|---|
 | Nettoyage de fin de chantier | un logement livré, sols et vitres qui brillent |
-| Plâtrerie, cloisons | un faux plafond avec éclairage intégré, un angle lissé (la page emprunte aujourd'hui le séjour de la villa de Chailly) |
-| Réalisations | un loft ou un local transformé : de quoi rétablir une sixième fiche |
+| Plâtrerie, cloisons | un faux plafond avec éclairage intégré, un angle lissé |
+| Réalisations | la villa de Chailly (papiers peints déposés, toile de verre, faux plafond lumineux) : de quoi rétablir une sixième fiche |
 | Peinture | un mur en lumière rasante, une teinte d'essai sur le mur |
 | Salle de bains | une salle de bains complète, faïence et robinetterie |
 | L'entreprise | l'équipe au travail, de dos ou de trois quarts ; l'atelier |

@@ -19,11 +19,11 @@ def realisations(services, base=""):
     Une pièce photographiée appartient à un seul chantier, sur tout le
     site : le dégagement et la cuisine des photos de l'immeuble Béthusy
     (chantier à la une, fragments/signature.html) ne se montrent pas dans
-    les fiches sous un autre nom. La fiche « Loft de Sévelin » a été
-    retirée le 05/10/2026 : sa photo (plafond lisse à spots, parquet)
-    contredisait son texte (plafond technique apparent, sol vinyle) ;
-    elle illustre désormais la villa de Chailly et son faux plafond
-    lumineux. D'où cinq fiches, et six chantiers sur la page.
+    les fiches sous un autre nom. La fiche « Villa de Chailly » montrait
+    cette même pièce : elle a été retirée faute d'une photo à elle. Le
+    texte du loft de Sévelin décrit ce que montre sa photo (parquet,
+    faux plafond éclairé). D'où cinq fiches, et six chantiers sur la
+    page avec celui de la une.
     """
     return f"""
   <section class="section" aria-labelledby="tFiches">

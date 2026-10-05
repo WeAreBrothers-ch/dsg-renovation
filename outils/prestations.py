@@ -109,15 +109,16 @@ PAGES = [
         "chapo": "Trois métiers qui dessinent la pièce : ce qui tient les murs, "
                  "ce qui les déplace, et ce qui ferme le dessus. Ils se "
                  "posent presque toujours ensemble.",
-        # La villa de Chailly : son faux plafond lumineux et ses murs
-        # repris. (La photo d'avant travaux qui servait ici montrait des
-        # murs tachés d'humidité, sous une légende de mur repris.)
+        # Le loft de Sévelin : ses cloisons, ses murs lissés, son faux
+        # plafond éclairé. (La photo d'avant travaux qui servait ici
+        # montrait des murs tachés d'humidité, sous une légende de mur
+        # repris.)
         "image": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
-        "alt": "Séjour de la villa de Chailly après travaux : faux plafond "
-               "lumineux au-dessus de la cuisine, murs repris et lissés",
-        "legende": ("Villa de Chailly, Lausanne",
-                    "Faux plafond lumineux et murs repris dans le séjour",
-                    "villa-de-chailly"),
+        "alt": "Pièce de vie du loft de Sévelin après travaux : cloisons des "
+               "deux chambres, murs lissés et faux plafond éclairé",
+        "legende": ("Loft de Sévelin, Lausanne",
+                    "Cloisons, murs lissés et faux plafond éclairé",
+                    "loft-de-sevelin"),
         "reperes": [
             ("Finition des murs", "Prêts à peindre ou lissés parfaits"),
             ("Cloison simple", "2 à 3 jours, finition comprise"),
