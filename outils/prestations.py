@@ -77,11 +77,11 @@ PAGES = [
                  "préparation. Un papier peint se juge à ses raccords. Dans "
                  "les deux cas, tout se joue sur le fond.",
         "image": IMG + "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg",
-        "alt": "Dégagement et cuisine d'un appartement de l'immeuble Béthusy "
-               "remis en peinture, portes neuves et parquet chêne",
-        "legende": ("Immeuble Béthusy, Lausanne",
+        "alt": "Dégagement et cuisine de la villa de Chailly remis en "
+               "peinture, portes neuves et parquet chêne",
+        "legende": ("Villa de Chailly, Lausanne",
                     "Dégagement et cuisine remis en peinture",
-                    "immeuble-bethusy"),
+                    "villa-de-chailly"),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 semaines"),
             ("Couches de finition", "2 au minimum"),

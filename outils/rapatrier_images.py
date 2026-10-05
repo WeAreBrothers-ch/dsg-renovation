@@ -63,15 +63,14 @@ NOMS = {
     # réalisation n° 001, appartement Beaulieu.
     "2c1464_593f3a927ebd420ab56d4d306a4e6aa5~mv2.jpg":
         "renovation-appartement-sejour-cuisine-lausanne",
-    # Peinture : page, vignette. Immeuble Béthusy, dégagement et cuisine
-    # (la même pièce que la photo du chantier à la une, autre angle).
+    # Peinture : page, vignette ; villa de Chailly, dégagement et cuisine.
     "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg":
-        "peinture-degagement-cuisine-immeuble-bethusy-lausanne",
-    # La même pièce de l'immeuble Béthusy, avant travaux (murs tachés
+        "peinture-degagement-cuisine-villa-chailly-lausanne",
+    # Le même dégagement, même cadrage, avant travaux (murs tachés
     # d'humidité, ancien parquet). Plus affichée : gardée pour un avant /
     # après.
     "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg":
-        "avant-travaux-degagement-immeuble-bethusy-lausanne",
+        "avant-travaux-degagement-villa-chailly-lausanne",
     # Carrelage et sols : page, vignette ; rénovation de salle de bains ;
     # réalisation n° 002, duplex des Eaux-Vives (l'alt y montre une
     # baignoire : c'est une salle de bains).

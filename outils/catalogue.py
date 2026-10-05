@@ -22,8 +22,8 @@ IMG = "https://static.wixstatic.com/media/"
 # Beaulieu (la cuisine ouverte sur le séjour) : elles portent son nom et
 # mènent à sa fiche. Aucune grande photo ne se répète sur une page : la
 # page des réalisations, dont la première fiche montre Beaulieu livré,
-# s'ouvre sur l'immeuble Béthusy, vu sous un autre angle que dans sa
-# fiche « À la une ».
+# s'ouvre sur son état d'avant travaux : toutes les autres photos y ont
+# déjà leur fiche.
 _BEAULIEU_APRES = {
     "src": "assets/images/sejour-apres.jpg",
     "alt": "Séjour de l'appartement Beaulieu après rénovation complète : cuisine blanche ouverte sur le séjour, parquet chêne et murs repris",
@@ -40,14 +40,9 @@ _BEAULIEU_AVANT = {
 }
 PHOTO_ENTREPRISE = dict(_BEAULIEU_APRES,
                         quoi="Livré par nos équipes, tous corps de métier")
-PHOTO_REALISATIONS = {
-    "src": IMG + "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg",
-    "alt": "Dégagement et cuisine d'un appartement de l'immeuble Béthusy "
-           "après travaux, portes neuves et parquet chêne",
-    "lieu": "Immeuble Béthusy, Lausanne",
-    "quoi": "Six appartements rénovés, locataires en place",
-    "ancre": "immeuble-bethusy",
-}
+PHOTO_REALISATIONS = dict(_BEAULIEU_AVANT,
+                          quoi="La cuisine s'ouvre sur le séjour : le "
+                               "résultat est dans la première fiche")
 PHOTO_DEVIS = dict(_BEAULIEU_AVANT,
                    quoi="Ce que nous relevons à la visite, et chiffrons "
                         "poste par poste")

@@ -3,11 +3,12 @@
 Le site tient aujourd'hui avec neuf photos, prises dans six pièces
 seulement : les sept prestations, les réalisations et les en-têtes se les
 partagent. Plusieurs fichiers de l'ancien site montraient la même pièce
-sous deux noms de chantier ; depuis le 05/10/2026, une pièce n'appartient
-plus qu'à un chantier, et la fiche « Villa de Chailly », faute d'une photo
-à elle, a été retirée. Une photo d'avant travaux de l'immeuble
-Béthusy (murs tachés d'humidité, même cadrage que la photo de la page
-peinture) est gardée dans `assets/images/` pour un futur avant / après.
+sous deux noms de chantier. Il en reste un cas, faute d'autre photo (l'ancien
+site Wix n'est plus en ligne) : le dégagement de la villa de Chailly et la
+cuisine de l'immeuble Béthusy sont la même pièce, sous deux angles. Une photo
+d'avant travaux de ce dégagement (murs tachés d'humidité, même cadrage que la
+photo de la page peinture) est gardée dans `assets/images/` pour un futur
+avant / après.
 
 Ce qui ferait la plus grande différence, c'est une demi-journée de
 photographe sur deux ou trois chantiers.
@@ -44,7 +45,7 @@ s'intègrent sans retouche au site.
 |---|---|
 | Nettoyage de fin de chantier | un logement livré, sols et vitres qui brillent |
 | Plâtrerie, cloisons | un faux plafond avec éclairage intégré, un angle lissé |
-| Réalisations | la villa de Chailly (papiers peints déposés, toile de verre, faux plafond lumineux) : de quoi rétablir une sixième fiche |
+| Réalisations | la villa de Chailly (papiers peints déposés, toile de verre, faux plafond lumineux) : sa fiche emprunte aujourd'hui une photo de l'immeuble Béthusy |
 | Peinture | un mur en lumière rasante, une teinte d'essai sur le mur |
 | Salle de bains | une salle de bains complète, faïence et robinetterie |
 | L'entreprise | l'équipe au travail, de dos ou de trois quarts ; l'atelier |

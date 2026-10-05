@@ -227,6 +227,19 @@ Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans
 JavaScript.
 
+## Aperçu sur GitHub Pages
+
+Chaque push sur `main` met le site en ligne à
+`https://wearebrothers-ch.github.io/dsg-renovation/` (aperçu pour le
+client ; la page 404 n'y trouve pas ses fichiers, le site étant servi
+dans un sous-dossier). `.github/workflows/pages.yml` le publie en un
+seul passage, sans jamais couper une mise en ligne commencée ; il
+s'active quand la source de Pages est « GitHub Actions » (Settings →
+Pages → Source). `.nojekyll` : le dépôt est publié tel quel, sans
+Jekyll. Quand GitHub Actions est ralenti (githubstatus.com), une mise
+en ligne peut attendre plusieurs minutes : la dernière version passe
+quand même, inutile de pousser à nouveau.
+
 ## Mise en ligne chez Infomaniak
 
 1. **Images.** Fait le 05/10/2026 : les quinze images sont dans

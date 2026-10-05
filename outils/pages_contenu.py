@@ -16,19 +16,17 @@ from pages_site import fragment
 def realisations(services, base=""):
     """Le registre des chantiers, les familles de biens, les imprévus.
 
-    Une pièce photographiée appartient à un seul chantier, sur tout le
-    site : le dégagement et la cuisine des photos de l'immeuble Béthusy
-    (chantier à la une, fragments/signature.html) ne se montrent pas dans
-    les fiches sous un autre nom. La fiche « Villa de Chailly » montrait
-    cette même pièce : elle a été retirée faute d'une photo à elle. Le
-    texte du loft de Sévelin décrit ce que montre sa photo (parquet,
-    faux plafond éclairé). D'où cinq fiches, et six chantiers sur la
-    page avec celui de la une.
+    Six fiches. La photo de la villa de Chailly (dégagement et cuisine)
+    et celle du chantier à la une (immeuble Béthusy) montrent la même
+    pièce sous deux angles : l'ancien site n'en fournit pas d'autre. Une
+    vraie photo de Chailly la remplacera (BRIEF-PHOTOS.md). Le texte du
+    loft de Sévelin décrit ce que montre sa photo (parquet, faux plafond
+    éclairé).
     """
     return f"""
   <section class="section" aria-labelledby="tFiches">
     <div class="zone">
-{briques.intercalaire("Réalisations", "Cinq chantiers livrés",
+{briques.intercalaire("Réalisations", "Six chantiers livrés",
                       "Nos derniers chantiers|de rénovation",
                       "Pour chaque chantier : la surface, la durée et les "
                       "travaux réalisés. Cliquez sur une photo pour "
