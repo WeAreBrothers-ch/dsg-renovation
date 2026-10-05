@@ -409,7 +409,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
      sans engagement) puis l'appel en rouge et un renvoi souligné « Voir nos réalisations » ;
    - à droite (sept colonnes), le **comparateur avant / après**, repères aux angles, à la hauteur de l'écran
      (460 à 780 px). À l'arrivée, la poignée fait seule un aller-retour lent. Sous l'image, la légende en deux
-     voix (« Séjour traversant — De la chape brute au parquet chêne ») et deux cases jointives **« Avant » /
+     voix (« Appartement Beaulieu — La cuisine ouverte sur le séjour, parquet chêne posé ») et deux cases jointives **« Avant » /
      « Après »** qui montrent un état entier d'un geste — au doigt, c'est plus sûr qu'une poignée ; l'étiquette
      de l'état caché s'efface.
    Au téléphone et sur tablette, le texte puis l'image, l'appel pleine largeur, le renvoi dessous.

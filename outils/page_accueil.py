@@ -18,8 +18,8 @@ from pages_site import fragment
 # retire `hidden`) : sans lui, ils ne feraient rien.
 LEGENDE_COMPARATEUR = """<figcaption class="legende legende--comparateur">
           <span class="vue__texte">
-            <span class="vue__lieu">Séjour traversant</span>
-            <span class="vue__quoi">De la chape brute au parquet chêne</span>
+            <span class="vue__lieu">Appartement Beaulieu</span>
+            <span class="vue__quoi">La cuisine ouverte sur le séjour, parquet chêne posé</span>
           </span>
           <span class="bascule" role="group" aria-label="Montrer un état entier" data-bascule hidden>
             <button class="bascule__choix" type="button" data-comparer="100" aria-pressed="false">Avant</button>

@@ -38,6 +38,12 @@
   .chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-3);border-top:var(--bd-fin)}
   .chantiers__grille .releve--regle dd{text-align:right;font-size:var(--t-petit)}
 }
+/* Une fiche seule sur la dernière ligne prend toute la largeur, sa photo
+   en bandeau : pas de case vide à côté d'elle. */
+@media (min-width:640px){
+  .chantiers__grille>.chemise:last-of-type:nth-of-type(odd){grid-column:1/-1}
+  .chantiers__grille>.chemise:last-of-type:nth-of-type(odd) .chemise__tirage{aspect-ratio:2/1}
+}
 @media (min-width:1024px){
   .chantiers__grille{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:var(--sp-8)}
   .chantiers__grille>.chemise{grid-column:span 2}
@@ -46,6 +52,8 @@
   .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:1/1}
   .chantiers__grille>.chemise:nth-of-type(4n+1) .chemise__tirage,
   .chantiers__grille>.chemise:nth-of-type(4n+4) .chemise__tirage{aspect-ratio:3/2}
+  .chantiers__grille>.chemise:last-of-type:nth-of-type(4n+1){grid-column:1/-1}
+  .chantiers__grille>.chemise:last-of-type:nth-of-type(4n+1) .chemise__tirage{aspect-ratio:21/9}
 }
 .chantiers__vide{grid-column:1/-1;padding:var(--sp-8) 0;text-align:center;color:var(--c-encre-60)}
 

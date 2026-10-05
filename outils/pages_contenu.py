@@ -14,11 +14,21 @@ from pages_site import fragment
 
 
 def realisations(services, base=""):
-    """Le registre des chantiers, les familles de biens, les imprévus."""
+    """Le registre des chantiers, les familles de biens, les imprévus.
+
+    Une pièce photographiée appartient à un seul chantier, sur tout le
+    site : le dégagement et la cuisine des photos de l'immeuble Béthusy
+    (chantier à la une, fragments/signature.html) ne se montrent pas dans
+    les fiches sous un autre nom. La fiche « Loft de Sévelin » a été
+    retirée le 05/10/2026 : sa photo (plafond lisse à spots, parquet)
+    contredisait son texte (plafond technique apparent, sol vinyle) ;
+    elle illustre désormais la villa de Chailly et son faux plafond
+    lumineux. D'où cinq fiches, et six chantiers sur la page.
+    """
     return f"""
   <section class="section" aria-labelledby="tFiches">
     <div class="zone">
-{briques.intercalaire("Réalisations", "Six chantiers livrés",
+{briques.intercalaire("Réalisations", "Cinq chantiers livrés",
                       "Nos derniers chantiers|de rénovation",
                       "Pour chaque chantier : la surface, la durée et les "
                       "travaux réalisés. Cliquez sur une photo pour "

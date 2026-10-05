@@ -63,27 +63,31 @@ NOMS = {
     # réalisation n° 001, appartement Beaulieu.
     "2c1464_593f3a927ebd420ab56d4d306a4e6aa5~mv2.jpg":
         "renovation-appartement-sejour-cuisine-lausanne",
-    # Peinture : page, vignette ; réalisation n° 005, villa de Chailly.
+    # Peinture : page, vignette. Immeuble Béthusy, dégagement et cuisine
+    # (la même pièce que la photo du chantier à la une, autre angle).
     "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg":
-        "peinture-villa-degagement-cuisine-lausanne",
-    # Plâtrerie, cloisons et faux plafonds : page, vignette.
+        "peinture-degagement-cuisine-immeuble-bethusy-lausanne",
+    # La même pièce de l'immeuble Béthusy, avant travaux (murs tachés
+    # d'humidité, ancien parquet). Plus affichée : gardée pour un avant /
+    # après.
     "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg":
-        "platrerie-mur-repris-appartement-lausanne",
+        "avant-travaux-degagement-immeuble-bethusy-lausanne",
     # Carrelage et sols : page, vignette ; rénovation de salle de bains ;
     # réalisation n° 002, duplex des Eaux-Vives (l'alt y montre une
     # baignoire : c'est une salle de bains).
     "2c1464_c44b6415607747ff9dccd68b224b3945~mv2.jpg":
         "carrelage-salle-de-bains-duplex-geneve",
-    # Nettoyage : page, vignette ; remise en état d'appartement ; lot
-    # cloisons ; réalisation n° 006, immeuble Rue de Bourg.
+    # Remise en état entre deux locations : page, vignette ; immeuble
+    # Rue de Bourg.
     "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg":
         "nettoyage-hall-logement-lausanne",
-    # Lot faux plafonds ; chantier signature, immeuble Béthusy.
+    # Nettoyage : page, vignette ; chantier à la une, immeuble Béthusy.
     "2c1464_a6d8829808714189a920f4d0c39660b9~mv2.jpg":
         "faux-plafond-cuisine-immeuble-bethusy-lausanne",
-    # Lot revêtements muraux ; réalisation n° 004, loft de Sévelin.
+    # Plâtrerie, cloisons et faux plafonds : page, vignette ; villa de
+    # Chailly, séjour sous son faux plafond lumineux.
     "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg":
-        "revetement-mural-sejour-loft-sevelin-lausanne",
+        "faux-plafond-sejour-villa-chailly-lausanne",
     # Lot pose de sol ; réalisation n° 003, maison de Pully.
     "2c1464_ce05ed0a65a14673bd0dcfe6d34744e1~mv2.jpg":
         "pose-de-sol-cuisine-gres-cerame-pully",

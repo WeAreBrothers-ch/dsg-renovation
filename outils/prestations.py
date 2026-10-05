@@ -77,11 +77,11 @@ PAGES = [
                  "préparation. Un papier peint se juge à ses raccords. Dans "
                  "les deux cas, tout se joue sur le fond.",
         "image": IMG + "2c1464_a7cac83b91964ef7b403ba6eb333bd0b~mv2.jpg",
-        "alt": "Dégagement et cuisine remis en peinture dans une villa "
-               "lausannoise",
-        "legende": ("Villa de Chailly, Lausanne",
+        "alt": "Dégagement et cuisine d'un appartement de l'immeuble Béthusy "
+               "remis en peinture, portes neuves et parquet chêne",
+        "legende": ("Immeuble Béthusy, Lausanne",
                     "Dégagement et cuisine remis en peinture",
-                    "villa-de-chailly"),
+                    "immeuble-bethusy"),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 semaines"),
             ("Couches de finition", "2 au minimum"),
@@ -109,11 +109,15 @@ PAGES = [
         "chapo": "Trois métiers qui dessinent la pièce : ce qui tient les murs, "
                  "ce qui les déplace, et ce qui ferme le dessus. Ils se "
                  "posent presque toujours ensemble.",
-        "image": IMG + "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg",
-        "alt": "Mur repris en plâtrerie avant mise en peinture dans un "
-               "appartement lausannois",
-        "legende": ("Appartement lausannois",
-                    "Mur repris en plâtrerie avant mise en peinture", None),
+        # La villa de Chailly : son faux plafond lumineux et ses murs
+        # repris. (La photo d'avant travaux qui servait ici montrait des
+        # murs tachés d'humidité, sous une légende de mur repris.)
+        "image": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
+        "alt": "Séjour de la villa de Chailly après travaux : faux plafond "
+               "lumineux au-dessus de la cuisine, murs repris et lissés",
+        "legende": ("Villa de Chailly, Lausanne",
+                    "Faux plafond lumineux et murs repris dans le séjour",
+                    "villa-de-chailly"),
         "reperes": [
             ("Finition des murs", "Prêts à peindre ou lissés parfaits"),
             ("Cloison simple", "2 à 3 jours, finition comprise"),
@@ -184,7 +188,7 @@ PAGES = [
                "après reprise des murs, plafonds et sols",
         "legende": ("Immeuble Béthusy, Lausanne",
                     "Chaque logement nettoyé à fond avant sa remise",
-                    None),
+                    "immeuble-bethusy"),
         "reperes": [
             ("Appartement 100 m²", "1 à 2 jours"),
             ("Passages", "2 au minimum, poussière oblige"),

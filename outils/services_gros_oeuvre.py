@@ -101,8 +101,8 @@ SERVICES = [
             "plâtrerie est le métier qui décide de la qualité de toutes les "
             "finitions qui suivent."
         ),
-        "image": IMG + "2c1464_1f332a25fbc5404f8ea0424fc54875d2~mv2.jpg",
-        "alt": "Mur repris en plâtrerie avant mise en peinture dans un appartement lausannois",
+        "image": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
+        "alt": "Séjour de la villa de Chailly après travaux : murs repris et lissés sous un faux plafond lumineux",
         "intro": [
             "Fissures, anciens papiers peints arrachés, trous de chevilles, "
             "angles écornés, plafonds fatigués : la plupart des logements "

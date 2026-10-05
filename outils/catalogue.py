@@ -18,42 +18,36 @@ IMG = "https://static.wixstatic.com/media/"
 
 # La photo de couverture de chaque page : un chantier réel, repris des
 # fiches de réalisations (fragments/chantiers.html, signature.html).
-# Aucune grande photo ne se répète sur une page : la liste des
-# prestations (entreprise, prestations) montre déjà les sept photos des
-# métiers, les réalisations leurs sept chantiers.
-PHOTO_ENTREPRISE = {
+# Les photos « séjour avant / après » sont celles de l'appartement
+# Beaulieu (la cuisine ouverte sur le séjour) : elles portent son nom et
+# mènent à sa fiche. Aucune grande photo ne se répète sur une page : la
+# page des réalisations, dont la première fiche montre Beaulieu livré,
+# s'ouvre donc sur son état d'avant travaux.
+_BEAULIEU_APRES = {
     "src": "assets/images/sejour-apres.jpg",
-    "alt": "Séjour traversant livré : cuisine blanche ouverte, parquet chêne "
-           "et murs repris",
-    "lieu": "Séjour traversant",
-    "quoi": "Livré par nos équipes, tous corps de métier",
+    "alt": "Séjour de l'appartement Beaulieu après rénovation complète : cuisine blanche ouverte sur le séjour, parquet chêne et murs repris",
+    "lieu": "Appartement Beaulieu, Lausanne",
     "largeur": 1404, "hauteur": 682,
+    "ancre": "appartement-beaulieu",
 }
-PHOTO_REALISATIONS = {
-    "src": "assets/images/sejour-apres.jpg",
-    "alt": "Séjour traversant livré : cuisine blanche ouverte, parquet chêne "
-           "et murs repris",
-    "lieu": "Séjour traversant",
-    "quoi": "De la chape brute au parquet chêne",
-    "largeur": 1404, "hauteur": 682,
-}
-PHOTO_DEVIS = {
+_BEAULIEU_AVANT = {
     "src": "assets/images/sejour-avant.jpg",
-    "alt": "Avant travaux : cloison porteuse mise à nu, gaines apparentes et "
-           "chape brute avant reprise",
-    "lieu": "Séjour traversant, avant travaux",
-    "quoi": "Ce que nous relevons à la visite, et chiffrons poste par poste",
+    "alt": "Séjour de l'appartement Beaulieu avant travaux : cuisine démontée jusqu'au mur, ouverture sur le séjour en cours, gaines et câbles apparents",
+    "lieu": "Appartement Beaulieu, avant travaux",
     "largeur": 1404, "hauteur": 682,
+    "ancre": "appartement-beaulieu",
 }
-
-PHOTO_PRESTATIONS = {
-    "src": IMG + "2c1464_ab94350c74604962a66564240516acc5~mv2.jpg",
-    "alt": "Pièce de vie du loft de Sévelin après travaux, grand volume "
-           "ouvert, comptoir blanc et parquet clair",
-    "lieu": "Loft de Sévelin, Lausanne",
-    "quoi": "Cloisons, plâtrerie, peinture et sol : tous les métiers",
-    "ancre": "loft-de-sevelin",
-}
+PHOTO_ENTREPRISE = dict(_BEAULIEU_APRES,
+                        quoi="Livré par nos équipes, tous corps de métier")
+PHOTO_REALISATIONS = dict(_BEAULIEU_AVANT,
+                          quoi="La cuisine s'ouvre sur le séjour : le "
+                               "résultat est dans la première fiche")
+PHOTO_DEVIS = dict(_BEAULIEU_AVANT,
+                   quoi="Ce que nous relevons à la visite, et chiffrons "
+                        "poste par poste")
+PHOTO_PRESTATIONS = dict(_BEAULIEU_APRES,
+                         quoi="Cloisons, plâtrerie, peinture et parquet : "
+                              "tous les métiers")
 
 # Les repères de l'en-tête de chaque page : des faits déjà écrits
 # ailleurs sur le site (donnees_site.py, confiance.py, les fiches).

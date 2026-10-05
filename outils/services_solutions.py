@@ -46,7 +46,8 @@ SERVICES = [
             "l'état des lieux d'entrée."
         ),
         "image": IMG + "2c1464_59c5df800ba245e2b7dff597bb0221a4~mv2.jpg",
-        "alt": "Logement nettoyé après travaux, prêt à être occupé",
+        "alt": "Hall d'un logement de l'immeuble Rue de Bourg remis en état "
+               "entre deux locations, sol en grès cérame et portes repeintes",
         "intro": [
             "Une remise en état d'appartement entre deux locations part d'une "
             "date plutôt que d'un plan : celle où le locataire suivant reçoit "
