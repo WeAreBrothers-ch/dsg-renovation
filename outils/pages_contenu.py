@@ -134,7 +134,7 @@ def devis(services, base=""):
     <div class="zone">
 {briques.intercalaire("La visite", "Ce qui fait gagner du temps",
                       "Ce qu'il faut|préparer")}
-      <div class="service__deux revele">
+      <div class="service__deux">
         <div class="service__texte">
           <p>La visite dure entre trente minutes et une heure et demie selon
           l'ampleur du projet. Cinq éléments préparés à l'avance suffisent à

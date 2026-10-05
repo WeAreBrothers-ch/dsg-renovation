@@ -52,7 +52,7 @@ TEMOINS = [
 def etapes(titre_id="tEtapes"):
     """Les quatre temps d'une demande, du premier appel à la livraison."""
     cellules = "\n".join(
-        f"""        <li class="etape revele">
+        f"""        <li class="etape">
           <p class="etape__tete"><span class="etape__n">{rang:02d}</span><span class="etape__cote">{cote}</span></p>
           <h3 class="etape__titre">{titre}</h3>
           <p class="etape__texte">{texte}</p>
@@ -111,7 +111,7 @@ def temoins():
         "à remplacer par un avis client réel</p>" if PROVISOIRES else ""
     )
     lignes = "\n".join(
-        f"""        <figure class="temoin revele">
+        f"""        <figure class="temoin">
           <figcaption>
             <span class="temoin__qui">{qui}</span>
             <span class="temoin__quoi">{quoi}</span>

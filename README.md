@@ -142,14 +142,18 @@ l'action (les boutons d'appel) et aux marques écrites ; il ne couvre
 jamais un fond. Le logo garde ses propres couleurs. Changer de palette,
 c'est changer `assets/css/00-jetons.css` : les autres feuilles ne
 demandent que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…).
-Des cadres d'un pixel marqués d'un repère carré à chaque angle, un
-chevron devant chaque intitulé, une grotesque (Archivo) pour les titres
+Des cadres d'un pixel marqués d'un repère carré à chaque angle —
+tous tracés en bordure, chaque carré posé au-dessus de son trait,
+la même règle partout (`01-socle.css`) —, un chevron devant chaque
+intitulé, une grotesque (Archivo) pour les titres
 et une sérif de lecture (Newsreader) pour les phrases.
 
 Ce que la v3 a changé, en bref :
 
-- **Plus de bonshommes animés** : les photos se dévoilent, les chiffres
-  défilent, les grandes photos glissent d'un rien au défilement.
+- **Rien ne s'anime au défilement** (05/10/2026) : ni bonshommes, ni
+  photos qui se dévoilent, ni chiffres qui défilent. Tout s'affiche
+  d'emblée — au téléphone, ces effets laissaient des vides pendant
+  qu'on faisait défiler.
 - **Photos** : une par prestation, aucune grande photo répétée sur une
   page ; `BRIEF-PHOTOS.md` dit quoi faire photographier.
 
@@ -175,8 +179,8 @@ dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 Les feuilles de style décrivent d'abord le téléphone ; tablette et
 bureau s'ajoutent par `min-width` (400, 480, 600, 640, 768, 1024, 1280,
 1440 px). Sur écran tactile, toute cible fait 44 px de haut au moins ;
-l'en-tête reste en haut de l'écran et la barre d'action sous le
-pouce ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
+l'en-tête reste en haut de l'écran et la barre d'action flotte sous
+le pouce, décollée des bords et du bas de l'écran (boutons de 46 px) ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
 s'ajoute à l'écran d'accueil avec son icône (`site.webmanifest`).
 Vérifié à 320, 360, 390, 414 px, en paysage et sur tablette : aucun
 débordement, décalage de mise en page nul, accessibilité et
@@ -211,7 +215,7 @@ pas bougé d'un pixel.
 | Fichier | Rôle |
 |---|---|
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
-| `motion.js` | révélations au défilement, photos qui se dévoilent, chiffres qui défilent, profondeur des grandes photos ; sans lui, la page s'affiche quand même |
+| `motion.js` | année du pied de page ; plus aucune animation au défilement |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
@@ -224,7 +228,10 @@ JavaScript.
 
 ## Mise en ligne chez Infomaniak
 
-1. **Images.** Tant que le site Wix existe, lancer une fois :
+1. **Images.** Fait le 05/10/2026 : les quinze images sont dans
+   `assets/images/` (originaux et variantes WebP 480, 960, 1600 px),
+   plus rien n'est demandé à Wix. Si une image Wix est ajoutée au
+   générateur, tant que le site Wix existe, relancer :
    ```
    python3 -m pip install Pillow      # facultatif : variantes WebP légères
    python3 outils/rapatrier_images.py

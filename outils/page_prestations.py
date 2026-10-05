@@ -51,7 +51,7 @@ def savoir_faire(services, base=""):
     <div class="zone">
 {briques.intercalaire("Le principe", "Pourquoi une seule entreprise",
                       "Une seule entreprise,|ou neuf")}
-      <div class="service__deux revele">
+      <div class="service__deux">
         <div class="service__texte">
           <p>Une rénovation qui passe par neuf entreprises différentes, c'est
           neuf devis à comparer, neuf plannings à faire coïncider et, au

@@ -84,11 +84,8 @@
 :is(.etapes,.cartes,.besoins)::-webkit-scrollbar{display:none}
 :is(.etapes,.cartes,.besoins)>*{scroll-snap-align:start}
 :is(.etapes,.besoins)::before{content:none}
-.js :is(.etapes,.cartes,.besoins)>.revele{opacity:1;transform:none}
 :is(.etapes,.cartes,.besoins):focus-visible{outline:2px solid var(--c-focus);outline-offset:2px}
 @media (min-width:600px){
   :is(.etapes,.cartes,.besoins){overflow:visible;scroll-snap-type:none}
   :is(.etapes,.besoins)::before{content:""}
-  .js :is(.etapes,.cartes,.besoins)>.revele{opacity:0;transform:translateY(16px)}
-  .js :is(.etapes,.cartes,.besoins)>.revele.est-vu{opacity:1;transform:none}
 }

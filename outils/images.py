@@ -126,7 +126,14 @@ def localiser(html, base):
         debut = correspondance.start()
         pour_robots = (html[max(0, debut - 9):debut] == 'content="'
                        or any(a <= debut < b for a, b in zones_robots))
-        return "%s/%s" % (SITE, chemin) if pour_robots else base + chemin
+        if pour_robots:
+            return "%s/%s" % (SITE, chemin)
+        # Un lien vers la photo (la visionneuse) : sa plus grande variante
+        # WebP, cinq à dix fois plus légère que l'original.
+        variantes = _VARIANTES.get(url)
+        if variantes and html[max(0, debut - 6):debut] == 'href="':
+            return base + variantes[-1][1]
+        return base + chemin
 
     return _WIX.sub(remplacer, html)
 

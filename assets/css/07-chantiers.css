@@ -62,7 +62,7 @@
 .signature__texte a{color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .signature__texte{
   grid-row:2;padding:var(--sp-5);margin-top:-1px;
-  box-shadow:inset 0 0 0 1px var(--c-cadre);background:var(--c-papier);
+  border:1px solid var(--c-cadre);background:var(--c-papier);
 }
 @media (min-width:1024px){
   .signature__media,.signature__texte{grid-area:1/1}

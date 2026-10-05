@@ -70,7 +70,7 @@ def entreprise(services, base=""):
     <div class="zone">
 {briques.intercalaire("Histoire", "Depuis 2019 à Lausanne",
                       "D'où vient|l'entreprise")}
-      <div class="service__deux revele">
+      <div class="service__deux">
         <div class="service__texte">
           {"".join("<p>%s</p>" % p for p in ce.HISTOIRE)}
         </div>
@@ -83,7 +83,7 @@ def entreprise(services, base=""):
     <div class="zone">
 {briques.intercalaire("Notre métier", "Rénovation, et rien d'autre",
                       "Le bâti existant,|pas le neuf")}
-      <div class="service__texte revele">
+      <div class="service__texte">
         {"".join("<p>%s</p>" % p for p in ce.METIER)}
       </div>
     </div>
@@ -127,7 +127,7 @@ def entreprise(services, base=""):
                       "Une partie de notre activité vient de clients qui nous "
                       "rappellent. C'est la seule référence qui vaille dans un "
                       "métier où tout se sait vite.")}
-      <div class="service__texte revele" style="margin-bottom:var(--sp-7)">
+      <div class="service__texte" style="margin-bottom:var(--sp-7)">
         <p>Les grandes régies de la place lausannoise nous confient des
         <a href="{base}services/remise-en-etat-appartement.html">remises en
         état entre deux locations</a>, parfois plusieurs logements du

@@ -312,7 +312,10 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   survol se creusent aussi sous le doigt.
 - **Au téléphone** : l'en-tête reste visible pendant toute la lecture, qu'on descende ou qu'on remonte (il
   s'effaçait à la descente jusqu'au 05/10/2026, à la demande du client il ne bouge plus) ; la barre d'action
-  (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
+  (Appeler, Devis gratuit) flotte sous le pouce : un bandeau de noir nacré cadré d'un pixel, sur une ombre,
+  décollé de 10 px des bords et du bas de l'écran (6 px sur un téléphone couché) en plus des marges de
+  l'encoche et de la barre du navigateur, boutons de 46 px (44 px couché) ; elle ne se confond plus avec le bas
+  du téléphone. On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
   - **Pas de sommaire collant** (retiré le 05/10/2026) : aucune rangée ne s'accroche en haut de l'écran
     pendant la lecture, en plus de l'en-tête.
   - **Lire la suite** : un texte courant de plusieurs paragraphes montre le premier ; le reste vient d'une
@@ -360,12 +363,15 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - Les grilles de cases se tracent par **interstice d'un pixel sur fond d'encre** (`gap: 1px`) quand le nombre
   de cases est fixe ; par **contour propre à chaque case** (`outline`) quand une rangée peut rester incomplète
   (cartes, lots voisins) — jamais de case vide noire.
-- Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) posé à cheval sur le trait.
-  La liste des blocs concernés est unique, dans `01-socle.css`.
+- Aux quatre angles d'un bloc cadré : un **carré plein de 5 px** (`--repere`) **posé au-dessus de son trait**
+  — sa base contre le trait horizontal, en haut comme en bas du cadre — et centré sur le trait vertical, au
+  premier plan devant les photos. Une seule règle, la même partout (05/10/2026 : selon le bloc, les carrés
+  tombaient sur le trait, au-dessus ou en dessous). Elle suppose que tous les cadres sont tracés en bordure
+  (`border`), jamais en ombre intérieure. La liste des blocs concernés est unique, dans `01-socle.css`.
 - Le même carré sert de puce (listes de postes, garanties) et, en rouge, de marque « vous êtes ici »
   (rubrique consultée, onglet actif).
-- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, le perle à
-  40 % dans la nuit.
+- Les repères d'angle prennent la couleur du cadre (`--c-repere`) : l'encre sur les fonds clairs, dans la nuit
+  un gris plein (`#6C6C6E`, le perle à 40 % sur le noir), net là où il chevauche un trait.
 - Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en rouge
   sombre (rouge clair dans la nuit).
 
@@ -434,28 +440,20 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Démonstration du comparateur (une fois) | `transform` des calques | 3 × 700 ms, entrée-sortie |
 | Boutons « Avant » / « Après » | `transform` des calques, jusqu'à l'état entier | 650 ms, entrée-sortie |
 | Comparateur | double translation `transform` (calque + image) | instantané, suit le doigt |
-| Apparitions au défilement | `opacity` + `translateY(16px)` | 800 ms `--e-sortie` |
-| Lignes des titres de section | `translateY` derrière un masque | 800 ms, décalage 80 ms |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
-| Photos qui se dévoilent | `clip-path` du cadre + `scale` de la photo | 1,1 s et 1,6 s `--e-sortie` |
-| Chiffres qui défilent | texte, une fois | 1,4 s, sortie cubique |
-| Profondeur des grandes photos | `transform` de la photo | liée au défilement, ±4 % |
 
-- Uniquement `transform` et `opacity` pendant le défilement : aucune mise en page recalculée.
+- **Rien ne bouge au défilement** (05/10/2026) : ni apparitions, ni titres qui montent, ni photos qui se
+  dévoilent, ni chiffres qui défilent, ni photos qui glissent. Au téléphone, ces effets laissaient des zones
+  vides et des photos à moitié découvertes pendant qu'on faisait défiler : tout s'affiche d'emblée. Le
+  mouvement ne répond plus qu'à un geste (boutons, comparateur, onglets).
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
-  seule, les boutons « Avant » / « Après » la placent d'un coup, les apparitions deviennent de simples fondus
-  courts.
+  seule, les boutons « Avant » / « Après » la placent d'un coup, le reste ne bouge pas.
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
 - **Plus de dessins animés** (v3.3) : les ouvriers du site, jugés bas de gamme par le client, sont retirés.
-  Ce qui bouge désormais sert la lecture : **les photos se dévoilent** de haut en bas quand leur bloc arrive
-  (`clip-path`, la photo recule d'un rien, 1,1 s), les vignettes des prestations l'une après l'autre ; **les
-  chiffres de l'entreprise défilent** de zéro à leur valeur (1,4 s, la valeur reste écrite dans la page) ;
-  **les grandes photos** (en-têtes, chantier à la une) glissent de ±4 % dans leur cadre au défilement ;
-  tout est coupé en mouvement réduit.
 ---
 
 ## 9. Interdits

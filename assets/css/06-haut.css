@@ -112,6 +112,10 @@
    01-socle.css), sa légende dessous. */
 .couverture__media{grid-column:1/-1;margin-inline:0;margin-bottom:0;position:relative}
 .couverture__cadre{display:block}
+/* Pas de trait autour de l'image : son bord en tient lieu. Les repères
+   s'y posent selon la règle commune (01-socle.css), le bord de l'image
+   à la place du trait. */
+.couverture__cadre::before{inset:calc(var(--repere) * -1) -2px 0 -2px}
 
 /* Dès 1024 px, côte à côte. Le texte tient cinq colonnes, l'image les
    sept autres, à la hauteur de l'écran moins l'en-tête et la légende :

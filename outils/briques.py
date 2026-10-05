@@ -109,12 +109,12 @@ def intercalaire(nom, cote, titre, chapo=""):
     lignes = titre.replace("|", " <br>")
     texte = ('<p class="chapo intercalaire__chapo">%s</p>' % chapo) if chapo else ""
     return f"""      <div class="intercalaire">
-        <div class="intercalaire__marge revele">
+        <div class="intercalaire__marge">
           <p class="intercalaire__nom">{nom}</p>
           <p class="intercalaire__cote">{cote}</p>
         </div>
-        <div class="intercalaire__corps revele">
-          <h2 class="h2" data-lignes>{lignes}</h2>
+        <div class="intercalaire__corps">
+          <h2 class="h2">{lignes}</h2>
           {texte}
         </div>
       </div>"""
@@ -134,14 +134,14 @@ def liste_metiers(services, base, courant=None):
             <span class="metiers__chev" aria-hidden="true"></span>
           </a>
         </li>""")
-    return ('      <ul class="metiers revele">\n'
+    return ('      <ul class="metiers">\n'
             + "\n".join(lignes) + "\n      </ul>")
 
 
 def releve_chiffre():
     """Les quatre chiffres de l'entreprise, en chemises de dossier."""
     cellules = "\n".join(
-        f"""        <li class="preuve revele">
+        f"""        <li class="preuve">
           <span class="preuve__onglet etiquette">{nom}</span>
           <p class="preuve__chiffre">
             <span class="preuve__val">{val}</span>{'<span class="preuve__plus">' + plus + '</span>' if plus else ''}
@@ -166,7 +166,7 @@ def appel(base, titre, texte, travaux=None):
     return f"""
   <section class="section rappel" aria-labelledby="rappelTitre">
     <div class="zone">
-      <div class="rappel__cadre revele">
+      <div class="rappel__cadre">
         <div class="rappel__corps">
           <p class="intercalaire__nom">Prochaine étape</p>
           <h2 class="rappel__titre" id="rappelTitre">{titre}</h2>

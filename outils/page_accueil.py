@@ -66,12 +66,12 @@ def accueil(services, base=""):
     <div class="zone">
 {briques.intercalaire("L'entreprise", "Chiffres à janvier 2026",
                       "Quarante ans de métier,|une équipe lausannoise")}
-      <p class="declaration entreprise__intro revele">Fondée en <span class="nb">2019</span>
+      <p class="declaration entreprise__intro">Fondée en <span class="nb">2019</span>
       sur un savoir-faire transmis depuis plus de <span class="nb">40</span> ans,
       DSG Rénovation intervient à Lausanne, Genève et sur tout l'arc lémanique.
       Rénover, c'est notre métier — pas une activité parmi d'autres.</p>
 {briques.releve_chiffre()}
-      <p class="suite revele"><a href="{base}entreprise.html">Découvrir l'entreprise<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}entreprise.html">Découvrir l'entreprise<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
@@ -83,7 +83,7 @@ def accueil(services, base=""):
                       "l'entreprise ou par des partenaires que nous suivons "
                       "depuis des années.")}
 {briques.liste_metiers(services, base)}
-      <p class="suite revele"><a href="{base}services.html">Voir toutes nos prestations<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}services.html">Voir toutes nos prestations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
@@ -92,7 +92,7 @@ def accueil(services, base=""):
 {briques.intercalaire("Réalisations", "Un chantier récent",
                       "Une rénovation lausannoise,|en détail")}
       {fragment('signature')}
-      <p class="suite revele"><a href="{base}realisations.html">Voir toutes nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}realisations.html">Voir toutes nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 
@@ -103,7 +103,7 @@ def accueil(services, base=""):
                       "Nous restons sur l'arc lémanique. Un chantier proche, "
                       "c'est une équipe qui arrive à l'heure et qui repasse "
                       "sans compter quand une reprise est nécessaire.")}
-      <div class="service__deux revele">
+      <div class="service__deux">
         <div class="service__texte">
           <p>À Lausanne, nous travaillons aussi bien dans les immeubles
           anciens de Sous-Gare, de Chauderon et du Vallon que dans les
@@ -127,7 +127,7 @@ def accueil(services, base=""):
                       "Quatre temps, les mêmes sur tous nos chantiers. Vous "
                       "savez à chaque étape ce qui vient ensuite, et quand.")}
 {confiance.etapes()}
-      <p class="suite revele"><a href="{base}entreprise.html#deroule">Le déroulé complet d'un chantier<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}entreprise.html#deroule">Le déroulé complet d'un chantier<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 """ + briques.appel(

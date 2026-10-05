@@ -32,7 +32,7 @@ def introuvable(services, base):
 {briques.intercalaire("Prestations", "Tout ce que nous faisons",
                       "Nos prestations|de rénovation")}
 {briques.liste_metiers(services, base)}
-      <p class="suite revele"><a href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 """
@@ -55,7 +55,7 @@ def merci(services, base):
                       "Appelez-nous|directement",
                       "Du lundi au vendredi, nous répondons au "
                       '<a href="tel:%s">%s</a>.' % (TELEPHONE_BRUT, TELEPHONE))}
-      <p class="suite revele"><a href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 """

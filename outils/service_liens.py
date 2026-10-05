@@ -18,7 +18,7 @@ def zone(base, fiche):
     <div class="zone">
 {briques.intercalaire("Zone", "Où nous intervenons",
                       prestations.intertitres_de(fiche)["zone"])}
-      <div class="service__deux revele">
+      <div class="service__deux">
         <div class="service__texte">
           <p>Notre atelier est à Lausanne, avenue de Béthusy. Nous
           intervenons chaque semaine en ville — des immeubles anciens de
@@ -43,7 +43,7 @@ def voisins(fiche, base):
     """Le maillage : les prestations souvent menées avec celle-ci."""
     fiches = "\n".join(
         f"""        <li>
-          <a class="voisin revele" href="{base}services/{slug}.html">
+          <a class="voisin" href="{base}services/{slug}.html">
             <span class="voisin__vue" aria-hidden="true"><img src="{prestations.page(slug)['image']}" alt="" width="316" height="237" loading="lazy" decoding="async"></span>
             <span class="voisin__nom">{prestations.page(slug)['nom']}</span>
             <span class="voisin__chev" aria-hidden="true"></span>

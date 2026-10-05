@@ -160,9 +160,10 @@
   --c-ligne:rgba(var(--c-craie-rgb),.16);
   --c-ligne-forte:rgba(var(--c-craie-rgb),.5);
   --c-cadre:rgba(var(--c-craie-rgb),.4);  /* trait de plan : 3.6, seuil des contours 3:1 */
-  /* Redit ici : un jeton qui en cite un autre se résout là où il est
-     déclaré, et le repère hériterait sinon de l'encre du clair. */
-  --c-repere:var(--c-cadre);
+  /* Le repère est plein : le cadre translucide posé sur le noir
+     (#6C6C6E), pour qu'il reste net là où il chevauche un trait.
+     Redit ici, sinon il hériterait de l'encre du clair. */
+  --c-repere:#6C6C6E;
   --c-valide:#9CCDAE;        /* 10.5 /  9.3 /  7.6 */
   --c-alerte:#F0A07A;        /*  8.9 /  7.9 /  6.5 */
   --c-focus:var(--c-perle);
@@ -257,18 +258,23 @@
   --d-ample:800ms;
 
   /* ---------- Mesures d'interface ----------
-     Sur téléphone et tablette, la barre d'action fixe occupe le bas de
-     l'écran : le pied de page réserve sa hauteur pour ne rien laisser
-     dessous. Elle disparaît avec la navigation complète, dès 1024 px. */
+     Sur téléphone et tablette, la barre d'action flotte au bas de
+     l'écran, décollée de ses bords : --h-bouton-barre est la hauteur de
+     ses deux boutons, --barre-ecart l'air qui la sépare des bords de
+     l'écran, --h-barre-mobile la hauteur que le pied de page réserve
+     sous son dernier mot : la barre (boutons, cadre, air) et un peu
+     d'air au-dessus d'elle. Elle disparaît avec la navigation complète, dès 1024 px. */
   --h-entete:64px;
-  --h-barre-mobile:64px;
+  --h-bouton-barre:46px;
+  --barre-ecart:10px;
+  --h-barre-mobile:calc(var(--h-bouton-barre) + 12px + var(--barre-ecart) + var(--sp-4));
 }
 
 /* Les écrans plus larges s'ajoutent au téléphone, jamais l'inverse. */
 /* Téléphone couché : la barre d'action se fait plus basse, pour laisser
    la hauteur au contenu. */
 @media (orientation:landscape) and (max-height:500px) and (hover:none){
-  :root{--h-barre-mobile:52px}
+  :root{--h-bouton-barre:44px;--barre-ecart:6px}
 }
 @media (min-width:768px){
   :root{--grille-goutt:20px}

@@ -210,20 +210,34 @@
 
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE
-   Deux cases jointives en pied d'écran : appeler, ou demander un
-   devis. Sur le fond sombre (.sur-sombre) : elle se détache de tous
-   les fonds, et le bouton d'appel y ressort.
+   Appeler, ou demander un devis : deux boutons dans un bandeau de
+   noir nacré (.sur-sombre) qui flotte au bas de l'écran. Décollé des
+   bords et du bas de l'écran (--barre-ecart, en plus des marges de
+   l'encoche et de la barre du navigateur), cadré d'un pixel et posé
+   sur une ombre : il ne se confond ni avec le bas du téléphone, ni
+   avec une bande sombre de la page qui passe dessous.
    ------------------------------------------------------------ */
 .barre-mobile{
-  display:flex;position:fixed;inset:auto 0 0 0;z-index:55;
-  padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  transform:translateY(110%);
+  display:flex;gap:5px;position:fixed;z-index:55;
+  left:calc(var(--barre-ecart) + env(safe-area-inset-left));
+  right:calc(var(--barre-ecart) + env(safe-area-inset-right));
+  bottom:calc(var(--barre-ecart) + env(safe-area-inset-bottom));
+  padding:5px;
+  border:1px solid var(--c-ligne-forte);
+  box-shadow:0 10px 30px rgba(0,0,0,.28),0 2px 6px rgba(0,0,0,.18);
+  transform:translateY(calc(100% + var(--barre-ecart) + env(safe-area-inset-bottom) + 24px));
   transition:transform var(--d-normal) var(--e-sortie);
 }
 .barre-mobile[data-visible="true"]{transform:none}
-/* Des marges plus courtes que les autres boutons : « Devis gratuit »
-   tient sur une ligne jusque sur les écrans de 320 px. */
-.barre-mobile .btn{flex:1;min-height:var(--h-barre-mobile);padding-inline:var(--sp-4);gap:var(--sp-3);font-size:var(--t-petit)}
-.barre-mobile .btn--cadre{box-shadow:none;background:transparent;justify-content:center}
+/* Des marges plus courtes que les autres boutons, et la flèche
+   seulement dès 360 px : « Devis gratuit » tient sur une ligne jusque
+   sur les écrans de 320 px. */
+.barre-mobile .btn{flex:1;min-height:var(--h-bouton-barre);padding-inline:var(--sp-3);gap:var(--sp-3);font-size:var(--t-petit);white-space:nowrap}
+.barre-mobile .fleche{display:none}
+@media (min-width:360px){
+  .barre-mobile .btn{padding-inline:var(--sp-4)}
+  .barre-mobile .fleche{display:block}
+}
+.barre-mobile .btn--cadre{box-shadow:inset 0 0 0 1px var(--c-cadre);background:transparent;justify-content:center}
 @media (min-width:1024px){.barre-mobile{display:none}}
 

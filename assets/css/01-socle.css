@@ -120,17 +120,27 @@ h1,h2,h3{
 /* ------------------------------------------------------------
    REPÈRES D'ANGLE — la signature du site
    Un cadre d'un pixel, et à chacun de ses quatre coins un petit
-   carré posé à cheval sur le trait : le piquet d'un géomètre, la
-   poignée d'un plan qu'on ajuste. Encre sur les fonds clairs, plâtre
-   à 40 % dans les bandes de nuit (--c-repere). Le pseudo-élément déborde du
-   cadre de la moitié du repère pour le centrer sur l'angle. Il ne
-   capte aucun clic. La liste ci-dessous est celle de tous les
-   blocs cadrés du site.
+   carré : le piquet d'un géomètre. Encre sur les fonds clairs, gris
+   dans le noir nacré (--c-repere). La liste ci-dessous est celle de
+   tous les blocs cadrés du site.
+
+   Une seule règle de pose, la même partout : chaque carré est posé
+   AU-DESSUS de son trait horizontal (sa base contre le trait, en
+   haut comme en bas du cadre) et centré sur le trait vertical. Elle
+   ne tient que si tous les cadres sont tracés de la même façon : une
+   bordure d'un pixel (border), jamais une ombre portée à l'intérieur
+   (box-shadow inset), qui décalerait le trait d'un pixel et demi.
+   Le carré passe devant les photos (z-index) et ne capte aucun clic.
+
+   Dans le repère du pseudo-élément (la boîte intérieure, bordure
+   exclue) : le trait du haut occupe -1 → 0, celui du bas H → H+1,
+   celui de gauche -1 → 0. D'où, pour un carré de 5 px : -6 → -1 en
+   haut, H-5 → H en bas, -3 → +2 sur les côtés.
    ------------------------------------------------------------ */
 :is(.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche,.couverture__cadre,.rappel__cadre){position:relative}
 :is(.preuves,.etapes,.besoins,.formulaire__partie,.replis,.coordonnees,.signature__texte,.encadre,.chemise__fiche,.couverture__cadre,.rappel__cadre)::before{
-  content:"";position:absolute;pointer-events:none;z-index:1;
-  inset:calc(var(--repere) / -2 - 1px);
+  content:"";position:absolute;pointer-events:none;z-index:3;
+  inset:calc(var(--repere) * -1 - 1px) -3px 0 -3px;
   background:
     linear-gradient(var(--c-repere),var(--c-repere)) top left / var(--repere) var(--repere) no-repeat,
     linear-gradient(var(--c-repere),var(--c-repere)) top right / var(--repere) var(--repere) no-repeat,
@@ -174,50 +184,6 @@ h1,h2,h3{
 .jeu__onglet:active{scale:.97}
 
 /* ============================================================
-   RÉVÉLATIONS AU DÉFILEMENT
-   Contenu visible par défaut : si le script échoue, on lit tout.
-   Rien n'est masqué au-delà d'une opacité : le texte reste dans le
-   document et dans la mise en page, Google le lit tel quel.
-   ============================================================ */
-.js .revele{
-  opacity:0;transform:translateY(16px);
-  transition:opacity var(--d-ample) var(--e-sortie),transform var(--d-ample) var(--e-sortie);
-}
-.js .revele.est-vu{opacity:1;transform:none}
-
-/* Titres de section : chaque ligne monte derrière un masque. */
-.js [data-lignes] .ligne{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
-.js [data-lignes] .ligne>span{
-  display:block;transform:translateY(105%);
-  transition:transform var(--d-ample) var(--e-sortie);
-}
-.js .est-vu [data-lignes] .ligne>span,
-.js [data-lignes].est-vu .ligne>span{transform:none}
-.js [data-lignes] .ligne:nth-child(2)>span{transition-delay:80ms}
-.js [data-lignes] .ligne:nth-child(3)>span{transition-delay:160ms}
-
-/* Photos : elles se dévoilent de haut en bas quand leur bloc arrive,
-   comme un volet qu'on remonte, et la photo se pose en reculant d'un
-   rien. Le bloc parent porte .revele ; la photo suit son .est-vu. */
-.js :is(.chemise,.signature,.metiers,.voisin).revele :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue){
-  clip-path:inset(0 0 100% 0);
-  transition:clip-path 1.1s var(--e-sortie) .1s;
-}
-.js :is(.chemise,.signature,.metiers,.voisin).revele :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue) img{
-  scale:1.12;transition:scale 1.6s var(--e-sortie) .1s;
-}
-.js :is(.chemise,.signature,.metiers,.voisin).est-vu :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue){clip-path:inset(0)}
-.js :is(.chemise,.signature,.metiers,.voisin).est-vu :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue) img{scale:1}
-/* Les vignettes de la liste des prestations se dévoilent l'une après
-   l'autre. */
-.js .metiers li:nth-child(2) .metiers__vue{transition-delay:.18s}
-.js .metiers li:nth-child(3) .metiers__vue{transition-delay:.26s}
-.js .metiers li:nth-child(4) .metiers__vue{transition-delay:.34s}
-.js .metiers li:nth-child(5) .metiers__vue{transition-delay:.42s}
-.js .metiers li:nth-child(6) .metiers__vue{transition-delay:.5s}
-.js .metiers li:nth-child(7) .metiers__vue{transition-delay:.58s}
-
-/* ============================================================
    MOUVEMENT RÉDUIT
    Plus aucun déplacement : les fondus courts restent, car ils
    aident à comprendre ce qui change.
@@ -230,8 +196,4 @@ h1,h2,h3{
     transition-duration:120ms!important;
     transition-property:opacity,color,background-color,border-color!important;
   }
-  .js .revele{transform:none!important}
-  .js [data-lignes] .ligne>span{transform:none!important}
-  .js :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue){clip-path:none!important}
-  .js :is(.chemise__tirage,.signature__cadre,.metiers__vue,.voisin__vue) img{scale:1!important}
 }
