@@ -119,17 +119,12 @@
 /* ------------------------------------------------------------
    FILTRES — tri des réalisations
    Une rangée de cellules jointives, comme les cases d'un plan. Au
-   téléphone, elle défile d'un geste du pouce, d'un bord à l'autre de
-   l'écran ; dès la tablette, elle revient à la ligne.
+   téléphone, les cases se partagent la largeur et passent à la ligne
+   s'il le faut : aucune n'est coupée au bord de l'écran.
    ------------------------------------------------------------ */
-.filtres{
-  display:flex;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
-  margin-inline:calc(-1 * var(--grille-marge));
-  padding-inline:var(--grille-marge);
-}
-.filtres::-webkit-scrollbar{display:none}
+.filtres{display:flex;flex:1 1 100%;flex-wrap:wrap;padding-right:1px}
 .filtre{
-  flex:0 0 auto;min-height:44px;padding:0 var(--sp-4);
+  flex:1 1 auto;min-height:44px;padding:0 var(--sp-3);
   box-shadow:inset 0 0 0 1px var(--c-cadre);margin-right:-1px;
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-nav);
   color:var(--c-encre-60);
@@ -142,6 +137,6 @@
 }
 .filtre[aria-pressed="true"]{background:var(--c-encre);color:var(--c-papier)}
 @media (min-width:768px){
-  .filtres{flex:0 1 auto;flex-wrap:wrap;overflow-x:visible;scrollbar-width:auto;margin-inline:0;padding-inline:0}
+  .filtres{flex:0 1 auto;padding-right:0}
   .filtre{flex:0 1 auto;padding:0 var(--sp-5)}
 }

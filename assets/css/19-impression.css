@@ -17,7 +17,7 @@
   /* Sur papier, le bouton d'appel devient une case d'encre. */
   .btn--plein{box-shadow:inset 0 0 0 1px #000}
   body{background:#fff;color:#000}
-  .entete,.barre-mobile,.menu,.filtres,.sommaire,.plie__bouton,.pied__signe{display:none!important}
+  .entete,.barre-mobile,.menu,.filtres,.plie__bouton,.pied__signe{display:none!important}
   /* Sur papier, tout se lit : textes dépliés, listes du pied ouvertes. */
   [data-plie]>p{display:block!important}
   [data-volet] ul{display:flex!important}

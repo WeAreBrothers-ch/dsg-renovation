@@ -117,10 +117,19 @@
    LIEN DE SUITE — le renvoi discret en fin de section
    ------------------------------------------------------------ */
 .suite{margin-top:var(--sp-7)}
-.suite a{
-  display:inline-flex;align-items:center;gap:var(--sp-4);
-  min-height:44px;padding-block:var(--sp-2);
-  font-weight:500;border-bottom:1px solid var(--c-cadre);
+/* Le trait souligne le texte seul, au ras des lettres : une ligne
+   sous toute la case, flèche comprise, se lisait comme un filet de
+   séparation plutôt que comme un lien. */
+.suite a,.caution__lien,.couverture__lien{
+  display:inline-flex;align-items:center;gap:var(--sp-3);
+  min-height:44px;
+  font-weight:500;
+  text-decoration:underline;text-decoration-thickness:1px;
+  text-underline-offset:5px;text-decoration-color:var(--c-ligne-forte);
+  transition:text-decoration-color var(--d-rapide) var(--e-standard);
+}
+@media (hover:hover) and (pointer:fine){
+  .suite a:hover,.caution__lien:hover,.couverture__lien:hover{text-decoration-color:currentColor}
 }
 
 /* ------------------------------------------------------------

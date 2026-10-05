@@ -13,7 +13,7 @@
 .caution{
   display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
   gap:var(--sp-4) var(--grille-goutt);align-items:center;
-  padding-block:var(--sp-7) 0;
+  padding-block:var(--sp-7);
 }
 .caution__titre{grid-column:1/-1;font-weight:500;color:var(--c-encre)}
 /* Au téléphone, quatre logos par rangée : deux rangées au lieu de trois. */
@@ -30,11 +30,7 @@
   .caution .partenaires__grille img{max-width:96px}
   .caution .partenaires__carre img{width:96px}
 }
-.caution__lien{
-  grid-column:1/-1;justify-self:start;
-  display:inline-flex;align-items:center;gap:var(--sp-3);min-height:44px;
-  font-size:var(--t-petit);font-weight:500;border-bottom:1px solid var(--c-cadre);
-}
+.caution__lien{grid-column:1/-1;justify-self:start;font-size:var(--t-petit)}
 /* Sur grand écran, l'intitulé dans la marge, les logos à droite. */
 @media (min-width:1024px){
   .caution__titre{grid-column:1/5}

@@ -41,10 +41,7 @@
 .couverture__actions .btn{min-width:min(100%,260px)}
 /* Le second choix est un renvoi, pas un second bouton : l'appel
    principal reste seul à peser. */
-.couverture__lien{
-  display:inline-flex;align-items:center;gap:var(--sp-4);align-self:flex-start;
-  min-height:44px;font-weight:500;border-bottom:1px solid var(--c-cadre);
-}
+.couverture__lien{align-self:flex-start}
 /* Trois garanties sous l'appel : ce qu'on obtient en cliquant, en
    petit, marquées du carré des repères. */
 .couverture__garanties{

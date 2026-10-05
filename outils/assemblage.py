@@ -14,7 +14,6 @@ import images
 import lecture
 import prestations
 import rythme
-import sommaire
 import typographie
 
 SERVICES = prestations.PAGES
@@ -128,8 +127,6 @@ def assembler(page, corps, base, modules, schemas):
     # Les textes de contenu écrivent leurs liens internes « {base}… » :
     # ils ignorent à quelle profondeur ils seront publiés.
     html = html.replace("{base}", base)
-    # Au téléphone, la rangée des sections, sous l'en-tête de la page.
-    html = sommaire.poser(html)
     # Au téléphone, les textes longs montrent leur premier paragraphe.
     html = lecture.plier(html)
     html = rythme.rythmer(html)
