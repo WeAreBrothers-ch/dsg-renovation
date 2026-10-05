@@ -179,8 +179,9 @@ dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 Les feuilles de style décrivent d'abord le téléphone ; tablette et
 bureau s'ajoutent par `min-width` (400, 480, 600, 640, 768, 1024, 1280,
 1440 px). Sur écran tactile, toute cible fait 44 px de haut au moins ;
-l'en-tête reste en haut de l'écran et la barre d'action flotte sous
-le pouce, décollée des bords et du bas de l'écran (boutons de 46 px) ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
+l'en-tête reste en haut de l'écran et la barre d'action reste sous
+le pouce, collée au bas de l'écran, ses boutons de 46 px posés dans
+les marges de la page ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
 s'ajoute à l'écran d'accueil avec son icône (`site.webmanifest`).
 Vérifié à 320, 360, 390, 414 px, en paysage et sur tablette : aucun
 débordement, décalage de mise en page nul, accessibilité et

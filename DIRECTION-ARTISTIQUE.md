@@ -312,10 +312,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   survol se creusent aussi sous le doigt.
 - **Au téléphone** : l'en-tête reste visible pendant toute la lecture, qu'on descende ou qu'on remonte (il
   s'effaçait à la descente jusqu'au 05/10/2026, à la demande du client il ne bouge plus) ; la barre d'action
-  (Appeler, Devis gratuit) flotte sous le pouce : un bandeau de noir nacré cadré d'un pixel, sur une ombre,
-  décollé de 10 px des bords et du bas de l'écran (6 px sur un téléphone couché) en plus des marges de
-  l'encoche et de la barre du navigateur, boutons de 46 px (44 px couché) ; elle ne se confond plus avec le bas
-  du téléphone. On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
+  (Appeler, Devis gratuit) reste sous le pouce : un bandeau de noir nacré collé au bas de l'écran, d'un bord
+  à l'autre, sous un trait d'un pixel ; les deux boutons (46 px, 44 px couché) y sont posés dans les marges de
+  la page, 10 px d'air au-dessus et au-dessous (6 px couché), et la barre descend sous eux jusqu'au bas de
+  l'écran (encoche, barre du navigateur). Une version flottante, décollée des bords, a été essayée puis
+  retirée à la demande du client (05/10/2026). On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
   - **Pas de sommaire collant** (retiré le 05/10/2026) : aucune rangée ne s'accroche en haut de l'écran
     pendant la lecture, en plus de l'en-tête.
   - **Lire la suite** : un texte courant de plusieurs paragraphes montre le premier ; le reste vient d'une

@@ -258,16 +258,17 @@
   --d-ample:800ms;
 
   /* ---------- Mesures d'interface ----------
-     Sur téléphone et tablette, la barre d'action flotte au bas de
-     l'écran, décollée de ses bords : --h-bouton-barre est la hauteur de
-     ses deux boutons, --barre-ecart l'air qui la sépare des bords de
-     l'écran, --h-barre-mobile la hauteur que le pied de page réserve
-     sous son dernier mot : la barre (boutons, cadre, air) et un peu
-     d'air au-dessus d'elle. Elle disparaît avec la navigation complète, dès 1024 px. */
+     Sur téléphone et tablette, la barre d'action occupe le bas de
+     l'écran, d'un bord à l'autre : --h-bouton-barre est la hauteur de
+     ses deux boutons, --barre-ecart l'air au-dessus et au-dessous
+     d'eux, --h-barre-mobile la hauteur que le pied de page réserve sous
+     son dernier mot : la barre (trait, air, boutons) et un peu d'air
+     au-dessus d'elle. Elle disparaît avec la navigation complète, dès
+     1024 px. */
   --h-entete:64px;
   --h-bouton-barre:46px;
   --barre-ecart:10px;
-  --h-barre-mobile:calc(var(--h-bouton-barre) + 12px + var(--barre-ecart) + var(--sp-4));
+  --h-barre-mobile:calc(var(--h-bouton-barre) + 2 * var(--barre-ecart) + 1px + var(--sp-4));
 }
 
 /* Les écrans plus larges s'ajoutent au téléphone, jamais l'inverse. */

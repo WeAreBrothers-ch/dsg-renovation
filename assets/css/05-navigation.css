@@ -210,22 +210,20 @@
 
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE
-   Appeler, ou demander un devis : deux boutons dans un bandeau de
-   noir nacré (.sur-sombre) qui flotte au bas de l'écran. Décollé des
-   bords et du bas de l'écran (--barre-ecart, en plus des marges de
-   l'encoche et de la barre du navigateur), cadré d'un pixel et posé
-   sur une ombre : il ne se confond ni avec le bas du téléphone, ni
-   avec une bande sombre de la page qui passe dessous.
+   Appeler, ou demander un devis : un bandeau de noir nacré
+   (.sur-sombre) collé au bas de l'écran, d'un bord à l'autre, sous un
+   trait d'un pixel. Les deux boutons y sont posés dans les marges de
+   la page, avec de l'air au-dessus et au-dessous (--barre-ecart) :
+   ils ne touchent ni les bords ni le bas du téléphone. Sous eux, la
+   barre descend jusqu'au bas de l'écran (encoche, barre du
+   navigateur).
    ------------------------------------------------------------ */
 .barre-mobile{
-  display:flex;gap:5px;position:fixed;z-index:55;
-  left:calc(var(--barre-ecart) + env(safe-area-inset-left));
-  right:calc(var(--barre-ecart) + env(safe-area-inset-right));
-  bottom:calc(var(--barre-ecart) + env(safe-area-inset-bottom));
-  padding:5px;
-  border:1px solid var(--c-ligne-forte);
-  box-shadow:0 10px 30px rgba(0,0,0,.28),0 2px 6px rgba(0,0,0,.18);
-  transform:translateY(calc(100% + var(--barre-ecart) + env(safe-area-inset-bottom) + 24px));
+  display:flex;gap:var(--sp-2);position:fixed;inset:auto 0 0 0;z-index:55;
+  /* --grille-marge tient déjà compte de l'encoche, sur les côtés. */
+  padding:var(--barre-ecart) var(--grille-marge) calc(var(--barre-ecart) + env(safe-area-inset-bottom));
+  border-top:1px solid var(--c-ligne-forte);
+  transform:translateY(calc(100% + 8px));
   transition:transform var(--d-normal) var(--e-sortie);
 }
 .barre-mobile[data-visible="true"]{transform:none}
