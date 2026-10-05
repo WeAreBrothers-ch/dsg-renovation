@@ -9,18 +9,14 @@
    de gauche, chaque rubrique la sienne à droite. Le fond reste
    presque opaque pour garder son contraste au-dessus des images, et
    pour rester blanc au passage des bandes de nuit : à 82 %, il y
-   virait au gris.
+   virait au gris. Il reste en haut de l'écran pendant toute la
+   lecture, au téléphone comme au bureau : on descend, il ne bouge pas.
    ------------------------------------------------------------ */
 .entete{
   position:fixed;inset:0 0 auto 0;z-index:60;
   padding-top:var(--sp-3);
   background:rgba(var(--c-papier-rgb),.97);
-  transition:transform var(--d-normal) var(--e-sortie);
 }
-/* Au téléphone et sur tablette, l'en-tête s'efface quand on descend et
-   revient dès qu'on remonte (nav.js) : la lecture garde toute la
-   hauteur de l'écran, et la barre d'action reste sous le pouce. */
-.entete[data-cache="true"]{transform:translateY(-100%)}
 @supports (backdrop-filter:blur(1px)){
   .entete{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
 }

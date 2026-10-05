@@ -175,16 +175,16 @@ dans `00-jetons.css`. Le plancher du site est de 4,5:1 — seuil AA.
 Les feuilles de style décrivent d'abord le téléphone ; tablette et
 bureau s'ajoutent par `min-width` (400, 480, 600, 640, 768, 1024, 1280,
 1440 px). Sur écran tactile, toute cible fait 44 px de haut au moins ;
-l'en-tête s'efface à la lecture et la barre d'action reste sous le
+l'en-tête reste en haut de l'écran et la barre d'action sous le
 pouce ; les marges évitent l'encoche (`viewport-fit=cover`). Le site
 s'ajoute à l'écran d'accueil avec son icône (`site.webmanifest`).
 Vérifié à 320, 360, 390, 414 px, en paysage et sur tablette : aucun
 débordement, décalage de mise en page nul, accessibilité et
 référencement à 100 dans Lighthouse (mobile).
 
-Au téléphone, une page reste simple à parcourir. Aucune barre de
-navigation ne s'accroche en haut de l'écran pendant la lecture :
-l'en-tête s'efface quand on descend et revient quand on remonte.
+Au téléphone, une page reste simple à parcourir. L'en-tête (logo,
+Appeler, Menu) reste visible pendant toute la lecture, qu'on descende
+ou qu'on remonte ; aucune autre barre ne s'accroche en haut de l'écran.
 
 - **Lire la suite** (`lecture.py`, `onglets.js`) : un texte de plusieurs
   paragraphes montre le premier ; le reste vient d'une touche. Tout le
@@ -210,7 +210,7 @@ pas bougé d'un pixel.
 
 | Fichier | Rôle |
 |---|---|
-| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, en-tête qui s'efface quand on descend au téléphone, volets du pied de page |
+| `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
 | `motion.js` | révélations au défilement, photos qui se dévoilent, chiffres qui défilent, profondeur des grandes photos ; sans lui, la page s'affiche quand même |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |

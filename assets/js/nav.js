@@ -1,7 +1,7 @@
 /* ============================================================
    DSG RÉNOVATION — NAVIGATION
    Liste des prestations sous « Prestations », menu plein écran,
-   barre d'action mobile, en-tête qui s'efface à la lecture.
+   barre d'action mobile.
    ============================================================ */
 (function () {
   "use strict";
@@ -16,14 +16,9 @@
   var barreMobile = document.getElementById("barreMobile");
   /** @type {HTMLElement|null} */
   var groupe = document.getElementById("navPrestations");
-  /** @type {HTMLElement|null} */
-  var entete = document.getElementById("entete");
-  var grandEcran = window.matchMedia("(min-width: 1024px)");
 
   var enAttente = false;
   var saisieEnCours = false;
-  var dernierY = window.scrollY;
-  var enteteCache = false;
 
   /* ---------- Liste des prestations ----------
      Le lien « Prestations » mène à la page pilier ; la case voisine
@@ -140,29 +135,8 @@
     barreMobile.setAttribute("data-visible", visible ? "true" : "false");
   }
 
-  /* ---------- En-tête ----------
-     Au téléphone et sur tablette, il s'efface quand on descend et
-     revient dès qu'on remonte : quelques pixels de marge évitent qu'il
-     clignote au moindre frémissement du doigt. Il reste là en haut de
-     page, menu ouvert, et dès que le clavier y amène le focus. */
-  function mettreAJourEntete() {
-    if (!entete) { return; }
-    var y = window.scrollY;
-    var ecart = y - dernierY;
-    var fixe = grandEcran.matches || y < 160 || menuEstOuvert() || entete.contains(document.activeElement);
-    if (fixe) {
-      enteteCache = false;
-      dernierY = y;
-    } else if (Math.abs(ecart) > 8) {
-      enteteCache = ecart > 0;
-      dernierY = y;
-    }
-    entete.setAttribute("data-cache", enteteCache ? "true" : "false");
-  }
-
   function auDefilement() {
     mettreAJourBarre();
-    mettreAJourEntete();
     enAttente = false;
   }
 
@@ -176,7 +150,6 @@
     var cible = evenement.target;
     saisieEnCours = cible instanceof Element && cible.matches("input, select, textarea");
     mettreAJourBarre();
-    mettreAJourEntete();
   });
   document.addEventListener("focusout", function () {
     saisieEnCours = false;

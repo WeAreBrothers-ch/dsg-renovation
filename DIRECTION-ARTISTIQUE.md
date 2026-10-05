@@ -310,10 +310,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   haut au moins sur un écran tactile ; avec une souris, les listes reprennent leur espacement serré. Au
   toucher, un voile de l'encre du fond répond (`-webkit-tap-highlight-color`) ; les lignes qui se creusent au
   survol se creusent aussi sous le doigt.
-- **Au téléphone** : l'en-tête s'efface quand on descend et revient dès qu'on remonte ; la barre d'action
+- **Au téléphone** : l'en-tête reste visible pendant toute la lecture, qu'on descende ou qu'on remonte (il
+  s'effaçait à la descente jusqu'au 05/10/2026, à la demande du client il ne bouge plus) ; la barre d'action
   (Appeler, Devis gratuit) reste sous le pouce, 52 px de haut sur un téléphone couché. On ouvre ce qu'on veut lire — sans script, tout reste ouvert :
   - **Pas de sommaire collant** (retiré le 05/10/2026) : aucune rangée ne s'accroche en haut de l'écran
-    pendant la lecture ; seul l'en-tête revient quand on remonte.
+    pendant la lecture, en plus de l'en-tête.
   - **Lire la suite** : un texte courant de plusieurs paragraphes montre le premier ; le reste vient d'une
     touche, et le focus passe au paragraphe révélé (`outils/lecture.py`). Dès la tablette, tout est déplié.
   - **Suites à faire glisser** (sous 600 px) : le déroulé, les cartes et les besoins défilent de côté dans
