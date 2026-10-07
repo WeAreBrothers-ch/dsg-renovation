@@ -38,6 +38,21 @@
   content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
 .jeu__onglet:focus-visible{outline-offset:-4px}
+/* Le curseur (onglets.js, d'après « Animated Tabs » de 21st.dev) : dès
+   que le script est là, un filet rouge glisse sous l'onglet ouvert,
+   d'une case à l'autre, et remplace le carré. Un pseudo-élément placé
+   par variables (--cx, --cy, --cw, --ch : la case ouverte), et non un
+   élément de plus : la barre garde ses seuls onglets, que comptent les
+   règles de rangées ci-dessus. */
+.jeu__barre{position:relative}
+.jeu__barre.a-curseur .jeu__onglet[aria-selected="true"]::before{display:none}
+.jeu__barre.a-curseur::after{
+  content:"";position:absolute;left:0;top:0;z-index:1;
+  width:1px;height:var(--h-curseur);background:var(--c-accent);pointer-events:none;
+  transform-origin:0 0;
+  transform:translate(var(--cx),calc(var(--cy) + var(--ch) * 1px - var(--h-curseur))) scaleX(var(--cw));
+}
+.jeu__barre.curseur-glisse::after{transition:transform var(--d-normal) var(--e-sortie)}
 /* Le panneau entre par une montée courte : assez pour qu'on voie
    qu'il a changé, assez peu pour ne pas faire attendre. */
 .js .jeu__panneau:not([hidden]){animation:panneau var(--d-normal) var(--e-sortie) both}

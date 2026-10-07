@@ -4,9 +4,20 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.3**, en production.
+Date : 07/10/2026 — Statut : **v6.4**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Deux composants de 21st.dev, 07/10/2026 (v6.4).** Choisis pour animer ce qui existe sans rien ajouter à
+l'écran, réécrits sans dépendance d'après leur code (accès payant) :
+- **l'enseigne s'allume** (« Text Hover Effect », Aceternity) : là où passe la souris, ou le doigt posé sur
+  l'enseigne du pied, une lueur au rouge du toit s'allume dans les lettres nacrées et s'éteint quand on s'en va
+  (`08-bas.css`, `motion.js`). Sur toutes les pages, au geste seulement ;
+- **la marque glisse** (« Animated Tabs ») : sous l'onglet ouvert, un filet rouge de 3 px (`--h-curseur`) glisse
+  d'une case à l'autre et remplace le carré « vous êtes ici » ; la case d'encre du filtre choisi glisse d'un
+  filtre à l'autre (`17-repli.css`, `02-boutons.css`, `onglets.js`). Sans script : le carré et l'encre, comme
+  avant.
+Écartés pour rester sobre : statut « ouvert maintenant » (horaires à valider), jauge du formulaire.
 
 **Le plan se trace, 07/10/2026 (v6.3).** Demande de l'agence : un site « un tout petit peu plus vivant, avec du
 mouvement », qui ne se parcoure pas sans que rien ne se passe, sans le dénaturer. Quand un bloc arrive à l'écran,
@@ -491,7 +502,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   plat (`--c-cadre-plein`) : l'encre sur les fonds clairs, dans la nuit un gris plein (`#72716F`, la chaux à
   40 % sur le noir), net là où il chevauche un trait.
 - Le même carré sert de puce (garanties, communes, listes d'un encadré) en **rouge écrit** ; de marque « vous êtes
-  ici » en **rouge** (rubrique consultée, onglet ouvert) ; de rangée de repères sous les suites qui défilent
+  ici » en **rouge** (rubrique consultée ; onglet ouvert sans script — avec lui, un filet glisse sous l'onglet) ; de rangée de repères sous les suites qui défilent
   au téléphone.
 - Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en rouge
   écrit (rouge clair dans la nuit).
@@ -574,6 +585,8 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Filet tiré à la règle (à l'arrivée du bloc) | `border-image` jusqu'à `--trace` | 800 ms, `--e-trait`, 70 ms d'un filet à l'autre |
 | Toit de l'intitulé (à l'arrivée) | `clip-path` | 800 ms, `--e-trait` |
 | Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
+| Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
+| Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |
 
 - **Au défilement, seuls les traits se tracent** (v6.3). Le 05/10/2026, les apparitions avaient été retirées : ni
   titres qui montent, ni photos qui se dévoilent, ni chiffres qui défilent — au téléphone, elles laissaient des

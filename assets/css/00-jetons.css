@@ -311,6 +311,8 @@
      et l'écart entre deux filets d'un même bordereau. */
   --e-trait:cubic-bezier(.3,.3,.4,1);
   --d-relais:70ms;
+  /* Le filet qui glisse sous l'onglet ouvert (17-repli.css). */
+  --h-curseur:3px;
 
   /* ---------- Mesures d'interface ----------
      Sur téléphone et tablette, la barre d'action occupe le bas de

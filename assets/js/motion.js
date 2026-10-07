@@ -1,6 +1,7 @@
 /* ============================================================
    DSG RÉNOVATION — MOUVEMENT
-   Année courante du pied de page, et le plan qui se trace.
+   Année courante du pied de page, l'enseigne qui s'allume, et le plan
+   qui se trace.
 
    Quand un bloc arrive à l'écran, ses traits se tracent : le toit de
    l'intitulé, les filets des bordereaux ; la carte se relève depuis
@@ -24,6 +25,36 @@
   /* ---------- Année du copyright ---------- */
   var annee = document.getElementById("annee");
   if (annee) { annee.textContent = String(new Date().getFullYear()); }
+
+  /* ---------- L'enseigne s'allume ----------
+     D'après « Text Hover Effect » (21st.dev), réécrit sans dépendance :
+     là où passe la souris, ou le doigt posé sur l'enseigne du pied, une
+     lueur au rouge du toit s'allume dans les lettres (08-bas.css). Le
+     script ne donne que la position ; la feuille allume et éteint. */
+  var enseigne = document.querySelector(".pied__logotype");
+  if (enseigne instanceof HTMLElement && "PointerEvent" in window) {
+    var lueur = { x: 0, y: 0, image: 0 };
+    var poser = function (evenement) {
+      var boite = enseigne.getBoundingClientRect();
+      lueur.x = evenement.clientX - boite.left;
+      lueur.y = evenement.clientY - boite.top;
+    };
+    var peindre = function () {
+      lueur.image = 0;
+      enseigne.style.setProperty("--lx", lueur.x.toFixed(1) + "px");
+      enseigne.style.setProperty("--ly", lueur.y.toFixed(1) + "px");
+    };
+    enseigne.addEventListener("pointerenter", function (evenement) {
+      poser(evenement);
+      peindre();
+      enseigne.classList.add("est-allume");
+    });
+    enseigne.addEventListener("pointermove", function (evenement) {
+      poser(evenement);
+      if (!lueur.image) { lueur.image = window.requestAnimationFrame(peindre); }
+    });
+    enseigne.addEventListener("pointerleave", function () { enseigne.classList.remove("est-allume"); });
+  }
 
   /* ---------- Le plan se trace ---------- */
   var BLOCS = ".intercalaire__marge, .metiers, .lots.service__villes, .piece__faits, " +

@@ -182,7 +182,22 @@
     -webkit-background-clip:text;background-clip:text;
     color:transparent;
   }
+  /* L'enseigne s'allume (motion.js, d'après « Text Hover Effect » de
+     21st.dev) : là où passe la souris, ou le doigt posé dessus, une
+     lueur au rouge du toit s'allume dans les lettres, et s'éteint quand
+     on s'en va. Les lettres seules la portent : le fond de la nuit ne
+     change pas. --lx, --ly : le pointeur ; --lueur : le rayon. */
+  .pied__logotype{
+    background:
+      radial-gradient(circle var(--lueur) at var(--lx,50%) var(--ly,50%),
+        var(--c-rouge-clair) 0%,var(--c-rouge) 45%,transparent 100%),
+      var(--nacre-texte);
+    -webkit-background-clip:text;background-clip:text;
+    transition:--lueur 600ms var(--e-sortie);
+  }
+  .pied__logotype.est-allume{--lueur:calc(100cqi / 7)}
 }
+@property --lueur{syntax:"<length>";inherits:false;initial-value:0px}
 @media (min-width:768px){
   .pied{padding-top:var(--sp-7)}
   .pied__logotype{margin-top:var(--sp-7);margin-bottom:var(--sp-6)}

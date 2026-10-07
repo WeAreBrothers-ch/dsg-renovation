@@ -120,6 +120,49 @@
     glissieres.forEach(mesurer);
   }
 
+  /* ---------- Le curseur des onglets et des filtres ----------
+     D'après « Animated Tabs » (21st.dev), réécrit sans dépendance : la
+     marque de la case choisie glisse d'une case à l'autre — un filet
+     rouge sous l'onglet ouvert (17-repli.css), la case d'encre sous le
+     filtre choisi (02-boutons.css). Le script ne fait que mesurer la
+     case choisie et la donner à la feuille (--cx, --cy, --cw, --ch) ;
+     qui choisit (ce fichier, dossier.js), il n'a pas à le savoir : il
+     guette l'attribut qui change. Sans script, ni l'un ni l'autre : la
+     case garde son carré, ou son encre. */
+  function curseur(barre, choisie) {
+    function placer(sansGlisser) {
+      var cible = barre.querySelector(choisie);
+      if (!(cible instanceof HTMLElement) || !barre.offsetWidth) { return; }
+      /* Au redimensionnement, la marque suit la case sans glisser. */
+      if (sansGlisser) { barre.classList.remove("curseur-glisse"); }
+      barre.style.setProperty("--cx", cible.offsetLeft + "px");
+      barre.style.setProperty("--cy", cible.offsetTop + "px");
+      barre.style.setProperty("--cw", String(cible.offsetWidth));
+      barre.style.setProperty("--ch", String(cible.offsetHeight));
+      barre.classList.add("a-curseur");
+      if (sansGlisser) {
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () { barre.classList.add("curseur-glisse"); });
+        });
+      }
+    }
+    new MutationObserver(function () { placer(false); })
+      .observe(barre, { subtree: true, attributes: true, attributeFilter: ["aria-selected", "aria-pressed"] });
+    /* La barre paraît (le script retire « hidden ») ou change de taille :
+       on mesure de nouveau. */
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(function () { placer(true); }).observe(barre);
+    } else {
+      placer(true);
+    }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".jeu__barre"), function (barre) {
+    curseur(barre, '[aria-selected="true"]');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".filtres"), function (barre) {
+    curseur(barre, '[aria-pressed="true"]');
+  });
+
   var jeux = document.querySelectorAll("[data-onglets]");
   if (!jeux.length) { return; }
 

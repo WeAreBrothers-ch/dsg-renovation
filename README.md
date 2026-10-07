@@ -151,6 +151,12 @@ l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
 
+Ce que la v6.4 a ajouté (07/10/2026) : deux composants de 21st.dev,
+réécrits sans dépendance. **L'enseigne du pied s'allume** en rouge sous
+la souris ou le doigt (« Text Hover Effect ») ; **la marque des onglets et
+des filtres glisse** d'une case à l'autre (« Animated Tabs »). Rien
+d'ajouté à l'écran : ils animent ce qui existait.
+
 Ce que la v6.3 a ajouté (07/10/2026) : **le plan se trace**. Quand un
 bloc arrive à l'écran, ses traits se tracent : le toit de l'intitulé se
 dessine, les filets des listes se tirent à la règle un par un, le plan
@@ -267,8 +273,8 @@ pas bougé d'un pixel.
 | Fichier | Rôle |
 |---|---|
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
-| `motion.js` | année du pied de page ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) |
-| `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
+| `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) |
+| `onglets.js` | jeux d'onglets des pages de prestation ; marque qui glisse sous l'onglet ouvert et sous le filtre choisi ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |

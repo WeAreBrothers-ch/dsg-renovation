@@ -140,6 +140,24 @@
   .filtre:hover{color:var(--c-encre);background:var(--c-papier-2)}
 }
 .filtre[aria-pressed="true"]{background:var(--c-encre);color:var(--c-papier)}
+/* Le curseur (onglets.js) : la case d'encre glisse d'un filtre à
+   l'autre, sous les intitulés, et leur encre change pendant qu'elle
+   passe. */
+.filtres{position:relative}
+.filtres.a-curseur::after{
+  content:"";position:absolute;left:0;top:0;z-index:0;
+  width:1px;height:1px;background:var(--c-encre);pointer-events:none;
+  transform-origin:0 0;
+  transform:translate(var(--cx),var(--cy)) scale(var(--cw),var(--ch));
+}
+.filtres.curseur-glisse::after{transition:transform var(--d-normal) var(--e-sortie)}
+.filtres.a-curseur .filtre{position:relative;z-index:1}
+.filtres.a-curseur .filtre[aria-pressed="true"]{background:transparent}
+.filtres.curseur-glisse .filtre{
+  transition:background-color var(--d-rapide) var(--e-standard),
+             color var(--d-normal) var(--e-standard),
+             scale 160ms var(--e-sortie);
+}
 @media (min-width:768px){
   .filtres{flex:0 1 auto;padding-right:0}
   .filtre{flex:0 1 auto;padding:0 var(--sp-5)}
