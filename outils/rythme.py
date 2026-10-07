@@ -2,8 +2,8 @@
 
 Une page d'un seul fond se lit comme un seul bloc, et le lecteur ne
 sait plus où finit une section. Trois fonds se relaient donc dans
-chaque page : le fond de la page (« blanc » ci-dessous : la chaux),
-pâle (.sur-pale : le blanc franc) et sombre (.sur-sombre, la nuit).
+chaque page : le fond de la page (« blanc » ci-dessous : le blanc
+franc), pâle (.sur-pale : la chaux) et sombre (.sur-sombre, la nuit).
 Leurs couleurs sont dans 00-jetons.css.
 
 Le dernier est choisi à la main, dans les gabarits : c'est une
@@ -13,7 +13,7 @@ Ajouter, retirer ou déplacer une section ne demande donc jamais de
 recalculer l'alternance à la main.
 
 Une suite de sections libres qui finirait sur le fond de la section
-imposée qui la suit (la bande des références, blanche elle aussi) part
+imposée qui la suit (la bande des références, sur la chaux elle aussi) part
 de l'autre fond, quand la section qui la précède le permet : après une
 bande sombre, les deux départs se valent.
 """
@@ -26,7 +26,7 @@ _SECTION = re.compile(r'<section class="([^"]*)"')
 _FONDS_IMPOSES = [
     ("sur-sombre", "nuit"),
     ("sur-pale", "pale"),
-    ("partenaires", "pale"),   # bande des références : le blanc
+    ("partenaires", "pale"),   # bande des références : la chaux
     ("couverture", "blanc"),   # la couverture de l'accueil
 ]
 

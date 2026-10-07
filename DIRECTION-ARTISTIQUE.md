@@ -4,9 +4,25 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v5**, en production.
+Date : 07/10/2026 — Statut : **v6**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Blanc, chaux & rouge DSG, 07/10/2026 (v6).** Le client trouve le site « mort » : du beige et du noir, trop
+sobre. Mesuré sur l'accueil, le rouge du logo n'en couvrait que 0,3 % (chaux 39 %, blanc 25 %, noir 22 %). Les
+palettes à nouvelles teintes et les reflets multicolores sur le nacré sont refusés : « les mêmes couleurs, avec
+quelques modifications ». Quatre dosages des seules couleurs du site sont comparés (blanc dominant ; plus le
+rouge écrit ; plus une bande rouge ; plus un mot d'accroche en rouge) ; le client retient le deuxième, sans le
+filet rouge essayé en tête de l'en-tête. Ce qui change :
+- **le blanc devient le fond** et la chaux passe une section sur deux (`.sur-pale`) : la page s'éclaire sans
+  changer de teinte ;
+- **les chiffres de l'entreprise s'écrivent au rouge du toit** (`--c-eclat`, « + » compris), sur le clair
+  comme dans la nuit ;
+- **le pied de page est coiffé d'un filet rouge** de 4 px (`--filet-toit`), la ligne du toit ;
+- **le chêne quitte la palette** : les marques écrites (chevrons, numéros, puces) prennent le rouge écrit
+  (rouge clair dans la nuit). Le site n'a plus qu'une couleur, le rouge du toit, sur le blanc, la chaux et le
+  noir.
+La palette v5 reste lisible dans l'historique git (`18b992f`).
 
 **Chaux, noir & rouge DSG, 07/10/2026 (v5).** Un audit de design trouve le site froid, répétitif, et relève
 six défauts visibles. Trois chantiers, menés ensemble :
@@ -166,17 +182,18 @@ qui cherche un artisan.
 Un chantier de rénovation commence par un relevé : on reporte la pièce sur le plan, on plante des repères aux
 angles, puis on ouvre. Le site en reprend la matière et le geste :
 
-- un **fond de chaux**, clair et chaud — l'enduit fini, pas l'acier —, relayé une section sur deux par le
-  **blanc franc** ;
+- un **fond blanc**, relayé une section sur deux par la **chaux** chaude — l'enduit frais, puis fini ;
 - une **encre noire**, celle des lettres du logo ;
 - des **cadres d'un pixel** ; aux angles de l'ouverture et du renvoi final, les repères carrés — les piquets
   du géomètre ;
 - des **bandes de noir nacré** qui rythment la page : un noir à reflets, jamais un aplat mort ;
 - **la preuve dès le premier écran** : à l'accueil, le chantier avant / après à côté du titre ; sur les autres
   pages principales, un chantier réel à côté du titre, sa légende posée dans l'image ;
-- **deux accents, chacun son rôle** : le **rouge du toit** pour l'action — les boutons d'appel, les liens, ce
-  qui demande l'attention — ; le **chêne** du parquet pour ce qui s'écrit en couleur sans s'actionner :
-  numéros d'étape, puces, et devant chaque intitulé de section un chevron dessiné comme le toit du logo.
+- **une seule couleur, le rouge du toit**, qui ne couvre jamais un fond de section : à plat pour l'action
+  (les boutons d'appel) ; écrit pour ce qu'on touche ou ce qui demande l'attention (liens, erreurs, « vous
+  êtes ici ») et pour les repères (numéros d'étape, puces, et devant chaque intitulé de section un chevron
+  dessiné comme le toit du logo) ; en grand pour ce qui doit se voir de loin (les chiffres de l'entreprise) ;
+  en filet au-dessus du pied de page.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le rouge
 DSG, le noir nacré, le logo et son toit rouge, le comparateur avant / après mis au centre de l'accueil, les
@@ -184,29 +201,30 @@ repères d'angle qui posent l'image d'ouverture sur le plan.
 
 ---
 
-## 2. Palette — « Chaux, noir & rouge DSG » (v5)
+## 2. Palette — « Blanc, chaux & rouge DSG » (v6)
 
-Le noir, le rouge et le gris d'ombre du logo, posés sur une chaux chaude ; un second accent, le chêne du
-parquet. Le noir est nacré partout où il fait fond. Répartition : **70 % chaux et blanc · 25 % noir · 5 %
-rouge et chêne.** Le logo garde ses propres couleurs. Contrastes mesurés (WCAG 2.1), plancher du site 4.5:1.
+Le noir, le rouge et le gris d'ombre du logo, sur un blanc franc que relaie une chaux chaude. Une seule
+couleur, le rouge du toit, qui ne couvre jamais un fond de section. Le noir est nacré partout où il fait fond.
+Répartition mesurée sur l'accueil : **59 % blanc et chaux · 21 % noir · un rouge qui ponctue** (boutons,
+chiffres, marques, filet du pied) ; le reste en photos. Le logo garde ses propres couleurs. Contrastes mesurés
+(WCAG 2.1), plancher du site 4.5:1.
 
 Les feuilles de composants ne nomment jamais une couleur : elles demandent un rôle (`--c-encre`, `--c-signal`,
-`--c-accent`, `--c-marque`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
+`--c-accent`, `--c-eclat`…). Changer de palette, c'est changer `00-jetons.css` et ce paragraphe.
 
 ### Les couleurs
 | Jeton | Valeur | Rôle |
 |---|---|---|
-| `--c-chaux` | `#F4F1EC` | le fond, une chaux chaude |
-| `--c-blanc` | `#FFFFFF` | une section sur deux, les cases du formulaire |
+| `--c-blanc` | `#FFFFFF` | le fond |
+| `--c-chaux` | `#F4F1EC` | une section sur deux, les cases posées sur le blanc |
+| `--c-chaux-2` | `#E9E4DC` | chaux creusée : les survols posés sur la chaux |
 | `--c-noir` | `#1B1B1B` | le noir du logo : l'encre, et la nuit des bandes sombres |
 | `--c-noir-2` | `#252422` | noir élevé : cases posées sur la nuit |
 | `--c-gris` | `#A6A4A5` | gris d'ombre du logo : le texte secondaire de la nuit |
 | `--c-gris-fonce` | `#72716F` | le cadre de la nuit, à plat : repères d'angle, enseigne sans nacré |
-| `--c-rouge` | `#DD0022` | rouge du toit : aplat des boutons d'appel, poignée du comparateur |
+| `--c-rouge` | `#DD0022` | rouge du toit : aplat des boutons d'appel, poignée du comparateur, chiffres, filet du pied |
 | `--c-rouge-sombre` | `#B3001B` | le rouge écrit sur le clair |
 | `--c-rouge-clair` | `#FF6A5C` | le rouge écrit sur la nuit, à la teinte du toit |
-| `--c-chene` | `#8A5A2B` | le chêne : les marques écrites sur le clair |
-| `--c-chene-clair` | `#C09468` | le chêne écrit sur la nuit |
 
 ### Le nacré
 `--nacre` : trois dégradés radiaux à peine teintés — ivoire `rgba(255,240,222,.08)` en haut à gauche, vieux
@@ -222,18 +240,18 @@ l'enseigne du pied (3.5 au plus sombre, seuil des grands textes 3:1).
 ### Surfaces
 | Jeton | Valeur | Usage |
 |---|---|---|
-| `--c-papier` | `#F4F1EC` | fond dominant, la chaux (le blanc dans `.sur-pale`) |
-| `--c-papier-2` | `#E9E4DC` | creux : survols, onglet ouvert, emplacement d'une image qui charge |
-| `--c-fiche` | `#FFFFFF` | relief : cases du formulaire, sous-menu (la chaux sur le blanc) |
+| `--c-papier` | `#FFFFFF` | fond dominant, le blanc (la chaux dans `.sur-pale`) |
+| `--c-papier-2` | `#F4F1EC` | creux : survols, onglet ouvert, emplacement d'une image qui charge (`#E9E4DC` sur la chaux) |
+| `--c-fiche` | `#F4F1EC` | relief : cases du formulaire, sous-menu (le blanc sur la chaux) |
 | `--c-bitume` | `#1B1B1B` | nuit : bandes sombres, pied de page, visionneuse, barre mobile (nacrée) |
 | `--c-bitume-2` | `#252422` | surface élevée dans la nuit |
 
-### Texte (chaux / blanc / creux)
+### Texte (blanc / chaux / chaux creusée)
 | Jeton | Valeur | Contrastes |
 |---|---|---|
-| `--c-encre` | `#1B1B1B` | 15.3 / 17.2 / 13.6 |
-| `--c-encre-60` | `#4A453F` | 8.4 / 9.5 / 7.5 |
-| `--c-encre-40` | `#68625B` | 5.3 / 6.0 / 4.8 |
+| `--c-encre` | `#1B1B1B` | 17.2 / 15.3 / 13.6 |
+| `--c-encre-60` | `#4A453F` | 9.5 / 8.4 / 7.5 |
+| `--c-encre-40` | `#68625B` | 6.0 / 5.3 / 4.8 |
 | `--c-craie` | `#F4F1EC` | 15.3 sur la nuit, 11.7 au reflet le plus clair |
 | `--c-craie-60` | `#A6A4A5` | 7.0 sur la nuit, 6.3 sur la nuit élevée, 5.3 au reflet |
 | `--c-filigrane` | `#72716F` | l'enseigne du pied sans nacré en lettres : 3.5 sur la nuit |
@@ -242,28 +260,31 @@ Le gris de lecture est foncé à dessein : la Newsreader, plus fine que l'Archiv
 nuit, une seule voix secondaire : `--c-encre-40` y vaut `--c-encre-60` (un second gris, plus sombre, n'y
 tenait plus son seuil au reflet).
 
-### Rouge — l'action ; chêne — les marques écrites
+### Le rouge, en quatre rôles
 | Jeton | Valeur | Usage | Contraste |
 |---|---|---|---|
 | `--c-signal` | = rouge | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 5.1 |
 | `--c-signal-fonce` | = noir | survol des boutons d'appel : le noir nacré (`--fond-survol-signal`) recouvre le rouge | texte blanc dessus : 17.2 |
-| `--c-accent` | = rouge sombre | liens, astérisques des champs obligatoires, erreurs, repère « vous êtes ici » (rubrique consultée, onglet ouvert) | 6.4 / 7.2 / 5.7 |
-| `--c-marque` | = chêne | chevrons des intitulés, numéros d'étape (01, 02…), puces, « + » des chiffres | 5.2 / 5.9 / 4.6 |
+| `--c-accent` | = rouge sombre | liens, astérisques des champs obligatoires, erreurs, repère « vous êtes ici » (rubrique consultée, onglet ouvert) | 7.2 / 6.4 / 5.7 |
+| `--c-marque` | = rouge sombre | chevrons des intitulés, numéros d'étape (01, 02…), puces | 7.2 / 6.4 / 5.7 |
+| `--c-eclat` | = rouge | les chiffres de l'entreprise et leur « + » (24 px) ; grand texte seulement | 5.1 / 4.6 / 4.1 ; 3.4 sur la nuit (seuil 3:1) |
 
-Le rouge, c'est ce qu'on touche ou ce qui demande l'attention ; le chêne, ce qui s'écrit en couleur sans
-s'actionner. Dans la nuit, le rouge clair et le chêne clair deviennent les couleurs écrites (6.1 et 6.3 ; 4.7
-et 4.8 au reflet) et le bouton d'appel garde son aplat rouge ; au survol, c'est la chaux qui le recouvre, texte
-noir (15.3). Ni le rouge ni le chêne ne s'écrivent en titre.
+Les marques prenaient le chêne en v5 ; leur rôle reste distinct de l'accent, pour qu'une palette future
+puisse les séparer à nouveau sans toucher aux composants. Dans la nuit, le rouge clair devient la couleur
+écrite (6.1 ; 4.7 au reflet) et le bouton d'appel garde son aplat rouge ; au survol, c'est la chaux qui le
+recouvre, texte noir (15.3). Les chiffres y gardent le rouge du toit : leurs cases sont d'un noir mat, sans
+reflet (3.4 ; 3.0 au survol, sur la nuit élevée). Le rouge ne s'écrit jamais en titre.
 
 ### États
-`--c-valide` `#2F6B4A` (5.6) · `--c-alerte` = rouge sombre (6.4), toujours avec son signe — un carré marqué
-d'un point d'exclamation — et un message : la couleur ne porte jamais seule l'information (un brun rouille,
-en v4, se confondait avec le chêne) · `--c-focus` = encre. Chaque fond redéfinit localement ces jetons : un
-composant demande `--c-encre` et obtient la bonne.
+`--c-valide` `#2F6B4A` (6.3) · `--c-alerte` = rouge sombre (7.2), toujours avec son signe — un carré marqué
+d'un point d'exclamation — et un message : la couleur ne porte jamais seule l'information · `--c-focus` =
+encre. Chaque fond redéfinit localement ces jetons : un composant demande `--c-encre` et obtient la bonne.
 
 ### Filets
 `--c-cadre` = l'encre pleine (trait de plan, 1 px) · `--c-ligne` encre à 14 % · `--c-ligne-forte` encre à 50 %
 (3.2). Dans la nuit, le cadre est une chaux à 40 % (3.5, au-dessus du seuil 3:1 des contours).
+`--filet-toit` : un trait rouge de 4 px en tête du pied de page, la ligne du toit posée sur la dalle qui
+ferme la page. Aucun filet rouge sur l'en-tête : essayé, retiré à la demande du client.
 
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, étiquettes « Avant » /
@@ -273,17 +294,17 @@ Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionn
 
 ## 2 bis. Rythme des fonds
 
-Trois fonds se relaient ; jamais deux fois le même à la suite. Ni le rouge ni le chêne ne couvrent un fond.
+Trois fonds se relaient ; jamais deux fois le même à la suite. Le rouge ne couvre jamais un fond.
 
 | Fond | Classe | Où |
 |---|---|---|
-| **Chaux** `#F4F1EC` | — | couverture, et une section sur deux |
-| **Blanc** `#FFFFFF` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références (page entreprise) |
-| **Noir nacré** `#1B1B1B` + `--nacre` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page, la barre mobile |
+| **Blanc** `#FFFFFF` | — | couverture, et une section sur deux |
+| **Chaux** `#F4F1EC` | `.sur-pale` | posé automatiquement une section sur deux par `outils/rythme.py` ; c'est aussi le fond de la bande des références (page entreprise) |
+| **Noir nacré** `#1B1B1B` + `--nacre` | `.sur-sombre` | **une bande par page**, choisie à la main : l'entreprise en chiffres (accueil), la méthode (prestations), l'ordre des travaux (page pilier), le déroulé (entreprise), les familles de biens (réalisations), ce que contient le devis (devis) ; et le pied de page (coiffé du filet du toit), la barre mobile |
 
 Une section pose elle-même son fond : ajouter la classe suffit, tous les composants suivent. Une suite de
 sections libres qui finirait sur le fond de la section imposée qui la suit part de l'autre fond (`rythme.py`) :
-ainsi la bande des références ne suit jamais une section blanche. On ne place jamais de logos de partenaires
+ainsi la bande des références ne suit jamais une section de chaux. On ne place jamais de logos de partenaires
 (multipliés sur le fond) ni de formulaire dans la nuit. Dans la nuit, on emploie la déclinaison
 négative du logo (`logo-negatif.webp` : lettres blanches, toit rouge).
 
@@ -426,11 +447,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   les photos. Il suppose un cadre tracé en bordure (`border`), jamais en ombre intérieure. Il prend le cadre à
   plat (`--c-cadre-plein`) : l'encre sur les fonds clairs, dans la nuit un gris plein (`#72716F`, la chaux à
   40 % sur le noir), net là où il chevauche un trait.
-- Le même carré sert de puce (garanties, communes, listes d'un encadré) en **chêne** ; de marque « vous êtes
+- Le même carré sert de puce (garanties, communes, listes d'un encadré) en **rouge écrit** ; de marque « vous êtes
   ici » en **rouge** (rubrique consultée, onglet ouvert) ; de rangée de repères sous les suites qui défilent
   au téléphone.
-- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en chêne
-  (chêne clair dans la nuit).
+- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en rouge
+  écrit (rouge clair dans la nuit).
 
 ---
 
@@ -471,16 +492,16 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
      « Après »** qui montrent un état entier d'un geste — au doigt, c'est plus sûr qu'une poignée ; l'étiquette
      de l'état caché s'efface.
    Au téléphone et sur tablette, le texte puis l'image, l'appel pleine largeur, le renvoi dessous.
-2. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur la
-   chaux).
+2. Cartouche d'identité en quatre cases (dès 768 px), puis bande des références (logos multipliés sur le
+   blanc).
 3. Les sections alternent leurs deux compositions (§ 4) : l'entreprise **en bande de noir nacré**, en-tête
-   posé (paragraphe d'intention, puis les quatre chiffres sur une rangée, d'un bord à l'autre, « + » en chêne
-   clair) ; les prestations, marge accrochée (une ligne par prestation, sa photo en tête, sans numéro) ; le
+   posé (paragraphe d'intention, puis les quatre chiffres sur une rangée, d'un bord à l'autre, au rouge du
+   toit) ; les prestations, marge accrochée (une ligne par prestation, sa photo en tête, sans numéro) ; le
    chantier à la une, en-tête posé (panneau dépoli sur photo pleine largeur) ; la zone, marge accrochée ; le
-   déroulé en quatre cases, en-tête posé — chaux et blanc en alternance.
+   déroulé en quatre cases, en-tête posé — blanc et chaux en alternance.
 4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en rouge et le téléphone à
    gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page en noir nacré (logo négatif)
-   et le nom de l'entreprise en enseigne, en lettres nacrées, d'un bord à l'autre de la grille et entier (v5 :
+   sous le filet rouge du toit, et le nom de l'entreprise en enseigne, en lettres nacrées, d'un bord à l'autre de la grille et entier (v5 :
    rogné par le bas et arrêté à mi-largeur, il passait pour un défaut d'affichage).
 
 **Pages intérieures principales** (prestations, entreprise, réalisations, devis, et chaque page de métier) :
@@ -522,9 +543,11 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Photo plein écran brute en ouverture.
 - Capitales décoratives, italique, titre bicolore, dégradé de texte (seule exception : l'enseigne nacrée du
   pied).
-- Un aplat de noir mort en fond de section (la nuit est nacrée) ; une couleur hors de la palette (§ 2).
-- Le rouge ou le chêne en titre ou en fond de section : le rouge reste à l'action (boutons, liens, erreurs,
-  « vous êtes ici »), le chêne aux marques écrites (chevrons, numéros, puces).
+- Un aplat de noir mort en fond de section (la nuit est nacrée) ; une couleur hors de la palette (§ 2) — le
+  chêne en est sorti en v6.
+- Le rouge en titre ou en fond de section : il reste à l'action (boutons, liens, erreurs, « vous êtes ici »),
+  aux marques écrites (chevrons, numéros, puces), aux chiffres et au filet du pied.
+- Un filet rouge sur l'en-tête.
 - Les repères d'angle sur un autre bloc que l'ouverture et le renvoi final.
 - Plusieurs blocs de dépliants à la suite : ce qui se lit d'un coup d'œil se montre ouvert.
 - Le logo clair dans la nuit (utiliser le négatif).

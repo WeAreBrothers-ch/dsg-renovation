@@ -130,24 +130,31 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Chaux, noir & rouge DSG » (v5, 07/10/2026) — tout est
+Palette « Blanc, chaux & rouge DSG » (v6, 07/10/2026) — tout est
 décrit dans `DIRECTION-ARTISTIQUE.md`. Le noir, le rouge du toit et le
-gris d'ombre du logo, posés sur une **chaux** chaude (`#F4F1EC`) ; le
-blanc franc une section sur deux, une bande de noir par page. Ce noir
+gris d'ombre du logo, sur un **blanc** franc ; la **chaux** chaude
+(`#F4F1EC`) une section sur deux, une bande de noir par page. Ce noir
 est **nacré** (`--nacre`) : de légers reflets ivoire, champagne et
 vieux rose — sur les bandes sombres, le pied, la barre mobile et le
 survol des boutons ; l'enseigne du pied s'écrit en lettres nacrées,
-d'un bord à l'autre de la grille. Deux accents, qui ne couvrent jamais
-un fond : le **rouge** pour l'action et ce qui demande l'attention
-(boutons, liens, astérisques, erreurs, « vous êtes ici »), le **chêne**
-(`#8A5A2B`) pour les marques écrites (chevrons, numéros, puces, « + »).
-Le logo garde ses propres couleurs. Changer de palette, c'est changer
+d'un bord à l'autre de la grille. Une seule couleur, le **rouge** du
+toit, qui ne couvre jamais un fond : à plat sur les boutons d'appel,
+écrit pour les liens, astérisques, erreurs, « vous êtes ici », les
+chevrons, numéros et puces, en grand pour les chiffres de
+l'entreprise, et en filet au-dessus du pied de page. Le logo garde ses
+propres couleurs. Changer de palette, c'est changer
 `assets/css/00-jetons.css` : les autres feuilles ne demandent que des
-rôles (`--c-encre`, `--c-signal`, `--c-accent`, `--c-marque`…).
+rôles (`--c-encre`, `--c-signal`, `--c-accent`, `--c-eclat`…).
 Des cadres d'un pixel ; le repère carré d'angle ne marque que
 l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
+
+Ce que la v6 a changé, en bref (07/10/2026, « les mêmes couleurs, moins
+mort ») : le blanc devient le fond et la chaux passe une section sur
+deux ; les chiffres de l'entreprise s'écrivent au rouge du toit ; un
+filet rouge coiffe le pied de page ; le chêne sort de la palette, les
+marques prennent le rouge écrit.
 
 Ce que la v5 a changé, en bref (audit de design du 07/10/2026) :
 

@@ -1,33 +1,33 @@
 /* ============================================================
    DSG RÉNOVATION — 00 · JETONS DE DESIGN
    Concept : « LE PLAN D'IMPLANTATION »
-   Palette : « CHAUX, NOIR & ROUGE DSG » (v5, 07/10/2026) — le noir,
-   le rouge et le gris d'ombre du logo, posés sur une chaux chaude ;
-   un second accent, le chêne, pour ce qui s'écrit en couleur sans
-   appeler l'action. Le noir n'est jamais un aplat mort : sur les
-   bandes sombres, il est nacré — des reflets ivoire, champagne et
-   vieux rose, à peine posés.
+   Palette : « BLANC, CHAUX & ROUGE DSG » (v6, 07/10/2026) — le noir,
+   le rouge et le gris d'ombre du logo, sur un blanc franc que relaie
+   une chaux chaude. Le rouge du toit n'est plus réservé aux boutons :
+   il écrit les marques et les chiffres, et coiffe le pied de page. Le
+   noir n'est jamais un aplat mort : il est nacré — des reflets
+   ivoire, champagne et vieux rose, à peine posés.
 
    Un chantier de rénovation commence par un relevé : on reporte la
    pièce sur le plan, on pose des repères aux angles, puis on ouvre.
    Le site en reprend la matière et le geste :
-     - un fond de chaux, clair et chaud : l'enduit fini, pas l'acier ;
+     - un fond blanc relayé par la chaux : l'enduit frais, puis fini ;
      - une encre noire, celle des lettres du logo ;
      - des cadres d'un pixel ; le repère carré, piquet d'implantation
        du géomètre, marque les angles des deux blocs qui ouvrent et
        ferment la page (01-socle.css) ;
-     - deux accents, qui ne couvrent jamais un fond de section : le
-       rouge du toit pour l'action et ce qui demande l'attention, le
-       chêne pour les marques écrites.
+     - une seule couleur, le rouge du toit, qui ne couvre jamais un
+       fond de section : à plat sur les boutons d'appel, écrit pour ce
+       qu'on touche, ce qui se repère et ce qui doit se voir de loin.
    Le logo garde ses propres couleurs.
 
    Trois fonds rythment chaque page, jamais deux fois le même à la
    suite (outils/rythme.py) :
-     chaux · blanc (.sur-pale) · noir nacré (.sur-sombre, une bande
+     blanc · chaux (.sur-pale) · noir nacré (.sur-sombre, une bande
      par page, le pied et la barre mobile).
 
    Les autres feuilles ne nomment jamais une couleur : elles demandent
-   un rôle (--c-encre, --c-signal, --c-accent, --c-marque…). Changer
+   un rôle (--c-encre, --c-signal, --c-accent, --c-eclat…). Changer
    de palette, c'est changer ce fichier.
 
    Aucune valeur n'est écrite ailleurs qu'ici (hors cas commenté).
@@ -36,19 +36,18 @@
    ============================================================ */
 :root{
   /* ---------- Les couleurs ----------
-     Le noir, le rouge et le gris sont ceux du logo ; la chaux et le
-     chêne, ceux du chantier livré : l'enduit et le parquet. */
-  --c-chaux:#F4F1EC;         /* chaux : le fond */
-  --c-blanc:#FFFFFF;         /* blanc : une section sur deux, les cases */
+     Le noir, le rouge et le gris sont ceux du logo ; le blanc et la
+     chaux, ceux du chantier : l'enduit frais et l'enduit fini. */
+  --c-blanc:#FFFFFF;         /* blanc : le fond */
+  --c-chaux:#F4F1EC;         /* chaux : une section sur deux, les cases */
+  --c-chaux-2:#E9E4DC;       /* chaux creusée : survols posés sur la chaux */
   --c-noir:#1B1B1B;          /* noir du logo : l'encre et la nuit */
   --c-noir-2:#252422;        /* noir élevé : cases posées sur la nuit */
   --c-gris:#A6A4A5;          /* gris d'ombre des lettres du logo */
   --c-gris-fonce:#72716F;    /* le cadre de la nuit, à plat : repères, enseigne */
-  --c-rouge:#DD0022;         /* rouge du toit : l'action */
+  --c-rouge:#DD0022;         /* rouge du toit : l'action, les chiffres */
   --c-rouge-sombre:#B3001B;  /* le rouge écrit sur le clair */
   --c-rouge-clair:#FF6A5C;   /* le rouge écrit sur la nuit, teinte du toit */
-  --c-chene:#8A5A2B;         /* chêne : les marques écrites sur le clair */
-  --c-chene-clair:#C09468;   /* le chêne écrit sur la nuit */
 
   /* ---------- Le nacré ----------
      Trois reflets chauds à peine posés — ivoire en haut à gauche,
@@ -66,26 +65,26 @@
   --nacre-texte:linear-gradient(100deg,var(--c-gris-fonce) 0%,var(--c-gris) 30%,#B9A58C 55%,var(--c-gris) 78%,var(--c-gris-fonce) 100%);
 
   /* ---------- Surfaces ---------- */
-  --c-papier:var(--c-chaux);   /* DOMINANTE */
-  --c-papier-2:#E9E4DC;      /* creux : survols, onglet ouvert, emplacement d'image */
-  --c-fiche:var(--c-blanc);  /* relief : cellules de formulaire, étiquettes */
+  --c-papier:var(--c-blanc);   /* DOMINANTE */
+  --c-papier-2:var(--c-chaux); /* creux : survols, onglet ouvert, emplacement d'image */
+  --c-fiche:var(--c-chaux);  /* relief : cellules de formulaire, étiquettes */
   --c-bitume:var(--c-noir);  /* nuit : bandes sombres, pied, visionneuse */
   --c-bitume-2:var(--c-noir-2); /* surface élevée dans la nuit */
 
   /* Les mêmes teintes en composantes, pour les voiles translucides
      (en-tête dépoli, panneau posé sur photo, visionneuse, ombres). */
-  --c-papier-rgb:244,241,236;
+  --c-papier-rgb:255,255,255;
   --c-encre-rgb:27,27,27;
   --c-sombre-rgb:27,27,27;
   --c-craie-rgb:244,241,236;
   --c-blanc-rgb:255,255,255;
 
   /* ---------- Textes sur le clair ----------
-     chaux / blanc / creux. Le gris de lecture est foncé : la sérif,
-     plus fine que la grotesque, pâlissait à 7:1. */
-  --c-encre:var(--c-noir);   /* 15.3 / 17.2 / 13.6 */
-  --c-encre-60:#4A453F;      /*  8.4 /  9.5 /  7.5 */
-  --c-encre-40:#68625B;      /*  5.3 /  6.0 /  4.8 */
+     blanc / chaux / chaux creusée. Le gris de lecture est foncé : la
+     sérif, plus fine que la grotesque, pâlissait à 7:1. */
+  --c-encre:var(--c-noir);   /* 17.2 / 15.3 / 13.6 */
+  --c-encre-60:#4A453F;      /*  9.5 /  8.4 /  7.5 */
+  --c-encre-40:#68625B;      /*  6.0 /  5.3 /  4.8 */
   --c-craie:var(--c-chaux);  /* 15.3 sur la nuit */
   --c-craie-60:var(--c-gris); /* 7.0 sur la nuit, 6.3 sur la nuit élevée */
   /* Grand texte décoratif (l'enseigne du pied), quand le nacré en
@@ -108,21 +107,26 @@
      Ce qui s'écrit en rouge parce qu'on le touche ou qu'il demande
      l'attention : liens dans le texte, astérisques des champs
      obligatoires, erreurs, repère « vous êtes ici ». */
-  --c-accent:var(--c-rouge-sombre);  /*  6.4 /  7.2 /  5.7 */
+  --c-accent:var(--c-rouge-sombre);  /*  7.2 /  6.4 /  5.7 */
 
-  /* ---------- Chêne — les marques écrites ----------
-     Ce qui s'écrit en couleur sans appeler l'action : chevron des
-     intitulés, numéros d'étape, puces, « + » des chiffres. Il laisse
-     au rouge toute sa force : le rouge, c'est ce qu'on touche. */
-  --c-marque:var(--c-chene);         /*  5.2 /  5.9 /  4.6 */
+  /* ---------- Rouge sombre — les marques écrites ----------
+     Ce qui s'écrit en couleur pour qu'on s'y repère : chevron des
+     intitulés, numéros d'étape, puces. Elles
+     prenaient le chêne en v5 ; elles prennent le rouge écrit, et le
+     site n'a plus qu'une couleur, celle du toit. */
+  --c-marque:var(--c-rouge-sombre);  /*  7.2 /  6.4 /  5.7 */
+
+  /* ---------- Rouge du toit — l'éclat ----------
+     Ce qui doit se voir de loin : les chiffres de l'entreprise et leur
+     « + ». Le rouge du logo tel quel, en grand texte seulement (24 px
+     et plus, seuil 3:1). */
+  --c-eclat:var(--c-rouge);          /*  5.1 /  4.6 /  4.1 */
 
   /* ---------- États ----------
-     L'erreur prend le rouge écrit et son signe (04-formulaires.css) :
-     un brun rouille se confondait avec le chêne et se lisait comme une
-     aide. */
-  --c-valide:#2F6B4A;        /*  5.6 /  6.3 /  5.0 */
-  --c-alerte:var(--c-rouge-sombre);  /*  6.4 /  7.2 /  5.7 */
-  --c-focus:var(--c-noir);   /* 15.3 */
+     L'erreur prend le rouge écrit et son signe (04-formulaires.css). */
+  --c-valide:#2F6B4A;        /*  6.3 /  5.6 /  5.0 */
+  --c-alerte:var(--c-rouge-sombre);  /*  7.2 /  6.4 /  5.7 */
+  --c-focus:var(--c-noir);   /* 17.2 */
 
   /* ---------- Filets ----------
      Le cadre est tracé à l'encre pleine : c'est un trait de plan, pas
@@ -137,6 +141,9 @@
      doubleraient la couleur. */
   --c-cadre-plein:var(--c-cadre);
   --bd-fin:1px solid var(--c-ligne);
+  /* Le filet du toit : un trait rouge de 4 px en tête du pied de page,
+     la ligne du toit du logo posée sur la dalle qui ferme la page. */
+  --filet-toit:inset 0 4px 0 var(--c-rouge);
 
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
      du cadre à plat (--c-cadre-plein). */
@@ -151,23 +158,26 @@
    ajouter la classe à une section suffit.
    ============================================================ */
 
-/* Blanc : une section sur deux. Le blanc franc à côté de la chaux
+/* Chaux : une section sur deux. La chaux chaude à côté du blanc franc
    marque le passage d'une section à l'autre sans l'assombrir : la page
    reste lumineuse d'un bout à l'autre. Les textes du clair y tiennent
-   tous (colonne blanc ci-dessus) ; les cases y prennent la chaux. */
+   tous (colonne chaux ci-dessus) ; les cases y prennent le blanc. */
 .sur-pale{
-  --c-papier:var(--c-blanc);
-  --c-papier-2:var(--c-chaux);
-  --c-fiche:var(--c-chaux);
-  --c-papier-rgb:255,255,255;
+  --c-papier:var(--c-chaux);
+  --c-papier-2:var(--c-chaux-2);
+  --c-fiche:var(--c-blanc);
+  --c-papier-rgb:244,241,236;
   background-color:var(--c-papier);
 }
 
 /* Noir nacré : une bande par page, le pied et la barre mobile. Le
-   rouge clair et le chêne clair y deviennent les couleurs écrites, et
-   le bouton d'appel garde son aplat rouge : au survol, c'est la chaux
-   qui le recouvre. Le fond porte ses reflets ; les cases posées dessus
-   restent d'un noir mat, comme des pièces sur une table laquée.
+   rouge clair y devient la couleur écrite, et le bouton d'appel garde
+   son aplat rouge : au survol, c'est la chaux qui le recouvre. Les
+   chiffres gardent le rouge du toit (--c-eclat) : leurs cases sont
+   d'un noir mat, sans reflet, 3.4, et 3.0 au survol, sur la nuit
+   élevée (grand texte, seuil 3:1). Le fond porte ses reflets ; les
+   cases posées dessus restent d'un noir mat, comme des pièces sur une
+   table laquée.
    Contrastes : nuit / élevée / reflet le plus clair. */
 .sur-sombre{
   --c-papier:var(--c-noir);
@@ -180,7 +190,7 @@
      sombre, n'y tenait plus son seuil au reflet. */
   --c-encre-40:var(--c-gris);
   --c-accent:var(--c-rouge-clair);  /*  6.1 /  5.5 /  4.7 */
-  --c-marque:var(--c-chene-clair);  /*  6.3 /  5.7 /  4.8 */
+  --c-marque:var(--c-rouge-clair);
   --c-signal-fonce:var(--c-chaux);
   --fond-survol-signal:var(--c-chaux);
   --c-sur-signal-survol:var(--c-noir);   /* 15.3 */

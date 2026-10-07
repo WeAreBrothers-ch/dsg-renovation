@@ -40,11 +40,12 @@
 /* ------------------------------------------------------------
    PIED DE PAGE
    Le seul grand aplat de nuit du site : il ferme la page comme la
-   dalle ferme le chantier. Ses colonnes sont des cases d'un pixel,
-   et le nom de l'entreprise s'y inscrit en très grand.
+   dalle ferme le chantier, sous le filet rouge du toit. Ses colonnes
+   sont des cases d'un pixel, et le nom de l'entreprise s'y inscrit
+   en très grand.
    ------------------------------------------------------------ */
 .pied{
-  color:var(--c-encre);
+  color:var(--c-encre);box-shadow:var(--filet-toit);
   padding-top:var(--sp-6);padding-bottom:calc(var(--h-barre-mobile) + env(safe-area-inset-bottom));
   overflow:hidden;position:relative;
 }
