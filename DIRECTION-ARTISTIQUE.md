@@ -4,9 +4,16 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6**, en production.
+Date : 07/10/2026 — Statut : **v6.1**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**La trame du relevé, 07/10/2026 (v6.1).** Pour que la bande de noir de chaque page vive sans rien ajouter de
+spectaculaire, elle porte le quadrillage du géomètre : un point carré tous les 24 px, une chaux à 14 % (§ 2,
+« La trame »). Toucher la bande ou cliquer dedans y fait partir une **onde carrée** au rouge écrit de la nuit
+— un plan n'a pas d'angle arrondi. Idée reprise du « Sonar Grid » publié sur 21st.dev (un composant React,
+anneaux ronds, impulsions sans fin) ; ici réécrite pour le site, sans dépendance, et ramenée aux règles du § 8 :
+une démonstration à l'arrivée, puis plus rien qui ne réponde à un geste (`trame.js`, `12-trame.css`).
 
 **Blanc, chaux & rouge DSG, 07/10/2026 (v6).** Le client trouve le site « mort » : du beige et du noir, trop
 sobre. Mesuré sur l'accueil, le rouge du logo n'en couvrait que 0,3 % (chaux 39 %, blanc 25 %, noir 22 %). Les
@@ -286,6 +293,14 @@ encre. Chaque fond redéfinit localement ces jetons : un composant demande `--c-
 `--filet-toit` : un trait rouge de 4 px en tête du pied de page, la ligne du toit posée sur la dalle qui
 ferme la page. Aucun filet rouge sur l'en-tête : essayé, retiré à la demande du client.
 
+### La trame
+`--trame-pas` 24 px · `--trame-point` chaux à 14 % (un point carré de 2 px, 1.6 sur la nuit : un décor, que le
+texte domine de loin) · `--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas qui
+s'éteint) · `--trame-masque` : sous la colonne de texte, accrochée à gauche, la toile ne garde que les deux
+cinquièmes de sa force. Seulement dans la bande de noir de `<main>`, jamais au pied de page (l'enseigne y suffit) ni sur un
+fond clair. Les cases mates posées dans la bande la recouvrent. Cachée en couleurs imposées et à
+l'impression.
+
 ### Voiles
 Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, étiquettes « Avant » /
 « Après », ombres) s'écrivent `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`,
@@ -524,14 +539,21 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Comparateur | double translation `transform` (calque + image) | instantané, suit le doigt |
 | Boutons : seconde encre qui glisse | `transform: scaleX` | 420 ms |
 | Pression | `scale: .97` | 160 ms |
+| Onde de la trame (au toucher, au clic) | points allumés sur une toile, sous le contenu | 3 s, sortie |
+| Arrivée de la trame (une fois) | une onde déjà partie, une seconde 1,2 s après | moins de 5 s en tout |
 
 - **Rien ne bouge au défilement** (05/10/2026) : ni apparitions, ni titres qui montent, ni photos qui se
   dévoilent, ni chiffres qui défilent, ni photos qui glissent. Au téléphone, ces effets laissaient des zones
   vides et des photos à moitié découvertes pendant qu'on faisait défiler : tout s'affiche d'emblée. Le
-  mouvement ne répond plus qu'à un geste (boutons, comparateur, onglets).
+  mouvement ne répond plus qu'à un geste (boutons, comparateur, onglets, trame).
+- **Deux démonstrations, une seule fois chacune** : la poignée du comparateur, et l'arrivée de la trame quand
+  le haut de la bande de noir atteint les deux cinquièmes de l'écran. Elles ne cachent ni ne retardent aucun
+  contenu ; la seconde dure moins de cinq secondes, puis la trame se tient immobile (aucun mouvement sans
+  fin : WCAG 2.2.2).
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
-  seule, les boutons « Avant » / « Après » la placent d'un coup, le reste ne bouge pas.
+  seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
+  répond plus au toucher, le reste ne bouge pas.
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
@@ -563,5 +585,5 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   méthode en cinq temps, rang d'une vue dans la visionneuse).
 - Une étiquette posée sur une photo au repos (hors états du comparateur) ; un texte alternatif recopié en
   légende.
-- Défilant perpétuel (marquee) : il a été retiré avec cette version.
+- Défilant perpétuel (marquee) : il a été retiré avec cette version. De même, une trame qui pulse sans fin.
 - Toute animation qui touche à la taille ou à la position dans la mise en page.

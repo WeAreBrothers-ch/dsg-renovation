@@ -148,6 +148,18 @@
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
      du cadre à plat (--c-cadre-plein). */
   --repere:5px;
+
+  /* ---------- La trame du relevé ----------
+     La bande de nuit porte le quadrillage du géomètre : un point carré
+     tous les 24 px, une chaux à 14 % (le point seul fait 1.6 sur la
+     nuit : un décor, que le texte domine de loin). Une onde carrée,
+     au rouge écrit de la nuit, s'y propage depuis le point touché
+     (trame.js, 12-trame.css). Elle s'efface à demi sous la colonne de
+     texte, accrochée à gauche. */
+  --trame-pas:24px;
+  --trame-point:rgba(var(--c-craie-rgb),.14);
+  --trame-onde:var(--c-rouge-clair);
+  --trame-masque:linear-gradient(100deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,1) 55%);
 }
 
 /* ============================================================

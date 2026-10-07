@@ -150,6 +150,13 @@ l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
 
+Ce que la v6.1 a ajouté (07/10/2026) : la bande de noir de chaque page
+porte la **trame du relevé**, un quadrillage de points à peine visible ;
+un toucher ou un clic y fait partir une onde carrée au rouge du toit, et
+la bande en montre une fois deux à son arrivée, puis se tient immobile.
+Idée reprise du « Sonar Grid » de 21st.dev, réécrite sans React ni
+dépendance (`trame.js`, `12-trame.css`).
+
 Ce que la v6 a changé, en bref (07/10/2026, « les mêmes couleurs, moins
 mort ») : le blanc devient le fond et la chaux passe une section sur
 deux ; les chiffres de l'entreprise s'écrivent au rouge du toit ; un
@@ -246,6 +253,7 @@ pas bougé d'un pixel.
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |
 | `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |
+| `trame.js` | trame du relevé sous la bande de noir : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
 
 Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans
