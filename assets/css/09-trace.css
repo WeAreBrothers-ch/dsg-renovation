@@ -1,0 +1,52 @@
+/* ============================================================
+   DSG RÉNOVATION — 09 · LE PLAN SE TRACE
+   Quand un bloc arrive à l'écran, ses traits se tracent, comme on
+   reporte un relevé sur le plan : le toit de l'intitulé se dessine, les
+   filets des bordereaux se tirent à la règle, un par un, de gauche à
+   droite (motion.js pose .est-trace, une seule fois par bloc).
+
+   Seuls les traits bougent. Le texte, les chiffres, les photos sont là
+   dès le premier affichage : rien ne se dévoile, aucune zone ne reste
+   vide pendant qu'on fait défiler — ce qui avait fait retirer les
+   apparitions au défilement le 05/10/2026. Sans script ou si le visiteur
+   demande moins de mouvement, tout est tracé d'emblée.
+
+   Le filet est peint par border-image, dont le dégradé s'arrête à
+   --trace : animer cette valeur tire le trait sans toucher à la mise en
+   page. --regle redit la couleur du filet d'origine.
+   ============================================================ */
+@property --trace{syntax:"<percentage>";inherits:false;initial-value:100%}
+
+.metiers,.metiers__ligne,.lots.service__villes,.lots.service__villes li,
+.piece__faits,.piece__faits div,.rappel__joindre,.rappel__joindre div,
+.service__liste li,.releve--regle dt,.releve--regle dd,.repli+.repli{
+  border-image:linear-gradient(to right,var(--regle) var(--trace),transparent var(--trace)) 1;
+}
+.metiers,.metiers__ligne,.lots.service__villes,.piece__faits,
+.rappel__joindre,.repli+.repli{--regle:var(--c-cadre)}
+.lots.service__villes li,.piece__faits div,.rappel__joindre div,
+.service__liste li,.releve--regle dt,.releve--regle dd{--regle:var(--c-ligne)}
+
+@media (prefers-reduced-motion:no-preference){
+  /* Chaque filet part à son rang dans le bordereau (--rang, posé par
+     motion.js sur les enfants du bloc). */
+  .metiers,.metiers__ligne,.lots.service__villes,.lots.service__villes li,
+  .piece__faits,.piece__faits div,.rappel__joindre,.rappel__joindre div,
+  .service__liste li,.releve--regle dt,.releve--regle dd,.repli+.repli{
+    transition:--trace var(--d-ample) var(--e-trait) calc(var(--rang,0) * var(--d-relais));
+  }
+  .js :is(.metiers,.lots.service__villes,.piece__faits,.rappel__joindre):not(.est-trace),
+  .js .metiers:not(.est-trace) .metiers__ligne,
+  .js .lots.service__villes:not(.est-trace) li,
+  .js .piece__faits:not(.est-trace) div,
+  .js .rappel__joindre:not(.est-trace) div,
+  .js .service__liste:not(.est-trace) li,
+  .js .releve--regle:not(.est-trace) :is(dt,dd),
+  .js .replis:not(.est-trace) .repli+.repli{--trace:0%}
+
+  /* Le toit de l'intitulé se dessine de gauche à droite. On guette la
+     marge, et non l'intercalaire : au bureau, celui-ci n'a pas de boîte
+     (display:contents) et ne serait jamais vu arriver. */
+  .intercalaire__nom::before{transition:clip-path var(--d-ample) var(--e-trait)}
+  .js .intercalaire__marge:not(.est-trace) .intercalaire__nom::before{clip-path:inset(0 100% 0 0)}
+}

@@ -17,59 +17,59 @@
    des hachures. Au survol d'une commune, sur le plan ou dans la
    liste, son repère se marque des deux côtés (carte.js).
    ============================================================ */
-.carte{margin:0 0 var(--sp-7)}
-.carte__cadre{position:relative}
-.carte__plan{position:relative;width:100%}
-.carte__fond{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.carte__fond path{vector-effect:non-scaling-stroke}
-.carte__lac{fill:var(--c-papier-2);stroke:var(--c-cadre);stroke-width:1px}
+.leman{margin:0 0 var(--sp-7)}
+.leman__cadre{position:relative}
+.leman__plan{position:relative;width:100%}
+.leman__fond{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.leman__fond path{vector-effect:non-scaling-stroke}
+.leman__lac{fill:var(--c-papier-2);stroke:var(--c-cadre);stroke-width:1px}
 /* Les hachures de l'eau : un trait d'un pixel, calé sur la grille des
    pixels, à six ou sept pixels d'écart. Le plan du téléphone, deux fois
    plus petit, n'en garde qu'une sur deux. */
-.carte__onde{fill:none;stroke:var(--c-ligne);stroke-width:1px;shape-rendering:crispEdges}
-.carte__onde--serree{display:none}
-.carte__loupe,.carte__renvoi{display:none;fill:none;stroke-width:1px;vector-effect:non-scaling-stroke}
-.carte__loupe{stroke:var(--c-cadre)}
-.carte__renvoi{stroke:var(--c-ligne-forte)}
+.leman__onde{fill:none;stroke:var(--c-ligne);stroke-width:1px;shape-rendering:crispEdges}
+.leman__onde--serree{display:none}
+.leman__loupe,.leman__renvoi{display:none;fill:none;stroke-width:1px;vector-effect:non-scaling-stroke}
+.leman__loupe{stroke:var(--c-cadre)}
+.leman__renvoi{stroke:var(--c-ligne-forte)}
 
-.carte__nom-lac{
+.leman__nom-lac{
   position:absolute;translate:-50% -50%;
   font-family:var(--f-lecture);font-size:var(--t-chapo);letter-spacing:.32em;
   color:var(--c-encre-60);
   text-shadow:0 0 3px var(--c-papier-2),0 0 6px var(--c-papier-2);
 }
 
-.carte__lieux{list-style:none;margin:0;padding:0}
-.carte__lieu{position:absolute;width:0;height:0}
+.leman__lieux{list-style:none;margin:0;padding:0}
+.leman__lieu{position:absolute;width:0;height:0}
 /* Le repère, puis une cible de survol plus large que lui. */
-.carte__lieu::before,.carte__lieu::after{content:"";position:absolute;translate:-50% -50%}
-.carte__lieu::before{
+.leman__lieu::before,.leman__lieu::after{content:"";position:absolute;translate:-50% -50%}
+.leman__lieu::before{
   width:7px;height:7px;background:var(--c-marque);
   transition:scale var(--d-rapide) var(--e-sortie),background-color var(--d-rapide) var(--e-standard);
 }
-.carte__lieu::after{width:28px;height:28px}
-.carte__lieu--atelier::before{
+.leman__lieu::after{width:28px;height:28px}
+.leman__lieu--atelier::before{
   width:11px;height:11px;background:var(--c-signal);
   box-shadow:0 0 0 3px var(--c-papier),0 0 0 4px var(--c-cadre);
 }
 
-.carte__nom{
+.leman__nom{
   position:absolute;white-space:nowrap;
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-etiquette);line-height:1.25;
   color:var(--c-encre);
   text-shadow:0 0 2px var(--c-papier),0 0 4px var(--c-papier),0 0 6px var(--c-papier);
 }
-.carte__lieu--e .carte__nom{left:10px;top:0;translate:0 -50%}
-.carte__lieu--o .carte__nom{right:10px;top:0;translate:0 -50%;text-align:right}
-.carte__lieu--n .carte__nom{bottom:8px;left:0;translate:-50% 0}
-.carte__lieu--s .carte__nom{top:8px;left:0;translate:-50% 0}
-.carte__lieu--atelier.carte__lieu--e .carte__nom{left:16px}
-.carte__lieu--atelier.carte__lieu--o .carte__nom{right:16px}
-.carte__lieu--atelier.carte__lieu--n .carte__nom{bottom:12px}
+.leman__lieu--e .leman__nom{left:10px;top:0;translate:0 -50%}
+.leman__lieu--o .leman__nom{right:10px;top:0;translate:0 -50%;text-align:right}
+.leman__lieu--n .leman__nom{bottom:8px;left:0;translate:-50% 0}
+.leman__lieu--s .leman__nom{top:8px;left:0;translate:-50% 0}
+.leman__lieu--atelier.leman__lieu--e .leman__nom{left:16px}
+.leman__lieu--atelier.leman__lieu--o .leman__nom{right:16px}
+.leman__lieu--atelier.leman__lieu--n .leman__nom{bottom:12px}
 
 /* La commune survolée, sur le plan comme dans la liste. */
-.carte__lieu.est-montre{z-index:1}
-.carte__lieu.est-montre::before{scale:1.6;background:var(--c-signal)}
+.leman__lieu.est-montre{z-index:1}
+.leman__lieu.est-montre::before{scale:1.6;background:var(--c-signal)}
 .lots.service__villes li{transition:color var(--d-rapide) var(--e-standard)}
 .lots.service__villes li::before{transition:scale var(--d-rapide) var(--e-sortie)}
 .lots.service__villes li.est-montre{color:var(--c-accent)}
@@ -77,62 +77,80 @@
 
 /* Une règle de dix kilomètres et ses deux talons, en haut à gauche,
    dans le blanc du Jura. */
-.carte__echelle{
+.leman__echelle{
   position:absolute;left:0;top:0;
   padding-bottom:var(--sp-2);text-align:center;white-space:nowrap;
   font-size:var(--t-etiquette);line-height:1;color:var(--c-encre-60);
   border-bottom:1px solid var(--c-encre);
 }
-.carte__echelle::before,.carte__echelle::after{
+.leman__echelle::before,.leman__echelle::after{
   content:"";position:absolute;bottom:-1px;width:1px;height:7px;background:var(--c-encre);
 }
-.carte__echelle::before{left:0}
-.carte__echelle::after{right:0}
+.leman__echelle::before{left:0}
+.leman__echelle::after{right:0}
 
 /* Au téléphone, le plan ne garde que les villes qu'il peut nommer ; les
    communes serrées autour de Lausanne passent au carton, posé dessous
    sur toute la largeur, son titre au-dessus de son cadre. */
-.carte__lieu--serre:not(.carte__lieu--atelier){display:none}
-.carte__carton{margin-top:var(--sp-6)}
-.carte__titre-carton{
+.leman__lieu--serre:not(.leman__lieu--atelier){display:none}
+.leman__carton{margin-top:var(--sp-6)}
+.leman__titre-carton{
   display:block;margin-bottom:var(--sp-2);
   font-family:var(--f-titre);font-weight:500;font-size:var(--t-etiquette);line-height:1.2;
   color:var(--c-encre-60);
 }
-.carte__carton .carte__plan{border:1px solid var(--c-cadre);background:var(--c-papier);overflow:hidden}
+.leman__carton .leman__plan{border:1px solid var(--c-cadre);background:var(--c-papier);overflow:hidden}
 
 /* La légende : les deux sortes de repères, puis la source du fond. */
-.carte__legende{
+.leman__legende{
   display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2) var(--sp-5);
   margin-top:var(--sp-4);font-size:var(--t-etiquette);line-height:1.3;color:var(--c-encre-60);
 }
-.carte__cle{display:inline-flex;align-items:center;gap:var(--sp-2)}
-.carte__cle::before{content:"";flex:0 0 auto;width:7px;height:7px;background:var(--c-marque)}
-.carte__cle--atelier::before{
+.leman__cle{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.leman__cle::before{content:"";flex:0 0 auto;width:7px;height:7px;background:var(--c-marque)}
+.leman__cle--atelier::before{
   width:9px;height:9px;margin:3px;background:var(--c-signal);
   box-shadow:0 0 0 2px var(--c-papier),0 0 0 3px var(--c-cadre);
 }
-.carte__source{color:var(--c-encre-40)}
+.leman__source{color:var(--c-encre-40)}
 
 /* Dès la tablette, le carton se loge au pied du plan, à droite ; le
    plan montre toutes les communes, et le carton les nomme. */
 @media (min-width:768px){
-  .carte__onde--serree{display:inline}
-  .carte__loupe,.carte__renvoi{display:inline}
-  .carte__lieu--serre:not(.carte__lieu--atelier){display:block}
-  .carte__lieu--serre .carte__nom{display:none}
-  .carte__carton{position:absolute;left:var(--x);top:var(--y);width:var(--l);margin:0}
-  .carte__titre-carton{
+  .leman__onde--serree{display:inline}
+  .leman__loupe,.leman__renvoi{display:inline}
+  .leman__lieu--serre:not(.leman__lieu--atelier){display:block}
+  .leman__lieu--serre .leman__nom{display:none}
+  .leman__carton{position:absolute;left:var(--x);top:var(--y);width:var(--l);margin:0}
+  .leman__titre-carton{
     position:absolute;left:0;bottom:0;z-index:1;margin:0;padding:var(--sp-3) var(--sp-4);
     font-family:var(--f-texte);font-weight:400;
     text-shadow:0 0 2px var(--c-papier-2),0 0 4px var(--c-papier-2),0 0 6px var(--c-papier-2);
   }
 }
 
+/* À son arrivée à l'écran, la carte se relève depuis l'atelier : le
+   dessin (rive, eau, cadre de repérage) s'étend en cercle à partir de
+   lui (--ox, --oy, posés par carte.py), et les piquets se plantent de
+   proche en proche (--delai). Les noms sont là d'emblée. Le repère se
+   plante par `transform`, que le survol (`scale`) ne touche pas. */
+@media (prefers-reduced-motion:no-preference){
+  .leman__fond{
+    clip-path:circle(110% at var(--ox,50%) var(--oy,50%));
+    transition:clip-path 1.4s var(--e-trait);
+  }
+  .leman__lieu::before{
+    transition:transform 420ms var(--e-sortie) var(--delai,0ms),
+      scale var(--d-rapide) var(--e-sortie),background-color var(--d-rapide) var(--e-standard);
+  }
+  .js .leman:not(.est-trace) .leman__fond{clip-path:circle(0 at var(--ox,50%) var(--oy,50%))}
+  .js .leman:not(.est-trace) .leman__lieu::before{transform:scale(0)}
+}
+
 /* Couleurs imposées : le plan garde son trait, les repères leur
    couleur système. */
 @media (forced-colors:active){
-  .carte__lac{fill:Canvas;stroke:CanvasText}
-  .carte__onde{stroke:GrayText}
-  .carte__lieu::before{background:Highlight;forced-color-adjust:none}
+  .leman__lac{fill:Canvas;stroke:CanvasText}
+  .leman__onde{stroke:GrayText}
+  .leman__lieu::before{background:Highlight;forced-color-adjust:none}
 }

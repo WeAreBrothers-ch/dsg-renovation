@@ -305,6 +305,12 @@
   --d-rapide:180ms;
   --d-normal:240ms;
   --d-ample:800ms;
+  /* Le plan se trace (09-trace.css) : un trait tiré à la règle, d'une
+     allure presque égale, qui ralentit à peine en arrivant — la courbe
+     de sortie en ferait les trois quarts avant qu'on le voie partir ;
+     et l'écart entre deux filets d'un même bordereau. */
+  --e-trait:cubic-bezier(.3,.3,.4,1);
+  --d-relais:70ms;
 
   /* ---------- Mesures d'interface ----------
      Sur téléphone et tablette, la barre d'action occupe le bas de

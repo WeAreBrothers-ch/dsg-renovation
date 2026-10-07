@@ -159,15 +159,29 @@ def _hachures(haut, bas, pas, depart, gauche=0, droite=LARGEUR):
     return "".join(lignes)
 
 
+# Quand la carte arrive à l'écran, le relevé s'étend depuis l'atelier et
+# les piquets se plantent de proche en proche : chacun attend son tour,
+# _PIQUET_DEPART plus _PIQUET_PAR_KM par kilomètre (13-carte.css).
+_PIQUET_DEPART = 600
+_PIQUET_PAR_KM = 14
+
+
+def _delai(lat, lon):
+    """Le moment où se plante un repère, en millisecondes."""
+    lat0, lon0 = LIEUX["Lausanne"][:2]
+    km = math.hypot((lon - lon0) * _KM_PAR_DEGRE, (lat - lat0) * 111.2)
+    return round(_PIQUET_DEPART + km * _PIQUET_PAR_KM)
+
+
 def _repere(nom, position, cote, serre=False):
     """Un repère. `serre` : posé sur le plan mais nommé dans le carton ;
     au téléphone, le plan ne le montre pas."""
-    classes = "carte__lieu" + (" carte__lieu--%s" % cote if cote else "")
+    classes = "leman__lieu" + (" leman__lieu--%s" % cote if cote else "")
     if nom == "Lausanne":
-        classes += " carte__lieu--atelier"
+        classes += " leman__lieu--atelier"
     if serre:
-        classes += " carte__lieu--serre"
-    texte = f'<span class="carte__nom">{nom}</span>' if cote else ""
+        classes += " leman__lieu--serre"
+    texte = f'<span class="leman__nom">{nom}</span>' if cote else ""
     return (f'            <li class="{classes}" data-lieu="{ancre(nom)}" '
             f'style="{position}">{texte}</li>')
 
@@ -187,52 +201,58 @@ def carte():
     for nom in COMMUNES:
         lat, lon, cote_plan, cote_carton = LIEUX[nom]
         x, y = _plan(lat, lon)
-        plan.append(_repere(nom, _pour_cent(x, y), cote_plan,
+        delai = ";--delai:%dms" % _delai(lat, lon)
+        plan.append(_repere(nom, _pour_cent(x, y) + delai, cote_plan,
                             serre=bool(cote_carton)))
         if cote_carton:
-            carton.append(_repere(nom, _pour_cent(x, y, ll, lh, lx, ly),
+            carton.append(_repere(nom, _pour_cent(x, y, ll, lh, lx, ly) + delai,
                                   cote_carton))
     dix_km = 100 * 10 / _KM_PAR_DEGRE * _K * _ECHELLE / LARGEUR
+    # Le relevé s'étend depuis l'atelier : centre du dévoilement, en
+    # pourcentage de chaque plan (13-carte.css).
+    ax, ay = _plan(*LIEUX["Lausanne"][:2])
+    depuis_plan = "--ox:%.2f%%;--oy:%.2f%%" % (100 * ax / LARGEUR, 100 * ay / HAUTEUR)
+    depuis_carton = "--ox:%.2f%%;--oy:%.2f%%" % (100 * (ax - lx) / ll, 100 * (ay - ly) / lh)
     place = "--x:%.2f%%;--y:%.2f%%;--l:%.2f%%" % (
         100 * cx / LARGEUR, 100 * cy / HAUTEUR, 100 * cl / LARGEUR)
-    return f"""      <figure class="carte" role="img" aria-label="Plan du Léman : l'atelier à Lausanne et les communes où nous intervenons, de Genève à Montreux">
-        <div class="carte__cadre">
-        <div class="carte__plan" style="aspect-ratio:{LARGEUR}/{HAUTEUR}">
-          <svg class="carte__fond" viewBox="0 0 {LARGEUR} {HAUTEUR}" aria-hidden="true" focusable="false">
+    return f"""      <figure class="leman" role="img" aria-label="Plan du Léman : l'atelier à Lausanne et les communes où nous intervenons, de Genève à Montreux">
+        <div class="leman__cadre">
+        <div class="leman__plan" style="aspect-ratio:{LARGEUR}/{HAUTEUR};{depuis_plan}">
+          <svg class="leman__fond" viewBox="0 0 {LARGEUR} {HAUTEUR}" aria-hidden="true" focusable="false">
             <defs>
               <path id="carteRive" d="{_rive()}"/>
               <clipPath id="carteEau"><use href="#carteRive"/></clipPath>
             </defs>
-            <use class="carte__lac" href="#carteRive"/>
+            <use class="leman__lac" href="#carteRive"/>
             <g clip-path="url(#carteEau)">
-              <path class="carte__onde" d="{_hachures(0, HAUTEUR, 16, 4)}"/>
-              <path class="carte__onde carte__onde--serree" d="{_hachures(0, HAUTEUR, 16, 12)}"/>
+              <path class="leman__onde" d="{_hachures(0, HAUTEUR, 16, 4)}"/>
+              <path class="leman__onde leman__onde--serree" d="{_hachures(0, HAUTEUR, 16, 12)}"/>
             </g>
-            <rect class="carte__loupe" x="{lx:.1f}" y="{ly:.1f}" width="{ll:.1f}" height="{lh:.1f}"/>
-            <path class="carte__renvoi" d="M{lx:.1f} {ly + lh:.1f}L{cx:.1f} {cy:.1f}M{lx + ll:.1f} {ly + lh:.1f}L{LARGEUR} {cy:.1f}"/>
+            <rect class="leman__loupe" x="{lx:.1f}" y="{ly:.1f}" width="{ll:.1f}" height="{lh:.1f}"/>
+            <path class="leman__renvoi" d="M{lx:.1f} {ly + lh:.1f}L{cx:.1f} {cy:.1f}M{lx + ll:.1f} {ly + lh:.1f}L{LARGEUR} {cy:.1f}"/>
           </svg>
-          <span class="carte__nom-lac" style="{_pour_cent(*_plan(*_LAC))}" aria-hidden="true">Léman</span>
-          <ul class="carte__lieux" aria-hidden="true">
+          <span class="leman__nom-lac" style="{_pour_cent(*_plan(*_LAC))}" aria-hidden="true">Léman</span>
+          <ul class="leman__lieux" aria-hidden="true">
 {chr(10).join(plan)}
           </ul>
-          <span class="carte__echelle" style="width:{dix_km:.2f}%" aria-hidden="true">10 km</span>
+          <span class="leman__echelle" style="width:{dix_km:.2f}%" aria-hidden="true">10 km</span>
         </div>
-        <div class="carte__carton" style="{place}" aria-hidden="true">
-          <span class="carte__titre-carton">Lausanne et environs</span>
-          <div class="carte__plan" style="aspect-ratio:{ll:.1f}/{lh:.1f}">
-            <svg class="carte__fond" viewBox="{lx:.1f} {ly:.1f} {ll:.1f} {lh:.1f}" focusable="false">
-              <use class="carte__lac" href="#carteRive"/>
-              <path class="carte__onde" clip-path="url(#carteEau)" d="{_hachures(ly, ly + lh, 8 / _ZOOM / 1.1, 0, lx, lx + ll)}"/>
+        <div class="leman__carton" style="{place}" aria-hidden="true">
+          <span class="leman__titre-carton">Lausanne et environs</span>
+          <div class="leman__plan" style="aspect-ratio:{ll:.1f}/{lh:.1f};{depuis_carton}">
+            <svg class="leman__fond" viewBox="{lx:.1f} {ly:.1f} {ll:.1f} {lh:.1f}" focusable="false">
+              <use class="leman__lac" href="#carteRive"/>
+              <path class="leman__onde" clip-path="url(#carteEau)" d="{_hachures(ly, ly + lh, 8 / _ZOOM / 1.1, 0, lx, lx + ll)}"/>
             </svg>
-            <ul class="carte__lieux">
+            <ul class="leman__lieux">
 {chr(10).join(carton)}
             </ul>
           </div>
         </div>
         </div>
-        <figcaption class="carte__legende">
-          <span class="carte__cle carte__cle--atelier">Atelier, avenue de Béthusy</span>
-          <span class="carte__cle">Communes où nous intervenons</span>
-          <span class="carte__source">Contours : OFS, swisstopo</span>
+        <figcaption class="leman__legende">
+          <span class="leman__cle leman__cle--atelier">Atelier, avenue de Béthusy</span>
+          <span class="leman__cle">Communes où nous intervenons</span>
+          <span class="leman__source">Contours : OFS, swisstopo</span>
         </figcaption>
       </figure>"""

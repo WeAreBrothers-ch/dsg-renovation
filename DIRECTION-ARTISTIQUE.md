@@ -4,9 +4,21 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.2**, en production.
+Date : 07/10/2026 — Statut : **v6.3**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Le plan se trace, 07/10/2026 (v6.3).** Demande de l'agence : un site « un tout petit peu plus vivant, avec du
+mouvement », qui ne se parcoure pas sans que rien ne se passe, sans le dénaturer. Quand un bloc arrive à l'écran,
+**ses traits se tracent**, comme on reporte un relevé sur le plan : le toit de l'intitulé se dessine, les filets
+des bordereaux se tirent à la règle un par un (prestations, communes, repères d'en-tête, coordonnées, relevés des
+chantiers, dépliants), et le plan du Léman se relève depuis l'atelier — le dessin s'étend en cercle à partir de
+lui, les piquets se plantent de proche en proche. **Seuls les traits bougent** : texte, chiffres et photos sont
+là dès le premier affichage, rien ne se dévoile, aucune zone ne reste vide — ce qui avait fait retirer les
+apparitions le 05/10. Une fois par bloc, moins d'une seconde (la carte : un peu plus) ; rien sans script ni en
+mouvement réduit (`09-trace.css`, `motion.js`). Le même jour, le nord du plan est retiré et le carton de
+Lausanne passe sous le plan au téléphone ; la classe du plan devient `.leman` (`.carte` désignait déjà les
+cartes à filet, auxquelles elle ajoutait une marge).
 
 **Le plan du Léman, 07/10/2026 (v6.2).** La section « Zone » de l'accueil n'était qu'un texte et une liste
 de communes. Elle montre désormais le lac dessiné comme un plan d'implantation, sans aucune photo : la rive
@@ -555,19 +567,26 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Onde de la trame (au toucher, au clic) | points allumés sur une toile, sous le contenu | 3 s, sortie |
 | Arrivée de la trame (une fois) | une onde déjà partie, une seconde 1,2 s après | moins de 5 s en tout |
 | Commune survolée (plan, liste) | `scale` du repère, couleur du nom | 180 ms, sortie |
+| Filet tiré à la règle (à l'arrivée du bloc) | `border-image` jusqu'à `--trace` | 800 ms, `--e-trait`, 70 ms d'un filet à l'autre |
+| Toit de l'intitulé (à l'arrivée) | `clip-path` | 800 ms, `--e-trait` |
+| Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
 
-- **Rien ne bouge au défilement** (05/10/2026) : ni apparitions, ni titres qui montent, ni photos qui se
-  dévoilent, ni chiffres qui défilent, ni photos qui glissent. Au téléphone, ces effets laissaient des zones
-  vides et des photos à moitié découvertes pendant qu'on faisait défiler : tout s'affiche d'emblée. Le
-  mouvement ne répond plus qu'à un geste (boutons, comparateur, onglets, trame).
+- **Au défilement, seuls les traits se tracent** (v6.3). Le 05/10/2026, les apparitions avaient été retirées : ni
+  titres qui montent, ni photos qui se dévoilent, ni chiffres qui défilent — au téléphone, elles laissaient des
+  zones vides et des photos à moitié découvertes. La règle reste pour tout ce qui se lit et se regarde : texte,
+  chiffres et photos s'affichent d'emblée. Seuls les traits du plan se tracent quand leur bloc arrive (filets,
+  toits, plan du Léman) : une fois, sans rien cacher. Pour le reste, le mouvement ne répond qu'à un geste
+  (boutons, comparateur, onglets, trame).
 - **Deux démonstrations, une seule fois chacune** : la poignée du comparateur, et l'arrivée de la trame quand
   le haut de la bande de noir atteint les deux cinquièmes de l'écran. Elles ne cachent ni ne retardent aucun
   contenu ; la seconde dure moins de cinq secondes, puis la trame se tient immobile (aucun mouvement sans
   fin : WCAG 2.2.2).
-- Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)`.
+- Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)` ; pour un trait qui se tire,
+  `--e-trait` `cubic-bezier(.3,.3,.4,1)` — une allure presque égale, la courbe de sortie en ferait les trois
+  quarts avant qu'on le voie partir.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
   seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
-  répond plus au toucher, le reste ne bouge pas.
+  répond plus au toucher, les traits sont tracés d'emblée, le reste ne bouge pas.
 - **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
@@ -600,4 +619,5 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Une étiquette posée sur une photo au repos (hors états du comparateur) ; un texte alternatif recopié en
   légende.
 - Défilant perpétuel (marquee) : il a été retiré avec cette version. De même, une trame qui pulse sans fin.
+- Au défilement, autre chose que des traits qui se tracent : un texte, un chiffre ou une photo qui apparaît.
 - Toute animation qui touche à la taille ou à la position dans la mise en page.

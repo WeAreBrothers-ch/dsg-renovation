@@ -25,4 +25,10 @@
   a[href^="http"]::after{content:" (" attr(href) ")";font-size:10px}
   .chemise,.temoin{break-inside:avoid}
   .partenaires__grille img{filter:grayscale(1);opacity:1}
+  /* Sur papier, le plan est tracé en entier, même là où l'on n'a pas fait
+     défiler. */
+  *{--trace:100%!important}
+  .intercalaire__nom::before{clip-path:none!important}
+  .leman__fond{clip-path:none!important}
+  .leman__lieu::before{transform:none!important}
 }

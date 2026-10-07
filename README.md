@@ -46,7 +46,7 @@ Après une modification du contenu, des feuilles de style ou du chrome :
 python3 outils/construire.py
 ```
 
-Le script écrit les pages, `assets/css/site.css` (les vingt feuilles
+Le script écrit les pages, `assets/css/site.css` (les vingt et une feuilles
 sources concaténées et minifiées, avec une empreinte de version dans
 l'adresse), le plan du site daté et `robots.txt`.
 
@@ -151,6 +151,13 @@ l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
 
+Ce que la v6.3 a ajouté (07/10/2026) : **le plan se trace**. Quand un
+bloc arrive à l'écran, ses traits se tracent : le toit de l'intitulé se
+dessine, les filets des listes se tirent à la règle un par un, le plan
+du Léman se relève depuis l'atelier et ses piquets se plantent. Seuls les
+traits bougent — texte, chiffres et photos sont là d'emblée (`09-trace.css`,
+`motion.js`). Rien sans script ni en mouvement réduit.
+
 Ce que la v6.2 a ajouté (07/10/2026) : la section « Zone » de
 l'accueil montre un **plan du Léman**, tracé comme un plan
 d'implantation — la rive au trait, l'eau hachurée, un carré rouge par
@@ -195,7 +202,8 @@ Ce que la v3 a changé, en bref :
 - **Rien ne s'anime au défilement** (05/10/2026) : ni bonshommes, ni
   photos qui se dévoilent, ni chiffres qui défilent. Tout s'affiche
   d'emblée — au téléphone, ces effets laissaient des vides pendant
-  qu'on faisait défiler.
+  qu'on faisait défiler. (Depuis la v6.3, seuls les traits du plan se
+  tracent à l'arrivée de leur bloc ; rien de ce qui se lit n'attend.)
 - **Photos** : une par prestation, aucune grande photo répétée sur une
   page ; `BRIEF-PHOTOS.md` dit quoi faire photographier.
 
@@ -259,7 +267,7 @@ pas bougé d'un pixel.
 | Fichier | Rôle |
 |---|---|
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
-| `motion.js` | année du pied de page ; plus aucune animation au défilement |
+| `motion.js` | année du pied de page ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) |
 | `onglets.js` | jeux d'onglets des pages de prestation ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
