@@ -2,8 +2,7 @@
 
 Un plan d'implantation à l'échelle du lac : la rive en trait d'encre, l'eau
 hachurée comme sur un plan, un carré rouge par commune desservie (le même
-que les puces de la liste), l'atelier marqué plus fort. L'échelle et le
-nord, comme sur tout plan.
+que les puces de la liste), l'atelier marqué plus fort, et l'échelle.
 
 Le contour est celui du Léman entier, rive française comprise, tiré des
 limites généralisées de l'OFS (swisstopo), publiées par le paquet npm
@@ -16,7 +15,7 @@ Le plan est tracé en SVG, à la construction ; les noms sont du HTML posé
 dessus, en pourcentage du plan, pour garder leur taille de texte à toutes
 les largeurs. Sept communes tiennent en cinq kilomètres autour de
 Lausanne : comme sur une carte imprimée, un carton les montre agrandies,
-dans le blanc que le lac laisse au pied du plan. Au survol d'une commune,
+sous le plan au téléphone, dans le blanc qu'il laisse dès la tablette. Au survol d'une commune,
 sur le plan ou dans la liste, son repère se marque des deux côtés
 (carte.js).
 """
@@ -103,16 +102,17 @@ LIEUX = {
     "Morges": (46.5111, 6.4983, "o", None),
     "Nyon": (46.3832, 6.2397, "o", None),
     "Vevey": (46.4628, 6.8432, "o", None),
-    "Montreux": (46.4350, 6.9140, "o", None),
+    "Montreux": (46.4350, 6.9140, "s", None),
     "Genève": (46.2044, 6.1432, "e", None),
 }
 
 _LAC = (46.43, 6.53)
 
-# Le carton : Lausanne et ses environs, agrandis deux fois et demie, posés
-# au pied du plan à droite, où le dessin laisse un blanc (le Chablais).
-# Trop petit au téléphone pour qu'on y lise sept noms, il paraît dès la
-# tablette (13-carte.css) ; la liste sous le plan les nomme toutes.
+# Le carton : Lausanne et ses environs, agrandis deux fois et demie. Au
+# téléphone, il se pose sous le plan, sur toute la largeur : c'est là que
+# se lisent les sept communes serrées autour de l'atelier. Dès la
+# tablette, il se loge au pied du plan à droite, dans le blanc que le lac
+# laisse (le Chablais), relié à son cadre de repérage par deux traits.
 _CARTON_GEO = (6.545, 6.700, 46.494, 46.558)   # ouest, est, sud, nord
 _ZOOM = 2.5
 
@@ -122,23 +122,17 @@ def _plan(lat, lon):
     return (lon - _OUEST) * _K * _ECHELLE, (_NORD - lat) * _ECHELLE
 
 
-def _carton():
-    """Le cadre de repérage sur le plan (x, y, l, h) et le carton (idem)."""
+def _loupe():
+    """Le cadre de repérage, en unités du plan : x, y, largeur, hauteur."""
     ouest, est, sud, nord = _CARTON_GEO
     x, y = _plan(nord, ouest)
     x2, y2 = _plan(sud, est)
-    l, h = (x2 - x) * _ZOOM, (y2 - y) * _ZOOM
-    return (x, y, x2 - x, y2 - y), (LARGEUR - l, HAUTEUR - h, l, h)
+    return x, y, x2 - x, y2 - y
 
 
-def _dans_carton(lat, lon):
-    (x, y, _, _), (cx, cy, _, _) = _carton()
-    px, py = _plan(lat, lon)
-    return cx + (px - x) * _ZOOM, cy + (py - y) * _ZOOM
-
-
-def _pour_cent(x, y):
-    return "left:%.2f%%;top:%.2f%%" % (100 * x / LARGEUR, 100 * y / HAUTEUR)
+def _pour_cent(x, y, largeur=LARGEUR, hauteur=HAUTEUR, x0=0, y0=0):
+    return "left:%.2f%%;top:%.2f%%" % (100 * (x - x0) / largeur,
+                                       100 * (y - y0) / hauteur)
 
 
 def ancre(nom):
@@ -154,76 +148,87 @@ def _rive():
     return "M" + " L".join(trace) + "Z"
 
 
-def _repere(nom, x, y, cote, carton=False, serre=False):
-    """Un repère. `carton` : posé dans le carton ; `serre` : posé sur le
-    plan mais nommé dans le carton — au téléphone, sans carton, le plan
-    ne garde que les villes qu'il peut nommer."""
+def _hachures(haut, bas, pas, depart, gauche=0, droite=LARGEUR):
+    """Les lignes de l'eau : un trait horizontal tous les `pas`, découpé
+    ensuite à la forme du lac. De vraies lignes plutôt qu'un motif : leur
+    trait reste d'un pixel net à toutes les tailles du plan."""
+    lignes, y = [], haut + depart
+    while y < bas:
+        lignes.append("M%.1f %.2fH%.1f" % (gauche, y, droite))
+        y += pas
+    return "".join(lignes)
+
+
+def _repere(nom, position, cote, serre=False):
+    """Un repère. `serre` : posé sur le plan mais nommé dans le carton ;
+    au téléphone, le plan ne le montre pas."""
     classes = "carte__lieu" + (" carte__lieu--%s" % cote if cote else "")
     if nom == "Lausanne":
         classes += " carte__lieu--atelier"
-    if carton:
-        classes += " carte__lieu--carton"
     if serre:
         classes += " carte__lieu--serre"
     texte = f'<span class="carte__nom">{nom}</span>' if cote else ""
-    return (f'          <li class="{classes}" data-lieu="{ancre(nom)}" '
-            f'style="{_pour_cent(x, y)}">{texte}</li>')
+    return (f'            <li class="{classes}" data-lieu="{ancre(nom)}" '
+            f'style="{position}">{texte}</li>')
 
 
 def carte():
-    """La figure : le plan, son carton, les repères, l'échelle, le nord,
-    la source."""
+    """La figure : le plan, son carton, les repères, l'échelle, la
+    légende."""
     manquantes = [c for c in COMMUNES if c not in LIEUX]
     if manquantes:
         raise SystemExit("carte.py : coordonnées manquantes pour %s"
                          % ", ".join(manquantes))
-    (lx, ly, ll, lh), (cx, cy, cl, ch) = _carton()
+    lx, ly, ll, lh = _loupe()
+    # Le carton sur le plan, dès la tablette : calé dans l'angle bas droit.
+    cl, ch = ll * _ZOOM, lh * _ZOOM
+    cx, cy = LARGEUR - cl, HAUTEUR - ch
     plan, carton = [], []
     for nom in COMMUNES:
         lat, lon, cote_plan, cote_carton = LIEUX[nom]
-        plan.append(_repere(nom, *_plan(lat, lon), cote_plan,
+        x, y = _plan(lat, lon)
+        plan.append(_repere(nom, _pour_cent(x, y), cote_plan,
                             serre=bool(cote_carton)))
         if cote_carton:
-            carton.append(_repere(nom, *_dans_carton(lat, lon), cote_carton, True))
-    rive = _rive()
+            carton.append(_repere(nom, _pour_cent(x, y, ll, lh, lx, ly),
+                                  cote_carton))
     dix_km = 100 * 10 / _KM_PAR_DEGRE * _K * _ECHELLE / LARGEUR
-    # Le carton reprend la rive, agrandie : on la déplace et on l'agrandit
-    # d'un seul geste, découpée à son cadre.
-    tx, ty = cx - lx * _ZOOM, cy - ly * _ZOOM
+    place = "--x:%.2f%%;--y:%.2f%%;--l:%.2f%%" % (
+        100 * cx / LARGEUR, 100 * cy / HAUTEUR, 100 * cl / LARGEUR)
     return f"""      <figure class="carte" role="img" aria-label="Plan du Léman : l'atelier à Lausanne et les communes où nous intervenons, de Genève à Montreux">
+        <div class="carte__cadre">
         <div class="carte__plan" style="aspect-ratio:{LARGEUR}/{HAUTEUR}">
           <svg class="carte__fond" viewBox="0 0 {LARGEUR} {HAUTEUR}" aria-hidden="true" focusable="false">
             <defs>
-              <pattern id="carteEau" width="8" height="8" patternUnits="userSpaceOnUse"><path class="carte__onde" d="M0 4H8"/></pattern>
-              <pattern id="carteEauCarton" width="{8 / _ZOOM:g}" height="{8 / _ZOOM:g}" patternUnits="userSpaceOnUse"><path class="carte__onde" d="M0 {4 / _ZOOM:g}H{8 / _ZOOM:g}"/></pattern>
-              <path id="carteRive" d="{rive}"/>
-              <clipPath id="carteDecoupe"><rect x="{cx:.1f}" y="{cy:.1f}" width="{cl:.1f}" height="{ch:.1f}"/></clipPath>
+              <path id="carteRive" d="{_rive()}"/>
+              <clipPath id="carteEau"><use href="#carteRive"/></clipPath>
             </defs>
             <use class="carte__lac" href="#carteRive"/>
-            <use class="carte__eau" href="#carteRive" fill="url(#carteEau)"/>
-            <g class="carte__zoom">
+            <g clip-path="url(#carteEau)">
+              <path class="carte__onde" d="{_hachures(0, HAUTEUR, 16, 4)}"/>
+              <path class="carte__onde carte__onde--serree" d="{_hachures(0, HAUTEUR, 16, 12)}"/>
+            </g>
             <rect class="carte__loupe" x="{lx:.1f}" y="{ly:.1f}" width="{ll:.1f}" height="{lh:.1f}"/>
-            <path class="carte__renvoi" d="M{lx:.1f} {ly + lh:.1f}L{cx:.1f} {cy:.1f}M{lx + ll:.1f} {ly + lh:.1f}L{cx + cl:.1f} {cy:.1f}"/>
-            <g clip-path="url(#carteDecoupe)">
-              <rect class="carte__carton-fond" x="{cx:.1f}" y="{cy:.1f}" width="{cl:.1f}" height="{ch:.1f}"/>
-              <g transform="translate({tx:.1f} {ty:.1f}) scale({_ZOOM:g})">
-                <use class="carte__lac" href="#carteRive"/>
-                <use class="carte__eau" href="#carteRive" fill="url(#carteEauCarton)"/>
-              </g>
-            </g>
-            <rect class="carte__carton" x="{cx:.1f}" y="{cy:.1f}" width="{cl:.1f}" height="{ch:.1f}"/>
-            </g>
+            <path class="carte__renvoi" d="M{lx:.1f} {ly + lh:.1f}L{cx:.1f} {cy:.1f}M{lx + ll:.1f} {ly + lh:.1f}L{LARGEUR} {cy:.1f}"/>
           </svg>
           <span class="carte__nom-lac" style="{_pour_cent(*_plan(*_LAC))}" aria-hidden="true">Léman</span>
-          <span class="carte__titre-carton" style="{_pour_cent(cx, cy + ch)}" aria-hidden="true">Lausanne et environs</span>
           <ul class="carte__lieux" aria-hidden="true">
 {chr(10).join(plan)}
-{chr(10).join(carton)}
           </ul>
-          <span class="carte__releve" aria-hidden="true">
-            <span class="carte__nord">N</span>
-            <span class="carte__echelle" style="width:{dix_km:.2f}%">10 km</span>
-          </span>
+          <span class="carte__echelle" style="width:{dix_km:.2f}%" aria-hidden="true">10 km</span>
+        </div>
+        <div class="carte__carton" style="{place}" aria-hidden="true">
+          <span class="carte__titre-carton">Lausanne et environs</span>
+          <div class="carte__plan" style="aspect-ratio:{ll:.1f}/{lh:.1f}">
+            <svg class="carte__fond" viewBox="{lx:.1f} {ly:.1f} {ll:.1f} {lh:.1f}" focusable="false">
+              <use class="carte__lac" href="#carteRive"/>
+              <path class="carte__onde" clip-path="url(#carteEau)" d="{_hachures(ly, ly + lh, 8 / _ZOOM / 1.1, 0, lx, lx + ll)}"/>
+            </svg>
+            <ul class="carte__lieux">
+{chr(10).join(carton)}
+            </ul>
+          </div>
+        </div>
         </div>
         <figcaption class="carte__legende">
           <span class="carte__cle carte__cle--atelier">Atelier, avenue de Béthusy</span>

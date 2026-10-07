@@ -11,10 +11,12 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
 **Le plan du Léman, 07/10/2026 (v6.2).** La section « Zone » de l'accueil n'était qu'un texte et une liste
 de communes. Elle montre désormais le lac dessiné comme un plan d'implantation, sans aucune photo : la rive
 d'un trait d'encre, l'eau hachurée sur la chaux, un carré au rouge écrit par commune (le même que les puces de
-la liste), l'atelier en piquet maître — le rouge du toit cerné d'un cadre —, l'échelle de 10 km et le nord
-coiffé du toit. Les sept communes tenues en cinq kilomètres autour de Lausanne sont nommées dans un carton
-agrandi deux fois et demie, posé dans le blanc du Chablais, relié à son cadre de repérage par deux traits de
-renvoi ; au téléphone, trop petit pour sept noms, le carton cède la place à la liste. Une légende sous le plan.
+la liste), l'atelier en piquet maître — le rouge du toit cerné d'un cadre — et une échelle de 10 km (le nord,
+essayé, a été retiré). Les sept communes tenues en cinq kilomètres autour de Lausanne sont nommées dans un
+carton agrandi deux fois et demie. Pensé d'abord pour le téléphone : le carton s'y pose sous le plan, sur toute
+la largeur, et le plan n'y garde que les villes qu'il peut nommer ; dès la tablette, le carton se loge dans le
+blanc du Chablais, relié à son cadre de repérage par deux traits de renvoi. Les hachures de l'eau sont de vraies
+lignes d'un pixel, à six ou sept pixels d'écart à toutes les tailles. Une légende sous le plan.
 Idée reprise du « Location Map » de 21st.dev, sans ses marqueurs qui pulsent. Un essai d'accordéon de photos pour
 les prestations a été écarté par le client le même jour.
 

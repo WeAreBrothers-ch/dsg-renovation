@@ -154,9 +154,9 @@ titres et une sérif de lecture (Newsreader) pour les phrases.
 Ce que la v6.2 a ajouté (07/10/2026) : la section « Zone » de
 l'accueil montre un **plan du Léman**, tracé comme un plan
 d'implantation — la rive au trait, l'eau hachurée, un carré rouge par
-commune, l'atelier en piquet maître, l'échelle et le nord coiffé du toit.
-Les sept communes serrées autour de Lausanne sont nommées dans un carton
-agrandi (dès la tablette). Survoler une commune, sur le plan ou dans la
+commune, l'atelier en piquet maître, une échelle de 10 km. Les sept
+communes serrées autour de Lausanne sont nommées dans un carton agrandi :
+sous le plan au téléphone, logé dans son angle dès la tablette. Survoler une commune, sur le plan ou dans la
 liste, la marque des deux côtés. Idée reprise du « Location Map » de
 21st.dev, dessinée sans photo ni dépendance (`carte.py`, `13-carte.css`,
 `carte.js`) ; contours OFS / swisstopo (paquet npm `swiss-maps`, 2026),
