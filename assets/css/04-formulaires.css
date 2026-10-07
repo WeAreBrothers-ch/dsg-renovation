@@ -168,33 +168,60 @@
 .champ__erreur:empty{display:none}
 
 /* ------------------------------------------------------------
-   PASTILLES — cases à cocher lues comme des étiquettes de lot
-   Cible tactile de 44 px au minimum.
+   PASTILLES — cases à cocher, en cases jointives
+   Le bordereau dans le bordereau : des cases égales, aux traits
+   d'un pixel (l'encre à moitié, sous les traits pleins des champs),
+   une case à cocher carrée devant chaque intitulé. Une colonne sur
+   l'écran le plus étroit, deux au téléphone, quatre au bureau : huit
+   travaux, des rangées toujours pleines. Cible de 52 px de haut.
    ------------------------------------------------------------ */
-.pastilles{display:flex;flex-wrap:wrap;gap:var(--sp-2);padding-block:var(--sp-2)}
-.pastille{position:relative;cursor:pointer}
+.pastilles{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:1px;margin-block:var(--sp-1) var(--sp-2);
+  background:var(--c-ligne-forte);border:1px solid var(--c-ligne-forte);
+}
+/* Un nombre impair de travaux : la dernière case prend la rangée. */
+@media (min-width:360px){
+  .pastilles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pastille:last-child:nth-child(odd){grid-column:1/-1}
+}
+@media (min-width:1024px){
+  .pastilles{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pastille:last-child:nth-child(odd){grid-column:auto}
+}
+.pastille{position:relative;display:flex;cursor:pointer}
 .champ .pastille input{
   position:absolute;inset:0;width:100%;height:100%;min-height:0;
   margin:0;opacity:0;cursor:pointer;
 }
 .pastille span{
-  display:inline-flex;align-items:center;gap:var(--sp-2);min-height:44px;
-  padding:0 var(--sp-4);box-shadow:inset 0 0 0 1px var(--c-ligne-forte);
-  font-size:var(--t-petit);font-weight:500;color:var(--c-encre);
+  flex:1 1 auto;position:relative;display:flex;align-items:center;gap:var(--sp-3);
+  min-height:52px;padding:var(--sp-2) var(--sp-3);background:var(--c-fiche);
+  font-size:var(--t-petit);font-weight:500;line-height:1.25;color:var(--c-encre);
+  transition:background-color var(--d-rapide) var(--e-standard);
+}
+/* La case à cocher : un carré d'un trait et demi ; cochée, l'encre
+   pleine et la coche en papier. */
+.pastille span::before{
+  content:"";flex:0 0 auto;width:16px;height:16px;
+  box-shadow:inset 0 0 0 1.5px var(--c-encre-40);
   transition:background-color var(--d-rapide) var(--e-standard),
-             box-shadow var(--d-rapide) var(--e-standard),
-             color var(--d-rapide) var(--e-standard);
+             box-shadow var(--d-rapide) var(--e-standard);
+}
+.pastille span::after{
+  content:"";position:absolute;left:calc(var(--sp-3) + 4px);top:50%;
+  width:8px;height:4px;margin-top:-4px;
+  border-left:1.5px solid var(--c-fiche);border-bottom:1.5px solid var(--c-fiche);
+  transform:rotate(-45deg) scale(0);transition:transform var(--d-rapide) var(--e-sortie);
 }
 @media (hover:hover) and (pointer:fine){
-  .pastille:hover span{box-shadow:inset 0 0 0 1px var(--c-encre)}
+  .pastille:hover span{background:var(--c-papier-2)}
+  .pastille:hover span::before{box-shadow:inset 0 0 0 1.5px var(--c-encre)}
 }
-.pastille input:checked+span{background:var(--c-encre);color:var(--c-fiche);box-shadow:none}
-.pastille input:checked+span::before{
-  content:"";width:10px;height:6px;margin-top:-3px;
-  border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
-  transform:rotate(-45deg);
-}
-.pastille input:focus-visible+span{outline:2px solid var(--c-focus);outline-offset:2px}
+.pastille input:checked+span{background:var(--c-papier-2)}
+.pastille input:checked+span::before{background:var(--c-encre);box-shadow:none}
+.pastille input:checked+span::after{transform:rotate(-45deg) scale(1)}
+.pastille input:focus-visible+span{outline:2px solid var(--c-focus);outline-offset:-3px}
+@media (prefers-reduced-motion:reduce){.pastille span::after{transition:none}}
 
 /* ------------------------------------------------------------
    ENVOI ET RETOUR

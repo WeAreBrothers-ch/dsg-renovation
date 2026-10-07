@@ -14,6 +14,10 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
 - un menu déroulant encore vide (« Choisir… », « Indifférent ») s'écrit comme les exemples des autres cases,
   en encre 40 et à la taille de l'interface ; choisi, il prend la grande réponse. Le triangle plein cède la
   place à un chevron d'encre d'un trait et demi, celui de l'en-tête ;
+- les travaux concernés ne s'empilent plus en étiquettes de largeurs inégales : ils forment un bordereau de
+  cases égales et jointives (traits d'encre à moitié), une case à cocher carrée devant chaque intitulé —
+  cochée, l'encre pleine, la coche en papier, la case en chaux creusée. Une colonne sous 360 px, deux au
+  téléphone, quatre au bureau : huit travaux, des rangées toujours pleines ;
 - chaque photo jointe porte dans son angle un carré d'encre « × » qui la retire (rouge au survol) ; au bureau,
   on peut aussi glisser les photos sur la case, qui se creuse en chaux et se cerne d'un tireté d'encre — le
   trait d'un plan provisoire — tant qu'elles survolent ;
