@@ -18,6 +18,9 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
   cases égales et jointives (traits d'encre à moitié), une case à cocher carrée devant chaque intitulé —
   cochée, l'encre pleine, la coche en papier, la case en chaux creusée. Une colonne sous 360 px, deux au
   téléphone, quatre au bureau : huit travaux, des rangées toujours pleines ;
+- au téléphone, les trois garanties de la couverture de l'accueil (« Visite et devis gratuits »…) ne se
+  serrent plus en trois colonnes, où chacune se coupait en trois ou quatre lignes : une par ligne entre deux
+  traits d'encre, le carré rouge en tête, la phrase entière ;
 - chaque photo jointe porte dans son angle un carré d'encre « × » qui la retire (rouge au survol) ; au bureau,
   on peut aussi glisser les photos sur la case, qui se creuse en chaux et se cerne d'un tireté d'encre — le
   trait d'un plan provisoire — tant qu'elles survolent ;

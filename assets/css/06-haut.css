@@ -68,17 +68,23 @@
 .couverture .legende--comparateur{padding-inline:var(--grille-marge)}
 .couverture .comparateur__etat--gauche{left:var(--grille-marge)}
 .couverture .comparateur__etat--droite{right:var(--grille-marge)}
+/* Les garanties, une par ligne entre deux traits d'encre : en trois
+   colonnes, chacune se coupait en trois ou quatre lignes et la plus
+   longue touchait le bord. Le carré rouge en tête, la phrase entière,
+   l'essentiel en encre. Une ligne qui déborde passe sous le texte, pas
+   sous le carré. */
 .couverture__garanties{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
-  margin-top:var(--sp-6);border-top:1px solid var(--c-cadre);border-bottom:1px solid var(--c-cadre);
-  font-size:var(--t-etiquette);line-height:1.3;color:var(--c-encre-60);
+  display:flex;flex-direction:column;gap:0;
+  margin-top:var(--sp-5);border-top:1px solid var(--c-cadre);border-bottom:1px solid var(--c-cadre);
+  font-size:var(--t-petit);line-height:1.3;color:var(--c-encre-60);
 }
 .couverture__garanties li{
-  display:block;padding:var(--sp-3) var(--sp-3) var(--sp-3) 0;
+  display:block;padding:var(--sp-3) 0 var(--sp-3) calc(var(--repere) + var(--sp-3));
+  text-indent:calc((var(--repere) + var(--sp-3)) * -1);
 }
-.couverture__garanties li+li{padding-left:var(--sp-3);border-left:var(--bd-fin)}
-.couverture__garanties li::before{display:block;margin-bottom:var(--sp-2)}
-.couverture__garanties span{display:block;font-weight:500;color:var(--c-encre)}
+.couverture__garanties li+li{border-top:var(--bd-fin)}
+.couverture__garanties li::before{display:inline-block;margin-right:var(--sp-3);vertical-align:.15em}
+.couverture__garanties span{font-weight:500;color:var(--c-encre)}
 @media (min-width:768px){
   .couverture h1{font-size:var(--t-couverture);margin-top:var(--sp-5)}
   .couverture__actions{margin-top:var(--sp-5)}
@@ -90,14 +96,14 @@
   .couverture .comparateur__etat--gauche{left:var(--sp-4)}
   .couverture .comparateur__etat--droite{right:var(--sp-4)}
   .couverture__garanties{
-    display:flex;flex-wrap:wrap;gap:var(--sp-2) var(--sp-4);margin-top:var(--sp-4);
-    border:0;font-size:var(--t-petit);
+    flex-direction:row;flex-wrap:wrap;gap:var(--sp-2) var(--sp-4);margin-top:var(--sp-4);
+    border:0;
   }
   .couverture__garanties li,.couverture__garanties li+li{
-    display:block;padding:0;border:0;
+    padding:0;border:0;text-indent:0;
   }
-  .couverture__garanties li::before{display:inline-block;margin:0 var(--sp-2) 0 0;vertical-align:.15em}
-  .couverture__garanties span{display:inline;font-weight:400;color:inherit}
+  .couverture__garanties li::before{margin-right:var(--sp-2)}
+  .couverture__garanties span{font-weight:400;color:inherit}
 }
 
 /* Au téléphone, l'appel principal prend toute la largeur, sous le
