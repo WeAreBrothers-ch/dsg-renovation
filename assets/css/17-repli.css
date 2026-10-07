@@ -69,6 +69,13 @@
   .jeu__barre{flex-wrap:wrap;padding:0}
   .jeu__onglet{flex:0 1 auto;justify-content:flex-start;text-align:left;padding:0 var(--sp-5);white-space:nowrap}
 }
+/* Dès la tablette, la barre tient toute la largeur de sa colonne, en
+   cases égales : une rangée du plan au-dessus du texte, et non une
+   étiquette posée dans un coin. */
+@media (min-width:768px){
+  .jeu__barre{padding:0 1px 1px 0}
+  .jeu__onglet{flex:1 1 0}
+}
 
 /* ------------------------------------------------------------
    DÉPLIANT DE BORDEREAU

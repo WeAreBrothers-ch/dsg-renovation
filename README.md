@@ -151,6 +151,12 @@ l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
 
+Ce que la v6.5 a changé (07/10/2026), au bureau seulement : dans les
+sections à marge accrochée, le titre rejoint l'intitulé dans la marge
+gauche, accroché pendant la lecture, et le contenu part à sa hauteur ;
+les onglets tiennent toute leur colonne en cases égales. Plus de tiers
+gauche vide sur toute la hauteur d'une section.
+
 Ce que la v6.4 a ajouté (07/10/2026) : deux composants de 21st.dev,
 réécrits sans dépendance. **L'enseigne du pied s'allume** en rouge sous
 la souris ou le doigt (« Text Hover Effect ») ; **la marque des onglets et

@@ -59,10 +59,9 @@
 
 /* ------------------------------------------------------------
    INTERCALAIRE — l'en-tête de chaque section
-   L'intitulé tient la marge gauche, le titre ouvre la colonne de
-   droite, et tout le contenu de la section s'y range ensuite. Sur
-   grand écran, l'intitulé reste accroché pendant la lecture de
-   la section : on sait toujours où l'on est.
+   Au téléphone, l'intitulé, le titre, puis le contenu. Sur grand
+   écran, l'intitulé et le titre tiennent la marge gauche, accrochés
+   pendant la lecture de la section : on sait toujours où l'on est.
    ------------------------------------------------------------ */
 .intercalaire{margin-bottom:var(--sp-6)}
 .intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-3)}
@@ -100,14 +99,22 @@
   .zone:has(>.intercalaire)>*{grid-column:5/-1}
   .zone:has(>.intercalaire)>.intercalaire{display:contents}
   .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
-  /* MARGE ACCROCHÉE — ce qui se lit. La marge couvre toutes les rangées
-     de la section : c'est ce qui lui laisse la hauteur nécessaire pour
-     rester accrochée. */
-  .zone:not(:has(>.pleine-largeur)) .intercalaire__marge{
-    grid-column:1/5;grid-row:1/span 40;align-self:start;
+  /* MARGE ACCROCHÉE — ce qui se lit. L'intitulé, le titre et son
+     chapeau tiennent ensemble le tiers gauche, et y restent accrochés
+     pendant la lecture ; le contenu part en haut des deux tiers droits,
+     à leur hauteur. Le titre posé au-dessus du contenu laissait la marge
+     vide sur toute la hauteur de la section, et le contenu serré à
+     droite. La marge couvre toutes les rangées de la section : c'est ce
+     qui lui laisse la hauteur nécessaire pour rester accrochée. */
+  .zone:not(:has(>.pleine-largeur))>.intercalaire{
+    display:block;grid-column:1/5;grid-row:1/span 40;align-self:start;
     position:sticky;top:calc(var(--h-entete) + var(--sp-6));
-    flex-direction:column;margin-bottom:0;padding-right:var(--sp-6);
+    margin-bottom:0;padding-right:var(--sp-7);
   }
+  .zone:not(:has(>.pleine-largeur)) .intercalaire__marge{flex-direction:column;margin-bottom:var(--sp-6)}
+  .zone:not(:has(>.pleine-largeur)) .intercalaire__corps{margin-bottom:0}
+  .zone:not(:has(>.pleine-largeur)) .intercalaire h2{font-size:var(--t-h2-marge)}
+  .zone:not(:has(>.pleine-largeur)) .intercalaire__chapo{font-size:var(--t-texte)}
   /* EN-TÊTE POSÉ — ce qui se regarde : une section dont un bloc prend
      toute la largeur (chiffres, déroulé, registre des chantiers,
      chantier à la une, formulaire) garde l'en-tête du téléphone,

@@ -4,9 +4,15 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.4**, en production.
+Date : 07/10/2026 — Statut : **v6.5**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Le bureau rééquilibré, 07/10/2026 (v6.5).** Au bureau, cinq sections sur sept d'une page de prestation
+laissaient le tiers gauche vide sur toute leur hauteur, un intitulé de deux lignes en haut, le titre et le
+contenu serrés à droite. Le titre passe dans la marge accrochée, avec l'intitulé et le chapeau ; le contenu part
+à leur hauteur ; les onglets tiennent toute leur colonne en cases égales. Une page de prestation raccourcit d'un
+huitième (7 011 → 6 218 px à 1 440 px de large). Le téléphone ne change pas (§ 4).
 
 **Deux composants de 21st.dev, 07/10/2026 (v6.4).** Choisis pour animer ce qui existe sans rien ajouter à
 l'écran, réécrits sans dépendance d'après leur code (accès payant) :
@@ -413,8 +419,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   contenu 1600 px max ; marge `clamp(16px, 3.3vw, 48px)`, élargie s'il le faut pour que rien ne passe sous
   l'encoche d'un téléphone couché (`env(safe-area-inset-*)`, `viewport-fit=cover`).
 - **Deux compositions de section** (≥ 1024 px), qui alternent au lieu de se répéter (v5) :
-  - **la marge accrochée**, pour ce qui se lit : l'intitulé et sa cote dans les colonnes 1–4, **accrochés**
-    pendant la lecture de la section ; titre et contenu dans les colonnes 5–12 ;
+  - **la marge accrochée**, pour ce qui se lit : l'intitulé, sa cote, **le titre** (`--t-h2-marge`) et son
+    chapeau dans les colonnes 1–4, **accrochés** pendant la lecture de la section ; le contenu dans les
+    colonnes 5–12, à partir du haut de la section (v6.5 : le titre posé au-dessus du contenu laissait la marge
+    vide sur toute la hauteur et serrait le contenu à droite). Les onglets y tiennent toute la largeur de leur
+    colonne, en cases égales, dès 768 px ;
   - **l'en-tête posé**, pour ce qui se regarde : dès qu'un bloc reprend les 12 colonnes (`.pleine-largeur` :
     chiffres, déroulé, méthode, registre, chantier signature, formulaire), l'intitulé passe au-dessus du
     titre, et tout part du bord gauche de la page, lien de fin de section compris.
