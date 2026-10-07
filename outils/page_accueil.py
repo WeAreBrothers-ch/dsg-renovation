@@ -39,10 +39,13 @@ def accueil(services, base=""):
       <div class="couverture__texte">
         <p class="intercalaire__nom couverture__nature">Du sol au plafond, tout en maîtrise.</p>
         <h1 id="t01">Entreprise de rénovation à Lausanne</h1>
-        <p class="chapo couverture__chapo">Rénovation totale d'appartements,
-        de maisons et d'immeubles à Lausanne et sur l'arc lémanique.<span class="couverture__chapo-suite"> Un
-        seul interlocuteur, tous les corps de métier, un chantier livré
-        propre et dans les délais.</span></p>
+        <p class="chapo couverture__chapo"><span class="couverture__portee">Rénovation
+        totale d'appartements, de maisons et d'immeubles à Lausanne et sur
+        l'arc lémanique.</span>
+        <span class="couverture__promesse"><span>Un seul interlocuteur,</span>
+        <span>tous les corps de métier,</span>
+        <span>un chantier livré propre</span>
+        <span>et dans les délais.</span></span></p>
         <div class="couverture__actions">
           <a class="btn btn--plein" href="{base}devis.html#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
           <a class="couverture__lien" href="{base}realisations.html">Voir nos réalisations<span class="fleche" aria-hidden="true"></span></a>
@@ -127,7 +130,7 @@ def accueil(services, base=""):
     <div class="zone">
 {briques.intercalaire("Déroulé", "De la demande à la livraison",
                       "Comment se passe|votre demande",
-                      "Quatre temps, les mêmes sur tous nos chantiers. Vous "
+                      "Six temps, les mêmes sur tous nos chantiers. Vous "
                       "savez à chaque étape ce qui vient ensuite, et quand.")}
 {confiance.etapes()}
       <p class="suite"><a href="{base}entreprise.html#deroule">Le déroulé complet d'un chantier<span class="fleche" aria-hidden="true"></span></a></p>

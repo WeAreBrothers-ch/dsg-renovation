@@ -53,6 +53,9 @@ SERVICES = [
             "Nettoyage de fin de chantier et remise des clés",
         ],
         "etapes": [
+            ("Premier appel", "Quelques minutes au téléphone ou par le "
+             "formulaire : nous vous disons tout de suite si le projet entre "
+             "dans notre métier et dans notre zone."),
             ("Visite et mesures", "Nous nous déplaçons, mesurons et notons "
              "l'état existant. La visite est gratuite et sans engagement."),
             ("Devis détaillé", "72 heures après la visite, vous recevez un devis poste "
@@ -124,8 +127,12 @@ SERVICES = [
             "Reprise des plafonds avant mise en peinture",
         ],
         "etapes": [
+            ("Visite et devis", "Nous mesurons murs et plafonds sur place ; "
+             "le devis poste par poste suit 72 heures après la visite."),
             ("Diagnostic du support", "Nous sondons les fonds : un enduit qui "
              "ne tient pas se voit au son, pas à l'œil."),
+            ("Protection", "Sols, menuiseries et passages bâchés avant le "
+             "premier ponçage."),
             ("Préparation", "Dépose de ce qui ne tient plus, dépoussiérage, "
              "application du fixateur adapté au support."),
             ("Enduit et ponçage", "Passes successives puis ponçage sous "

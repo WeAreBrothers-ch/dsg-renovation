@@ -61,6 +61,8 @@ SERVICES = [
              "avec contrôle sous éclairage rasant."),
             ("Repli", "Dépose des protections, nettoyage et remise en place "
              "du mobilier."),
+            ("Réception", "Tour des pièces avec vous, à la lumière du jour ; "
+             "ce qui est relevé est repris sous dix jours."),
         ],
         "reperes": [
             ("Appartement 100 m²", "1 à 2 semaines"),
@@ -196,6 +198,9 @@ SERVICES = [
             "Réfection de joints et remplacement de carreaux cassés",
         ],
         "etapes": [
+            ("Visite et devis", "Nous mesurons les surfaces, repérons les "
+             "seuils et les accès ; le devis poste par poste suit 72 heures "
+             "après la visite."),
             ("Contrôle du support", "Planéité, humidité, tenue : un support "
              "qui bouge fissure le carrelage, quel que soit le collage."),
             ("Plan de pose", "Tracé des axes et position des coupes arrêtés "
@@ -204,6 +209,8 @@ SERVICES = [
              "les zones de projection."),
             ("Pose et joints", "Collage au double encollage en grand format, "
              "puis jointoiement et nettoyage du voile de ciment."),
+            ("Réception", "Tour de la pièce avec vous, coupes et joints à "
+             "l'œil ; ce qui est relevé est repris sous dix jours."),
         ],
         "reperes": [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),
@@ -335,14 +342,18 @@ SERVICES = [
             "Évacuation des derniers déchets et protections",
         ],
         "etapes": [
+            ("Visite et devis", "Nous passons voir le logement : surface, "
+             "état, accès. Le devis suit 72 heures après la visite."),
             ("Repli du chantier", "Dépose des protections et évacuation des "
              "derniers déchets et emballages."),
             ("Première passe", "Décapage des points durs et dépoussiérage "
              "descendant, du plafond vers le sol."),
             ("Seconde passe", "Rattrapage de la poussière retombée, vitres, "
              "sanitaires et cuisine."),
-            ("Contrôle", "Tour du logement avec vous, pièce par pièce, avant "
-             "remise des clés."),
+            ("Contrôle", "Tour du logement avec vous, pièce par pièce."),
+            ("Remise des clés", "Ce que le tour a relevé est repris, puis les "
+             "clés vous sont rendues : le logement est habitable tout de "
+             "suite."),
         ],
         "reperes": [
             ("Appartement 100 m²", "1 à 2 jours"),

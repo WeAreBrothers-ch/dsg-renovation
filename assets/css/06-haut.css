@@ -34,6 +34,9 @@
   max-width:8.7em;
 }
 .couverture__chapo{margin-top:clamp(16px,2.4vw,32px);max-width:40ch}
+/* La promesse, ce qui distingue l'entreprise, ferme le chapô : à
+   l'encre, quand ce qui la précède décrit en gris. */
+.couverture__promesse{color:var(--c-encre)}
 .couverture__actions{
   display:flex;flex-direction:column;align-items:stretch;gap:var(--sp-2) var(--sp-5);
   width:100%;margin-top:var(--sp-5);
@@ -52,15 +55,23 @@
 .couverture__garanties li::before{content:"";width:var(--repere);height:var(--repere);background:var(--c-marque)}
 
 /* ---------- Au téléphone ----------
-   Le titre, une seule phrase d'accroche (la suite du chapô attend la
-   tablette), puis l'avant / après bord à bord, sur toute la largeur
-   de l'écran : c'est la photo qui parle. L'appel pleine largeur sous
-   le pouce, le renvoi dessous, puis les trois garanties en bandeau de
-   trois cases — l'intitulé en petit, l'essentiel à l'encre. */
+   Le titre et la promesse seule (ce qui décrit attend la tablette),
+   dans la lettre des titres, un membre par ligne : un seul
+   interlocuteur, tous les corps de métier, un chantier livré propre
+   et dans les délais. Puis l'avant / après bord à bord, sur toute la
+   largeur de l'écran : c'est la photo qui parle. L'appel pleine
+   largeur sous le pouce, le renvoi dessous, puis les trois garanties
+   en bandeau de trois cases — l'intitulé en petit, l'essentiel à
+   l'encre. */
 .couverture h1{font-size:clamp(2.375rem,10.8vw,3.25rem);margin-top:var(--sp-4)}
 .couverture__media{margin-top:var(--sp-5)}
 .couverture__actions{margin-top:var(--sp-4)}
-.couverture__chapo-suite{display:none}
+.couverture__portee{display:none}
+.couverture__promesse{
+  display:block;max-width:26ch;
+  font-family:var(--f-titre);font-weight:500;letter-spacing:-.01em;line-height:1.3;
+}
+.couverture__promesse span{display:block}
 .couverture .couverture__media{margin-inline:calc(var(--grille-marge) * -1)}
 .couverture .comparateur{aspect-ratio:4/3}
 @media (min-width:400px){.couverture .comparateur{aspect-ratio:5/4}}
@@ -82,7 +93,9 @@
 @media (min-width:768px){
   .couverture h1{font-size:var(--t-couverture);margin-top:var(--sp-5)}
   .couverture__actions{margin-top:var(--sp-5)}
-  .couverture__chapo-suite{display:inline}
+  .couverture__portee{display:inline}
+  .couverture__promesse{display:inline;max-width:none;font:inherit;letter-spacing:inherit}
+  .couverture__promesse span{display:inline}
   .couverture .couverture__media{margin-inline:0}
   .couverture .comparateur{aspect-ratio:16/9}
   .couverture__cadre::before{content:""}

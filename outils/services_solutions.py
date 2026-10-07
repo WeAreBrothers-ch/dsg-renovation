@@ -84,6 +84,9 @@ SERVICES = [
             "Évacuation des anciens revêtements et des déchets de chantier",
         ],
         "etapes": [
+            ("Premier appel", "Un appel ou le formulaire : l'adresse, le "
+             "nombre de logements et la date d'entrée du locataire suivant "
+             "suffisent pour commencer."),
             ("Visite du logement", "Sous une semaine, nous passons mesurer et "
              "noter l'état de chaque pièce ; le logement n'a pas besoin "
              "d'être vidé."),
@@ -262,8 +265,10 @@ SERVICES = [
             ("Étanchéité", "Natte ou résine sous la douche et les zones de "
              "projection, séchage compris, avant le premier carreau."),
             ("Pose et finitions", "Carrelage et joints, raccordement des "
-             "sanitaires par notre partenaire, nettoyage, puis tour de la "
-             "pièce avec vous."),
+             "sanitaires par notre partenaire, puis nettoyage."),
+            ("Réception", "Tour de la pièce avec vous, robinetterie et "
+             "écoulements essayés ; ce qui est relevé est repris sous dix "
+             "jours."),
         ],
         "reperes": [
             ("Salle de bains", "1 à 2 semaines, étanchéité comprise"),

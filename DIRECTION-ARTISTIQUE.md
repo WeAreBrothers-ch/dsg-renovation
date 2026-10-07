@@ -479,8 +479,10 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
     fermé.
   - **Titres** : titre de section à 30 px, chapô à la taille du texte, paragraphe d'intention à celle du
     chapô ; intitulé et titre plus proches, sections plus serrées.
-  - **Couverture de l'accueil (v3.4)** : l'accroche, le titre, une seule phrase de chapô (la suite attend la
-    tablette), puis l'avant / après **bord à bord**, sur toute la largeur de l'écran (4/3 sous 400 px, 5/4
+  - **Couverture de l'accueil (v3.4)** : l'accroche, le titre, puis la promesse seule, en Archivo à l'encre,
+    un membre par ligne (« Un seul interlocuteur, / tous les corps de métier, / un chantier livré propre /
+    et dans les délais. ») — la phrase qui décrit attend la tablette, où la promesse ferme le chapô à
+    l'encre —, puis l'avant / après **bord à bord**, sur toute la largeur de l'écran (4/3 sous 400 px, 5/4
     au-delà) ; l'appel pleine largeur, le renvoi, puis les trois garanties en bandeau de trois cases. La
     barre du bas n'apparaît qu'une fois cet appel sorti de l'écran : jamais deux « Devis gratuit » à la fois.
   - **Lire la suite** se replie : le bouton devient « Réduire » une fois le texte ouvert.
@@ -585,7 +587,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    posé (paragraphe d'intention, puis les quatre chiffres sur une rangée, d'un bord à l'autre, au rouge du
    toit) ; les prestations, marge accrochée (une ligne par prestation, sa photo en tête, sans numéro) ; le
    chantier à la une, en-tête posé (panneau dépoli sur photo pleine largeur) ; la zone, marge accrochée ; le
-   déroulé en quatre cases, en-tête posé — blanc et chaux en alternance. La zone porte le **plan du Léman**
+   déroulé en six cases, en-tête posé — blanc et chaux en alternance. La zone porte le **plan du Léman**
    (`outils/carte.py`, `13-carte.css`) au-dessus du texte et de la liste des communes.
 4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en rouge et le téléphone à
    gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page en noir nacré (logo négatif)
@@ -665,7 +667,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Coins arrondis, ombres décoratives, filet coloré épais sur un côté d'un bloc.
 - Un numéro qui ne compte rien : numéro de section (« N° 01 »), de registre sur une photo (« N° 005 »), de
   rang devant une prestation (« 01 … 07 »). Les numéros sont réservés aux séquences réelles (étapes, articles,
-  méthode en cinq temps, rang d'une vue dans la visionneuse).
+  méthode en six temps, rang d'une vue dans la visionneuse).
 - Une étiquette posée sur une photo au repos (hors états du comparateur) ; un texte alternatif recopié en
   légende.
 - Défilant perpétuel (marquee) : il a été retiré avec cette version. De même, une trame qui pulse sans fin.

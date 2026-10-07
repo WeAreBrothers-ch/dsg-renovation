@@ -8,9 +8,9 @@ visiblement tant qu'ils n'ont pas été remplacés.
 
 import briques_bis
 
-# Le déroulé en quatre temps, condensé des six temps de la page entreprise.
-# Chaque cote reprend un délai déjà annoncé ailleurs sur le site : aucune
-# promesse nouvelle n'est faite ici.
+# Le déroulé de l'accueil : les six temps de la page entreprise, dits au
+# visiteur. Chaque cote reprend un délai déjà annoncé ailleurs sur le
+# site : aucune promesse nouvelle n'est faite ici.
 ETAPES = [
     ("Vous décrivez le projet",
      "Par téléphone ou par le formulaire en ligne. En quelques minutes, nous vous "
@@ -24,10 +24,17 @@ ETAPES = [
      "Poste par poste, protections, évacuation et nettoyage compris. Rien "
      "n'est renvoyé à un « selon besoin ».",
      "72 h après la visite"),
+    ("Nous fixons le planning",
+     "Avant le premier jour, le calendrier semaine par semaine de chaque "
+     "corps de métier, avec la date de livraison.",
+     "À la signature"),
+    ("Nous menons le chantier",
+     "Un seul responsable pilote tous les corps de métier et vous rend "
+     "compte. Les imprévus sont signalés et chiffrés avant d'être exécutés.",
+     "Selon les travaux"),
     ("Nous livrons à la date prévue",
-     "Planning daté avant le démarrage, un seul responsable de chantier, "
-     "visite de fin de chantier pièce par pièce et défauts corrigés sous "
-     "dix jours.",
+     "Visite de fin de chantier pièce par pièce avec vous, défauts corrigés "
+     "sous dix jours, puis remise des clés.",
      "À la date convenue"),
 ]
 
@@ -54,10 +61,10 @@ TEMOINS = [
 def etapes(titre_id="tEtapes", temps=None):
     """Les temps d'un déroulé, en cases d'un même cadre (une glissière).
 
-    Par défaut, les quatre temps d'une demande (accueil). `temps` :
+    Par défaut, les six temps dits au visiteur (accueil). `temps` :
     (titre, texte, cote) — les six temps d'un chantier (page entreprise),
-    la méthode d'une prestation (cote vide). La feuille règle les
-    colonnes sur le nombre de temps (18-confiance.css).
+    la méthode d'une prestation, en six temps elle aussi (cote vide). La
+    feuille règle les colonnes sur le nombre de temps (18-confiance.css).
     """
     temps = ETAPES if temps is None else temps
     cellules = [
