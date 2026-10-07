@@ -6,6 +6,7 @@ concurrencent dans les résultats de recherche au lieu de s'additionner.
 """
 
 import briques
+import carte
 import confiance
 from donnees_site import COMMUNES
 from pages_site import fragment
@@ -30,7 +31,8 @@ LEGENDE_COMPARATEUR = """<figcaption class="legende legende--comparateur">
 
 def accueil(services, base=""):
     """Page d'accueil : la preuve, les chiffres, les prestations, le déroulé."""
-    villes = "".join("<li>%s</li>" % c for c in COMMUNES)
+    villes = "".join('<li data-lieu="%s">%s</li>' % (carte.ancre(c), c)
+                     for c in COMMUNES)
     return f"""
   <section class="couverture" aria-labelledby="t01">
     <div class="zone grille12 couverture__grille">
@@ -103,6 +105,7 @@ def accueil(services, base=""):
                       "Nous restons sur l'arc lémanique. Un chantier proche, "
                       "c'est une équipe qui arrive à l'heure et qui repasse "
                       "sans compter quand une reprise est nécessaire.")}
+{carte.carte()}
       <div class="service__deux">
         <div class="service__texte">
           <p>À Lausanne, nous travaillons aussi bien dans les immeubles

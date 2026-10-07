@@ -4,9 +4,19 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.1**, en production.
+Date : 07/10/2026 — Statut : **v6.2**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Le plan du Léman, 07/10/2026 (v6.2).** La section « Zone » de l'accueil n'était qu'un texte et une liste
+de communes. Elle montre désormais le lac dessiné comme un plan d'implantation, sans aucune photo : la rive
+d'un trait d'encre, l'eau hachurée sur la chaux, un carré au rouge écrit par commune (le même que les puces de
+la liste), l'atelier en piquet maître — le rouge du toit cerné d'un cadre —, l'échelle de 10 km et le nord
+coiffé du toit. Les sept communes tenues en cinq kilomètres autour de Lausanne sont nommées dans un carton
+agrandi deux fois et demie, posé dans le blanc du Chablais, relié à son cadre de repérage par deux traits de
+renvoi ; au téléphone, trop petit pour sept noms, le carton cède la place à la liste. Une légende sous le plan.
+Idée reprise du « Location Map » de 21st.dev, sans ses marqueurs qui pulsent. Un essai d'accordéon de photos pour
+les prestations a été écarté par le client le même jour.
 
 **La trame du relevé, 07/10/2026 (v6.1).** Pour que la bande de noir de chaque page vive sans rien ajouter de
 spectaculaire, elle porte le quadrillage du géomètre : un point carré tous les 24 px, une chaux à 14 % (§ 2,
@@ -513,7 +523,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
    posé (paragraphe d'intention, puis les quatre chiffres sur une rangée, d'un bord à l'autre, au rouge du
    toit) ; les prestations, marge accrochée (une ligne par prestation, sa photo en tête, sans numéro) ; le
    chantier à la une, en-tête posé (panneau dépoli sur photo pleine largeur) ; la zone, marge accrochée ; le
-   déroulé en quatre cases, en-tête posé — blanc et chaux en alternance.
+   déroulé en quatre cases, en-tête posé — blanc et chaux en alternance. La zone porte le **plan du Léman**
+   (`outils/carte.py`, `13-carte.css`) au-dessus du texte et de la liste des communes.
 4. Renvoi final : un **cadre à repères** en relief (blanc), la question, l'appel en rouge et le téléphone à
    gauche ; à droite, téléphone, courriel, horaires et atelier. Puis pied de page en noir nacré (logo négatif)
    sous le filet rouge du toit, et le nom de l'entreprise en enseigne, en lettres nacrées, d'un bord à l'autre de la grille et entier (v5 :
@@ -541,6 +552,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Pression | `scale: .97` | 160 ms |
 | Onde de la trame (au toucher, au clic) | points allumés sur une toile, sous le contenu | 3 s, sortie |
 | Arrivée de la trame (une fois) | une onde déjà partie, une seconde 1,2 s après | moins de 5 s en tout |
+| Commune survolée (plan, liste) | `scale` du repère, couleur du nom | 180 ms, sortie |
 
 - **Rien ne bouge au défilement** (05/10/2026) : ni apparitions, ni titres qui montent, ni photos qui se
   dévoilent, ni chiffres qui défilent, ni photos qui glissent. Au téléphone, ces effets laissaient des zones

@@ -46,7 +46,7 @@ Après une modification du contenu, des feuilles de style ou du chrome :
 python3 outils/construire.py
 ```
 
-Le script écrit les pages, `assets/css/site.css` (les dix-neuf feuilles
+Le script écrit les pages, `assets/css/site.css` (les vingt feuilles
 sources concaténées et minifiées, avec une empreinte de version dans
 l'adresse), le plan du site daté et `robots.txt`.
 
@@ -80,6 +80,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
+| `carte.py` | le plan du Léman de l'accueil : contour du lac, repères des communes, carton de Lausanne |
 | `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), glissière (suites à faire glisser au téléphone, et leur rangée de repères) |
@@ -149,6 +150,17 @@ Des cadres d'un pixel ; le repère carré d'angle ne marque que
 l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
+
+Ce que la v6.2 a ajouté (07/10/2026) : la section « Zone » de
+l'accueil montre un **plan du Léman**, tracé comme un plan
+d'implantation — la rive au trait, l'eau hachurée, un carré rouge par
+commune, l'atelier en piquet maître, l'échelle et le nord coiffé du toit.
+Les sept communes serrées autour de Lausanne sont nommées dans un carton
+agrandi (dès la tablette). Survoler une commune, sur le plan ou dans la
+liste, la marque des deux côtés. Idée reprise du « Location Map » de
+21st.dev, dessinée sans photo ni dépendance (`carte.py`, `13-carte.css`,
+`carte.js`) ; contours OFS / swisstopo (paquet npm `swiss-maps`, 2026),
+crédités dans les mentions légales.
 
 Ce que la v6.1 a ajouté (07/10/2026) : la bande de noir de chaque page
 porte la **trame du relevé**, un quadrillage de points à peine visible ;
@@ -253,6 +265,7 @@ pas bougé d'un pixel.
 | `lumineuse.js` | visionneuse plein écran des réalisations |
 | `dossier.js` | filtres des réalisations |
 | `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |
+| `carte.js` | plan du Léman : une commune survolée, sur le plan ou dans la liste, se marque des deux côtés |
 | `trame.js` | trame du relevé sous la bande de noir : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
 
 Tout est neutralisé si le visiteur demande moins de mouvement

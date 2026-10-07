@@ -97,7 +97,7 @@ def construire_accueil():
     }
     corps = page_accueil.accueil(SERVICES, "")
     schemas = [seo.site_web(), seo.entreprise()]
-    modules = BASE_JS + ["comparateur.js"]
+    modules = BASE_JS + ["comparateur.js", "carte.js"]
     return ecrire("index.html", assembler(page, corps, "", modules, schemas))
 
 

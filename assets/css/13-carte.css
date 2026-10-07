@@ -1,0 +1,138 @@
+/* ============================================================
+   DSG RÉNOVATION — 13 · LA CARTE DE LA ZONE
+   Un plan d'implantation à l'échelle du lac (outils/carte.py) : la
+   rive tracée d'un trait d'encre, l'eau hachurée comme sur un plan,
+   un carré rouge par commune — le même que les puces de la liste
+   posée dessous. L'atelier est le piquet maître : le rouge du toit,
+   cerné d'un cadre. L'échelle et le nord, dont la flèche est le toit
+   du logo.
+
+   Autour de Lausanne, sept communes en cinq kilomètres : un carton les
+   montre agrandies au pied du plan, comme sur une carte imprimée, un
+   cadre de repérage et deux traits de renvoi disent d'où il vient.
+
+   Les noms sont du texte posé sur le dessin : ils gardent leur taille
+   à toutes les largeurs, un halo du fond les détache de la rive et
+   des hachures. Au survol d'une commune, sur le plan ou dans la
+   liste, son repère se marque des deux côtés (carte.js).
+   ============================================================ */
+.carte{margin:0 0 var(--sp-7)}
+.carte__plan{position:relative;width:100%}
+.carte__fond{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.carte__fond path{vector-effect:non-scaling-stroke}
+.carte__lac{fill:var(--c-papier-2);stroke:var(--c-cadre);stroke-width:1px}
+.carte__eau{stroke:none}
+.carte__onde{stroke:var(--c-ligne);stroke-width:1px}
+.carte__loupe,.carte__carton{fill:none;stroke:var(--c-cadre);stroke-width:1px;vector-effect:non-scaling-stroke}
+.carte__renvoi{fill:none;stroke:var(--c-ligne-forte);stroke-width:1px;vector-effect:non-scaling-stroke}
+.carte__carton-fond{fill:var(--c-papier)}
+/* Le titre du carton, à son pied gauche, sur l'eau. */
+.carte__titre-carton{
+  position:absolute;translate:0 -100%;padding:var(--sp-3) var(--sp-4);
+  font-size:var(--t-etiquette);line-height:1.2;color:var(--c-encre-60);
+  text-shadow:0 0 2px var(--c-papier-2),0 0 4px var(--c-papier-2),0 0 6px var(--c-papier-2);
+}
+
+.carte__nom-lac{
+  position:absolute;translate:-50% -50%;
+  font-family:var(--f-lecture);font-size:var(--t-chapo);letter-spacing:.32em;
+  color:var(--c-encre-60);
+  text-shadow:0 0 3px var(--c-papier-2),0 0 6px var(--c-papier-2);
+}
+
+.carte__lieux{list-style:none;margin:0;padding:0}
+.carte__lieu{position:absolute;width:0;height:0}
+/* Le repère, puis une cible de survol plus large que lui. */
+.carte__lieu::before,.carte__lieu::after{content:"";position:absolute;translate:-50% -50%}
+.carte__lieu::before{
+  width:7px;height:7px;background:var(--c-marque);
+  transition:scale var(--d-rapide) var(--e-sortie),background-color var(--d-rapide) var(--e-standard);
+}
+.carte__lieu::after{width:28px;height:28px}
+.carte__lieu--atelier::before{
+  width:11px;height:11px;background:var(--c-signal);
+  box-shadow:0 0 0 3px var(--c-papier),0 0 0 4px var(--c-cadre);
+}
+
+.carte__nom{
+  position:absolute;white-space:nowrap;
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-etiquette);line-height:1.25;
+  color:var(--c-encre);
+  text-shadow:0 0 2px var(--c-papier),0 0 4px var(--c-papier),0 0 6px var(--c-papier);
+  transition:opacity var(--d-rapide) var(--e-standard);
+}
+.carte__lieu--e .carte__nom{left:10px;top:0;translate:0 -50%}
+.carte__lieu--o .carte__nom{right:10px;top:0;translate:0 -50%;text-align:right}
+.carte__lieu--n .carte__nom{bottom:8px;left:0;translate:-50% 0}
+.carte__lieu--s .carte__nom{top:8px;left:0;translate:-50% 0}
+.carte__lieu--atelier.carte__lieu--e .carte__nom{left:16px}
+.carte__lieu--atelier.carte__lieu--o .carte__nom{right:16px}
+.carte__lieu--atelier.carte__lieu--n .carte__nom{bottom:12px}
+
+/* La commune survolée, sur le plan comme dans la liste. */
+.carte__lieu.est-montre{z-index:1}
+.carte__lieu.est-montre::before{scale:1.6;background:var(--c-signal)}
+.lots.service__villes li{transition:color var(--d-rapide) var(--e-standard)}
+.lots.service__villes li::before{transition:scale var(--d-rapide) var(--e-sortie)}
+.lots.service__villes li.est-montre{color:var(--c-accent)}
+.lots.service__villes li.est-montre::before{scale:1.6}
+
+/* Le nord et l'échelle, en haut à gauche, dans le blanc du Jura. */
+.carte__releve{
+  position:absolute;left:0;top:0;width:100%;
+  display:flex;flex-direction:column;align-items:flex-start;gap:var(--sp-2);
+  pointer-events:none;
+}
+/* Une règle de dix kilomètres, ses deux talons. */
+.carte__echelle{
+  position:relative;
+  padding-bottom:var(--sp-2);text-align:center;white-space:nowrap;
+  font-size:var(--t-etiquette);line-height:1;color:var(--c-encre-60);
+  border-bottom:1px solid var(--c-encre);
+}
+.carte__echelle::before,.carte__echelle::after{
+  content:"";position:absolute;bottom:-1px;width:1px;height:7px;background:var(--c-encre);
+}
+.carte__echelle::before{left:0}
+.carte__echelle::after{right:0}
+/* Le nord, coiffé du toit. */
+.carte__nord{
+  display:flex;flex-direction:column;align-items:center;gap:var(--sp-1);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-etiquette);line-height:1;color:var(--c-encre);
+}
+.carte__nord::before{
+  content:"";width:18px;height:10px;background:var(--c-marque);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* La légende : les deux sortes de repères, puis la source du fond. */
+.carte__legende{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2) var(--sp-5);
+  margin-top:var(--sp-4);font-size:var(--t-etiquette);line-height:1.3;color:var(--c-encre-60);
+}
+.carte__cle{display:inline-flex;align-items:center;gap:var(--sp-2)}
+.carte__cle::before{content:"";flex:0 0 auto;width:7px;height:7px;background:var(--c-marque)}
+.carte__cle--atelier::before{
+  width:9px;height:9px;margin:3px;background:var(--c-signal);
+  box-shadow:0 0 0 2px var(--c-papier),0 0 0 3px var(--c-cadre);
+}
+.carte__source{color:var(--c-encre-40)}
+
+/* Le carton paraît dès la tablette : au téléphone, sept noms n'y
+   tiendraient pas, et le plan ne garde que les villes qu'il nomme.
+   Avec le carton, c'est lui qui nomme Lausanne. */
+.carte__zoom,.carte__lieu--carton,.carte__titre-carton,.carte__lieu--serre:not(.carte__lieu--atelier){display:none}
+@media (min-width:768px){
+  .carte__releve{gap:var(--sp-4)}
+  .carte__zoom{display:inline}
+  .carte__lieu--carton,.carte__titre-carton,.carte__lieu--serre:not(.carte__lieu--atelier){display:block}
+  .carte__lieu--serre .carte__nom{display:none}
+}
+
+/* Couleurs imposées : le plan garde son trait, les repères leur
+   couleur système. */
+@media (forced-colors:active){
+  .carte__lac{fill:Canvas;stroke:CanvasText}
+  .carte__onde{stroke:GrayText}
+  .carte__lieu::before{background:Highlight;forced-color-adjust:none}
+}
