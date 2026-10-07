@@ -52,7 +52,7 @@ def tete(page, base, feuille, schemas):
 <meta name="description" content="{page['description']}">
 <link rel="canonical" href="{page['canonique']}">
 {page.get('robots', '')}
-<meta name="theme-color" content="#F3F3F4">
+<meta name="theme-color" content="#F4F1EC">
 <link rel="icon" href="{base}favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="{base}assets/images/icone-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="{base}apple-touch-icon.png">

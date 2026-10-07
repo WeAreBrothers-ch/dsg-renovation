@@ -9,6 +9,16 @@ chantier se feuillette, elle ne se déroule pas.
 """
 
 
+def reperes(nombre):
+    """La rangée de repères posée sous une suite à faire glisser : un carré
+    par case, le premier marqué. Écrite dans la page plutôt qu'ajoutée par
+    le script, elle a sa place dès le premier affichage : rien ne bouge à
+    l'arrivée d'onglets.js, qui ne fait que déplacer la marque. La feuille
+    la montre au téléphone seulement, et seulement avec le script."""
+    return ('      <div class="suite__reperes" aria-hidden="true"><span data-actif></span>'
+            + "<span></span>" * (nombre - 1) + "</div>")
+
+
 def cartes(items):
     """Cartes à filet : un titre, une cote, un texte, des étiquettes.
 
@@ -27,7 +37,31 @@ def cartes(items):
           <p class="carte__texte">{texte}</p>
           {lots}
         </li>""")
-    return '      <ul class="cartes">\n' + "\n".join(blocs) + "\n      </ul>"
+    return ('      <ul class="cartes">\n' + "\n".join(blocs) + "\n      </ul>\n"
+            + reperes(len(blocs)))
+
+
+def postes(items, numerote=False):
+    """Une liste ouverte : chaque poste, son intitulé et sa phrase, d'un
+    filet à l'autre, deux par ligne dès la tablette.
+
+    Pour ce qui doit se lire d'un coup d'œil — ce que contient un devis,
+    ce que nous ne faisons pas — et non s'ouvrir ligne à ligne : une page
+    qui enchaîne les dépliants se parcourt comme une foire aux
+    questions. `items` : (intitulé, phrase).
+    """
+    balise = "ol" if numerote else "ul"
+    lignes = []
+    for rang, (titre, texte) in enumerate(items, 1):
+        numero = ('<span class="poste__n" aria-hidden="true">%02d</span>' % rang
+                  if numerote else "")
+        lignes.append(f"""        <li class="poste">
+          {numero}<h3 class="poste__titre">{titre}</h3>
+          <p class="poste__texte">{texte}</p>
+        </li>""")
+    classe = "postes postes--numerote" if numerote else "postes"
+    return ('      <%s class="%s">\n' % (balise, classe) + "\n".join(lignes)
+            + "\n      </%s>" % balise)
 
 
 def _insecable(texte):
@@ -53,4 +87,5 @@ def besoins(lignes, services, base):
         </li>"""
         for dit, slug, note in lignes
     )
-    return '      <ul class="besoins">\n' + rangs + "\n      </ul>"
+    return ('      <ul class="besoins">\n' + rangs + "\n      </ul>\n"
+            + reperes(len(lignes)))

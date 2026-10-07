@@ -80,9 +80,9 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
-| `confiance.py` | déroulé en quatre temps, logos, témoignages (masqués tant qu'ils sont provisoires) |
+| `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
-| `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins |
+| `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), repères des suites à faire glisser |
 | `repli.py` | onglets et dépliants |
 | `page_service.py`, `service_liens.py` | corps d'une page de prestation, zone, prestations voisines |
 | `page_accueil.py`, `page_prestations.py`, `pages_site.py`, `pages_contenu.py` | corps des pages |
@@ -130,23 +130,39 @@ construction.
 
 ## Couleurs et direction artistique
 
-Palette « Noir nacré & rouge DSG » (v4, 05/10/2026) — tout est décrit
-dans `DIRECTION-ARTISTIQUE.md`. Les couleurs du logo, et elles seules :
-son noir, le rouge du toit, le gris d'ombre de ses lettres, le blanc.
-Le fond est un blanc perle neutre, le blanc franc une section sur
-deux, une bande de noir par page. Ce noir est **nacré** (`--nacre`) :
-de légers reflets froids, rosés et verts qui le font vivre — sur les
-bandes sombres, le pied, la barre mobile et le survol des boutons ;
-l'enseigne du pied s'écrit en lettres nacrées. Le rouge reste à
-l'action (les boutons d'appel) et aux marques écrites ; il ne couvre
-jamais un fond. Le logo garde ses propres couleurs. Changer de palette,
-c'est changer `assets/css/00-jetons.css` : les autres feuilles ne
-demandent que des rôles (`--c-encre`, `--c-signal`, `--c-accent`…).
-Des cadres d'un pixel marqués d'un repère carré à chaque angle —
-tous tracés en bordure, chaque carré posé au-dessus de son trait,
-la même règle partout (`01-socle.css`) —, un chevron devant chaque
-intitulé, une grotesque (Archivo) pour les titres
-et une sérif de lecture (Newsreader) pour les phrases.
+Palette « Chaux, noir & rouge DSG » (v5, 07/10/2026) — tout est
+décrit dans `DIRECTION-ARTISTIQUE.md`. Le noir, le rouge du toit et le
+gris d'ombre du logo, posés sur une **chaux** chaude (`#F4F1EC`) ; le
+blanc franc une section sur deux, une bande de noir par page. Ce noir
+est **nacré** (`--nacre`) : de légers reflets ivoire, champagne et
+vieux rose — sur les bandes sombres, le pied, la barre mobile et le
+survol des boutons ; l'enseigne du pied s'écrit en lettres nacrées,
+d'un bord à l'autre de la grille. Deux accents, qui ne couvrent jamais
+un fond : le **rouge** pour l'action et ce qui demande l'attention
+(boutons, liens, astérisques, erreurs, « vous êtes ici »), le **chêne**
+(`#8A5A2B`) pour les marques écrites (chevrons, numéros, puces, « + »).
+Le logo garde ses propres couleurs. Changer de palette, c'est changer
+`assets/css/00-jetons.css` : les autres feuilles ne demandent que des
+rôles (`--c-encre`, `--c-signal`, `--c-accent`, `--c-marque`…).
+Des cadres d'un pixel ; le repère carré d'angle ne marque que
+l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
+chevron devant chaque intitulé, une grotesque (Archivo) pour les
+titres et une sérif de lecture (Newsreader) pour les phrases.
+
+Ce que la v5 a changé, en bref (audit de design du 07/10/2026) :
+
+- **Palette réchauffée** et second accent, le chêne ; les gris de
+  texte foncés (la sérif pâlissait) ; douze neutres ramenés à neuf.
+- **Six défauts corrigés** : « facultatif » en rouge, filets coupés
+  des fiches de réalisations, légendes illisibles sur photo au
+  téléphone, focus invisible sur la poignée du comparateur, enseigne
+  du pied rognée, suites à faire glisser coupées par leur cadre.
+- **Moins de monotonie** : deux compositions de section qui alternent
+  (marge accrochée pour ce qui se lit, en-tête posé dès qu'un bloc
+  prend toute la largeur) ; déroulé, limites, contenu du devis et
+  méthode des prestations se lisent ouverts ; les vingt questions du
+  devis tiennent en un bloc à onglets ; les repères d'angle sont
+  réservés à deux blocs.
 
 Ce que la v3 a changé, en bref :
 

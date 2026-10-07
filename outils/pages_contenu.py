@@ -79,26 +79,26 @@ def devis(services, base=""):
     """Le bordereau d'abord, puis tout ce qu'on se demande avant de signer.
 
     Le formulaire ouvre la page : quelqu'un qui arrive ici veut demander
-    un devis, pas lire. Le reste répond à ceux qui hésitent encore.
+    un devis, pas lire. Le reste répond à ceux qui hésitent encore : ce
+    que contient le devis se lit ouvert, comme les lignes d'un devis ;
+    les questions tiennent en un bloc à onglets.
     """
-    contient = repli.replis(
-        [(titre, "<p>%s</p>" % texte) for titre, texte in cd.CONTIENT]
-    )
+    contient = briques_bis.postes(cd.CONTIENT, numerote=True)
     preparer = "\n".join(
         "            <li><strong>%s</strong> — %s</li>" % (t, x)
         for t, x in cd.PREPARER
     )
-    groupes = "".join(
-        f"""
-  <section class="section" aria-label="{groupe['nom']}">
-    <div class="zone">
-{briques.intercalaire(groupe["nom"], groupe["cote"],
-                      groupe["titre"])}
-{briques.questions_liste(groupe["questions"])}
-    </div>
-  </section>
-"""
-        for groupe in cq.GROUPES
+    # Les questions en un seul bloc, un onglet par moment du projet :
+    # quatre sections de dépliants à la suite se lisaient comme une
+    # seule liste sans fin. Sans script, les quatre groupes se suivent,
+    # chacun sous son titre (.jeu__titre).
+    questions = repli.onglets(
+        [(groupe["nom"],
+          '<h3 class="jeu__titre">%s</h3>\n%s'
+          % (groupe["titre"].replace("|", " "),
+             briques.questions_liste(groupe["questions"])))
+         for groupe in cq.GROUPES],
+        "Les questions, par moment du projet",
     )
     return f"""
   <section class="section" aria-labelledby="tDemande">
@@ -159,4 +159,12 @@ def devis(services, base=""):
       </div>
     </div>
   </section>
-{groupes}"""
+
+  <section class="section" aria-labelledby="tQuestions">
+    <div class="zone">
+{briques.intercalaire("Questions", "Du premier appel à la livraison",
+                      "Les questions|qu'on nous pose")}
+{questions}
+    </div>
+  </section>
+"""

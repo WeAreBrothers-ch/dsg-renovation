@@ -17,7 +17,7 @@
 }
 .carte{
   display:flex;flex-direction:column;
-  padding:var(--sp-5) var(--sp-5) var(--sp-6);outline:1px solid var(--c-cadre);
+  padding:var(--sp-5) var(--sp-5) var(--sp-6);outline:1px solid var(--c-cadre-plein);
 }
 .carte__titre{margin-top:var(--sp-3)}
 .carte__texte{
@@ -34,10 +34,7 @@
    calé en pied de case. Toute la case mène à la fiche du lot. Au
    téléphone, les cases défilent de côté ; deux par ligne dès 600 px.
    ------------------------------------------------------------ */
-.besoins{
-  display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px;
-  background:var(--c-cadre);border:1px solid var(--c-cadre);
-}
+.besoins{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px}
 .besoin{
   position:relative;display:flex;flex-direction:column;gap:var(--sp-3);
   min-height:0;padding:var(--sp-4) var(--sp-5) 0;background:var(--c-papier);
@@ -74,26 +71,77 @@
 /* Le lien couvre toute la case : la cible fait la taille du bloc. */
 .besoin__lot::after{content:"";position:absolute;inset:0}
 .besoin__lot:focus-visible{outline:none}
-.besoin:has(.besoin__lot:focus-visible){outline:2px solid var(--c-focus);outline-offset:-2px}
+/* L'anneau de focus se pose à l'intérieur (ombre), sans prendre la
+   place du contour de la case. */
+.besoin:has(.besoin__lot:focus-visible){box-shadow:inset 0 0 0 2px var(--c-focus)}
+
+/* ------------------------------------------------------------
+   POSTES — une liste qui se lit ouverte (outils/briques_bis.postes)
+   Ce que contient un devis, ce que nous ne faisons pas : chaque poste,
+   son intitulé et sa phrase, d'un filet à l'autre — les lignes d'un
+   devis plutôt que des dépliants à ouvrir un à un. Numérotés, les
+   postes portent leur rang en marge, à la couleur des marques. Deux
+   par ligne dès la tablette.
+   ------------------------------------------------------------ */
+.postes{display:grid;grid-template-columns:minmax(0,1fr);column-gap:var(--sp-7)}
+.poste{
+  display:grid;grid-template-columns:minmax(0,1fr);align-content:start;row-gap:var(--sp-2);
+  padding-block:var(--sp-4) var(--sp-5);border-top:1px solid var(--c-cadre);
+}
+.postes--numerote .poste{grid-template-columns:2.5em minmax(0,1fr)}
+.poste__n{
+  grid-row:1;padding-top:.2em;font-weight:500;font-size:var(--t-ui);
+  font-variant-numeric:tabular-nums;color:var(--c-marque);
+}
+.poste__titre{
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);
+  letter-spacing:-.01em;line-height:1.3;
+}
+.poste__texte{
+  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.55;
+  color:var(--c-encre-60);text-wrap:pretty;
+}
+.postes--numerote :is(.poste__titre,.poste__texte){grid-column:2}
+@media (min-width:768px){
+  .postes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .poste{padding-block:var(--sp-5) var(--sp-6)}
+}
 
 /* ------------------------------------------------------------
    SUITES À FAIRE GLISSER — déroulé, cartes, besoins
-   Au téléphone, une suite de cases se parcourt d'un geste de côté :
-   chaque case s'arrête contre le bord gauche, la suivante dépasse à
-   droite pour dire qu'il y en a d'autres. Les repères d'angle ne s'y
-   posent pas (ils défileraient avec les cases), et les cases ne
-   montent pas à leur arrivée : elles sont déjà là quand on les fait
-   venir. Dès 600 px, les suites reprennent leur grille.
+   Au téléphone, une suite de cases se parcourt d'un geste de côté.
+   Elle déborde jusqu'aux bords de l'écran : chaque case s'arrête sur
+   la marge de la page, et la suivante est coupée par le bord de
+   l'écran — non plus par le cadre de la suite, où elle passait pour
+   un débordement. Chaque case trace son propre contour, à toutes les
+   tailles (comme les cartes) : un fond d'encre derrière la grille
+   aurait rempli les marges de la suite, et noirci la case manquante
+   d'une rangée incomplète.
+   Sous la suite, une rangée de repères dit combien de cases elle
+   compte et laquelle est à l'écran (onglets.js). Les cases ne montent
+   pas à leur arrivée : elles sont déjà là quand on les fait venir.
+   Dès 600 px, les suites reprennent leur grille.
    ------------------------------------------------------------ */
 :is(.etapes,.cartes,.besoins){
   overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;scrollbar-width:none;
+  margin-inline:calc(var(--grille-marge) * -1);
+  padding:1px var(--grille-marge);scroll-padding-inline:var(--grille-marge);
 }
 :is(.etapes,.cartes,.besoins)::-webkit-scrollbar{display:none}
 :is(.etapes,.cartes,.besoins)>*{scroll-snap-align:start}
-:is(.etapes,.besoins)::before{content:none}
-:is(.etapes,.cartes,.besoins):focus-visible{outline:2px solid var(--c-focus);outline-offset:2px}
+:is(.etape,.besoin){outline:1px solid var(--c-cadre-plein)}
+:is(.etapes,.cartes,.besoins):focus-visible{outline:2px solid var(--c-focus);outline-offset:-2px}
+
+.suite__reperes{display:none;gap:var(--sp-2);margin-top:var(--sp-4)}
+.js .suite__reperes{display:flex}
+.suite__reperes span{
+  width:var(--repere);height:var(--repere);background:var(--c-ligne-forte);
+  transition:width var(--d-normal) var(--e-sortie),background-color var(--d-normal) var(--e-standard);
+}
+.suite__reperes span[data-actif]{width:calc(var(--repere) * 4);background:var(--c-encre)}
+
 @media (min-width:600px){
-  :is(.etapes,.cartes,.besoins){overflow:visible;scroll-snap-type:none}
-  :is(.etapes,.besoins)::before{content:""}
+  :is(.etapes,.cartes,.besoins){overflow:visible;scroll-snap-type:none;margin-inline:0;padding:1px}
+  .js .suite__reperes{display:none}
 }

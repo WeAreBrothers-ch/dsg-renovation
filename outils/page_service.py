@@ -7,6 +7,7 @@ lisible, et chaque métier garde ses mots-clés.
 """
 
 import briques
+import confiance
 import prestations
 import repli
 import service_liens
@@ -48,15 +49,21 @@ def _prestations(fiche):
 
 
 def _methode(fiche):
-    """La méthode, étape par étape, chacune derrière son intitulé."""
-    etapes = [(titre, "<p>%s</p>" % texte)
-              for titre, texte in prestations.etapes_de(fiche)]
+    """La méthode, étape par étape, en cases d'un même cadre.
+
+    Les étapes tiennent en une ou deux phrases : elles se lisent d'un
+    coup d'œil, comme le déroulé de l'accueil, plutôt qu'en dépliants.
+    Cinq étapes prennent leur propre grille (.etapes--cinq) : jamais de
+    rangée creuse.
+    """
+    etapes = [(titre, texte, "") for titre, texte in prestations.etapes_de(fiche)]
+    classe = "etapes--cinq" if len(etapes) == 5 else ""
     return f"""
   <section class="section sur-sombre" aria-labelledby="comment">
     <div class="zone">
 {briques.intercalaire("Méthode", "Du premier appel à la fin des travaux",
                       prestations.intertitres_de(fiche)["comment"])}
-{repli.replis(etapes, ouvert=True)}
+{confiance.etapes("comment", etapes, classe)}
     </div>
   </section>
 """

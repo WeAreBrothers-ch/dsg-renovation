@@ -45,26 +45,74 @@
   });
 
   /* Suites à faire glisser (16-composants.css) : au téléphone, le
-     déroulé et les cartes défilent de côté. Tant qu'une suite déborde,
-     elle prend le focus, pour se laisser parcourir au clavier ; elle le
-     rend dès qu'elle retrouve sa grille. Les besoins, eux, sont des
-     liens : le focus les fait déjà venir. */
-  var suites = document.querySelectorAll(".etapes, .cartes");
-  function focaliserSuites() {
-    Array.prototype.forEach.call(suites, function (suite) {
-      /* Les repères d'angle de la grille débordent d'un demi-repère :
-         seule une suite qui défile vraiment compte. */
-      var defile = window.getComputedStyle(suite).overflowX !== "visible";
-      if (defile && suite.scrollWidth > suite.clientWidth + 1) {
-        suite.setAttribute("tabindex", "0");
-      } else {
-        suite.removeAttribute("tabindex");
+     déroulé, les cartes et les besoins défilent de côté. Tant qu'une
+     suite défile, elle prend le focus pour se laisser parcourir au
+     clavier — sauf les besoins, qui sont des liens : le focus les fait
+     déjà venir —, et sa rangée de repères (écrite dans la page,
+     outils/briques_bis.reperes) marque la case à l'écran : un carré
+     par case, celui-là s'allonge. Ce n'est qu'une indication
+     (aria-hidden). Dès que la suite retrouve sa grille, elle rend le
+     focus et la feuille masque la rangée ; quand elle défile de
+     nouveau (écran tourné), la marque se recale sur la case à
+     l'écran. */
+  var suites = Array.prototype.map.call(document.querySelectorAll(".etapes, .cartes, .besoins"), function (suite) {
+    var reperes = suite.nextElementSibling;
+    return {
+      suite: suite,
+      reperes: reperes && reperes.classList.contains("suite__reperes") ? reperes : null,
+      focalisable: !suite.classList.contains("besoins"),
+      actif: 0,
+      attente: 0
+    };
+  });
+
+  /* Seule une suite qui défile vraiment compte : une grille dont un
+     contour déborde d'un pixel ne se parcourt pas. */
+  function defile(suite) {
+    return window.getComputedStyle(suite).overflowX !== "visible" &&
+      suite.scrollWidth > suite.clientWidth + 1;
+  }
+
+  /** @param {{suite: Element, reperes: Element, actif: number, attente: number}} s */
+  function marquer(s) {
+    s.attente = 0;
+    var cases = s.suite.children;
+    if (!s.reperes || cases.length < 2 || !defile(s.suite)) { return; }
+    var pas = cases[1].offsetLeft - cases[0].offsetLeft;
+    if (pas <= 0) { return; }
+    /* Au bout de la course, la dernière case est entière à l'écran sans
+       avoir pu s'aligner sur la marge : c'est elle qu'on regarde. */
+    var fin = s.suite.scrollLeft >= s.suite.scrollWidth - s.suite.clientWidth - 2;
+    var rang = fin ? cases.length - 1 : Math.round(s.suite.scrollLeft / pas);
+    if (rang === s.actif) { return; }
+    s.reperes.children[s.actif].removeAttribute("data-actif");
+    s.reperes.children[rang].setAttribute("data-actif", "");
+    s.actif = rang;
+  }
+
+  function ajusterSuites() {
+    suites.forEach(function (s) {
+      if (s.focalisable) {
+        if (defile(s.suite)) {
+          s.suite.setAttribute("tabindex", "0");
+        } else {
+          s.suite.removeAttribute("tabindex");
+        }
       }
+      marquer(s);
     });
   }
+
+  suites.forEach(function (s) {
+    s.suite.addEventListener("scroll", function () {
+      if (!s.attente) {
+        s.attente = window.requestAnimationFrame(function () { marquer(s); });
+      }
+    }, { passive: true });
+  });
   if (suites.length) {
-    focaliserSuites();
-    window.addEventListener("resize", focaliserSuites);
+    ajusterSuites();
+    window.addEventListener("resize", ajusterSuites);
   }
 
   var jeux = document.querySelectorAll("[data-onglets]");

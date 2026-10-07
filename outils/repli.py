@@ -47,25 +47,23 @@ def onglets(panneaux, etiquette):
     )
 
 
-def replis(entrees, numerote=True, ouvert=False):
+def replis(entrees, numerote=True):
     """Une suite de lignes dépliables.
 
     `entrees` : (intitulé, corps HTML) ou (intitulé, corps, cote).
-    Fermée, chaque ligne se lit comme une ligne de sommaire. `ouvert` :
-    les lignes courtes et essentielles (les étapes d'une méthode) se
-    lisent d'emblée ; on peut toujours les refermer. Au téléphone, seule
-    la première reste ouverte (data-replie-telephone, onglets.js) : la
-    suite se lit en intitulés, sur un écran au lieu de deux.
+    Fermée, chaque ligne se lit comme une ligne de sommaire. Ce qui doit
+    se lire d'emblée ne passe pas par ici : les étapes d'une méthode sont
+    des cases (confiance.etapes), les listes courtes des postes
+    (briques_bis.postes).
     """
     lignes = []
     for rang, entree in enumerate(entrees, 1):
-        attribut = (" open" + (" data-replie-telephone" if rang > 1 else "")) if ouvert else ""
         titre, corps = entree[0], entree[1]
         cote = entree[2] if len(entree) > 2 else ""
         numero = ('<span class="repli__n" aria-hidden="true">%02d</span>' % rang
                   if numerote else '<span class="repli__n"></span>')
         marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
-        lignes.append(f"""        <details class="repli"{attribut}>
+        lignes.append(f"""        <details class="repli">
           <summary class="repli__tete">
             {numero}
             <span class="repli__titre">{titre}</span>

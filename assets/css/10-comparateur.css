@@ -17,20 +17,22 @@
 
 .vue{position:relative;margin:0;overflow:hidden;background:var(--c-papier-2)}
 .vue img{width:100%;height:100%;object-fit:cover}
-/* Le voile : assez dense au pied pour que le blanc s'y lise sur un mur
-   blanc (5.5 au pire derrière le lieu), nul au tiers de l'image. */
-.vue::after,.legende--comparateur{
-  background:linear-gradient(to top,
-    rgba(var(--c-sombre-rgb),.78) 0,
-    rgba(var(--c-sombre-rgb),.52) 50%,
-    rgba(var(--c-sombre-rgb),0) 100%);
-}
-.vue::after{content:"";position:absolute;inset:auto 0 0;height:min(62%,240px);pointer-events:none}
+/* Le voile est porté par la légende, et non par l'image : il couvre
+   le texte quelle que soit la hauteur de la photo (au téléphone, un
+   voile calé sur l'image laissait la première ligne sur un mur blanc).
+   Il s'efface dans la marge haute de la légende (--voile) ; derrière
+   le texte, il ne descend jamais sous 66 % : 5.5 au pire, sur un mur
+   blanc. */
 .vue__legende,.legende--comparateur{
+  --voile:var(--sp-7);
   position:absolute;left:0;right:0;bottom:0;z-index:4;
   display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-  gap:var(--sp-3) var(--sp-5);padding:var(--sp-4);
+  gap:var(--sp-3) var(--sp-5);padding:var(--voile) var(--sp-4) var(--sp-4);
   color:var(--c-blanc);text-shadow:0 1px 2px rgba(var(--c-sombre-rgb),.35);
+  background:linear-gradient(to top,
+    rgba(var(--c-sombre-rgb),.8) 0,
+    rgba(var(--c-sombre-rgb),.66) calc(100% - var(--voile)),
+    rgba(var(--c-sombre-rgb),0) 100%);
 }
 .vue__texte{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:44ch}
 .vue__lieu{font-weight:500;font-size:var(--t-petit);line-height:1.3}
@@ -49,23 +51,26 @@
   .vue__lien:hover{text-decoration-color:var(--c-blanc)}
 }
 .vue__lien:focus-visible{outline-color:var(--c-blanc)}
+/* Au téléphone, la photo est petite : la légende garde le lieu, et le
+   lien vers la fiche (ou les deux boutons du comparateur) ; ce qu'on
+   voit attend la tablette. */
+:is(.vue__legende,.legende--comparateur) .vue__quoi{display:none}
 @media (min-width:768px){
-  .vue__legende,.legende--comparateur{padding:var(--sp-5) var(--sp-6)}
+  .vue__legende,.legende--comparateur{--voile:var(--sp-8)}
+  .vue__legende{padding:var(--voile) var(--sp-6) var(--sp-5)}
+  :is(.vue__legende,.legende--comparateur) .vue__quoi{display:block}
 }
 
 /* La légende du comparateur se pose dans l'image comme les autres ;
    elle laisse passer le doigt, sauf sur ses deux boutons. Au
-   téléphone, l'image est petite : une seule ligne, le lieu et les deux
-   boutons ; ce qu'on voit attend la tablette. */
+   téléphone, une seule ligne : le lieu et les deux boutons. */
 .legende--comparateur{
   flex-wrap:nowrap;align-items:center;
-  padding:var(--sp-7) var(--sp-3) var(--sp-3);pointer-events:none;
+  padding:var(--voile) var(--sp-3) var(--sp-3);pointer-events:none;
 }
-.legende--comparateur .vue__quoi{display:none}
 .legende--comparateur .bascule__choix{min-height:40px;padding-inline:var(--sp-3)}
 @media (min-width:768px){
-  .legende--comparateur{align-items:flex-end;padding:var(--sp-8) var(--sp-6) var(--sp-5)}
-  .legende--comparateur .vue__quoi{display:block}
+  .legende--comparateur{align-items:flex-end;padding:var(--voile) var(--sp-6) var(--sp-5)}
   .legende--comparateur .bascule__choix{padding-inline:var(--sp-4)}
 }
 .legende--comparateur .bascule{pointer-events:auto;text-shadow:none}
@@ -148,8 +153,13 @@
   .comparateur__poignee:hover::after{scale:1.06}
 }
 .comparateur__poignee:active::after{scale:1.1}
+/* Au clavier, un double anneau, blanc puis noir : sur un mur blanc
+   comme dans une ombre, l'un des deux se détache toujours. Couleurs
+   fixes : le fond est une photo, pas celui de la section. */
 .comparateur__poignee:focus-visible{outline:none}
-.comparateur__poignee:focus-visible::after{outline:2px solid var(--c-fiche);outline-offset:3px}
+.comparateur__poignee:focus-visible::after{
+  box-shadow:0 0 0 3px var(--c-blanc),0 0 0 6px var(--c-noir),var(--om-1);
+}
 @media (min-width:768px){
   .comparateur__poignee::after{width:56px;height:56px;margin:-28px 0 0 -28px}
 }

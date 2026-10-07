@@ -75,8 +75,8 @@ def pied(base, courante, services):
       <span class="pied__devise">Professionnalisme, fiabilité et passion</span>
       {legal}
     </div>
+    <p class="pied__logotype" aria-hidden="true">{MARQUE}</p>
   </div>
-  <p class="pied__logotype" aria-hidden="true">{MARQUE}</p>
 </footer>
 
 <div class="barre-mobile sur-sombre" id="barreMobile" data-visible="false">

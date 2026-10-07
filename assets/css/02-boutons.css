@@ -31,7 +31,7 @@
 
 /* La couleur d'action (--c-signal) ne sert qu'ici : à appeler
    l'action. Au survol, le noir nacré la recouvre ; sur la bande
-   sombre, c'est le perle (--fond-survol-signal, 00-jetons.css). */
+   sombre, c'est la chaux (--fond-survol-signal, 00-jetons.css). */
 .btn--plein{background:var(--c-signal);color:var(--c-sur-signal)}
 .btn--plein::after{background:var(--c-signal-fonce);background-image:var(--fond-survol-signal)}
 @media (hover:hover) and (pointer:fine){
@@ -67,14 +67,15 @@
 .intercalaire{margin-bottom:var(--sp-6)}
 .intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-3)}
 /* L'intitulé porte le toit du logo : un chevron, la ligne qui coiffe
-   « DSG ». Il prend la couleur d'accent du fond (--c-accent). */
+   « DSG ». Il prend la couleur des marques écrites (--c-marque) : le
+   rouge reste à ce qu'on touche. */
 .intercalaire__nom{
   display:inline-flex;align-items:center;gap:var(--sp-3);
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);
   color:var(--c-encre);
 }
 .intercalaire__nom::before{
-  content:"";flex:0 0 auto;width:18px;height:10px;background:var(--c-accent);
+  content:"";flex:0 0 auto;width:18px;height:10px;background:var(--c-marque);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
 }
@@ -106,16 +107,20 @@
     flex-direction:column;margin-bottom:0;padding-right:var(--sp-6);
   }
   .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
-  /* Les blocs qui ont besoin de toute la largeur la reprennent. */
-  .zone:has(>.intercalaire)>.pleine-largeur{grid-column:1/-1;grid-row:auto}
-  /* Ce qui suit un tel bloc s'aligne sur lui, au bord gauche de la
-     page : laissé dans la colonne de droite, un lien de fin de section
-     (« Voir toutes nos réalisations ») flottait au milieu de l'écran. */
-  .zone:has(>.intercalaire)>.pleine-largeur~*{grid-column:1/-1}
-  /* Une section qui contient un tel bloc ne peut pas garder sa marge
-     accrochée : le bloc passerait dessous. L'intitulé reste alors à
-     sa place, à côté du titre. */
-  .zone:has(>.pleine-largeur) .intercalaire__marge{grid-row:1;position:static}
+  /* EN-TÊTE POSÉ — une section dont un bloc prend toute la largeur
+     (chiffres, déroulé, registre des chantiers, chantier à la une,
+     formulaire) change de composition : l'intitulé passe au-dessus du
+     titre, et tout part du bord gauche de la page, lien de fin de
+     section compris. Le site alterne ainsi deux mises en page — la
+     marge accrochée pour ce qui se lit, l'en-tête posé pour ce qui se
+     regarde — au lieu de répéter la même d'une section à l'autre. (La
+     marge accrochée n'y tiendrait pas : le bloc passerait dessous.) */
+  .zone:has(>.pleine-largeur)>*{grid-column:1/-1;grid-row:auto}
+  .zone:has(>.pleine-largeur) .intercalaire__marge{
+    grid-column:1/-1;grid-row:auto;position:static;
+    flex-direction:row;align-items:baseline;margin-bottom:var(--sp-5);padding-right:0;
+  }
+  .zone:has(>.pleine-largeur) .intercalaire__corps{grid-column:1/9}
 }
 
 /* ------------------------------------------------------------

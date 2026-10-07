@@ -60,7 +60,13 @@ def _ressources_wix(texte):
 
 
 def entreprise(services, base=""):
-    """Qui nous sommes, comment se déroule un chantier, nos limites."""
+    """Qui nous sommes, comment se déroule un chantier, nos limites.
+
+    Le déroulé et les limites se lisent ouverts — les six temps en cases,
+    les quatre refus en liste — : seuls les engagements restent en
+    dépliants. Trois blocs repliés à la suite faisaient de la page une
+    foire aux questions.
+    """
     engagements = repli.replis(
         [(titre, "<p>%s</p>" % texte) for titre, texte in ce.ENGAGEMENTS],
         numerote=False,
@@ -70,12 +76,10 @@ def entreprise(services, base=""):
     <div class="zone">
 {briques.intercalaire("Histoire", "Depuis 2019 à Lausanne",
                       "D'où vient|l'entreprise")}
-      <div class="service__deux">
-        <div class="service__texte">
-          {"".join("<p>%s</p>" % p for p in ce.HISTOIRE)}
-        </div>
-{briques.releve_chiffre()}
+      <div class="service__texte entreprise__intro">
+        {"".join("<p>%s</p>" % p for p in ce.HISTOIRE)}
       </div>
+{briques.releve_chiffre("preuves--quatre pleine-largeur")}
     </div>
   </section>
 
@@ -96,8 +100,7 @@ def entreprise(services, base=""):
                       "Six temps, dans cet ordre, sur tous nos chantiers — "
                       "qu'il s'agisse d'un seul métier ou d'une rénovation "
                       "complète.")}
-{repli.replis([(titre, "<p>%s</p>" % texte, cote)
-                for titre, texte, cote in ce.DEROULE])}
+{confiance.etapes("tDeroule", ce.DEROULE, "etapes--six")}
     </div>
   </section>
 
@@ -107,8 +110,7 @@ def entreprise(services, base=""):
                       "Ce que nous|ne faisons pas",
                       "Une entreprise qui accepte tout finit par mal faire "
                       "quelque chose. Voici où nous nous arrêtons.")}
-{repli.replis([(titre, "<p>%s</p>" % texte)
-                for titre, texte in ce.LIMITES], numerote=False)}
+{briques_bis.postes(ce.LIMITES)}
     </div>
   </section>
 

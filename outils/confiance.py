@@ -6,6 +6,8 @@ exception : ils attendent de vrais avis clients, et la page le dit
 visiblement tant qu'ils n'ont pas été remplacés.
 """
 
+import briques_bis
+
 # Le déroulé en quatre temps, condensé des six temps de la page entreprise.
 # Chaque cote reprend un délai déjà annoncé ailleurs sur le site : aucune
 # promesse nouvelle n'est faite ici.
@@ -49,18 +51,25 @@ TEMOINS = [
 ]
 
 
-def etapes(titre_id="tEtapes"):
-    """Les quatre temps d'une demande, du premier appel à la livraison."""
+def etapes(titre_id="tEtapes", temps=None, classe=""):
+    """Les temps d'un déroulé, en cases d'un même cadre.
+
+    Par défaut, les quatre temps d'une demande (accueil). `temps` :
+    (titre, texte, cote) — les six temps d'un chantier, page entreprise,
+    avec `classe="etapes--six"` (trois par rangée sur grand écran).
+    """
+    temps = ETAPES if temps is None else temps
+    classes = " ".join(["etapes"] + classe.split() + ["pleine-largeur"])
     cellules = "\n".join(
         f"""        <li class="etape">
           <p class="etape__tete"><span class="etape__n">{rang:02d}</span><span class="etape__cote">{cote}</span></p>
           <h3 class="etape__titre">{titre}</h3>
           <p class="etape__texte">{texte}</p>
         </li>"""
-        for rang, (titre, texte, cote) in enumerate(ETAPES, 1)
+        for rang, (titre, texte, cote) in enumerate(temps, 1)
     )
-    return (f'      <ol class="etapes pleine-largeur" aria-labelledby="{titre_id}">\n'
-            + cellules + "\n      </ol>")
+    return (f'      <ol class="{classes}" aria-labelledby="{titre_id}">\n'
+            + cellules + "\n      </ol>\n" + briques_bis.reperes(len(temps)))
 
 
 def bande_references(base):

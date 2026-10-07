@@ -138,8 +138,12 @@ def liste_metiers(services, base, courant=None):
             + "\n".join(lignes) + "\n      </ul>")
 
 
-def releve_chiffre():
-    """Les quatre chiffres de l'entreprise, en chemises de dossier."""
+def releve_chiffre(classe=""):
+    """Les quatre chiffres de l'entreprise, en chemises de dossier.
+
+    `classe` : « preuves--quatre pleine-largeur » pose les quatre chiffres
+    sur une seule rangée, d'un bord à l'autre de la page.
+    """
     cellules = "\n".join(
         f"""        <li class="preuve">
           <span class="preuve__onglet etiquette">{nom}</span>
@@ -150,7 +154,8 @@ def releve_chiffre():
         </li>"""
         for nom, val, plus, texte in RELEVE
     )
-    return '      <ul class="preuves">\n' + cellules + "\n      </ul>"
+    return ('      <ul class="%s">\n' % " ".join(["preuves"] + classe.split())
+            + cellules + "\n      </ul>")
 
 
 def appel(base, titre, texte, travaux=None):

@@ -41,18 +41,20 @@
 }
 
 /* ------------------------------------------------------------
-   DÉROULÉ EN QUATRE TEMPS
-   Quatre cases d'un même cadre, repères aux angles : le rang et
-   le délai en tête, puis ce qui se passe.
-   Au téléphone, les cases défilent de côté dans le cadre (voir
-   « Suites à faire glisser », 16-composants.css) : un temps et le
-   bord du suivant à l'écran, plutôt que quatre cases empilées. Deux
-   par ligne dès 600 px, quatre sur grand écran.
+   DÉROULÉ — les quatre temps d'une demande (accueil), les six temps
+   d'un chantier (page entreprise)
+   Les cases d'un même cadre : le rang et le délai en tête, puis ce
+   qui se passe. Au téléphone, les cases défilent de côté jusqu'au bord
+   de l'écran (voir « Suites à faire glisser », 16-composants.css) : un
+   temps et le bord du suivant à l'écran, plutôt que des cases
+   empilées. Deux par ligne dès 600 px ; sur grand écran, quatre, ou
+   trois pour les six temps (.etapes--six), trois puis cinq pour les
+   cinq étapes de certaines prestations (.etapes--cinq). Chaque case
+   trace son contour (16-composants.css) : une rangée incomplète ne
+   noircit jamais. Pour qu'elle reste pleine, une dernière case de
+   rang impair prend deux colonnes.
    ------------------------------------------------------------ */
-.etapes{
-  display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px;
-  background:var(--c-cadre);border:1px solid var(--c-cadre);
-}
+.etapes{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px}
 .etape{
   display:flex;flex-direction:column;gap:var(--sp-3);
   min-height:0;padding:var(--sp-4) var(--sp-4) var(--sp-5);background:var(--c-papier);
@@ -61,7 +63,7 @@
   display:flex;justify-content:space-between;align-items:baseline;gap:var(--sp-3);
   font-size:var(--t-etiquette);
 }
-.etape__n{font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-accent)}
+.etape__n{font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-marque)}
 .etape__cote{color:var(--c-encre-60);text-align:right}
 .etape__titre{
   padding-top:var(--sp-4);
@@ -74,7 +76,15 @@
   .etape{min-height:280px;padding:var(--sp-5) var(--sp-5) var(--sp-6)}
   .etape__titre{padding-top:var(--sp-7)}
 }
-@media (min-width:1024px){.etapes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:600px){.etapes>:last-child:nth-child(odd){grid-column:span 2}}
+@media (min-width:1024px){
+  .etapes{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .etapes:is(.etapes--six,.etapes--cinq){grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1280px){
+  .etapes.etapes--cinq{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .etapes--cinq>:last-child:nth-child(odd){grid-column:auto}
+}
 /* Les cases d'une même rangée partagent leurs lignes (subgrid) : un
    titre sur deux lignes ne fait plus descendre le texte de sa seule
    case, les textes démarrent tous à la même hauteur. */
@@ -98,6 +108,6 @@
 }
 .suite-demande li::before{
   content:counter(suite,decimal-leading-zero);
-  font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-accent);
+  font-weight:500;font-variant-numeric:tabular-nums;color:var(--c-marque);
 }
 .suite-demande b{color:var(--c-encre);font-weight:500}

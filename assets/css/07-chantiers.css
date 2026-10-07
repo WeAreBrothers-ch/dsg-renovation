@@ -34,9 +34,12 @@
   .chantiers__grille{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--sp-7)}
   .chantiers__grille>.chemise .chemise__tirage{aspect-ratio:4/3}
   .chantiers__grille .chemise__fiche{padding:var(--sp-5)}
-  .chantiers__grille .releve--regle{grid-template-columns:auto 1fr;grid-template-rows:none;grid-auto-flow:row;column-gap:var(--sp-4)}
+  /* Le filet court d'un bord à l'autre de la fiche : l'écart entre le
+     libellé et la valeur passe dans la valeur (padding), et non dans un
+     interstice de grille qui coupait le trait en deux. */
+  .chantiers__grille .releve--regle{grid-template-columns:auto 1fr;grid-template-rows:none;grid-auto-flow:row;column-gap:0}
   .chantiers__grille .releve--regle :is(dt,dd){padding-block:var(--sp-3);border-top:var(--bd-fin)}
-  .chantiers__grille .releve--regle dd{text-align:right;font-size:var(--t-petit)}
+  .chantiers__grille .releve--regle dd{padding-left:var(--sp-4);text-align:right;font-size:var(--t-petit)}
 }
 /* Une fiche seule sur la dernière ligne prend toute la largeur, sa photo
    en bandeau : pas de case vide à côté d'elle. */
