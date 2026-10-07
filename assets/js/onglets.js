@@ -44,75 +44,80 @@
     });
   });
 
-  /* Suites à faire glisser (16-composants.css) : au téléphone, le
-     déroulé, les cartes et les besoins défilent de côté. Tant qu'une
-     suite défile, elle prend le focus pour se laisser parcourir au
-     clavier — sauf les besoins, qui sont des liens : le focus les fait
-     déjà venir —, et sa rangée de repères (écrite dans la page,
-     outils/briques_bis.reperes) marque la case à l'écran : un carré
-     par case, celui-là s'allonge. Ce n'est qu'une indication
-     (aria-hidden). Dès que la suite retrouve sa grille, elle rend le
-     focus et la feuille masque la rangée ; quand elle défile de
-     nouveau (écran tourné), la marque se recale sur la case à
-     l'écran. */
-  var suites = Array.prototype.map.call(document.querySelectorAll(".etapes, .cartes, .besoins"), function (suite) {
-    var reperes = suite.nextElementSibling;
+  /* Glissières (16-composants.css, outils/briques_bis.glissiere) : au
+     téléphone, déroulés, cartes et besoins défilent de côté. Tant
+     qu'une suite défile, elle prend le focus pour se laisser parcourir
+     au clavier — sauf si ses cases sont des liens : le focus les fait
+     déjà venir —, et sa rangée de repères marque la case à l'écran (un
+     carré par case, celui-là s'allonge ; une simple indication,
+     aria-hidden). Les mesures ne changent qu'avec la taille de la
+     suite : elles sont prises à ce moment-là (ResizeObserver), et le
+     défilement ne lit plus que sa position. */
+  var glissieres = Array.prototype.map.call(document.querySelectorAll(".glissiere"), function (suite) {
     return {
       suite: suite,
-      reperes: reperes && reperes.classList.contains("suite__reperes") ? reperes : null,
-      focalisable: !suite.classList.contains("besoins"),
+      reperes: suite.nextElementSibling,
+      focalisable: !suite.querySelector("a[href]"),
       actif: 0,
-      attente: 0
+      defile: false,
+      pas: 0,
+      course: 0
     };
   });
 
-  /* Seule une suite qui défile vraiment compte : une grille dont un
-     contour déborde d'un pixel ne se parcourt pas. */
-  function defile(suite) {
-    return window.getComputedStyle(suite).overflowX !== "visible" &&
-      suite.scrollWidth > suite.clientWidth + 1;
-  }
-
-  /** @param {{suite: Element, reperes: Element, actif: number, attente: number}} s */
-  function marquer(s) {
-    s.attente = 0;
-    var cases = s.suite.children;
-    if (!s.reperes || cases.length < 2 || !defile(s.suite)) { return; }
-    var pas = cases[1].offsetLeft - cases[0].offsetLeft;
-    if (pas <= 0) { return; }
+  /**
+   * Marque la case à l'écran.
+   * @param {{suite: Element, reperes: Element, actif: number, defile: boolean, pas: number, course: number}} g
+   */
+  function marquer(g) {
+    if (!g.defile || g.pas <= 0) { return; }
     /* Au bout de la course, la dernière case est entière à l'écran sans
        avoir pu s'aligner sur la marge : c'est elle qu'on regarde. */
-    var fin = s.suite.scrollLeft >= s.suite.scrollWidth - s.suite.clientWidth - 2;
-    var rang = fin ? cases.length - 1 : Math.round(s.suite.scrollLeft / pas);
-    if (rang === s.actif) { return; }
-    s.reperes.children[s.actif].removeAttribute("data-actif");
-    s.reperes.children[rang].setAttribute("data-actif", "");
-    s.actif = rang;
+    var rang = g.suite.scrollLeft >= g.course - 2
+      ? g.suite.children.length - 1
+      : Math.round(g.suite.scrollLeft / g.pas);
+    if (rang === g.actif) { return; }
+    g.reperes.children[g.actif].removeAttribute("data-actif");
+    g.reperes.children[rang].setAttribute("data-actif", "");
+    g.actif = rang;
   }
 
-  function ajusterSuites() {
-    suites.forEach(function (s) {
-      if (s.focalisable) {
-        if (defile(s.suite)) {
-          s.suite.setAttribute("tabindex", "0");
-        } else {
-          s.suite.removeAttribute("tabindex");
-        }
+  /**
+   * Mesure une suite : défile-t-elle (une grille dont un contour
+   * déborde d'un pixel ne se parcourt pas), et de combien par case.
+   * @param {{suite: Element, focalisable: boolean, defile: boolean, pas: number, course: number}} g
+   */
+  function mesurer(g) {
+    var suite = g.suite;
+    var cases = suite.children;
+    g.defile = window.getComputedStyle(suite).overflowX !== "visible" &&
+      suite.scrollWidth > suite.clientWidth + 1;
+    g.pas = cases.length > 1 ? cases[1].offsetLeft - cases[0].offsetLeft : 0;
+    g.course = suite.scrollWidth - suite.clientWidth;
+    if (g.focalisable) {
+      if (g.defile) {
+        suite.setAttribute("tabindex", "0");
+      } else {
+        suite.removeAttribute("tabindex");
       }
-      marquer(s);
-    });
+    }
+    marquer(g);
   }
 
-  suites.forEach(function (s) {
-    s.suite.addEventListener("scroll", function () {
-      if (!s.attente) {
-        s.attente = window.requestAnimationFrame(function () { marquer(s); });
-      }
-    }, { passive: true });
+  glissieres.forEach(function (g) {
+    g.suite.addEventListener("scroll", function () { marquer(g); }, { passive: true });
   });
-  if (suites.length) {
-    ajusterSuites();
-    window.addEventListener("resize", ajusterSuites);
+  if ("ResizeObserver" in window) {
+    var observateur = new ResizeObserver(function (entrees) {
+      entrees.forEach(function (entree) {
+        glissieres.forEach(function (g) {
+          if (g.suite === entree.target) { mesurer(g); }
+        });
+      });
+    });
+    glissieres.forEach(function (g) { observateur.observe(g.suite); });
+  } else {
+    glissieres.forEach(mesurer);
   }
 
   var jeux = document.querySelectorAll("[data-onglets]");

@@ -9,8 +9,6 @@ ni le visiteur ni le référencement.
 GROUPES = [
     {
         "nom": "Avant le devis",
-        "cote": "Zone, gratuité, délais",
-        "titre": "Avant de|nous appeler",
         "questions": [
             ("Intervenez-vous en dehors de Lausanne ?",
              "Oui. Nous travaillons sur tout l'arc lémanique : Lausanne et "
@@ -45,8 +43,6 @@ GROUPES = [
     },
     {
         "nom": "Pendant le chantier",
-        "cote": "Organisation, nuisances, présence",
-        "titre": "Pendant|les travaux",
         "questions": [
             ("Puis-je rester dans le logement pendant les travaux ?",
              "Pour des travaux ciblés — peinture d'une pièce, changement de "
@@ -80,8 +76,6 @@ GROUPES = [
     },
     {
         "nom": "Prix et paiement",
-        "cote": "Devis, suppléments, échéances",
-        "titre": "Ce que ça|coûte",
         "questions": [
             ("Combien coûte une rénovation complète à Lausanne ?",
              "Le prix dépend de l'état existant bien plus que de la surface. "
@@ -115,8 +109,6 @@ GROUPES = [
     },
     {
         "nom": "Après la livraison",
-        "cote": "Fin des travaux, défauts, régies",
-        "titre": "Une fois|le chantier livré",
         "questions": [
             ("Comment se passe la réception du chantier ?",
              "Par une visite de fin de chantier, pièce par pièce, avec vous. "

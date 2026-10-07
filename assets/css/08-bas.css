@@ -161,14 +161,13 @@
    pied d'un bord à l'autre de la grille, entier : rogné par le bas et
    arrêté à mi-largeur, il passait pour un défaut d'affichage. Sa taille
    se règle sur la largeur de la grille (unités de conteneur) : le mot
-   mesure 6,81 fois sa taille, on le compose à 1/6,85 de la largeur.
-   Sans unités de conteneur, l'écran sert d'étalon, borné à la grille
-   et à 1/7 : la barre de défilement compte dans 100vw. */
+   (MARQUE, en Archivo 500 serrée à -.055em) mesure 6,81 fois sa
+   taille, on le compose à 1/6,85 de la largeur. Changer le nom, la
+   graisse ou l'approche demande de mesurer de nouveau. */
 .pied>.zone{container-type:inline-size}
 .pied__logotype{
   margin-top:var(--sp-5);margin-bottom:var(--sp-4);
   font-family:var(--f-titre);font-weight:500;
-  font-size:calc((min(100vw,var(--grille-contenu)) - 2 * var(--grille-marge)) / 7);
   font-size:calc(100cqi / 6.85);
   letter-spacing:-.055em;line-height:.8;white-space:nowrap;user-select:none;
   /* Une enseigne en filigrane, en lettres nacrées : elle signe la

@@ -53,17 +53,14 @@ def _methode(fiche):
 
     Les étapes tiennent en une ou deux phrases : elles se lisent d'un
     coup d'œil, comme le déroulé de l'accueil, plutôt qu'en dépliants.
-    Cinq étapes prennent leur propre grille (.etapes--cinq) : jamais de
-    rangée creuse.
     """
     etapes = [(titre, texte, "") for titre, texte in prestations.etapes_de(fiche)]
-    classe = "etapes--cinq" if len(etapes) == 5 else ""
     return f"""
   <section class="section sur-sombre" aria-labelledby="comment">
     <div class="zone">
 {briques.intercalaire("Méthode", "Du premier appel à la fin des travaux",
                       prestations.intertitres_de(fiche)["comment"])}
-{confiance.etapes("comment", etapes, classe)}
+{confiance.etapes("comment", etapes)}
     </div>
   </section>
 """

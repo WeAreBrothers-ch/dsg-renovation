@@ -70,7 +70,7 @@ def accueil(services, base=""):
       sur un savoir-faire transmis depuis plus de <span class="nb">40</span> ans,
       DSG Rénovation intervient à Lausanne, Genève et sur tout l'arc lémanique.
       Rénover, c'est notre métier — pas une activité parmi d'autres.</p>
-{briques.releve_chiffre("preuves--quatre pleine-largeur")}
+{briques.releve_chiffre()}
       <p class="suite"><a href="{base}entreprise.html">Découvrir l'entreprise<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>

@@ -120,8 +120,8 @@ h1,h2,h3{
 /* ------------------------------------------------------------
    REPÈRES D'ANGLE — la signature du site
    Un cadre d'un pixel, et à chacun de ses quatre coins un petit
-   carré : le piquet d'un géomètre. Encre sur les fonds clairs, gris
-   dans le noir nacré (--c-repere). Deux blocs seulement les portent :
+   carré : le piquet d'un géomètre, du cadre à plat (--c-cadre-plein) :
+   encre sur les fonds clairs, gris dans le noir nacré. Deux blocs seulement les portent :
    l'image qui ouvre l'accueil et le renvoi qui ferme chaque page — le
    relevé, puis la décision. Posés sur tous les blocs cadrés (chiffres,
    déroulé, dépliants, formulaire, fiches…), ils se lisaient comme les
@@ -146,10 +146,10 @@ h1,h2,h3{
   content:"";position:absolute;pointer-events:none;z-index:3;
   inset:calc(var(--repere) * -1 - 1px) -3px 0 -3px;
   background:
-    linear-gradient(var(--c-repere),var(--c-repere)) top left / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-repere),var(--c-repere)) top right / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-repere),var(--c-repere)) bottom left / var(--repere) var(--repere) no-repeat,
-    linear-gradient(var(--c-repere),var(--c-repere)) bottom right / var(--repere) var(--repere) no-repeat;
+    linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) top left / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) top right / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) bottom left / var(--repere) var(--repere) no-repeat,
+    linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) bottom right / var(--repere) var(--repere) no-repeat;
 }
 
 /* ------------------------------------------------------------

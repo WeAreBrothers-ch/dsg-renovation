@@ -99,27 +99,24 @@
   }
   .zone:has(>.intercalaire)>*{grid-column:5/-1}
   .zone:has(>.intercalaire)>.intercalaire{display:contents}
-  /* La marge couvre toutes les rangées de la section : c'est ce qui
-     lui laisse la hauteur nécessaire pour rester accrochée. */
-  .intercalaire__marge{
+  .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
+  /* MARGE ACCROCHÉE — ce qui se lit. La marge couvre toutes les rangées
+     de la section : c'est ce qui lui laisse la hauteur nécessaire pour
+     rester accrochée. */
+  .zone:not(:has(>.pleine-largeur)) .intercalaire__marge{
     grid-column:1/5;grid-row:1/span 40;align-self:start;
     position:sticky;top:calc(var(--h-entete) + var(--sp-6));
     flex-direction:column;margin-bottom:0;padding-right:var(--sp-6);
   }
-  .intercalaire__corps{grid-column:5/-1;margin-bottom:var(--sp-8)}
-  /* EN-TÊTE POSÉ — une section dont un bloc prend toute la largeur
-     (chiffres, déroulé, registre des chantiers, chantier à la une,
-     formulaire) change de composition : l'intitulé passe au-dessus du
-     titre, et tout part du bord gauche de la page, lien de fin de
-     section compris. Le site alterne ainsi deux mises en page — la
-     marge accrochée pour ce qui se lit, l'en-tête posé pour ce qui se
-     regarde — au lieu de répéter la même d'une section à l'autre. (La
-     marge accrochée n'y tiendrait pas : le bloc passerait dessous.) */
-  .zone:has(>.pleine-largeur)>*{grid-column:1/-1;grid-row:auto}
-  .zone:has(>.pleine-largeur) .intercalaire__marge{
-    grid-column:1/-1;grid-row:auto;position:static;
-    flex-direction:row;align-items:baseline;margin-bottom:var(--sp-5);padding-right:0;
-  }
+  /* EN-TÊTE POSÉ — ce qui se regarde : une section dont un bloc prend
+     toute la largeur (chiffres, déroulé, registre des chantiers,
+     chantier à la une, formulaire) garde l'en-tête du téléphone,
+     l'intitulé au-dessus du titre, et tout part du bord gauche de la
+     page, lien de fin de section compris. Le site alterne ainsi deux
+     mises en page au lieu de répéter la même d'une section à l'autre.
+     (La marge accrochée n'y tiendrait pas : le bloc passerait dessous.) */
+  .zone:has(>.pleine-largeur)>*{grid-column:1/-1}
+  .zone:has(>.pleine-largeur) .intercalaire__marge{grid-column:1/-1;align-items:baseline}
   .zone:has(>.pleine-largeur) .intercalaire__corps{grid-column:1/9}
 }
 

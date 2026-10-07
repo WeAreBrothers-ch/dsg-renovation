@@ -82,7 +82,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
 | `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
-| `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), repères des suites à faire glisser |
+| `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), glissière (suites à faire glisser au téléphone, et leur rangée de repères) |
 | `repli.py` | onglets et dépliants |
 | `page_service.py`, `service_liens.py` | corps d'une page de prestation, zone, prestations voisines |
 | `page_accueil.py`, `page_prestations.py`, `pages_site.py`, `pages_contenu.py` | corps des pages |
@@ -210,8 +210,9 @@ ou qu'on remonte ; aucune autre barre ne s'accroche en haut de l'écran.
 - **Lire la suite** (`lecture.py`, `onglets.js`) : un texte de plusieurs
   paragraphes montre le premier ; le reste vient d'une touche. Tout le
   texte reste dans la page, pour Google comme sans script.
-- **Suites à faire glisser** : le déroulé, les cartes et les besoins
-  défilent de côté ; les réalisations passent à deux par ligne, les
+- **Suites à faire glisser** (`.glissiere`) : les déroulés, la méthode
+  des prestations, les cartes et les besoins défilent de côté jusqu'au
+  bord de l'écran, une rangée de repères sous eux ; les réalisations passent à deux par ligne, les
   références à quatre logos par ligne, les chiffres à leur seul
   intitulé.
 - **Pied de page court** : coordonnées en boutons, les trois listes

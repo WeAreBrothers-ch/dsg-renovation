@@ -1,23 +1,21 @@
 /* ============================================================
    DSG RÉNOVATION — 16 · COMPOSANTS DE CONTENU
-   Cartes de collaboration, tableau des besoins.
+   Cartes de collaboration, tableau des besoins, postes, et la
+   glissière qui fait défiler cartes, besoins et déroulés au
+   téléphone.
    ============================================================ */
 
 /* ------------------------------------------------------------
    CARTES — des cases jointives d'un même cadre
+   Une glissière (plus bas) : contour par case, une rangée incomplète
+   ne laisse jamais de case vide ; au téléphone, elles défilent de côté.
    ------------------------------------------------------------ */
-/* Contour par case (voir .voisins) : une rangée incomplète ne laisse
-   jamais de case vide. Au téléphone, les cartes défilent de côté. */
-.cartes{
-  display:grid;grid-auto-flow:column;grid-auto-columns:85%;
-  gap:1px;padding:1px;
-}
 @media (min-width:600px){
-  .cartes{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+  .cartes{grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
 }
 .carte{
   display:flex;flex-direction:column;
-  padding:var(--sp-5) var(--sp-5) var(--sp-6);outline:1px solid var(--c-cadre-plein);
+  padding:var(--sp-5) var(--sp-5) var(--sp-6);
 }
 .carte__titre{margin-top:var(--sp-3)}
 .carte__texte{
@@ -28,20 +26,20 @@
 
 /* ------------------------------------------------------------
    BESOINS — ce que dit le client, le lot qui répond
-   Les cases d'un même cadre, comme le déroulé en quatre temps : la
+   Les cases d'un même cadre, comme les déroulés : la
    phrase du visiteur en tête, en romain de lecture (une parole
    rapportée, pas un intitulé de catalogue), puis le lot qui répond,
-   calé en pied de case. Toute la case mène à la fiche du lot. Au
-   téléphone, les cases défilent de côté ; deux par ligne dès 600 px.
+   calé en pied de case. Toute la case mène à la fiche du lot. Une
+   glissière : au téléphone, les cases défilent de côté ; deux par
+   ligne dès 600 px.
    ------------------------------------------------------------ */
-.besoins{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px}
 .besoin{
   position:relative;display:flex;flex-direction:column;gap:var(--sp-3);
   min-height:0;padding:var(--sp-4) var(--sp-5) 0;background:var(--c-papier);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
 @media (min-width:600px){
-  .besoins{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .besoins{grid-template-columns:repeat(2,minmax(0,1fr))}
   .besoin{min-height:220px;padding-top:var(--sp-5)}
 }
 /* Comme le déroulé : les cases d'une rangée partagent leurs lignes, la
@@ -79,69 +77,65 @@
    POSTES — une liste qui se lit ouverte (outils/briques_bis.postes)
    Ce que contient un devis, ce que nous ne faisons pas : chaque poste,
    son intitulé et sa phrase, d'un filet à l'autre — les lignes d'un
-   devis plutôt que des dépliants à ouvrir un à un. Numérotés, les
-   postes portent leur rang en marge, à la couleur des marques. Deux
-   par ligne dès la tablette.
+   devis plutôt que des dépliants à ouvrir un à un. L'intitulé et la
+   phrase prennent les styles communs (.h4, .texte), le rang celui des
+   dépliants (.repli__n, 17-repli.css). Deux par ligne dès la tablette.
    ------------------------------------------------------------ */
 .postes{display:grid;grid-template-columns:minmax(0,1fr);column-gap:var(--sp-7)}
 .poste{
   display:grid;grid-template-columns:minmax(0,1fr);align-content:start;row-gap:var(--sp-2);
   padding-block:var(--sp-4) var(--sp-5);border-top:1px solid var(--c-cadre);
 }
-.postes--numerote .poste{grid-template-columns:2.5em minmax(0,1fr)}
-.poste__n{
-  grid-row:1;padding-top:.2em;font-weight:500;font-size:var(--t-ui);
-  font-variant-numeric:tabular-nums;color:var(--c-marque);
-}
-.poste__titre{
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);
-  letter-spacing:-.01em;line-height:1.3;
-}
-.poste__texte{
-  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.55;
-  color:var(--c-encre-60);text-wrap:pretty;
-}
-.postes--numerote :is(.poste__titre,.poste__texte){grid-column:2}
+/* Numérotés (ol), les postes portent leur rang en marge : le numéro
+   tient la première colonne sur deux rangées, l'intitulé et la phrase
+   se rangent d'eux-mêmes dans la seconde. */
+ol.postes>.poste{grid-template-columns:2.5em minmax(0,1fr)}
+.poste__n{grid-row:span 2;padding-top:.2em}
 @media (min-width:768px){
   .postes{grid-template-columns:repeat(2,minmax(0,1fr))}
   .poste{padding-block:var(--sp-5) var(--sp-6)}
 }
 
 /* ------------------------------------------------------------
-   SUITES À FAIRE GLISSER — déroulé, cartes, besoins
-   Au téléphone, une suite de cases se parcourt d'un geste de côté.
-   Elle déborde jusqu'aux bords de l'écran : chaque case s'arrête sur
-   la marge de la page, et la suivante est coupée par le bord de
-   l'écran — non plus par le cadre de la suite, où elle passait pour
-   un débordement. Chaque case trace son propre contour, à toutes les
-   tailles (comme les cartes) : un fond d'encre derrière la grille
-   aurait rempli les marges de la suite, et noirci la case manquante
-   d'une rangée incomplète.
-   Sous la suite, une rangée de repères dit combien de cases elle
-   compte et laquelle est à l'écran (onglets.js). Les cases ne montent
-   pas à leur arrivée : elles sont déjà là quand on les fait venir.
-   Dès 600 px, les suites reprennent leur grille.
+   GLISSIÈRE — les suites à faire glisser : déroulés, cartes, besoins
+   (outils/briques_bis.glissiere pose la classe et la rangée de
+   repères). Au téléphone, une suite de cases se parcourt d'un geste de
+   côté. Elle déborde jusqu'aux bords de l'écran : chaque case s'arrête
+   sur la marge de la page, et la suivante est coupée par le bord de
+   l'écran — non plus par le cadre de la suite, où elle passait pour un
+   débordement. Chaque case trace son propre contour, à toutes les
+   tailles : un fond d'encre derrière la grille aurait rempli les marges
+   de la suite, et noirci la case manquante d'une rangée incomplète.
+   Sous la suite, une rangée de repères dit combien de cases elle compte
+   et laquelle est à l'écran (onglets.js). Les cases ne montent pas à
+   leur arrivée : elles sont déjà là quand on les fait venir. Dès 600 px,
+   la suite reprend sa grille ; chaque composant y pose ses colonnes.
    ------------------------------------------------------------ */
-:is(.etapes,.cartes,.besoins){
+.glissiere{
+  display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px;
   overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;scrollbar-width:none;
   margin-inline:calc(var(--grille-marge) * -1);
   padding:1px var(--grille-marge);scroll-padding-inline:var(--grille-marge);
 }
-:is(.etapes,.cartes,.besoins)::-webkit-scrollbar{display:none}
-:is(.etapes,.cartes,.besoins)>*{scroll-snap-align:start}
-:is(.etape,.besoin){outline:1px solid var(--c-cadre-plein)}
-:is(.etapes,.cartes,.besoins):focus-visible{outline:2px solid var(--c-focus);outline-offset:-2px}
+/* Les cartes, plus bavardes, prennent un peu plus de largeur. */
+.glissiere.cartes{grid-auto-columns:85%}
+.glissiere::-webkit-scrollbar{display:none}
+.glissiere>*{scroll-snap-align:start;outline:1px solid var(--c-cadre-plein)}
+.glissiere:focus-visible{outline-offset:-2px}
 
-.suite__reperes{display:none;gap:var(--sp-2);margin-top:var(--sp-4)}
-.js .suite__reperes{display:flex}
-.suite__reperes span{
+.glissiere__reperes{display:none;gap:var(--sp-2);margin-top:var(--sp-4)}
+.js .glissiere__reperes{display:flex}
+.glissiere__reperes span{
   width:var(--repere);height:var(--repere);background:var(--c-ligne-forte);
   transition:width var(--d-normal) var(--e-sortie),background-color var(--d-normal) var(--e-standard);
 }
-.suite__reperes span[data-actif]{width:calc(var(--repere) * 4);background:var(--c-encre)}
+.glissiere__reperes span[data-actif]{width:calc(var(--repere) * 4);background:var(--c-encre)}
 
 @media (min-width:600px){
-  :is(.etapes,.cartes,.besoins){overflow:visible;scroll-snap-type:none;margin-inline:0;padding:1px}
-  .js .suite__reperes{display:none}
+  .glissiere{
+    grid-auto-flow:row;grid-auto-columns:auto;
+    overflow:visible;scroll-snap-type:none;margin-inline:0;padding:1px;
+  }
+  .js .glissiere__reperes{display:none}
 }

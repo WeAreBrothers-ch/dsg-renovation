@@ -1,8 +1,9 @@
 /* ============================================================
    DSG RÉNOVATION — 18 · CONFIANCE
    Ce qui rassure avant de décider : les références sous la
-   couverture, le déroulé en quatre temps, ce qui se passe après
-   l'envoi d'une demande.
+   couverture, les déroulés en cases (une demande, un chantier, la
+   méthode d'une prestation), ce qui se passe après l'envoi d'une
+   demande.
    ============================================================ */
 
 /* ------------------------------------------------------------
@@ -42,19 +43,16 @@
 
 /* ------------------------------------------------------------
    DÉROULÉ — les quatre temps d'une demande (accueil), les six temps
-   d'un chantier (page entreprise)
+   d'un chantier (page entreprise), la méthode d'une prestation
    Les cases d'un même cadre : le rang et le délai en tête, puis ce
-   qui se passe. Au téléphone, les cases défilent de côté jusqu'au bord
-   de l'écran (voir « Suites à faire glisser », 16-composants.css) : un
-   temps et le bord du suivant à l'écran, plutôt que des cases
-   empilées. Deux par ligne dès 600 px ; sur grand écran, quatre, ou
-   trois pour les six temps (.etapes--six), trois puis cinq pour les
-   cinq étapes de certaines prestations (.etapes--cinq). Chaque case
-   trace son contour (16-composants.css) : une rangée incomplète ne
-   noircit jamais. Pour qu'elle reste pleine, une dernière case de
-   rang impair prend deux colonnes.
+   qui se passe. Une glissière (16-composants.css) : au téléphone, les
+   cases défilent de côté jusqu'au bord de l'écran, un temps et le bord
+   du suivant à l'écran plutôt que des cases empilées. Les colonnes se
+   règlent sur le nombre de temps : deux par ligne dès 600 px ; sur
+   grand écran, quatre, trois à partir de cinq temps, et une seule
+   rangée de cinq pour cinq temps exactement, dès 1280 px. Une dernière
+   case de rang impair prend deux colonnes : la rangée reste pleine.
    ------------------------------------------------------------ */
-.etapes{display:grid;grid-auto-flow:column;grid-auto-columns:82%;gap:1px}
 .etape{
   display:flex;flex-direction:column;gap:var(--sp-3);
   min-height:0;padding:var(--sp-4) var(--sp-4) var(--sp-5);background:var(--c-papier);
@@ -72,18 +70,18 @@
 }
 .etape__texte{font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.5;color:var(--c-encre-60)}
 @media (min-width:600px){
-  .etapes{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .etapes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .etapes>:last-child:nth-child(odd){grid-column:span 2}
   .etape{min-height:280px;padding:var(--sp-5) var(--sp-5) var(--sp-6)}
   .etape__titre{padding-top:var(--sp-7)}
 }
-@media (min-width:600px){.etapes>:last-child:nth-child(odd){grid-column:span 2}}
 @media (min-width:1024px){
   .etapes{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .etapes:is(.etapes--six,.etapes--cinq){grid-template-columns:repeat(3,minmax(0,1fr))}
+  .etapes:has(>:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (min-width:1280px){
-  .etapes.etapes--cinq{grid-template-columns:repeat(5,minmax(0,1fr))}
-  .etapes--cinq>:last-child:nth-child(odd){grid-column:auto}
+  .etapes:has(>:nth-child(5):last-child){grid-template-columns:repeat(5,minmax(0,1fr))}
+  .etapes:has(>:nth-child(5):last-child)>:last-child{grid-column:auto}
 }
 /* Les cases d'une même rangée partagent leurs lignes (subgrid) : un
    titre sur deux lignes ne fait plus descendre le texte de sa seule

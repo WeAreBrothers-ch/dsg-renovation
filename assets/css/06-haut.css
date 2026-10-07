@@ -184,11 +184,11 @@
   .preuve__texte{display:block;font-size:var(--t-texte);line-height:1.5}
 }
 /* Sur grand écran, les quatre chiffres tiennent une seule rangée,
-   d'un bord à l'autre de la page (.preuves--quatre.pleine-largeur :
-   l'accueil, la page entreprise) — plutôt qu'une colonne étroite de
-   quatre cases empilées face à un texte trois fois plus court. */
+   d'un bord à l'autre de la page (.pleine-largeur : l'accueil, la page
+   entreprise) — plutôt qu'une colonne étroite de quatre cases empilées
+   face à un texte trois fois plus court. */
 @media (min-width:1024px){
-  .preuves--quatre{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .preuves{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 
 /* ------------------------------------------------------------

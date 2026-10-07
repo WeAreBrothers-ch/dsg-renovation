@@ -90,13 +90,9 @@ def devis(services, base=""):
     )
     # Les questions en un seul bloc, un onglet par moment du projet :
     # quatre sections de dépliants à la suite se lisaient comme une
-    # seule liste sans fin. Sans script, les quatre groupes se suivent,
-    # chacun sous son titre (.jeu__titre).
+    # seule liste sans fin.
     questions = repli.onglets(
-        [(groupe["nom"],
-          '<h3 class="jeu__titre">%s</h3>\n%s'
-          % (groupe["titre"].replace("|", " "),
-             briques.questions_liste(groupe["questions"])))
+        [(groupe["nom"], briques.questions_liste(groupe["questions"]))
          for groupe in cq.GROUPES],
         "Les questions, par moment du projet",
     )

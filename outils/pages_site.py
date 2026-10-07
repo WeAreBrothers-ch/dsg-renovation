@@ -79,7 +79,7 @@ def entreprise(services, base=""):
       <div class="service__texte entreprise__intro">
         {"".join("<p>%s</p>" % p for p in ce.HISTOIRE)}
       </div>
-{briques.releve_chiffre("preuves--quatre pleine-largeur")}
+{briques.releve_chiffre()}
     </div>
   </section>
 
@@ -100,7 +100,7 @@ def entreprise(services, base=""):
                       "Six temps, dans cet ordre, sur tous nos chantiers — "
                       "qu'il s'agisse d'un seul métier ou d'une rénovation "
                       "complète.")}
-{confiance.etapes("tDeroule", ce.DEROULE, "etapes--six")}
+{confiance.etapes("tDeroule", ce.DEROULE)}
     </div>
   </section>
 

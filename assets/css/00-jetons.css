@@ -131,16 +131,16 @@
   --c-ligne-forte:rgba(var(--c-encre-rgb),.5);   /* 3.2 */
   --c-cadre:var(--c-encre);
   /* Le cadre à plat, opaque : le contour propre à chaque case d'une
-     suite (cartes, déroulé, besoins). Deux contours voisins se
-     superposent dans l'interstice d'un pixel ; translucides, ils y
-     doubleraient le trait. */
+     glissière (cartes, déroulés, besoins) et les repères d'angle.
+     Deux contours voisins se superposent dans l'interstice d'un
+     pixel, un repère chevauche son trait : translucides, ils y
+     doubleraient la couleur. */
   --c-cadre-plein:var(--c-cadre);
   --bd-fin:1px solid var(--c-ligne);
 
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
-     de la couleur du cadre. */
+     du cadre à plat (--c-cadre-plein). */
   --repere:5px;
-  --c-repere:var(--c-cadre);
 }
 
 /* ============================================================
@@ -187,11 +187,10 @@
   --c-ligne:rgba(var(--c-craie-rgb),.16);
   --c-ligne-forte:rgba(var(--c-craie-rgb),.5);
   --c-cadre:rgba(var(--c-craie-rgb),.4);  /* trait de plan : 3.5, seuil des contours 3:1 */
-  /* Le cadre à plat et le repère sont pleins : le cadre translucide
-     posé sur le noir, pour rester nets là où ils chevauchent un trait.
-     Redits ici, sinon ils hériteraient de l'encre du clair. */
+  /* Le cadre à plat est plein : le cadre translucide posé sur le noir,
+     pour rester net là où il chevauche un trait. Redit ici, sinon il
+     hériterait de l'encre du clair. */
   --c-cadre-plein:var(--c-gris-fonce);
-  --c-repere:var(--c-gris-fonce);
   --c-valide:#9CCDAE;        /*  9.6 /  8.7 /  7.4 */
   --c-alerte:var(--c-rouge-clair);  /*  6.1 /  5.5 /  4.7 */
   --c-focus:var(--c-chaux);

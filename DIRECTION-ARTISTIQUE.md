@@ -410,10 +410,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   d'identité, relevé chiffré, déroulé, dépliants, formulaire, coordonnées, lots voisins, pied de page.
 - Les grilles de cases se tracent par **interstice d'un pixel sur fond d'encre** (`gap: 1px`) quand le nombre
   de cases est fixe (chiffres, formulaire) ; par **contour propre à chaque case** (`outline`) partout où une
-  rangée peut rester incomplète et dans les suites qui défilent au téléphone (déroulés, méthode, cartes,
-  besoins, lots voisins) — jamais de case vide noire. Ce contour prend le cadre opaque (`--c-cadre-plein`) :
+  rangée peut rester incomplète et dans les glissières, ces suites qui défilent au téléphone (déroulés,
+  méthode, cartes, besoins ; `.glissiere`, posée par `briques_bis.glissiere` avec sa rangée de repères), et
+  pour les lots voisins — jamais de case vide noire. Ce contour prend le cadre opaque (`--c-cadre-plein`) :
   deux contours voisins se superposent dans l'interstice, et un cadre translucide (la nuit) y doublerait le
-  trait. Pour garder les rangées pleines, une dernière case de rang impair prend deux colonnes.
+  trait. Les colonnes d'un déroulé se règlent sur le nombre de temps (quatre ; trois dès cinq temps ; cinq
+  de front pour cinq temps dès 1280 px), et une dernière case de rang impair prend deux colonnes.
 - **Deux blocs seulement portent les repères d'angle** (v5) : l'image qui ouvre l'accueil (le comparateur,
   sans trait : ses quatre angles suffisent à la poser sur le plan) et le renvoi final de chaque page — le
   relevé, puis la décision. Posés sur tous les blocs cadrés (chiffres, déroulé, dépliants, formulaire,
@@ -421,8 +423,8 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   plus une signature. La liste est dans `01-socle.css`.
 - Le repère est un **carré plein de 5 px** (`--repere`) **posé au-dessus de son trait** — sa base contre le
   trait horizontal, en haut comme en bas du cadre — et centré sur le trait vertical, au premier plan devant
-  les photos. Il suppose un cadre tracé en bordure (`border`), jamais en ombre intérieure. Il prend la couleur
-  du cadre (`--c-repere`) : l'encre sur les fonds clairs, dans la nuit un gris plein (`#72716F`, la chaux à
+  les photos. Il suppose un cadre tracé en bordure (`border`), jamais en ombre intérieure. Il prend le cadre à
+  plat (`--c-cadre-plein`) : l'encre sur les fonds clairs, dans la nuit un gris plein (`#72716F`, la chaux à
   40 % sur le noir), net là où il chevauche un trait.
 - Le même carré sert de puce (garanties, communes, listes d'un encadré) en **chêne** ; de marque « vous êtes
   ici » en **rouge** (rubrique consultée, onglet ouvert) ; de rangée de repères sous les suites qui défilent

@@ -27,7 +27,7 @@
   --voile:var(--sp-7);
   position:absolute;left:0;right:0;bottom:0;z-index:4;
   display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-  gap:var(--sp-3) var(--sp-5);padding:var(--voile) var(--sp-4) var(--sp-4);
+  gap:var(--sp-3) var(--sp-5);padding:var(--sp-4);padding-top:var(--voile);
   color:var(--c-blanc);text-shadow:0 1px 2px rgba(var(--c-sombre-rgb),.35);
   background:linear-gradient(to top,
     rgba(var(--c-sombre-rgb),.8) 0,
@@ -36,8 +36,11 @@
 }
 .vue__texte{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:44ch}
 .vue__lieu{font-weight:500;font-size:var(--t-petit);line-height:1.3}
+/* Au téléphone, la photo est petite : la légende garde le lieu, et le
+   lien vers la fiche (ou les deux boutons du comparateur) ; ce qu'on
+   voit attend la tablette. */
 .vue__quoi{
-  font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.35;
+  display:none;font-family:var(--f-lecture);font-size:var(--t-texte);line-height:1.35;
   color:rgba(var(--c-blanc-rgb),.9);text-wrap:pretty;
 }
 .vue__lien{
@@ -51,26 +54,21 @@
   .vue__lien:hover{text-decoration-color:var(--c-blanc)}
 }
 .vue__lien:focus-visible{outline-color:var(--c-blanc)}
-/* Au téléphone, la photo est petite : la légende garde le lieu, et le
-   lien vers la fiche (ou les deux boutons du comparateur) ; ce qu'on
-   voit attend la tablette. */
-:is(.vue__legende,.legende--comparateur) .vue__quoi{display:none}
-@media (min-width:768px){
-  .vue__legende,.legende--comparateur{--voile:var(--sp-8)}
-  .vue__legende{padding:var(--voile) var(--sp-6) var(--sp-5)}
-  :is(.vue__legende,.legende--comparateur) .vue__quoi{display:block}
-}
 
 /* La légende du comparateur se pose dans l'image comme les autres ;
    elle laisse passer le doigt, sauf sur ses deux boutons. Au
    téléphone, une seule ligne : le lieu et les deux boutons. */
 .legende--comparateur{
   flex-wrap:nowrap;align-items:center;
-  padding:var(--voile) var(--sp-3) var(--sp-3);pointer-events:none;
+  padding-inline:var(--sp-3);padding-bottom:var(--sp-3);pointer-events:none;
 }
 .legende--comparateur .bascule__choix{min-height:40px;padding-inline:var(--sp-3)}
+/* Dès la tablette, les deux légendes ont les mêmes marges ; posée
+   après celle du comparateur, la règle vaut pour les deux. */
 @media (min-width:768px){
-  .legende--comparateur{align-items:flex-end;padding:var(--voile) var(--sp-6) var(--sp-5)}
+  .vue__legende,.legende--comparateur{--voile:var(--sp-8);padding:var(--sp-5) var(--sp-6);padding-top:var(--voile)}
+  .vue__quoi{display:block}
+  .legende--comparateur{align-items:flex-end}
   .legende--comparateur .bascule__choix{padding-inline:var(--sp-4)}
 }
 .legende--comparateur .bascule{pointer-events:auto;text-shadow:none}

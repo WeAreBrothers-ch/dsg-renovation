@@ -19,7 +19,9 @@ def _identifiant(prefixe):
 def onglets(panneaux, etiquette):
     """Un jeu d'onglets : une languette par panneau, un seul visible.
 
-    `panneaux` : liste de (intitulé, contenu HTML).
+    `panneaux` : liste de (intitulé, contenu HTML). Chaque panneau porte
+    aussi son intitulé en titre (.jeu__titre) : sans script, les panneaux
+    se suivent et chacun garde son nom ; avec, la languette le remplace.
     """
     if len(panneaux) < 2:
         return panneaux[0][1] if panneaux else ""
@@ -36,7 +38,8 @@ def onglets(panneaux, etiquette):
         )
         corps.append(
             '<div class="jeu__panneau" role="tabpanel" data-panneau id="%s"'
-            ' aria-labelledby="%s">\n%s\n</div>' % (panneau_id, onglet_id, contenu)
+            ' aria-labelledby="%s">\n<h3 class="h3 jeu__titre">%s</h3>\n%s\n</div>'
+            % (panneau_id, onglet_id, nom, contenu)
         )
     return (
         '      <div class="jeu" data-onglets>\n'
@@ -50,24 +53,20 @@ def onglets(panneaux, etiquette):
 def replis(entrees, numerote=True):
     """Une suite de lignes dépliables.
 
-    `entrees` : (intitulé, corps HTML) ou (intitulé, corps, cote).
-    Fermée, chaque ligne se lit comme une ligne de sommaire. Ce qui doit
-    se lire d'emblée ne passe pas par ici : les étapes d'une méthode sont
-    des cases (confiance.etapes), les listes courtes des postes
-    (briques_bis.postes).
+    `entrees` : (intitulé, corps HTML). Fermée, chaque ligne se lit comme
+    une ligne de sommaire. Ce qui doit se lire d'emblée ne passe pas par
+    ici : les étapes d'une méthode sont des cases (confiance.etapes), les
+    listes courtes des postes (briques_bis.postes).
     """
     lignes = []
-    for rang, entree in enumerate(entrees, 1):
-        titre, corps = entree[0], entree[1]
-        cote = entree[2] if len(entree) > 2 else ""
+    for rang, (titre, corps) in enumerate(entrees, 1):
         numero = ('<span class="repli__n" aria-hidden="true">%02d</span>' % rang
                   if numerote else '<span class="repli__n"></span>')
-        marque = '<span class="repli__cote">%s</span>' % cote if cote else "<span></span>"
         lignes.append(f"""        <details class="repli">
           <summary class="repli__tete">
             {numero}
             <span class="repli__titre">{titre}</span>
-            {marque}
+            <span></span>
             <span class="repli__signe" aria-hidden="true"></span>
           </summary>
           <div class="repli__corps">{corps}</div>

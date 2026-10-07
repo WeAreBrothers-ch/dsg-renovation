@@ -51,25 +51,25 @@ TEMOINS = [
 ]
 
 
-def etapes(titre_id="tEtapes", temps=None, classe=""):
-    """Les temps d'un déroulé, en cases d'un même cadre.
+def etapes(titre_id="tEtapes", temps=None):
+    """Les temps d'un déroulé, en cases d'un même cadre (une glissière).
 
     Par défaut, les quatre temps d'une demande (accueil). `temps` :
-    (titre, texte, cote) — les six temps d'un chantier, page entreprise,
-    avec `classe="etapes--six"` (trois par rangée sur grand écran).
+    (titre, texte, cote) — les six temps d'un chantier (page entreprise),
+    la méthode d'une prestation (cote vide). La feuille règle les
+    colonnes sur le nombre de temps (18-confiance.css).
     """
     temps = ETAPES if temps is None else temps
-    classes = " ".join(["etapes"] + classe.split() + ["pleine-largeur"])
-    cellules = "\n".join(
+    cellules = [
         f"""        <li class="etape">
           <p class="etape__tete"><span class="etape__n">{rang:02d}</span><span class="etape__cote">{cote}</span></p>
           <h3 class="etape__titre">{titre}</h3>
           <p class="etape__texte">{texte}</p>
         </li>"""
         for rang, (titre, texte, cote) in enumerate(temps, 1)
-    )
-    return (f'      <ol class="{classes}" aria-labelledby="{titre_id}">\n'
-            + cellules + "\n      </ol>\n" + briques_bis.reperes(len(temps)))
+    ]
+    return briques_bis.glissiere("ol", "etapes pleine-largeur", cellules,
+                                 f' aria-labelledby="{titre_id}"')
 
 
 def bande_references(base):

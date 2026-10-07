@@ -12,7 +12,7 @@
     --c-craie:#000;--c-craie-60:#333;
     --c-signal:#fff;--c-signal-fonce:#fff;--c-sur-signal:#000;--c-sur-signal-survol:#000;
     --c-accent:#000;--c-marque:#000;--c-alerte:#000;
-    --c-ligne:rgba(0,0,0,.32);--c-ligne-forte:rgba(0,0,0,.62);--c-cadre:#000;--c-cadre-plein:#000;--c-repere:#000;
+    --c-ligne:rgba(0,0,0,.32);--c-ligne-forte:rgba(0,0,0,.62);--c-cadre:#000;--c-cadre-plein:#000;
   }
   /* Sur papier, le bouton d'appel devient une case d'encre. */
   .btn--plein{box-shadow:inset 0 0 0 1px #000}

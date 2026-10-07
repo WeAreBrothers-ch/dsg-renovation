@@ -94,7 +94,7 @@
 .voisins>li{display:flex}
 .voisin{
   flex:1;display:flex;align-items:center;gap:var(--sp-4);
-  min-height:64px;padding:var(--sp-3) var(--sp-4);outline:1px solid var(--c-cadre);
+  min-height:64px;padding:var(--sp-3) var(--sp-4);outline:1px solid var(--c-cadre-plein);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
 @media (min-width:600px){.voisin{min-height:88px;padding:var(--sp-4) var(--sp-5)}}
