@@ -73,6 +73,11 @@
 .piece__image{aspect-ratio:4/3}
 .piece--vue .piece__faits{order:5}
 .piece--vue .couverture__actions{order:6}
+/* Page à action propre (le devis) : l'appel suit le chapô, avant les
+   repères et la photo — au premier écran du téléphone. */
+.piece--action .couverture__actions{order:4}
+.piece--action .piece__faits{order:5}
+.piece--action .piece__vue{order:6}
 @media (min-width:768px){.piece__image{aspect-ratio:16/10}}
 @media (min-width:1024px){
   .piece--vue .piece__entete{display:grid;grid-template-rows:auto 1fr;row-gap:var(--sp-6)}
@@ -89,6 +94,7 @@
   .piece--vue .piece__chapo{margin-bottom:var(--sp-6)}
   .piece--vue .piece__faits{margin-top:auto}
   .piece--vue .couverture__actions .btn{min-width:0}
+  .piece--action .couverture__actions{order:6}
   .piece--vue .piece__tete .couverture__actions{padding-top:var(--sp-2)}
   .piece__vue{grid-column:7/13;grid-row:1/3;margin-top:0}
   .piece__image{

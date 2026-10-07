@@ -75,7 +75,8 @@ python3 -m http.server     # puis http://localhost:8000
 | `rythme.py` | alternance automatique des fonds blanc / pâle |
 | `lecture.py` | « Lire la suite » : au téléphone, un texte long montre son premier paragraphe |
 | `typographie.py` | espaces insécables avant « : ; ? ! » et dans les guillemets |
-| `images.py` | remplace les images Wix par leurs copies locales (srcset compris) |
+| `images.py` | remplace les images Wix par leurs copies locales, puis sert chaque photo dans un `<picture>` : AVIF et WebP, `sizes` mesuré bloc par bloc (recadrage compris) |
+| `optimiser_images.py` | décline chaque photo en AVIF (240 à 1600 px) et WebP, chaque logo de partenaire en WebP à sa taille d'affichage |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
 | `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
@@ -126,8 +127,11 @@ construction.
   pages satellites. La zone est couverte par la fiche d'établissement,
   les réalisations et le texte.
 - **Vitesse** : une seule feuille de style, polices servies par le site
-  et préchargées, scripts différés, images en `srcset` une fois
-  rapatriées, cache long (`.htaccess`).
+  et préchargées, scripts différés, cache long (`.htaccess`). Les
+  photos partent en AVIF (WebP pour les navigateurs qui ne le lisent
+  pas), à la largeur utile de leur cadre et à la densité de l'écran :
+  la photo d'en-tête de l'entreprise ou du devis pèse 40 à 70 Ko au
+  lieu de 190 à 250 Ko, les logos des régies 38 Ko au lieu de 140.
 
 ## Couleurs et direction artistique
 
@@ -312,14 +316,17 @@ Actions → Runners → New self-hosted runner, macOS ARM64).
 ## Mise en ligne chez Infomaniak
 
 1. **Images.** Fait le 05/10/2026 : les quinze images sont dans
-   `assets/images/` (originaux et variantes WebP 480, 960, 1600 px),
-   plus rien n'est demandé à Wix. Si une image Wix est ajoutée au
-   générateur, tant que le site Wix existe, relancer :
+   `assets/images/` (originaux, déclinaisons AVIF et WebP), plus rien
+   n'est demandé à Wix. Si une image Wix est ajoutée au générateur,
+   tant que le site Wix existe, relancer :
    ```
-   python3 -m pip install Pillow      # facultatif : variantes WebP légères
+   python3 -m pip install -U Pillow   # une version récente écrit l'AVIF
    python3 outils/rapatrier_images.py
+   python3 outils/optimiser_images.py # déclinaisons AVIF / WebP
    python3 outils/construire.py
    ```
+   Une photo locale ajoutée à la main (`assets/images/<nom>.jpg`) se
+   décline de même avec `optimiser_images.py`.
    puis commiter `assets/images/` et `outils/images_locales.json`. Sans
    cela, les photos disparaîtront avec le site Wix. La politique de
    confidentialité cesse d'elle-même de mentionner Wix une fois toutes

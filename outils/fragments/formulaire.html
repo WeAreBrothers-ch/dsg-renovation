@@ -36,13 +36,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="type">Type de bien</label>
-                <select id="type" name="type" aria-describedby="typeErreur">
-                  <option value="">Choisir…</option>
+                <span class="champ__choix"><select id="type" name="type" aria-describedby="typeErreur">
+                  <option value="" class="choisir">Choisir…</option>
                   <option>Appartement</option>
                   <option>Maison / villa</option>
                   <option>Immeuble / régie</option>
                   <option>Local commercial</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="typeErreur" aria-live="polite"></p>
               </div>
 
@@ -60,13 +60,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="delai">Démarrage souhaité</label>
-                <select id="delai" name="delai" aria-describedby="delaiErreur">
-                  <option value="">Choisir…</option>
+                <span class="champ__choix"><select id="delai" name="delai" aria-describedby="delaiErreur">
+                  <option value="" class="choisir">Choisir…</option>
                   <option>Dès que possible</option>
                   <option>Dans 1 à 3 mois</option>
                   <option>Dans 3 à 6 mois</option>
                   <option>Pas encore décidé</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="delaiErreur" aria-live="polite"></p>
               </div>
 
@@ -76,6 +76,7 @@
                   <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosEtat photosAide photosErreur">
                   <label class="fichier__bouton" for="photos"><span class="fichier__icone" aria-hidden="true"></span>Ajouter des photos</label>
                   <span class="fichier__etat" id="photosEtat" aria-live="polite">Aucune photo choisie</span>
+                  <span class="fichier__deposer" aria-hidden="true">ou glissez-les ici</span>
                 </div>
                 <ul class="photos-apercu" id="photosApercu" aria-label="Photos choisies" hidden></ul>
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
@@ -100,13 +101,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="rappel">Quand vous rappeler ?</label>
-                <select id="rappel" name="rappel" aria-describedby="rappelErreur">
-                  <option value="">Indifférent</option>
+                <span class="champ__choix"><select id="rappel" name="rappel" aria-describedby="rappelErreur">
+                  <option value="" class="choisir">Indifférent</option>
                   <option>Le matin</option>
                   <option>À midi</option>
                   <option>L'après-midi</option>
                   <option>En fin de journée</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="rappelErreur" aria-live="polite"></p>
               </div>
 

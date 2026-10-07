@@ -64,6 +64,11 @@ def couverture(page, base, fil, action=None):
     )
     media = page.get("media")
     classe = "piece piece--vue" if media else "piece"
+    # Une page qui porte sa propre action (le devis : « Décrire mon
+    # projet ») la montre avant la photo au téléphone : c'est ce qu'on
+    # y vient faire (14-document.css).
+    if media and action is not None:
+        classe += " piece--action"
     # Quatre repères au pied du texte : ce qu'on veut savoir avant
     # d'appeler (durées, conditions, horaires), lu d'un coup d'œil.
     faits = ""

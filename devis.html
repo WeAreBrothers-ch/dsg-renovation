@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=5b45c058">
+<link rel="stylesheet" href="assets/css/site.css?v=90482160">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 
 <script type="application/ld+json">
@@ -386,7 +386,7 @@
 
 <main id="contenu">
 
-  <header class="piece piece--vue">
+  <header class="piece piece--vue piece--action">
     <div class="zone">
       <div class="piece__entete">
         <div class="piece__marge">
@@ -406,8 +406,8 @@
           </div>
         </div>
         <div class="piece__vue"><figure class="vue piece__image">
-          <img src="assets/images/sejour-avant.jpg" alt="Séjour de l'appartement Beaulieu avant travaux : cuisine démontée jusqu'au mur, ouverture sur le séjour en cours, gaines et câbles apparents"
-               width="1404" height="682" fetchpriority="high" decoding="async">
+          <picture><source type="image/avif" srcset="assets/images/sejour-avant-240.avif 240w, assets/images/sejour-avant-480.avif 480w, assets/images/sejour-avant-720.avif 720w, assets/images/sejour-avant-960.avif 960w, assets/images/sejour-avant-1280.avif 1280w, assets/images/sejour-avant-1404.avif 1404w" sizes="(min-width: 1024px) and (min-height: 944px) 1565px, (min-width: 1024px) and (min-height: 644px) calc(2.059 * (100vh - 184px)), (min-width: 1024px) 947px, (min-width: 768px) calc(1.287 * (100vw - 51px)), calc(1.544 * (100vw - 32px))"><img sizes="(min-width: 1024px) and (min-height: 944px) 1565px, (min-width: 1024px) and (min-height: 644px) calc(2.059 * (100vh - 184px)), (min-width: 1024px) 947px, (min-width: 768px) calc(1.287 * (100vw - 51px)), calc(1.544 * (100vw - 32px))" src="assets/images/sejour-avant-960.webp" srcset="assets/images/sejour-avant-240.webp 240w, assets/images/sejour-avant-480.webp 480w, assets/images/sejour-avant-960.webp 960w, assets/images/sejour-avant-1404.webp 1404w" alt="Séjour de l'appartement Beaulieu avant travaux : cuisine démontée jusqu'au mur, ouverture sur le séjour en cours, gaines et câbles apparents"
+               width="1404" height="682" fetchpriority="high" decoding="async"></picture>
           <figcaption class="vue__legende">
             <span class="vue__texte"><span class="vue__lieu">Appartement Beaulieu, avant travaux</span><span class="vue__quoi">Ce que nous relevons à la visite, et chiffrons poste par poste</span></span>
             <a class="vue__lien" href="realisations.html#appartement-beaulieu">Voir le chantier<span class="fleche" aria-hidden="true"></span></a>
@@ -469,13 +469,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="type">Type de bien</label>
-                <select id="type" name="type" aria-describedby="typeErreur">
-                  <option value="">Choisir…</option>
+                <span class="champ__choix"><select id="type" name="type" aria-describedby="typeErreur">
+                  <option value="" class="choisir">Choisir…</option>
                   <option>Appartement</option>
                   <option>Maison / villa</option>
                   <option>Immeuble / régie</option>
                   <option>Local commercial</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="typeErreur" aria-live="polite"></p>
               </div>
 
@@ -493,13 +493,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="delai">Démarrage souhaité</label>
-                <select id="delai" name="delai" aria-describedby="delaiErreur">
-                  <option value="">Choisir…</option>
+                <span class="champ__choix"><select id="delai" name="delai" aria-describedby="delaiErreur">
+                  <option value="" class="choisir">Choisir…</option>
                   <option>Dès que possible</option>
                   <option>Dans 1 à 3 mois</option>
                   <option>Dans 3 à 6 mois</option>
                   <option>Pas encore décidé</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="delaiErreur" aria-live="polite"></p>
               </div>
 
@@ -509,6 +509,7 @@
                   <input type="file" id="photos" name="photos[]" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple aria-describedby="photosEtat photosAide photosErreur">
                   <label class="fichier__bouton" for="photos"><span class="fichier__icone" aria-hidden="true"></span>Ajouter des photos</label>
                   <span class="fichier__etat" id="photosEtat" aria-live="polite">Aucune photo choisie</span>
+                  <span class="fichier__deposer" aria-hidden="true">ou glissez-les ici</span>
                 </div>
                 <ul class="photos-apercu" id="photosApercu" aria-label="Photos choisies" hidden></ul>
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
@@ -533,13 +534,13 @@
 
               <div class="champ">
                 <label class="champ__label" for="rappel">Quand vous rappeler ?</label>
-                <select id="rappel" name="rappel" aria-describedby="rappelErreur">
-                  <option value="">Indifférent</option>
+                <span class="champ__choix"><select id="rappel" name="rappel" aria-describedby="rappelErreur">
+                  <option value="" class="choisir">Indifférent</option>
                   <option>Le matin</option>
                   <option>À midi</option>
                   <option>L'après-midi</option>
                   <option>En fin de journée</option>
-                </select>
+                </select></span>
                 <p class="champ__erreur" id="rappelErreur" aria-live="polite"></p>
               </div>
 
@@ -1038,6 +1039,6 @@
 <script src="assets/js/motion.js?v=b66cd8e0" defer></script>
 <script src="assets/js/onglets.js?v=47e6592c" defer></script>
 <script src="assets/js/trame.js?v=d661c0cb" defer></script>
-<script src="assets/js/formulaire.js?v=f2de0581" defer></script>
+<script src="assets/js/formulaire.js?v=57ede73c" defer></script>
 </body>
 </html>

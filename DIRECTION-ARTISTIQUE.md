@@ -4,9 +4,23 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.5**, en production.
+Date : 07/10/2026 — Statut : **v6.6**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**La demande de devis, et des photos plus légères, 07/10/2026 (v6.6).** Même dessin, finitions :
+- au téléphone, l'en-tête de la page devis montre « Décrire mon projet » sous le chapeau, avant les repères
+  et la photo : on y vient pour ça, le bouton tient dans le premier écran (`.piece--action`, `briques.couverture`) ;
+- un menu déroulant encore vide (« Choisir… », « Indifférent ») s'écrit comme les exemples des autres cases,
+  en encre 40 et à la taille de l'interface ; choisi, il prend la grande réponse. Le triangle plein cède la
+  place à un chevron d'encre d'un trait et demi, celui de l'en-tête ;
+- chaque photo jointe porte dans son angle un carré d'encre « × » qui la retire (rouge au survol) ; au bureau,
+  on peut aussi glisser les photos sur la case, qui se creuse en chaux et se cerne d'un tireté d'encre — le
+  trait d'un plan provisoire — tant qu'elles survolent ;
+- les photos partent en **AVIF** (WebP pour les navigateurs qui ne le lisent pas), déclinées de 240 à 1 600 px
+  (`outils/optimiser_images.py`), et chacune à la largeur utile de son cadre : une photo recadrée dans un
+  cadre plus haut qu'elle compte sa hauteur fois son format (§ 6). La photo d'en-tête de l'entreprise, des
+  réalisations et du devis passe de 190–250 Ko à 40–70 Ko ; les logos des régies de 140 à 38 Ko.
 
 **Le bureau rééquilibré, 07/10/2026 (v6.5).** Au bureau, cinq sections sur sept d'une page de prestation
 laissaient le tiers gauche vide sur toute leur hauteur, un intitulé de deux lignes en haut, le titre et le
@@ -539,6 +553,12 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   verre du site, et il a une fonction : garder la photo visible sous la fiche.
 - Toutes les images portent `alt`, `width`, `height`. L'image principale de chaque page est en
   `fetchpriority="high"`, toutes les autres en `loading="lazy"`.
+- **Poids** (v6.6) : chaque photo est servie dans un `<picture>` — AVIF d'abord, WebP en relève — à la
+  largeur utile de son cadre (`sizes`, `outils/images.py`), mesurée de 320 à 1 920 px. Une photo recadrée
+  (`object-fit: cover`) dans un cadre plus haut qu'elle s'affiche plus large que lui : sa largeur utile est
+  la hauteur du cadre fois son format, et c'est elle que le `sizes` annonce — sinon le navigateur prend une
+  variante trop petite et la photo est floue. Les logos des partenaires : un WebP sans perte à trois fois
+  leur largeur d'affichage.
 
 ---
 

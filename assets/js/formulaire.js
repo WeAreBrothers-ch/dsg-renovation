@@ -183,7 +183,7 @@
       etat.textContent = nombre === 0 ? "Aucune photo choisie"
         : nombre === 1 ? "1 photo choisie" : nombre + " photos choisies";
     }
-    fichiers.forEach(function (fichier) {
+    fichiers.forEach(function (fichier, rang) {
       var vignette = document.createElement("li");
       var nom = document.createTextNode(fichier.name);
       if (fichier.type.indexOf("image/") === 0 && window.URL && URL.createObjectURL) {
@@ -201,10 +201,81 @@
       } else {
         vignette.appendChild(nom);
       }
+      if (peutRetirer) {
+        var retirer = document.createElement("button");
+        retirer.type = "button";
+        retirer.className = "photo__retirer";
+        retirer.setAttribute("aria-label", "Retirer la photo\u00a0«\u00a0" + fichier.name + "\u00a0»");
+        retirer.addEventListener("click", function () { retirerPhoto(rang); });
+        vignette.appendChild(retirer);
+      }
       apercu.appendChild(vignette);
     });
   }
+
+  /* Retirer une photo, en déposer d'autres : le sélecteur ne se modifie
+     qu'en lui donnant une liste neuve (DataTransfer). Sans cette
+     possibilité (navigateurs anciens), ni croix ni dépôt : le bouton
+     « Ajouter des photos » reste, comme avant. Chaque changement passe
+     par l'événement « change », que guettent déjà les vignettes et la
+     vérification. */
+  var peutRetirer = (function () {
+    try { return typeof DataTransfer === "function" && !!new DataTransfer().items; } catch (e) { return false; }
+  }());
+  function remplacerPhotos(liste) {
+    var neuve = new DataTransfer();
+    liste.forEach(function (fichier) { neuve.items.add(fichier); });
+    photos.files = neuve.files;
+    photos.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+  function retirerPhoto(rang) {
+    var liste = Array.prototype.slice.call(photos.files || []);
+    liste.splice(rang, 1);
+    remplacerPhotos(liste);
+    /* Le focus reste dans les vignettes, ou revient au bouton d'ajout. */
+    var croix = apercu.querySelectorAll(".photo__retirer");
+    var suivant = croix[Math.min(rang, croix.length - 1)] || formulaire.querySelector(".fichier__bouton");
+    if (suivant instanceof HTMLElement) {
+      if (!suivant.hasAttribute("tabindex") && suivant.tagName === "LABEL") { suivant.setAttribute("tabindex", "-1"); }
+      suivant.focus();
+    }
+  }
   if (photos) { photos.addEventListener("change", montrerPhotos); }
+
+  /* Au bureau, les photos se déposent dans leur case. */
+  var zone = photos ? photos.closest(".champ") : null;
+  if (peutRetirer && zone instanceof HTMLElement) {
+    var survols = 0;
+    var porteFichiers = function (evenement) {
+      return !!evenement.dataTransfer && Array.prototype.indexOf.call(evenement.dataTransfer.types || [], "Files") !== -1;
+    };
+    zone.addEventListener("dragenter", function (evenement) {
+      if (!porteFichiers(evenement)) { return; }
+      evenement.preventDefault();
+      survols += 1;
+      zone.classList.add("champ--deposer");
+    });
+    zone.addEventListener("dragover", function (evenement) {
+      if (!porteFichiers(evenement)) { return; }
+      evenement.preventDefault();
+      evenement.dataTransfer.dropEffect = "copy";
+    });
+    zone.addEventListener("dragleave", function () {
+      survols = Math.max(0, survols - 1);
+      if (survols === 0) { zone.classList.remove("champ--deposer"); }
+    });
+    zone.addEventListener("drop", function (evenement) {
+      if (!porteFichiers(evenement)) { return; }
+      evenement.preventDefault();
+      survols = 0;
+      zone.classList.remove("champ--deposer");
+      var deposees = Array.prototype.filter.call(evenement.dataTransfer.files || [], function (fichier) {
+        return fichier.type.indexOf("image/") === 0 || /\.(heic|heif)$/i.test(fichier.name);
+      });
+      if (!deposees.length) { return; }
+      remplacerPhotos(Array.prototype.slice.call(photos.files || []).concat(deposees));
+    });
+  }
   formulaire.addEventListener("reset", function () { window.setTimeout(montrerPhotos, 0); });
 
   /* Efface l'erreur dès que le visiteur corrige. */
