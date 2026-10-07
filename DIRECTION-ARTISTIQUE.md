@@ -18,7 +18,11 @@ là dès le premier affichage, rien ne se dévoile, aucune zone ne reste vide �
 apparitions le 05/10. Une fois par bloc, moins d'une seconde (la carte : un peu plus) ; rien sans script ni en
 mouvement réduit (`09-trace.css`, `motion.js`). Le même jour, le nord du plan est retiré et le carton de
 Lausanne passe sous le plan au téléphone ; la classe du plan devient `.leman` (`.carte` désignait déjà les
-cartes à filet, auxquelles elle ajoutait une marge).
+cartes à filet, auxquelles elle ajoutait une marge). **L'en-tête est remis au propre**, même dessin : un seul trait
+d'un pixel à chaque jonction (deux décalages s'additionnaient et doublaient le trait entre la marque et les
+rubriques, entre les rubriques et le téléphone), la même marge de 24 px de part et d'autre de chaque mot, une
+seule encre pour les rubriques et le téléphone, la case du chevron carrée, la rangée centrée dans la barre (8 px
+dessus et dessous) pour que le toit du logo ne touche plus le cadre.
 
 **Le plan du Léman, 07/10/2026 (v6.2).** La section « Zone » de l'accueil n'était qu'un texte et une liste
 de communes. Elle montre désormais le lac dessiné comme un plan d'implantation, sans aucune photo : la rive
