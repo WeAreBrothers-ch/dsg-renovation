@@ -6,19 +6,20 @@
 /* ------------------------------------------------------------
    EN-TÊTE
    Une rangée de cases d'un pixel : la marque occupe la grande case
-   de gauche, chaque rubrique la sienne à droite. Le fond reste
-   presque opaque pour garder son contraste au-dessus des images, et
-   pour rester blanc au passage des bandes de nuit : à 82 %, il y
-   virait au gris. Il reste en haut de l'écran pendant toute la
-   lecture, au téléphone comme au bureau : on descend, il ne bouge pas.
+   de gauche, chaque rubrique la sienne à droite. Le fond est d'un
+   blanc plein : translucide (93 %, flouté), il virait au gris au
+   passage des bandes de nuit, le texte blanc y transparaissait et le
+   noir bavait sous les cases. Il reste en haut de l'écran pendant
+   toute la lecture, au téléphone comme au bureau : on descend, il ne
+   bouge pas. La barre fait toute la hauteur --h-entete, air du
+   dessous compris : elle s'arrêtait au ras des cases et, sur une
+   bande de nuit, ses marges blanches dépassaient en deux coins de part
+   et d'autre du cadre.
    ------------------------------------------------------------ */
 .entete{
   position:fixed;inset:0 0 auto 0;z-index:60;
-  padding-top:var(--sp-2);
-  background:rgba(var(--c-papier-rgb),.97);
-}
-@supports (backdrop-filter:blur(1px)){
-  .entete{background:rgba(var(--c-papier-rgb),.93);backdrop-filter:blur(12px)}
+  padding-block:var(--sp-2);
+  background:var(--c-papier);
 }
 /* La rangée de cases est centrée dans la barre, autant d'air dessus que
    dessous ; --h-case est sa hauteur, que reprennent la case du chevron

@@ -4,9 +4,15 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 07/10/2026 — Statut : **v6.6**, en production.
+Date : 08/10/2026 — Statut : **v6.7**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**L'en-tête au passage des bandes de nuit, 08/10/2026 (v6.7).** Même dessin. La barre blanche s'arrêtait au
+ras des cases (8 px d'air dessus, aucun dessous) : sur une bande de noir, ses marges blanches dépassaient en deux
+coins de part et d'autre du cadre. Elle fait désormais toute la hauteur de l'en-tête (64 px), la rangée centrée
+dedans. Son fond, translucide et dépoli (93 %), virait au gris sur le noir, le texte blanc y transparaissait et
+le noir bavait sous les cases : il est d'un blanc plein.
 
 **La demande de devis, et des photos plus légères, 07/10/2026 (v6.6).** Même dessin, finitions :
 - au téléphone, l'en-tête de la page devis montre « Décrire mon projet » sous le chapeau, avant les repères
@@ -368,10 +374,11 @@ fond clair. Les cases mates posées dans la bande la recouvrent. Cachée en coul
 l'impression.
 
 ### Voiles
-Les fonds translucides (en-tête dépoli, panneau du chantier à la une, visionneuse, étiquettes « Avant » /
-« Après », ombres) s'écrivent `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`,
-`rgba(var(--c-sombre-rgb), …)` : aucune composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête est
-à 93 %.
+Les fonds translucides (panneau du chantier à la une, visionneuse, étiquettes « Avant » / « Après »,
+ombres) s'écrivent `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`,
+`rgba(var(--c-sombre-rgb), …)` : aucune composante n'est écrite en dur hors de `00-jetons.css`. L'en-tête
+n'en est plus : d'un blanc plein, il reste blanc au passage des bandes de nuit (dépoli à 93 %, il y virait au
+gris).
 
 ## 2 bis. Rythme des fonds
 
