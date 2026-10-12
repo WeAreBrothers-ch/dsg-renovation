@@ -14,9 +14,9 @@ Le visiteur qui arrive de l'extérieur trouve l'écran couvert d'un **mur de bri
 briques de terre cuite à l'échelle (94 × 30, joint de 6), dans les teintes du site — blanc cassé, chaux, chaux
 creusée, deux chaux rosées où la brique transparaît sous le badigeon, le vieux rose du nacré —, un mortier gris
 chaud, un grain, une arête éclairée, parfois un coin écorné. Une **plaque de noir nacré** y est vissée, une vis
-carrée à chaque angle : le logo négatif, « Pour entrer sur le site, cassez le mur. », la consigne « Trois coups
-suffisent : frappez où vous voulez. », trois carrés cernés que le rouge du toit remplit à chaque coup, et le
-bouton « Frapper le mur » (une masse dessinée au bout, en masque comme la flèche). Sur le mur, le curseur est une
+carrée à chaque angle, et le strict nécessaire : le logo négatif, « Cassez le mur pour entrer. », trois carrés
+cernés que le rouge du toit remplit à chaque coup, et le bouton « Frapper » (une masse dessinée au bout, en
+masque comme la flèche). Ce qui reste à frapper ne s'écrit que pour les lecteurs d'écran. Sur le mur, le curseur est une
 masse. **Trois coups** : le premier fait tomber la brique frappée, dans un jet d'éclats et de poussière, et
 la plaque tremble ; le deuxième fait tomber les briques autour du coup, et le site paraît dans le trou ; la vis
 d'en haut à droite saute, la plaque penche sur celle de gauche ; le troisième abat le mur : une onde part du point frappé, chaque brique tombe quand

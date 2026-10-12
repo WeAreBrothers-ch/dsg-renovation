@@ -1,8 +1,8 @@
 /* ============================================================
    DSG RÉNOVATION — 20 · LE MUR À L'ENTRÉE
    Un mur de briques passé à la chaux couvre l'écran à l'arrivée ;
-   une plaque de noir nacré y est vissée : « Pour entrer sur le site,
-   cassez le mur. » Trois coups le cassent (assets/js/mur.js) ; trois
+   une plaque de noir nacré y est vissée : « Cassez le mur pour
+   entrer. » Trois coups le cassent (assets/js/mur.js) ; trois
    carrés, les repères du site, comptent les coups au rouge du toit.
 
    Le motif de briques tient le mur dès le premier rendu ; mur.js
@@ -40,7 +40,7 @@
    Elle flotte au-dessus des briques, d'où son ombre. */
 .mur__plaque{
   position:relative;
-  width:min(100%,35rem);
+  width:min(100%,27rem);
   padding:var(--sp-6) var(--sp-5) var(--sp-5);
   box-shadow:var(--om-2);
   /* Elle pivote sur sa vis d'en haut à gauche quand celle de droite saute. */
@@ -72,21 +72,10 @@
   letter-spacing:-.025em;line-height:1.06;text-wrap:balance;
   color:var(--c-encre);
 }
-/* La consigne change à chaque coup ; un double invisible de la plus
-   longue (data-gabarit) lui garde sa hauteur : la plaque ne bouge pas. */
-.mur__consigne{
-  display:grid;
-  margin-top:var(--sp-3);
-  font-family:var(--f-lecture);font-size:var(--t-chapo);line-height:1.45;
-  color:var(--c-encre-60);text-wrap:pretty;
-}
-.mur__consigne>span,.mur__consigne::after{grid-area:1/1}
-.mur__consigne::after{content:attr(data-gabarit);visibility:hidden}
-
 .mur__bas{
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
   gap:var(--sp-4) var(--sp-5);
-  margin-top:var(--sp-5);
+  margin-top:var(--sp-6);
 }
 /* Trois coups : trois carrés cernés, que le rouge du toit remplit. */
 .mur__coups{display:flex;gap:var(--sp-2)}

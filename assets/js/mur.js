@@ -14,8 +14,8 @@
 
    Le mur se dresse devant qui arrive de l'extérieur du site, une fois
    par onglet (outils/mur.py décide, avant le premier rendu). Au
-   clavier, le bouton « Frapper le mur » donne les coups ; la consigne
-   annonce ce qui reste. Mouvement réduit : les trous paraissent d'un
+   clavier, le bouton « Frapper » donne les coups ; les lecteurs
+   d'écran entendent ce qui reste. Mouvement réduit : les trous paraissent d'un
    coup, et le mur s'efface au troisième au lieu de tomber. Sans
    canevas, les trois coups restent, le mur s'efface au dernier.
    ============================================================ */
@@ -41,23 +41,15 @@
   var toile = /** @type {HTMLCanvasElement} */ (mur.querySelector(".mur__briques"));
   /** @type {HTMLElement} */
   var plaque = /** @type {HTMLElement} */ (mur.querySelector(".mur__plaque"));
-  var consigne = document.getElementById("murConsigne");
-  /* Le texte de la consigne ; la plaque garde la hauteur de la plus
-     longue (20-mur.css). */
-  var consigneTexte = consigne ? consigne.querySelector("span") || consigne : null;
+  var annonce = document.getElementById("murAnnonce");
   var bouton = document.getElementById("murFrapper");
   var marques = mur.querySelectorAll(".mur__coups li");
   var reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var COUPS = 3;
-  /* Ce que dit la consigne avant chaque coup, puis quand le mur tombe.
-     Les espaces insécables que outils/typographie.py pose dans les pages. */
-  var CONSIGNES = [
-    "Trois coups suffisent : frappez où vous voulez.",
-    "Une brique tombe. Encore deux coups.",
-    "Ça tient encore. Un dernier coup !",
-    "Le mur tombe. Bienvenue chez DSG Rénovation."
-  ];
+  /* Ce qu'entend un lecteur d'écran avant chaque coup, puis quand le
+     mur tombe. À l'écran, les trois carrés le disent. */
+  var ANNONCES = ["Trois coups.", "Encore deux coups.", "Un dernier coup.", "Le mur tombe."];
   /* Une brique fait 94 % de son pas en longueur, son rang 36 % ; le joint
      6 % (le motif --mur-motif de 00-jetons.css, à la même échelle). */
   var RANG = 0.36;
@@ -477,7 +469,7 @@
     if (coups >= COUPS || ouvert) { return; }
     coups += 1;
     if (marques[coups - 1]) { marques[coups - 1].classList.add("est-frappe"); }
-    if (consigneTexte) { consigneTexte.textContent = CONSIGNES[coups]; }
+    if (annonce) { annonce.textContent = ANNONCES[coups]; }
     try {
       if (coups < COUPS) { secouer(); }
       if (coups === COUPS) {

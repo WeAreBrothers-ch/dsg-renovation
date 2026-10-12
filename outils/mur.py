@@ -45,9 +45,9 @@ SCRIPT_TETE = (
     % CLE
 )
 
-# La consigne avant le premier coup, la plus longue : la plaque en garde
-# la hauteur quand mur.js la remplace (20-mur.css, data-gabarit).
-CONSIGNE = "Trois coups suffisent\u00a0: frappez où vous voulez."
+# Le strict nécessaire sur la plaque : le titre, trois carrés qui
+# comptent les coups, le bouton. Ce qui reste à frapper ne s'écrit que
+# pour les lecteurs d'écran (murAnnonce, mis à jour par mur.js).
 
 # Juste après le mur : il se montre avant que le reste de la page soit
 # lu, aucune image du site ne passe avant lui.
@@ -58,20 +58,20 @@ _DEVOILER = (
 
 
 def mur(base):
-    """Le mur, sa plaque et sa consigne, en tête de <body>.
+    """Le mur et sa plaque, en tête de <body>.
 
     Masqué (hidden) tant que le script de tête n'a pas décidé de le
     monter : sans JavaScript, il n'existe pas pour le visiteur.
     """
-    return f"""<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murConsigne" tabindex="-1" hidden>
+    return f"""<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
   <canvas class="mur__briques" aria-hidden="true"></canvas>
   <div class="mur__plaque sur-sombre">
     <img class="mur__logo" src="{base}{LOGO_NEGATIF}" alt="{MARQUE}" width="{LOGO_LARGEUR}" height="{LOGO_HAUTEUR}" loading="lazy" decoding="async">
-    <p class="mur__titre" id="murTitre">Pour entrer sur le site, cassez le mur.</p>
-    <p class="mur__consigne" id="murConsigne" aria-live="polite" data-gabarit="{CONSIGNE}"><span>{CONSIGNE}</span></p>
+    <p class="mur__titre" id="murTitre">Cassez le mur pour entrer.</p>
+    <p class="visuellement-cache" id="murAnnonce" aria-live="polite">Trois coups.</p>
     <div class="mur__bas">
       <ol class="mur__coups" aria-hidden="true"><li></li><li></li><li></li></ol>
-      <button class="btn btn--plein mur__frapper" type="button" id="murFrapper">Frapper le mur<span class="mur__masse" aria-hidden="true"></span></button>
+      <button class="btn btn--plein mur__frapper" type="button" id="murFrapper">Frapper<span class="mur__masse" aria-hidden="true"></span></button>
     </div>
   </div>
 </div>
