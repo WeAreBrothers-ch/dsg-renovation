@@ -19,7 +19,7 @@ tombe de lui-même au chargement complet. Il ne peut pas bloquer
 l'entrée.
 """
 
-from donnees_site import LOGO_HAUTEUR, LOGO_LARGEUR, LOGO_NEGATIF, MARQUE
+from donnees_site import LOGO_AVIF, LOGO_HAUTEUR, LOGO_LARGEUR, LOGO_WEBP, MARQUE
 
 # La même clé que mur.js.
 CLE = "dsg-mur"
@@ -45,9 +45,12 @@ SCRIPT_TETE = (
     % CLE
 )
 
-# Le strict nécessaire sur la plaque : le titre, trois carrés qui
-# comptent les coups, le bouton. Ce qui reste à frapper ne s'écrit que
-# pour les lecteurs d'écran (murAnnonce, mis à jour par mur.js).
+# Sur le mur, un cartouche de plan, dessiné comme le reste du site : un
+# cadre d'un pixel, les repères d'angle du bloc qui ouvre, le logo de
+# l'en-tête, le titre, puis une rangée de deux cases — trois carrés qui
+# comptent les coups, le bouton. Le strict nécessaire : ce qui reste à
+# frapper ne s'écrit que pour les lecteurs d'écran (murAnnonce, mis à
+# jour par mur.js).
 
 # Juste après le mur : il se montre avant que le reste de la page soit
 # lu, aucune image du site ne passe avant lui.
@@ -58,20 +61,22 @@ _DEVOILER = (
 
 
 def mur(base):
-    """Le mur et sa plaque, en tête de <body>.
+    """Le mur et son cartouche, en tête de <body>.
 
     Masqué (hidden) tant que le script de tête n'a pas décidé de le
     monter : sans JavaScript, il n'existe pas pour le visiteur.
     """
     return f"""<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
   <canvas class="mur__briques" aria-hidden="true"></canvas>
-  <div class="mur__plaque sur-sombre">
-    <img class="mur__logo" src="{base}{LOGO_NEGATIF}" alt="{MARQUE}" width="{LOGO_LARGEUR}" height="{LOGO_HAUTEUR}" loading="lazy" decoding="async">
-    <p class="mur__titre" id="murTitre">Cassez le mur pour entrer.</p>
+  <div class="mur__cartouche">
+    <div class="mur__tete">
+      <picture><source type="image/avif" srcset="{base}{LOGO_AVIF}"><img class="mur__logo" src="{base}{LOGO_WEBP}" alt="{MARQUE}" width="{LOGO_LARGEUR}" height="{LOGO_HAUTEUR}"></picture>
+      <p class="mur__titre" id="murTitre">Cassez le mur pour entrer.</p>
+    </div>
     <p class="visuellement-cache" id="murAnnonce" aria-live="polite">Trois coups.</p>
     <div class="mur__bas">
       <ol class="mur__coups" aria-hidden="true"><li></li><li></li><li></li></ol>
-      <button class="btn btn--plein mur__frapper" type="button" id="murFrapper">Frapper<span class="mur__masse" aria-hidden="true"></span></button>
+      <button class="btn btn--plein mur__frapper" type="button" id="murFrapper">Frapper<span class="fleche" aria-hidden="true"></span></button>
     </div>
   </div>
 </div>

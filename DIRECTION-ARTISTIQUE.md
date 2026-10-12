@@ -13,16 +13,20 @@ aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écri
 Le visiteur qui arrive de l'extérieur trouve l'écran couvert d'un **mur de briques passé à la chaux** : des
 briques de terre cuite à l'échelle (94 × 30, joint de 6), dans les teintes du site — blanc cassé, chaux, chaux
 creusée, deux chaux rosées où la brique transparaît sous le badigeon, le vieux rose du nacré —, un mortier gris
-chaud, un grain, une arête éclairée, parfois un coin écorné. Une **plaque de noir nacré** y est vissée, une vis
-carrée à chaque angle, et le strict nécessaire : le logo négatif, « Cassez le mur pour entrer. », trois carrés
-cernés que le rouge du toit remplit à chaque coup, et le bouton « Frapper » (une masse dessinée au bout, en
-masque comme la flèche). Ce qui reste à frapper ne s'écrit que pour les lecteurs d'écran. Sur le mur, le curseur est une
-masse. **Trois coups** : le premier fait tomber la brique frappée, dans un jet d'éclats et de poussière, et
-la plaque tremble ; le deuxième fait tomber les briques autour du coup, et le site paraît dans le trou ; la vis
-d'en haut à droite saute, la plaque penche sur celle de gauche ; le troisième abat le mur : une onde part du point frappé, chaque brique tombe quand
-elle l'atteint, la plaque avec elles, et les traits du site se tracent alors seulement (`20-mur.css`, `mur.js`,
-`outils/mur.py`). Un coup porté sur la plaque fait tomber les briques juste à côté d'elle, là où l'on voit le
-mur. Aucune fissure : essayées le même jour, retirées à la demande de l'agence.
+chaud, un grain léger, une arête éclairée, parfois un coin écorné. Un **cartouche de plan** y est posé, dessiné
+avec les pièces du site et rien d'autre : un blanc franc, un cadre d'un pixel à l'encre et les repères d'angle du
+bloc qui ouvre, le logo de l'en-tête à sa hauteur (32 px), « Cassez le mur pour entrer. » à l'échelle des
+sous-titres, puis une rangée de deux cases comme l'en-tête — trois carrés cernés que le rouge de l'action
+remplit à chaque coup, et le bouton « Frapper » et sa flèche. 22 rem au bureau, la largeur de l'en-tête au
+téléphone. Ce qui reste à frapper ne s'écrit que pour les lecteurs d'écran. Sur le mur, le curseur est le
+viseur. **Trois coups** : le premier fait tomber la brique frappée, quelques éclats et un peu de poussière ; le
+deuxième fait tomber les briques autour du coup, et le site paraît dans le trou ; le troisième abat le mur : une
+onde part du point frappé, chaque brique tombe quand elle l'atteint — elles tombent plus qu'elles ne volent, et
+tournent à peine —, le cartouche avec elles, et les traits du site se tracent alors seulement (`20-mur.css`,
+`mur.js`, `outils/mur.py`). Un coup porté sur le cartouche fait tomber les briques juste à côté de lui, là où
+l'on voit le mur. Essayés le même jour et retirés à la demande de l'agence : les fissures, puis une plaque de noir
+nacré trop grande (ombre portée, vis, logo négatif, une consigne, une masse pour curseur), qui faisait décor
+ajouté plutôt que pièce du site.
 Le mur se dresse devant qui vient de l'extérieur (moteur de recherche, lien, favori) ; qui vient d'une page du
 site est déjà entré, même dans un nouvel onglet, et un onglet qui l'a cassé ne le revoit plus. Rien n'est gardé
 d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Sans JavaScript, il n'existe
@@ -398,11 +402,9 @@ l'impression.
 `--mur-teintes` sept briques : `#FBFAF7` blanc cassé, `#F4F1EC` chaux (deux fois), `#EFEBE4`, `#E9E4DC`
 chaux creusée, `#ECE3DA` et `#E6DCD2` chaux rosées · `--mur-mortier` `#CDC6BC` ·
 `--mur-pas` le pas d'une brique, de 72 à 128 px (8,5 % de l'écran) · `--mur-motif` le même appareil en SVG, qui
-tient le mur avant que le script peigne ses briques · `--mur-curseur` la masse (tête d'encre cernée de chaux,
-manche champagne). Rien n'y est du texte : aucun seuil de contraste n'y est requis. La plaque est une case
-`.sur-sombre` : ses textes tiennent les seuils de la nuit, son ombre est `--om-2` (elle flotte sur le mur). Ses
-quatre vis sont des carrés de `--repere` en gris foncé, posés dans la plaque : ce ne sont pas des repères
-d'angle, qui chevauchent un cadre.
+tient le mur avant que le script peigne ses briques. Rien n'y est du texte : aucun seuil de contraste n'y est
+requis. Le cartouche prend les jetons du clair (fond, encre, cadre) : ses textes tiennent les seuils du blanc.
+Ses repères d'angle sont ceux du site (`01-socle.css`) : le mur ouvre la visite.
 
 ### Voiles
 Les fonds translucides (panneau du chantier à la une, visionneuse, étiquettes « Avant » / « Après »,
@@ -662,7 +664,6 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
 | Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |
 | Mur à l'entrée : 1er et 2e coups | une brique, puis celles qui l'entourent, tombent d'une toile ; éclats, poussière | jusqu'à 1,4 s, pesanteur |
-| Mur à l'entrée : la plaque | `transform` (tremble, penche de 2° au 2e coup) | 360 ms, sortie |
 | Mur à l'entrée : chute (3e coup) | briques sur une toile, pesanteur ; onde de 2,2 px/ms depuis le coup | 1,5 à 2,6 s |
 
 - **Au défilement, seuls les traits se tracent** (v6.3). Le 05/10/2026, les apparitions avaient été retirées : ni
@@ -677,7 +678,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   fin : WCAG 2.2.2).
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)` ; pour un trait qui se tire,
   `--e-trait` `cubic-bezier(.3,.3,.4,1)` — une allure presque égale, la courbe de sortie en ferait les trois
-  quarts avant qu'on le voie partir. Seule exception, la chute des briques et de la plaque du mur à l'entrée :
+  quarts avant qu'on le voie partir. Seule exception, la chute des briques et du cartouche du mur à l'entrée :
   la pesanteur, qui accélère, n'est pas une courbe d'interface.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
   seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
@@ -699,7 +700,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 - Le rouge en titre ou en fond de section : il reste à l'action (boutons, liens, erreurs, « vous êtes ici »),
   aux marques écrites (chevrons, numéros, puces), aux chiffres et au filet du pied.
 - Un filet rouge sur l'en-tête.
-- Les repères d'angle sur un autre bloc que l'ouverture et le renvoi final.
+- Les repères d'angle sur un autre bloc que l'ouverture, le renvoi final et le cartouche du mur à l'entrée.
 - Plusieurs blocs de dépliants à la suite : ce qui se lit d'un coup d'œil se montre ouvert.
 - Le logo clair dans la nuit (utiliser le négatif).
 - Une bande de légende sous une photo : la légende se pose dans l'image.

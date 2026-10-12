@@ -84,7 +84,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `carte.py` | le plan du Léman de l'accueil : contour du lac, repères des communes, carton de Lausanne |
 | `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
-| `mur.py` | le mur à l'entrée : sa plaque, et le script de tête qui décide s'il se monte |
+| `mur.py` | le mur à l'entrée : son cartouche, et le script de tête qui décide s'il se monte |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), glissière (suites à faire glisser au téléphone, et leur rangée de repères) |
 | `repli.py` | onglets et dépliants |
 | `page_service.py`, `service_liens.py` | corps d'une page de prestation, zone, prestations voisines |
@@ -163,7 +163,8 @@ titres et une sérif de lecture (Newsreader) pour les phrases.
 
 Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
 sur le site de l'extérieur trouve l'écran couvert d'un mur de briques passé
-à la chaux, aux teintes du site, une plaque de noir nacré vissée dessus :
+à la chaux, aux teintes du site, un cartouche posé dessus, dessiné comme
+le reste du site (cadre d'un pixel, repères d'angle, logo, bouton rouge) :
 « Cassez le mur pour entrer. » **Trois coups, pas un de
 plus** : le premier fait tomber la brique frappée, le deuxième celles qui
 l'entourent (le site paraît dans le trou), le troisième l'abat, et le site

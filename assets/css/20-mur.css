@@ -1,9 +1,14 @@
 /* ============================================================
    DSG RÉNOVATION — 20 · LE MUR À L'ENTRÉE
-   Un mur de briques passé à la chaux couvre l'écran à l'arrivée ;
-   une plaque de noir nacré y est vissée : « Cassez le mur pour
-   entrer. » Trois coups le cassent (assets/js/mur.js) ; trois
-   carrés, les repères du site, comptent les coups au rouge du toit.
+   Un mur de briques passé à la chaux couvre l'écran à l'arrivée ; un
+   cartouche de plan y est posé : « Cassez le mur pour entrer. » Trois
+   coups le cassent (assets/js/mur.js).
+
+   Le cartouche est dessiné avec les pièces du site, rien d'autre : le
+   cadre d'un pixel et ses repères d'angle (01-socle.css), le logo de
+   l'en-tête à sa hauteur, un titre à l'échelle des sous-titres, une
+   rangée de cases comme l'en-tête, le bouton d'appel rouge et sa flèche. Ni ombre,
+   ni vis, ni noir : il est à plat sur le mur, comme sur la page.
 
    Le motif de briques tient le mur dès le premier rendu ; mur.js
    peint ensuite ses briques une à une, au même pas (--mur-pas), et
@@ -18,7 +23,7 @@
    recouvrent le bas de l'écran : un mur tenu entre le haut et le bas
    de la partie visible laissait voir le site sous elles. Le mur
    descend donc jusqu'au bas de l'écran entier (100lvh), sous les
-   barres ; la plaque se centre dans la partie visible (100dvh). */
+   barres ; le cartouche se centre dans la partie visible (100dvh). */
 .mur{
   position:fixed;top:0;left:0;right:0;z-index:150;
   height:100vh;height:100lvh;
@@ -29,7 +34,8 @@
   background-image:var(--mur-motif);
   background-position:0 0;
   background-size:var(--mur-pas) calc(var(--mur-pas) * .72);
-  cursor:var(--mur-curseur),pointer;
+  /* Le viseur du géomètre : on vise, on frappe. */
+  cursor:crosshair;
   /* Des coups, pas des gestes : ni défilement, ni zoom, ni sélection. */
   touch-action:none;
   -webkit-user-select:none;user-select:none;
@@ -42,78 +48,39 @@
 .mur.est-peint{background-color:transparent;background-image:none}
 .mur__briques{position:absolute;inset:0;display:block;width:100%;height:100%}
 
-/* ---------- La plaque ----------
-   Vissée au mur : une vis carrée à chaque angle, du carré des repères.
-   Elle flotte au-dessus des briques, d'où son ombre. */
-.mur__plaque{
-  position:relative;
-  width:min(100%,27rem);
-  padding:var(--sp-6) var(--sp-5) var(--sp-5);
-  box-shadow:var(--om-2);
-  /* Elle pivote sur sa vis d'en haut à gauche quand celle de droite saute. */
-  transform-origin:calc(var(--sp-3) + var(--repere) / 2) calc(var(--sp-3) + var(--repere) / 2);
-  cursor:inherit;
-}
-.mur__plaque::before{
-  content:"";position:absolute;inset:var(--sp-3);pointer-events:none;
-  --vis:linear-gradient(var(--c-gris-fonce),var(--c-gris-fonce));
-  background:
-    var(--vis) left top/var(--repere) var(--repere) no-repeat,
-    var(--vis) right top/var(--repere) var(--repere) no-repeat,
-    var(--vis) left bottom/var(--repere) var(--repere) no-repeat,
-    var(--vis) right bottom/var(--repere) var(--repere) no-repeat;
-}
-/* Au deuxième coup, la vis d'en haut à droite saute : la plaque penche
-   sur celle de gauche (mur.js). */
-.mur__plaque.est-devissee::before{
-  background:
-    var(--vis) left top/var(--repere) var(--repere) no-repeat,
-    var(--vis) left bottom/var(--repere) var(--repere) no-repeat,
-    var(--vis) right bottom/var(--repere) var(--repere) no-repeat;
-}
-
-.mur__logo{width:clamp(104px,9vw,128px);margin-bottom:var(--sp-5)}
-.mur__titre{
-  font-family:var(--f-titre);font-weight:500;
-  font-size:clamp(1.75rem,3.2vw,2.5rem);
-  letter-spacing:-.025em;line-height:1.06;text-wrap:balance;
+/* ---------- Le cartouche ----------
+   Le fond de la page et son encre ; le cadre est une bordure d'un
+   pixel, la seule que les repères d'angle savent coiffer. */
+.mur__cartouche{
+  width:min(100%,22rem);
+  background:var(--c-papier);
+  border:1px solid var(--c-cadre);
   color:var(--c-encre);
+  cursor:crosshair;
 }
-.mur__bas{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
-  gap:var(--sp-4) var(--sp-5);
+.mur__tete{padding:var(--sp-5) var(--sp-5) var(--sp-6)}
+/* Le logo de l'en-tête, à sa hauteur. */
+.mur__logo{height:32px;width:auto}
+.mur__titre{
   margin-top:var(--sp-6);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h3);
+  letter-spacing:-.015em;line-height:1.15;text-wrap:balance;
 }
-/* Trois coups : trois carrés cernés, que le rouge du toit remplit. */
-.mur__coups{display:flex;gap:var(--sp-2)}
+
+/* La rangée du bas : deux cases, un trait entre elles, comme l'en-tête. */
+.mur__bas{display:flex;align-items:stretch;border-top:1px solid var(--c-cadre)}
+/* Trois coups : trois carrés cernés d'encre, que le rouge de l'action
+   remplit un à un. */
+.mur__coups{display:flex;align-items:center;gap:var(--sp-2);flex:1 1 auto;padding:0 var(--sp-5)}
 .mur__coups li{
-  width:14px;height:14px;
+  width:10px;height:10px;
   box-shadow:inset 0 0 0 1px var(--c-cadre);
-  transition:background-color var(--d-rapide) var(--e-standard),
-             box-shadow var(--d-rapide) var(--e-standard);
+  transition:background-color var(--d-rapide) var(--e-standard),box-shadow var(--d-rapide) var(--e-standard);
 }
-.mur__coups li.est-frappe{background:var(--c-eclat);box-shadow:none;animation:mur-coup var(--d-normal) var(--e-sortie)}
-@keyframes mur-coup{from{scale:1.5}}
+.mur__coups li.est-frappe{background:var(--c-signal);box-shadow:none;animation:mur-coup var(--d-normal) var(--e-sortie)}
+@keyframes mur-coup{from{scale:1.6}}
 
-.mur__frapper{flex:1 1 100%;cursor:inherit}
-/* La masse, dessinée en masque comme la flèche des boutons. */
-.mur__masse{
-  flex:0 0 auto;width:16px;height:16px;
-  background:currentColor;
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg transform='rotate(-45 8 8)'%3E%3Cpath d='M2.5 1.8h11v4.6h-11z'/%3E%3Cpath d='M7.2 6.4h1.6v8.4H7.2z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg transform='rotate(-45 8 8)'%3E%3Cpath d='M2.5 1.8h11v4.6h-11z'/%3E%3Cpath d='M7.2 6.4h1.6v8.4H7.2z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
-  transform-origin:80% 80%;
-  transition:transform var(--d-normal) var(--e-sortie);
-}
-@media (hover:hover) and (pointer:fine){
-  .mur__frapper:hover .mur__masse{transform:rotate(-14deg)}
-}
-
-@media (min-width:480px){
-  .mur__plaque{padding:var(--sp-7) var(--sp-7) var(--sp-6)}
-  .mur__frapper{flex:0 0 auto}
-}
-
+.mur__frapper{flex:0 0 auto;min-width:10.5rem;border-left:1px solid var(--c-cadre);cursor:pointer}
 /* Mouvement réduit, ou sans canevas : au troisième coup, le mur
    s'efface au lieu de tomber. */
 .mur.est-efface{opacity:0;transition:opacity 320ms var(--e-standard)}

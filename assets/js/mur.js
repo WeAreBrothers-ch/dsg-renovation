@@ -1,16 +1,16 @@
 /* ============================================================
    DSG RÉNOVATION — LE MUR À L'ENTRÉE
    Le visiteur qui arrive trouve un mur de briques passé à la chaux,
-   une plaque vissée dessus : « Pour entrer sur le site, cassez le
-   mur. » Trois coups, pas un de plus : le premier fait tomber la
+   un cartouche de plan posé dessus : « Cassez le mur pour entrer. »
+   Trois coups, pas un de plus : le premier fait tomber la
    brique frappée, le deuxième celles qui l'entourent — le site paraît
    dans le trou —, le troisième abat le mur : une onde part du point
    frappé, les briques tombent, et le site est derrière. Pas de
    fissure : des briques qui tombent, des éclats, de la poussière.
 
-   Un coup porté sur la plaque fait tomber les briques juste à côté
-   d'elle, là où l'on voit le mur ; la plaque, elle, tremble, et penche
-   au deuxième coup.
+   Un coup porté sur le cartouche fait tomber les briques juste à côté
+   de lui, là où l'on voit le mur. Le cartouche ne bouge pas : il tombe
+   avec le mur, au troisième coup.
 
    Le mur se dresse devant qui arrive de l'extérieur du site, une fois
    par onglet (outils/mur.py décide, avant le premier rendu). Au
@@ -40,7 +40,7 @@
   /** @type {HTMLCanvasElement} */
   var toile = /** @type {HTMLCanvasElement} */ (mur.querySelector(".mur__briques"));
   /** @type {HTMLElement} */
-  var plaque = /** @type {HTMLElement} */ (mur.querySelector(".mur__plaque"));
+  var cartouche = /** @type {HTMLElement} */ (mur.querySelector(".mur__cartouche"));
   var annonce = document.getElementById("murAnnonce");
   var bouton = document.getElementById("murFrapper");
   var marques = mur.querySelectorAll(".mur__coups li");
@@ -105,7 +105,7 @@
   });
 
   /* Deux toiles : le mur peint, qui ne change qu'à un coup (une brique
-     en part, un trou reste), et par-dessus, sous la plaque, le calque
+     en part, un trou reste), et par-dessus, sous le cartouche, le calque
      de ce qui bouge — éclats, poussière, briques qui tombent —, seul
      repeint à chaque image. */
   var mctx = toile.getContext ? toile.getContext("2d") : null;
@@ -129,9 +129,7 @@
   /** Éclats et poussière. */
   var eclats = [];
   var poussieres = [];
-  /** La plaque penche au deuxième coup (degrés), puis tombe. */
-  var inclinaison = 0;
-  var chutePlaque = null;
+  var chuteCartouche = null;
   var debutChute = 0;
   var boucle = 0;
   var dernier = 0;
@@ -170,8 +168,10 @@
     halo.addColorStop(1, ombre(0));
     c.fillStyle = halo;
     c.fillRect(b.x, b.y, w, h);
-    for (var k = 0; k < 9; k++) {
-      c.fillStyle = ombre(0.05 + rnd() * 0.07);
+    /* Un grain léger : à côté du cartouche, net, un grain plus fort
+       faisait sale. */
+    for (var k = 0; k < 4; k++) {
+      c.fillStyle = ombre(0.03 + rnd() * 0.05);
       c.fillRect(b.x + rnd() * (w - 2), b.y + rnd() * (h - 2), 1 + rnd() * 1.2, 1 + rnd() * 1.2);
     }
     c.fillStyle = lumiere(0.75);
@@ -305,26 +305,27 @@
   }
 
   /**
-   * Des éclats et un nuage de poussière, au point frappé.
+   * Quelques éclats et un peu de poussière, au point frappé : de quoi
+   * sentir le coup, pas un feu d'artifice.
    * @param {number} x
    * @param {number} y
    * @param {number} force
    * @param {string} teinte
    */
   function projeter(x, y, force, teinte) {
-    var n = 10 + force * 8;
+    var n = 6 + force * 4;
     for (var i = 0; i < n; i++) {
-      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.7;
-      var v = 140 + Math.random() * (260 + force * 160);
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.5;
+      var v = 100 + Math.random() * (180 + force * 100);
       eclats.push({
         x: x, y: y, a: Math.random() * 6,
-        vx: Math.cos(a) * v, vy: Math.sin(a) * v, va: (Math.random() - 0.5) * 18,
-        taille: 2 + Math.random() * (3 + force * 2),
+        vx: Math.cos(a) * v, vy: Math.sin(a) * v, va: (Math.random() - 0.5) * 10,
+        taille: 1.5 + Math.random() * (2.5 + force),
         teinte: Math.random() < 0.3 ? mortier : teinte,
         vie: 0.9 + Math.random() * 0.5
       });
     }
-    for (var k = 0; k < 3 + force; k++) {
+    for (var k = 0; k < 2 + force; k++) {
       poussieres.push({
         x: x + (Math.random() - 0.5) * H, y: y + (Math.random() - 0.5) * H * 0.6,
         r: H * (0.4 + Math.random() * 0.4), vie: 0, duree: 0.6 + Math.random() * 0.35
@@ -365,15 +366,17 @@
         mctx.clearRect(p.b.x, p.b.y, L, H);
         return;
       }
-      detacher(p.b, false, p.dx / (p.d || 1) * (60 + Math.random() * 140),
-        -60 - Math.random() * 160, (Math.random() - 0.5) * 7, Math.random() * 40, maintenant);
+      detacher(p.b, false, p.dx / (p.d || 1) * (40 + Math.random() * 90),
+        -40 - Math.random() * 100, (Math.random() - 0.5) * 3, Math.random() * 40, maintenant);
     });
     if (!aussitot) { projeter(x, y, force, teinte); }
   }
 
   /**
    * Le troisième coup : une onde part du point frappé, chaque brique
-   * tombe quand elle l'atteint, la plaque avec elles.
+   * tombe quand elle l'atteint, le cartouche avec elles. Une chute
+   * sobre : les briques tombent plus qu'elles ne volent, et tournent à
+   * peine.
    * @param {number} x0
    * @param {number} y0
    */
@@ -385,26 +388,24 @@
       window.setTimeout(ouvrir, 320);
       return;
     }
-    if (plaque.getAnimations) {
-      plaque.getAnimations().forEach(function (animation) { animation.cancel(); });
-    }
     var frappee = briqueSous(x0, y0);
     toile.style.visibility = "hidden";
     briques.forEach(function (b) {
       if (b.tombee) { return; }
       var dx = b.x + L / 2 - x0, dy = b.y + H / 2 - y0;
       var d = Math.sqrt(dx * dx + dy * dy) || 1;
-      /* Près du coup, les briques sautent ; plus loin, elles s'affaissent. */
+      /* Près du coup, les briques partent un peu ; plus loin, elles
+         s'affaissent. */
       var pres = Math.max(0, 1 - d / (L * 3));
-      detacher(b, true, dx / d * (30 + Math.random() * 120 + pres * 260),
-        -Math.random() * 90 - pres * 260, (Math.random() - 0.5) * (3 + pres * 8),
-        d / ONDE * (0.85 + Math.random() * 0.3), maintenant);
+      detacher(b, true, dx / d * (10 + Math.random() * 40 + pres * 120),
+        -Math.random() * 30 - pres * 110, (Math.random() - 0.5) * (0.8 + pres * 2.2),
+        d / ONDE * (0.9 + Math.random() * 0.2), maintenant);
     });
-    var boite = plaque.getBoundingClientRect();
+    var boite = cartouche.getBoundingClientRect();
     var pdx = boite.left + boite.width / 2 - x0, pdy = boite.top + boite.height / 2 - y0;
-    chutePlaque = {
-      y: 0, vy: -120, a: inclinaison * Math.PI / 180,
-      va: (pdx < 0 ? -1 : 1) * (0.5 + Math.random() * 0.5),
+    chuteCartouche = {
+      y: 0, vy: -60, a: 0,
+      va: (pdx < 0 ? -1 : 1) * (0.15 + Math.random() * 0.2),
       depart: maintenant + Math.sqrt(pdx * pdx + pdy * pdy) / ONDE * 0.6 + 80
     };
     debutChute = maintenant;
@@ -412,40 +413,23 @@
     relancer();
   }
 
-  /* ---------- La plaque ---------- */
-
-  /** La plaque tremble ; au deuxième coup, une vis lâche et elle penche. */
-  function secouer() {
-    var avant = inclinaison;
-    if (coups === 2) {
-      inclinaison = 2;
-      plaque.classList.add("est-devissee");
-    }
-    plaque.style.transform = "rotate(" + inclinaison + "deg)";
-    if (reduit || !plaque.animate) { return; }
-    plaque.animate([
-      { transform: "rotate(" + avant + "deg)" },
-      { transform: "translate(-3px, 1px) rotate(" + (avant + 1.4) + "deg)" },
-      { transform: "translate(2px, 0) rotate(" + (inclinaison - 0.9) + "deg)" },
-      { transform: "rotate(" + inclinaison + "deg)" }
-    ], { duration: 360, easing: "cubic-bezier(.23,1,.32,1)" });
-  }
+  /* ---------- Le cartouche ---------- */
 
   /**
-   * Un coup porté sur la plaque fait tomber les briques à côté d'elle :
-   * on y voit le mur.
+   * Un coup porté sur le cartouche fait tomber les briques à côté de
+   * lui : on y voit le mur.
    * @param {number} x
    * @param {number} y
    * @returns {Array<number>}
    */
-  function horsPlaque(x, y) {
-    var boite = plaque.getBoundingClientRect();
+  function horsCartouche(x, y) {
+    var boite = cartouche.getBoundingClientRect();
     var marge = L * 0.6;
     if (x < boite.left - marge || x > boite.right + marge ||
         y < boite.top - marge || y > boite.bottom + marge) { return [x, y]; }
     var cx = boite.left + boite.width / 2, cy = boite.top + boite.height / 2;
     var places = [];
-    /* Des points tout autour de la plaque, gardés dans la partie visible
+    /* Des points tout autour du cartouche, gardés dans la partie visible
        de l'écran : le bas du mur passe sous les barres du navigateur. */
     var bas = Math.min(haut, window.innerHeight || haut);
     for (var k = 0; k < 24; k++) {
@@ -473,13 +457,12 @@
     if (marques[coups - 1]) { marques[coups - 1].classList.add("est-frappe"); }
     if (annonce) { annonce.textContent = ANNONCES[coups]; }
     try {
-      if (coups < COUPS) { secouer(); }
       if (coups === COUPS) {
         abattre(x, y);
         return;
       }
       if (!ctx) { return; }
-      var point = horsPlaque(x, y);
+      var point = horsCartouche(x, y);
       var impact = {
         x: point[0] / larg, y: point[1] / haut, coup: coups,
         graine: Math.floor(Math.random() * 4294967296)
@@ -519,7 +502,7 @@
 
   /**
    * Une image : le calque, effacé, reçoit les briques qui tombent, les
-   * éclats et la poussière ; la plaque tombe. Renvoie vrai tant que
+   * éclats et la poussière ; le cartouche tombe. Renvoie vrai tant que
    * quelque chose bouge.
    * @param {number} t
    * @param {number} [dt]
@@ -583,14 +566,14 @@
       return true;
     });
 
-    if (chutePlaque) {
-      var p = chutePlaque;
+    if (chuteCartouche) {
+      var p = chuteCartouche;
       if (t >= p.depart) {
         p.vy += PESANTEUR * dt;
         p.y += p.vy * dt;
         p.a += p.va * dt;
       }
-      plaque.style.transform = "translateY(" + p.y.toFixed(1) + "px) rotate(" + p.a.toFixed(3) + "rad)";
+      cartouche.style.transform = "translateY(" + p.y.toFixed(1) + "px) rotate(" + p.a.toFixed(3) + "rad)";
       if (p.y < haut * 1.2) { actif = true; }
     }
     calqueSali = corps.length > 0 || eclats.length > 0 || poussieres.length > 0;

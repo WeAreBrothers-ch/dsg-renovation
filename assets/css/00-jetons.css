@@ -176,10 +176,6 @@
      terre cuite (22 × 6,5 cm, joint de 1,5 cm, à l'échelle près). */
   --mur-pas:clamp(72px,8.5vw,128px);
   --mur-motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72' preserveAspectRatio='none'%3E%3Cpath d='M0 0h100v72H0z' fill='%23CDC6BC'/%3E%3Cpath d='M0 0h94v30H0zM0 36h44v30H0zM50 36h50v30H50z' fill='%23F4F1EC'/%3E%3C/svg%3E");
-  /* Le curseur sur le mur : une masse, tête à l'encre cernée de chaux,
-     manche couleur bois (le champagne du nacré). Le point qui frappe
-     est le bout de la tête, en bas à gauche. */
-  --mur-curseur:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='rotate(-45 16 16)' stroke='%23F4F1EC' stroke-width='1.5'%3E%3Cpath d='M14.25 12.5h3.5v17h-3.5z' fill='%23B9A58C'/%3E%3Cpath d='M6 4.5h20v8H6z' fill='%231B1B1B'/%3E%3C/g%3E%3C/svg%3E") 3 16;
 }
 
 /* ============================================================
