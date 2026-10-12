@@ -566,9 +566,10 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
   relevé, puis la décision. Posés sur tous les blocs cadrés (chiffres, déroulé, dépliants, formulaire,
   fiches…), ils se lisaient comme les poignées de sélection d'un logiciel de dessin : une maquette pas finie,
   plus une signature. La liste est dans `01-socle.css`.
-- Le repère est un **carré plein de 5 px** (`--repere`) **posé au-dessus de son trait** — sa base contre le
-  trait horizontal, en haut comme en bas du cadre — et centré sur le trait vertical, au premier plan devant
-  les photos. Il suppose un cadre tracé en bordure (`border`), jamais en ombre intérieure. Il prend le cadre à
+- Le repère est un **carré plein de 5 px** (`--repere`) **centré sur son angle**, à cheval sur les deux traits
+  qui s'y croisent, au premier plan devant les photos : les quatre angles se lisent pareil (12/10/2026 ; posé
+  au-dessus de son trait, il sortait du cadre en haut et y rentrait en bas, et au téléphone les angles du haut
+  et du bas ne se ressemblaient plus). Il suppose un cadre tracé en bordure (`border`), jamais en ombre intérieure. Il prend le cadre à
   plat (`--c-cadre-plein`) : l'encre sur les fonds clairs, dans la nuit un gris plein (`#72716F`, la chaux à
   40 % sur le noir), net là où il chevauche un trait.
 - Le même carré sert de puce (garanties, communes, listes d'un encadré) en **rouge écrit** ; de marque « vous êtes

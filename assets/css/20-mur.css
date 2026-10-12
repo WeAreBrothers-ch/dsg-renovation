@@ -16,20 +16,29 @@
    mur ne se monte pas (outils/mur.py).
    ============================================================ */
 
-/* Tant que le mur tient, la page derrière ne défile pas. */
+/* Tant que le mur tient, la page derrière ne défile pas, et ce que le
+   navigateur montre autour d'elle prend la couleur du mur : le fond du
+   document, qu'un glissé fait voir dans le rebond, et la teinte des
+   barres (theme-color, posée par mur.js). Le fond de la page (body)
+   reste blanc : c'est lui qu'on voit par les trous. */
 .mur-ferme,.mur-ferme body{overflow:hidden}
+.mur-ferme{background-color:var(--mur-mortier)}
 
-/* Au téléphone, les barres du navigateur (Safari surtout, translucides)
-   recouvrent le bas de l'écran : un mur tenu entre le haut et le bas
-   de la partie visible laissait voir le site sous elles. Le mur
-   descend donc jusqu'au bas de l'écran entier (100lvh), sous les
-   barres ; le cartouche se centre dans la partie visible (100dvh). */
+/* Au téléphone, les barres du navigateur (Safari surtout, translucides
+   ou flottantes) recouvrent le bas de l'écran, et un glissé fait
+   rebondir la page : un mur tenu au ras de l'écran y laissait voir le
+   site. Le mur déborde donc largement de l'écran, en haut et en bas
+   (--mur-deborde), sur toute sa hauteur possible (100lvh, barres
+   rentrées) ; le cartouche se centre dans la partie visible (100dvh). */
 .mur{
-  position:fixed;top:0;left:0;right:0;z-index:150;
-  height:100vh;height:100lvh;
+  --mur-deborde:max(8rem,20vh);
+  position:fixed;left:0;right:0;z-index:150;
+  top:calc(var(--mur-deborde) * -1);
+  height:calc(100vh + 2 * var(--mur-deborde));
+  height:calc(100lvh + 2 * var(--mur-deborde));
   display:grid;place-items:center;
-  padding:max(var(--sp-5),env(safe-area-inset-top)) var(--grille-marge) max(var(--sp-5),env(safe-area-inset-bottom));
-  padding-bottom:calc(max(var(--sp-5),env(safe-area-inset-bottom)) + 100lvh - 100dvh);
+  padding:calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-top))) var(--grille-marge) calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-bottom)));
+  padding-bottom:calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-bottom)) + 100lvh - 100dvh);
   background-color:var(--mur-mortier);
   background-image:var(--mur-motif);
   background-position:0 0;

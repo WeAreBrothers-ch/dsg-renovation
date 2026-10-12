@@ -132,23 +132,28 @@ h1,h2,h3{
    poignées de sélection d'un logiciel de dessin : une maquette pas
    finie, plus une signature. Les autres cadres gardent leur trait.
 
-   Une seule règle de pose, la même partout : chaque carré est posé
-   AU-DESSUS de son trait horizontal (sa base contre le trait, en
-   haut comme en bas du cadre) et centré sur le trait vertical. Elle
-   ne tient que si tous les cadres sont tracés de la même façon : une
-   bordure d'un pixel (border), jamais une ombre portée à l'intérieur
-   (box-shadow inset), qui décalerait le trait d'un pixel et demi.
-   Le carré passe devant les photos (z-index) et ne capte aucun clic.
+   Une seule règle de pose, la même partout : chaque carré est centré
+   sur son angle, à cheval sur les deux traits qui s'y croisent — le
+   piquet planté au coin. Les quatre angles se lisent pareil. (Posé
+   au-dessus de son trait, le carré sortait du cadre en haut et y
+   rentrait en bas : au téléphone, les angles du haut et du bas ne se
+   ressemblaient plus.) La règle ne tient que si tous les cadres sont
+   tracés de la même façon : une bordure d'un pixel (border), jamais
+   une ombre portée à l'intérieur (box-shadow inset), qui décalerait
+   le trait d'un pixel et demi. Le carré passe devant les photos
+   (z-index) et ne capte aucun clic.
 
    Dans le repère du pseudo-élément (la boîte intérieure, bordure
    exclue) : le trait du haut occupe -1 → 0, celui du bas H → H+1,
-   celui de gauche -1 → 0. D'où, pour un carré de 5 px : -6 → -1 en
-   haut, H-5 → H en bas, -3 → +2 sur les côtés.
+   celui de gauche -1 → 0, celui de droite L → L+1. Un carré de 5 px
+   centré sur un trait d'un pixel déborde de 3 px d'un côté et de 2 de
+   l'autre : -3 → +2 en haut et à gauche, H-2 → H+3 et L-2 → L+3 en
+   bas et à droite. D'où un pseudo-élément qui déborde de 3 px partout.
    ------------------------------------------------------------ */
 :is(.couverture__cadre,.rappel__cadre,.mur__cartouche){position:relative}
 :is(.couverture__cadre,.rappel__cadre,.mur__cartouche)::before{
   content:"";position:absolute;pointer-events:none;z-index:3;
-  inset:calc(var(--repere) * -1 - 1px) -3px 0 -3px;
+  inset:calc((var(--repere) + 1px) / -2);
   background:
     linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) top left / var(--repere) var(--repere) no-repeat,
     linear-gradient(var(--c-cadre-plein),var(--c-cadre-plein)) top right / var(--repere) var(--repere) no-repeat,

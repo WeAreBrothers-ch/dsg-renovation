@@ -73,6 +73,12 @@
   var rgbLumiere = style.getPropertyValue("--c-blanc-rgb").trim() || "255,255,255";
   if (!teintes[0]) { teintes = ["#F4F1EC"]; }
 
+  /* Les barres du navigateur prennent la couleur du mur tant qu'il
+     tient (20-mur.css), puis retrouvent celle du site. */
+  var teinteBarres = document.querySelector('meta[name="theme-color"]');
+  var teinteSite = teinteBarres ? teinteBarres.getAttribute("content") : null;
+  if (teinteBarres) { teinteBarres.setAttribute("content", mortier); }
+
   /** @param {number} a */
   function ombre(a) { return "rgba(" + rgbOmbre + "," + a + ")"; }
   /** @param {number} a */
@@ -135,6 +141,23 @@
   var dernier = 0;
   /* Le calque porte encore l'image précédente. */
   var calqueSali = false;
+
+  /**
+   * Une boîte de l'écran dans le repère du mur, qui déborde de l'écran
+   * en haut et en bas (20-mur.css) : la toile et les coups s'y comptent.
+   * @param {Element} element
+   */
+  function dansLeMur(element) {
+    var m = mur.getBoundingClientRect(), b = element.getBoundingClientRect();
+    return { left: b.left - m.left, top: b.top - m.top, right: b.right - m.left,
+      bottom: b.bottom - m.top, width: b.width, height: b.height };
+  }
+
+  /** La partie du mur visible à l'écran : de `haut` à `bas`. */
+  function vue() {
+    var m = mur.getBoundingClientRect();
+    return { haut: -m.top, bas: -m.top + (window.innerHeight || haut) };
+  }
 
   /** Le pas d'une brique, réglé par la feuille (--mur-pas). */
   function lirePas() {
@@ -401,7 +424,7 @@
         -Math.random() * 30 - pres * 110, (Math.random() - 0.5) * (0.8 + pres * 2.2),
         d / ONDE * (0.9 + Math.random() * 0.2), maintenant);
     });
-    var boite = cartouche.getBoundingClientRect();
+    var boite = dansLeMur(cartouche);
     var pdx = boite.left + boite.width / 2 - x0, pdy = boite.top + boite.height / 2 - y0;
     chuteCartouche = {
       y: 0, vy: -60, a: 0,
@@ -423,20 +446,21 @@
    * @returns {Array<number>}
    */
   function horsCartouche(x, y) {
-    var boite = cartouche.getBoundingClientRect();
+    var boite = dansLeMur(cartouche);
     var marge = L * 0.6;
     if (x < boite.left - marge || x > boite.right + marge ||
         y < boite.top - marge || y > boite.bottom + marge) { return [x, y]; }
     var cx = boite.left + boite.width / 2, cy = boite.top + boite.height / 2;
     var places = [];
     /* Des points tout autour du cartouche, gardés dans la partie visible
-       de l'écran : le bas du mur passe sous les barres du navigateur. */
-    var bas = Math.min(haut, window.innerHeight || haut);
+       du mur : il déborde de l'écran, et passe sous les barres du
+       navigateur. */
+    var visible = vue();
     for (var k = 0; k < 24; k++) {
       var a = (k / 24) * Math.PI * 2;
       var px = cx + Math.cos(a) * (boite.width / 2 + marge + L * 0.3);
       var py = cy + Math.sin(a) * (boite.height / 2 + marge + L * 0.3);
-      if (px > H && px < larg - H && py > H && py < bas - H) { places.push([px, py]); }
+      if (px > H && px < larg - H && py > visible.haut + H && py < visible.bas - H) { places.push([px, py]); }
     }
     if (!places.length) { return [x, y]; }
     /* Le plus proche du point frappé, à un rien près. */
@@ -602,6 +626,7 @@
     window.removeEventListener("resize", surRedimension);
     inertes.forEach(function (element) { element.removeAttribute("inert"); });
     racine.classList.remove("mur-ferme");
+    if (teinteBarres && teinteSite) { teinteBarres.setAttribute("content", teinteSite); }
     mur.remove();
     /* Le plan se trace maintenant (motion.js). */
     document.dispatchEvent(new Event("mur:ouvert"));
@@ -619,7 +644,7 @@
   if (bouton) {
     bouton.addEventListener("click", function (evenement) {
       if (evenement.detail !== 0) { return; }
-      var boite = bouton.getBoundingClientRect();
+      var boite = dansLeMur(bouton);
       frapper(boite.left + boite.width * Math.random(), boite.top + boite.height / 2);
     });
   }
