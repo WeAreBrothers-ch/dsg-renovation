@@ -162,10 +162,12 @@ chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
 
 Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
-sur le site de l'extérieur trouve l'écran couvert d'un mur de briques passé
-à la chaux, aux teintes du site, un cartouche posé dessus, dessiné comme
-le reste du site (cadre d'un pixel, repères d'angle, logo, bouton rouge) :
-« Cassez le mur pour entrer. » **Trois coups, pas un de
+sur le site de l'extérieur trouve l'écran couvert d'un mur dessiné en
+élévation, comme le site est dessiné en plan — des briques au trait sur la
+chaux, quelques-unes teintées ou hachurées —, qui se monte rang par rang ;
+un petit cartouche posé dessus, dessiné comme le reste du site (cadre d'un
+pixel, repères d'angle, logo, bouton rouge) : « Cassez le mur pour
+entrer. » **Trois coups, pas un de
 plus** : le premier fait tomber la brique frappée, le deuxième celles qui
 l'entourent (le site paraît dans le trou), le troisième l'abat, et le site
 est là. Un

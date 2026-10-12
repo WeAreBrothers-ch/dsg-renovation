@@ -1,4 +1,4 @@
-"""Le mur à l'entrée : un mur de briques à la chaux, à casser pour entrer.
+"""Le mur à l'entrée : un mur dessiné en élévation, à casser pour entrer.
 
 Le visiteur qui arrive sur le site trouve un mur. Trois coups le
 cassent (mur.js, 20-mur.css) : le premier fait tomber une brique, le

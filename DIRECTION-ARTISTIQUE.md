@@ -10,23 +10,25 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
 
 **Le mur à l'entrée, 12/10/2026 (v6.8).** Demande de l'agence : avant d'entrer sur le site, un mur de briques
 aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écrit qu'il faut le casser pour entrer.
-Le visiteur qui arrive de l'extérieur trouve l'écran couvert d'un **mur de briques passé à la chaux** : des
-briques de terre cuite à l'échelle (94 × 30, joint de 6), dans les teintes du site — blanc cassé, chaux, chaux
-creusée, deux chaux rosées où la brique transparaît sous le badigeon, le vieux rose du nacré —, un mortier gris
-chaud, un grain léger, une arête éclairée, parfois un coin écorné. Un **cartouche de plan** y est posé, dessiné
-avec les pièces du site et rien d'autre : un blanc franc, un cadre d'un pixel à l'encre et les repères d'angle du
-bloc qui ouvre, le logo de l'en-tête à sa hauteur (32 px), « Cassez le mur pour entrer. » à l'échelle des
-sous-titres, puis une rangée de deux cases comme l'en-tête — trois carrés cernés que le rouge de l'action
-remplit à chaque coup, et le bouton « Frapper » et sa flèche. 22 rem au bureau, la largeur de l'en-tête au
-téléphone. Ce qui reste à frapper ne s'écrit que pour les lecteurs d'écran. Sur le mur, le curseur est le
-viseur. **Trois coups** : le premier fait tomber la brique frappée, quelques éclats et un peu de poussière ; le
+Le visiteur qui arrive de l'extérieur trouve l'écran couvert d'un **mur dessiné en élévation**, comme le reste
+du site est dessiné en plan : sur la chaux, des briques de terre cuite à l'échelle (22 × 6,5 cm, joint compris)
+cernées d'un trait d'un pixel ; la plupart restent du papier, quelques-unes prennent la chaux creusée, une sur
+dix est hachurée à 45° comme l'eau du plan du Léman. Il **se monte rang par rang**, du pied de l'écran vers son
+haut, en deux tiers de seconde, sur une feuille blanche qui ne laisse rien voir du site. Un **cartouche de plan**
+y est posé, dessiné avec les pièces du site et rien d'autre : un blanc franc, un cadre d'un pixel à l'encre et
+les repères d'angle du bloc qui ouvre, le logo, « Cassez le mur pour entrer. » à l'échelle des intertitres, puis
+une rangée de deux cases comme l'en-tête — trois carrés cernés que le rouge de l'action remplit à chaque coup, et
+le bouton « Frapper » et sa flèche. Compact : 16,5 rem au téléphone (264 × 148 px), 18 rem dès la tablette. Ce
+qui reste à frapper ne s'écrit que pour les lecteurs d'écran. Sur le mur, le curseur est le
+viseur. **Trois coups** : le premier fait tomber la brique frappée et quelques éclats dessinés comme elle ; le
 deuxième fait tomber les briques autour du coup, et le site paraît dans le trou ; le troisième abat le mur : une
 onde part du point frappé, chaque brique tombe quand elle l'atteint — elles tombent plus qu'elles ne volent, et
 tournent à peine —, le cartouche avec elles, et les traits du site se tracent alors seulement (`20-mur.css`,
 `mur.js`, `outils/mur.py`). Un coup porté sur le cartouche fait tomber les briques juste à côté de lui, là où
-l'on voit le mur. Essayés le même jour et retirés à la demande de l'agence : les fissures, puis une plaque de noir
+l'on voit le mur. Essayés le même jour et retirés à la demande de l'agence : les fissures ; une plaque de noir
 nacré trop grande (ombre portée, vis, logo négatif, une consigne, une masse pour curseur), qui faisait décor
-ajouté plutôt que pièce du site.
+ajouté plutôt que pièce du site ; un mur de briques peintes en relief (badigeon, grain, arête éclairée, mortier
+épais), qui faisait texture de jeu à côté d'un site au trait.
 Le mur se dresse devant qui vient de l'extérieur (moteur de recherche, lien, favori) ; qui vient d'une page du
 site est déjà entré, même dans un nouvel onglet, et un onglet qui l'a cassé ne le revoit plus. Rien n'est gardé
 d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Sans JavaScript, il n'existe
@@ -399,11 +401,10 @@ fond clair. Les cases mates posées dans la bande la recouvrent. Cachée en coul
 l'impression.
 
 ### Le mur à l'entrée (v6.8)
-`--mur-teintes` sept briques : `#FBFAF7` blanc cassé, `#F4F1EC` chaux (deux fois), `#EFEBE4`, `#E9E4DC`
-chaux creusée, `#ECE3DA` et `#E6DCD2` chaux rosées · `--mur-mortier` `#CDC6BC` ·
-`--mur-pas` le pas d'une brique, de 72 à 128 px (8,5 % de l'écran) · `--mur-motif` le même appareil en SVG, qui
-tient le mur avant que le script peigne ses briques. Rien n'y est du texte : aucun seuil de contraste n'y est
-requis. Le cartouche prend les jetons du clair (fond, encre, cadre) : ses textes tiennent les seuils du blanc.
+`--mur-papier` = la chaux · `--mur-trait` `#C3BDB4`, l'encre à 24 % sur la chaux, rendue opaque pour ne pas
+doubler là où deux briques partagent un trait · `--mur-hachure` l'encre à 14 % · `--mur-teintes` six briques
+sur dix de papier, deux `#EFEBE4`, deux chaux creusée `#E9E4DC` · `--mur-pas` le pas d'une brique, de 60 à
+104 px (6,5 % de l'écran). Rien n'y est du texte : aucun seuil de contraste n'y est requis. Le cartouche prend les jetons du clair (fond, encre, cadre) : ses textes tiennent les seuils du blanc.
 Ses repères d'angle sont ceux du site (`01-socle.css`) : le mur ouvre la visite.
 
 ### Voiles
@@ -664,7 +665,8 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
 | Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
 | Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |
-| Mur à l'entrée : 1er et 2e coups | une brique, puis celles qui l'entourent, tombent d'une toile ; éclats, poussière | jusqu'à 1,4 s, pesanteur |
+| Mur à l'entrée : montage (à l'arrivée) | briques posées sur une toile, rang par rang, du pied vers le haut | 640 ms : 420 de rang en rang, 220 par rang |
+| Mur à l'entrée : 1er et 2e coups | une brique, puis celles qui l'entourent, tombent d'une toile ; éclats | jusqu'à 1,4 s, pesanteur |
 | Mur à l'entrée : chute (3e coup) | briques sur une toile, pesanteur ; onde de 2,2 px/ms depuis le coup | 1,5 à 2,6 s |
 
 - **Au défilement, seuls les traits se tracent** (v6.3). Le 05/10/2026, les apparitions avaient été retirées : ni
@@ -683,7 +685,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   la pesanteur, qui accélère, n'est pas une courbe d'interface.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
   seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
-  répond plus au toucher, les traits sont tracés d'emblée ; le mur à l'entrée se troue d'un coup,
+  répond plus au toucher, les traits sont tracés d'emblée ; le mur à l'entrée est là d'emblée, se troue d'un coup,
   puis s'efface au troisième sans tomber ; le reste ne bouge pas.
 - **Sans JavaScript** : pas de mur à l'entrée, tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.

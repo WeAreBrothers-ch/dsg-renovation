@@ -1,12 +1,16 @@
 /* ============================================================
    DSG RÉNOVATION — LE MUR À L'ENTRÉE
-   Le visiteur qui arrive trouve un mur de briques passé à la chaux,
-   un cartouche de plan posé dessus : « Cassez le mur pour entrer. »
-   Trois coups, pas un de plus : le premier fait tomber la
-   brique frappée, le deuxième celles qui l'entourent — le site paraît
-   dans le trou —, le troisième abat le mur : une onde part du point
-   frappé, les briques tombent, et le site est derrière. Pas de
-   fissure : des briques qui tombent, des éclats, de la poussière.
+   Le visiteur qui arrive trouve un mur, dessiné comme le reste du
+   site : une élévation de plan, des briques au trait sur la chaux,
+   quelques-unes teintées ou hachurées comme l'eau du plan du Léman. Un
+   cartouche y est posé : « Cassez le mur pour entrer. »
+
+   Le mur se monte rang par rang, du pied vers le haut, comme le plan se
+   trace ailleurs sur le site (motion.js) : moins d'une seconde, et le
+   cartouche est là d'emblée. Trois coups, pas un de plus : le premier
+   fait tomber la brique frappée, le deuxième celles qui l'entourent —
+   le site paraît dans le trou —, le troisième abat le mur : une onde
+   part du point frappé, les briques tombent, et le site est derrière.
 
    Un coup porté sur le cartouche fait tomber les briques juste à côté
    de lui, là où l'on voit le mur. Le cartouche ne bouge pas : il tombe
@@ -15,9 +19,10 @@
    Le mur se dresse devant qui arrive de l'extérieur du site, une fois
    par onglet (outils/mur.py décide, avant le premier rendu). Au
    clavier, le bouton « Frapper » donne les coups ; les lecteurs
-   d'écran entendent ce qui reste. Mouvement réduit : les trous paraissent d'un
-   coup, et le mur s'efface au troisième au lieu de tomber. Sans
-   canevas, les trois coups restent, le mur s'efface au dernier.
+   d'écran entendent ce qui reste. Mouvement réduit : le mur est là
+   d'emblée, les trous paraissent d'un coup, et il s'efface au troisième
+   au lieu de tomber. Sans canevas, la feuille reste blanche, les trois
+   coups restent, le mur s'efface au dernier.
    ============================================================ */
 (function () {
   "use strict";
@@ -50,10 +55,16 @@
   /* Ce qu'entend un lecteur d'écran avant chaque coup, puis quand le
      mur tombe. À l'écran, les trois carrés le disent. */
   var ANNONCES = ["Trois coups.", "Encore deux coups.", "Un dernier coup.", "Le mur tombe."];
-  /* Une brique fait 94 % de son pas en longueur, son rang 36 % ; le joint
-     6 % (le motif --mur-motif de 00-jetons.css, à la même échelle). */
+  /* Un rang fait 36 % du pas d'une brique : une brique de terre cuite
+     (22 × 6,5 cm, joint compris, à l'échelle près). */
   var RANG = 0.36;
-  var JOINT = 0.06;
+  /* Une brique sur dix est hachurée, à 45°, un trait tous les 5 px. */
+  var PART_HACHUREE = 0.1;
+  var PAS_HACHURE = 5;
+  /* Le mur se monte en 640 ms : 420 du pied au faîte de l'écran, et
+     chaque rang se pose de gauche à droite en 220. */
+  var MONTEE = 420;
+  var BALAYAGE = 220;
   /* Pesanteur des briques et des éclats, en px/s². */
   var PESANTEUR = 3200;
   /* L'onde qui abat le mur : px parcourus par milliseconde. */
@@ -63,30 +74,26 @@
   var GRAINE = 20261012;
   var PIXELS_MAX = 6e6;
   /* Le calque, repeint à chaque image, est moins dense : deux millions
-     de points au plus. Ce qui bouge n'a pas besoin du grain du mur. */
+     de points au plus. Ce qui bouge n'a pas besoin du trait du mur. */
   var PIXELS_CALQUE = 2e6;
 
   var style = window.getComputedStyle(mur);
+  var papier = style.getPropertyValue("--mur-papier").trim() || "#F4F1EC";
+  var trait = style.getPropertyValue("--mur-trait").trim() || "#C3BDB4";
+  var hachure = style.getPropertyValue("--mur-hachure").trim() || "rgba(27,27,27,.14)";
   var teintes = style.getPropertyValue("--mur-teintes").trim().split(/\s+/);
-  var mortier = style.getPropertyValue("--mur-mortier").trim() || "#CDC6BC";
-  var rgbOmbre = style.getPropertyValue("--c-encre-rgb").trim() || "27,27,27";
-  var rgbLumiere = style.getPropertyValue("--c-blanc-rgb").trim() || "255,255,255";
-  if (!teintes[0]) { teintes = ["#F4F1EC"]; }
+  if (!teintes[0]) { teintes = [papier]; }
 
   /* Les barres du navigateur prennent la couleur du mur tant qu'il
      tient (20-mur.css), puis retrouvent celle du site. */
   var teinteBarres = document.querySelector('meta[name="theme-color"]');
   var teinteSite = teinteBarres ? teinteBarres.getAttribute("content") : null;
-  if (teinteBarres) { teinteBarres.setAttribute("content", mortier); }
-
-  /** @param {number} a */
-  function ombre(a) { return "rgba(" + rgbOmbre + "," + a + ")"; }
-  /** @param {number} a */
-  function lumiere(a) { return "rgba(" + rgbLumiere + "," + a + ")"; }
+  if (teinteBarres) { teinteBarres.setAttribute("content", papier); }
 
   /**
-   * Hasard reproductible (mulberry32) : un coup rejoué après un
-   * redimensionnement fait tomber les mêmes briques.
+   * Hasard reproductible (mulberry32) : le même mur à chaque visite, et
+   * un coup rejoué après un redimensionnement fait tomber les mêmes
+   * briques.
    * @param {number} graine
    * @returns {function(): number}
    */
@@ -110,10 +117,10 @@
     inertes.push(element);
   });
 
-  /* Deux toiles : le mur peint, qui ne change qu'à un coup (une brique
+  /* Deux toiles : le mur dessiné, qui ne change qu'à un coup (une brique
      en part, un trou reste), et par-dessus, sous le cartouche, le calque
-     de ce qui bouge — éclats, poussière, briques qui tombent —, seul
-     repeint à chaque image. */
+     de ce qui bouge — éclats, briques qui tombent —, seul repeint à
+     chaque image. */
   var mctx = toile.getContext ? toile.getContext("2d") : null;
   var calque = document.createElement("canvas");
   calque.className = "mur__briques";
@@ -122,9 +129,16 @@
   var ctx = mctx ? calque.getContext("2d") : null;
 
   var larg = 0, haut = 0, dpr = 1, dprCalque = 1;
-  var L = 96, H = 34.56, J = 5.76;
-  /** @type {Array<{x:number,y:number,teinte:string,graine:number,tombee:boolean}>} */
+  var L = 80, H = 28.8;
+  /**
+   * Une brique : sa case (x0, y0) → (x1, y1), en pixels entiers pour un
+   * trait net à toute densité, ses deux bords compris — deux briques
+   * voisines partagent le trait qui les sépare.
+   * @type {Array<{x0:number,y0:number,x1:number,y1:number,teinte:string,hachee:boolean,pose:number,posee:boolean,tombee:boolean}>}
+   */
   var briques = [];
+  /** Le mur en train de se monter : l'heure du premier rang, ou 0. */
+  var montage = 0;
   var coups = 0;
   var abattu = false;
   var ouvert = false;
@@ -132,9 +146,8 @@
   var impacts = [];
   /** Briques qui tombent. */
   var corps = [];
-  /** Éclats et poussière. */
+  /** Éclats. */
   var eclats = [];
-  var poussieres = [];
   var chuteCartouche = null;
   var debutChute = 0;
   var boucle = 0;
@@ -162,60 +175,99 @@
   /** Le pas d'une brique, réglé par la feuille (--mur-pas). */
   function lirePas() {
     var pas = parseFloat(window.getComputedStyle(mur).backgroundSize);
-    if (!(pas > 0)) { pas = Math.min(128, Math.max(72, window.innerWidth * 0.085)); }
+    if (!(pas > 0)) { pas = Math.min(104, Math.max(60, window.innerWidth * 0.065)); }
     return pas;
   }
 
-  /* ---------- Le mur peint ---------- */
+  /** Le milieu d'une brique. */
+  function milieu(b) { return [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]; }
+
+  /* ---------- Le mur dessiné ---------- */
 
   /**
-   * Une brique et son mortier (à droite et dessous), sur le mur peint.
-   * Un badigeon inégal, un grain, une arête éclairée, parfois un coin
-   * écorné.
+   * Le contour d'une brique : un trait d'un pixel sur ses quatre bords.
+   * Le trait est opaque : là où deux briques le partagent, il ne double
+   * pas.
    * @param {CanvasRenderingContext2D} c
-   * @param {{x:number,y:number,teinte:string,graine:number}} b
+   * @param {{x0:number,y0:number,x1:number,y1:number}} b
    */
-  function peindreBrique(c, b) {
-    var w = L - J, h = H - J, rnd = hasard(b.graine);
-    c.fillStyle = mortier;
-    c.fillRect(b.x, b.y, L, H);
-    /* L'ombre de la brique sur le joint qui la porte. */
-    c.fillStyle = ombre(0.1);
-    c.fillRect(b.x, b.y + h, L, Math.max(1, J * 0.4));
-    c.fillStyle = b.teinte;
-    c.fillRect(b.x, b.y, w, h);
-    /* Le badigeon : plus mince d'un côté, la brique y transparaît. */
-    var gx = b.x + rnd() * w, gy = b.y + rnd() * h;
-    var halo = c.createRadialGradient(gx, gy, 0, gx, gy, w * 0.7);
-    halo.addColorStop(0, ombre(0.02 + rnd() * 0.035));
-    halo.addColorStop(1, ombre(0));
-    c.fillStyle = halo;
-    c.fillRect(b.x, b.y, w, h);
-    /* Un grain léger : à côté du cartouche, net, un grain plus fort
-       faisait sale. */
-    for (var k = 0; k < 4; k++) {
-      c.fillStyle = ombre(0.03 + rnd() * 0.05);
-      c.fillRect(b.x + rnd() * (w - 2), b.y + rnd() * (h - 2), 1 + rnd() * 1.2, 1 + rnd() * 1.2);
-    }
-    c.fillStyle = lumiere(0.75);
-    c.fillRect(b.x, b.y, w, 1);
-    c.fillStyle = ombre(0.07);
-    c.fillRect(b.x, b.y + h - 1.5, w, 1.5);
-    if (rnd() < 0.16) {
-      var e = 2 + rnd() * 4, droite = rnd() < 0.5, bas = rnd() < 0.5;
-      var cx = droite ? b.x + w : b.x, cy = bas ? b.y + h : b.y;
-      c.fillStyle = mortier;
-      c.beginPath();
-      c.moveTo(cx, cy);
-      c.lineTo(cx + (droite ? -e : e), cy);
-      c.lineTo(cx, cy + (bas ? -e * 0.8 : e * 0.8));
-      c.closePath();
-      c.fill();
-    }
+  function cerner(c, b) {
+    var w = b.x1 - b.x0 + 1, h = b.y1 - b.y0 + 1;
+    c.fillStyle = trait;
+    c.fillRect(b.x0, b.y0, w, 1);
+    c.fillRect(b.x0, b.y1, w, 1);
+    c.fillRect(b.x0, b.y0, 1, h);
+    c.fillRect(b.x1, b.y0, 1, h);
   }
 
-  /** Le mur entier, à la taille de l'écran, puis les coups déjà portés. */
-  function monter() {
+  /**
+   * Une brique : sa teinte, ses hachures s'il en a, son contour.
+   * @param {CanvasRenderingContext2D} c
+   * @param {{x0:number,y0:number,x1:number,y1:number,teinte:string,hachee:boolean}} b
+   */
+  function peindreBrique(c, b) {
+    var w = b.x1 - b.x0, h = b.y1 - b.y0;
+    c.fillStyle = b.teinte;
+    c.fillRect(b.x0, b.y0, w + 1, h + 1);
+    if (b.hachee) {
+      c.save();
+      c.beginPath();
+      c.rect(b.x0 + 1, b.y0 + 1, w - 1, h - 1);
+      c.clip();
+      c.strokeStyle = hachure;
+      c.lineWidth = 1;
+      c.beginPath();
+      for (var k = -h; k < w; k += PAS_HACHURE) {
+        c.moveTo(b.x0 + k, b.y1);
+        c.lineTo(b.x0 + k + h, b.y0);
+      }
+      c.stroke();
+      c.restore();
+    }
+    cerner(c, b);
+  }
+
+  /**
+   * Le trou d'une brique partie : sa case s'efface, trait compris, et
+   * les briques qui le bordent retracent le leur. Entre deux trous, il
+   * ne reste aucun trait en l'air.
+   * @param {{x0:number,y0:number,x1:number,y1:number}} b
+   */
+  function trouer(b) {
+    mctx.clearRect(b.x0, b.y0, b.x1 - b.x0 + 1, b.y1 - b.y0 + 1);
+    briques.forEach(function (v) {
+      if (v.tombee || !v.posee) { return; }
+      if (v.x1 < b.x0 || v.x0 > b.x1 || v.y1 < b.y0 || v.y0 > b.y1) { return; }
+      cerner(mctx, v);
+    });
+  }
+
+  /**
+   * Le mur est monté : la feuille, restée blanche sous lui pendant le
+   * montage — on ne voit pas le site avant d'avoir frappé —, s'efface, et
+   * les trous laisseront voir le site.
+   */
+  function monte() {
+    montage = 0;
+    mur.classList.add("est-peint");
+  }
+
+  /** Les briques pas encore posées le sont toutes, d'un coup. */
+  function finirMontage() {
+    if (!montage) { return; }
+    briques.forEach(function (b) {
+      if (!b.posee) { b.posee = true; peindreBrique(mctx, b); }
+    });
+    monte();
+  }
+
+  /**
+   * Le mur entier, à la taille de l'écran, puis les coups déjà portés.
+   * La première fois, il se monte rang par rang (sauf en mouvement
+   * réduit) ; après un redimensionnement, il est là d'un coup.
+   * @param {boolean} [monterRangParRang]
+   */
+  function monter(monterRangParRang) {
     larg = mur.clientWidth;
     haut = mur.clientHeight;
     if (!ctx || !mctx || !larg || !haut) { return; }
@@ -226,7 +278,6 @@
     dprCalque = Math.min(dpr, Math.max(0.75, Math.sqrt(PIXELS_CALQUE / (larg * haut))));
     L = lirePas();
     H = L * RANG;
-    J = L * JOINT;
     toile.width = Math.round(larg * dpr);
     toile.height = Math.round(haut * dpr);
     calque.width = Math.round(larg * dprCalque);
@@ -234,25 +285,38 @@
     mctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     mctx.clearRect(0, 0, larg, haut);
 
+    /* Le mur se monte du pied de l'écran vers son haut : les rangs sous
+       l'écran d'abord, ceux qui le dépassent en dernier. */
+    var visible = vue();
     briques = [];
     var rnd = hasard(GRAINE);
     for (var r = 0; r * H < haut; r++) {
-      /* Les rangs impairs décalés d'une demi-brique, comme le motif. */
+      var y0 = Math.round(r * H), y1 = Math.round((r + 1) * H);
+      /* Les rangs impairs décalés d'une demi-brique. */
       for (var x = r % 2 ? -L / 2 : 0; x < larg; x += L) {
+        var x0 = Math.round(x), x1 = Math.round(x + L);
+        var montee = Math.min(1, Math.max(0, (visible.bas - (y0 + y1) / 2) / (visible.bas - visible.haut)));
         briques.push({
-          x: x, y: r * H,
+          x0: x0, y0: y0, x1: x1, y1: y1,
           teinte: teintes[Math.floor(rnd() * teintes.length)],
-          graine: Math.floor(rnd() * 4294967296),
+          hachee: rnd() < PART_HACHUREE,
+          pose: montee * MONTEE + Math.max(0, (x0 + x1) / 2 / larg) * BALAYAGE,
+          posee: false,
           tombee: false
         });
       }
     }
-    briques.forEach(function (b) { peindreBrique(mctx, b); });
 
     corps = [];
-    impacts.forEach(function (impact) { porter(impact, true); });
-    mur.classList.add("est-peint");
-    peindre(window.performance.now());
+    if (monterRangParRang && !reduit) {
+      montage = window.performance.now();
+      relancer();
+    } else {
+      montage = 1;
+      finirMontage();
+      impacts.forEach(function (impact) { porter(impact, true); });
+      peindre(window.performance.now());
+    }
   }
 
   /* ---------- Les coups ---------- */
@@ -265,23 +329,23 @@
   function briqueSous(x, y) {
     for (var i = 0; i < briques.length; i++) {
       var b = briques[i];
-      if (!b.tombee && x >= b.x && x < b.x + L && y >= b.y && y < b.y + H) { return b; }
+      if (!b.tombee && x >= b.x0 && x < b.x1 && y >= b.y0 && y < b.y1) { return b; }
     }
     return null;
   }
 
   /**
-   * Une brique repeinte seule, de la même graine. Rien n'est relu sur le
-   * mur peint (une relecture de la toile coûte, au téléphone, plus que
-   * de tout repeindre).
-   * @param {{x:number,y:number,teinte:string,graine:number}} b
+   * Une brique redessinée seule, pour tomber. Rien n'est relu sur le mur
+   * (une relecture de la toile coûte, au téléphone, plus que de tout
+   * redessiner).
+   * @param {{x0:number,y0:number,x1:number,y1:number,teinte:string,hachee:boolean}} b
    * @param {number} sx  coin de la part visible, en points de la toile
    * @param {number} sy
    * @param {number} sw
    * @param {number} sh
    * @returns {HTMLCanvasElement}
    */
-  function repeindre(b, sx, sy, sw, sh) {
+  function redessiner(b, sx, sy, sw, sh) {
     var piece = document.createElement("canvas");
     piece.width = sw;
     piece.height = sh;
@@ -292,12 +356,12 @@
   }
 
   /**
-   * Une brique se détache et tombe. Au deuxième coup, elle est repeinte
-   * à part et laisse un trou ; quand le mur s'abat (`entier`), le mur
-   * peint, masqué, sert lui-même de source.
-   * Seule la part de la brique qui était à l'écran tombe : celles du
-   * bord gauche en dépassaient d'une moitié.
-   * @param {{x:number,y:number,tombee:boolean}} b
+   * Une brique se détache et tombe. Aux deux premiers coups, elle est
+   * redessinée à part et laisse un trou ; quand le mur s'abat
+   * (`entier`), le mur dessiné, masqué, sert lui-même de source. Seule
+   * la part de la brique qui était sur la toile tombe : celles du bord
+   * gauche en dépassaient d'une moitié.
+   * @param {{x0:number,y0:number,x1:number,y1:number,tombee:boolean}} b
    * @param {boolean} entier
    * @param {number} vx
    * @param {number} vy
@@ -307,51 +371,46 @@
    */
   function detacher(b, entier, vx, vy, va, retard, maintenant) {
     b.tombee = true;
-    var x0 = Math.max(0, b.x), y0 = Math.max(0, b.y);
-    var x1 = Math.min(larg, b.x + L), y1 = Math.min(haut, b.y + H);
+    var x0 = Math.max(0, b.x0), y0 = Math.max(0, b.y0);
+    var x1 = Math.min(larg, b.x1 + 1), y1 = Math.min(haut, b.y1 + 1);
     if (x1 <= x0 || y1 <= y0) { return; }
     var sx = Math.round(x0 * dpr), sy = Math.round(y0 * dpr);
     var sw = Math.max(1, Math.round(x1 * dpr) - sx), sh = Math.max(1, Math.round(y1 * dpr) - sy);
     var source = toile;
     if (!entier) {
-      source = repeindre(b, sx, sy, sw, sh);
+      source = redessiner(b, sx, sy, sw, sh);
       sx = sy = 0;
-      mctx.clearRect(b.x, b.y, L, H);
+      trouer(b);
     }
+    var m = milieu(b);
     corps.push({
       source: source, sx: sx, sy: sy, sw: sw, sh: sh,
-      dx: x0 - b.x - L / 2, dy: y0 - b.y - H / 2, dw: x1 - x0, dh: y1 - y0,
-      x: b.x + L / 2, y: b.y + H / 2, a: 0,
+      dx: x0 - m[0], dy: y0 - m[1], dw: x1 - x0, dh: y1 - y0,
+      x: m[0], y: m[1], a: 0,
       vx: vx, vy: vy, va: va,
       depart: maintenant + retard
     });
   }
 
   /**
-   * Quelques éclats et un peu de poussière, au point frappé : de quoi
-   * sentir le coup, pas un feu d'artifice.
+   * Quelques éclats au point frappé, des bouts de brique dessinés comme
+   * elle : de quoi sentir le coup, pas un feu d'artifice.
    * @param {number} x
    * @param {number} y
    * @param {number} force
    * @param {string} teinte
    */
   function projeter(x, y, force, teinte) {
-    var n = 6 + force * 4;
+    var n = 4 + force * 3;
     for (var i = 0; i < n; i++) {
-      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.5;
-      var v = 100 + Math.random() * (180 + force * 100);
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.4;
+      var v = 90 + Math.random() * (160 + force * 90);
       eclats.push({
         x: x, y: y, a: Math.random() * 6,
-        vx: Math.cos(a) * v, vy: Math.sin(a) * v, va: (Math.random() - 0.5) * 10,
-        taille: 1.5 + Math.random() * (2.5 + force),
-        teinte: Math.random() < 0.3 ? mortier : teinte,
+        vx: Math.cos(a) * v, vy: Math.sin(a) * v, va: (Math.random() - 0.5) * 8,
+        taille: 3 + Math.random() * (3 + force * 2),
+        teinte: teinte,
         vie: 0.9 + Math.random() * 0.5
-      });
-    }
-    for (var k = 0; k < 2 + force; k++) {
-      poussieres.push({
-        x: x + (Math.random() - 0.5) * H, y: y + (Math.random() - 0.5) * H * 0.6,
-        r: H * (0.4 + Math.random() * 0.4), vie: 0, duree: 0.6 + Math.random() * 0.35
       });
     }
   }
@@ -375,18 +434,18 @@
     var proches = [];
     briques.forEach(function (b) {
       if (b.tombee) { return; }
-      var dx = b.x + L / 2 - x, dy = b.y + H / 2 - y;
+      var m = milieu(b), dx = m[0] - x, dy = m[1] - y;
       proches.push({ b: b, dx: dx, dy: dy, d: Math.sqrt(dx * dx + dy * dy) });
     });
     proches.sort(function (p, q) { return p.d - q.d; });
     /* La plus proche tombe toujours ; au deuxième coup, trois au moins. */
     var tombent = proches.filter(function (p, rang) { return rang < 1 + force * 2 || p.d <= rayon; });
-    var teinte = tombent.length ? tombent[0].b.teinte : teintes[0];
+    var teinte = tombent.length ? tombent[0].b.teinte : papier;
 
     tombent.forEach(function (p) {
       if (aussitot) {
         p.b.tombee = true;
-        mctx.clearRect(p.b.x, p.b.y, L, H);
+        trouer(p.b);
         return;
       }
       detacher(p.b, false, p.dx / (p.d || 1) * (40 + Math.random() * 90),
@@ -415,7 +474,7 @@
     toile.style.visibility = "hidden";
     briques.forEach(function (b) {
       if (b.tombee) { return; }
-      var dx = b.x + L / 2 - x0, dy = b.y + H / 2 - y0;
+      var m = milieu(b), dx = m[0] - x0, dy = m[1] - y0;
       var d = Math.sqrt(dx * dx + dy * dy) || 1;
       /* Près du coup, les briques partent un peu ; plus loin, elles
          s'affaissent. */
@@ -432,7 +491,7 @@
       depart: maintenant + Math.sqrt(pdx * pdx + pdy * pdy) / ONDE * 0.6 + 80
     };
     debutChute = maintenant;
-    projeter(x0, y0, 2, frappee ? frappee.teinte : teintes[0]);
+    projeter(x0, y0, 2, frappee ? frappee.teinte : papier);
     relancer();
   }
 
@@ -481,6 +540,7 @@
     if (marques[coups - 1]) { marques[coups - 1].classList.add("est-frappe"); }
     if (annonce) { annonce.textContent = ANNONCES[coups]; }
     try {
+      finirMontage();
       if (coups === COUPS) {
         abattre(x, y);
         return;
@@ -525,9 +585,9 @@
   }
 
   /**
-   * Une image : le calque, effacé, reçoit les briques qui tombent, les
-   * éclats et la poussière ; le cartouche tombe. Renvoie vrai tant que
-   * quelque chose bouge.
+   * Une image : le mur se monte, rang par rang ; le calque, effacé,
+   * reçoit les briques qui tombent et les éclats ; le cartouche tombe.
+   * Renvoie vrai tant que quelque chose bouge.
    * @param {number} t
    * @param {number} [dt]
    * @returns {boolean}
@@ -536,6 +596,16 @@
     if (!ctx) { return false; }
     dt = dt || 0;
     var actif = false;
+
+    if (montage) {
+      var ecoule = t - montage, reste = false;
+      briques.forEach(function (b) {
+        if (b.posee) { return; }
+        if (b.pose <= ecoule) { b.posee = true; peindreBrique(mctx, b); } else { reste = true; }
+      });
+      if (reste) { actif = true; } else { monte(); }
+    }
+
     if (calqueSali) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, calque.width, calque.height);
@@ -569,23 +639,10 @@
       ctx.rotate(e.a);
       ctx.fillStyle = e.teinte;
       ctx.fillRect(-e.taille / 2, -e.taille * 0.35, e.taille, e.taille * 0.7);
-      ctx.fillStyle = ombre(0.18);
-      ctx.fillRect(-e.taille / 2, e.taille * 0.2, e.taille, e.taille * 0.15);
+      ctx.strokeStyle = trait;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(-e.taille / 2, -e.taille * 0.35, e.taille, e.taille * 0.7);
       ctx.restore();
-      actif = true;
-      return true;
-    });
-
-    poussieres = poussieres.filter(function (p) {
-      p.vie += dt;
-      var k = p.vie / p.duree;
-      if (k >= 1) { return false; }
-      var r = p.r * (1 + k * 1.6);
-      var nuage = ctx.createRadialGradient(p.x, p.y - k * H * 0.5, 0, p.x, p.y - k * H * 0.5, r);
-      nuage.addColorStop(0, "rgba(" + rgbLumiere + "," + (0.55 * (1 - k)) + ")");
-      nuage.addColorStop(1, "rgba(" + rgbLumiere + ",0)");
-      ctx.fillStyle = nuage;
-      ctx.fillRect(p.x - r, p.y - k * H * 0.5 - r, r * 2, r * 2);
       actif = true;
       return true;
     });
@@ -600,7 +657,7 @@
       cartouche.style.transform = "translateY(" + p.y.toFixed(1) + "px) rotate(" + p.a.toFixed(3) + "rad)";
       if (p.y < haut * 1.2) { actif = true; }
     }
-    calqueSali = corps.length > 0 || eclats.length > 0 || poussieres.length > 0;
+    calqueSali = corps.length > 0 || eclats.length > 0;
     return actif;
   }
 
@@ -653,11 +710,11 @@
   var attente = 0;
   function surRedimension() {
     window.clearTimeout(attente);
-    attente = window.setTimeout(function () { if (!abattu) { monter(); } }, 120);
+    attente = window.setTimeout(function () { if (!abattu) { monter(false); } }, 120);
   }
   window.addEventListener("resize", surRedimension);
 
-  monter();
+  monter(true);
   mur.focus({ preventScroll: true });
   /* Le mur est monté : le script de tête ne le retirera pas de lui-même
      (outils/mur.py). */

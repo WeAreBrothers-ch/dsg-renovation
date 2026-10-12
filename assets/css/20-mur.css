@@ -1,7 +1,7 @@
 /* ============================================================
    DSG RÉNOVATION — 20 · LE MUR À L'ENTRÉE
-   Un mur de briques passé à la chaux couvre l'écran à l'arrivée ; un
-   cartouche de plan y est posé : « Cassez le mur pour entrer. » Trois
+   Un mur couvre l'écran à l'arrivée, dessiné comme une élévation de
+   plan ; un cartouche y est posé : « Cassez le mur pour entrer. » Trois
    coups le cassent (assets/js/mur.js).
 
    Le cartouche est dessiné avec les pièces du site, rien d'autre : le
@@ -10,10 +10,9 @@
    rangée de cases comme l'en-tête, le bouton d'appel rouge et sa flèche. Ni ombre,
    ni vis, ni noir : il est à plat sur le mur, comme sur la page.
 
-   Le motif de briques tient le mur dès le premier rendu ; mur.js
-   peint ensuite ses briques une à une, au même pas (--mur-pas), et
-   le motif s'efface derrière elles (.est-peint). Sans JavaScript, le
-   mur ne se monte pas (outils/mur.py).
+   Au premier rendu, la feuille est blanche — la chaux — et le cartouche
+   y est déjà ; mur.js y monte le mur rang par rang, au pas --mur-pas.
+   Sans JavaScript, le mur ne se monte pas (outils/mur.py).
    ============================================================ */
 
 /* Tant que le mur tient, la page derrière ne défile pas, et ce que le
@@ -22,7 +21,7 @@
    barres (theme-color, posée par mur.js). Le fond de la page (body)
    reste blanc : c'est lui qu'on voit par les trous. */
 .mur-ferme,.mur-ferme body{overflow:hidden}
-.mur-ferme{background-color:var(--mur-mortier)}
+.mur-ferme{background-color:var(--mur-papier)}
 
 /* Au téléphone, les barres du navigateur (Safari surtout, translucides
    ou flottantes) recouvrent le bas de l'écran, et un glissé fait
@@ -39,10 +38,10 @@
   display:grid;place-items:center;
   padding:calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-top))) var(--grille-marge) calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-bottom)));
   padding-bottom:calc(var(--mur-deborde) + max(var(--sp-5),env(safe-area-inset-bottom)) + 100lvh - 100dvh);
-  background-color:var(--mur-mortier);
-  background-image:var(--mur-motif);
-  background-position:0 0;
-  background-size:var(--mur-pas) calc(var(--mur-pas) * .72);
+  background-color:var(--mur-papier);
+  /* Aucune image : la taille n'est là que pour que mur.js y lise le pas,
+     résolu en pixels. */
+  background-size:var(--mur-pas) auto;
   /* Le viseur du géomètre : on vise, on frappe. */
   cursor:crosshair;
   /* Des coups, pas des gestes : ni défilement, ni zoom, ni sélection. */
@@ -52,44 +51,55 @@
   -webkit-tap-highlight-color:transparent;
   outline:none;
 }
-/* Les briques sont peintes : le motif s'efface, et les trous laissent
-   voir le site. La taille du motif reste : mur.js y lit le pas. */
-.mur.est-peint{background-color:transparent;background-image:none}
+/* Le mur est dessiné sur sa toile : la feuille s'efface, et les trous
+   laissent voir le site. */
+.mur.est-peint{background-color:transparent}
 .mur__briques{position:absolute;inset:0;display:block;width:100%;height:100%}
 
 /* ---------- Le cartouche ----------
    Le fond de la page et son encre ; le cadre est une bordure d'un
    pixel, la seule que les repères d'angle savent coiffer. */
 .mur__cartouche{
-  width:min(100%,22rem);
+  width:min(100%,16.5rem);
   background:var(--c-papier);
   border:1px solid var(--c-cadre);
   color:var(--c-encre);
   cursor:crosshair;
 }
-.mur__tete{padding:var(--sp-5) var(--sp-5) var(--sp-6)}
-/* Le logo de l'en-tête, à sa hauteur. */
-.mur__logo{height:32px;width:auto}
+.mur__tete{padding:var(--sp-4) var(--sp-4) var(--sp-5)}
+/* Le logo, un cran sous celui de l'en-tête : un cartouche se lit de près. */
+.mur__logo{height:24px;width:auto}
 .mur__titre{
-  margin-top:var(--sp-6);
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h3);
-  letter-spacing:-.015em;line-height:1.15;text-wrap:balance;
+  margin-top:var(--sp-4);
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);
+  letter-spacing:-.01em;line-height:1.2;text-wrap:balance;
 }
 
 /* La rangée du bas : deux cases, un trait entre elles, comme l'en-tête. */
 .mur__bas{display:flex;align-items:stretch;border-top:1px solid var(--c-cadre)}
 /* Trois coups : trois carrés cernés d'encre, que le rouge de l'action
    remplit un à un. */
-.mur__coups{display:flex;align-items:center;gap:var(--sp-2);flex:1 1 auto;padding:0 var(--sp-5)}
+.mur__coups{display:flex;align-items:center;gap:6px;flex:1 1 auto;padding:0 var(--sp-4)}
 .mur__coups li{
-  width:10px;height:10px;
+  width:8px;height:8px;
   box-shadow:inset 0 0 0 1px var(--c-cadre);
   transition:background-color var(--d-rapide) var(--e-standard),box-shadow var(--d-rapide) var(--e-standard);
 }
 .mur__coups li.est-frappe{background:var(--c-signal);box-shadow:none;animation:mur-coup var(--d-normal) var(--e-sortie)}
 @keyframes mur-coup{from{scale:1.6}}
 
-.mur__frapper{flex:0 0 auto;min-width:10.5rem;border-left:1px solid var(--c-cadre);cursor:pointer}
+/* Le bouton d'appel, à la mesure du cartouche : la hauteur d'une cible
+   au doigt (44 px), le corps des rubriques de l'en-tête. */
+.mur__frapper{
+  flex:0 0 auto;min-height:44px;min-width:8.5rem;gap:var(--sp-4);padding:0 var(--sp-4);
+  font-size:var(--t-nav);
+  border-left:1px solid var(--c-cadre);cursor:pointer;
+}
+@media (min-width:768px){
+  .mur__cartouche{width:18rem}
+  .mur__logo{height:28px}
+  .mur__frapper{min-height:48px}
+}
 /* Mouvement réduit, ou sans canevas : au troisième coup, le mur
    s'efface au lieu de tomber. */
 .mur.est-efface{opacity:0;transition:opacity 320ms var(--e-standard)}
