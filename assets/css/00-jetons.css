@@ -176,6 +176,9 @@
   /* Le pas d'une brique : une brique de terre cuite, 22 × 6,5 cm joint
      compris, de 60 à 104 px (6,5 % de l'écran). */
   --mur-pas:clamp(60px,6.5vw,104px);
+  /* Ce que le mur déborde de l'écran, en haut et en bas : aucune barre
+     de navigateur, aucun rebond d'un glissé ne laisse voir le site. */
+  --mur-deborde:max(8rem,20vh);
 }
 
 /* ============================================================

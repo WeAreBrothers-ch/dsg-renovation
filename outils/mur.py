@@ -64,7 +64,8 @@ def mur(base):
     """Le mur et son cartouche, en tête de <body>.
 
     Masqué (hidden) tant que le script de tête n'a pas décidé de le
-    monter : sans JavaScript, il n'existe pas pour le visiteur.
+    monter : sans JavaScript, il n'existe pas pour le visiteur. Son pied
+    (20-mur.css) ne se montre que sous la classe « mur-ferme ».
     """
     return f"""<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
   <canvas class="mur__briques" aria-hidden="true"></canvas>
@@ -80,5 +81,6 @@ def mur(base):
     </div>
   </div>
 </div>
+<canvas class="mur-pied" id="murPied" aria-hidden="true"></canvas>
 {_DEVOILER}
 """

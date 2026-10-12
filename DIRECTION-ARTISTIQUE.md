@@ -31,7 +31,10 @@ ajouté plutôt que pièce du site ; un mur de briques peintes en relief (badige
 épais), qui faisait texture de jeu à côté d'un site au trait.
 Le mur se dresse devant qui vient de l'extérieur (moteur de recherche, lien, favori) ; qui vient d'une page du
 site est déjà entré, même dans un nouvel onglet, et un onglet qui l'a cassé ne le revoit plus. Rien n'est gardé
-d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Sans JavaScript, il n'existe
+d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Au téléphone, il couvre
+tout l'écran : il en déborde en haut et en bas, et sous la barre d'adresse flottante de Safari (iOS 26), qui coupe
+ce qui est fixé au-dessus d'elle et montre la page dessous, un **pied de mur** posé dans la page, dessiné à
+l'identique, prend le relais ; la zone de l'heure prend la chaux. Sans JavaScript, il n'existe
 pas ; si son script ne s'exécute pas, il tombe de lui-même au chargement. Au clavier, le bouton donne les coups ;
 en mouvement réduit, les trous paraissent d'un coup et le mur s'efface au troisième.
 

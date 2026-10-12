@@ -39,6 +39,8 @@
   var mur = document.getElementById("mur");
   if (!mur || !racine.classList.contains("mur-ferme")) {
     if (mur) { mur.remove(); }
+    var piedInutile = document.getElementById("murPied");
+    if (piedInutile) { piedInutile.remove(); }
     return;
   }
 
@@ -46,6 +48,8 @@
   var toile = /** @type {HTMLCanvasElement} */ (mur.querySelector(".mur__briques"));
   /** @type {HTMLElement} */
   var cartouche = /** @type {HTMLElement} */ (mur.querySelector(".mur__cartouche"));
+  /** Le pied du mur, posé dans la page sous le mur fixe (20-mur.css). */
+  var pied = /** @type {HTMLCanvasElement|null} */ (document.getElementById("murPied"));
   var annonce = document.getElementById("murAnnonce");
   var bouton = document.getElementById("murFrapper");
   var marques = mur.querySelectorAll(".mur__coups li");
@@ -112,7 +116,7 @@
      Tant que le mur tient, rien d'autre ne reçoit le focus. */
   var inertes = [];
   Array.prototype.forEach.call(document.body.children, function (element) {
-    if (element === mur || element.tagName === "SCRIPT" || element.hasAttribute("inert")) { return; }
+    if (element === mur || element === pied || element.tagName === "SCRIPT" || element.hasAttribute("inert")) { return; }
     element.setAttribute("inert", "");
     inertes.push(element);
   });
@@ -122,6 +126,8 @@
      de ce qui bouge — éclats, briques qui tombent —, seul repeint à
      chaque image. */
   var mctx = toile.getContext ? toile.getContext("2d") : null;
+  /* Le pied reçoit les mêmes traits que le mur, au même endroit. */
+  var pctx = mctx && pied && pied.getContext ? pied.getContext("2d") : null;
   var calque = document.createElement("canvas");
   calque.className = "mur__briques";
   calque.setAttribute("aria-hidden", "true");
@@ -179,6 +185,16 @@
     return pas;
   }
 
+  /**
+   * Le pied se cale sous le mur fixe, à l'endroit de la page que l'écran
+   * montre : la page ne défile pas, mais elle peut s'ouvrir plus bas (un
+   * lien vers une ancre).
+   */
+  function placerPied() {
+    if (!pied) { return; }
+    pied.style.top = (window.pageYOffset + mur.getBoundingClientRect().top) + "px";
+  }
+
   /** Le milieu d'une brique. */
   function milieu(b) { return [(b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2]; }
 
@@ -228,17 +244,35 @@
   }
 
   /**
+   * Ce qui se dessine sur le mur se dessine aussi sur son pied.
+   * @param {function(CanvasRenderingContext2D): void} dessin
+   */
+  function surLeMur(dessin) {
+    dessin(mctx);
+    if (pctx) { dessin(pctx); }
+  }
+
+  /**
+   * Une brique posée, sur le mur et sur son pied.
+   * @param {{x0:number,y0:number,x1:number,y1:number,teinte:string,hachee:boolean,posee:boolean}} b
+   */
+  function poser(b) {
+    b.posee = true;
+    surLeMur(function (c) { peindreBrique(c, b); });
+  }
+
+  /**
    * Le trou d'une brique partie : sa case s'efface, trait compris, et
    * les briques qui le bordent retracent le leur. Entre deux trous, il
    * ne reste aucun trait en l'air.
    * @param {{x0:number,y0:number,x1:number,y1:number}} b
    */
   function trouer(b) {
-    mctx.clearRect(b.x0, b.y0, b.x1 - b.x0 + 1, b.y1 - b.y0 + 1);
+    surLeMur(function (c) { c.clearRect(b.x0, b.y0, b.x1 - b.x0 + 1, b.y1 - b.y0 + 1); });
     briques.forEach(function (v) {
       if (v.tombee || !v.posee) { return; }
       if (v.x1 < b.x0 || v.x0 > b.x1 || v.y1 < b.y0 || v.y0 > b.y1) { return; }
-      cerner(mctx, v);
+      surLeMur(function (c) { cerner(c, v); });
     });
   }
 
@@ -250,14 +284,13 @@
   function monte() {
     montage = 0;
     mur.classList.add("est-peint");
+    if (pctx) { pied.classList.add("est-peint"); }
   }
 
   /** Les briques pas encore posées le sont toutes, d'un coup. */
   function finirMontage() {
     if (!montage) { return; }
-    briques.forEach(function (b) {
-      if (!b.posee) { b.posee = true; peindreBrique(mctx, b); }
-    });
+    briques.forEach(function (b) { if (!b.posee) { poser(b); } });
     monte();
   }
 
@@ -284,6 +317,14 @@
     calque.height = Math.round(haut * dprCalque);
     mctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     mctx.clearRect(0, 0, larg, haut);
+    if (pctx) {
+      pied.width = toile.width;
+      pied.height = toile.height;
+      pied.style.height = haut + "px";
+      placerPied();
+      pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pctx.clearRect(0, 0, larg, haut);
+    }
 
     /* Le mur se monte du pied de l'écran vers son haut : les rangs sous
        l'écran d'abord, ceux qui le dépassent en dernier. */
@@ -467,11 +508,14 @@
     var maintenant = window.performance.now();
     if (!ctx || reduit) {
       mur.classList.add("est-efface");
+      if (pied) { pied.classList.add("est-efface"); }
       window.setTimeout(ouvrir, 320);
       return;
     }
     var frappee = briqueSous(x0, y0);
     toile.style.visibility = "hidden";
+    /* Le mur tombe : son pied s'en va avec lui. */
+    if (pied) { pied.style.visibility = "hidden"; }
     briques.forEach(function (b) {
       if (b.tombee) { return; }
       var m = milieu(b), dx = m[0] - x0, dy = m[1] - y0;
@@ -601,7 +645,7 @@
       var ecoule = t - montage, reste = false;
       briques.forEach(function (b) {
         if (b.posee) { return; }
-        if (b.pose <= ecoule) { b.posee = true; peindreBrique(mctx, b); } else { reste = true; }
+        if (b.pose <= ecoule) { poser(b); } else { reste = true; }
       });
       if (reste) { actif = true; } else { monte(); }
     }
@@ -681,6 +725,8 @@
     noter();
     if (boucle) { window.cancelAnimationFrame(boucle); }
     window.removeEventListener("resize", surRedimension);
+    window.removeEventListener("scroll", placerPied);
+    if (pied) { pied.remove(); }
     inertes.forEach(function (element) { element.removeAttribute("inert"); });
     racine.classList.remove("mur-ferme");
     if (teinteBarres && teinteSite) { teinteBarres.setAttribute("content", teinteSite); }
@@ -713,6 +759,7 @@
     attente = window.setTimeout(function () { if (!abattu) { monter(false); } }, 120);
   }
   window.addEventListener("resize", surRedimension);
+  window.addEventListener("scroll", placerPied, { passive: true });
 
   monter(true);
   mur.focus({ preventScroll: true });

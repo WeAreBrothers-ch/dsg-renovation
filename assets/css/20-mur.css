@@ -22,6 +22,9 @@
    reste blanc : c'est lui qu'on voit par les trous. */
 .mur-ferme,.mur-ferme body{overflow:hidden}
 .mur-ferme{background-color:var(--mur-papier)}
+/* Safari (iOS 26) teinte la zone de l'heure d'après ce qui est fixé en
+   haut de la page : l'en-tête, caché sous le mur, y prend sa couleur. */
+.mur-ferme .entete{background-color:var(--mur-papier)}
 
 /* Au téléphone, les barres du navigateur (Safari surtout, translucides
    ou flottantes) recouvrent le bas de l'écran, et un glissé fait
@@ -30,7 +33,6 @@
    (--mur-deborde), sur toute sa hauteur possible (100lvh, barres
    rentrées) ; le cartouche se centre dans la partie visible (100dvh). */
 .mur{
-  --mur-deborde:max(8rem,20vh);
   position:fixed;left:0;right:0;z-index:150;
   top:calc(var(--mur-deborde) * -1);
   height:calc(100vh + 2 * var(--mur-deborde));
@@ -56,6 +58,25 @@
 .mur.est-peint{background-color:transparent}
 .mur__briques{position:absolute;inset:0;display:block;width:100%;height:100%}
 
+/* ---------- Le pied du mur ----------
+   Safari (iOS 26), sa barre d'adresse flottant en bas de l'écran, coupe
+   ce qui est fixé au-dessus d'elle et montre dessous la page elle-même :
+   sous la barre, on voyait le site. Le pied du mur est le même mur,
+   dessiné à l'identique par mur.js, mais posé dans la page, sous le mur
+   fixe : là où celui-ci est coupé, c'est lui qu'on voit. Avant que
+   mur.js le dessine, une feuille blanche, comme le mur. */
+.mur-pied{display:none}
+.mur-ferme .mur-pied{
+  display:block;position:absolute;left:0;z-index:149;width:100%;
+  top:calc(var(--mur-deborde) * -1);
+  height:calc(100vh + 2 * var(--mur-deborde));
+  height:calc(100lvh + 2 * var(--mur-deborde));
+  background-color:var(--mur-papier);
+  pointer-events:none;
+}
+.mur-pied.est-peint{background-color:transparent}
+.mur-pied.est-efface{opacity:0;transition:opacity 320ms var(--e-standard)}
+
 /* ---------- Le cartouche ----------
    Le fond de la page et son encre ; le cadre est une bordure d'un
    pixel, la seule que les repères d'angle savent coiffer. */
@@ -75,8 +96,11 @@
   letter-spacing:-.01em;line-height:1.2;text-wrap:balance;
 }
 
-/* La rangée du bas : deux cases, un trait entre elles, comme l'en-tête. */
-.mur__bas{display:flex;align-items:stretch;border-top:1px solid var(--c-cadre)}
+/* La rangée du bas : deux cases, un trait entre elles, comme l'en-tête.
+   Elle tient sa propre pile (z-index 0) : le bouton, sa seconde encre
+   et sa pression ne passent jamais devant le repère d'angle du
+   cartouche (Safari le masquait en bas à droite). */
+.mur__bas{position:relative;z-index:0;display:flex;align-items:stretch;border-top:1px solid var(--c-cadre)}
 /* Trois coups : trois carrés cernés d'encre, que le rouge de l'action
    remplit un à un. */
 .mur__coups{display:flex;align-items:center;gap:6px;flex:1 1 auto;padding:0 var(--sp-4)}
@@ -105,6 +129,6 @@
 .mur.est-efface{opacity:0;transition:opacity 320ms var(--e-standard)}
 
 @media print{
-  .mur{display:none!important}
+  .mur,.mur-pied{display:none!important}
   .mur-ferme,.mur-ferme body{overflow:visible}
 }
