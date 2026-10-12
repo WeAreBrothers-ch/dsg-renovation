@@ -445,12 +445,14 @@
         y < boite.top - marge || y > boite.bottom + marge) { return [x, y]; }
     var cx = boite.left + boite.width / 2, cy = boite.top + boite.height / 2;
     var places = [];
-    /* Des points tout autour de la plaque, gardés dans l'écran. */
+    /* Des points tout autour de la plaque, gardés dans la partie visible
+       de l'écran : le bas du mur passe sous les barres du navigateur. */
+    var bas = Math.min(haut, window.innerHeight || haut);
     for (var k = 0; k < 24; k++) {
       var a = (k / 24) * Math.PI * 2;
       var px = cx + Math.cos(a) * (boite.width / 2 + marge + L * 0.3);
       var py = cy + Math.sin(a) * (boite.height / 2 + marge + L * 0.3);
-      if (px > H && px < larg - H && py > H && py < haut - H) { places.push([px, py]); }
+      if (px > H && px < larg - H && py > H && py < bas - H) { places.push([px, py]); }
     }
     if (!places.length) { return [x, y]; }
     /* Le plus proche du point frappé, à un rien près. */

@@ -14,10 +14,17 @@
 /* Tant que le mur tient, la page derrière ne défile pas. */
 .mur-ferme,.mur-ferme body{overflow:hidden}
 
+/* Au téléphone, les barres du navigateur (Safari surtout, translucides)
+   recouvrent le bas de l'écran : un mur tenu entre le haut et le bas
+   de la partie visible laissait voir le site sous elles. Le mur
+   descend donc jusqu'au bas de l'écran entier (100lvh), sous les
+   barres ; la plaque se centre dans la partie visible (100dvh). */
 .mur{
-  position:fixed;inset:0;z-index:150;
+  position:fixed;top:0;left:0;right:0;z-index:150;
+  height:100vh;height:100lvh;
   display:grid;place-items:center;
   padding:max(var(--sp-5),env(safe-area-inset-top)) var(--grille-marge) max(var(--sp-5),env(safe-area-inset-bottom));
+  padding-bottom:calc(max(var(--sp-5),env(safe-area-inset-bottom)) + 100lvh - 100dvh);
   background-color:var(--mur-mortier);
   background-image:var(--mur-motif);
   background-position:0 0;
