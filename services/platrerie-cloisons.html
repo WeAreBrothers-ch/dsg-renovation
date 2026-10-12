@@ -25,8 +25,9 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="../assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=80380ded">
+<link rel="stylesheet" href="../assets/css/site.css?v=a5a79779">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
+<script>(function(h){var k="dsg-mur",v=false,d=false,r=document.referrer;try{v=sessionStorage.getItem(k)==="1"}catch(e){}try{d=!!r&&new URL(r).origin===location.origin}catch(e){}if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){h.classList.add("mur-ferme");addEventListener("load",function(){if(!h.classList.contains("mur-pret")){h.classList.remove("mur-ferme");var m=document.getElementById("mur");if(m){m.hidden=true}document.dispatchEvent(new Event("mur:ouvert"))}})}else{try{sessionStorage.setItem(k,"1")}catch(e){}}})(document.documentElement)</script>
 
 <script type="application/ld+json">
 {
@@ -415,6 +416,19 @@
 </head>
 
 <body>
+<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murConsigne" tabindex="-1" hidden>
+  <canvas class="mur__briques" aria-hidden="true"></canvas>
+  <div class="mur__plaque sur-sombre">
+    <img class="mur__logo" src="../assets/images/logo-negatif.webp" alt="DSG Rénovation" width="314" height="166" loading="lazy" decoding="async">
+    <p class="mur__titre" id="murTitre">Pour entrer sur le site, cassez le mur.</p>
+    <p class="mur__consigne" id="murConsigne" aria-live="polite" data-gabarit="Trois coups suffisent : frappez où vous voulez."><span>Trois coups suffisent : frappez où vous voulez.</span></p>
+    <div class="mur__bas">
+      <ol class="mur__coups" aria-hidden="true"><li></li><li></li><li></li></ol>
+      <button class="btn btn--plein mur__frapper" type="button" id="murFrapper">Frapper le mur<span class="mur__masse" aria-hidden="true"></span></button>
+    </div>
+  </div>
+</div>
+<script>if(document.documentElement.classList.contains("mur-ferme")){document.getElementById("mur").hidden=false}</script>
 <a class="saut" href="#contenu">Aller au contenu principal</a>
 
 <header class="entete" id="entete">
@@ -949,8 +963,9 @@
   <a class="btn btn--cadre" href="tel:+41218470202"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
   <a class="btn btn--plein" href="../devis.html#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
+<script src="../assets/js/mur.js?v=273bb852" defer></script>
 <script src="../assets/js/nav.js?v=bf327ce6" defer></script>
-<script src="../assets/js/motion.js?v=b66cd8e0" defer></script>
+<script src="../assets/js/motion.js?v=86e7770c" defer></script>
 <script src="../assets/js/onglets.js?v=47e6592c" defer></script>
 <script src="../assets/js/trame.js?v=d661c0cb" defer></script>
 </body>

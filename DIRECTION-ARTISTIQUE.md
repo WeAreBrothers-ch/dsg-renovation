@@ -4,9 +4,30 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 08/10/2026 — Statut : **v6.7**, en production.
+Date : 12/10/2026 — Statut : **v6.8**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**Le mur à l'entrée, 12/10/2026 (v6.8).** Demande de l'agence : avant d'entrer sur le site, un mur de briques
+aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écrit qu'il faut le casser pour entrer.
+Le visiteur qui arrive de l'extérieur trouve l'écran couvert d'un **mur de briques passé à la chaux** : des
+briques de terre cuite à l'échelle (94 × 30, joint de 6), dans les teintes du site — blanc cassé, chaux, chaux
+creusée, deux chaux rosées où la brique transparaît sous le badigeon, le vieux rose du nacré —, un mortier gris
+chaud, un grain, une arête éclairée, parfois un coin écorné. Une **plaque de noir nacré** y est vissée, une vis
+carrée à chaque angle : le logo négatif, « Pour entrer sur le site, cassez le mur. », la consigne « Trois coups
+suffisent : frappez où vous voulez. », trois carrés cernés que le rouge du toit remplit à chaque coup, et le
+bouton « Frapper le mur » (une masse dessinée au bout, en masque comme la flèche). Sur le mur, le curseur est une
+masse. **Trois coups** : le premier fissure le mur — les fissures se tracent comme les traits du plan, d'un
+seul trait depuis le point frappé, à l'encre avec une arête de chaux —, la plaque tremble ; le deuxième fait
+tomber les briques autour du coup, et le site paraît dans le trou ; la vis d'en haut à droite saute, la plaque
+penche sur celle de gauche ; le troisième abat le mur : une onde part du point frappé, chaque brique tombe quand
+elle l'atteint, la plaque avec elles, et les traits du site se tracent alors seulement (`20-mur.css`, `mur.js`,
+`outils/mur.py`). Un coup porté sur la plaque fissure le mur juste à côté d'elle, là où l'on voit les briques.
+Le mur se dresse devant qui vient de l'extérieur (moteur de recherche, lien, favori) ; qui vient d'une page du
+site est déjà entré, même dans un nouvel onglet, et un onglet qui l'a cassé ne le revoit plus. Rien n'est gardé
+d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Sans JavaScript, il n'existe
+pas ; si son script ne s'exécute pas, il tombe de lui-même au chargement. Au clavier, le bouton donne les coups ;
+en mouvement réduit, fissures et trous paraissent d'un coup et le mur s'efface au troisième.
 
 **L'en-tête au passage des bandes de nuit, 08/10/2026 (v6.7).** Même dessin. La barre blanche s'arrêtait au
 ras des cases (8 px d'air dessus, aucun dessous) : sur une bande de noir, ses marges blanches dépassaient en deux
@@ -373,6 +394,16 @@ cinquièmes de sa force. Seulement dans la bande de noir de `<main>`, jamais au 
 fond clair. Les cases mates posées dans la bande la recouvrent. Cachée en couleurs imposées et à
 l'impression.
 
+### Le mur à l'entrée (v6.8)
+`--mur-teintes` sept briques : `#FBFAF7` blanc cassé, `#F4F1EC` chaux (deux fois), `#EFEBE4`, `#E9E4DC`
+chaux creusée, `#ECE3DA` et `#E6DCD2` chaux rosées · `--mur-mortier` `#CDC6BC` · `--mur-fissure` = l'encre ·
+`--mur-pas` le pas d'une brique, de 72 à 128 px (8,5 % de l'écran) · `--mur-motif` le même appareil en SVG, qui
+tient le mur avant que le script peigne ses briques · `--mur-curseur` la masse (tête d'encre cernée de chaux,
+manche champagne). Rien n'y est du texte : aucun seuil de contraste n'y est requis. La plaque est une case
+`.sur-sombre` : ses textes tiennent les seuils de la nuit, son ombre est `--om-2` (elle flotte sur le mur). Ses
+quatre vis sont des carrés de `--repere` en gris foncé, posés dans la plaque : ce ne sont pas des repères
+d'angle, qui chevauchent un cadre.
+
 ### Voiles
 Les fonds translucides (panneau du chantier à la une, visionneuse, étiquettes « Avant » / « Après »,
 ombres) s'écrivent `rgba(var(--c-papier-rgb), …)`, `rgba(var(--c-encre-rgb), …)`,
@@ -630,6 +661,9 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
 | Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
 | Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |
+| Mur à l'entrée : fissure (1er et 2e coups) | trait tracé sur une toile depuis le point frappé ; éclats, poussière | 260 ms ; éclats jusqu'à 1,4 s, pesanteur |
+| Mur à l'entrée : la plaque | `transform` (tremble, penche de 2° au 2e coup) | 360 ms, sortie |
+| Mur à l'entrée : chute (3e coup) | briques sur une toile, pesanteur ; onde de 2,2 px/ms depuis le coup | 1,5 à 2,6 s |
 
 - **Au défilement, seuls les traits se tracent** (v6.3). Le 05/10/2026, les apparitions avaient été retirées : ni
   titres qui montent, ni photos qui se dévoilent, ni chiffres qui défilent — au téléphone, elles laissaient des
@@ -643,11 +677,13 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   fin : WCAG 2.2.2).
 - Aucune courbe d'entrée (ease-in). `--e-sortie` `cubic-bezier(.23,1,.32,1)` ; pour un trait qui se tire,
   `--e-trait` `cubic-bezier(.3,.3,.4,1)` — une allure presque égale, la courbe de sortie en ferait les trois
-  quarts avant qu'on le voie partir.
+  quarts avant qu'on le voie partir. Seule exception, la chute des briques et de la plaque du mur à l'entrée :
+  la pesanteur, qui accélère, n'est pas une courbe d'interface.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
   seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
-  répond plus au toucher, les traits sont tracés d'emblée, le reste ne bouge pas.
-- **Sans JavaScript** : tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
+  répond plus au toucher, les traits sont tracés d'emblée ; le mur à l'entrée se fissure et se troue d'un coup,
+  puis s'efface au troisième sans tomber ; le reste ne bouge pas.
+- **Sans JavaScript** : pas de mur à l'entrée, tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.
 - Aucune librairie d'animation ni de défilement.
 - **Plus de dessins animés** (v3.3) : les ouvriers du site, jugés bas de gamme par le client, sont retirés.

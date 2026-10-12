@@ -46,7 +46,7 @@ Après une modification du contenu, des feuilles de style ou du chrome :
 python3 outils/construire.py
 ```
 
-Le script écrit les pages, `assets/css/site.css` (les vingt et une feuilles
+Le script écrit les pages, `assets/css/site.css` (les vingt-deux feuilles
 sources concaténées et minifiées, avec une empreinte de version dans
 l'adresse), le plan du site daté et `robots.txt`.
 
@@ -84,6 +84,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `carte.py` | le plan du Léman de l'accueil : contour du lac, repères des communes, carton de Lausanne |
 | `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
+| `mur.py` | le mur à l'entrée : sa plaque, et le script de tête qui décide s'il se monte |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), glissière (suites à faire glisser au téléphone, et leur rangée de repères) |
 | `repli.py` | onglets et dépliants |
 | `page_service.py`, `service_liens.py` | corps d'une page de prestation, zone, prestations voisines |
@@ -126,6 +127,11 @@ construction.
   Morges… » sur un même modèle seraient traitées par Google comme des
   pages satellites. La zone est couverte par la fiche d'établissement,
   les réalisations et le texte.
+- **Le mur à l'entrée** ne retire rien à la page : tout le contenu est
+  dans le HTML, derrière lui, et un robot sans JavaScript ne le voit pas.
+  Google, qui exécute les scripts, peut le compter comme un interstitiel
+  (une fenêtre qui couvre le contenu à l'arrivée depuis la recherche),
+  ce qu'il pénalise un peu au téléphone. À peser avec le client.
 - **Vitesse** : une seule feuille de style, polices servies par le site
   et préchargées, scripts différés, cache long (`.htaccess`). Les
   photos partent en AVIF (WebP pour les navigateurs qui ne le lisent
@@ -154,6 +160,19 @@ Des cadres d'un pixel ; le repère carré d'angle ne marque que
 l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
 chevron devant chaque intitulé, une grotesque (Archivo) pour les
 titres et une sérif de lecture (Newsreader) pour les phrases.
+
+Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
+sur le site de l'extérieur trouve l'écran couvert d'un mur de briques passé
+à la chaux, aux teintes du site, une plaque de noir nacré vissée dessus :
+« Pour entrer sur le site, cassez le mur. » **Trois coups, pas un de
+plus** : le premier le fissure, le deuxième en fait tomber des briques (le
+site paraît dans le trou), le troisième l'abat, et le site est là. Un
+onglet qui l'a cassé ne le revoit plus ; qui vient d'une page du site est
+déjà entré ; rien n'est gardé d'une visite à l'autre (stockage de session
+seulement). Pour le remontrer : ajouter `?mur` à l'adresse
+(`…/index.html?mur`). Sans JavaScript, il n'existe pas ; si son script
+échoue, il tombe de lui-même au chargement (`outils/mur.py`,
+`20-mur.css`, `mur.js`).
 
 Ce que la v6.5 a changé (07/10/2026), au bureau seulement : dans les
 sections à marge accrochée, le titre rejoint l'intitulé dans la marge
@@ -282,8 +301,9 @@ pas bougé d'un pixel.
 
 | Fichier | Rôle |
 |---|---|
+| `mur.js` | le mur à l'entrée : briques peintes sur une toile, trois coups (fissures, trou, chute), la page derrière inerte tant qu'il tient ; au clavier, le bouton « Frapper le mur » |
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
-| `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) |
+| `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) — derrière le mur de l'entrée, seulement quand il est tombé |
 | `onglets.js` | jeux d'onglets des pages de prestation ; marque qui glisse sous l'onglet ouvert et sous le filtre choisi ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |

@@ -10,6 +10,7 @@ from donnees_site import (COURRIEL, IMAGE_PARTAGE, IMAGE_PARTAGE_ALT,
                           MARQUE, NAVIGATION, SITE, TELEPHONE, TELEPHONE_BRUT)
 from gabarit_liens import accueil, vers_devis
 from gabarit_pied import pied  # noqa: F401 — réexporté pour construire.py
+from mur import SCRIPT_TETE as SCRIPT_MUR, mur
 
 # La classe « js » est posée avant le premier rendu, pour que les blocs
 # à révéler soient masqués d'emblée, sans clignotement. Si motion.js ne
@@ -72,12 +73,13 @@ def tete(page, base, feuille, schemas):
 <link rel="preload" href="{base}assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}{feuille}">
 {SCRIPT_JS}
+{SCRIPT_MUR}
 
 {jsonld}
 </head>
 
 <body>
-<a class="saut" href="#contenu">Aller au contenu principal</a>
+{mur(base)}<a class="saut" href="#contenu">Aller au contenu principal</a>
 """
 
 

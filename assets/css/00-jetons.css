@@ -160,6 +160,28 @@
   --trame-point:rgba(var(--c-craie-rgb),.14);
   --trame-onde:var(--c-rouge-clair);
   --trame-masque:linear-gradient(100deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,1) 55%);
+
+  /* ---------- Le mur à l'entrée ----------
+     Un mur de briques passé à la chaux, à casser pour entrer
+     (20-mur.css, mur.js). Les briques prennent les teintes du site :
+     le blanc cassé, la chaux, la chaux creusée, et deux chaux rosées
+     où la brique transparaît sous le badigeon — le vieux rose du
+     nacré. Le mortier est un gris chaud, plus clair que le gris
+     d'ombre du logo ; les fissures sont tracées à l'encre. Le motif
+     est celui que mur.js dessine : il tient le mur tant que le script
+     n'a pas peint ses briques. Rien n'y est du texte : aucun seuil
+     de contraste n'y est requis. */
+  --mur-teintes:#FBFAF7 #F4F1EC #F4F1EC #EFEBE4 #E9E4DC #ECE3DA #E6DCD2;
+  --mur-mortier:#CDC6BC;
+  --mur-fissure:var(--c-noir);
+  /* Une brique et son joint : 94 × 30 et 6 de mortier, une brique de
+     terre cuite (22 × 6,5 cm, joint de 1,5 cm, à l'échelle près). */
+  --mur-pas:clamp(72px,8.5vw,128px);
+  --mur-motif:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 72' preserveAspectRatio='none'%3E%3Cpath d='M0 0h100v72H0z' fill='%23CDC6BC'/%3E%3Cpath d='M0 0h94v30H0zM0 36h44v30H0zM50 36h50v30H50z' fill='%23F4F1EC'/%3E%3C/svg%3E");
+  /* Le curseur sur le mur : une masse, tête à l'encre cernée de chaux,
+     manche couleur bois (le champagne du nacré). Le point qui frappe
+     est le bout de la tête, en bas à gauche. */
+  --mur-curseur:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='rotate(-45 16 16)' stroke='%23F4F1EC' stroke-width='1.5'%3E%3Cpath d='M14.25 12.5h3.5v17h-3.5z' fill='%23B9A58C'/%3E%3Cpath d='M6 4.5h20v8H6z' fill='%231B1B1B'/%3E%3C/g%3E%3C/svg%3E") 3 16;
 }
 
 /* ============================================================

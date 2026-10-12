@@ -22,18 +22,20 @@ RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Les feuilles sources, dans l'ordre de leur numéro. On les édite une à
 # une ; les pages, elles, ne chargent qu'une feuille : site.css, leur
 # concaténation minifiée, écrite par construire.py. Une requête au lieu
-# de vingt et une, et aucun commentaire envoyé au visiteur.
+# de vingt-deux, et aucun commentaire envoyé au visiteur.
 FEUILLES = [
     "00-jetons.css", "00-polices.css", "01-socle.css", "02-boutons.css",
     "03-fiches.css", "04-formulaires.css", "05-navigation.css",
     "06-haut.css", "07-chantiers.css", "08-bas.css", "09-trace.css",
     "10-comparateur.css", "11-lumineuse.css", "12-trame.css", "13-carte.css",
     "14-document.css", "15-pages.css", "16-composants.css",
-    "17-repli.css", "18-confiance.css", "19-impression.css",
+    "17-repli.css", "18-confiance.css", "19-impression.css", "20-mur.css",
 ]
 FEUILLE_SITE = "assets/css/site.css"
 
-BASE_JS = ["nav.js", "motion.js", "onglets.js", "trame.js"]
+# mur.js en tête : il monte le mur à l'entrée avant que les autres
+# modules ne s'exécutent.
+BASE_JS = ["mur.js", "nav.js", "motion.js", "onglets.js", "trame.js"]
 
 
 def ecrire(chemin, contenu):

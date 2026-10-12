@@ -81,12 +81,21 @@
   }
   /* Un bloc se trace quand il a passé le bas de l'écran d'un huitième :
      on le voit se faire, pas seulement fini. */
-  var observateur = new IntersectionObserver(function (entrees) {
-    entrees.forEach(function (entree) {
-      if (!entree.isIntersecting) { return; }
-      observateur.unobserve(entree.target);
-      tracer(entree.target);
-    });
-  }, { rootMargin: "0px 0px -12% 0px" });
-  Array.prototype.forEach.call(blocs, function (bloc) { observateur.observe(bloc); });
+  function observer() {
+    var observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (entree) {
+        if (!entree.isIntersecting) { return; }
+        observateur.unobserve(entree.target);
+        tracer(entree.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    Array.prototype.forEach.call(blocs, function (bloc) { observateur.observe(bloc); });
+  }
+  /* Derrière le mur de l'entrée (mur.js), rien ne se trace : le plan se
+     dessine quand le mur est tombé, sous les yeux du visiteur. */
+  if (document.documentElement.classList.contains("mur-ferme")) {
+    document.addEventListener("mur:ouvert", observer, { once: true });
+  } else {
+    observer();
+  }
 }());
