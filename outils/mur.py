@@ -1,8 +1,9 @@
 """Le mur à l'entrée : un mur de briques à la chaux, à casser pour entrer.
 
 Le visiteur qui arrive sur le site trouve un mur. Trois coups le
-cassent (mur.js, 20-mur.css) : le premier le fissure, le deuxième fait
-tomber des briques, le troisième l'abat, et le site apparaît derrière.
+cassent (mur.js, 20-mur.css) : le premier fait tomber une brique, le
+deuxième celles qui l'entourent, le troisième l'abat, et le site apparaît
+derrière.
 
 Le mur se dresse devant qui arrive de l'extérieur : d'un moteur de
 recherche, d'un lien, d'un favori. Qui vient d'une page du site est

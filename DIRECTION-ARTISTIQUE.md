@@ -17,17 +17,17 @@ chaud, un grain, une arête éclairée, parfois un coin écorné. Une **plaque d
 carrée à chaque angle : le logo négatif, « Pour entrer sur le site, cassez le mur. », la consigne « Trois coups
 suffisent : frappez où vous voulez. », trois carrés cernés que le rouge du toit remplit à chaque coup, et le
 bouton « Frapper le mur » (une masse dessinée au bout, en masque comme la flèche). Sur le mur, le curseur est une
-masse. **Trois coups** : le premier fissure le mur — les fissures se tracent comme les traits du plan, d'un
-seul trait depuis le point frappé, à l'encre avec une arête de chaux —, la plaque tremble ; le deuxième fait
-tomber les briques autour du coup, et le site paraît dans le trou ; la vis d'en haut à droite saute, la plaque
-penche sur celle de gauche ; le troisième abat le mur : une onde part du point frappé, chaque brique tombe quand
+masse. **Trois coups** : le premier fait tomber la brique frappée, dans un jet d'éclats et de poussière, et
+la plaque tremble ; le deuxième fait tomber les briques autour du coup, et le site paraît dans le trou ; la vis
+d'en haut à droite saute, la plaque penche sur celle de gauche ; le troisième abat le mur : une onde part du point frappé, chaque brique tombe quand
 elle l'atteint, la plaque avec elles, et les traits du site se tracent alors seulement (`20-mur.css`, `mur.js`,
-`outils/mur.py`). Un coup porté sur la plaque fissure le mur juste à côté d'elle, là où l'on voit les briques.
+`outils/mur.py`). Un coup porté sur la plaque fait tomber les briques juste à côté d'elle, là où l'on voit le
+mur. Aucune fissure : essayées le même jour, retirées à la demande de l'agence.
 Le mur se dresse devant qui vient de l'extérieur (moteur de recherche, lien, favori) ; qui vient d'une page du
 site est déjà entré, même dans un nouvel onglet, et un onglet qui l'a cassé ne le revoit plus. Rien n'est gardé
 d'une visite à l'autre. `?mur` à la fin d'une adresse le remonte, pour le montrer. Sans JavaScript, il n'existe
 pas ; si son script ne s'exécute pas, il tombe de lui-même au chargement. Au clavier, le bouton donne les coups ;
-en mouvement réduit, fissures et trous paraissent d'un coup et le mur s'efface au troisième.
+en mouvement réduit, les trous paraissent d'un coup et le mur s'efface au troisième.
 
 **L'en-tête au passage des bandes de nuit, 08/10/2026 (v6.7).** Même dessin. La barre blanche s'arrêtait au
 ras des cases (8 px d'air dessus, aucun dessous) : sur une bande de noir, ses marges blanches dépassaient en deux
@@ -396,7 +396,7 @@ l'impression.
 
 ### Le mur à l'entrée (v6.8)
 `--mur-teintes` sept briques : `#FBFAF7` blanc cassé, `#F4F1EC` chaux (deux fois), `#EFEBE4`, `#E9E4DC`
-chaux creusée, `#ECE3DA` et `#E6DCD2` chaux rosées · `--mur-mortier` `#CDC6BC` · `--mur-fissure` = l'encre ·
+chaux creusée, `#ECE3DA` et `#E6DCD2` chaux rosées · `--mur-mortier` `#CDC6BC` ·
 `--mur-pas` le pas d'une brique, de 72 à 128 px (8,5 % de l'écran) · `--mur-motif` le même appareil en SVG, qui
 tient le mur avant que le script peigne ses briques · `--mur-curseur` la masse (tête d'encre cernée de chaux,
 manche champagne). Rien n'y est du texte : aucun seuil de contraste n'y est requis. La plaque est une case
@@ -661,7 +661,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
 | Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
 | Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |
-| Mur à l'entrée : fissure (1er et 2e coups) | trait tracé sur une toile depuis le point frappé ; éclats, poussière | 260 ms ; éclats jusqu'à 1,4 s, pesanteur |
+| Mur à l'entrée : 1er et 2e coups | une brique, puis celles qui l'entourent, tombent d'une toile ; éclats, poussière | jusqu'à 1,4 s, pesanteur |
 | Mur à l'entrée : la plaque | `transform` (tremble, penche de 2° au 2e coup) | 360 ms, sortie |
 | Mur à l'entrée : chute (3e coup) | briques sur une toile, pesanteur ; onde de 2,2 px/ms depuis le coup | 1,5 à 2,6 s |
 
@@ -681,7 +681,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
   la pesanteur, qui accélère, n'est pas une courbe d'interface.
 - **Mouvement réduit** : plus aucun déplacement ; l'image d'ouverture reste cadrée, la poignée ne se déplace pas
   seule, les boutons « Avant » / « Après » la placent d'un coup, la trame montre une onde figée à mi-course et ne
-  répond plus au toucher, les traits sont tracés d'emblée ; le mur à l'entrée se fissure et se troue d'un coup,
+  répond plus au toucher, les traits sont tracés d'emblée ; le mur à l'entrée se troue d'un coup,
   puis s'efface au troisième sans tomber ; le reste ne bouge pas.
 - **Sans JavaScript** : pas de mur à l'entrée, tout le contenu est visible, les onglets affichent tous leurs panneaux, l'image reste
   cadrée, le comparateur est coupé à 50 % et les boutons « Avant » / « Après », sans effet, n'apparaissent pas.

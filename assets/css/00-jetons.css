@@ -167,13 +167,11 @@
      le blanc cassé, la chaux, la chaux creusée, et deux chaux rosées
      où la brique transparaît sous le badigeon — le vieux rose du
      nacré. Le mortier est un gris chaud, plus clair que le gris
-     d'ombre du logo ; les fissures sont tracées à l'encre. Le motif
-     est celui que mur.js dessine : il tient le mur tant que le script
+     d'ombre du logo. Le motif est celui que mur.js dessine : il tient le mur tant que le script
      n'a pas peint ses briques. Rien n'y est du texte : aucun seuil
      de contraste n'y est requis. */
   --mur-teintes:#FBFAF7 #F4F1EC #F4F1EC #EFEBE4 #E9E4DC #ECE3DA #E6DCD2;
   --mur-mortier:#CDC6BC;
-  --mur-fissure:var(--c-noir);
   /* Une brique et son joint : 94 × 30 et 6 de mortier, une brique de
      terre cuite (22 × 6,5 cm, joint de 1,5 cm, à l'échelle près). */
   --mur-pas:clamp(72px,8.5vw,128px);

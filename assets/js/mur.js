@@ -2,21 +2,22 @@
    DSG RÉNOVATION — LE MUR À L'ENTRÉE
    Le visiteur qui arrive trouve un mur de briques passé à la chaux,
    une plaque vissée dessus : « Pour entrer sur le site, cassez le
-   mur. » Trois coups, pas un de plus : le premier le fissure, le
-   deuxième en fait tomber des briques, le troisième l'abat — une onde
-   part du point frappé, les briques tombent, et le site est derrière.
+   mur. » Trois coups, pas un de plus : le premier fait tomber la
+   brique frappée, le deuxième celles qui l'entourent — le site paraît
+   dans le trou —, le troisième abat le mur : une onde part du point
+   frappé, les briques tombent, et le site est derrière. Pas de
+   fissure : des briques qui tombent, des éclats, de la poussière.
 
-   Les fissures se tracent comme les traits du plan (09-trace.css) :
-   d'un seul trait, depuis le point frappé. Un coup porté sur la plaque
-   fissure le mur juste à côté d'elle, là où l'on voit les briques ;
-   la plaque, elle, tremble, et penche au deuxième coup.
+   Un coup porté sur la plaque fait tomber les briques juste à côté
+   d'elle, là où l'on voit le mur ; la plaque, elle, tremble, et penche
+   au deuxième coup.
 
    Le mur se dresse devant qui arrive de l'extérieur du site, une fois
-   par onglet (outils/mur.py décide, avant le premier rendu). Au clavier, le bouton « Frapper le mur » donne
-   les coups ; la consigne annonce ce qui reste. Mouvement réduit :
-   les fissures et les trous paraissent d'un coup, et le mur s'efface
-   au troisième au lieu de tomber. Sans canevas, les trois coups
-   restent, le mur s'efface au dernier.
+   par onglet (outils/mur.py décide, avant le premier rendu). Au
+   clavier, le bouton « Frapper le mur » donne les coups ; la consigne
+   annonce ce qui reste. Mouvement réduit : les trous paraissent d'un
+   coup, et le mur s'efface au troisième au lieu de tomber. Sans
+   canevas, les trois coups restent, le mur s'efface au dernier.
    ============================================================ */
 (function () {
   "use strict";
@@ -53,7 +54,7 @@
      Les espaces insécables que outils/typographie.py pose dans les pages. */
   var CONSIGNES = [
     "Trois coups suffisent : frappez où vous voulez.",
-    "Ça se fissure. Encore deux coups.",
+    "Une brique tombe. Encore deux coups.",
     "Ça tient encore. Un dernier coup !",
     "Le mur tombe. Bienvenue chez DSG Rénovation."
   ];
@@ -65,8 +66,6 @@
   var PESANTEUR = 3200;
   /* L'onde qui abat le mur : px parcourus par milliseconde. */
   var ONDE = 2.2;
-  /* Une fissure se trace en 260 ms, quelle que soit sa longueur. */
-  var TRACE = 260;
   /* Au-delà, le mur se retire même s'il reste une brique en vue. */
   var CHUTE_MAX = 2600;
   var GRAINE = 20261012;
@@ -78,7 +77,6 @@
   var style = window.getComputedStyle(mur);
   var teintes = style.getPropertyValue("--mur-teintes").trim().split(/\s+/);
   var mortier = style.getPropertyValue("--mur-mortier").trim() || "#CDC6BC";
-  var encre = style.getPropertyValue("--mur-fissure").trim() || "#1B1B1B";
   var rgbOmbre = style.getPropertyValue("--c-encre-rgb").trim() || "27,27,27";
   var rgbLumiere = style.getPropertyValue("--c-blanc-rgb").trim() || "255,255,255";
   if (!teintes[0]) { teintes = ["#F4F1EC"]; }
@@ -90,7 +88,7 @@
 
   /**
    * Hasard reproductible (mulberry32) : un coup rejoué après un
-   * redimensionnement redessine les mêmes fissures.
+   * redimensionnement fait tomber les mêmes briques.
    * @param {number} graine
    * @returns {function(): number}
    */
@@ -114,10 +112,10 @@
     inertes.push(element);
   });
 
-  /* Deux toiles : le mur peint, qui ne change qu'à un coup (les
-     fissures s'y tracent par petits bouts), et par-dessus, sous la
-     plaque, le calque de ce qui bouge — éclats, poussière, briques qui
-     tombent —, seul repeint à chaque image. */
+  /* Deux toiles : le mur peint, qui ne change qu'à un coup (une brique
+     en part, un trou reste), et par-dessus, sous la plaque, le calque
+     de ce qui bouge — éclats, poussière, briques qui tombent —, seul
+     repeint à chaque image. */
   var mctx = toile.getContext ? toile.getContext("2d") : null;
   var calque = document.createElement("canvas");
   calque.className = "mur__briques";
@@ -134,8 +132,6 @@
   var ouvert = false;
   /** Les coups portés, en fractions du mur, pour les rejouer. */
   var impacts = [];
-  /** Fissures en train de se tracer. */
-  var salves = [];
   /** Briques qui tombent. */
   var corps = [];
   /** Éclats et poussière. */
@@ -238,133 +234,10 @@
     }
     briques.forEach(function (b) { peindreBrique(mctx, b); });
 
-    salves = [];
     corps = [];
     impacts.forEach(function (impact) { porter(impact, true); });
     mur.classList.add("est-peint");
     peindre(window.performance.now());
-  }
-
-  /* ---------- Fissures ---------- */
-
-  /**
-   * Une branche de fissure : une ligne brisée qui dévie un peu à chaque
-   * pas, et lâche parfois une branche plus fine.
-   * @param {Array} traits
-   * @param {number} x
-   * @param {number} y
-   * @param {number} angle
-   * @param {number} longueur
-   * @param {number} epaisseur
-   * @param {number} decalage  distance au point frappé où elle part
-   * @param {function(): number} rnd
-   * @param {number} profondeur
-   */
-  function branche(traits, x, y, angle, longueur, epaisseur, decalage, rnd, profondeur) {
-    var points = [x, y], parcouru = 0;
-    while (parcouru < longueur) {
-      angle += (rnd() - 0.5) * 0.8;
-      var pas = L * 0.16 * (0.6 + rnd() * 0.8);
-      x += Math.cos(angle) * pas;
-      y += Math.sin(angle) * pas;
-      parcouru += pas;
-      points.push(x, y);
-      if (profondeur < 1 && rnd() < 0.2) {
-        branche(traits, x, y, angle + (rnd() < 0.5 ? -1 : 1) * (0.5 + rnd() * 0.5),
-          (longueur - parcouru) * 0.6 + L * 0.2, 1, decalage + parcouru, rnd, profondeur + 1);
-      }
-    }
-    traits.push({ points: points, epaisseur: epaisseur, decalage: decalage, fin: decalage + parcouru });
-  }
-
-  /**
-   * Les fissures d'un coup : des branches en étoile, plus longues et plus
-   * nombreuses au deuxième.
-   * @param {number} x0
-   * @param {number} y0
-   * @param {number} force  0 au premier coup, 1 au deuxième
-   * @param {function(): number} rnd
-   */
-  function fissures(x0, y0, force, rnd) {
-    var traits = [];
-    var n = 5 + Math.floor(rnd() * 3) + force * 2;
-    var portee = L * (1.4 + force * 1.1);
-    var depart = rnd() * Math.PI * 2;
-    for (var i = 0; i < n; i++) {
-      var angle = depart + (i / n) * Math.PI * 2 + (rnd() - 0.5) * 0.7;
-      branche(traits, x0, y0, angle, portee * (0.55 + rnd() * 0.65), 1.5, 0, rnd, 0);
-    }
-    return traits;
-  }
-
-  /**
-   * Le bout de fissure compris entre les distances `de` et `a` du point
-   * frappé : en creux, une arête de chaux dessous, l'encre dessus. Elle
-   * ne court que sur les briques encore en place (source-atop) : jamais
-   * dans un trou.
-   * @param {CanvasRenderingContext2D} c
-   * @param {{points:Array<number>,epaisseur:number,decalage:number}} trait
-   * @param {number} de
-   * @param {number} a
-   */
-  function tracer(c, trait, de, a) {
-    /* Un demi-pixel de recouvrement : aucun jour entre deux bouts. */
-    var debut = Math.max(0, de - trait.decalage - 0.5), fin = a - trait.decalage;
-    if (fin <= debut) { return; }
-    var p = trait.points, parcouru = 0, ouvert = false;
-    c.beginPath();
-    for (var i = 2; i < p.length && parcouru < fin; i += 2) {
-      var dx = p[i] - p[i - 2], dy = p[i + 1] - p[i - 1], d = Math.sqrt(dx * dx + dy * dy);
-      if (parcouru + d > debut) {
-        if (!ouvert) {
-          var k0 = Math.max(0, debut - parcouru) / d;
-          c.moveTo(p[i - 2] + dx * k0, p[i - 1] + dy * k0);
-          ouvert = true;
-        }
-        var k1 = Math.min(1, (fin - parcouru) / d);
-        c.lineTo(p[i - 2] + dx * k1, p[i - 1] + dy * k1);
-      }
-      parcouru += d;
-    }
-    if (!ouvert) { return; }
-    c.save();
-    c.globalCompositeOperation = "source-atop";
-    c.lineJoin = "miter";
-    c.lineCap = "butt";
-    c.lineWidth = trait.epaisseur;
-    c.translate(0.8, 0.9);
-    c.strokeStyle = lumiere(0.85);
-    c.stroke();
-    c.translate(-0.8, -0.9);
-    c.strokeStyle = encre;
-    c.stroke();
-    c.restore();
-  }
-
-  /**
-   * Le creux du coup : une écaille de badigeon arrachée, plus large au
-   * deuxième coup.
-   * @param {CanvasRenderingContext2D} c
-   * @param {number} x
-   * @param {number} y
-   * @param {number} force
-   * @param {function(): number} rnd
-   */
-  function cratere(c, x, y, force, rnd) {
-    var r = H * (0.34 + force * 0.14);
-    c.save();
-    c.globalCompositeOperation = "source-atop";
-    [[1, 0.13], [0.55, 0.22]].forEach(function (couche) {
-      c.fillStyle = ombre(couche[1]);
-      c.beginPath();
-      for (var k = 0; k < 9; k++) {
-        var a = (k / 9) * Math.PI * 2, rr = r * couche[0] * (0.6 + rnd() * 0.6);
-        c[k ? "lineTo" : "moveTo"](x + Math.cos(a) * rr * 1.25, y + Math.sin(a) * rr);
-      }
-      c.closePath();
-      c.fill();
-    });
-    c.restore();
   }
 
   /* ---------- Les coups ---------- */
@@ -383,8 +256,7 @@
   }
 
   /**
-   * Une brique repeinte seule, avec les coups qu'elle a reçus : la même
-   * graine, les mêmes creux, les mêmes fissures. Rien n'est relu sur le
+   * Une brique repeinte seule, de la même graine. Rien n'est relu sur le
    * mur peint (une relecture de la toile coûte, au téléphone, plus que
    * de tout repeindre).
    * @param {{x:number,y:number,teinte:string,graine:number}} b
@@ -401,11 +273,6 @@
     var c = piece.getContext("2d");
     c.setTransform(dpr, 0, 0, dpr, -sx, -sy);
     peindreBrique(c, b);
-    impacts.forEach(function (impact) {
-      var rnd = hasard(impact.graine), x = impact.x * larg, y = impact.y * haut;
-      cratere(c, x, y, impact.coup - 1, rnd);
-      fissures(x, y, impact.coup - 1, rnd).forEach(function (t) { tracer(c, t, 0, Infinity); });
-    });
     return piece;
   }
 
@@ -474,8 +341,10 @@
   }
 
   /**
-   * Un coup sur le mur : rejoué d'un coup (redimensionnement, mouvement
-   * réduit) ou animé.
+   * Un coup sur le mur : des briques s'en détachent — au premier, la
+   * brique frappée (ou, sur un trou, la plus proche) ; au deuxième, toutes
+   * celles qui l'entourent, sur près d'une brique. Rejoué d'un coup
+   * (redimensionnement, mouvement réduit) ou animé.
    * @param {{x:number,y:number,coup:number,graine:number}} impact
    * @param {boolean} aussitot
    */
@@ -484,45 +353,30 @@
     var x = impact.x * larg, y = impact.y * haut;
     var force = impact.coup - 1;
     var rnd = hasard(impact.graine);
-    var touchee = briqueSous(x, y);
     var maintenant = window.performance.now();
+    var rayon = force ? L * 0.8 * (0.8 + rnd() * 0.4) : 0;
 
-    if (!aussitot) { achever(); }
-    cratere(mctx, x, y, force, rnd);
-    var traits = fissures(x, y, force, rnd);
-
-    /* Au deuxième coup, les briques autour du point frappé tombent. */
-    if (impact.coup === 2) {
-      briques.forEach(function (b) {
-        if (b.tombee) { return; }
-        var dx = b.x + L / 2 - x, dy = b.y + H / 2 - y;
-        var d = Math.sqrt(dx * dx + dy * dy);
-        if (b !== touchee && d > L * 0.8 * (0.8 + rnd() * 0.4)) { return; }
-        if (aussitot) {
-          b.tombee = true;
-          mctx.clearRect(b.x, b.y, L, H);
-          return;
-        }
-        detacher(b, false, dx / (d || 1) * (60 + Math.random() * 140),
-          -60 - Math.random() * 160, (Math.random() - 0.5) * 7, Math.random() * 40, maintenant);
-      });
-    }
-
-    var fin = traits.reduce(function (m, t) { return Math.max(m, t.fin); }, 0);
-    if (aussitot) {
-      traits.forEach(function (t) { tracer(mctx, t, 0, Infinity); });
-    } else {
-      salves.push({ traits: traits, debut: maintenant, vitesse: fin / TRACE, fin: fin, trace: 0 });
-      projeter(x, y, force, touchee ? touchee.teinte : teintes[0]);
-    }
-  }
-
-  /** Les fissures en cours, tracées jusqu'au bout sur le mur peint. */
-  function achever() {
-    salves.forEach(function (salve) {
-      salve.traits.forEach(function (t) { tracer(mctx, t, salve.trace, Infinity); });
+    var proches = [];
+    briques.forEach(function (b) {
+      if (b.tombee) { return; }
+      var dx = b.x + L / 2 - x, dy = b.y + H / 2 - y;
+      proches.push({ b: b, dx: dx, dy: dy, d: Math.sqrt(dx * dx + dy * dy) });
     });
-    salves = [];
+    proches.sort(function (p, q) { return p.d - q.d; });
+    /* La plus proche tombe toujours ; au deuxième coup, trois au moins. */
+    var tombent = proches.filter(function (p, rang) { return rang < 1 + force * 2 || p.d <= rayon; });
+    var teinte = tombent.length ? tombent[0].b.teinte : teintes[0];
+
+    tombent.forEach(function (p) {
+      if (aussitot) {
+        p.b.tombee = true;
+        mctx.clearRect(p.b.x, p.b.y, L, H);
+        return;
+      }
+      detacher(p.b, false, p.dx / (p.d || 1) * (60 + Math.random() * 140),
+        -60 - Math.random() * 160, (Math.random() - 0.5) * 7, Math.random() * 40, maintenant);
+    });
+    if (!aussitot) { projeter(x, y, force, teinte); }
   }
 
   /**
@@ -542,7 +396,7 @@
     if (plaque.getAnimations) {
       plaque.getAnimations().forEach(function (animation) { animation.cancel(); });
     }
-    achever();
+    var frappee = briqueSous(x0, y0);
     toile.style.visibility = "hidden";
     briques.forEach(function (b) {
       if (b.tombee) { return; }
@@ -562,7 +416,7 @@
       depart: maintenant + Math.sqrt(pdx * pdx + pdy * pdy) / ONDE * 0.6 + 80
     };
     debutChute = maintenant;
-    projeter(x0, y0, 2, (briqueSous(x0, y0) || { teinte: teintes[0] }).teinte);
+    projeter(x0, y0, 2, frappee ? frappee.teinte : teintes[0]);
     relancer();
   }
 
@@ -586,8 +440,8 @@
   }
 
   /**
-   * Un coup porté sur la plaque fissure le mur à côté d'elle : on y
-   * voit les briques.
+   * Un coup porté sur la plaque fait tomber les briques à côté d'elle :
+   * on y voit le mur.
    * @param {number} x
    * @param {number} y
    * @returns {Array<number>}
@@ -670,9 +524,9 @@
   }
 
   /**
-   * Une image : les fissures s'allongent sur le mur peint ; le calque,
-   * effacé, reçoit les briques qui tombent, les éclats et la poussière ;
-   * la plaque tombe. Renvoie vrai tant que quelque chose bouge.
+   * Une image : le calque, effacé, reçoit les briques qui tombent, les
+   * éclats et la poussière ; la plaque tombe. Renvoie vrai tant que
+   * quelque chose bouge.
    * @param {number} t
    * @param {number} [dt]
    * @returns {boolean}
@@ -687,17 +541,6 @@
       calqueSali = false;
     }
     ctx.setTransform(dprCalque, 0, 0, dprCalque, 0, 0);
-
-    /* Les fissures s'allongent sur le mur peint, du bout tracé à
-       l'image précédente jusqu'où elles en sont. */
-    salves = salves.filter(function (salve) {
-      var s = Math.min(salve.fin, (t - salve.debut) * salve.vitesse);
-      actif = true;
-      if (s <= salve.trace) { return true; }
-      salve.traits.forEach(function (trait) { tracer(mctx, trait, salve.trace, s); });
-      salve.trace = s;
-      return s < salve.fin;
-    });
 
     corps = corps.filter(function (c) {
       if (t >= c.depart) {

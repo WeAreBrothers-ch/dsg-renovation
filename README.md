@@ -165,8 +165,9 @@ Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
 sur le site de l'extérieur trouve l'écran couvert d'un mur de briques passé
 à la chaux, aux teintes du site, une plaque de noir nacré vissée dessus :
 « Pour entrer sur le site, cassez le mur. » **Trois coups, pas un de
-plus** : le premier le fissure, le deuxième en fait tomber des briques (le
-site paraît dans le trou), le troisième l'abat, et le site est là. Un
+plus** : le premier fait tomber la brique frappée, le deuxième celles qui
+l'entourent (le site paraît dans le trou), le troisième l'abat, et le site
+est là. Un
 onglet qui l'a cassé ne le revoit plus ; qui vient d'une page du site est
 déjà entré ; rien n'est gardé d'une visite à l'autre (stockage de session
 seulement). Pour le remontrer : ajouter `?mur` à l'adresse
@@ -301,7 +302,7 @@ pas bougé d'un pixel.
 
 | Fichier | Rôle |
 |---|---|
-| `mur.js` | le mur à l'entrée : briques peintes sur une toile, trois coups (fissures, trou, chute), la page derrière inerte tant qu'il tient ; au clavier, le bouton « Frapper le mur » |
+| `mur.js` | le mur à l'entrée : briques peintes sur une toile, trois coups (une brique, un trou, la chute), la page derrière inerte tant qu'il tient ; au clavier, le bouton « Frapper le mur » |
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
 | `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) — derrière le mur de l'entrée, seulement quand il est tombé |
 | `onglets.js` | jeux d'onglets des pages de prestation ; marque qui glisse sous l'onglet ouvert et sous le filtre choisi ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
