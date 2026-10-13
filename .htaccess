@@ -17,6 +17,11 @@ AddType application/manifest+json .webmanifest
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # 0. La validation des certificats (Let's Encrypt) interroge
+  #    http://…/.well-known/acme-challenge/ : elle passe telle quelle,
+  #    sans redirection vers HTTPS ni vers www.
+  RewriteRule ^\.well-known/acme-challenge/ - [L]
+
   # 1. HTTPS partout. Infomaniak peut chiffrer en amont du serveur : on
   #    ne redirige que si AUCUN des deux signaux n'indique HTTPS, ce qui
   #    exclut toute boucle. (Le Manager propose aussi « Forcer HTTPS ».)
