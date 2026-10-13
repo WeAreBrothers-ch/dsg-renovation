@@ -9,7 +9,7 @@
      du JSON : le statut HTTP dit si elle est partie, et un refus
      porte un message par champ ;
    - sans JavaScript, le formulaire est soumis normalement : le
-     visiteur est renvoyé vers merci.html, ou vers le formulaire
+     visiteur est renvoyé vers la page merci, ou vers le formulaire
      si la demande n'a pas pu partir.
 
    Rien n'est conservé : les photos ne quittent pas le dossier
@@ -46,9 +46,10 @@ const EXPEDITEUR = 'Site DSG Rénovation <contact@dsg-renov.ch>';
    Fichier absent : envoi par mail(). */
 const REGLAGES_SMTP = __DIR__ . '/envoi-reglages.php';
 
-/* Pages où renvoyer le visiteur qui envoie sans JavaScript. */
-const PAGE_MERCI = 'merci.html';
-const PAGE_ERREUR = 'devis.html?erreur=1#formulaire';
+/* Pages où renvoyer le visiteur qui envoie sans JavaScript, à leur
+   adresse publique (sans « .html », voir .htaccess). */
+const PAGE_MERCI = 'merci';
+const PAGE_ERREUR = 'devis?erreur=1#formulaire';
 
 /* Fuseau de l'heure de réception inscrite dans le courriel. */
 const FUSEAU = 'Europe/Zurich';

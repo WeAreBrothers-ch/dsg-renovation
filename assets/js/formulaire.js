@@ -4,7 +4,7 @@
 
    La demande part vers envoi.php (attribut data-envoi), sur
    l'hébergement du site : le script la transmet par e-mail, photos
-   jointes. Réussie, elle mène à merci.html. Si data-envoi est vide,
+   jointes. Réussie, elle mène à la page merci. Si data-envoi est vide,
    repli : le logiciel de messagerie du visiteur s'ouvre avec la
    demande préremplie. Sans JavaScript, l'attribut action du
    formulaire prend le relais.
@@ -18,7 +18,7 @@
   var retour = document.getElementById("formulaireRetour");
   var bouton = formulaire.querySelector('button[type="submit"]');
   var POINT_ENVOI = (formulaire.getAttribute("data-envoi") || "").trim();
-  var PAGE_MERCI = "merci.html";
+  var PAGE_MERCI = "merci";
   var DESTINATAIRE = "contact@dsg-renov.ch";
   var TELEPHONE = "+41 21 847 02 02";
   var MOTIF_EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
