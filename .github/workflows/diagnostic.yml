@@ -1,0 +1,31 @@
+# TEMPORAIRE : le sitemap tel que Googlebot le lit (lecture seule).
+# Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Sitemap vu par Googlebot
+        run: |
+          ua="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+          for u in https://www.dsg-renov.ch/sitemap.xml https://dsg-renov.ch/sitemap.xml http://www.dsg-renov.ch/sitemap.xml https://www.dsg-renov.ch/robots.txt; do
+            echo "=== $u"
+            curl -sS -A "$ua" -o /tmp/s -D /tmp/h --max-time 20 -w 'code %{http_code}, %{size_download} octets, redirection: %{redirect_url}\n' "$u"
+            grep -iE '^(content-type|content-encoding|x-robots-tag|cache-control|location):' /tmp/h || true
+          done
+          echo "=== validité XML"
+          curl -sS -A "$ua" https://www.dsg-renov.ch/sitemap.xml -o sitemap.xml
+          python3 -c "import xml.etree.ElementTree as E; r=E.parse('sitemap.xml').getroot(); print('XML valide,', len(r), 'adresses, espace de noms', r.tag.split('}')[0][1:])"
+          head -c 300 sitemap.xml; echo
+          echo "=== robots.txt"; curl -sS -A "$ua" https://www.dsg-renov.ch/robots.txt
+          echo "=== chaque adresse du sitemap"
+          grep -o '<loc>[^<]*' sitemap.xml | sed 's/<loc>//' | while read u; do printf '%s %s\n' "$(curl -sS -A "$ua" -o /dev/null --max-time 20 -w '%{http_code}' "$u")" "$u"; done
