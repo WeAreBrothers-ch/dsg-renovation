@@ -1,0 +1,138 @@
+# Mise en ligne de www.dsg-renov.ch chez Infomaniak, à chaque push sur main.
+#
+# Le dépôt est le site, déjà assemblé par outils/construire.py : il part
+# tel quel dans le dossier du site sur l'hébergement, par rsync sur SSH.
+# Seuls les fichiers modifiés voyagent, un fichier retiré du dépôt est
+# retiré du serveur, et les nouveaux fichiers ne prennent leur place qu'à
+# la fin de l'envoi. Les fichiers de fabrication (outils/, .github/, les
+# documents .md) ne partent pas.
+#
+# Une seule fois : trois secrets du dépôt (Settings → Secrets and
+# variables → Actions → New repository secret), relevés dans le Manager
+# Infomaniak, rubrique FTP / SSH de l'hébergement :
+#   INFOMANIAK_HOTE          le serveur, de la forme xxxx.ftp.infomaniak.com
+#   INFOMANIAK_UTILISATEUR   un compte « FTP + SSH »
+#   INFOMANIAK_MOT_DE_PASSE  son mot de passe
+# Tant qu'ils manquent, le workflow le signale et s'arrête sans rien
+# envoyer ni échouer.
+#
+# L'hébergement porte d'autres sites : l'envoi n'écrit et n'efface que
+# dans DOSSIER, et ne part pas si ce dossier n'existe pas. Les fichiers
+# qu'Infomaniak pose lui-même dans le dossier (.ftpquota, .user.ini,
+# .well-known/ des certificats) ne sont jamais effacés.
+#
+# Relancer une mise en ligne sans rien changer : Actions → Infomaniak →
+# Run workflow.
+name: Infomaniak
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infomaniak
+  cancel-in-progress: false
+
+env:
+  # Dossier du site, depuis la racine de l'hébergement (Manager → le
+  # site → Gérer → Paramètres avancés le confirme).
+  DOSSIER: sites/dsg-renov.ch
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Accès à l'hébergement
+        id: acces
+        env:
+          HOTE: ${{ secrets.INFOMANIAK_HOTE }}
+          UTILISATEUR: ${{ secrets.INFOMANIAK_UTILISATEUR }}
+          SSHPASS: ${{ secrets.INFOMANIAK_MOT_DE_PASSE }}
+        run: |
+          if [ -n "$HOTE" ] && [ -n "$UTILISATEUR" ] && [ -n "$SSHPASS" ]; then
+            echo "pret=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Secrets INFOMANIAK_HOTE, INFOMANIAK_UTILISATEUR et INFOMANIAK_MOT_DE_PASSE à renseigner (Settings → Secrets and variables → Actions) : rien n'est envoyé."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.acces.outputs.pret == 'oui'
+
+      - name: Outils d'envoi
+        if: steps.acces.outputs.pret == 'oui'
+        run: |
+          manque=""
+          for outil in sshpass rsync; do
+            command -v "$outil" >/dev/null || manque="$manque $outil"
+          done
+          if [ -n "$manque" ]; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq $manque
+          fi
+
+      - name: Envoi vers Infomaniak
+        if: steps.acces.outputs.pret == 'oui'
+        env:
+          HOTE: ${{ secrets.INFOMANIAK_HOTE }}
+          UTILISATEUR: ${{ secrets.INFOMANIAK_UTILISATEUR }}
+          SSHPASS: ${{ secrets.INFOMANIAK_MOT_DE_PASSE }}
+        run: |
+          case "${DOSSIER%/}" in
+            ""|.|/|"~"|sites|*/sites|*..*)
+              echo "::error::DOSSIER « $DOSSIER » désigne plus que le dossier du site : envoi refusé."
+              exit 1 ;;
+          esac
+
+          # Le serveur est reconnu à sa première connexion (aucune clé
+          # n'est gardée d'une mise en ligne à l'autre). Mot de passe seul :
+          # sshpass le lit dans SSHPASS.
+          connu="$RUNNER_TEMP/known_hosts"
+          ssh_cmd="sshpass -e ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$connu -o PreferredAuthentications=password,keyboard-interactive -o PubkeyAuthentication=no -o ConnectTimeout=30"
+
+          set +e
+          $ssh_cmd "$UTILISATEUR@$HOTE" "test -d '$DOSSIER'"
+          code=$?
+          set -e
+          case $code in
+            0) ;;
+            1)
+              echo "::error::Dossier « $DOSSIER » introuvable sur l'hébergement. Dossiers présents dans sites/ :"
+              $ssh_cmd "$UTILISATEUR@$HOTE" "ls -1 sites" || true
+              exit 1 ;;
+            5)
+              echo "::error::Mot de passe refusé : vérifier INFOMANIAK_UTILISATEUR et INFOMANIAK_MOT_DE_PASSE, et que le compte est bien « FTP + SSH »."
+              exit 1 ;;
+            *)
+              echo "::error::Connexion SSH impossible à $HOTE (code $code) : vérifier INFOMANIAK_HOTE."
+              exit 1 ;;
+          esac
+
+          rsync --recursive --links --compress --checksum \
+            --delete --delete-after --delay-updates \
+            --itemize-changes \
+            --filter='P /.well-known/' \
+            --filter='P .ftpquota' \
+            --filter='P /.user.ini' \
+            --exclude='/.git/' \
+            --exclude='/.github/' \
+            --exclude='/outils/' \
+            --exclude='/inspirations/' \
+            --exclude='/.gitignore' \
+            --exclude='/.nojekyll' \
+            --exclude='*.md' \
+            --exclude='__pycache__/' \
+            --exclude='*.pyc' \
+            --exclude='.DS_Store' \
+            -e "$ssh_cmd" \
+            ./ "$UTILISATEUR@$HOTE:${DOSSIER%/}/"
+
+          echo "### En ligne chez Infomaniak" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit \`${GITHUB_SHA::7}\` envoyé dans \`$DOSSIER\` : https://www.dsg-renov.ch" >> "$GITHUB_STEP_SUMMARY"

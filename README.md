@@ -339,6 +339,17 @@ Actions → Runners → New self-hosted runner, macOS ARM64).
 
 ## Mise en ligne chez Infomaniak
 
+Chaque push sur `main` met aussi le site en ligne chez Infomaniak
+(`.github/workflows/infomaniak.yml`) : le dépôt part par rsync sur SSH
+dans le dossier du site, `sites/dsg-renov.ch`. Seuls les fichiers
+modifiés voyagent, un fichier retiré du dépôt est retiré du serveur, et
+`outils/`, `.github/` et les `.md` restent au dépôt. Les autres sites de
+l'hébergement ne sont jamais touchés, ni les fichiers qu'Infomaniak pose
+lui-même (`.ftpquota`, `.user.ini`, `.well-known/`). Le résultat se lit
+dans Actions → Infomaniak ; un échec dit ce qui manque (mot de passe
+refusé, serveur introuvable, dossier absent — avec la liste des dossiers
+présents).
+
 1. **Images.** Fait le 05/10/2026 : les quinze images sont dans
    `assets/images/` (originaux, déclinaisons AVIF et WebP), plus rien
    n'est demandé à Wix. Si une image Wix est ajoutée au générateur,
@@ -355,10 +366,22 @@ Actions → Runners → New self-hosted runner, macOS ARM64).
    cela, les photos disparaîtront avec le site Wix. La politique de
    confidentialité cesse d'elle-même de mentionner Wix une fois toutes
    les images rapatriées.
-2. **Envoyer les fichiers** à la racine de l'hébergement : tout le
-   dossier peut partir, `.htaccess` rend introuvables `outils/`, `.git/`
-   et les `.md`. Ne pas oublier `.htaccess`, fichier caché.
-3. **PHP** (Manager Infomaniak) : version 8.0 ou plus, extension
+2. **Accès de GitHub à l'hébergement** (une seule fois). Dans le
+   Manager : l'hébergement → FTP / SSH → créer un compte **FTP + SSH**.
+   Dans GitHub : Settings → Secrets and variables → Actions → New
+   repository secret, trois fois :
+   - `INFOMANIAK_HOTE` : le serveur affiché en haut de la page
+     FTP / SSH (`xxxx.ftp.infomaniak.com`) ;
+   - `INFOMANIAK_UTILISATEUR` : le nom du compte ;
+   - `INFOMANIAK_MOT_DE_PASSE` : son mot de passe.
+
+   Puis Actions → Infomaniak → Run workflow pour le premier envoi ; les
+   suivants partent seuls à chaque push sur `main`. Tant que les secrets
+   manquent, le workflow le signale et n'envoie rien. Si le site a été
+   créé dans un autre dossier que `sites/dsg-renov.ch`, changer
+   `DOSSIER` en tête du workflow.
+3. **PHP** (Manager → le site → Gérer les paramètres avancés → PHP /
+   Apache) : version 8.0 ou plus (le site est en 8.4), extension
    fileinfo active, `upload_max_filesize` ≥ 8M, `post_max_size` ≥ 21M,
    `max_file_uploads` ≥ 6, `memory_limit` ≥ 128M.
 4. **Courriel** : l'adresse `contact@dsg-renov.ch` doit exister (elle
@@ -368,7 +391,16 @@ Actions → Runners → New self-hosted runner, macOS ARM64).
 5. **Anciennes adresses Wix** : relever les URL de l'ancien site et
    compléter la section 5 de `.htaccess` (redirections 301), avant la
    bascule du domaine.
-6. **Après la bascule** : vérifier `https://dsg-renov.ch` →
+6. **Domaine** : `dsg-renov.ch` et `www.dsg-renov.ch` doivent pointer
+   sur l'hébergement Infomaniak (enregistrements A et AAAA de la zone
+   DNS). Tant qu'ils pointent ailleurs, le Manager montre la page de
+   l'ancien hébergeur dans l'aperçu du site. Ne pas toucher aux
+   enregistrements MX : ce sont ceux du courriel.
+7. **Certificat** (Manager → le site → Certificat SSL) : Let's Encrypt,
+   en cochant `dsg-renov.ch` **et** `www.dsg-renov.ch`. Il ne s'installe
+   qu'une fois le domaine pointé sur Infomaniak. `.htaccess` envoie tout
+   visiteur en HTTPS : sans certificat, le navigateur affiche une alerte.
+8. **Après la bascule** : vérifier `https://dsg-renov.ch` →
    `https://www.dsg-renov.ch`, puis activer HSTS dans `.htaccess` ;
    déclarer le site dans Google Search Console et Bing Webmaster Tools,
    soumettre `sitemap.xml`.
