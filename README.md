@@ -345,7 +345,8 @@ dans le dossier du site, `sites/dsg-renov.ch`. Seuls les fichiers
 modifiés voyagent, un fichier retiré du dépôt est retiré du serveur, et
 `outils/`, `.github/` et les `.md` restent au dépôt. Les autres sites de
 l'hébergement ne sont jamais touchés, ni les fichiers qu'Infomaniak pose
-lui-même (`.ftpquota`, `.user.ini`, `.well-known/`). Le résultat se lit
+lui-même (`.ftpquota`, `.user.ini`, `.well-known/`,
+`.infomaniak-maintenance.html`). Le résultat se lit
 dans Actions → Infomaniak ; un échec dit ce qui manque (mot de passe
 refusé, serveur introuvable, dossier absent — avec la liste des dossiers
 présents).
