@@ -32,6 +32,7 @@ import seo
 import prestations
 from assemblage import BASE_JS, RACINE, assembler, ecrire
 from donnees_site import SITE
+from gabarit_liens import adresse
 
 SERVICES = prestations.PAGES
 
@@ -235,7 +236,7 @@ def construire_plan(pages):
     """Plan du site et directives d'exploration."""
     exclues = ("mentions-legales.html", "confidentialite.html") + tuple(
         fichier for fichier, *_ in pages_speciales.PAGES)
-    urls = [("" if p == "index.html" else p, _date_de_modification(p))
+    urls = [(adresse(p), _date_de_modification(p))
             for p in pages if p not in exclues]
     ecrire("sitemap.xml", seo.plan_du_site(urls))
     ecrire("robots.txt", seo.robots())

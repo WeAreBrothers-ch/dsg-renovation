@@ -19,7 +19,7 @@ confidentialite.html  traitement des données (noindex)
 404.html              page introuvable, servie par le serveur (noindex)
 merci.html            après l'envoi du formulaire (noindex)
 envoi.php             reçoit le formulaire et l'envoie par e-mail, photos jointes
-.htaccess             HTTPS, www, redirections, cache, 404, fichiers internes bloqués
+.htaccess             HTTPS, www, adresses sans .html, redirections, cache, 404, fichiers internes bloqués
 favicon.ico, apple-touch-icon.png   icônes du site
 site.webmanifest      nom et icône quand on ajoute le site à l'écran d'accueil
 sitemap.xml, robots.txt             régénérés avec les pages
@@ -109,6 +109,12 @@ construction.
   « Lausanne », une description de 155 au plus, un seul H1 qui dit le
   métier et la ville, des intertitres propres à la page, une adresse
   canonique, une image de partage (1200 × 630).
+- **Adresses sans « .html »** : les pages restent des fichiers
+  `services/peinture.html`, mais se publient à `/services/peinture`.
+  Le générateur écrit tous les liens, canoniques, `og:url`, balisage et
+  plan du site sans l'extension (`gabarit_liens.adresse`) ; `.htaccess`
+  sert le fichier, renvoie l'ancienne adresse en `.html` vers la
+  nouvelle et retire un « / » final.
 - **Balisage** `schema.org` : fiche d'établissement `GeneralContractor`
   (adresse, horaires, zone, date de fondation, effectif, carte) sur
   toutes les pages, `WebSite` sur l'accueil, `Service` et `FAQPage` sur
