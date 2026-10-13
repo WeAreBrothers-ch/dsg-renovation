@@ -17,23 +17,28 @@
    (un rouge partagé disait l'inverse). */
 .formulaire__requis{color:var(--c-accent)}
 
+/* Chaque partie : un bandeau-titre (la légende), puis ses cases. Le
+   cadre n'est jamais celui du fieldset : Safari pose le trait du haut
+   d'un fieldset au milieu de sa légende — même flottante —, et les
+   traits des côtés s'y arrêtaient. Le fieldset ne dessine donc rien ;
+   la légende trace le haut et les côtés du bandeau, les cases le
+   reste, d'un même trait dans tous les navigateurs. */
+.formulaire__partie{min-width:0;margin:0;padding:0;border:0}
+.formulaire__legende{
+  display:block;width:100%;margin:0;
+  padding:var(--sp-4) var(--sp-5);background:var(--c-papier-2);
+  border:1px solid var(--c-cadre);border-bottom:0;
+  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;
+}
+.formulaire__n{margin-right:var(--sp-3);font-variant-numeric:tabular-nums;color:var(--c-marque)}
+.formulaire__n::before{content:"0"}
 /* Une case par ligne au téléphone ; deux côte à côte dès 600 px. */
-.formulaire__partie{
-  min-width:0;margin:0;padding:0;
+.formulaire__cases{
   display:grid;grid-template-columns:minmax(0,1fr);gap:1px;
   background:var(--c-cadre);border:1px solid var(--c-cadre);
 }
-/* Flottante, la légende devient une case ordinaire de la grille. */
-.formulaire__legende{
-  float:left;width:100%;grid-column:1/-1;
-  display:flex;align-items:baseline;gap:var(--sp-3);
-  padding:var(--sp-4) var(--sp-5);background:var(--c-papier-2);
-  font-family:var(--f-titre);font-weight:500;font-size:var(--t-h4);letter-spacing:-.01em;
-}
-.formulaire__n{font-variant-numeric:tabular-nums;color:var(--c-marque)}
-.formulaire__n::before{content:"0"}
 .formulaire__large{grid-column:1/-1}
-@media (min-width:600px){.formulaire__partie{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:600px){.formulaire__cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* ------------------------------------------------------------
    CHAMP — une case
