@@ -55,9 +55,11 @@ def _image_partage(url, alt):
 def page_simple(fichier, titre, description, etiquette, h1, chapo,
                 corps_fn, modules, fil_seo, image=None, action=None,
                 media=None, faits=None):
-    """Une page de la racine : fil d'Ariane, couverture, corps, pied.
+    """Une page simple : fil d'Ariane, couverture, corps, pied. Elle est
+    à la racine, ou page d'accueil d'un dossier (services/index.html).
 
     `media` : la photo de la couverture et sa légende (briques.vue)."""
+    base = "../" * fichier.count("/")
     page = {
         "titre": titre,
         "description": description,
@@ -71,11 +73,11 @@ def page_simple(fichier, titre, description, etiquette, h1, chapo,
     }
     page.update(_image_partage(image or (media or {}).get("src"), titre))
     corps = briques.couverture(
-        page, "", [("Accueil", "/"), (etiquette, "")], action
-    ) + corps_fn(SERVICES, "")
+        page, base, [("Accueil", "/"), (etiquette, "")], action
+    ) + corps_fn(SERVICES, base)
     schemas = [seo.entreprise(), seo.fil([("Accueil", ""), (etiquette, fichier)])]
     schemas += fil_seo
-    return ecrire(fichier, assembler(page, corps, "", modules, schemas))
+    return ecrire(fichier, assembler(page, corps, base, modules, schemas))
 
 
 def _media_service(service):
@@ -105,7 +107,7 @@ def construire_accueil():
 def construire_services():
     """La page pilier et les pages de prestation."""
     faits = [page_simple(
-        "services.html",
+        "services/index.html",
         "Travaux de rénovation à Lausanne : peinture, plâtrerie, sols",
         "Rénovation complète, peinture, plâtrerie, cloisons, faux plafonds, "
         "carrelage, sols et nettoyage à Lausanne : un seul interlocuteur "
@@ -133,7 +135,7 @@ def construire_services():
             "faits": service["reperes"],
         }
         page.update(_image_partage(service["image"], service["alt"]))
-        fil = [("Accueil", "/"), ("Prestations", "services.html"),
+        fil = [("Accueil", "/"), ("Prestations", "services/index.html"),
                (service["nom"], "")]
         corps = (briques.couverture(page, "../", fil)
                  + page_service.corps(service, "../"))
@@ -145,7 +147,7 @@ def construire_services():
                 for poste in postes
             ]),
             seo.questions(prestations.questions_de(service)),
-            seo.fil([("Accueil", ""), ("Prestations", "services.html"),
+            seo.fil([("Accueil", ""), ("Prestations", "services/index.html"),
                      (service["nom"], fichier)]),
         ]
         faits.append(ecrire(fichier, assembler(

@@ -102,7 +102,7 @@ def _sous_menu(base, services, courante):
           <ul class="sous-menu__liste">
             {lignes}
           </ul>
-          <a class="sous-menu__tout" href="{base}services.html">Toutes nos prestations<span class="fleche" aria-hidden="true"></span></a>
+          <a class="sous-menu__tout" href="{base}services/index.html">Toutes nos prestations<span class="fleche" aria-hidden="true"></span></a>
         </div>"""
 
 
@@ -113,11 +113,11 @@ def entete(base, courante, services):
     la liste des prestations), le téléphone et le devis. En dessous :
     la marque, « Appeler » et « Menu » — le téléphone reste à un geste.
     """
-    dans_prestations = courante == "services.html" or courante.startswith("services/")
+    dans_prestations = courante.startswith("services/")
     marque_prestations = ' aria-current="page"' if dans_prestations else ""
     autres = "\n      ".join(
         _lien_nav(e, base, courante) for e in NAVIGATION
-        if e["barre"] and e["url"] != "services.html"
+        if e["barre"] and e["url"] != "services/index.html"
     )
     menu = "\n    ".join(_entree_menu(e, base, services) for e in NAVIGATION)
     return f"""
@@ -129,7 +129,7 @@ def entete(base, courante, services):
 
     <nav class="nav" aria-label="Navigation principale">
       <div class="nav__groupe" id="navPrestations">
-        <a href="{base}services.html"{marque_prestations}>Prestations</a>
+        <a href="{base}services/index.html"{marque_prestations}>Prestations</a>
         <button class="nav__deplier" type="button" aria-expanded="false" aria-controls="sousMenu"><span class="visuellement-cache">Afficher la liste des prestations</span></button>
         {_sous_menu(base, services, courante)}
       </div>
@@ -166,7 +166,7 @@ def entete(base, courante, services):
 def _entree_menu(entree, base, services):
     """Une ligne du menu plein écran ; les prestations y sont dépliées."""
     lien = '<a href="%s%s">%s</a>' % (base, entree["url"], entree["nom"])
-    if entree["url"] != "services.html":
+    if entree["url"] != "services/index.html":
         return "<li>%s</li>" % lien
     sous = "".join(
         '<li><a href="%sservices/%s.html">%s</a></li>' % (base, s["slug"], s["nom_menu"])
