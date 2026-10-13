@@ -1,0 +1,31 @@
+# TEMPORAIRE : le port 80 (http://) répond-il ? Lecture seule. Ne doit
+# pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Port 80
+        run: |
+          date -u
+          for i in 1 2 3; do
+            for u in http://www.dsg-renov.ch/ http://dsg-renov.ch/ http://www.dsg-renov.ch/sitemap.xml http://www.dsg-renov.ch/.well-known/acme-challenge/essai https://www.dsg-renov.ch/; do
+              printf '%-58s %s\n' "$u" "$(curl -sS -4 -o /dev/null --max-time 15 -w '%{http_code} %{redirect_url} (%{time_total}s)' "$u" 2>&1 | tail -c 120)"
+            done
+            echo "---"; sleep 20
+          done
+          echo "=== comparaison : autre site du même hébergement"
+          for u in http://wearebrothers.ch/ https://wearebrothers.ch/; do
+            printf '%-58s %s\n' "$u" "$(curl -sS -4 -o /dev/null --max-time 15 -w '%{http_code} %{redirect_url} (%{time_total}s)' "$u" 2>&1 | tail -c 120)"
+          done
+          echo "=== TCP direct sur 185.176.225.20"
+          for p in 80 443; do timeout 10 bash -c "echo > /dev/tcp/185.176.225.20/$p" && echo "port $p ouvert" || echo "port $p : pas de réponse"; done
