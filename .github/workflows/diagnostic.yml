@@ -1,0 +1,30 @@
+# TEMPORAIRE : état des lieux DNS de dsg-renov.ch (lecture seule).
+# Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Zone actuelle (Infomaniak) et ancienne zone (GoDaddy)
+        run: |
+          date -u
+          for ns in ns11.infomaniak.ch ns09.domaincontrol.com; do
+            echo "=================== $ns"
+            for q in "MX dsg-renov.ch" "TXT dsg-renov.ch" "TXT _dmarc.dsg-renov.ch" "TXT google._domainkey.dsg-renov.ch" \
+                     "A dsg-renov.ch" "AAAA dsg-renov.ch" "CNAME www.dsg-renov.ch" "A www.dsg-renov.ch" "CAA dsg-renov.ch"; do
+              set -- $q
+              r=$(dig +norec +noall +answer $1 $2 @$ns | awk '{ $1=""; $3=""; print }' | sed 's/^ *//')
+              echo "$2 $1:"; [ -n "$r" ] && echo "$r" | sed 's/^/    /' || echo "    (aucun)"
+            done
+          done
+          echo "=================== résolveurs publics (MX)"
+          for r in 1.1.1.1 8.8.8.8 9.9.9.9; do echo "$r: $(dig +short MX dsg-renov.ch @$r | tr '\n' ' ')"; done
