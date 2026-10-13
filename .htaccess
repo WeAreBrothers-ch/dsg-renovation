@@ -9,13 +9,6 @@ Options -Indexes
 AddDefaultCharset utf-8
 ErrorDocument 404 /404.html
 
-# /services est à la fois une page (services.html) et le dossier de ses
-# pages (services/peinture.html) : Apache ne doit pas y ajouter un « / »
-# de lui-même. Aucun dossier ne se liste (Options -Indexes).
-<IfModule mod_dir.c>
-  DirectorySlash Off
-</IfModule>
-
 AddType font/woff2 .woff2
 AddType image/avif .avif
 AddType image/webp .webp
@@ -57,7 +50,7 @@ AddType application/manifest+json .webmanifest
   #    l'écrivait « qui-sommes-nous%3F ».
   #    services, devis, realisations et mentions-legales sont aussi les
   #    adresses du nouveau site : elles ne redirigent pas.
-  RewriteRule ^(nos-prestations|prestations)/?$ /services [R=301,L]
+  RewriteRule ^(nos-prestations|prestations)/?$ /services/ [R=301,L]
   RewriteRule ^(projets|réalisations|single-project|copie-de-projet-[0-9]+)/?$ /realisations [R=301,L]
   RewriteRule ^((à|a)-propos|about|carri(è|e)res)/?$ /entreprise [R=301,L]
   RewriteRule ^qui-sommes-nous /entreprise [R=301,L]
@@ -69,8 +62,11 @@ AddType application/manifest+json .webmanifest
   #    services/peinture.html. L'ancienne adresse en « .html » renvoie
   #    vers la nouvelle (une seule adresse par page, requête et ancre
   #    gardées), et un « / » final est retiré (/devis/ → /devis), sans
-  #    quoi les liens relatifs de la page se perdraient. 404.html ne sert
-  #    qu'aux erreurs.
+  #    quoi les liens relatifs de la page se perdraient. La page des
+  #    prestations est la page d'accueil de son dossier, /services/
+  #    (services/index.html) : Infomaniak ajoute de lui-même le « / »
+  #    d'un dossier. 404.html ne sert qu'aux erreurs.
+  RewriteRule ^services\.html$ /services/ [R=301,L]
   RewriteCond %{THE_REQUEST} \s/+((?:[^?\s]*/)?(?!404\.)[^/?\s]+)\.html[\s?] [NC]
   RewriteRule ^ /%1 [R=301,L,NE]
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f

@@ -9,7 +9,7 @@ framework ; un petit script PHP pour le formulaire. Hébergement prévu :
 
 ```
 index.html            accueil : la preuve, les chiffres, les prestations
-services.html         page pilier des prestations
+services/index.html   page pilier des prestations (/services/)
 services/*.html       une page par prestation — sept fichiers
 realisations.html     nos chantiers, familles de biens, imprévus
 entreprise.html       histoire, déroulé, limites, références
@@ -110,7 +110,10 @@ construction.
   métier et la ville, des intertitres propres à la page, une adresse
   canonique, une image de partage (1200 × 630).
 - **Adresses sans « .html »** : les pages restent des fichiers
-  `services/peinture.html`, mais se publient à `/services/peinture`.
+  `services/peinture.html`, mais se publient à `/services/peinture` ;
+  la page pilier est la page d'accueil de son dossier, `/services/`
+  (`services/index.html`), car Infomaniak ajoute toujours le « / »
+  d'un dossier.
   Le générateur écrit tous les liens, canoniques, `og:url`, balisage et
   plan du site sans l'extension (`gabarit_liens.adresse`) ; `.htaccess`
   sert le fichier, renvoie l'ancienne adresse en `.html` vers la

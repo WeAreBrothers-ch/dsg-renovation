@@ -85,7 +85,7 @@ def accueil(services, base=""):
                       "l'entreprise ou par des partenaires que nous suivons "
                       "depuis des années.")}
 {briques.liste_metiers(services, base)}
-      <p class="suite"><a href="{base}services.html">Voir toutes nos prestations<span class="fleche" aria-hidden="true"></span></a></p>
+      <p class="suite"><a href="{base}services/index.html">Voir toutes nos prestations<span class="fleche" aria-hidden="true"></span></a></p>
     </div>
   </section>
 

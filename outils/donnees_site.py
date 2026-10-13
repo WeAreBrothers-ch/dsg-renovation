@@ -52,7 +52,7 @@ ZONES_PIED = [
 # elles se posent réellement. Un menu court se lit, un menu long se
 # parcourt.
 NAVIGATION = [
-    {"nom": "Prestations", "url": "services.html", "barre": True},
+    {"nom": "Prestations", "url": "services/index.html", "barre": True},
     {"nom": "Réalisations", "url": "realisations.html", "barre": True},
     {"nom": "L'entreprise", "url": "entreprise.html", "barre": True},
     {"nom": "Devis gratuit", "url": "devis.html", "barre": False},
