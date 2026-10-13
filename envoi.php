@@ -17,7 +17,12 @@
    limitation du débit garde quelques minutes des horodatages,
    rangés sous une empreinte de l'adresse IP, jamais l'adresse.
 
-   PHP 8.0 ou plus récent, extension fileinfo, fonction mail().
+   Le courriel part par SMTP authentifié quand envoi-reglages.php
+   existe (écrit à chaque mise en ligne depuis les secrets du dépôt,
+   jamais versionné), sinon par la fonction mail() du serveur, que
+   le Manager Infomaniak doit alors avoir activée pour le site.
+
+   PHP 8.0 ou plus récent, extensions fileinfo et openssl.
    ============================================================ */
 
 declare(strict_types=1);
@@ -27,11 +32,19 @@ declare(strict_types=1);
 /* Adresse qui reçoit les demandes. */
 const DESTINATAIRE = 'contact@dsg-renov.ch';
 
-/* Expéditeur des courriels. Infomaniak refuse un expéditeur hors du
-   domaine : l'adresse doit exister sur dsg-renov.ch. Elle reçoit aussi
-   les avis de non-distribution ; la réponse, elle, part vers le
-   visiteur (Reply-To) quand il a laissé son courriel. */
+/* Expéditeur des courriels envoyés par mail(). Infomaniak exige que
+   l'adresse existe et soit aussi inscrite dans le Manager (le site →
+   Gérer les paramètres avancés → Général → E-mail de l'expéditeur) ;
+   il réécrit l'adresse de retour (root@…infomaniak.ch). Par SMTP,
+   l'adresse devient celle du compte authentifié et le nom reste. La
+   réponse part vers le visiteur (Reply-To) quand il a laissé son
+   courriel. */
 const EXPEDITEUR = 'Site DSG Rénovation <contact@dsg-renov.ch>';
+
+/* Réglages de l'envoi SMTP authentifié, que recommande Infomaniak :
+   tableau hote, port, utilisateur (adresse complète), mot_de_passe.
+   Fichier absent : envoi par mail(). */
+const REGLAGES_SMTP = __DIR__ . '/envoi-reglages.php';
 
 /* Pages où renvoyer le visiteur qui envoie sans JavaScript. */
 const PAGE_MERCI = 'merci.html';
@@ -504,14 +517,140 @@ function rediger(array $donnees, int $photos, DateTimeImmutable $recu): string
 }
 
 /**
- * Confie le courriel à la messagerie du serveur. L'option -f fixe
- * l'adresse de retour des avis de non-distribution ; si le serveur la
- * refuse, on réessaie sans elle.
+ * Réglages SMTP posés à la mise en ligne, s'il y en a.
+ *
+ * @return array{hote: string, port: int, utilisateur: string, mot_de_passe: string}|null
+ */
+function reglages_smtp(): ?array
+{
+    if (!is_file(REGLAGES_SMTP)) {
+        return null;
+    }
+    $reglages = require REGLAGES_SMTP;
+    $hote = $reglages['hote'] ?? null;
+    $utilisateur = $reglages['utilisateur'] ?? null;
+    $mot_de_passe = $reglages['mot_de_passe'] ?? null;
+    if (!is_string($hote) || $hote === '' || !is_string($mot_de_passe) || $mot_de_passe === ''
+        || !is_string($utilisateur) || filter_var($utilisateur, FILTER_VALIDATE_EMAIL) === false) {
+        error_log('envoi.php : envoi-reglages.php incomplet, envoi par mail().');
+        return null;
+    }
+    $port = (int) ($reglages['port'] ?? 465);
+    return ['hote' => $hote, 'port' => $port > 0 ? $port : 465, 'utilisateur' => $utilisateur, 'mot_de_passe' => $mot_de_passe];
+}
+
+/**
+ * Écrit tout le texte sur la connexion, quitte à s'y reprendre : une
+ * connexion chiffrée n'accepte pas toujours un gros envoi d'un coup.
+ *
+ * @param resource $flux
+ */
+function smtp_ecrire($flux, string $texte): bool
+{
+    for ($fait = 0, $total = strlen($texte); $fait < $total; $fait += $ecrit) {
+        $ecrit = @fwrite($flux, substr($texte, $fait, 65536));
+        if ($ecrit === false || $ecrit === 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Envoie une commande SMTP (ou rien, pour lire l'accueil), puis lit la
+ * réponse jusqu'à sa dernière ligne : « 250-… » annonce une suite,
+ * « 250 … » termine.
+ *
+ * @param resource $flux
+ * @return int code de la réponse, 0 si la connexion est perdue
+ */
+function smtp_echanger($flux, ?string $commande): int
+{
+    if ($commande !== null && !smtp_ecrire($flux, $commande . "\r\n")) {
+        return 0;
+    }
+    while (($ligne = fgets($flux, 1024)) !== false) {
+        if (strlen($ligne) < 4 || $ligne[3] !== '-') {
+            return (int) substr($ligne, 0, 3);
+        }
+    }
+    return 0;
+}
+
+/**
+ * Envoie un message complet, en-têtes compris, par SMTP authentifié et
+ * chiffré d'un bout à l'autre (SMTPS, port 465). Le mot de passe ne
+ * passe jamais dans le journal.
+ *
+ * @param array{hote: string, port: int, utilisateur: string, mot_de_passe: string} $smtp
+ */
+function poster_smtp(array $smtp, string $message): bool
+{
+    $contexte = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => true]]);
+    $flux = @stream_socket_client('ssl://' . $smtp['hote'] . ':' . $smtp['port'], $numero, $raison, 20, STREAM_CLIENT_CONNECT, $contexte);
+    if ($flux === false) {
+        error_log(sprintf('envoi.php : connexion SMTP impossible à %s:%d (%s).', $smtp['hote'], $smtp['port'], $raison));
+        return false;
+    }
+    stream_set_timeout($flux, 30);
+
+    /* Chaque étape, et les codes qui la valident. */
+    $etapes = [
+        'accueil' => [null, [220]],
+        'EHLO' => ['EHLO ' . substr((string) strrchr($smtp['utilisateur'], '@'), 1), [250]],
+        'AUTH' => ['AUTH LOGIN', [334]],
+        'utilisateur' => [base64_encode($smtp['utilisateur']), [334]],
+        'mot de passe' => [base64_encode($smtp['mot_de_passe']), [235]],
+        'MAIL FROM' => ['MAIL FROM:<' . $smtp['utilisateur'] . '>', [250]],
+        'RCPT TO' => ['RCPT TO:<' . DESTINATAIRE . '>', [250, 251]],
+        'DATA' => ['DATA', [354]],
+    ];
+    foreach ($etapes as $etape => [$commande, $codes]) {
+        $code = smtp_echanger($flux, $commande);
+        if (!in_array($code, $codes, true)) {
+            error_log(sprintf('envoi.php : SMTP refusé à l\'étape « %s » (code %d).', $etape, $code));
+            fclose($flux);
+            return false;
+        }
+    }
+
+    /* Le message, puis un point seul sur sa ligne. Une ligne qui commence
+       par un point en prend un second (RFC 5321). Pas de copie de plus
+       qu'il n'en faut : avec les photos, il pèse jusqu'à 27 Mo. */
+    $message = (string) preg_replace('/^\./m', '..', $message);
+    $fin = str_ends_with($message, "\r\n") ? ".\r\n" : "\r\n.\r\n";
+    $code = smtp_ecrire($flux, $message) && smtp_ecrire($flux, $fin) ? smtp_echanger($flux, null) : 0;
+    if ($code !== 250) {
+        error_log(sprintf('envoi.php : SMTP refusé à l\'étape « message » (code %d).', $code));
+        fclose($flux);
+        return false;
+    }
+    smtp_echanger($flux, 'QUIT');
+    fclose($flux);
+    return true;
+}
+
+/**
+ * Envoie le courriel : par SMTP quand il est réglé, sinon par la
+ * messagerie du serveur. Un SMTP en échec laisse sa chance à mail() :
+ * mieux vaut un envoi de trop qu'une demande perdue. Pour mail(),
+ * l'option -f fixe l'adresse de retour des avis de non-distribution ;
+ * si le serveur la refuse, on réessaie sans elle.
  *
  * @param array<string, string> $entetes
+ * @param array{hote: string, port: int, utilisateur: string, mot_de_passe: string}|null $smtp
  */
-function poster(string $objet, string $corps, array $entetes, string $retour): bool
+function poster(string $objet, string $corps, array $entetes, string $retour, ?array $smtp): bool
 {
+    if ($smtp !== null) {
+        $lignes = ['To: ' . DESTINATAIRE, 'Subject: ' . $objet];
+        foreach ($entetes as $nom => $valeur) {
+            $lignes[] = $nom . ': ' . $valeur;
+        }
+        if (poster_smtp($smtp, implode("\r\n", $lignes) . "\r\n\r\n" . $corps)) {
+            return true;
+        }
+    }
     if (!function_exists('mail')) {
         return false;
     }
@@ -527,7 +666,13 @@ function poster(string $objet, string $corps, array $entetes, string $retour): b
  */
 function envoyer(array $donnees, array $pieces): bool
 {
+    $smtp = reglages_smtp();
     [$nom_expediteur, $adresse_expediteur] = decomposer(EXPEDITEUR);
+    /* Par SMTP, l'expéditeur est le compte authentifié : Infomaniak en
+       refuse tout autre (« Sender mismatch »), Google le réécrit. */
+    if ($smtp !== null) {
+        $adresse_expediteur = $smtp['utilisateur'];
+    }
     if (filter_var($adresse_expediteur, FILTER_VALIDATE_EMAIL) === false) {
         throw new RuntimeException('EXPEDITEUR ne contient pas une adresse valide');
     }
@@ -569,7 +714,7 @@ function envoyer(array $donnees, array $pieces): bool
         $corps .= "--{$frontiere}--\r\n";
     }
 
-    return poster(encoder_entete('Demande de devis — ' . $donnees['nom']), $corps, $entetes, $adresse_expediteur);
+    return poster(encoder_entete('Demande de devis — ' . $donnees['nom']), $corps, $entetes, $adresse_expediteur, $smtp);
 }
 
 /* ---------- Outils ---------- */

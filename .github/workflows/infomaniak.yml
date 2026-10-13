@@ -16,6 +16,18 @@
 # Tant qu'ils manquent, le workflow le signale et s'arrête sans rien
 # envoyer ni échouer.
 #
+# Formulaire de devis : avec trois secrets de plus, envoi.php expédie par
+# SMTP authentifié (recommandé par Infomaniak) au lieu de mail() :
+#   SMTP_SERVEUR       smtp.gmail.com (Google Workspace) ou
+#                      mail.infomaniak.com ; port 465 sauf « :port »
+#   SMTP_UTILISATEUR   l'adresse complète du compte, qui devient
+#                      l'expéditeur des demandes
+#   SMTP_MOT_DE_PASSE  son mot de passe (chez Google : un mot de passe
+#                      d'application)
+# Ils sont écrits dans envoi-reglages.php à chaque mise en ligne ; ce
+# fichier n'est jamais versionné, et retirer les secrets le retire du
+# serveur (retour à mail()).
+#
 # L'hébergement porte d'autres sites : l'envoi n'écrit et n'efface que
 # dans DOSSIER, et ne part pas si ce dossier n'existe pas. Les fichiers
 # qu'Infomaniak pose lui-même dans le dossier (.ftpquota, .user.ini,
@@ -78,6 +90,37 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install -y -qq $manque
           fi
+
+      - name: Réglages du formulaire
+        if: steps.acces.outputs.pret == 'oui'
+        env:
+          SMTP_SERVEUR: ${{ secrets.SMTP_SERVEUR }}
+          SMTP_UTILISATEUR: ${{ secrets.SMTP_UTILISATEUR }}
+          SMTP_MOT_DE_PASSE: ${{ secrets.SMTP_MOT_DE_PASSE }}
+        run: |
+          if [ -z "$SMTP_SERVEUR" ] || [ -z "$SMTP_UTILISATEUR" ] || [ -z "$SMTP_MOT_DE_PASSE" ]; then
+            echo "::notice::Formulaire : envoi par mail() du serveur (secrets SMTP_SERVEUR, SMTP_UTILISATEUR et SMTP_MOT_DE_PASSE absents)."
+            exit 0
+          fi
+          # Chaînes PHP entre apostrophes : seuls \ et ' s'y échappent.
+          python3 - <<'PY'
+          import os
+          def php(texte):
+              return "'" + texte.replace("\\", "\\\\").replace("'", "\\'") + "'"
+          serveur = os.environ["SMTP_SERVEUR"].strip()
+          hote, _, port = serveur.partition(":")
+          with open("envoi-reglages.php", "w", encoding="utf-8") as f:
+              f.write("<?php\n// Écrit à la mise en ligne depuis les secrets du dépôt. Ne pas versionner.\n")
+              f.write("return [\n")
+              f.write(f"    'hote' => {php(hote.strip())},\n")
+              f.write(f"    'port' => {int(port) if port.strip().isdigit() else 465},\n")
+              f.write(f"    'utilisateur' => {php(os.environ['SMTP_UTILISATEUR'].strip())},\n")
+              f.write(f"    'mot_de_passe' => {php(os.environ['SMTP_MOT_DE_PASSE'])},\n")
+              f.write("];\n")
+          PY
+          chmod 600 envoi-reglages.php
+          if command -v php >/dev/null; then php -l envoi-reglages.php >/dev/null; fi
+          echo "Formulaire : envoi par SMTP authentifié."
 
       - name: Envoi vers Infomaniak
         if: steps.acces.outputs.pret == 'oui'

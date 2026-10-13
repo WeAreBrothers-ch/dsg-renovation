@@ -381,10 +381,12 @@ présents).
    manquent, le workflow le signale et n'envoie rien. Si le site a été
    créé dans un autre dossier que `sites/dsg-renov.ch`, changer
    `DOSSIER` en tête du workflow.
-3. **PHP** (Manager → le site → Gérer les paramètres avancés → PHP /
-   Apache) : version 8.0 ou plus (le site est en 8.4), extension
-   fileinfo active, `upload_max_filesize` ≥ 8M, `post_max_size` ≥ 21M,
-   `max_file_uploads` ≥ 6, `memory_limit` ≥ 128M.
+3. **PHP** : vérifié le 13/10/2026 sur le serveur (PHP 8.4), sans
+   envoyer de courriel : le formulaire répond, une photo de 7,9 Mo et
+   trois de 6,5 Mo passent. Si l'on touche aux réglages (Manager → le
+   site → Gérer les paramètres avancés → PHP / Apache) : version 8.0 ou
+   plus, extensions fileinfo et openssl, `upload_max_filesize` ≥ 8M,
+   `post_max_size` ≥ 21M, `max_file_uploads` ≥ 6, `memory_limit` ≥ 128M.
 4. **Courriel** : il reste chez Google Workspace. La zone DNS
    d'Infomaniak, créée sans eux au passage du domaine (13/10/2026),
    doit porter les enregistrements de l'ancienne zone (Manager →
@@ -401,10 +403,27 @@ présents).
      `p=reject` posé par Infomaniak, tant que Google ne signe pas en
      DKIM (l'ancienne zone n'en avait pas).
 
-   `contact@dsg-renov.ch` reçoit et expédie les demandes : `envoi.php`
-   l'emploie comme expéditeur, enveloppe comprise (`-f`). Faire une
-   vraie demande avec une photo et vérifier qu'elle n'arrive pas en
-   indésirables.
+   Les demandes du formulaire arrivent à `contact@dsg-renov.ch`. Elles
+   partent de l'une de deux façons :
+   - **SMTP authentifié** (recommandé par Infomaniak, bien reçu par
+     Gmail) : trois secrets du dépôt, `SMTP_SERVEUR`,
+     `SMTP_UTILISATEUR`, `SMTP_MOT_DE_PASSE` (voir l'en-tête de
+     `.github/workflows/infomaniak.yml`). Avec le compte Google de
+     `contact@dsg-renov.ch` : `smtp.gmail.com`, l'adresse, et un mot de
+     passe d'application (compte Google → Sécurité → Validation en deux
+     étapes → Mots de passe des applications). L'expéditeur des
+     demandes devient ce compte. Un échec SMTP retombe sur `mail()`,
+     consigné dans le journal d'erreurs PHP ;
+   - **`mail()` du serveur**, sans ces secrets : Infomaniak la livre
+     désactivée. Manager → le site → Gérer les paramètres avancés →
+     PHP / Apache → activer la fonction mail ; puis onglet Général →
+     E-mail de l'expéditeur : `contact@dsg-renov.ch`. Infomaniak
+     réécrit l'adresse de retour (`root@…infomaniak.ch`) : le courriel
+     n'est pas aligné pour DMARC, d'où `p=none`, et peut finir en
+     indésirables.
+
+   Dans les deux cas, faire une vraie demande avec une photo et
+   vérifier qu'elle arrive en boîte de réception.
 5. **Anciennes adresses Wix** : fait le 13/10/2026. Les quatorze pages
    de l'ancien site relevées dans la Wayback Machine (2022–2026)
    renvoient en 301 vers la page qui les remplace (section 5 de

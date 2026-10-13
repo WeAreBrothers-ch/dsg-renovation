@@ -15,3 +15,7 @@
 inspirations/
 __pycache__/
 *.pyc
+
+# Réglages SMTP du formulaire, écrits à la mise en ligne depuis les
+# secrets du dépôt : jamais versionnés.
+envoi-reglages.php
