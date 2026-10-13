@@ -1,5 +1,5 @@
-# TEMPORAIRE : où se règlent les DNS de dsg-renov.ch (lecture seule).
-# Ne doit pas arriver sur main.
+# TEMPORAIRE : enregistrements de l'ancienne zone (GoDaddy) à reporter
+# dans la nouvelle (Infomaniak). Lecture seule. Ne doit pas arriver sur main.
 name: Diagnostic
 
 on:
@@ -14,19 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Délégation et zones
+      - name: Ancienne zone et nouvelle zone
         run: |
-          echo "=== délégation au registre .ch"
-          tld=$(dig +short NS ch. | head -1)
-          dig +norec NS dsg-renov.ch @"$tld" | grep -E 'IN\s+NS' || true
-          for ns in ns11.infomaniak.ch ns12.infomaniak.ch ns09.domaincontrol.com ns10.domaincontrol.com; do
-            echo "=== réponse de $ns"
-            for q in "SOA dsg-renov.ch" "NS dsg-renov.ch" "A dsg-renov.ch" "AAAA dsg-renov.ch" "CNAME www.dsg-renov.ch" "A www.dsg-renov.ch" "MX dsg-renov.ch" "TXT dsg-renov.ch"; do
-              set -- $q
-              echo "$q: $(dig +short +norec $1 $2 @$ns | tr '\n' ' ') [$(dig +norec $1 $2 @$ns | grep -o 'status: [A-Z]*' | head -1)]"
+          noms="@ www mail webmail email smtp imap pop autodiscover autoconfig calendar agenda drive docs sites groups ftp m shop blog app api cdn _dmarc google._domainkey default._domainkey k1._domainkey selector1._domainkey selector2._domainkey dkim._domainkey mail._domainkey s1._domainkey s2._domainkey _domainconnect _autodiscover._tcp _sip._tls _sipfederationtls._tcp _caldavs._tcp _carddavs._tcp _imaps._tcp _submission._tcp"
+          for ns in ns09.domaincontrol.com ns11.infomaniak.ch; do
+            echo "=================== $ns"
+            for n in $noms; do
+              if [ "$n" = "@" ]; then f=dsg-renov.ch; else f=$n.dsg-renov.ch; fi
+              for t in A AAAA CNAME MX TXT SRV CAA NS; do
+                r=$(dig +short +norec $t $f @$ns | tr '\n' ' ')
+                [ -n "$r" ] && echo "$n $t: $r"
+              done
             done
-          done
-          echo "=== résolveurs publics"
-          for r in 1.1.1.1 8.8.8.8 9.9.9.9; do
-            echo "$r: A=$(dig +short A dsg-renov.ch @$r | tr '\n' ' ') www=$(dig +short A www.dsg-renov.ch @$r | tr '\n' ' ') NS=$(dig +short NS dsg-renov.ch @$r | tr '\n' ' ')"
           done
