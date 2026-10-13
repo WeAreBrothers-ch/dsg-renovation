@@ -95,6 +95,7 @@ AddType application/manifest+json .webmanifest
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-  # À activer une fois le HTTPS vérifié sur www et sans www (un an) :
+  # HSTS : Infomaniak envoie déjà le sien (max-age=16000000, relevé le
+  # 13/10/2026). Ne pas activer cette ligne, qui le doublerait.
   # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
