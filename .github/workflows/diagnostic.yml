@@ -1,0 +1,85 @@
+# TEMPORAIRE : relevé avant bascule (DNS, domaine, anciennes adresses,
+# pages servies par Infomaniak). Lecture seule : aucune connexion SSH,
+# rien n'est écrit sur le serveur. Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: DNS du domaine
+        run: |
+          for n in dsg-renov.ch www.dsg-renov.ch; do
+            for t in NS SOA A AAAA CNAME MX TXT CAA; do
+              echo "$n $t: $(dig +short $t $n | tr '\n' ' ')"
+            done
+          done
+          echo "_dmarc TXT: $(dig +short TXT _dmarc.dsg-renov.ch | tr '\n' ' ')"
+          for n in wearebrothers.ch www.wearebrothers.ch; do
+            echo "$n A: $(dig +short A $n | tr '\n' ' ')  AAAA: $(dig +short AAAA $n | tr '\n' ' ')"
+          done
+          echo "--- RDAP"
+          curl -sS --max-time 20 https://rdap.nic.ch/domain/dsg-renov.ch | head -c 4000 || true
+
+      - name: Ce que montre le domaine aujourd'hui
+        run: |
+          for u in http://dsg-renov.ch/ http://www.dsg-renov.ch/ https://www.dsg-renov.ch/; do
+            echo "=== $u"
+            curl -sS -I --max-time 20 "$u" | grep -iE '^(HTTP|location|server|x-wix|x-seen-by)' || true
+          done
+
+      - name: Anciennes adresses (Wayback Machine)
+        run: |
+          curl -sS --max-time 60 "https://web.archive.org/cdx/search/cdx?url=dsg-renov.ch&matchType=domain&fl=original,statuscode,timestamp,mimetype&collapse=urlkey&limit=3000" \
+            | grep -viE '\.(js|css|png|jpe?g|gif|svg|woff2?|ico|webp)(\?|$)|/_api/|/_partials|/_serverless|static\.wix|wixstatic|parastorage|/_static' \
+            || echo "(aucune réponse)"
+
+      - name: Pages servies par Infomaniak
+        env:
+          HOTE: ${{ secrets.INFOMANIAK_HOTE }}
+        run: |
+          # Quelle adresse sert le site ? On essaie les candidates connues.
+          candidates="$(dig +short A wearebrothers.ch) $(dig +short A www.wearebrothers.ch) $(dig +short A "$HOTE")"
+          ip=""
+          for c in $(echo $candidates | tr ' ' '\n' | grep -E '^[0-9.]+$' | sort -u); do
+            titre=$(curl -sk --max-time 15 --resolve "www.dsg-renov.ch:443:$c" https://www.dsg-renov.ch/ | grep -o '<title>[^<]*' | head -1)
+            echo "candidate $c : ${titre:-rien}"
+            case "$titre" in *DSG*) ip=$c ;; esac
+          done
+          if [ -z "$ip" ]; then
+            echo "Aucune candidate ne sert le site."
+            exit 0
+          fi
+          echo "=== Le site est servi par $ip"
+
+          r() { curl -sk --max-time 15 --resolve "$1:443:$ip" --resolve "$1:80:$ip" "${@:2}"; }
+          echo "--- codes et redirections"
+          for u in "http://dsg-renov.ch/" "http://www.dsg-renov.ch/" "https://dsg-renov.ch/devis.html" "https://www.dsg-renov.ch/index.html" \
+                   "https://www.dsg-renov.ch/" "https://www.dsg-renov.ch/devis.html" "https://www.dsg-renov.ch/services/peinture.html" \
+                   "https://www.dsg-renov.ch/merci.html" "https://www.dsg-renov.ch/sitemap.xml" "https://www.dsg-renov.ch/robots.txt" \
+                   "https://www.dsg-renov.ch/page-qui-n-existe-pas" "https://www.dsg-renov.ch/outils/construire.py" \
+                   "https://www.dsg-renov.ch/README.md" "https://www.dsg-renov.ch/.htaccess" "https://www.dsg-renov.ch/assets/" \
+                   "https://www.dsg-renov.ch/envoi.php"; do
+            h=${u#*://}; h=${h%%/*}
+            echo "$u -> $(r "$h" -o /dev/null -w '%{http_code} %{redirect_url}' "$u")"
+          done
+          echo "--- en-têtes : accueil, feuille de style, police, photo"
+          for p in / /assets/css/site.css /assets/fonts/archivo-latin.woff2 /assets/images/sejour-apres-960.avif; do
+            echo "=== $p"
+            r www.dsg-renov.ch -sI -H 'Accept-Encoding: gzip' "https://www.dsg-renov.ch$p" | grep -iE '^(HTTP|server|content-type|content-encoding|cache-control|expires|x-content-type|x-frame|referrer-policy|permissions-policy|strict-transport|x-powered-by)'
+          done
+          echo "--- page 404 servie"
+          r www.dsg-renov.ch "https://www.dsg-renov.ch/page-qui-n-existe-pas" | grep -o '<title>[^<]*'
+          echo "--- certificat présenté"
+          echo | openssl s_client -connect "$ip:443" -servername www.dsg-renov.ch 2>/dev/null | openssl x509 -noout -subject -issuer -ext subjectAltName 2>/dev/null || echo "(aucun)"
