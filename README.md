@@ -385,10 +385,26 @@ présents).
    Apache) : version 8.0 ou plus (le site est en 8.4), extension
    fileinfo active, `upload_max_filesize` ≥ 8M, `post_max_size` ≥ 21M,
    `max_file_uploads` ≥ 6, `memory_limit` ≥ 128M.
-4. **Courriel** : l'adresse `contact@dsg-renov.ch` doit exister (elle
-   expédie les demandes) ; SPF (`include:spf.infomaniak.ch`) et DKIM
-   actifs sur le domaine. Faire une vraie demande avec une photo et
-   vérifier qu'elle n'arrive pas en indésirables.
+4. **Courriel** : il reste chez Google Workspace. La zone DNS
+   d'Infomaniak, créée sans eux au passage du domaine (13/10/2026),
+   doit porter les enregistrements de l'ancienne zone (Manager →
+   Domaines → dsg-renov.ch → Zone DNS) :
+   - les cinq MX de Google : `1 aspmx.l.google.com`,
+     `5 alt1.aspmx.l.google.com`, `5 alt2.aspmx.l.google.com`,
+     `10 aspmx2.googlemail.com`, `10 aspmx3.googlemail.com` ;
+   - le SPF, à la place de `v=spf1 -all` :
+     `v=spf1 include:_spf.google.com include:spf.infomaniak.ch ~all`
+     (Google pour la messagerie, Infomaniak pour le formulaire) ;
+   - le TXT `google-site-verification=atDt3j2J5qjkfq6Puo9AaCNwlAxj2gFo0DofILheiLk`,
+     qui garde le domaine vérifié chez Google ;
+   - DMARC (`_dmarc`) : `v=DMARC1; p=none;` à la place du
+     `p=reject` posé par Infomaniak, tant que Google ne signe pas en
+     DKIM (l'ancienne zone n'en avait pas).
+
+   `contact@dsg-renov.ch` reçoit et expédie les demandes : `envoi.php`
+   l'emploie comme expéditeur, enveloppe comprise (`-f`). Faire une
+   vraie demande avec une photo et vérifier qu'elle n'arrive pas en
+   indésirables.
 5. **Anciennes adresses Wix** : fait le 13/10/2026. Les quatorze pages
    de l'ancien site relevées dans la Wayback Machine (2022–2026)
    renvoient en 301 vers la page qui les remplace (section 5 de
@@ -402,8 +418,9 @@ présents).
    enregistrements (point 4).
 7. **Certificat** (Manager → le site → Certificat SSL) : Let's Encrypt,
    en cochant `dsg-renov.ch` **et** `www.dsg-renov.ch`. Il ne s'installe
-   qu'une fois le domaine pointé sur Infomaniak. `.htaccess` envoie tout
-   visiteur en HTTPS : sans certificat, le navigateur affiche une alerte.
+   qu'une fois le domaine pointé sur Infomaniak (c'est le cas depuis le
+   13/10/2026). `.htaccess` envoie tout visiteur en HTTPS : sans
+   certificat, le navigateur affiche une alerte.
 8. **Après la bascule** : vérifier `https://dsg-renov.ch` →
    `https://www.dsg-renov.ch` ; déclarer le site dans Google Search
    Console (le domaine y est déjà vérifié par l'enregistrement
