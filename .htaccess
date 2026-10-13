@@ -39,21 +39,21 @@ AddType application/manifest+json .webmanifest
   RewriteRule \.(md|py|pyc|sh)$ - [R=404,L]
   RewriteRule ^\.gitignore$ - [R=404,L]
 
-  # 5. ANCIENNES ADRESSES DU SITE WIX → nouvelles pages (301).
-  #    À COMPLÉTER AVANT LA BASCULE DU DOMAINE : relever les adresses
-  #    du site Wix (Google Search Console, sitemap Wix, recherche
-  #    « site:dsg-renov.ch ») et en rediriger chacune vers la page qui
-  #    la remplace. Sans ces lignes, le référencement acquis par
-  #    l'ancien site est perdu. Modèles :
-  # RewriteRule ^peinture/?$                /services/peinture.html [R=301,L]
-  # RewriteRule ^platrerie/?$               /services/platrerie-cloisons.html [R=301,L]
-  # RewriteRule ^carrelage/?$               /services/carrelage-sols.html [R=301,L]
-  # RewriteRule ^nettoyage/?$               /services/nettoyage-fin-de-chantier.html [R=301,L]
-  # RewriteRule ^renovation/?$              /services/renovation-complete.html [R=301,L]
-  # RewriteRule ^(services|prestations)/?$  /services.html [R=301,L]
-  # RewriteRule ^(realisations|projets)/?$  /realisations.html [R=301,L]
-  # RewriteRule ^(a-propos|about)/?$        /entreprise.html [R=301,L]
-  # RewriteRule ^(contact|devis)/?$         /devis.html [R=301,L]
+  # 5. ANCIENNES ADRESSES DU SITE WIX → nouvelles pages (301), pour
+  #    garder le référencement acquis par l'ancien site. Relevées le
+  #    13/10/2026 dans les archives de la Wayback Machine (2022–2026).
+  #    Les accents s'écrivent tels quels (Apache compare l'adresse
+  #    décodée, octet par octet : une lettre accentuée en fait deux,
+  #    d'où « (é|e) » et non « [ée] ») ; la variante sans accent est
+  #    prise aussi. « qui-sommes-nous » n'a pas de fin imposée : Wix
+  #    l'écrivait « qui-sommes-nous%3F ».
+  RewriteRule ^(services|nos-prestations|prestations)/?$ /services.html [R=301,L]
+  RewriteRule ^(projets|r(é|e)alisations|single-project|copie-de-projet-[0-9]+)/?$ /realisations.html [R=301,L]
+  RewriteRule ^((à|a)-propos|about|carri(è|e)res)/?$ /entreprise.html [R=301,L]
+  RewriteRule ^qui-sommes-nous /entreprise.html [R=301,L]
+  RewriteRule ^(contact|devis)/?$ /devis.html [R=301,L]
+  RewriteRule ^mentions-l(é|e)gales/?$ /mentions-legales.html [R=301,L]
+  RewriteRule ^politique-de-(confidentialit(é|e)|cookies)/?$ /confidentialite.html [R=301,L]
 </IfModule>
 
 # ---------- Compression ----------
