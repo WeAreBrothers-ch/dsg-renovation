@@ -1,0 +1,54 @@
+# TEMPORAIRE : pourquoi Let's Encrypt n'obtient pas de réponse (lecture
+# seule, via letsdebug.net). Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: DNS vu de plusieurs résolveurs
+        run: |
+          for r in 1.1.1.1 8.8.8.8 9.9.9.9 208.67.222.222; do
+            echo "$r: A=$(dig +short A dsg-renov.ch @$r | tr '\n' ' ') AAAA=$(dig +short AAAA dsg-renov.ch @$r | tr '\n' ' ') www=$(dig +short A www.dsg-renov.ch @$r | tr '\n' ' ') www6=$(dig +short AAAA www.dsg-renov.ch @$r | tr '\n' ' ')"
+          done
+          echo "CAA: $(dig +short CAA dsg-renov.ch @1.1.1.1)"
+
+      - name: Requête comme Let's Encrypt (IPv4)
+        run: |
+          for h in dsg-renov.ch www.dsg-renov.ch; do
+            echo "=== http://$h/.well-known/acme-challenge/essai"
+            curl -sS -4 -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url} (%{remote_ip}, %{time_total}s)\n' "http://$h/.well-known/acme-challenge/essai" || echo "échec"
+            echo "=== http://$h/"
+            curl -sS -4 -o /dev/null --max-time 20 -w '%{http_code} %{redirect_url} (%{remote_ip}, %{time_total}s)\n' "http://$h/" || echo "échec"
+          done
+
+      - name: Let's Debug
+        run: |
+          for d in dsg-renov.ch www.dsg-renov.ch; do
+            id=$(curl -sS --max-time 30 -H 'content-type: application/json' --data "{\"method\":\"http-01\",\"domain\":\"$d\"}" https://letsdebug.net | python3 -c 'import json,sys; print(json.load(sys.stdin)["ID"])')
+            echo "=== $d (test $id) https://letsdebug.net/$d/$id"
+            for i in $(seq 1 30); do
+              res=$(curl -sS --max-time 30 -H 'accept: application/json' "https://letsdebug.net/$d/$id")
+              etat=$(printf '%s' "$res" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("status",""))')
+              [ "$etat" = "Complete" ] && break
+              sleep 5
+            done
+            printf '%s' "$res" | python3 -c '
+          import json,sys
+          d=json.load(sys.stdin)
+          pb=(d.get("result") or {}).get("problems") or []
+          print("statut:", d.get("status"), "| problèmes:", len(pb))
+          for p in pb:
+              print("-", p.get("severity"), p.get("name"))
+              print("  ", p.get("explanation"))
+              print("  ", (p.get("detail") or "")[:1500])
+          '
+          done
