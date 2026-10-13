@@ -389,22 +389,28 @@ présents).
    expédie les demandes) ; SPF (`include:spf.infomaniak.ch`) et DKIM
    actifs sur le domaine. Faire une vraie demande avec une photo et
    vérifier qu'elle n'arrive pas en indésirables.
-5. **Anciennes adresses Wix** : relever les URL de l'ancien site et
-   compléter la section 5 de `.htaccess` (redirections 301), avant la
-   bascule du domaine.
-6. **Domaine** : `dsg-renov.ch` et `www.dsg-renov.ch` doivent pointer
-   sur l'hébergement Infomaniak (enregistrements A et AAAA de la zone
-   DNS). Tant qu'ils pointent ailleurs, le Manager montre la page de
-   l'ancien hébergeur dans l'aperçu du site. Ne pas toucher aux
-   enregistrements MX : ce sont ceux du courriel.
+5. **Anciennes adresses Wix** : fait le 13/10/2026. Les quatorze pages
+   de l'ancien site relevées dans la Wayback Machine (2022–2026)
+   renvoient en 301 vers la page qui les remplace (section 5 de
+   `.htaccess`). Une adresse oubliée se repère dans Google Search
+   Console (Pages → Introuvable (404)) et s'ajoute à la même section.
+6. **Domaine** : fait le 13/10/2026. La zone DNS est chez Infomaniak
+   (serveurs `ns11` et `ns12.infomaniak.ch`, à la place de GoDaddy) ;
+   `dsg-renov.ch` et `www` pointent sur l'hébergement
+   (`185.176.225.20`, `2001:1600:0:aaaa::80:83`). Le courriel, lui,
+   reste chez Google Workspace : la nouvelle zone doit porter ses
+   enregistrements (point 4).
 7. **Certificat** (Manager → le site → Certificat SSL) : Let's Encrypt,
    en cochant `dsg-renov.ch` **et** `www.dsg-renov.ch`. Il ne s'installe
    qu'une fois le domaine pointé sur Infomaniak. `.htaccess` envoie tout
    visiteur en HTTPS : sans certificat, le navigateur affiche une alerte.
 8. **Après la bascule** : vérifier `https://dsg-renov.ch` →
-   `https://www.dsg-renov.ch`, puis activer HSTS dans `.htaccess` ;
-   déclarer le site dans Google Search Console et Bing Webmaster Tools,
-   soumettre `sitemap.xml`.
+   `https://www.dsg-renov.ch` ; déclarer le site dans Google Search
+   Console (le domaine y est déjà vérifié par l'enregistrement
+   `google-site-verification`, à garder dans la zone) et Bing
+   Webmaster Tools, soumettre `sitemap.xml`. HSTS : Infomaniak envoie
+   déjà son propre en-tête (`max-age=16000000`) ; ne pas activer la
+   ligne de `.htaccess`, qui le doublerait.
 
 ## À compléter
 
