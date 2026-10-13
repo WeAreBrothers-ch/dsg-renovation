@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=e5df42c9">
+<link rel="stylesheet" href="assets/css/site.css?v=6bc5da36">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 <script>(function(h){var k="dsg-mur",v=false,d=false,r=document.referrer;try{v=sessionStorage.getItem(k)==="1"}catch(e){}try{d=!!r&&new URL(r).origin===location.origin}catch(e){}if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){h.classList.add("mur-ferme");addEventListener("load",function(){if(!h.classList.contains("mur-pret")){h.classList.remove("mur-ferme");var m=document.getElementById("mur");if(m){m.hidden=true}document.dispatchEvent(new Event("mur:ouvert"))}})}else{try{sessionStorage.setItem(k,"1")}catch(e){}}})(document.documentElement)</script>
 
@@ -462,6 +462,7 @@
 
             <fieldset class="formulaire__partie">
               <legend class="formulaire__legende"><span class="formulaire__n">1</span>Votre projet</legend>
+              <div class="formulaire__cases">
 
               <div class="champ formulaire__large">
                 <p class="champ__label" id="travauxLabel">Travaux concernés</p>
@@ -532,10 +533,12 @@
                 <p class="champ__aide" id="photosAide">Deux ou trois photos nous aident à préparer la visite. Jusqu'à 6 photos, 8 Mo chacune.</p>
                 <p class="champ__erreur" id="photosErreur" aria-live="polite"></p>
               </div>
+              </div>
             </fieldset>
 
             <fieldset class="formulaire__partie">
               <legend class="formulaire__legende"><span class="formulaire__n">2</span>Vos coordonnées</legend>
+              <div class="formulaire__cases">
 
               <div class="champ formulaire__large">
                 <label class="champ__label" for="nom">Nom et prénom <span class="formulaire__requis" aria-hidden="true">*</span></label>
@@ -573,6 +576,7 @@
               <div class="formulaire__piege" aria-hidden="true">
                 <label for="siteWeb">Ne pas remplir</label>
                 <input type="text" id="siteWeb" name="site_web" tabindex="-1" autocomplete="off">
+              </div>
               </div>
             </fieldset>
 
