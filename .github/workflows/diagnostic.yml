@@ -1,0 +1,37 @@
+# TEMPORAIRE : contrôle de la zone DNS après corrections (lecture seule).
+# Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Zone publiée et résolveurs publics
+        run: |
+          date -u
+          for ns in ns11.infomaniak.ch ns12.infomaniak.ch; do
+            echo "=================== $ns"
+            for q in "MX dsg-renov.ch" "TXT dsg-renov.ch" "TXT _dmarc.dsg-renov.ch"; do
+              set -- $q
+              echo "$2 $1:"; dig +norec +noall +answer $1 $2 @$ns | awk '{ $1=""; $3=""; print }' | sed 's/^ */    /'
+            done
+          done
+          echo "=================== résolveurs publics"
+          for r in 1.1.1.1 8.8.8.8 9.9.9.9; do
+            echo "-- $r"
+            echo "MX: $(dig +short MX dsg-renov.ch @$r | sort -n | tr '\n' ' ')"
+            echo "TXT: $(dig +short TXT dsg-renov.ch @$r | tr '\n' ' ')"
+            echo "DMARC: $(dig +short TXT _dmarc.dsg-renov.ch @$r | tr '\n' ' ')"
+          done
+          echo "=================== SPF : un seul enregistrement v=spf1 ?"
+          dig +short TXT dsg-renov.ch @ns11.infomaniak.ch | grep -c 'v=spf1'
+          echo "=================== serveurs Google joignables (port 25)"
+          for h in aspmx.l.google.com alt1.aspmx.l.google.com; do timeout 8 bash -c "exec 3<>/dev/tcp/$h/25 && head -c 60 <&3" 2>/dev/null && echo " ← $h" || echo "$h : port 25 fermé depuis GitHub (normal)"; done
