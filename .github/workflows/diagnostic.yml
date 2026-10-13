@@ -1,0 +1,37 @@
+# TEMPORAIRE : durée de vie en cache des anciens enregistrements DNS
+# (lecture seule). Ne doit pas arriver sur main.
+name: Diagnostic
+
+on:
+  push:
+    branches: [claude/dreamy-bardeen-pbumqx]
+
+permissions:
+  contents: read
+
+jobs:
+  releve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: TTL des anciens et nouveaux enregistrements
+        run: |
+          date -u
+          tld=$(dig +short NS ch. | head -1)
+          echo "=== délégation au registre ($tld)"
+          dig +norec NS dsg-renov.ch @"$tld" | grep -E 'IN\s+NS' || true
+          echo "=== ancienne zone (GoDaddy)"
+          dig +norec NS dsg-renov.ch @ns09.domaincontrol.com | grep -E 'IN\s+(NS|SOA)' || true
+          dig +norec A dsg-renov.ch @ns09.domaincontrol.com | grep -E 'IN\s+A' || true
+          dig +norec CNAME www.dsg-renov.ch @ns09.domaincontrol.com | grep -E 'IN\s+CNAME' || true
+          echo "=== nouvelle zone (Infomaniak)"
+          dig +norec SOA dsg-renov.ch @ns11.infomaniak.ch | grep -E 'IN\s+SOA' || true
+          dig +norec A dsg-renov.ch @ns11.infomaniak.ch | grep -E 'IN\s+A' || true
+          dig +norec A www.dsg-renov.ch @ns11.infomaniak.ch | grep -E 'IN\s+A' || true
+          echo "=== résolveurs publics (TTL restant)"
+          for r in 1.1.1.1 8.8.8.8 9.9.9.9 208.67.222.222 185.12.64.1; do
+            echo "-- $r"
+            dig A dsg-renov.ch @$r | grep -E 'IN\s+A' || true
+            dig A www.dsg-renov.ch @$r | grep -E 'IN\s+(A|CNAME)' || true
+            dig NS dsg-renov.ch @$r | grep -E 'IN\s+NS' || true
+          done
