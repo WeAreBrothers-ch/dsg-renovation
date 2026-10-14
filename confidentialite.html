@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=caaf7683">
+<link rel="stylesheet" href="assets/css/site.css?v=19f98060">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
 <script>(function(h){var k="dsg-mur",v=false,d=false,r=document.referrer;try{v=sessionStorage.getItem(k)==="1"}catch(e){}try{d=!!r&&new URL(r).origin===location.origin}catch(e){}if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){h.classList.add("mur-ferme");addEventListener("load",function(){if(!h.classList.contains("mur-pret")){h.classList.remove("mur-ferme");var m=document.getElementById("mur");if(m){m.hidden=true}document.dispatchEvent(new Event("mur:ouvert"))}})}else{try{sessionStorage.setItem(k,"1")}catch(e){}}})(document.documentElement)</script>
 
@@ -196,7 +196,7 @@
       <a class="btn btn--plein btn--compact" href="devis#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <a class="entete__appel" href="tel:+41218470202"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
+    <a class="entete__appel" href="tel:+41218470202" aria-label="Appeler le +41 21 847 02 02"><span class="entete__combine" aria-hidden="true"></span></a>
     <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
@@ -204,18 +204,18 @@
 <div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
   <div class="menu__haut">
     <span class="menu__marque"><picture><source type="image/avif" srcset="assets/images/logo-blanc.avif"><img src="assets/images/logo.webp" alt="DSG Rénovation" width="314" height="166"></picture></span>
+    <a class="entete__appel" href="tel:+41218470202" aria-label="Appeler le +41 21 847 02 02"><span class="entete__combine" aria-hidden="true"></span></a>
     <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li><a href="services/">Prestations</a><ul class="menu__sous"><li><a href="services/renovation-complete">Rénovation complète</a></li><li><a href="services/peinture">Peinture &amp; revêtements</a></li><li><a href="services/platrerie-cloisons">Plâtrerie &amp; cloisons</a></li><li><a href="services/carrelage-sols">Carrelage &amp; sols</a></li><li><a href="services/nettoyage-fin-de-chantier">Nettoyage de chantier</a></li><li><a href="services/remise-en-etat-appartement">Remise en état</a></li><li><a href="services/renovation-salle-de-bains">Salle de bains</a></li></ul></li>
-    <li><a href="realisations">Réalisations</a></li>
-    <li><a href="entreprise">L'entreprise</a></li>
-    <li><a href="devis">Devis gratuit</a></li>
+    <li><a class="menu__rubrique" href="services/">Prestations</a><ul class="menu__sous"><li><a href="services/renovation-complete">Rénovation complète</a></li><li><a href="services/peinture">Peinture &amp; revêtements</a></li><li><a href="services/platrerie-cloisons">Plâtrerie &amp; cloisons</a></li><li><a href="services/carrelage-sols">Carrelage &amp; sols</a></li><li><a href="services/nettoyage-fin-de-chantier">Nettoyage de chantier</a></li><li><a href="services/remise-en-etat-appartement">Remise en état</a></li><li><a href="services/renovation-salle-de-bains">Salle de bains</a></li><li><a class="menu__tout" href="services/">Toutes nos prestations</a></li></ul></li>
+    <li><a class="menu__rubrique" href="realisations">Réalisations</a></li>
+    <li><a class="menu__rubrique" href="entreprise">L'entreprise</a></li>
   </ul>
   <div class="menu__pied">
-    <a class="donnee" href="tel:+41218470202">+41 21 847 02 02</a>
-    <a class="donnee" href="mailto:contact@dsg-renov.ch">contact@dsg-renov.ch</a>
-    <a class="btn btn--plein" href="devis#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+    <a class="menu__contact" href="tel:+41218470202"><span class="menu__etiquette">Téléphone</span>+41 21 847 02 02</a>
+    <a class="menu__contact" href="mailto:contact@dsg-renov.ch"><span class="menu__etiquette">Courriel</span>contact@dsg-renov.ch</a>
+    <a class="btn btn--plein menu__devis" href="devis#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 
@@ -676,7 +676,7 @@
   <a class="btn btn--plein" href="devis#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
 <script src="assets/js/mur.js?v=2bae8478" defer></script>
-<script src="assets/js/nav.js?v=bf327ce6" defer></script>
+<script src="assets/js/nav.js?v=c41d6c34" defer></script>
 <script src="assets/js/motion.js?v=86e7770c" defer></script>
 <script src="assets/js/onglets.js?v=47e6592c" defer></script>
 <script src="assets/js/trame.js?v=5cde66b7" defer></script>

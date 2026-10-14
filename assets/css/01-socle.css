@@ -171,13 +171,13 @@ h1,h2,h3{
    centré. Avec une souris, les listes reprennent leur espacement
    serré. */
 :is(.pied__col a,.pied address a,.pied__itineraire,.pied__legal a,
-    .piece__chemin a,.coordonnees a,.renvoi a,.menu__liste .menu__sous a,.menu__pied .donnee,.lots a,
+    .piece__chemin a,.coordonnees a,.renvoi a,.lots a,
     .releve-piece a){
   min-height:44px;
 }
 @media (hover:hover) and (pointer:fine){
   :is(.pied__col a,.pied address a,.pied__itineraire,.pied__legal a,
-      .piece__chemin a,.coordonnees a,.renvoi a,.menu__liste .menu__sous a,.menu__pied .donnee,.lots a,
+      .piece__chemin a,.coordonnees a,.renvoi a,.lots a,
       .releve-piece a){
     min-height:0;
   }

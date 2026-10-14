@@ -174,7 +174,9 @@ phrases.
 Ce que la v6.10 a changé (14/10/2026) : **l'en-tête est une barre en
 cases** d'un bord à l'autre de l'écran — filets fins du haut en bas,
 rubrique consultée soulignée de rouge, devis en case rouge pleine contre
-le bord ; au bureau, « Prestations » ouvre un **panneau en cases** avec la
+le bord ; au téléphone, le combiné en case carrée et « Menu », et un menu
+plein écran qui garde la barre et range rubriques, prestations, coordonnées
+et devis en cases ; au bureau, « Prestations » ouvre un **panneau en cases** avec la
 photo, le nom et le résumé de chaque prestation (`gabarit._sous_menu`),
 dont les photos ne se chargent qu'à la première ouverture.
 

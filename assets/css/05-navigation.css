@@ -37,19 +37,19 @@
 /* Une case : toute la hauteur de la barre, un filet fin à sa gauche.
    Au survol, elle se creuse de la chaux, comme les lignes des
    bordereaux. */
-.nav>a,.nav__groupe,.entete__tel,.entete__appel,.burger{
+.nav>a,.nav__groupe,.entete__tel,.entete__appel,.burger,.menu__fermer{
   position:relative;
   display:flex;align-items:center;gap:var(--sp-2);
   border-left:1px solid var(--c-ligne);
   transition:background-color var(--d-rapide) var(--e-standard);
 }
-.nav>a,.nav__groupe>a,.entete__tel,.entete__appel,.burger{
+.nav>a,.nav__groupe>a,.entete__tel,.entete__appel,.burger,.menu__fermer{
   font-weight:500;font-size:var(--t-nav);color:var(--c-encre);white-space:nowrap;
 }
 @media (hover:hover) and (pointer:fine){
-  :is(.nav>a,.nav__groupe,.entete__tel,.entete__appel,.burger):hover{background:var(--c-papier-2)}
+  :is(.nav>a,.nav__groupe,.entete__tel,.entete__appel,.burger,.menu__fermer):hover{background:var(--c-papier-2)}
 }
-:is(.nav>a,.nav__groupe>a,.nav__deplier,.entete__tel,.entete__appel,.burger):focus-visible{outline-offset:-3px}
+:is(.nav>a,.nav__groupe>a,.nav__deplier,.entete__tel,.entete__appel,.burger,.menu__fermer):focus-visible{outline-offset:-3px}
 
 .entete__combine{
   width:16px;height:16px;background:var(--c-accent);
@@ -57,21 +57,21 @@
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 
-/* ---------- Au téléphone et sur tablette : Appeler et Menu ----------
+/* ---------- Au téléphone et sur tablette : le combiné et Menu ----------
    Le téléphone reste à un geste dès l'arrivée : c'est le premier
    réflexe de quelqu'un qui cherche un artisan sur son téléphone. Deux
-   cases, la dernière contre le bord de l'écran ; sous 400 px, elles se
-   serrent pour laisser la marque lisible. Le menu : le mot, puis deux
-   traits d'encre ; « Fermer » les croise (menu plein écran, plus bas). */
-.entete__appel,.burger{padding-inline:var(--sp-4)}
-.burger{gap:var(--sp-3)}
+   cases, la dernière contre le bord de l'écran : le combiné rouge dans
+   une case carrée (son nom est dit aux lecteurs d'écran ; « Appeler »
+   s'écrit en toutes lettres dans la barre d'action du bas), puis
+   « Menu » et ses deux traits, dans une case de largeur fixe que
+   « Fermer » reprend telle quelle (menu plein écran, plus bas). */
+.entete__appel{width:calc(var(--h-entete) - 1px);justify-content:center}
+.entete__appel .entete__combine{width:18px;height:18px}
+.burger,.menu__fermer{width:7rem;justify-content:center;gap:var(--sp-3)}
 .burger::after,.menu__fermer::after{
   content:"";flex:0 0 auto;width:18px;height:10px;background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M0 1.25h18M0 8.75h18' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M0 1.25h18M0 8.75h18' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-@media (min-width:400px){
-  .entete__appel,.burger{padding-inline:var(--sp-5)}
 }
 
 /* ---------- Bureau : les rubriques, le téléphone, le devis ---------- */
@@ -190,82 +190,100 @@
 /* ------------------------------------------------------------
    MENU PLEIN ÉCRAN
    Le même blanc que la page : on change de pièce, pas d'univers. Son
-   haut redit la barre trait pour trait — la marque ne bouge pas,
-   « Fermer » prend la place de « Menu ».
+   haut est la barre elle-même, case pour case — la marque, le combiné,
+   puis « Fermer » dans la case de « Menu » : rien ne bouge quand on
+   l'ouvre. Dessous, le même langage : des rangées d'un bord à l'autre
+   au trait fin, les prestations en cases deux par deux, les
+   coordonnées en relevé, le devis en case rouge pleine.
    ------------------------------------------------------------ */
 .menu{
   position:fixed;inset:0;z-index:70;
   background:var(--c-papier);color:var(--c-encre);
   display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
-  padding:0 var(--grille-marge) calc(var(--sp-7) + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
   opacity:0;visibility:hidden;
   transition:opacity 260ms var(--e-sortie),visibility 0s linear 260ms;
 }
 .menu[data-ouvert="true"]{opacity:1;visibility:visible;transition-delay:0s}
-/* Plus haut que l'écran, le menu défile : ses parties ne se tassent
-   pas. */
+/* Plus haut que l'écran, le menu défile sous sa barre : ses parties ne
+   se tassent pas. */
 .menu>*{flex-shrink:0}
 .menu__haut{
+  position:sticky;top:0;z-index:1;
   display:flex;align-items:stretch;
-  height:var(--h-entete);
-  margin-inline:calc(var(--grille-marge) * -1);
-  padding-left:var(--grille-marge);padding-right:0;
-  border-bottom:1px solid var(--c-ligne);
+  height:var(--h-entete);padding-left:var(--grille-marge);
+  background:var(--c-papier);border-bottom:1px solid var(--c-ligne);
 }
 .menu__marque{display:flex;align-items:center;margin-right:auto}
 .menu__marque img{height:32px;width:auto}
-.menu__fermer{
-  display:flex;align-items:center;gap:var(--sp-3);
-  padding-inline:var(--sp-4);border-left:1px solid var(--c-ligne);
-  font-weight:500;font-size:var(--t-nav);
-}
-@media (min-width:400px){
-  .menu__fermer{padding-inline:var(--sp-5)}
-}
-.menu__fermer:focus-visible{outline-offset:-3px}
 .menu__fermer::after{
-  width:14px;height:14px;
+  width:14px;height:14px;margin-inline:2px;
   -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 1l12 12M13 1 1 13' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
           mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 1l12 12M13 1 1 13' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
-  margin-inline:2px;
 }
-.menu__liste{margin-top:var(--sp-7);display:flex;flex-direction:column}
-.menu__liste li{
-  border-bottom:1px solid var(--c-cadre);
+
+/* Les rubriques : une rangée chacune, d'un bord à l'autre, le nom en
+   grand et la flèche au bout. Elles arrivent l'une après l'autre. */
+.menu__liste>li{
+  border-bottom:1px solid var(--c-ligne);
   opacity:0;transform:translateY(12px);
   transition:opacity 420ms var(--e-sortie),transform 420ms var(--e-sortie);
 }
-.menu__liste li:first-child{border-top:1px solid var(--c-cadre)}
-.menu[data-ouvert="true"] .menu__liste li{opacity:1;transform:none}
-.menu__liste li:nth-child(2){transition-delay:40ms}
-.menu__liste li:nth-child(3){transition-delay:80ms}
-.menu__liste li:nth-child(4){transition-delay:120ms}
-.menu__liste li:nth-child(5){transition-delay:160ms}
-.menu__liste li:nth-child(6){transition-delay:200ms}
-.menu__liste a{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:var(--sp-4) 0;
+.menu[data-ouvert="true"] .menu__liste>li{opacity:1;transform:none}
+.menu__liste>li:nth-child(2){transition-delay:40ms}
+.menu__liste>li:nth-child(3){transition-delay:80ms}
+.menu__liste>li:nth-child(4){transition-delay:120ms}
+.menu__rubrique{
+  display:flex;align-items:center;gap:var(--sp-3);
+  min-height:80px;padding-inline:var(--grille-marge);
   font-family:var(--f-titre);font-weight:500;
-  font-size:clamp(1.875rem,6vw,2.75rem);letter-spacing:-.025em;line-height:1.1;
+  font-size:clamp(1.75rem,7.4vw,2.5rem);letter-spacing:-.025em;line-height:1.1;
 }
-.menu__liste a::after{
-  content:"";width:15px;height:10px;background:currentColor;
+.menu__rubrique::after{
+  content:"";width:15px;height:10px;margin-left:auto;background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-/* Les prestations, dépliées sous « Prestations » : on voit d'un coup
-   d'œil tout ce que l'entreprise fait, sans ouvrir une page de plus. */
-.menu__sous{display:flex;flex-direction:column;padding:0 0 var(--sp-4) var(--sp-4)}
-.menu__liste .menu__sous li{border:0;opacity:1;transform:none}
-.menu__liste .menu__sous a{
-  display:flex;align-items:center;
-  padding:var(--sp-2) 0;font-family:var(--f-texte);font-size:var(--t-ui);
-  letter-spacing:0;color:var(--c-encre-60);
+/* La rubrique consultée : le carré rouge devant son nom. */
+.menu__rubrique[aria-current]::before,.menu__sous a[aria-current]::before{
+  content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
-.menu__liste .menu__sous a::after{display:none}
-.menu__pied{margin-top:auto;padding-top:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-3)}
-.menu__pied .donnee{display:inline-flex;align-items:center;padding-block:var(--sp-1);color:var(--c-encre-60)}
-.menu__pied .btn{width:100%;margin-top:var(--sp-3)}
+
+/* Les prestations, dépliées sous « Prestations » en cases deux par
+   deux, sur la chaux : on voit d'un coup d'œil tout ce que l'entreprise
+   fait. La dernière case mène à la page pilier. */
+.menu__sous{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  background:var(--c-papier-2);border-top:1px solid var(--c-ligne);
+}
+.menu__sous li:nth-child(odd){border-right:1px solid var(--c-ligne)}
+.menu__sous li:nth-child(n+3){border-top:1px solid var(--c-ligne)}
+.menu__sous a{
+  display:flex;align-items:center;gap:var(--sp-2);
+  height:100%;min-height:60px;padding:var(--sp-3) var(--sp-4);
+  font-weight:500;font-size:var(--t-petit);line-height:1.25;color:var(--c-encre);
+}
+.menu__sous li:nth-child(odd) a{padding-left:var(--grille-marge)}
+.menu__sous .menu__tout{color:var(--c-accent)}
+.menu__sous .menu__tout::after{
+  content:"";flex:0 0 auto;width:15px;height:10px;margin-left:auto;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Au pied du menu, les coordonnées en relevé — l'intitulé à gauche, la
+   donnée à droite —, puis le devis : une case rouge pleine d'un bord à
+   l'autre, comme celle de la barre au bureau. */
+.menu__pied{margin-top:auto;padding-top:var(--sp-7);display:flex;flex-direction:column}
+.menu__contact{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
+  min-height:56px;padding-inline:var(--grille-marge);border-top:1px solid var(--c-ligne);
+  font-weight:500;font-size:var(--t-ui);font-variant-numeric:tabular-nums;color:var(--c-encre);
+}
+.menu__etiquette{font-weight:400;font-size:var(--t-petit);color:var(--c-encre-60)}
+.menu__devis{width:100%;min-height:64px;padding-inline:var(--grille-marge)}
+.menu__devis:active{scale:none}
+:is(.menu__rubrique,.menu__sous a,.menu__contact):focus-visible{outline-offset:-3px}
 
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE

@@ -89,7 +89,9 @@
     });
 
     if (ouvert) {
-      var premier = menu.querySelector("a, button");
+      /* Le focus va sur « Fermer », à la place de « Menu » : le même
+         geste referme. */
+      var premier = fermer || menu.querySelector("a, button");
       if (premier instanceof HTMLElement) { premier.focus(); }
     } else {
       burger.focus();

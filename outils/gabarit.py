@@ -132,7 +132,9 @@ def entete(base, courante, services):
         _lien_nav(e, base, courante) for e in NAVIGATION
         if e["barre"] and e["url"] != "services/index.html"
     )
-    menu = "\n    ".join(_entree_menu(e, base, services) for e in NAVIGATION)
+    # Le devis a sa case rouge au pied du menu : pas de ligne en double.
+    menu = "\n    ".join(_entree_menu(e, base, services, courante)
+                         for e in NAVIGATION if e["url"] != "devis.html")
     return f"""
 <header class="entete" id="entete">
   <div class="zone entete__inner">
@@ -154,7 +156,7 @@ def entete(base, courante, services):
       <a class="btn btn--plein btn--compact" href="{vers_devis(base, courante)}">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 
-    <a class="entete__appel" href="tel:{TELEPHONE_BRUT}"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
+    <a class="entete__appel" href="tel:{TELEPHONE_BRUT}" aria-label="Appeler le {TELEPHONE}"><span class="entete__combine" aria-hidden="true"></span></a>
     <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">Menu</button>
   </div>
 </header>
@@ -162,29 +164,37 @@ def entete(base, courante, services):
 <div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
   <div class="menu__haut">
     <span class="menu__marque">{logo(base)}</span>
+    <a class="entete__appel" href="tel:{TELEPHONE_BRUT}" aria-label="Appeler le {TELEPHONE}"><span class="entete__combine" aria-hidden="true"></span></a>
     <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
     {menu}
   </ul>
   <div class="menu__pied">
-    <a class="donnee" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a>
-    <a class="donnee" href="mailto:{COURRIEL}">{COURRIEL}</a>
-    <a class="btn btn--plein" href="{vers_devis(base, courante)}">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
+    <a class="menu__contact" href="tel:{TELEPHONE_BRUT}"><span class="menu__etiquette">Téléphone</span>{TELEPHONE}</a>
+    <a class="menu__contact" href="mailto:{COURRIEL}"><span class="menu__etiquette">Courriel</span>{COURRIEL}</a>
+    <a class="btn btn--plein menu__devis" href="{vers_devis(base, courante)}">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
   </div>
 </div>
 """
 
 
-def _entree_menu(entree, base, services):
-    """Une ligne du menu plein écran ; les prestations y sont dépliées."""
-    lien = '<a href="%s%s">%s</a>' % (base, entree["url"], entree["nom"])
+def _entree_menu(entree, base, services, courante):
+    """Une rubrique du menu plein écran. Les prestations s'y déplient en
+    cases, deux par rangée, la dernière menant à la page pilier."""
+    actuelle = (courante.startswith("services/") if entree["url"] == "services/index.html"
+                else courante == entree["url"])
+    lien = '<a class="menu__rubrique" href="%s%s"%s>%s</a>' % (
+        base, entree["url"], ' aria-current="page"' if actuelle else "", entree["nom"])
     if entree["url"] != "services/index.html":
         return "<li>%s</li>" % lien
     sous = "".join(
-        '<li><a href="%sservices/%s.html">%s</a></li>' % (base, s["slug"], s["nom_menu"])
+        '<li><a href="%sservices/%s.html"%s>%s</a></li>' % (
+            base, s["slug"],
+            ' aria-current="page"' if courante == "services/%s.html" % s["slug"] else "",
+            s["nom_menu"])
         for s in services
-    )
+    ) + '<li><a class="menu__tout" href="%sservices/index.html">Toutes nos prestations</a></li>' % base
     return '<li>%s<ul class="menu__sous">%s</ul></li>' % (lien, sous)
 
 

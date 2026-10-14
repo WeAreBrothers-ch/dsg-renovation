@@ -17,9 +17,14 @@ de la page, puis les cases jusqu'au bord droit, séparées par un **filet fin** 
 au bas de la barre ; un seul filet la ferme. Une case se creuse de la chaux au survol et sous le doigt (plus
 d'enfoncement, qui faisait bouger ses filets). La **rubrique consultée** est soulignée d'un trait rouge de
 2 px posé sur le filet de la barre ; le **téléphone** porte le combiné rouge ; le **devis** est une case
-rouge pleine, du haut de la barre à son filet, contre le bord de l'écran. Au téléphone, « Appeler » et
-« Menu » sont deux cases, la dernière contre le bord ; le menu plein écran redit la barre, « Fermer » dans
-la case de « Menu ». Au bureau, « Prestations » ouvre un **panneau en cases** sur toute la largeur, calé sur
+rouge pleine, du haut de la barre à son filet, contre le bord de l'écran. Au téléphone, deux cases : le
+combiné rouge dans une case carrée (son nom est dit aux lecteurs d'écran ; « Appeler » s'écrit en toutes
+lettres dans la barre d'action du bas), puis « Menu » dans une case de largeur fixe. Le **menu plein écran**
+garde la barre case pour case — « Fermer » prend la case de « Menu », rien ne bouge — et parle le même
+langage : les rubriques en rangées d'un bord à l'autre au trait fin, la rubrique consultée marquée du carré
+rouge ; les prestations en cases deux par deux sur la chaux, la dernière menant à la page pilier ; le
+téléphone et le courriel en relevé (l'intitulé à gauche, la donnée à droite) ; le devis en case rouge pleine
+d'un bord à l'autre. La ligne « Devis gratuit », qui doublait ce bouton, quitte la liste. Au bureau, « Prestations » ouvre un **panneau en cases** sur toute la largeur, calé sur
 la grille : l'intitulé « Nos prestations », une phrase et le renvoi vers la page pilier, puis une case par
 prestation — sa photo (2:1, servie par `images.py`), son nom, son résumé ; la prestation consultée creusée,
 le carré rouge devant son nom ; un voile d'encre à 22 % sur la page. Fermé, le panneau n'est pas affiché :
