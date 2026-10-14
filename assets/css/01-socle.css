@@ -182,17 +182,19 @@ h1,h2,h3{
     min-height:0;
   }
 }
-/* Les lignes qui se creusent au survol se creusent aussi sous le doigt. */
+/* Les lignes et les cases de l'en-tête qui se creusent au survol se
+   creusent aussi sous le doigt. */
 @media (hover:none){
-  :is(.metiers__ligne,.voisin,.besoin,.repli__tete,.lots a,.jeu__onglet):active{background:var(--c-papier-2)}
+  :is(.metiers__ligne,.voisin,.besoin,.repli__tete,.lots a,.jeu__onglet,
+      .entete__appel,.burger,.menu__fermer):active{background:var(--c-papier-2)}
 }
 
-.btn,.filtre,.burger,.menu__fermer,.lumineuse__fermer,.lumineuse__nav,
+.btn,.filtre,.lumineuse__fermer,.lumineuse__nav,
 .depliant__tete,.jeu__onglet{
   transition-property:scale;transition-duration:160ms;
   transition-timing-function:var(--e-sortie);
 }
-.btn:active,.filtre:active,.burger:active,.menu__fermer:active,
+.btn:active,.filtre:active,
 .lumineuse__fermer:active,.lumineuse__nav:active,.depliant__tete:active,
 .jeu__onglet:active{scale:.97}
 

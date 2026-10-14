@@ -69,6 +69,9 @@ def _recadree(format_, bureau, tablette, telephone):
 
 _TAILLES = [
     ("metiers__vue", "(min-width: 1024px) 112px, 72px"),
+    # 05-navigation.css : le panneau des prestations, au bureau seulement ;
+    # une case sur quatre de la grille, moins ses marges (2 × 24 px).
+    ("sous-menu__vue", "(min-width: 1600px) 328px, calc(23.35vw - 48px)"),
     ("voisin__vue", "64px"),
     # Les fiches alternent grande et petite case : la grande fait foi.
     ("chemise__tirage", "(min-width: 1620px) 1000px, (min-width: 1024px) 62vw, "

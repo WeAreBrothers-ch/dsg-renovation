@@ -78,7 +78,7 @@ python3 -m http.server     # puis http://localhost:8000
 | `images.py` | remplace les images Wix par leurs copies locales, puis sert chaque photo dans un `<picture>` : AVIF et WebP, `sizes` mesuré bloc par bloc (recadrage compris) |
 | `optimiser_images.py` | décline chaque photo en AVIF (240 à 1600 px) et WebP, chaque logo de partenaire en WebP à sa taille d'affichage |
 | `rapatrier_images.py` | télécharge les images encore chez Wix — voir « Mise en ligne » |
-| `gabarit.py` | tête du document, en-tête, liste des prestations, menu |
+| `gabarit.py` | tête du document, en-tête en cases, panneau des prestations (photo, nom, résumé), menu |
 | `gabarit_pied.py` | pied de page, barre d'action mobile |
 | `gabarit_liens.py` | lien vers l'accueil, liens « Devis gratuit » (prestation pré-cochée) |
 | `carte.py` | le plan du Léman de l'accueil : contour du lac, repères des communes, carton de Lausanne |
@@ -171,10 +171,14 @@ intitulé posé sur un filet d'encre amorcé de rouge, une grotesque
 (Archivo) pour les titres et une sérif de lecture (Newsreader) pour les
 phrases.
 
-Ce que la v6.9 a changé (14/10/2026) : **l'en-tête** n'est plus une
-rangée de cases mais une barre blanche d'un bord à l'autre, fermée par
-un filet clair, ses commandes en mots (« Appeler », « Menu » et ses deux
-traits) ; **l'intitulé de section** perd son chevron, qui se lisait comme
+Ce que la v6.10 a changé (14/10/2026) : **l'en-tête est une barre en
+cases** d'un bord à l'autre de l'écran — filets fins du haut en bas,
+rubrique consultée soulignée de rouge, devis en case rouge pleine contre
+le bord ; au bureau, « Prestations » ouvre un **panneau en cases** avec la
+photo, le nom et le résumé de chaque prestation (`gabarit._sous_menu`),
+dont les photos ne se chargent qu'à la première ouverture.
+
+Ce que la v6.9 a changé (14/10/2026) : **l'intitulé de section** perd son chevron, qui se lisait comme
 une flèche à déplier, et se pose sur un filet amorcé du rouge du toit ;
 **toute la nuit porte la même trame animée** — bandes, leurs cases
 (sans fond, la trame passe dessous) et pied de page ; seule la barre

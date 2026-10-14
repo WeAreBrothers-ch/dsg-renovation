@@ -90,19 +90,32 @@ def _lien_nav(entree, base, courante):
 
 
 def _sous_menu(base, services, courante):
-    """Les prestations, une par ligne, sous l'entrée « Prestations »."""
-    lignes = "\n            ".join(
-        '<li><a href="%sservices/%s.html"%s>%s</a></li>'
+    """Le panneau des prestations, sous l'entrée « Prestations » : un
+    intitulé et le renvoi vers la page pilier, puis une case par
+    prestation — sa photo, son nom, son résumé. Les photos passent par
+    images.py comme les autres ; le panneau fermé n'étant pas affiché,
+    elles ne se chargent qu'à sa première ouverture."""
+    cases = "\n            ".join(
+        '<li><a href="%sservices/%s.html"%s>'
+        '<span class="sous-menu__vue" aria-hidden="true"><img src="%s" alt="" width="316" height="237" loading="lazy" decoding="async"></span>'
+        '<span class="sous-menu__nom">%s</span>'
+        '<span class="sous-menu__resume">%s</span></a></li>'
         % (base, s["slug"], ' aria-current="page"'
            if courante == "services/%s.html" % s["slug"] else "",
-           s["nom_menu"])
+           s["image"], s["nom_menu"], s["resume"])
         for s in services
     )
     return f"""<div class="sous-menu" id="sousMenu">
-          <ul class="sous-menu__liste">
-            {lignes}
-          </ul>
-          <a class="sous-menu__tout" href="{base}services/index.html">Toutes nos prestations<span class="fleche" aria-hidden="true"></span></a>
+          <div class="sous-menu__zone">
+            <div class="sous-menu__tete">
+              <p class="sous-menu__titre">Nos prestations</p>
+              <p class="sous-menu__texte">Tous les corps de métier, un seul interlocuteur : nos salariés et des partenaires suivis depuis des années.</p>
+              <a class="sous-menu__tout" href="{base}services/index.html">Toutes nos prestations<span class="fleche" aria-hidden="true"></span></a>
+            </div>
+            <ul class="sous-menu__liste">
+            {cases}
+            </ul>
+          </div>
         </div>"""
 
 
@@ -137,7 +150,7 @@ def entete(base, courante, services):
     </nav>
 
     <div class="entete__actions">
-      <a class="entete__tel" href="tel:{TELEPHONE_BRUT}">{TELEPHONE}</a>
+      <a class="entete__tel" href="tel:{TELEPHONE_BRUT}"><span class="entete__combine" aria-hidden="true"></span>{TELEPHONE}</a>
       <a class="btn btn--plein btn--compact" href="{vers_devis(base, courante)}">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
     </div>
 

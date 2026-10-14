@@ -4,9 +4,26 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 14/10/2026 — Statut : **v6.9**, en production.
+Date : 14/10/2026 — Statut : **v6.10**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**La barre en cases, 14/10/2026 (v6.10).** L'agence veut retrouver l'en-tête en cases d'avant la v6.9, mais
+sans ce qui le faisait bon marché : la marque dans une grande case vide, des cadres d'encre doublés à chaque
+jonction, une rangée qui flottait dans la barre comme un tableau, et une liste nue pour les prestations. Deux
+propositions rendues sur le site (une barre en cases, un cartouche encadré) ; la première est retenue.
+L'en-tête est **une rangée de cases d'un bord à l'autre de l'écran** : la marque libre, alignée sur le texte
+de la page, puis les cases jusqu'au bord droit, séparées par un **filet fin** (`--c-ligne`) qui court du haut
+au bas de la barre ; un seul filet la ferme. Une case se creuse de la chaux au survol et sous le doigt (plus
+d'enfoncement, qui faisait bouger ses filets). La **rubrique consultée** est soulignée d'un trait rouge de
+2 px posé sur le filet de la barre ; le **téléphone** porte le combiné rouge ; le **devis** est une case
+rouge pleine, du haut de la barre à son filet, contre le bord de l'écran. Au téléphone, « Appeler » et
+« Menu » sont deux cases, la dernière contre le bord ; le menu plein écran redit la barre, « Fermer » dans
+la case de « Menu ». Au bureau, « Prestations » ouvre un **panneau en cases** sur toute la largeur, calé sur
+la grille : l'intitulé « Nos prestations », une phrase et le renvoi vers la page pilier, puis une case par
+prestation — sa photo (2:1, servie par `images.py`), son nom, son résumé ; la prestation consultée creusée,
+le carré rouge devant son nom ; un voile d'encre à 22 % sur la page. Fermé, le panneau n'est pas affiché :
+ses photos ne se chargent qu'à sa première ouverture.
 
 **L'en-tête, les intitulés et la nuit, 14/10/2026 (v6.9).** Trois retours de l'agence sur le téléphone :
 - **l'en-tête n'était pas propre** : une rangée de cases d'encre (la marque, « Appeler », « Menu », au bureau
@@ -617,8 +634,10 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - Chaque intitulé de section **se pose sur un filet d'encre** (`--c-cadre`) qui court sur toute sa colonne,
   amorcé de 24 px du rouge écrit (`--amorce`, 3 px ; rouge clair dans la nuit) : l'intitulé et sa cote dessous,
   sur une ligne. Plus de chevron (v6.9) : il se lisait comme une flèche à déplier.
-- L'en-tête n'est pas cadré (v6.9) : une barre blanche d'un bord à l'autre, fermée par un filet clair
-  (`--c-ligne`), ses commandes en mots.
+- L'en-tête est une barre en cases (v6.10) : d'un bord à l'autre de l'écran, des filets fins (`--c-ligne`)
+  du haut au bas de la barre, jamais un cadre d'encre doublé ni une rangée qui flotte ; la rubrique
+  consultée soulignée de rouge, le devis en case rouge pleine contre le bord. Le panneau des prestations
+  reprend ses cases.
 
 ---
 
