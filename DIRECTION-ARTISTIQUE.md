@@ -4,9 +4,29 @@ Document de référence unique. Il doit permettre de coder le site **sans avoir 
 Toutes les valeurs sont normatives : si une valeur n'est pas listée ici, elle ne doit pas apparaître dans le code.
 Les valeurs vivent dans `assets/css/00-jetons.css` ; ce document en donne la raison.
 
-Date : 12/10/2026 — Statut : **v6.8**, en production.
+Date : 14/10/2026 — Statut : **v6.9**, en production.
 La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP) reste lisible dans l'historique git
 (commit `1fd70a6`). Elle est remplacée intégralement.
+
+**L'en-tête, les intitulés et la nuit, 14/10/2026 (v6.9).** Trois retours de l'agence sur le téléphone :
+- **l'en-tête n'était pas propre** : une rangée de cases d'encre (la marque, « Appeler », « Menu », au bureau
+  une case par rubrique) faisait un tableau plutôt qu'une barre. C'est désormais une **barre blanche d'un
+  bord à l'autre**, fermée par un seul filet clair (`--c-ligne`) : la marque sur la marge de la page, les
+  commandes en mots sans cadre — « Appeler » derrière le combiné rouge, « Menu » suivi de deux traits d'encre,
+  au bureau les rubriques, le téléphone et le bouton « Devis gratuit » ; au survol, le mot se souligne d'un
+  trait fin. Le haut du menu plein écran redit la barre trait pour trait : la marque ne bouge pas, « Fermer »
+  et sa croix prennent la place de « Menu ». La liste des prestations pend du filet de la barre ;
+- **l'intitulé de section n'était pas réussi** : le chevron rouge qui le précédait se lisait comme une flèche
+  à déplier, et la cote passait sous lui en se décalant. L'intitulé **se pose sur un filet d'encre** qui court
+  sur toute sa colonne, **amorcé de 24 px du rouge du toit** (3 px d'épaisseur, `--amorce`) ; l'intitulé et
+  sa cote se lisent dessous, sur une ligne, la cote passant dessous quand la place manque. L'accroche de
+  l'accueil et « Prochaine étape » portent le même filet. À l'arrivée, l'amorce part la première et le filet
+  se tire à la règle derrière elle ;
+- **les parties noires doivent toujours avoir un fond** : la trame n'existait que dans la toile de `trame.js`,
+  s'effaçait aux deux cinquièmes sous la colonne de texte — au téléphone, toute la largeur —, et le pied comme
+  la barre mobile restaient d'un noir nacré nu. **Toute la nuit porte désormais la trame**, peinte par la
+  feuille (`--trame-fond`, posé par `.sur-sombre`) : bandes, pied de page, barre mobile, d'égale force
+  partout, avec ou sans script. La toile ne porte plus que l'onde, posée sur les points de la feuille.
 
 **Le mur à l'entrée, 12/10/2026 (v6.8).** Demande de l'agence : avant d'entrer sur le site, un mur de briques
 aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écrit qu'il faut le casser pour entrer.
@@ -84,7 +104,7 @@ l'écran, réécrits sans dépendance d'après leur code (accès payant) :
 
 **Le plan se trace, 07/10/2026 (v6.3).** Demande de l'agence : un site « un tout petit peu plus vivant, avec du
 mouvement », qui ne se parcoure pas sans que rien ne se passe, sans le dénaturer. Quand un bloc arrive à l'écran,
-**ses traits se tracent**, comme on reporte un relevé sur le plan : le toit de l'intitulé se dessine, les filets
+**ses traits se tracent**, comme on reporte un relevé sur le plan : le toit de l'intitulé (v6.9 : son filet) se dessine, les filets
 des bordereaux se tirent à la règle un par un (prestations, communes, repères d'en-tête, coordonnées, relevés des
 chantiers, dépliants), et le plan du Léman se relève depuis l'atelier — le dessin s'étend en cercle à partir de
 lui, les piquets se plantent de proche en proche. **Seuls les traits bougent** : texte, chiffres et photos sont
@@ -300,8 +320,8 @@ angles, puis on ouvre. Le site en reprend la matière et le geste :
   pages principales, un chantier réel à côté du titre, sa légende posée dans l'image ;
 - **une seule couleur, le rouge du toit**, qui ne couvre jamais un fond de section : à plat pour l'action
   (les boutons d'appel) ; écrit pour ce qu'on touche ou ce qui demande l'attention (liens, erreurs, « vous
-  êtes ici ») et pour les repères (numéros d'étape, puces, et devant chaque intitulé de section un chevron
-  dessiné comme le toit du logo) ; en grand pour ce qui doit se voir de loin (les chiffres de l'entreprise) ;
+  êtes ici ») et pour les repères (numéros d'étape, puces, et l'amorce du filet sur lequel se pose chaque
+  intitulé de section) ; en grand pour ce qui doit se voir de loin (les chiffres de l'entreprise) ;
   en filet au-dessus du pied de page.
 
 Ce qui reste propre à DSG et n'existe pas chez Tekt : l'Archivo (police historique de la marque), le rouge
@@ -375,7 +395,7 @@ tenait plus son seuil au reflet).
 | `--c-signal` | = rouge | aplat des boutons d'appel, poignée du comparateur, sélection de texte | texte blanc dessus : 5.1 |
 | `--c-signal-fonce` | = noir | survol des boutons d'appel : le noir nacré (`--fond-survol-signal`) recouvre le rouge | texte blanc dessus : 17.2 |
 | `--c-accent` | = rouge sombre | liens, astérisques des champs obligatoires, erreurs, repère « vous êtes ici » (rubrique consultée, onglet ouvert) | 7.2 / 6.4 / 5.7 |
-| `--c-marque` | = rouge sombre | chevrons des intitulés, numéros d'étape (01, 02…), puces | 7.2 / 6.4 / 5.7 |
+| `--c-marque` | = rouge sombre | amorce du filet des intitulés, numéros d'étape (01, 02…), puces | 7.2 / 6.4 / 5.7 |
 | `--c-eclat` | = rouge | les chiffres de l'entreprise et leur « + » (24 px) ; grand texte seulement | 5.1 / 4.6 / 4.1 ; 3.4 sur la nuit (seuil 3:1) |
 
 Les marques prenaient le chêne en v5 ; leur rôle reste distinct de l'accent, pour qu'une palette future
@@ -396,11 +416,14 @@ encre. Chaque fond redéfinit localement ces jetons : un composant demande `--c-
 ferme la page. Aucun filet rouge sur l'en-tête : essayé, retiré à la demande du client.
 
 ### La trame
-`--trame-pas` 24 px · `--trame-point` chaux à 14 % (un point carré de 2 px, 1.6 sur la nuit : un décor, que le
-texte domine de loin) · `--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas qui
-s'éteint) · `--trame-masque` : sous la colonne de texte, accrochée à gauche, la toile ne garde que les deux
-cinquièmes de sa force. Seulement dans la bande de noir de `<main>`, jamais au pied de page (l'enseigne y suffit) ni sur un
-fond clair. Les cases mates posées dans la bande la recouvrent. Cachée en couleurs imposées et à
+`--trame-pas` 24 px · `--trame-taille` 2 px · `--trame-point` chaux à 14 % (un point carré, 1.6 sur la nuit : un
+décor, que le texte domine de loin) · `--trame-fond` le carreau d'un pas, son point dans l'angle, que
+`--trame-calage` centre dans la surface. **Toute la nuit la porte** (v6.9) : `.sur-sombre` la pose par-dessus le
+nacré — bandes, pied de page, barre mobile —, d'égale force d'un bord à l'autre, sous le texte comme ailleurs,
+avec ou sans script. Aucun noir n'est jamais à nu. Jamais sur un fond clair. Dans la bande de `<main>`, la toile
+de `trame.js` n'ajoute que l'onde : `--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas
+qui s'éteint) ; `--trame-masque` : sous la colonne de texte, accrochée à gauche, l'onde ne garde que les deux
+cinquièmes de sa force. Les cases mates posées dans la bande la recouvrent. Cachée en couleurs imposées et à
 l'impression.
 
 ### Le mur à l'entrée (v6.8)
@@ -555,7 +578,7 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 
 ## 5. Le cadre et ses repères — signature du site
 
-- Tout bloc structurant est **cadré d'un pixel d'encre** : en-tête (une case par rubrique), cartouche
+- Tout bloc structurant est **cadré d'un pixel d'encre** : cartouche
   d'identité, relevé chiffré, déroulé, dépliants, formulaire, coordonnées, lots voisins, pied de page.
 - Les grilles de cases se tracent par **interstice d'un pixel sur fond d'encre** (`gap: 1px`) quand le nombre
   de cases est fixe (chiffres, formulaire) ; par **contour propre à chaque case** (`outline`) partout où une
@@ -579,8 +602,11 @@ mesuré : aucun texte ne se recompose à l'arrivée des polices, décalage de mi
 - Le même carré sert de puce (garanties, communes, listes d'un encadré) en **rouge écrit** ; de marque « vous êtes
   ici » en **rouge** (rubrique consultée ; onglet ouvert sans script — avec lui, un filet glisse sous l'onglet) ; de rangée de repères sous les suites qui défilent
   au téléphone.
-- Chaque intitulé de section est précédé du **toit** : un chevron dessiné comme la ligne du logo, en rouge
-  écrit (rouge clair dans la nuit).
+- Chaque intitulé de section **se pose sur un filet d'encre** (`--c-cadre`) qui court sur toute sa colonne,
+  amorcé de 24 px du rouge écrit (`--amorce`, 3 px ; rouge clair dans la nuit) : l'intitulé et sa cote dessous,
+  sur une ligne. Plus de chevron (v6.9) : il se lisait comme une flèche à déplier.
+- L'en-tête n'est pas cadré (v6.9) : une barre blanche d'un bord à l'autre, fermée par un filet clair
+  (`--c-ligne`), ses commandes en mots.
 
 ---
 
@@ -664,7 +690,7 @@ Une seule idée, reprise partout : **ce qui s'ouvre se révèle depuis son cadre
 | Arrivée de la trame (une fois) | une onde déjà partie, une seconde 1,2 s après | moins de 5 s en tout |
 | Commune survolée (plan, liste) | `scale` du repère, couleur du nom | 180 ms, sortie |
 | Filet tiré à la règle (à l'arrivée du bloc) | `border-image` jusqu'à `--trace` | 800 ms, `--e-trait`, 70 ms d'un filet à l'autre |
-| Toit de l'intitulé (à l'arrivée) | `clip-path` | 800 ms, `--e-trait` |
+| Amorce de l'intitulé, puis son filet (à l'arrivée) | `clip-path`, puis `border-image` jusqu'à `--trace` | 240 ms, puis 800 ms, `--e-trait` |
 | Plan du Léman (à l'arrivée) | `clip-path` en cercle depuis l'atelier ; `transform` des piquets | 1,4 s ; piquets de 0,6 à 1,3 s |
 | Enseigne qui s'allume (survol, doigt posé) | rayon d'une lueur dans les lettres (`--lueur`) | suit le pointeur ; 600 ms à l'allumage et à l'extinction |
 | Marque d'onglet, case d'encre du filtre | `transform` d'un pseudo-élément, d'une case à l'autre | 240 ms, sortie |

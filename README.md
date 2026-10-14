@@ -159,16 +159,26 @@ vieux rose — sur les bandes sombres, le pied, la barre mobile et le
 survol des boutons ; l'enseigne du pied s'écrit en lettres nacrées,
 d'un bord à l'autre de la grille. Une seule couleur, le **rouge** du
 toit, qui ne couvre jamais un fond : à plat sur les boutons d'appel,
-écrit pour les liens, astérisques, erreurs, « vous êtes ici », les
-chevrons, numéros et puces, en grand pour les chiffres de
+écrit pour les liens, astérisques, erreurs, « vous êtes ici », l'amorce
+des intitulés, les numéros et les puces, en grand pour les chiffres de
 l'entreprise, et en filet au-dessus du pied de page. Le logo garde ses
 propres couleurs. Changer de palette, c'est changer
 `assets/css/00-jetons.css` : les autres feuilles ne demandent que des
 rôles (`--c-encre`, `--c-signal`, `--c-accent`, `--c-eclat`…).
 Des cadres d'un pixel ; le repère carré d'angle ne marque que
-l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; un
-chevron devant chaque intitulé, une grotesque (Archivo) pour les
-titres et une sérif de lecture (Newsreader) pour les phrases.
+l'ouverture de l'accueil et le renvoi final (`01-socle.css`) ; chaque
+intitulé posé sur un filet d'encre amorcé de rouge, une grotesque
+(Archivo) pour les titres et une sérif de lecture (Newsreader) pour les
+phrases.
+
+Ce que la v6.9 a changé (14/10/2026) : **l'en-tête** n'est plus une
+rangée de cases mais une barre blanche d'un bord à l'autre, fermée par
+un filet clair, ses commandes en mots (« Appeler », « Menu » et ses deux
+traits) ; **l'intitulé de section** perd son chevron, qui se lisait comme
+une flèche à déplier, et se pose sur un filet amorcé du rouge du toit ;
+**toute la nuit porte la trame** — bandes, pied de page, barre mobile —,
+peinte par la feuille (`--trame-fond`), d'égale force partout, avec ou
+sans script ; `trame.js` n'y ajoute plus que l'onde.
 
 Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
 sur le site de l'extérieur trouve l'écran couvert d'un mur dessiné en
@@ -323,7 +333,7 @@ pas bougé d'un pixel.
 | `dossier.js` | filtres des réalisations |
 | `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |
 | `carte.js` | plan du Léman : une commune survolée, sur le plan ou dans la liste, se marque des deux côtés |
-| `trame.js` | trame du relevé sous la bande de noir : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
+| `trame.js` | onde de la trame dans la bande de noir (les points sont peints par la feuille) : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
 
 Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans

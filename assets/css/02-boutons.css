@@ -64,19 +64,24 @@
    pendant la lecture de la section : on sait toujours où l'on est.
    ------------------------------------------------------------ */
 .intercalaire{margin-bottom:var(--sp-6)}
-.intercalaire__marge{display:flex;flex-wrap:wrap;gap:0 var(--sp-3);margin-bottom:var(--sp-3)}
-/* L'intitulé porte le toit du logo : un chevron, la ligne qui coiffe
-   « DSG ». Il prend la couleur des marques écrites (--c-marque) : le
-   rouge reste à ce qu'on touche. */
+.intercalaire__marge{display:flex;flex-wrap:wrap;gap:var(--sp-1) var(--sp-4);margin-bottom:var(--sp-3)}
+/* L'intitulé se pose sur un filet d'encre, comme le titre d'un plan
+   sur son trait : le filet court sur toute la colonne, amorcé du rouge
+   du toit (--c-marque, la couleur des marques écrites). L'intitulé et
+   sa cote se lisent dessous, sur une ligne, la cote passant dessous
+   quand la place manque. Seul (accroche de l'accueil, « Prochaine
+   étape »), l'intitulé porte lui-même son filet. Le chevron qui le
+   précédait se lisait comme une flèche à déplier. */
+.intercalaire__marge,:not(.intercalaire__marge)>.intercalaire__nom{
+  position:relative;padding-top:var(--sp-3);border-top:1px solid var(--c-cadre);
+}
+.intercalaire__marge::before,:not(.intercalaire__marge)>.intercalaire__nom::before{
+  content:"";position:absolute;top:-1px;left:0;
+  width:var(--amorce);height:3px;background:var(--c-marque);
+}
 .intercalaire__nom{
-  display:inline-flex;align-items:center;gap:var(--sp-3);
   font-family:var(--f-texte);font-weight:500;font-size:var(--t-ui);
   color:var(--c-encre);
-}
-.intercalaire__nom::before{
-  content:"";flex:0 0 auto;width:18px;height:10px;background:var(--c-marque);
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M1 9 9 1.6 17 9' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 .intercalaire__cote{
   font-family:var(--f-texte);font-size:var(--t-ui);color:var(--c-encre-60);

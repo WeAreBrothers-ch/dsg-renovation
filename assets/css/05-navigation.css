@@ -5,87 +5,73 @@
 
 /* ------------------------------------------------------------
    EN-TÊTE
-   Une rangée de cases d'un pixel : la marque occupe la grande case
-   de gauche, chaque rubrique la sienne à droite. Le fond est d'un
-   blanc plein : translucide (93 %, flouté), il virait au gris au
-   passage des bandes de nuit, le texte blanc y transparaissait et le
-   noir bavait sous les cases. Il reste en haut de l'écran pendant
-   toute la lecture, au téléphone comme au bureau : on descend, il ne
-   bouge pas. La barre fait toute la hauteur --h-entete, air du
-   dessous compris : elle s'arrêtait au ras des cases et, sur une
-   bande de nuit, ses marges blanches dépassaient en deux coins de part
-   et d'autre du cadre.
+   Une barre blanche d'un bord à l'autre de l'écran, fermée par un
+   seul filet clair : la marque à gauche, sur la marge de la page, les
+   commandes à droite. Plus de rangée de cases : leurs cadres d'encre,
+   doublés à chaque jonction, faisaient un tableau au lieu d'une barre.
+   Le fond est d'un blanc plein : translucide (93 %, flouté), il virait
+   au gris au passage des bandes de nuit. Il reste en haut de l'écran
+   pendant toute la lecture, au téléphone comme au bureau.
    ------------------------------------------------------------ */
 .entete{
   position:fixed;inset:0 0 auto 0;z-index:60;
-  padding-block:var(--sp-2);
+  height:var(--h-entete);
   background:var(--c-papier);
+  border-bottom:1px solid var(--c-ligne);
 }
-/* La rangée de cases est centrée dans la barre, autant d'air dessus que
-   dessous ; --h-case est sa hauteur, que reprennent la case du chevron
-   (carrée) et le menu plein écran. */
-.entete__inner,.menu__haut{--h-case:calc(var(--h-entete) - 2 * var(--sp-2))}
 .entete__inner{
-  display:flex;align-items:stretch;
-  height:var(--h-case);
+  display:flex;align-items:center;
+  height:100%;
 }
-/* Chaque case trace son cadre et chevauche d'un pixel la précédente :
-   deux cases voisines n'ont qu'un trait entre elles. Les groupes
-   (rubriques, actions) ne tracent rien et ne chevauchent pas : c'est
-   leur première case qui le fait, sinon le trait doublerait. */
-.entete__inner>*{box-shadow:inset 0 0 0 1px var(--c-cadre);margin-left:-1px}
-.entete__inner>:first-child,.entete__inner>.nav,.entete__inner>.entete__actions{margin-left:0}
 
+/* La marque part de la marge, comme le texte de la page dessous. */
 .marque{
-  display:flex;align-items:center;flex:1 1 auto;
-  padding-inline:var(--sp-4);
+  display:flex;align-items:center;min-height:44px;margin-right:auto;
 }
 .marque picture{display:block}
 .marque img{height:32px;width:auto;object-fit:contain}
 
-/* ---------- Rubriques : visibles dès 1024 px ---------- */
-.nav{display:none;align-items:stretch;box-shadow:none!important}
-/* Toutes les cases de texte ont la même marge de part et d'autre du
-   mot, et la même encre : la rangée se lit d'un seul trait. */
-.nav>a,.nav__groupe>a{
-  position:relative;display:flex;align-items:center;gap:var(--sp-2);
-  padding:0 var(--sp-5);margin-left:-1px;
-  box-shadow:inset 0 0 0 1px var(--c-cadre);
+/* Les commandes de l'en-tête : des mots, sans cadre. Une cible de
+   44 px de haut ; au survol, le mot se souligne d'un trait fin. */
+.nav>a,.nav__groupe>a,.entete__tel,.entete__appel,.burger{
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  min-height:44px;padding-inline:var(--sp-3);
   font-weight:500;font-size:var(--t-nav);color:var(--c-encre);white-space:nowrap;
-  transition:color var(--d-rapide) var(--e-standard),background-color var(--d-rapide) var(--e-standard);
+  text-decoration:underline 1px transparent;text-underline-offset:6px;
+  transition:text-decoration-color var(--d-rapide) var(--e-standard);
 }
 @media (hover:hover) and (pointer:fine){
-  .nav>a:hover,.nav__groupe>a:hover{color:var(--c-encre);background:var(--c-papier-2)}
+  :is(.nav>a,.nav__groupe>a,.entete__tel,.entete__appel,.burger):hover{text-decoration-color:currentColor}
 }
-.nav a:focus-visible,.nav__deplier:focus-visible{outline-offset:-4px}
+
+/* ---------- Rubriques : visibles dès 1024 px ---------- */
+.nav{display:none;align-self:stretch;align-items:center;gap:var(--sp-2);margin-right:var(--sp-5)}
+.nav a:focus-visible,.nav__deplier:focus-visible{outline-offset:-2px}
 /* La rubrique consultée : le seul repère en couleur de l'en-tête. */
-.nav a[aria-current]{color:var(--c-encre)}
 .nav>a[aria-current]::before,.nav__groupe>a[aria-current]::before{
   content:"";width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
 
-/* « Prestations » : le lien mène à la page pilier, la case voisine
+/* « Prestations » : le lien mène à la page pilier, le chevron voisin
    ouvre la liste des prestations. Au survol d'une souris, la liste
-   s'ouvre seule ; au clavier et au doigt, par le bouton (nav.js). */
-.nav__groupe{position:relative;display:flex;align-items:stretch}
+   s'ouvre seule ; au clavier et au doigt, par le bouton (nav.js). Le
+   groupe tient toute la hauteur de la barre : la liste pend de son
+   filet. */
+.nav__groupe{position:relative;display:flex;align-self:stretch;align-items:center}
+.nav__groupe>a{padding-right:var(--sp-1)}
 .nav__deplier{
-  width:var(--h-case);margin-left:-1px;display:grid;place-items:center;
-  box-shadow:inset 0 0 0 1px var(--c-cadre);color:var(--c-encre);
-  transition:background-color var(--d-rapide) var(--e-standard),color var(--d-rapide) var(--e-standard);
+  width:32px;min-height:44px;display:grid;place-items:center;
+  color:var(--c-encre);
 }
 .nav__deplier::before{
-  content:"";width:10px;height:10px;margin-top:-4px;
+  content:"";width:8px;height:8px;margin-top:-4px;
   border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
   transform:rotate(45deg);transition:transform var(--d-normal) var(--e-sortie);
 }
-.nav__groupe[data-ouvert="true"] .nav__deplier{background:var(--c-papier-2);color:var(--c-encre)}
 .nav__groupe[data-ouvert="true"] .nav__deplier::before{transform:translateY(4px) rotate(225deg)}
-@media (hover:hover) and (pointer:fine){
-  .nav__deplier:hover{background:var(--c-papier-2);color:var(--c-encre)}
-}
 
 .sous-menu{
-  position:absolute;top:calc(100% - 1px);left:-1px;z-index:2;
+  position:absolute;top:100%;left:0;z-index:2;
   width:max(100%,340px);
   background:var(--c-fiche);box-shadow:inset 0 0 0 1px var(--c-cadre),var(--om-1);
   opacity:0;visibility:hidden;transform:translateY(-6px);
@@ -108,77 +94,80 @@
   font-weight:500;font-size:var(--t-nav);color:var(--c-accent);
 }
 
-.entete__actions{display:none;align-items:stretch;flex:0 0 auto;box-shadow:none!important}
-.entete__tel{
-  display:flex;align-items:center;padding:0 var(--sp-5);margin-left:-1px;
-  box-shadow:inset 0 0 0 1px var(--c-cadre);
-  font-weight:500;font-size:var(--t-nav);font-variant-numeric:tabular-nums;white-space:nowrap;
-  transition:background-color var(--d-rapide) var(--e-standard);
-}
-@media (hover:hover) and (pointer:fine){.entete__tel:hover{background:var(--c-papier-2)}}
-.entete__actions .btn{min-height:0;height:100%;padding-inline:var(--sp-5)}
+.entete__actions{display:none;align-items:center;gap:var(--sp-3);flex:0 0 auto}
+.entete__tel{font-variant-numeric:tabular-nums}
+.entete__actions .btn{min-height:44px}
 
 /* ---------- Au téléphone et sur tablette : Appeler et Menu ----------
    Le téléphone reste à un geste dès l'arrivée : c'est le premier
-   réflexe de quelqu'un qui cherche un artisan sur son téléphone. Sous
-   400 px, les deux cases se resserrent pour laisser la marque lisible. */
-.entete__appel{
-  display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
-  min-width:0;padding:0 var(--sp-3);
-  font-weight:500;font-size:var(--t-nav);color:var(--c-encre);
-  transition:background-color var(--d-rapide) var(--e-standard);
-}
+   réflexe de quelqu'un qui cherche un artisan sur son téléphone. Le
+   dernier mot finit sur la marge de la page, comme la marque commence
+   sur l'autre. */
 .entete__combine{
   width:16px;height:16px;background:var(--c-accent);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-@media (hover:hover) and (pointer:fine){.entete__appel:hover{background:var(--c-papier-2)}}
-
-/* Bouton menu : un mot, dans sa case. */
-.burger{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:0;padding:0 var(--sp-3);
-  font-weight:500;font-size:var(--t-nav);
+/* Le menu : le mot, puis deux traits d'encre ; « Fermer » les croise
+   (menu plein écran, plus bas). */
+.entete__appel,.burger{padding-inline:var(--sp-2)}
+.burger{margin-right:calc(var(--sp-2) * -1)}
+.burger::after,.menu__fermer::after{
+  content:"";flex:0 0 auto;width:18px;height:10px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M0 1.25h18M0 8.75h18' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 10'%3E%3Cpath d='M0 1.25h18M0 8.75h18' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
 }
-@media (min-width:400px){
-  .entete__appel{min-width:auto;padding-inline:var(--sp-4)}
-  .burger{min-width:88px;padding-inline:var(--sp-4)}
+/* Sous 360 px, les mots se serrent pour laisser la marque lisible ;
+   au-delà, ils prennent leur air. */
+@media (min-width:360px){
+  .entete__appel,.burger{padding-inline:var(--sp-3)}
+  .burger{margin-right:calc(var(--sp-3) * -1)}
 }
 /* Dès 1024 px, les rubriques et le devis prennent leur place. */
 @media (min-width:1024px){
   .nav,.entete__actions{display:flex}
   .burger,.entete__appel{display:none}
-  .marque{padding-inline:var(--sp-5)}
 }
 
 /* ------------------------------------------------------------
    MENU PLEIN ÉCRAN
-   Le même blanc que la page : on change de pièce, pas d'univers.
+   Le même blanc que la page : on change de pièce, pas d'univers. Son
+   haut redit la barre trait pour trait — la marque ne bouge pas,
+   « Fermer » prend la place de « Menu ».
    ------------------------------------------------------------ */
 .menu{
   position:fixed;inset:0;z-index:70;
   background:var(--c-papier);color:var(--c-encre);
   display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
-  padding:var(--sp-2) var(--grille-marge) calc(var(--sp-7) + env(safe-area-inset-bottom));
+  padding:0 var(--grille-marge) calc(var(--sp-7) + env(safe-area-inset-bottom));
   opacity:0;visibility:hidden;
   transition:opacity 260ms var(--e-sortie),visibility 0s linear 260ms;
 }
 .menu[data-ouvert="true"]{opacity:1;visibility:visible;transition-delay:0s}
 /* Plus haut que l'écran, le menu défile : ses parties ne se tassent
-   pas (la case « Fermer » garderait sinon la hauteur du logo). */
+   pas. */
 .menu>*{flex-shrink:0}
 .menu__haut{
-  display:flex;align-items:stretch;
-  height:var(--h-case);
+  display:flex;align-items:center;
+  height:var(--h-entete);
+  margin-inline:calc(var(--grille-marge) * -1);padding-inline:var(--grille-marge);
+  border-bottom:1px solid var(--c-ligne);
 }
-.menu__haut>*{box-shadow:inset 0 0 0 1px var(--c-cadre);margin-left:-1px}
-.menu__marque{flex:1;display:flex;align-items:center;padding-inline:var(--sp-4);margin-left:0}
+.menu__marque{display:flex;align-items:center;margin-right:auto}
 .menu__marque img{height:32px;width:auto}
 .menu__fermer{
-  min-width:88px;padding:0 var(--sp-4);
-  display:inline-flex;align-items:center;justify-content:center;
+  display:inline-flex;align-items:center;gap:var(--sp-2);
+  min-height:44px;padding-inline:var(--sp-2);margin-right:calc(var(--sp-2) * -1);
   font-weight:500;font-size:var(--t-nav);
+}
+@media (min-width:360px){
+  .menu__fermer{padding-inline:var(--sp-3);margin-right:calc(var(--sp-3) * -1)}
+}
+.menu__fermer::after{
+  width:14px;height:14px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 1l12 12M13 1 1 13' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 1l12 12M13 1 1 13' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+  margin-inline:2px;
 }
 .menu__liste{margin-top:var(--sp-7);display:flex;flex-direction:column}
 .menu__liste li{
@@ -220,7 +209,7 @@
 
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE
-   Appeler, ou demander un devis : un bandeau de noir nacré
+   Appeler, ou demander un devis : un bandeau de noir nacré tramé
    (.sur-sombre) collé au bas de l'écran, d'un bord à l'autre, sous un
    trait d'un pixel. Les deux boutons y sont posés dans les marges de
    la page, avec de l'air au-dessus et au-dessous (--barre-ecart) :

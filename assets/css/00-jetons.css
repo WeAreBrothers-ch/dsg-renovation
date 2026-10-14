@@ -148,18 +148,33 @@
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
      du cadre à plat (--c-cadre-plein). */
   --repere:5px;
+  /* Amorce de l'intitulé : le rouge du toit qui ouvre le filet sur
+     lequel se pose chaque intitulé de section (02-boutons.css), 3 px
+     d'épaisseur. */
+  --amorce:24px;
 
   /* ---------- La trame du relevé ----------
-     La bande de nuit porte le quadrillage du géomètre : un point carré
-     tous les 24 px, une chaux à 14 % (le point seul fait 1.6 sur la
-     nuit : un décor, que le texte domine de loin). Une onde carrée,
+     Toute la nuit porte le quadrillage du géomètre — bandes, pied de
+     page, barre mobile : aucun noir n'est jamais à nu. Un point carré
+     de 2 px tous les 24 px, une chaux à 14 % (le point seul fait 1.6
+     sur la nuit : un décor, que le texte domine de loin), d'égale force
+     d'un bord à l'autre, sous le texte comme ailleurs. La feuille la
+     peint elle-même (--trame-fond, posé par .sur-sombre) : elle est là
+     dès le premier affichage, avec ou sans script. Les points sont
+     centrés dans la surface : ses bords tombent également à gauche et à
+     droite (--trame-calage). Dans les bandes de <main>, une onde carrée,
      au rouge écrit de la nuit, s'y propage depuis le point touché
-     (trame.js, 12-trame.css). Elle s'efface à demi sous la colonne de
-     texte, accrochée à gauche. */
+     (trame.js, 12-trame.css) ; elle s'efface à demi sous la colonne de
+     texte, accrochée à gauche (--trame-masque). */
   --trame-pas:24px;
+  --trame-taille:2px;
   --trame-point:rgba(var(--c-craie-rgb),.14);
   --trame-onde:var(--c-rouge-clair);
   --trame-masque:linear-gradient(100deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,1) 55%);
+  /* Un carreau par pas, son point dans l'angle haut gauche ; le calage
+     met le centre d'un point au milieu de la surface. */
+  --trame-fond:conic-gradient(at var(--trame-taille) var(--trame-taille),transparent 75%,var(--trame-point) 0);
+  --trame-calage:calc(50% + (var(--trame-pas) - var(--trame-taille)) / 2);
 
   /* ---------- Le mur à l'entrée ----------
      Un mur à casser pour entrer (20-mur.css, mur.js), dessiné comme le
@@ -236,8 +251,11 @@
   --c-alerte:var(--c-rouge-clair);  /*  6.1 /  5.5 /  4.7 */
   --c-focus:var(--c-chaux);
   color:var(--c-encre);
+  /* La trame par-dessus le nacré. Taille et calage n'appartiennent qu'à
+     elle : écrits en liste, ils se répéteraient sur les quatre calques
+     du nacré et le découperaient en carreaux. */
+  background:var(--trame-fond) var(--trame-calage) var(--trame-calage)/var(--trame-pas) var(--trame-pas),var(--nacre);
   background-color:var(--c-papier);
-  background-image:var(--nacre);
 }
 
 /* Polices de secours calibrées : tant que les polices du site ne sont

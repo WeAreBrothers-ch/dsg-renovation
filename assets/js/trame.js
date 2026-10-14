@@ -1,9 +1,11 @@
 /* ============================================================
    DSG RÉNOVATION — TRAME DU RELEVÉ
-   La bande de noir nacré de chaque page porte la trame du plan : un
-   point tous les --trame-pas, comme le quadrillage du géomètre.
-   Une onde carrée — un plan n'a pas d'angle arrondi — s'y propage au
-   rouge écrit de la nuit depuis le point qu'on touche.
+   La nuit porte la trame du plan : un point tous les --trame-pas,
+   comme le quadrillage du géomètre, que la feuille peint elle-même
+   (--trame-fond, 00-jetons.css). Ici, dans la bande de noir nacré de
+   chaque page, une onde carrée — un plan n'a pas d'angle arrondi —
+   s'y propage au rouge écrit de la nuit depuis le point qu'on touche :
+   la toile ne porte que l'onde, posée sur les points de la feuille.
 
    Transposé du « Sonar Grid » de 21st.dev (composant React) : même
    idée, écrite pour ce site, sans dépendance.
@@ -13,9 +15,9 @@
    la bande montre une fois ce qu'elle sait faire — une onde déjà
    partie, une seconde qui la suit —, moins de cinq secondes en tout,
    puis la trame se tient immobile. Mouvement réduit : la trame et
-   une onde figée, rien ne bouge. Sans JavaScript, ni l'une ni
-   l'autre : le fond nacré seul, comme avant. Pur décor, la toile est
-   cachée aux lecteurs d'écran et ne reçoit aucun clic.
+   une onde figée, rien ne bouge. Sans JavaScript, pas d'onde : la
+   trame de la feuille seule. Pur décor, la toile est cachée aux
+   lecteurs d'écran et ne reçoit aucun clic.
    ============================================================ */
 (function () {
   "use strict";
@@ -38,7 +40,8 @@
      de mouvement en tout. */
   var AVANCE_ARRIVEE = 0.12;
   var DELAI_SECONDE = 1200;
-  /* Taille des points, en pixels CSS : au repos, sur la crête. */
+  /* Taille des points, en pixels CSS : au repos (--trame-taille), sur
+     la crête. */
   var POINT = 2;
   var POINT_CRETE = 3.5;
   /* Des clics en rafale : au-delà de ONDES_MAX, la plus ancienne cède. */
@@ -67,16 +70,10 @@
     var ctx = toile.getContext("2d");
     if (!ctx) { return; }
 
-    /* Le fond de la trame, dessiné une fois par taille : chaque image
-       le recopie, puis pose les ondes dessus. */
-    var fond = document.createElement("canvas");
-    var ctxFond = fond.getContext("2d");
-
     var largeur = 0;
     var hauteur = 0;
     var densite = 1;
     var pas = 24;
-    var couleurPoint = "";
     var couleurOnde = "";
     var ondes = [];
     var image = 0;
@@ -85,14 +82,13 @@
     function lireJetons() {
       var style = window.getComputedStyle(toile);
       pas = parseFloat(style.getPropertyValue("--trame-pas")) || 24;
-      couleurPoint = style.getPropertyValue("--trame-point").trim();
       couleurOnde = style.getPropertyValue("--trame-onde").trim();
     }
 
-    /* Décalage de la trame : centrée dans la bande, pour que ses bords
-       tombent également à gauche et à droite. */
+    /* Décalage de la trame : un point au milieu de la bande, comme la
+       feuille les pose (--trame-calage) — l'onde allume ses points. */
     function origine(cote) {
-      return (cote - Math.floor(cote / pas) * pas) / 2;
+      return (cote / 2) % pas;
     }
 
     function dimensionner() {
@@ -101,21 +97,9 @@
       hauteur = Math.round(boite.height);
       taille = largeur + "x" + hauteur;
       densite = Math.min(window.devicePixelRatio || 1, 2);
-      [toile, fond].forEach(function (c) {
-        c.width = Math.max(1, Math.round(largeur * densite));
-        c.height = Math.max(1, Math.round(hauteur * densite));
-      });
+      toile.width = Math.max(1, Math.round(largeur * densite));
+      toile.height = Math.max(1, Math.round(hauteur * densite));
       lireJetons();
-      ctxFond.setTransform(densite, 0, 0, densite, 0, 0);
-      ctxFond.clearRect(0, 0, largeur, hauteur);
-      ctxFond.fillStyle = couleurPoint;
-      var x0 = origine(largeur);
-      var y0 = origine(hauteur);
-      for (var y = y0; y <= hauteur; y += pas) {
-        for (var x = x0; x <= largeur; x += pas) {
-          ctxFond.fillRect(x - POINT / 2, y - POINT / 2, POINT, POINT);
-        }
-      }
       dessiner(performance.now());
     }
 
@@ -198,7 +182,6 @@
     function dessiner(maintenant) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, toile.width, toile.height);
-      ctx.drawImage(fond, 0, 0);
       ctx.setTransform(densite, 0, 0, densite, 0, 0);
       ondes = ondes.filter(function (onde) {
         var t = onde.fige !== undefined ? onde.fige : (maintenant - onde.depart) / DUREE_ONDE;
@@ -226,7 +209,7 @@
     dimensionner();
 
     /* La bande change de taille (écran tourné, « Lire la suite »
-       déplié) : la trame se redessine à sa nouvelle mesure. */
+       déplié) : la toile se remet à sa nouvelle mesure. */
     if ("ResizeObserver" in window) {
       new ResizeObserver(function () {
         var boite = toile.getBoundingClientRect();

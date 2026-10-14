@@ -39,10 +39,10 @@
 
 /* ------------------------------------------------------------
    PIED DE PAGE
-   Le seul grand aplat de nuit du site : il ferme la page comme la
-   dalle ferme le chantier, sous le filet rouge du toit. Ses colonnes
-   sont des cases d'un pixel, et le nom de l'entreprise s'y inscrit
-   en très grand.
+   La nuit qui ferme la page comme la dalle ferme le chantier, sous le
+   filet rouge du toit, sur la trame du relevé comme toute la nuit du
+   site (.sur-sombre). Ses colonnes sont des cases d'un pixel, et le nom
+   de l'entreprise s'y inscrit en très grand.
    ------------------------------------------------------------ */
 .pied{
   color:var(--c-encre);box-shadow:var(--filet-toit);
@@ -54,7 +54,8 @@
    leur intitulé (nav.js pose les boutons, la feuille les replie dès le
    premier affichage pour que rien ne bouge). Trois colonnes ouvertes
    dès 768 px, quatre sur grand écran. */
-/* Les cases sont transparentes : le nacré du pied passe dessous.
+/* Les cases sont transparentes : le nacré et la trame du pied passent
+   dessous.
    Chacune trace son bord droit et son bord bas, la grille les deux
    autres — un seul trait entre deux cases. */
 .pied__grille{

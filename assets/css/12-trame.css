@@ -1,9 +1,11 @@
 /* ============================================================
    DSG RÉNOVATION — 12 · TRAME DU RELEVÉ
-   La toile que trame.js pose sous le contenu de la bande de noir
-   nacré : derrière le texte et les cases, devant le nacré. La bande
-   forme son propre empilement : la toile y passe sous tout, sans
-   qu'aucun bloc de la bande ait à se placer.
+   Les points de la trame sont peints par la feuille, sur toute la nuit
+   (--trame-fond, .sur-sombre, 00-jetons.css). La toile que trame.js
+   pose dans la bande de noir nacré n'y ajoute que l'onde : derrière le
+   texte et les cases, devant le fond. La bande forme son propre
+   empilement : la toile y passe sous tout, sans qu'aucun bloc de la
+   bande ait à se placer.
    ============================================================ */
 .section.sur-sombre{isolation:isolate}
 
@@ -16,7 +18,8 @@
 }
 
 /* Couleurs imposées (contraste élevé de Windows) : la toile garderait
-   ses couleurs à elle, hors du thème du visiteur. */
+   ses couleurs à elle, hors du thème du visiteur (les points de la
+   feuille, un dégradé, y tombent d'eux-mêmes). */
 @media (forced-colors:active){
   .trame{display:none}
 }
