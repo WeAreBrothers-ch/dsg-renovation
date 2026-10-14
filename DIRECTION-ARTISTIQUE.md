@@ -23,10 +23,12 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
   l'accueil et « Prochaine étape » portent le même filet. À l'arrivée, l'amorce part la première et le filet
   se tire à la règle derrière elle ;
 - **les parties noires doivent toujours avoir un fond** : la trame n'existait que dans la toile de `trame.js`,
-  s'effaçait aux deux cinquièmes sous la colonne de texte — au téléphone, toute la largeur —, et le pied comme
-  la barre mobile restaient d'un noir nacré nu. **Toute la nuit porte désormais la trame**, peinte par la
-  feuille (`--trame-fond`, posé par `.sur-sombre`) : bandes, pied de page, barre mobile, d'égale force
-  partout, avec ou sans script. La toile ne porte plus que l'onde, posée sur les points de la feuille.
+  s'effaçait aux deux cinquièmes sous la colonne de texte — au téléphone, toute la largeur —, le pied comme
+  la barre mobile restaient d'un noir nacré nu, et les cases mates posées dans la bande (chiffres, déroulés,
+  méthode) la recouvraient d'un noir uni. **Toute la nuit porte désormais la trame**, peinte par la feuille
+  (`--trame-fond`, posé par `.sur-sombre`) : bandes, pied de page, barre mobile, et les cases mates sur leur
+  noir, d'égale force partout, avec ou sans script. La toile ne porte plus que l'onde, posée sur les points
+  de la feuille.
 
 **Le mur à l'entrée, 12/10/2026 (v6.8).** Demande de l'agence : avant d'entrer sur le site, un mur de briques
 aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écrit qu'il faut le casser pour entrer.
@@ -361,7 +363,8 @@ rose `rgba(232,176,150,.07)` au pied à droite, champagne `rgba(240,214,170,.05)
 dégradé de noir (`#201F1E` → `#1B1B1B` → `#1D1C1A`, 155°). Il couvre le fond de `.sur-sombre` (bandes, pied,
 barre mobile) et le survol des boutons rouges. Au plus clair, il atteint `#32302D` : chaque texte de la nuit y
 garde son seuil (troisième valeur ci-dessous). Les cases posées sur la nuit restent d'un noir mat, comme des
-pièces sur une table laquée ; celles du pied sont transparentes, le nacré passe dessous.
+pièces sur une table laquée, et portent la trame (v6.9) ; celles du pied sont transparentes, le nacré et la
+trame passent dessous.
 
 `--nacre-texte` : le même nacré en lettres (`#72716F` → `#A6A4A5` → `#B9A58C` → `#A6A4A5` → `#72716F`), pour
 l'enseigne du pied (3.5 au plus sombre, seuil des grands textes 3:1).
@@ -423,7 +426,8 @@ nacré — bandes, pied de page, barre mobile —, d'égale force d'un bord à l
 avec ou sans script. Aucun noir n'est jamais à nu. Jamais sur un fond clair. Dans la bande de `<main>`, la toile
 de `trame.js` n'ajoute que l'onde : `--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas
 qui s'éteint) ; `--trame-masque` : sous la colonne de texte, accrochée à gauche, l'onde ne garde que les deux
-cinquièmes de sa force. Les cases mates posées dans la bande la recouvrent. Cachée en couleurs imposées et à
+cinquièmes de sa force. Les cases mates posées dans la bande (`.preuve`, `.etape`) portent la même trame sur
+leur noir mat, centrée dans la case (`12-trame.css`) ; l'onde passe sous elles. Cachée en couleurs imposées et à
 l'impression.
 
 ### Le mur à l'entrée (v6.8)

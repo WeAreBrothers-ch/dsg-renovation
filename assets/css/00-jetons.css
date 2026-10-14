@@ -155,7 +155,8 @@
 
   /* ---------- La trame du relevé ----------
      Toute la nuit porte le quadrillage du géomètre — bandes, pied de
-     page, barre mobile : aucun noir n'est jamais à nu. Un point carré
+     page, barre mobile, cases mates des bandes : aucun noir n'est
+     jamais à nu. Un point carré
      de 2 px tous les 24 px, une chaux à 14 % (le point seul fait 1.6
      sur la nuit : un décor, que le texte domine de loin), d'égale force
      d'un bord à l'autre, sous le texte comme ailleurs. La feuille la
@@ -223,7 +224,7 @@
    d'un noir mat, sans reflet, 3.4, et 3.0 au survol, sur la nuit
    élevée (grand texte, seuil 3:1). Le fond porte ses reflets ; les
    cases posées dessus restent d'un noir mat, comme des pièces sur une
-   table laquée.
+   table laquée, et portent la trame comme lui (12-trame.css).
    Contrastes : nuit / élevée / reflet le plus clair. */
 .sur-sombre{
   --c-papier:var(--c-noir);

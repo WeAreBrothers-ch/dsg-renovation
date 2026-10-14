@@ -164,7 +164,7 @@
   padding:var(--sp-4) var(--sp-4) var(--sp-5);background:var(--c-papier);
   transition:background-color var(--d-normal) var(--e-standard);
 }
-@media (hover:hover) and (pointer:fine){.preuve:hover{background:var(--c-fiche)}}
+@media (hover:hover) and (pointer:fine){.preuve:hover{background-color:var(--c-fiche)}}
 .preuve__onglet{color:var(--c-encre)}
 .preuve__chiffre{display:flex;align-items:flex-start;padding-top:var(--sp-3)}
 .preuve__val{

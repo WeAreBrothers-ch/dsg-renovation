@@ -17,6 +17,17 @@
   mask-image:var(--trame-masque);
 }
 
+/* Les cases mates posées dans la nuit — chiffres de l'entreprise,
+   déroulés, méthode d'une prestation — portent la trame elles aussi :
+   aucun noir n'est à nu. Elles restent d'un noir mat, sans le nacré
+   (le rouge des chiffres y garde son seuil), et leur trame est centrée
+   dans la case comme celle de la bande l'est dans la bande. */
+.sur-sombre :is(.preuve,.etape){
+  background-image:var(--trame-fond);
+  background-size:var(--trame-pas) var(--trame-pas);
+  background-position:var(--trame-calage) var(--trame-calage);
+}
+
 /* Couleurs imposées (contraste élevé de Windows) : la toile garderait
    ses couleurs à elle, hors du thème du visiteur (les points de la
    feuille, un dégradé, y tombent d'eux-mêmes). */

@@ -176,7 +176,8 @@ rangée de cases mais une barre blanche d'un bord à l'autre, fermée par
 un filet clair, ses commandes en mots (« Appeler », « Menu » et ses deux
 traits) ; **l'intitulé de section** perd son chevron, qui se lisait comme
 une flèche à déplier, et se pose sur un filet amorcé du rouge du toit ;
-**toute la nuit porte la trame** — bandes, pied de page, barre mobile —,
+**toute la nuit porte la trame** — bandes et leurs cases, pied de page,
+barre mobile —,
 peinte par la feuille (`--trame-fond`), d'égale force partout, avec ou
 sans script ; `trame.js` n'y ajoute plus que l'onde.
 
