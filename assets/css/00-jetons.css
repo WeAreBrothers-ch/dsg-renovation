@@ -143,7 +143,8 @@
   --bd-fin:1px solid var(--c-ligne);
   /* Le filet du toit : un trait rouge de 4 px en tête du pied de page,
      la ligne du toit du logo posée sur la dalle qui ferme la page. */
-  --filet-toit:inset 0 4px 0 var(--c-rouge);
+  --filet-toit-ep:4px;
+  --filet-toit:inset 0 var(--filet-toit-ep) 0 var(--c-rouge);
 
   /* Repère d'angle : le carré posé à cheval sur chaque coin d'un cadre,
      du cadre à plat (--c-cadre-plein). */
@@ -154,26 +155,31 @@
   --amorce:24px;
 
   /* ---------- La trame du relevé ----------
-     Toute la nuit porte le quadrillage du géomètre — bandes, pied de
-     page, barre mobile, cases mates des bandes : aucun noir n'est
-     jamais à nu. Un point carré
-     de 2 px tous les 24 px, une chaux à 14 % (le point seul fait 1.6
-     sur la nuit : un décor, que le texte domine de loin), d'égale force
-     d'un bord à l'autre, sous le texte comme ailleurs. La feuille la
-     peint elle-même (--trame-fond, posé par .sur-sombre) : elle est là
-     dès le premier affichage, avec ou sans script. Les points sont
-     centrés dans la surface : ses bords tombent également à gauche et à
-     droite (--trame-calage). Dans les bandes de <main>, une onde carrée,
-     au rouge écrit de la nuit, s'y propage depuis le point touché
-     (trame.js, 12-trame.css) ; elle s'efface à demi sous la colonne de
-     texte, accrochée à gauche (--trame-masque). */
+     Toute la nuit porte le quadrillage du géomètre — les bandes et
+     leurs cases, le pied de page : aucun noir n'est jamais à nu. Seule
+     la barre d'action du téléphone garde le nacré seul
+     (05-navigation.css). Un point carré de 2 px tous les 24 px, une
+     chaux à 14 % (le point seul fait 1.6 sur la nuit : un décor, que le
+     texte domine de loin), d'égale force d'un bord à l'autre, sous le
+     texte comme ailleurs. La feuille la peint elle-même (--trame-fond,
+     posé par .sur-sombre) : elle est là dès le premier affichage, avec
+     ou sans script. Les points sont centrés dans la surface : ses bords
+     tombent également à gauche et à droite (--trame-calage). Dans les
+     bandes de <main> et dans le pied, une onde carrée, au rouge écrit
+     de la nuit, s'y propage depuis le point touché (trame.js,
+     12-trame.css) ; elle s'efface à demi sous la colonne de texte,
+     accrochée à gauche (--trame-masque). */
   --trame-pas:24px;
   --trame-taille:2px;
   --trame-point:rgba(var(--c-craie-rgb),.14);
   --trame-onde:var(--c-rouge-clair);
   --trame-masque:linear-gradient(100deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,1) 55%);
   /* Un carreau par pas, son point dans l'angle haut gauche ; le calage
-     met le centre d'un point au milieu de la surface. */
+     met le centre d'un point au milieu de la surface, arrondi au pixel
+     (ci-dessous) : une surface de largeur ou de hauteur impaire — un
+     téléphone de 375 ou 393 px, une bande de 1308,4 px — poserait sinon
+     ses points à cheval sur deux pixels, flous, et l'onde de trame.js
+     ne tomberait plus dessus. */
   --trame-fond:conic-gradient(at var(--trame-taille) var(--trame-taille),transparent 75%,var(--trame-point) 0);
   --trame-calage:calc(50% + (var(--trame-pas) - var(--trame-taille)) / 2);
 
@@ -195,6 +201,12 @@
   /* Ce que le mur déborde de l'écran, en haut et en bas : aucune barre
      de navigateur, aucun rebond d'un glissé ne laisse voir le site. */
   --mur-deborde:max(8rem,20vh);
+}
+
+/* Le calage de la trame arrondi au pixel inférieur, là où le navigateur
+   connaît round() ; trame.js compte ses nœuds de la même façon. */
+@supports (width:round(down,1.5px,1px)){
+  :root{--trame-calage:round(down,50% + (var(--trame-pas) - var(--trame-taille)) / 2,1px)}
 }
 
 /* ============================================================
@@ -219,12 +231,12 @@
 
 /* Noir nacré : une bande par page, le pied et la barre mobile. Le
    rouge clair y devient la couleur écrite, et le bouton d'appel garde
-   son aplat rouge : au survol, c'est la chaux qui le recouvre. Les
-   chiffres gardent le rouge du toit (--c-eclat) : leurs cases sont
-   d'un noir mat, sans reflet, 3.4, et 3.0 au survol, sur la nuit
-   élevée (grand texte, seuil 3:1). Le fond porte ses reflets ; les
-   cases posées dessus restent d'un noir mat, comme des pièces sur une
-   table laquée, et portent la trame comme lui (12-trame.css).
+   son aplat rouge : au survol, c'est la chaux qui le recouvre. Le
+   fond porte ses reflets et la trame ; les cases posées dessus sont
+   des cadres sans fond : le nacré, la trame et son onde passent
+   dessous (12-trame.css). Les chiffres y gardent le rouge du toit
+   (--c-eclat) : 3.05 au plus bas sur le nacré, mesuré sous chaque
+   chiffre (grand texte, seuil 3:1).
    Contrastes : nuit / élevée / reflet le plus clair. */
 .sur-sombre{
   --c-papier:var(--c-noir);

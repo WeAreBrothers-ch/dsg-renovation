@@ -176,10 +176,12 @@ rangée de cases mais une barre blanche d'un bord à l'autre, fermée par
 un filet clair, ses commandes en mots (« Appeler », « Menu » et ses deux
 traits) ; **l'intitulé de section** perd son chevron, qui se lisait comme
 une flèche à déplier, et se pose sur un filet amorcé du rouge du toit ;
-**toute la nuit porte la trame** — bandes et leurs cases, pied de page,
-barre mobile —,
-peinte par la feuille (`--trame-fond`), d'égale force partout, avec ou
-sans script ; `trame.js` n'y ajoute plus que l'onde.
+**toute la nuit porte la même trame animée** — bandes, leurs cases
+(sans fond, la trame passe dessous) et pied de page ; seule la barre
+d'action du téléphone garde le nacré seul —, peinte par la feuille
+(`--trame-fond`), d'égale force partout, avec ou sans script ;
+`trame.js` n'y ajoute plus que l'onde, posée pixel pour pixel sur ses
+points.
 
 Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
 sur le site de l'extérieur trouve l'écran couvert d'un mur dessiné en
@@ -334,7 +336,7 @@ pas bougé d'un pixel.
 | `dossier.js` | filtres des réalisations |
 | `formulaire.js` | vérification, prestation pré-cochée, photos (vignettes), touche Entrée « Suivant », envoi vers `envoi.php` |
 | `carte.js` | plan du Léman : une commune survolée, sur le plan ou dans la liste, se marque des deux côtés |
-| `trame.js` | onde de la trame dans la bande de noir (les points sont peints par la feuille) : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
+| `trame.js` | onde de la trame dans la bande de noir et le pied (les points sont peints par la feuille) : onde carrée au toucher, deux ondes une seule fois à l'arrivée, onde figée en mouvement réduit |
 
 Tout est neutralisé si le visiteur demande moins de mouvement
 (`prefers-reduced-motion`), et le contenu reste lisible sans

@@ -3,9 +3,11 @@
    La nuit porte la trame du plan : un point tous les --trame-pas,
    comme le quadrillage du géomètre, que la feuille peint elle-même
    (--trame-fond, 00-jetons.css). Ici, dans la bande de noir nacré de
-   chaque page, une onde carrée — un plan n'a pas d'angle arrondi —
-   s'y propage au rouge écrit de la nuit depuis le point qu'on touche :
-   la toile ne porte que l'onde, posée sur les points de la feuille.
+   chaque page et dans le pied, une onde carrée — un plan n'a pas
+   d'angle arrondi — s'y propage au rouge écrit de la nuit depuis le
+   point qu'on touche : la toile ne porte que l'onde, posée point pour
+   point sur ceux de la feuille. Les cases de la bande n'ont pas de
+   fond : l'onde passe sous elles comme la trame.
 
    Transposé du « Sonar Grid » de 21st.dev (composant React) : même
    idée, écrite pour ce site, sans dépendance.
@@ -22,10 +24,13 @@
 (function () {
   "use strict";
 
-  var bandes = document.querySelectorAll("main .section.sur-sombre");
+  var bandes = document.querySelectorAll("main .section.sur-sombre, .pied.sur-sombre");
   if (!bandes.length || !("getContext" in document.createElement("canvas"))) { return; }
 
   var mouvementReduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* La feuille arrondit le milieu de la surface au pixel, si elle le
+     peut (--trame-calage, 00-jetons.css) : la toile fait de même. */
+  var calageArrondi = !!(window.CSS && CSS.supports && CSS.supports("width", "round(down, 1.5px, 1px)"));
 
   /* Une onde vit 3 s. Elle porte jusqu'à RAYON_MAX px au bureau, moins
      au téléphone (voir portee()). Sa crête allume les points sur un
@@ -72,6 +77,9 @@
 
     var largeur = 0;
     var hauteur = 0;
+    /* Premier nœud de la toile : là où la feuille pose ses points. */
+    var origineX = 0;
+    var origineY = 0;
     var densite = 1;
     var pas = 24;
     var couleurOnde = "";
@@ -85,21 +93,66 @@
       couleurOnde = style.getPropertyValue("--trame-onde").trim();
     }
 
-    /* Décalage de la trame : un point au milieu de la bande, comme la
-       feuille les pose (--trame-calage) — l'onde allume ses points. */
-    function origine(cote) {
-      return (cote / 2) % pas;
+    /* Reste positif d'une division : un nœud à gauche de la toile
+       donne un premier nœud dans la toile, pas avant elle. */
+    function modulo(a, b) {
+      return ((a % b) + b) % b;
     }
 
+    /* Ce dont dépendent les nœuds : la bande, au centième de pixel, et
+       la densité de l'écran (un zoom la change). */
+    function mesure() {
+      var cadre = bande.getBoundingClientRect();
+      return [cadre.width, cadre.height, window.devicePixelRatio || 1]
+        .map(function (v) { return v.toFixed(2); }).join(" ");
+    }
+
+    /* Le milieu d'un côté de la bande, là où la feuille pose un point :
+       arrondi au pixel inférieur comme --trame-calage (un point de
+       --trame-taille dont le bord gauche tombe sur un pixel entier). */
+    function milieu(cote) {
+      var bord = cote / 2 - POINT / 2;
+      return (calageArrondi ? Math.floor(bord) : bord) + POINT / 2;
+    }
+
+    /* La toile se mesure à la bande, à la densité réelle de l'écran
+       (trois pixels par point au téléphone) : une toile plus grossière,
+       agrandie, flouterait l'onde et la décalerait d'un pixel sur les
+       points de la feuille. Ceux-ci sont centrés dans la bande
+       (--trame-calage) : un point au milieu, les autres de pas en pas.
+       La toile peut ne pas couvrir toute la bande (le pied la tient sous
+       son filet rouge) : ses nœuds se comptent depuis le milieu de la
+       bande, pas depuis le sien. Quand la bande change de hauteur, les
+       points de la feuille se recentrent : les ondes en cours se
+       reposent sur les nouveaux nœuds. */
     function dimensionner() {
+      /* La toile reprend d'abord la mesure que lui donne la feuille
+         (toute la bande), puis se fixe à un nombre entier de pixels
+         d'écran : une bande de 474,4 px en fait 1423,2, la toile n'en
+         a que 1423, et le navigateur l'étirerait d'un rien — l'onde
+         baverait d'un pixel au bas de la bande. Fixée par défaut, elle
+         s'arrête un tiers de pixel plus tôt au plus, invisible, ne
+         déborde jamais de la bande et ne s'étire jamais. */
+      toile.style.width = "";
+      toile.style.height = "";
+      densite = Math.min(window.devicePixelRatio || 1, 3);
       var boite = toile.getBoundingClientRect();
-      largeur = Math.round(boite.width);
-      hauteur = Math.round(boite.height);
-      taille = largeur + "x" + hauteur;
-      densite = Math.min(window.devicePixelRatio || 1, 2);
-      toile.width = Math.max(1, Math.round(largeur * densite));
-      toile.height = Math.max(1, Math.round(hauteur * densite));
+      var cadre = bande.getBoundingClientRect();
+      toile.width = Math.max(1, Math.floor(boite.width * densite + 0.01));
+      toile.height = Math.max(1, Math.floor(boite.height * densite + 0.01));
+      largeur = toile.width / densite;
+      hauteur = toile.height / densite;
+      toile.style.width = largeur + "px";
+      toile.style.height = hauteur + "px";
+      taille = mesure();
       lireJetons();
+      origineX = modulo(milieu(cadre.width) - (boite.left - cadre.left), pas);
+      origineY = modulo(milieu(cadre.height) - (boite.top - cadre.top), pas);
+      ondes.forEach(function (onde) {
+        var centre = noeud(onde.x, onde.y);
+        onde.x = centre.x;
+        onde.y = centre.y;
+      });
       dessiner(performance.now());
     }
 
@@ -111,11 +164,9 @@
      * @returns {{x: number, y: number}}
      */
     function noeud(x, y) {
-      var x0 = origine(largeur);
-      var y0 = origine(hauteur);
       return {
-        x: x0 + Math.round((x - x0) / pas) * pas,
-        y: y0 + Math.round((y - y0) / pas) * pas
+        x: origineX + Math.round((x - origineX) / pas) * pas,
+        y: origineY + Math.round((y - origineY) / pas) * pas
       };
     }
 
@@ -153,8 +204,8 @@
       var force = Math.pow(1 - t, 0.9);
       var avant = pas * AVANT;
       var sillage = pas * SILLAGE;
-      var x0 = origine(largeur);
-      var y0 = origine(hauteur);
+      var x0 = origineX;
+      var y0 = origineY;
       var exterieur = rayon + avant;
       /* On ne parcourt que les nœuds du carré qu'atteint l'onde. */
       var colMin = Math.max(0, Math.ceil((onde.x - exterieur - x0) / pas));
@@ -173,16 +224,32 @@
           var k = ecart < 0 ? 1 + ecart / avant : Math.pow(1 - ecart / sillage, 2);
           var cote = POINT + (POINT_CRETE - POINT) * k;
           ctx.globalAlpha = k * force;
-          ctx.fillRect(x - cote / 2, y - cote / 2, cote, cote);
+          poser(x, y, cote);
         }
       }
       ctx.globalAlpha = 1;
     }
 
+    /**
+     * Pose un point carré centré sur un nœud, en pixels d'écran entiers.
+     * Le navigateur peint un point de la feuille sur les pixels dont le
+     * centre tombe dans le point : on arrondit de même, et au repos
+     * (--trame-taille) le point de l'onde couvre exactement celui de la
+     * feuille, sans liseré.
+     * @param {number} x  nœud, en pixels CSS de la toile
+     * @param {number} y
+     * @param {number} cote  côté du point, en pixels CSS
+     */
+    function poser(x, y, cote) {
+      var c = Math.max(1, Math.round(cote * densite));
+      var gauche = Math.ceil(x * densite - c / 2 - 0.5);
+      var haut = Math.ceil(y * densite - c / 2 - 0.5);
+      ctx.fillRect(gauche, haut, c, c);
+    }
+
     function dessiner(maintenant) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, toile.width, toile.height);
-      ctx.setTransform(densite, 0, 0, densite, 0, 0);
       ondes = ondes.filter(function (onde) {
         var t = onde.fige !== undefined ? onde.fige : (maintenant - onde.depart) / DUREE_ONDE;
         if (t >= 1) { return false; }
@@ -209,11 +276,13 @@
     dimensionner();
 
     /* La bande change de taille (écran tourné, « Lire la suite »
-       déplié) : la toile se remet à sa nouvelle mesure. */
+       déplié, polices arrivées) : la toile se remet à sa nouvelle
+       mesure. La mesure exacte de la bande compte, pas seulement celle
+       de la toile : un quart de pixel de hauteur peut déplacer d'un
+       pixel le milieu où la feuille pose ses points. */
     if ("ResizeObserver" in window) {
       new ResizeObserver(function () {
-        var boite = toile.getBoundingClientRect();
-        if (Math.round(boite.width) + "x" + Math.round(boite.height) !== taille) { dimensionner(); }
+        if (mesure() !== taille) { dimensionner(); }
       }).observe(bande);
     }
 

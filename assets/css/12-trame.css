@@ -2,12 +2,12 @@
    DSG RÉNOVATION — 12 · TRAME DU RELEVÉ
    Les points de la trame sont peints par la feuille, sur toute la nuit
    (--trame-fond, .sur-sombre, 00-jetons.css). La toile que trame.js
-   pose dans la bande de noir nacré n'y ajoute que l'onde : derrière le
-   texte et les cases, devant le fond. La bande forme son propre
-   empilement : la toile y passe sous tout, sans qu'aucun bloc de la
-   bande ait à se placer.
+   pose dans la bande de noir nacré et dans le pied n'y ajoute que
+   l'onde : derrière le texte et les cases, devant le fond. La bande
+   forme son propre empilement : la toile y passe sous tout, sans
+   qu'aucun bloc de la bande ait à se placer.
    ============================================================ */
-.section.sur-sombre{isolation:isolate}
+.section.sur-sombre,.pied.sur-sombre{isolation:isolate}
 
 .trame{
   position:absolute;inset:0;z-index:-1;
@@ -16,17 +16,19 @@
   -webkit-mask-image:var(--trame-masque);
   mask-image:var(--trame-masque);
 }
+/* Dans le pied, la toile commence sous le filet rouge du toit : l'onde
+   ne passe pas dessus. Sa hauteur est écrite : en « auto », une toile
+   garde ses proportions au lieu de suivre le pied. trame.js compte ses
+   nœuds depuis le milieu du pied, comme la feuille : ils restent sur
+   les points. */
+.pied>.trame{top:var(--filet-toit-ep);height:calc(100% - var(--filet-toit-ep))}
 
-/* Les cases mates posées dans la nuit — chiffres de l'entreprise,
-   déroulés, méthode d'une prestation — portent la trame elles aussi :
-   aucun noir n'est à nu. Elles restent d'un noir mat, sans le nacré
-   (le rouge des chiffres y garde son seuil), et leur trame est centrée
-   dans la case comme celle de la bande l'est dans la bande. */
-.sur-sombre :is(.preuve,.etape){
-  background-image:var(--trame-fond);
-  background-size:var(--trame-pas) var(--trame-pas);
-  background-position:var(--trame-calage) var(--trame-calage);
-}
+/* Les cases posées dans la nuit — chiffres de l'entreprise, déroulés,
+   méthode d'une prestation — n'ont pas de fond à elles : leur cadre
+   seul les dessine. La trame de la bande passe dessous d'un seul
+   tenant, point pour point, et l'onde avec elle ; au téléphone, les
+   cases d'une glissière défilent sur une trame qui ne bouge pas. */
+.sur-sombre :is(.preuve,.etape){background:none}
 
 /* Couleurs imposées (contraste élevé de Windows) : la toile garderait
    ses couleurs à elle, hors du thème du visiteur (les points de la

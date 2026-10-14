@@ -25,10 +25,15 @@ La v1 du 29/07/2026 (« La preuve par la matière », six références hors BTP)
 - **les parties noires doivent toujours avoir un fond** : la trame n'existait que dans la toile de `trame.js`,
   s'effaçait aux deux cinquièmes sous la colonne de texte — au téléphone, toute la largeur —, le pied comme
   la barre mobile restaient d'un noir nacré nu, et les cases mates posées dans la bande (chiffres, déroulés,
-  méthode) la recouvraient d'un noir uni. **Toute la nuit porte désormais la trame**, peinte par la feuille
-  (`--trame-fond`, posé par `.sur-sombre`) : bandes, pied de page, barre mobile, et les cases mates sur leur
-  noir, d'égale force partout, avec ou sans script. La toile ne porte plus que l'onde, posée sur les points
-  de la feuille.
+  méthode) la recouvraient d'un noir uni. **Toute la nuit porte désormais la même trame animée**, peinte par
+  la feuille (`--trame-fond`, posé par `.sur-sombre`), d'égale force partout, avec ou sans script : les bandes,
+  **leurs cases, qui n'ont plus de fond** (leur cadre seul les dessine : la trame de la bande et son onde
+  passent dessous d'un seul tenant, point pour point, même quand on fait glisser les cases au téléphone), et
+  **le pied de page, qui reçoit l'onde** comme les bandes. La toile de `trame.js` ne porte plus que l'onde,
+  tracée à la densité réelle de l'écran et posée pixel pour pixel sur les points de la feuille, dont le
+  milieu est arrondi au pixel (`round()`) : sur un téléphone de 375 ou 393 px, ou une bande de hauteur
+  fractionnaire, les points tombaient à cheval sur deux pixels. Seule la **barre d'action du téléphone**
+  (« Appeler », « Devis gratuit ») garde le nacré seul, à la demande de l'agence.
 
 **Le mur à l'entrée, 12/10/2026 (v6.8).** Demande de l'agence : avant d'entrer sur le site, un mur de briques
 aux couleurs du site, à casser en trois clics, pas plus — et qu'il soit écrit qu'il faut le casser pour entrer.
@@ -362,9 +367,8 @@ Les feuilles de composants ne nomment jamais une couleur : elles demandent un r�
 rose `rgba(232,176,150,.07)` au pied à droite, champagne `rgba(240,214,170,.05)` en haut à droite — sur un
 dégradé de noir (`#201F1E` → `#1B1B1B` → `#1D1C1A`, 155°). Il couvre le fond de `.sur-sombre` (bandes, pied,
 barre mobile) et le survol des boutons rouges. Au plus clair, il atteint `#32302D` : chaque texte de la nuit y
-garde son seuil (troisième valeur ci-dessous). Les cases posées sur la nuit restent d'un noir mat, comme des
-pièces sur une table laquée, et portent la trame (v6.9) ; celles du pied sont transparentes, le nacré et la
-trame passent dessous.
+garde son seuil (troisième valeur ci-dessous). Les cases posées sur la nuit n'ont pas de fond (v6.9) : leur
+cadre seul les dessine, le nacré, la trame et son onde passent dessous, comme sous celles du pied.
 
 `--nacre-texte` : le même nacré en lettres (`#72716F` → `#A6A4A5` → `#B9A58C` → `#A6A4A5` → `#72716F`), pour
 l'enseigne du pied (3.5 au plus sombre, seuil des grands textes 3:1).
@@ -399,13 +403,14 @@ tenait plus son seuil au reflet).
 | `--c-signal-fonce` | = noir | survol des boutons d'appel : le noir nacré (`--fond-survol-signal`) recouvre le rouge | texte blanc dessus : 17.2 |
 | `--c-accent` | = rouge sombre | liens, astérisques des champs obligatoires, erreurs, repère « vous êtes ici » (rubrique consultée, onglet ouvert) | 7.2 / 6.4 / 5.7 |
 | `--c-marque` | = rouge sombre | amorce du filet des intitulés, numéros d'étape (01, 02…), puces | 7.2 / 6.4 / 5.7 |
-| `--c-eclat` | = rouge | les chiffres de l'entreprise et leur « + » (24 px) ; grand texte seulement | 5.1 / 4.6 / 4.1 ; 3.4 sur la nuit (seuil 3:1) |
+| `--c-eclat` | = rouge | les chiffres de l'entreprise et leur « + » (24 px) ; grand texte seulement | 5.1 / 4.6 / 4.1 ; 3.05 au plus bas sur la nuit (seuil 3:1) |
 
 Les marques prenaient le chêne en v5 ; leur rôle reste distinct de l'accent, pour qu'une palette future
 puisse les séparer à nouveau sans toucher aux composants. Dans la nuit, le rouge clair devient la couleur
 écrite (6.1 ; 4.7 au reflet) et le bouton d'appel garde son aplat rouge ; au survol, c'est la chaux qui le
-recouvre, texte noir (15.3). Les chiffres y gardent le rouge du toit : leurs cases sont d'un noir mat, sans
-reflet (3.4 ; 3.0 au survol, sur la nuit élevée). Le rouge ne s'écrit jamais en titre.
+recouvre, texte noir (15.3). Les chiffres y gardent le rouge du toit, posés sur le nacré de la bande (v6.9 :
+leurs cases n'ont plus de fond) : 3.05 au plus bas, mesuré sous chaque chiffre du téléphone au grand écran
+(seuil des grands textes 3:1). Le rouge ne s'écrit jamais en titre.
 
 ### États
 `--c-valide` `#2F6B4A` (6.3) · `--c-alerte` = rouge sombre (7.2), toujours avec son signe — un carré marqué
@@ -421,14 +426,17 @@ ferme la page. Aucun filet rouge sur l'en-tête : essayé, retiré à la demande
 ### La trame
 `--trame-pas` 24 px · `--trame-taille` 2 px · `--trame-point` chaux à 14 % (un point carré, 1.6 sur la nuit : un
 décor, que le texte domine de loin) · `--trame-fond` le carreau d'un pas, son point dans l'angle, que
-`--trame-calage` centre dans la surface. **Toute la nuit la porte** (v6.9) : `.sur-sombre` la pose par-dessus le
-nacré — bandes, pied de page, barre mobile —, d'égale force d'un bord à l'autre, sous le texte comme ailleurs,
-avec ou sans script. Aucun noir n'est jamais à nu. Jamais sur un fond clair. Dans la bande de `<main>`, la toile
-de `trame.js` n'ajoute que l'onde : `--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas
-qui s'éteint) ; `--trame-masque` : sous la colonne de texte, accrochée à gauche, l'onde ne garde que les deux
-cinquièmes de sa force. Les cases mates posées dans la bande (`.preuve`, `.etape`) portent la même trame sur
-leur noir mat, centrée dans la case (`12-trame.css`) ; l'onde passe sous elles. Cachée en couleurs imposées et à
-l'impression.
+`--trame-calage` centre dans la surface, arrondi au pixel inférieur (`round()`, là où le navigateur le connaît).
+**Toute la nuit la porte** (v6.9) : `.sur-sombre` la pose par-dessus le nacré — bandes et pied de page —, d'égale
+force d'un bord à l'autre, sous le texte comme ailleurs, avec ou sans script. Aucun noir n'est jamais à nu.
+Exceptions : la barre d'action du téléphone, qui garde le nacré seul ; les fonds clairs. Les cases posées dans
+une bande (`.preuve`, `.etape`) n'ont pas de fond : la trame de la bande passe dessous, d'un seul tenant
+(`12-trame.css`). Dans chaque bande de `<main>` et dans le pied, la toile de `trame.js` n'ajoute que l'onde :
+`--trame-onde` = rouge clair (la crête, 3,5 px, et un sillage de trois pas qui s'éteint) ; `--trame-masque` :
+sous la colonne de texte, accrochée à gauche, l'onde ne garde que les deux cinquièmes de sa force. La toile est
+à la densité réelle de l'écran et compte ses nœuds depuis le milieu de la surface, arrondi comme la feuille :
+chaque point de l'onde couvre exactement un point de la trame. Dans le pied, elle commence sous le filet rouge
+(`--filet-toit-ep`). Cachée en couleurs imposées et à l'impression.
 
 ### Le mur à l'entrée (v6.8)
 `--mur-papier` = la chaux · `--mur-trait` `#C3BDB4`, l'encre à 24 % sur la chaux, rendue opaque pour ne pas

@@ -165,6 +165,13 @@
   transition:background-color var(--d-normal) var(--e-standard);
 }
 @media (hover:hover) and (pointer:fine){.preuve:hover{background-color:var(--c-fiche)}}
+/* Dans la nuit, les cases n'ont pas de fond : la trame de la bande
+   passe dessous (12-trame.css). L'encre des interstices remplirait
+   alors les cases ; chacune trace son contour, opaque, et deux contours
+   voisins se confondent dans l'interstice. Le bord du relevé reste
+   transparent : le cadre tombe où il tombait. */
+.sur-sombre .preuves{background:none;border-color:transparent}
+.sur-sombre .preuve{outline:1px solid var(--c-cadre-plein)}
 .preuve__onglet{color:var(--c-encre)}
 .preuve__chiffre{display:flex;align-items:flex-start;padding-top:var(--sp-3)}
 .preuve__val{
