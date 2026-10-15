@@ -192,9 +192,11 @@
    Le même blanc que la page : on change de pièce, pas d'univers. Son
    haut est la barre elle-même, case pour case — la marque, le combiné,
    puis « Fermer » dans la case de « Menu » : rien ne bouge quand on
-   l'ouvre. Dessous, le même langage : des rangées d'un bord à l'autre
-   au trait fin, les prestations en cases deux par deux, les
-   coordonnées en relevé, le devis en case rouge pleine.
+   l'ouvre. Dessous, trois rubriques de même taille, au trait fin ;
+   « Prestations » se déplie en liste simple sous son nom. Au pied,
+   calés en bas de l'écran sous le pouce : le téléphone, le courriel,
+   puis le devis en case rouge pleine. Replié, tout tient sur un écran
+   de téléphone, sans défiler.
    ------------------------------------------------------------ */
 .menu{
   position:fixed;inset:0;z-index:70;
@@ -205,8 +207,8 @@
   transition:opacity 260ms var(--e-sortie),visibility 0s linear 260ms;
 }
 .menu[data-ouvert="true"]{opacity:1;visibility:visible;transition-delay:0s}
-/* Plus haut que l'écran, le menu défile sous sa barre : ses parties ne
-   se tassent pas. */
+/* Plus haut que l'écran (liste dépliée sur un petit téléphone), le
+   menu défile sous sa barre : ses parties ne se tassent pas. */
 .menu>*{flex-shrink:0}
 .menu__haut{
   position:sticky;top:0;z-index:1;
@@ -222,8 +224,9 @@
           mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 1l12 12M13 1 1 13' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
 }
 
-/* Les rubriques : une rangée chacune, d'un bord à l'autre, le nom en
-   grand et la flèche au bout. Elles arrivent l'une après l'autre. */
+/* Les rubriques : une rangée chacune, d'un bord à l'autre, le nom à
+   gauche, la flèche discrète au bout. Elles arrivent l'une après
+   l'autre. */
 .menu__liste>li{
   border-bottom:1px solid var(--c-ligne);
   opacity:0;transform:translateY(12px);
@@ -232,58 +235,71 @@
 .menu[data-ouvert="true"] .menu__liste>li{opacity:1;transform:none}
 .menu__liste>li:nth-child(2){transition-delay:40ms}
 .menu__liste>li:nth-child(3){transition-delay:80ms}
-.menu__liste>li:nth-child(4){transition-delay:120ms}
 .menu__rubrique{
   display:flex;align-items:center;gap:var(--sp-3);
-  min-height:80px;padding-inline:var(--grille-marge);
-  font-family:var(--f-titre);font-weight:500;
-  font-size:clamp(1.75rem,7.4vw,2.5rem);letter-spacing:-.025em;line-height:1.1;
+  width:100%;min-height:64px;padding-inline:var(--grille-marge);
+  font-family:var(--f-titre);font-weight:500;text-align:left;
+  font-size:clamp(1.5rem,6.4vw,1.75rem);letter-spacing:-.02em;line-height:1.15;
+  color:var(--c-encre);
+  transition:background-color var(--d-rapide) var(--e-standard);
 }
 .menu__rubrique::after{
-  content:"";width:15px;height:10px;margin-left:auto;background:currentColor;
+  content:"";flex:0 0 auto;width:15px;height:10px;margin-left:auto;background:var(--c-encre-40);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
 }
+/* « Prestations » ouvre son volet : un chevron, qui se retourne. */
+.menu__deplier::after{
+  width:14px;height:8px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+  transition:rotate var(--d-normal) var(--e-sortie);
+}
+.menu__groupe[data-ouvert="true"] .menu__deplier::after{rotate:180deg}
 /* La rubrique consultée : le carré rouge devant son nom. */
-.menu__rubrique[aria-current]::before,.menu__sous a[aria-current]::before{
+.menu__rubrique:is([aria-current],[data-courante])::before,.menu__sous a[aria-current]::before{
   content:"";flex:0 0 auto;width:var(--repere);height:var(--repere);background:var(--c-accent);
 }
 
-/* Les prestations, dépliées sous « Prestations » en cases deux par
-   deux, sur la chaux : on voit d'un coup d'œil tout ce que l'entreprise
-   fait. La dernière case mène à la page pilier. */
-.menu__sous{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  background:var(--c-papier-2);border-top:1px solid var(--c-ligne);
+/* Le volet des prestations : une liste simple sur la chaux
+   (.sur-pale), une prestation par ligne, sans cases. Replié, il ne prend aucune place
+   et ses liens sont hors d'atteinte (visibility). */
+.menu__volet{
+  display:grid;grid-template-rows:0fr;visibility:hidden;
+  transition:grid-template-rows var(--d-normal) var(--e-sortie),visibility 0s linear var(--d-normal);
 }
-.menu__sous li:nth-child(odd){border-right:1px solid var(--c-ligne)}
-.menu__sous li:nth-child(n+3){border-top:1px solid var(--c-ligne)}
+.menu__groupe[data-ouvert="true"] .menu__volet{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.menu__sous{min-height:0;overflow:hidden}
+.menu__sous li:first-child{padding-top:var(--sp-2)}
+.menu__sous li:last-child{padding-bottom:var(--sp-2)}
 .menu__sous a{
-  display:flex;align-items:center;gap:var(--sp-2);
-  height:100%;min-height:60px;padding:var(--sp-3) var(--sp-4);
-  font-weight:500;font-size:var(--t-petit);line-height:1.25;color:var(--c-encre);
+  display:flex;align-items:center;gap:var(--sp-3);
+  min-height:44px;padding-inline:var(--grille-marge);
+  font-size:1.0625rem;line-height:1.25;color:var(--c-encre);
 }
-.menu__sous li:nth-child(odd) a{padding-left:var(--grille-marge)}
-.menu__sous .menu__tout{color:var(--c-accent)}
+.menu__sous .menu__tout{font-weight:500;color:var(--c-accent)}
 .menu__sous .menu__tout::after{
-  content:"";flex:0 0 auto;width:15px;height:10px;margin-left:auto;background:currentColor;
+  content:"";flex:0 0 auto;width:15px;height:10px;background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 10'%3E%3Cpath d='M0 5h13.5M9.5 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 
-/* Au pied du menu, les coordonnées en relevé — l'intitulé à gauche, la
-   donnée à droite —, puis le devis : une case rouge pleine d'un bord à
-   l'autre, comme celle de la barre au bureau. */
-.menu__pied{margin-top:auto;padding-top:var(--sp-7);display:flex;flex-direction:column}
+/* Au pied, calés en bas de l'écran : les coordonnées en relevé —
+   l'intitulé à gauche, la donnée à droite —, puis le devis, une case
+   rouge pleine d'un bord à l'autre. */
+.menu__pied{margin-top:auto;padding-top:var(--sp-6);display:flex;flex-direction:column}
 .menu__contact{
   display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
-  min-height:56px;padding-inline:var(--grille-marge);border-top:1px solid var(--c-ligne);
+  min-height:52px;padding-inline:var(--grille-marge);border-top:1px solid var(--c-ligne);
   font-weight:500;font-size:var(--t-ui);font-variant-numeric:tabular-nums;color:var(--c-encre);
 }
 .menu__etiquette{font-weight:400;font-size:var(--t-petit);color:var(--c-encre-60)}
-.menu__devis{width:100%;min-height:64px;padding-inline:var(--grille-marge)}
+.menu__devis{width:100%;min-height:60px;padding-inline:var(--grille-marge)}
 .menu__devis:active{scale:none}
 :is(.menu__rubrique,.menu__sous a,.menu__contact):focus-visible{outline-offset:-3px}
+@media (hover:none){
+  :is(.menu__rubrique,.menu__sous a,.menu__contact):active{background:var(--c-papier-2)}
+}
 
 /* ------------------------------------------------------------
    BARRE D'ACTION MOBILE

@@ -163,7 +163,7 @@ def entete(base, courante, services):
 
 <div class="menu" id="menu" data-ouvert="false" role="dialog" aria-modal="true" aria-label="Menu de navigation">
   <div class="menu__haut">
-    <span class="menu__marque">{logo(base)}</span>
+    <a class="menu__marque" href="{accueil(base)}" aria-label="{MARQUE}, retour à l'accueil">{logo(base)}</a>
     <a class="entete__appel" href="tel:{TELEPHONE_BRUT}" aria-label="Appeler le {TELEPHONE}"><span class="entete__combine" aria-hidden="true"></span></a>
     <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
@@ -180,14 +180,16 @@ def entete(base, courante, services):
 
 
 def _entree_menu(entree, base, services, courante):
-    """Une rubrique du menu plein écran. Les prestations s'y déplient en
-    cases, deux par rangée, la dernière menant à la page pilier."""
+    """Une rubrique du menu plein écran. « Prestations » est un volet :
+    il se déplie en liste simple sous son nom (nav.js), et s'ouvre de
+    lui-même sur une page de prestation. Replié, le menu tient sur un
+    écran de téléphone, devis compris."""
     actuelle = (courante.startswith("services/") if entree["url"] == "services/index.html"
                 else courante == entree["url"])
-    lien = '<a class="menu__rubrique" href="%s%s"%s>%s</a>' % (
-        base, entree["url"], ' aria-current="page"' if actuelle else "", entree["nom"])
+    courant = ' aria-current="page"' if actuelle else ""
     if entree["url"] != "services/index.html":
-        return "<li>%s</li>" % lien
+        return '<li><a class="menu__rubrique" href="%s%s"%s>%s</a></li>' % (
+            base, entree["url"], courant, entree["nom"])
     sous = "".join(
         '<li><a href="%sservices/%s.html"%s>%s</a></li>' % (
             base, s["slug"],
@@ -195,7 +197,11 @@ def _entree_menu(entree, base, services, courante):
             s["nom_menu"])
         for s in services
     ) + '<li><a class="menu__tout" href="%sservices/index.html">Toutes nos prestations</a></li>' % base
-    return '<li>%s<ul class="menu__sous">%s</ul></li>' % (lien, sous)
+    ouvert = "true" if actuelle else "false"
+    return ('<li class="menu__groupe" data-ouvert="%s">'
+            '<button class="menu__rubrique menu__deplier" type="button" aria-expanded="%s" aria-controls="menuPrestations"%s>%s</button>'
+            '<div class="menu__volet" id="menuPrestations"><ul class="menu__sous sur-pale">%s</ul></div></li>'
+            % (ouvert, ouvert, ' data-courante="true"' if actuelle else "", entree["nom"], sous))
 
 
 def scripts(base, modules, version):

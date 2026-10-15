@@ -94,8 +94,32 @@
       var premier = fermer || menu.querySelector("a, button");
       if (premier instanceof HTMLElement) { premier.focus(); }
     } else {
+      replierPrestations();
       burger.focus();
     }
+  }
+
+  /* ---------- Volet des prestations du menu ----------
+     « Prestations » déplie la liste sous son nom, et la replie. Fermer
+     le menu rend au volet son état de départ : ouvert sur une page de
+     prestation, replié ailleurs. */
+  var volet = menu ? menu.querySelector(".menu__groupe") : null;
+  var deplierVolet = volet ? volet.querySelector(".menu__deplier") : null;
+  var voletDepart = volet ? volet.getAttribute("data-ouvert") === "true" : false;
+
+  /** @param {boolean} ouvert */
+  function basculerPrestations(ouvert) {
+    if (!volet || !deplierVolet) { return; }
+    volet.setAttribute("data-ouvert", ouvert ? "true" : "false");
+    deplierVolet.setAttribute("aria-expanded", ouvert ? "true" : "false");
+  }
+
+  function replierPrestations() { basculerPrestations(voletDepart); }
+
+  if (deplierVolet) {
+    deplierVolet.addEventListener("click", function () {
+      basculerPrestations(deplierVolet.getAttribute("aria-expanded") !== "true");
+    });
   }
 
   function menuEstOuvert() {

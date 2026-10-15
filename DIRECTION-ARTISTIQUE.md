@@ -21,10 +21,13 @@ rouge pleine, du haut de la barre à son filet, contre le bord de l'écran. Au t
 combiné rouge dans une case carrée (son nom est dit aux lecteurs d'écran ; « Appeler » s'écrit en toutes
 lettres dans la barre d'action du bas), puis « Menu » dans une case de largeur fixe. Le **menu plein écran**
 garde la barre case pour case — « Fermer » prend la case de « Menu », rien ne bouge — et parle le même
-langage : les rubriques en rangées d'un bord à l'autre au trait fin, la rubrique consultée marquée du carré
-rouge ; les prestations en cases deux par deux sur la chaux, la dernière menant à la page pilier ; le
-téléphone et le courriel en relevé (l'intitulé à gauche, la donnée à droite) ; le devis en case rouge pleine
-d'un bord à l'autre. La ligne « Devis gratuit », qui doublait ce bouton, quitte la liste. Au bureau, « Prestations » ouvre un **panneau en cases** sur toute la largeur, calé sur
+langage : trois rubriques de même taille en rangées d'un bord à l'autre au trait fin, la rubrique consultée
+marquée du carré rouge ; « Prestations » se déplie au toucher en liste simple sur la chaux, une prestation
+par ligne, « Toutes nos prestations » en rouge pour finir (ouverte d'office sur une page de prestation) ;
+au pied, calés en bas de l'écran, le téléphone et le courriel en relevé (l'intitulé à gauche, la donnée à
+droite) puis le devis en case rouge pleine d'un bord à l'autre. Replié, le menu tient sur un écran de
+téléphone, dès 320 × 568, sans défiler (15/10/2026 : la grille de cases beiges et les titres géants
+faisaient un menu plus haut que l'écran, le devis caché en bas). La ligne « Devis gratuit », qui doublait ce bouton, quitte la liste. Au bureau, « Prestations » ouvre un **panneau en cases** sur toute la largeur, calé sur
 la grille : l'intitulé « Nos prestations », une phrase et le renvoi vers la page pilier, puis une case par
 prestation — sa photo (2:1, servie par `images.py`), son nom, son résumé ; la prestation consultée creusée,
 le carré rouge devant son nom ; un voile d'encre à 22 % sur la page. Fermé, le panneau n'est pas affiché :
