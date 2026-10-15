@@ -431,13 +431,13 @@ présents).
      `p=reject` posé par Infomaniak, tant que Google ne signe pas en
      DKIM (l'ancienne zone n'en avait pas).
 
-   Les demandes du formulaire arrivent à `contact@dsg-renov.ch`. Elles
+   Les demandes du formulaire arrivent à `admin@dsg-renov.ch`. Elles
    partent de l'une de deux façons :
    - **SMTP authentifié** (recommandé par Infomaniak, bien reçu par
      Gmail) : trois secrets du dépôt, `SMTP_SERVEUR`,
      `SMTP_UTILISATEUR`, `SMTP_MOT_DE_PASSE` (voir l'en-tête de
      `.github/workflows/infomaniak.yml`). Avec le compte Google de
-     `contact@dsg-renov.ch` : `smtp.gmail.com`, l'adresse, et un mot de
+     `admin@dsg-renov.ch` : `smtp.gmail.com`, l'adresse, et un mot de
      passe d'application (compte Google → Sécurité → Validation en deux
      étapes → Mots de passe des applications). L'expéditeur des
      demandes devient ce compte. Un échec SMTP retombe sur `mail()`,
@@ -445,7 +445,7 @@ présents).
    - **`mail()` du serveur**, sans ces secrets : Infomaniak la livre
      désactivée. Manager → le site → Gérer les paramètres avancés →
      PHP / Apache → activer la fonction mail ; puis onglet Général →
-     E-mail de l'expéditeur : `contact@dsg-renov.ch`. Infomaniak
+     E-mail de l'expéditeur : `admin@dsg-renov.ch`. Infomaniak
      réécrit l'adresse de retour (`root@…infomaniak.ch`) : le courriel
      n'est pas aligné pour DMARC, d'où `p=none`, et peut finir en
      indésirables.

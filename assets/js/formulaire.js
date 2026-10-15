@@ -19,7 +19,7 @@
   var bouton = formulaire.querySelector('button[type="submit"]');
   var POINT_ENVOI = (formulaire.getAttribute("data-envoi") || "").trim();
   var PAGE_MERCI = "merci";
-  var DESTINATAIRE = "contact@dsg-renov.ch";
+  var DESTINATAIRE = "admin@dsg-renov.ch";
   var TELEPHONE = "+41 21 847 02 02";
   var MOTIF_EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 

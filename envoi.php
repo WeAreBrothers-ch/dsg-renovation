@@ -30,7 +30,7 @@ declare(strict_types=1);
 /* ---------- Réglages ---------- */
 
 /* Adresse qui reçoit les demandes. */
-const DESTINATAIRE = 'contact@dsg-renov.ch';
+const DESTINATAIRE = 'admin@dsg-renov.ch';
 
 /* Expéditeur des courriels envoyés par mail(). Infomaniak exige que
    l'adresse existe et soit aussi inscrite dans le Manager (le site →
@@ -39,7 +39,7 @@ const DESTINATAIRE = 'contact@dsg-renov.ch';
    l'adresse devient celle du compte authentifié et le nom reste. La
    réponse part vers le visiteur (Reply-To) quand il a laissé son
    courriel. */
-const EXPEDITEUR = 'Site DSG Rénovation <contact@dsg-renov.ch>';
+const EXPEDITEUR = 'Site DSG Rénovation <admin@dsg-renov.ch>';
 
 /* Réglages de l'envoi SMTP authentifié, que recommande Infomaniak :
    tableau hote, port, utilisateur (adresse complète), mot_de_passe.

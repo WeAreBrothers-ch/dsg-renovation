@@ -52,7 +52,7 @@
   - Start: `npm run start` (Next.js server mode)
   - Port: 3000 (reverse proxy via Infomaniak)
   - Environment: Production with monitoring
-- **Email:** Setup forwarding contact@dsg-renov.ch (Infomaniak mail)
+- **Email:** Setup forwarding admin@dsg-renov.ch (Infomaniak mail)
 - **Monitoring:** Sentry pour error tracking (optionnel P2)
 - **CDN:** Infomaniak caching headers (images Sanity)
 
@@ -203,7 +203,7 @@ Chaque service:
 - Infos bloc:
   - **Adresse:** Avenue de Béthusy 60, 1012 Lausanne
   - **Tél:** +41 21 847 02 02
-  - **Email:** contact@dsg-renov.ch
+  - **Email:** admin@dsg-renov.ch
   - **Horaires:** Lun-Ven 8h-17h (à clarifier)
 
 - Carte Google Maps (embeddée)
