@@ -38,7 +38,6 @@ AddType application/manifest+json .webmanifest
   RewriteRule ^(outils|\.git|\.github)(/|$) - [R=404,L]
   RewriteRule \.(md|py|pyc|sh)$ - [R=404,L]
   RewriteRule ^\.gitignore$ - [R=404,L]
-  RewriteRule ^envoi-reglages\.php$ - [R=404,L]
 
   # 5. ANCIENNES ADRESSES DU SITE WIX → nouvelles pages (301), pour
   #    garder le référencement acquis par l'ancien site. Relevées le
