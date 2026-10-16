@@ -334,10 +334,26 @@
   /* Le nacré seul, sans la trame du reste de la nuit : les deux
      boutons d'action se lisent sur un fond calme. */
   background:var(--nacre);background-color:var(--c-papier);
-  transform:translateY(calc(100% + 8px));
-  transition:transform var(--d-normal) var(--e-sortie);
+  /* Elle paraît sans à-coup : le bandeau se lève de quelques pixels en
+     se fondant, puis les deux boutons arrivent l'un après l'autre. Il
+     montait d'un bloc depuis le bas de l'écran, ce qui faisait
+     sursauter. Il se retire d'un fondu court, sans cascade. */
+  opacity:0;visibility:hidden;transform:translateY(16px);
+  transition:opacity var(--d-rapide) var(--e-standard),transform var(--d-normal) var(--e-standard),visibility 0s linear var(--d-normal);
 }
-.barre-mobile[data-visible="true"]{transform:none}
+.barre-mobile[data-visible="true"]{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity 320ms var(--e-standard),transform 560ms var(--e-sortie),visibility 0s;
+}
+.barre-mobile .btn{
+  opacity:0;transform:translateY(8px);
+  transition:color var(--d-rapide) var(--e-standard),opacity var(--d-rapide) var(--e-standard),transform var(--d-normal) var(--e-standard),scale 160ms var(--e-sortie);
+}
+.barre-mobile[data-visible="true"] .btn{
+  opacity:1;transform:none;
+  transition:color var(--d-rapide) var(--e-standard),opacity 360ms var(--e-standard) 90ms,transform 560ms var(--e-sortie) 90ms,scale 160ms var(--e-sortie);
+}
+.barre-mobile[data-visible="true"] .btn+.btn{transition-delay:0s,160ms,160ms,0s}
 /* Des marges plus courtes que les autres boutons, et la flèche
    seulement dès 360 px : « Devis gratuit » tient sur une ligne jusque
    sur les écrans de 320 px. */
