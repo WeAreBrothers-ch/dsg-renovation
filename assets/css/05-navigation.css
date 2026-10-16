@@ -165,11 +165,12 @@
 .sous-menu__liste{display:contents}
 .sous-menu__liste li{border-left:1px solid var(--c-ligne)}
 .sous-menu__liste li:nth-child(n+4){border-top:1px solid var(--c-ligne)}
-.sous-menu__liste li:nth-child(4n+4){border-left:0}
 /* La première case de la seconde rangée part de la marge, sous
-   l'intitulé ; elle reporte à droite l'air qu'elle n'a pas à gauche :
-   sa photo garde la taille des autres, ses lignes leur hauteur. */
-.sous-menu__liste li:nth-child(4n+4) a{padding-left:0;padding-right:calc(2 * var(--sp-5))}
+   l'intitulé, sans filet à gauche ; elle garde l'air des autres cases
+   autour de sa photo. Collée à la marge, sa photo et son texte
+   touchaient le bord du fond creusé (prestation consultée, survol),
+   comme coupés. */
+.sous-menu__liste li:nth-child(4n+4){border-left:0}
 .sous-menu__liste a{
   display:flex;flex-direction:column;gap:var(--sp-2);
   height:100%;padding:var(--sp-4) var(--sp-5) var(--sp-5);
