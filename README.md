@@ -171,6 +171,21 @@ intitulé posé sur un filet d'encre amorcé de rouge, une grotesque
 (Archivo) pour les titres et une sérif de lecture (Newsreader) pour les
 phrases.
 
+Ce que la v6.11 a corrigé (16/10/2026), au toucher et à la souris :
+**sur une page de prestation, le volet du menu téléphone**, déplié
+d'office, restait sous le doigt et la souris menu fermé — un toucher au
+milieu de la page ouvrait une autre prestation, et au bureau il volait
+la souris au panneau des prestations, qui se refermait aussitôt ; le
+panneau ne se referme plus non plus au clic sur sa flèche, ni quand la
+souris franchit le filet de la barre, et défile sur un écran bas.
+**Après le mur**, la barre du haut et la teinte du navigateur reprennent
+leur blanc dès le troisième coup, sous les briques : la chaux du mur y
+restait pendant toute la chute. **Le comparateur** ne bouge plus quand
+on fait défiler la page le doigt posé sur la photo ; **la visionneuse**
+des réalisations se balaie au doigt et ne montre que les chantiers du
+filtre choisi ; **les logos des régies** tombent en deux rangées pleines
+(quatre et trois) au téléphone et sur tablette, en une seule au bureau.
+
 Ce que la v6.10 a changé (14/10/2026) : **l'en-tête est une barre en
 cases** d'un bord à l'autre de l'écran — filets fins du haut en bas,
 rubrique consultée soulignée de rouge, devis en case rouge pleine contre

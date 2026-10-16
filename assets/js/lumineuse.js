@@ -95,7 +95,9 @@
     if (evenement.key === "ArrowRight") { evenement.preventDefault(); afficher(rang + 1); }
   });
 
-  /* Balayage tactile */
+  /* Balayage tactile. Le geste de côté reste au script
+     (11-lumineuse.css, touch-action) : sinon le navigateur le prend
+     pour lui et l'interrompt (pointercancel), et rien ne défile. */
   var departX = null;
   boite.addEventListener("pointerdown", function (evenement) {
     departX = evenement.pointerType === "touch" ? evenement.clientX : null;
@@ -106,17 +108,22 @@
     if (Math.abs(ecart) > 48) { afficher(ecart > 0 ? rang - 1 : rang + 1); }
     departX = null;
   });
+  boite.addEventListener("pointercancel", function () { departX = null; });
 
   /* Branchement des galeries */
   Array.prototype.forEach.call(galeries, function (galerie) {
     var vues = Array.prototype.slice.call(galerie.querySelectorAll("a[data-vue]"));
     if (!vues.length) { return; }
 
-    vues.forEach(function (vue, index) {
+    vues.forEach(function (vue) {
       vue.addEventListener("click", function (evenement) {
         if (evenement.metaKey || evenement.ctrlKey || evenement.shiftKey) { return; }
         evenement.preventDefault();
-        ouvrir(vues, index, vue);
+        /* Seules les vues à l'écran défilent : un filtre des
+           réalisations (dossier.js) masque des fiches, la visionneuse
+           ne les montre pas et compte celles qui restent. */
+        var visibles = vues.filter(function (v) { return !v.closest("[hidden]"); });
+        ouvrir(visibles, Math.max(0, visibles.indexOf(vue)), vue);
       });
     });
   });

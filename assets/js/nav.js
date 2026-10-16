@@ -22,9 +22,10 @@
 
   /* ---------- Liste des prestations ----------
      Le lien « Prestations » mène à la page pilier ; la case voisine
-     ouvre la liste. Une souris l'ouvre au survol, avec un court délai
-     à la sortie pour ne pas la refermer au moindre écart. Échap la
-     referme et rend le focus au bouton. */
+     ouvre la liste. Une souris l'ouvre au survol, avec un délai à la
+     sortie pour ne pas la refermer au moindre écart : un trajet en
+     biais vers une case lointaine frôle les rubriques voisines. Échap
+     la referme et rend le focus au bouton. */
   if (groupe) {
     var deplier = groupe.querySelector(".nav__deplier");
     var survol = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -39,7 +40,14 @@
     var listeOuverte = function () { return groupe.getAttribute("data-ouvert") === "true"; };
 
     if (deplier) {
-      deplier.addEventListener("click", function () { basculerListe(!listeOuverte()); });
+      deplier.addEventListener("click", function (evenement) {
+        /* À la souris, le survol a déjà ouvert le panneau : le clic qui
+           suit, par réflexe, ne le referme pas sous le pointeur. Il se
+           referme quand la souris s'en va, à Échap ou d'un clic ailleurs.
+           Le clavier (detail 0) et le doigt gardent la bascule. */
+        if (survol.matches && evenement.detail > 0) { basculerListe(true); return; }
+        basculerListe(!listeOuverte());
+      });
     }
     groupe.addEventListener("mouseenter", function () {
       if (survol.matches) { basculerListe(true); }
@@ -47,7 +55,13 @@
     groupe.addEventListener("mouseleave", function () {
       if (!survol.matches) { return; }
       window.clearTimeout(minuterie);
-      minuterie = window.setTimeout(function () { basculerListe(false); }, 180);
+      minuterie = window.setTimeout(function () { basculerListe(false); }, 320);
+    });
+    /* Une page rendue par « Précédent » (cache du navigateur) revient
+       telle qu'on l'a quittée : le panneau, ouvert au clic sur une
+       prestation, s'y referme. */
+    window.addEventListener("pageshow", function (evenement) {
+      if (evenement.persisted) { basculerListe(false); }
     });
     /* Le focus quitte le groupe : la liste se referme. */
     groupe.addEventListener("focusout", function (evenement) {

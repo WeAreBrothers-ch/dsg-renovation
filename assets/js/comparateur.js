@@ -144,7 +144,11 @@
       window.requestAnimationFrame(pas);
     }
 
-    bloc.addEventListener("pointerdown", function (evenement) {
+    /**
+     * Le glissement commence : la poignée suit le pointeur.
+     * @param {PointerEvent} evenement
+     */
+    function saisir(evenement) {
       arreterDemo();
       enCours = true;
       try {
@@ -154,9 +158,32 @@
            continue tant que le pointeur reste sur le bloc. */
       }
       placer(depuisX(evenement.clientX));
+    }
+
+    /* Au doigt, la photo occupe la largeur de l'écran : on la touche
+       pour faire défiler la page. Le doigt posé ne déplace donc rien ;
+       la poignée ne suit qu'un geste de côté (le défilement vertical
+       reste au navigateur, 10-comparateur.css), ou se pose là où l'on
+       a simplement touché. Sinon chaque défilement déplaçait la coupe. */
+    var SEUIL = 8;
+    var appui = null;
+
+    bloc.addEventListener("pointerdown", function (evenement) {
+      if (evenement.pointerType === "touch") {
+        appui = { x: evenement.clientX, y: evenement.clientY };
+        return;
+      }
+      saisir(evenement);
     });
 
     bloc.addEventListener("pointermove", function (evenement) {
+      if (appui) {
+        var dx = Math.abs(evenement.clientX - appui.x), dy = Math.abs(evenement.clientY - appui.y);
+        if (dx < SEUIL || dx < dy) { return; }
+        appui = null;
+        saisir(evenement);
+        return;
+      }
       if (!enCours) { return; }
       evenement.preventDefault();
       placer(depuisX(evenement.clientX));
@@ -166,6 +193,11 @@
      * @param {PointerEvent} evenement
      */
     function relacher(evenement) {
+      if (appui && evenement.type === "pointerup") {
+        arreterDemo();
+        placer(depuisX(evenement.clientX));
+      }
+      appui = null;
       if (!enCours) { return; }
       enCours = false;
       if (bloc.hasPointerCapture(evenement.pointerId)) {

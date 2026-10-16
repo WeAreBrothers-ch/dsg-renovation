@@ -127,6 +127,13 @@
   transition:opacity var(--d-rapide) var(--e-sortie),transform var(--d-normal) var(--e-sortie),display var(--d-normal) allow-discrete;
 }
 .nav__groupe[data-ouvert="true"] .sous-menu{display:block;opacity:1;transform:none}
+/* Le filet de la barre, entre la case et le panneau, appartient à la
+   barre : la souris qui le franchit quittait le groupe. Une bande
+   transparente le couvre, qui est au groupe. */
+.nav__groupe[data-ouvert="true"]::after{content:"";position:absolute;left:0;right:0;top:100%;height:2px}
+/* Sur un écran bas (portable de 600 à 700 px), le panneau défile sous
+   la barre au lieu de sortir de l'écran. */
+.sous-menu{max-height:calc(100vh - var(--h-entete));max-height:calc(100dvh - var(--h-entete));overflow-y:auto;overscroll-behavior:contain}
 @starting-style{
   .nav__groupe[data-ouvert="true"] .sous-menu{opacity:0;transform:translateY(-6px)}
 }
@@ -160,8 +167,9 @@
 .sous-menu__liste li:nth-child(n+4){border-top:1px solid var(--c-ligne)}
 .sous-menu__liste li:nth-child(4n+4){border-left:0}
 /* La première case de la seconde rangée part de la marge, sous
-   l'intitulé. */
-.sous-menu__liste li:nth-child(4n+4) a{padding-left:0}
+   l'intitulé ; elle reporte à droite l'air qu'elle n'a pas à gauche :
+   sa photo garde la taille des autres, ses lignes leur hauteur. */
+.sous-menu__liste li:nth-child(4n+4) a{padding-left:0;padding-right:calc(2 * var(--sp-5))}
 .sous-menu__liste a{
   display:flex;flex-direction:column;gap:var(--sp-2);
   height:100%;padding:var(--sp-4) var(--sp-5) var(--sp-5);
@@ -207,6 +215,8 @@
   transition:opacity 260ms var(--e-sortie),visibility 0s linear 260ms;
 }
 .menu[data-ouvert="true"]{opacity:1;visibility:visible;transition-delay:0s}
+/* Au bureau, la barre a ses rubriques : le menu n'existe pas. */
+@media (min-width:1024px){.menu{display:none}}
 /* Plus haut que l'écran (liste dépliée sur un petit téléphone), le
    menu défile sous sa barre : ses parties ne se tassent pas. */
 .menu>*{flex-shrink:0}
@@ -263,12 +273,16 @@
 
 /* Le volet des prestations : une liste simple sur la chaux
    (.sur-pale), une prestation par ligne, sans cases. Replié, il ne prend aucune place
-   et ses liens sont hors d'atteinte (visibility). */
+   et ses liens sont hors d'atteinte (visibility). Déplié, il suit le
+   menu (inherit), jamais « visible » : un enfant visible dans un menu
+   caché reste sous le doigt et la souris. Sur une page de prestation,
+   où le volet part déplié, ses liens invisibles couvraient la page au
+   téléphone et le panneau des prestations au bureau. */
 .menu__volet{
   display:grid;grid-template-rows:0fr;visibility:hidden;
   transition:grid-template-rows var(--d-normal) var(--e-sortie),visibility 0s linear var(--d-normal);
 }
-.menu__groupe[data-ouvert="true"] .menu__volet{grid-template-rows:1fr;visibility:visible;transition-delay:0s}
+.menu__groupe[data-ouvert="true"] .menu__volet{grid-template-rows:1fr;visibility:inherit;transition-delay:0s}
 .menu__sous{min-height:0;overflow:hidden}
 .menu__sous li:first-child{padding-top:var(--sp-2)}
 .menu__sous li:last-child{padding-bottom:var(--sp-2)}

@@ -23,8 +23,12 @@
 .mur-ferme,.mur-ferme body{overflow:hidden}
 .mur-ferme{background-color:var(--mur-papier)}
 /* Safari (iOS 26) teinte la zone de l'heure d'après ce qui est fixé en
-   haut de la page : l'en-tête, caché sous le mur, y prend sa couleur. */
-.mur-ferme .entete{background-color:var(--mur-papier)}
+   haut de la page : l'en-tête, caché sous le mur, y prend sa couleur.
+   Au troisième coup (« mur-tombe »), quand les briques le couvrent
+   encore, il reprend son blanc : la chaux, la teinte d'une case
+   survolée, restait sur la barre pendant toute la chute, comme si elle
+   était sélectionnée, puis sautait au blanc. */
+.mur-ferme:not(.mur-tombe) .entete{background-color:var(--mur-papier)}
 
 /* Au téléphone, les barres du navigateur (Safari surtout, translucides
    ou flottantes) recouvrent le bas de l'écran, et un glissé fait

@@ -505,6 +505,11 @@
    */
   function abattre(x0, y0) {
     abattu = true;
+    /* La barre et les teintes du navigateur reprennent celles du site
+       tant que les briques les couvrent : rien ne change à la vue
+       quand elles tombent (20-mur.css). */
+    racine.classList.add("mur-tombe");
+    if (teinteBarres && teinteSite) { teinteBarres.setAttribute("content", teinteSite); }
     var maintenant = window.performance.now();
     if (!ctx || reduit) {
       mur.classList.add("est-efface");
@@ -728,7 +733,7 @@
     window.removeEventListener("scroll", placerPied);
     if (pied) { pied.remove(); }
     inertes.forEach(function (element) { element.removeAttribute("inert"); });
-    racine.classList.remove("mur-ferme");
+    racine.classList.remove("mur-ferme", "mur-tombe");
     if (teinteBarres && teinteSite) { teinteBarres.setAttribute("content", teinteSite); }
     mur.remove();
     /* Le plan se trace maintenant (motion.js). */
