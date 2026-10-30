@@ -29,12 +29,12 @@ PAGES = [
     {
         "slug": "remise-en-etat-appartement",
         "numero": "06",
-        "nom": "Remise en état entre deux locations",
-        "nom_menu": "Remise en état",
+        "nom": "Remise en état d'appartement",
+        "nom_menu": "Remise en état d'appartement",
         "resume": "Logement remis en état entre deux locataires, rendu à "
                   "date fixe, nettoyage compris.",
         "lots": ["remise-en-etat-appartement"],
-        "titre": "Remise en état d'appartement à Lausanne — entre locataires",
+        "titre": "Remise en état d'appartement à Lausanne avant relocation",
         "description": (
             "Remise en état d'appartement à Lausanne entre deux locataires : "
             "peinture, joints, sols, nettoyage, logement rendu à date fixe. "
@@ -77,17 +77,17 @@ PAGES = [
         "slug": "renovation-salle-de-bains",
         "numero": "07",
         "nom": "Rénovation de salle de bains",
-        "nom_menu": "Salle de bains",
+        "nom_menu": "Rénovation de salle de bain",
         "resume": "Dépose, étanchéité, carrelage et faïence ; sanitaire et "
                   "électricité coordonnés.",
         "lots": ["renovation-salle-de-bains"],
-        "titre": "Rénovation de salle de bains à Lausanne, étanchéité comprise",
+        "titre": "Rénovation de salle de bain à Lausanne, clé en main",
         "description": (
             "Rénovation de salle de bains à Lausanne : dépose, étanchéité "
             "sous carrelage, faïence et sol, sanitaire et électricité "
             "coordonnés. Devis gratuit."
         ),
-        "h1": ["Rénovation de salle de bains", "à Lausanne"],
+        "h1": ["Rénovation de salle de bain", "à Lausanne"],
         "chapo": "Dépose, support et étanchéité d'abord, carrelage et faïence "
                  "ensuite. Dans une salle de bains, ce qui compte le plus ne "
                  "se voit plus une fois le chantier fini.",
@@ -131,6 +131,7 @@ PAGES = [
 INTERTITRES = {
     "remise-en-etat-appartement": {
         "quoi": "Remise en état|entre deux locataires",
+        "local": "Relouer un appartement|à Lausanne",
         "comment": "Une remise en état,|étape par étape",
         "zone": "Remise en état à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur|la remise en état",
@@ -138,6 +139,7 @@ INTERTITRES = {
     },
     "renovation-salle-de-bains": {
         "quoi": "Rénovation de salle de bains,|de la dépose aux joints",
+        "local": "Une vieille salle de bain :|ce qu'il y a derrière la faïence",
         "comment": "Une salle de bains,|étape par étape",
         "zone": "Rénovation de salle de bains|à Lausanne et sur l'arc lémanique",
         "questions": "Vos questions sur la|rénovation de salle de bains",

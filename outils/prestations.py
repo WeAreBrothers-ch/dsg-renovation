@@ -28,18 +28,18 @@ PAGES = [
     {
         "slug": "renovation-complete",
         "numero": "01",
-        "nom": "Rénovation complète",
-        "nom_menu": "Rénovation complète",
+        "nom": "Rénovation complète d'appartement",
+        "nom_menu": "Rénovation d'appartement",
         "resume": "Appartement, maison ou immeuble repris de fond en comble, "
                   "tous corps de métier coordonnés.",
         "lots": ["renovation-complete"],
-        "titre": "Rénovation complète d'appartement et de maison à Lausanne",
+        "titre": "Rénovation d'appartement et de maison à Lausanne",
         "description": (
-            "Rénovation complète d'appartement ou de maison à Lausanne : tous "
-            "les corps de métier coordonnés, un seul responsable. Devis "
-            "gratuit 72 h après visite."
+            "Rénovation complète d'appartement ou de maison à Lausanne, clé "
+            "en main : tous les corps de métier coordonnés, un seul "
+            "responsable. Devis gratuit."
         ),
-        "h1": ["Rénovation complète", "à Lausanne"],
+        "h1": ["Rénovation d'appartement", "et de maison à Lausanne"],
         "chapo": "Appartement, maison ou immeuble repris de fond en comble. "
                  "Un seul contrat, un seul responsable de chantier, une seule "
                  "date de livraison.",
@@ -61,18 +61,18 @@ PAGES = [
     {
         "slug": "peinture",
         "numero": "02",
-        "nom": "Peinture &amp; revêtements muraux",
-        "nom_menu": "Peinture &amp; revêtements",
+        "nom": "Peinture &amp; papier peint",
+        "nom_menu": "Peinture &amp; papier peint",
         "resume": "Préparation des fonds, mise en teinte, papier peint et "
                   "toile de verre posés sans raccord visible.",
         "lots": ["peinture", "revetements-muraux"],
-        "titre": "Peintre à Lausanne — peinture et papier peint",
+        "titre": "Peintre en bâtiment à Lausanne — entreprise de peinture",
         "description": (
-            "Peintre à Lausanne : préparation des fonds, peinture intérieure "
-            "et extérieure, papier peint et toile de verre, teintes testées "
-            "sur place. Devis gratuit."
+            "Entreprise de peinture à Lausanne : peintre en bâtiment pour "
+            "appartements, villas et immeubles. Peinture intérieure et "
+            "extérieure, papier peint. Devis gratuit."
         ),
-        "h1": ["Peintre à Lausanne :", "peinture et revêtements muraux"],
+        "h1": ["Peintre en bâtiment", "à Lausanne"],
         "chapo": "Une belle peinture, c'est quatre-vingts pour cent de "
                  "préparation. Un papier peint se juge à ses raccords. Dans "
                  "les deux cas, tout se joue sur le fond.",
@@ -101,9 +101,9 @@ PAGES = [
         "lots": ["platrerie", "cloisons", "faux-plafonds"],
         "titre": "Plâtrier à Lausanne — cloisons, enduits et faux plafonds",
         "description": (
-            "Plâtrier à Lausanne : enduits et lissage, cloisons placo ou "
-            "alba, faux plafonds avec éclairage intégré. Devis gratuit 72 h "
-            "après la visite."
+            "Plâtrier-peintre à Lausanne : plâtrerie, enduits et lissage, "
+            "cloisons placo ou alba, faux plafonds avec éclairage intégré. "
+            "Devis gratuit 72 h après visite."
         ),
         "h1": ["Plâtrier à Lausanne :", "plâtrerie, cloisons, faux plafonds"],
         "chapo": "Trois métiers qui dessinent la pièce : ce qui tient les murs, "
@@ -131,18 +131,18 @@ PAGES = [
     {
         "slug": "carrelage-sols",
         "numero": "04",
-        "nom": "Carrelage &amp; sols",
-        "nom_menu": "Carrelage &amp; sols",
+        "nom": "Carrelage, parquet &amp; sols",
+        "nom_menu": "Carrelage &amp; parquet",
         "resume": "Salles d'eau et cuisines recarrelées, parquet, vinyle et "
                   "linoléum posés sur support préparé.",
         "lots": ["carrelage", "pose-de-sol"],
-        "titre": "Carreleur à Lausanne — carrelage, parquet et vinyle",
+        "titre": "Carreleur à Lausanne — carrelage et pose de parquet",
         "description": (
-            "Carreleur à Lausanne : salles de bains, cuisines, grès cérame "
-            "grand format, parquet, vinyle et linoléum posés sur un sol "
-            "préparé. Devis gratuit."
+            "Carreleur à Lausanne : pose de carrelage en salle de bain et "
+            "cuisine, grès cérame grand format, pose de parquet, vinyle et "
+            "linoléum. Devis gratuit."
         ),
-        "h1": ["Carreleur à Lausanne :", "carrelage et sols"],
+        "h1": ["Carreleur à Lausanne :", "carrelage et parquet"],
         "chapo": "Ce sur quoi on marche supporte tout le reste. Le plan de "
                  "pose des carreaux et la mise à niveau du sol se décident "
                  "avant la première colle, jamais après.",
@@ -167,13 +167,13 @@ PAGES = [
         "slug": "nettoyage-fin-de-chantier",
         "numero": "05",
         "nom": "Nettoyage de fin de chantier",
-        "nom_menu": "Nettoyage de chantier",
+        "nom_menu": "Nettoyage fin de chantier",
         "resume": "Logement rendu habitable immédiatement, vitres et "
                   "sanitaires compris.",
         "lots": ["nettoyage-fin-de-chantier"],
-        "titre": "Nettoyage de fin de chantier à Lausanne",
+        "titre": "Nettoyage de fin de chantier et de travaux à Lausanne",
         "description": (
-            "Nettoyage de fin de travaux à Lausanne : poussière de chantier, "
+            "Nettoyage de fin de chantier à Lausanne : poussière de travaux, "
             "vitres, sanitaires, sols. Logement habitable, prêt pour l'état "
             "des lieux. Devis gratuit."
         ),
@@ -209,14 +209,16 @@ PAGES += pages_solutions.PAGES
 # yeux d'un moteur ; chacune porte ici son métier et sa ville.
 INTERTITRES = {
     "renovation-complete": {
-        "quoi": "Une rénovation complète,|tous corps de métier",
+        "quoi": "Rénovation complète d'appartement,|tous corps de métier",
+        "local": "Rénover un appartement|ancien à Lausanne",
         "comment": "Comment se déroule|une rénovation complète",
         "zone": "Rénovation complète à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur|la rénovation complète",
         "voisins": "Les métiers d'une|rénovation complète",
     },
     "peinture": {
-        "quoi": "Nos travaux de peinture|et de revêtements",
+        "quoi": "Nos travaux de peinture|et de papier peint",
+        "local": "Peindre dans l'ancien|à Lausanne",
         "comment": "Un chantier de peinture,|étape par étape",
         "zone": "Peintre à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions|sur la peinture",
@@ -224,6 +226,7 @@ INTERTITRES = {
     },
     "platrerie-cloisons": {
         "quoi": "Plâtrerie, cloisons|et faux plafonds",
+        "local": "Plâtrerie dans les immeubles|anciens de Lausanne",
         "comment": "Un chantier de plâtrerie,|étape par étape",
         "zone": "Plâtrier à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur la|plâtrerie et les cloisons",
@@ -231,13 +234,15 @@ INTERTITRES = {
     },
     "carrelage-sols": {
         "quoi": "Carrelage, parquet|et sols souples",
+        "local": "Carrelage et parquet|dans l'ancien à Lausanne",
         "comment": "Une pose de carrelage,|étape par étape",
         "zone": "Carreleur à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur|le carrelage et les sols",
         "voisins": "Souvent réalisé|avec le carrelage",
     },
     "nettoyage-fin-de-chantier": {
-        "quoi": "Un nettoyage de chantier,|pas un ménage",
+        "quoi": "Nettoyage de fin de travaux,|pas un simple ménage",
+        "local": "Un logement prêt|pour l'état des lieux",
         "comment": "Un nettoyage de fin de chantier,|étape par étape",
         "zone": "Nettoyage de chantier à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur|le nettoyage de chantier",

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Remise en état d'appartement à Lausanne — entre locataires</title>
+<title>Remise en état d'appartement à Lausanne avant relocation</title>
 <meta name="description" content="Remise en état d'appartement à Lausanne entre deux locataires : peinture, joints, sols, nettoyage, logement rendu à date fixe. Devis gratuit.">
 <link rel="canonical" href="https://www.dsg-renov.ch/services/remise-en-etat-appartement">
 
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CH">
 <meta property="og:site_name" content="DSG Rénovation">
-<meta property="og:title" content="Remise en état d'appartement à Lausanne — entre locataires">
+<meta property="og:title" content="Remise en état d'appartement à Lausanne avant relocation">
 <meta property="og:description" content="Remise en état d'appartement à Lausanne entre deux locataires : peinture, joints, sols, nettoyage, logement rendu à date fixe. Devis gratuit.">
 <meta property="og:url" content="https://www.dsg-renov.ch/services/remise-en-etat-appartement">
 <meta property="og:image" content="https://www.dsg-renov.ch/assets/images/nettoyage-hall-logement-lausanne.jpg">
@@ -27,7 +27,7 @@
 <link rel="preload" href="../assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css?v=fe090c7e">
 <script>document.documentElement.className+=" js";addEventListener("load",function(){var h=document.documentElement;if(!h.classList.contains("motion")){h.classList.remove("js")}});</script>
-<script>(function(h){var k="dsg-mur",v=false,d=false,r=document.referrer;try{v=sessionStorage.getItem(k)==="1"}catch(e){}try{d=!!r&&new URL(r).origin===location.origin}catch(e){}if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){h.classList.add("mur-ferme");addEventListener("load",function(){if(!h.classList.contains("mur-pret")){h.classList.remove("mur-ferme");var m=document.getElementById("mur");if(m){m.hidden=true}document.dispatchEvent(new Event("mur:ouvert"))}})}else{try{sessionStorage.setItem(k,"1")}catch(e){}}})(document.documentElement)</script>
+<script>(function(h){var k="dsg-mur",v=false,d=false,r=document.referrer;try{v=sessionStorage.getItem(k)==="1"}catch(e){}d=!!r||!/^\/(index(\.html)?)?$/.test(location.pathname)||/bot|crawl|spider|slurp|lighthouse|headless|inspection|preview|facebook/i.test(navigator.userAgent);if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){h.classList.add("mur-ferme");addEventListener("load",function(){if(!h.classList.contains("mur-pret")){h.classList.remove("mur-ferme");var m=document.getElementById("mur");if(m){m.hidden=true}document.dispatchEvent(new Event("mur:ouvert"))}})}else{try{sessionStorage.setItem(k,"1")}catch(e){}}})(document.documentElement)</script>
 
 <script type="application/ld+json">
 {
@@ -113,12 +113,12 @@
     }
   ],
   "knowsAbout": [
-    "Rénovation complète",
-    "Peinture & revêtements muraux",
+    "Rénovation complète d'appartement",
+    "Peinture & papier peint",
     "Plâtrerie, cloisons & faux plafonds",
-    "Carrelage & sols",
+    "Carrelage, parquet & sols",
     "Nettoyage de fin de chantier",
-    "Remise en état entre deux locations",
+    "Remise en état d'appartement",
     "Rénovation de salle de bains"
   ],
   "openingHoursSpecification": {
@@ -139,8 +139,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Remise en état entre deux locations",
-  "serviceType": "Remise en état entre deux locations",
+  "name": "Remise en état d'appartement",
+  "serviceType": "Remise en état d'appartement",
   "description": "Remise en état d'appartement à Lausanne entre deux locataires : peinture, joints, sols, nettoyage, logement rendu à date fixe. Devis gratuit.",
   "provider": {
     "@id": "https://www.dsg-renov.ch/#entreprise"
@@ -198,7 +198,7 @@
   "url": "https://www.dsg-renov.ch/services/remise-en-etat-appartement",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Prestations — Remise en état entre deux locations",
+    "name": "Prestations — Remise en état d'appartement",
     "itemListElement": [
       {
         "@type": "Offer",
@@ -336,7 +336,7 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Remise en état entre deux locations",
+      "name": "Remise en état d'appartement",
       "item": "https://www.dsg-renov.ch/services/remise-en-etat-appartement"
     }
   ]
@@ -345,7 +345,7 @@
 </head>
 
 <body>
-<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
+<div class="mur" id="mur" data-nosnippet role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
   <canvas class="mur__briques" aria-hidden="true"></canvas>
   <div class="mur__cartouche">
     <div class="mur__tete">
@@ -381,13 +381,13 @@
               <a class="sous-menu__tout" href="../services/">Toutes nos prestations<span class="fleche" aria-hidden="true"></span></a>
             </div>
             <ul class="sous-menu__liste">
-            <li><a href="../services/renovation-complete"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/renovation-appartement-sejour-cuisine-lausanne-240.avif 240w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-480.avif 480w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-720.avif 720w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.avif 960w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1280.avif 1280w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.webp" srcset="../assets/images/renovation-appartement-sejour-cuisine-lausanne-240.webp 240w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-480.webp 480w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.webp 960w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Rénovation complète</span><span class="sous-menu__resume">Appartement, maison ou immeuble repris de fond en comble, tous corps de métier coordonnés.</span></a></li>
-            <li><a href="../services/peinture"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.avif 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.avif 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-720.avif 720w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.avif 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1280.avif 1280w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.webp" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.webp 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.webp 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.webp 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Peinture &amp; revêtements</span><span class="sous-menu__resume">Préparation des fonds, mise en teinte, papier peint et toile de verre posés sans raccord visible.</span></a></li>
+            <li><a href="../services/renovation-complete"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/renovation-appartement-sejour-cuisine-lausanne-240.avif 240w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-480.avif 480w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-720.avif 720w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.avif 960w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1280.avif 1280w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.webp" srcset="../assets/images/renovation-appartement-sejour-cuisine-lausanne-240.webp 240w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-480.webp 480w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-960.webp 960w, ../assets/images/renovation-appartement-sejour-cuisine-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Rénovation d'appartement</span><span class="sous-menu__resume">Appartement, maison ou immeuble repris de fond en comble, tous corps de métier coordonnés.</span></a></li>
+            <li><a href="../services/peinture"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.avif 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.avif 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-720.avif 720w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.avif 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1280.avif 1280w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.webp" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.webp 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.webp 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.webp 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Peinture &amp; papier peint</span><span class="sous-menu__resume">Préparation des fonds, mise en teinte, papier peint et toile de verre posés sans raccord visible.</span></a></li>
             <li><a href="../services/platrerie-cloisons"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-240.avif 240w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-480.avif 480w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-720.avif 720w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-960.avif 960w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-1280.avif 1280w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-960.webp" srcset="../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-240.webp 240w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-480.webp 480w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-960.webp 960w, ../assets/images/cloisons-sejour-cuisine-loft-sevelin-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Plâtrerie &amp; cloisons</span><span class="sous-menu__resume">Enduits et lissage, création ou suppression de volumes, plafonds suspendus et éclairage intégré.</span></a></li>
-            <li><a href="../services/carrelage-sols"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.avif 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.avif 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-720.avif 720w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.avif 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1280.avif 1280w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.webp" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.webp 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.webp 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.webp 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Carrelage &amp; sols</span><span class="sous-menu__resume">Salles d'eau et cuisines recarrelées, parquet, vinyle et linoléum posés sur support préparé.</span></a></li>
-            <li><a href="../services/nettoyage-fin-de-chantier"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-240.avif 240w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-480.avif 480w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-720.avif 720w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.avif 960w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1280.avif 1280w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.webp" srcset="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-240.webp 240w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-480.webp 480w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.webp 960w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Nettoyage de chantier</span><span class="sous-menu__resume">Logement rendu habitable immédiatement, vitres et sanitaires compris.</span></a></li>
-            <li><a href="../services/remise-en-etat-appartement" aria-current="page"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/nettoyage-hall-logement-lausanne-240.avif 240w, ../assets/images/nettoyage-hall-logement-lausanne-480.avif 480w, ../assets/images/nettoyage-hall-logement-lausanne-720.avif 720w, ../assets/images/nettoyage-hall-logement-lausanne-960.avif 960w, ../assets/images/nettoyage-hall-logement-lausanne-1280.avif 1280w, ../assets/images/nettoyage-hall-logement-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/nettoyage-hall-logement-lausanne-960.webp" srcset="../assets/images/nettoyage-hall-logement-lausanne-240.webp 240w, ../assets/images/nettoyage-hall-logement-lausanne-480.webp 480w, ../assets/images/nettoyage-hall-logement-lausanne-960.webp 960w, ../assets/images/nettoyage-hall-logement-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Remise en état</span><span class="sous-menu__resume">Logement remis en état entre deux locataires, rendu à date fixe, nettoyage compris.</span></a></li>
-            <li><a href="../services/renovation-salle-de-bains"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/carrelage-salle-de-bains-duplex-geneve-240.avif 240w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-480.avif 480w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-720.avif 720w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-960.avif 960w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1280.avif 1280w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/carrelage-salle-de-bains-duplex-geneve-960.webp" srcset="../assets/images/carrelage-salle-de-bains-duplex-geneve-240.webp 240w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-480.webp 480w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-960.webp 960w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Salle de bains</span><span class="sous-menu__resume">Dépose, étanchéité, carrelage et faïence ; sanitaire et électricité coordonnés.</span></a></li>
+            <li><a href="../services/carrelage-sols"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.avif 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.avif 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-720.avif 720w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.avif 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1280.avif 1280w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.webp" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.webp 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.webp 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.webp 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Carrelage &amp; parquet</span><span class="sous-menu__resume">Salles d'eau et cuisines recarrelées, parquet, vinyle et linoléum posés sur support préparé.</span></a></li>
+            <li><a href="../services/nettoyage-fin-de-chantier"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-240.avif 240w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-480.avif 480w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-720.avif 720w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.avif 960w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1280.avif 1280w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.webp" srcset="../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-240.webp 240w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-480.webp 480w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-960.webp 960w, ../assets/images/faux-plafond-cuisine-immeuble-bethusy-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Nettoyage fin de chantier</span><span class="sous-menu__resume">Logement rendu habitable immédiatement, vitres et sanitaires compris.</span></a></li>
+            <li><a href="../services/remise-en-etat-appartement" aria-current="page"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/nettoyage-hall-logement-lausanne-240.avif 240w, ../assets/images/nettoyage-hall-logement-lausanne-480.avif 480w, ../assets/images/nettoyage-hall-logement-lausanne-720.avif 720w, ../assets/images/nettoyage-hall-logement-lausanne-960.avif 960w, ../assets/images/nettoyage-hall-logement-lausanne-1280.avif 1280w, ../assets/images/nettoyage-hall-logement-lausanne-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/nettoyage-hall-logement-lausanne-960.webp" srcset="../assets/images/nettoyage-hall-logement-lausanne-240.webp 240w, ../assets/images/nettoyage-hall-logement-lausanne-480.webp 480w, ../assets/images/nettoyage-hall-logement-lausanne-960.webp 960w, ../assets/images/nettoyage-hall-logement-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Remise en état d'appartement</span><span class="sous-menu__resume">Logement remis en état entre deux locataires, rendu à date fixe, nettoyage compris.</span></a></li>
+            <li><a href="../services/renovation-salle-de-bains"><span class="sous-menu__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/carrelage-salle-de-bains-duplex-geneve-240.avif 240w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-480.avif 480w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-720.avif 720w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-960.avif 960w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1280.avif 1280w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1600.avif 1600w" sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)"><img sizes="(min-width: 1600px) 328px, calc(23.35vw - 48px)" src="../assets/images/carrelage-salle-de-bains-duplex-geneve-960.webp" srcset="../assets/images/carrelage-salle-de-bains-duplex-geneve-240.webp 240w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-480.webp 480w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-960.webp 960w, ../assets/images/carrelage-salle-de-bains-duplex-geneve-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span><span class="sous-menu__nom">Rénovation de salle de bain</span><span class="sous-menu__resume">Dépose, étanchéité, carrelage et faïence ; sanitaire et électricité coordonnés.</span></a></li>
             </ul>
           </div>
         </div>
@@ -413,7 +413,7 @@
     <button class="menu__fermer" type="button" id="menuFermer" aria-label="Fermer le menu">Fermer</button>
   </div>
   <ul class="menu__liste">
-    <li class="menu__groupe" data-ouvert="true"><button class="menu__rubrique menu__deplier" type="button" aria-expanded="true" aria-controls="menuPrestations" data-courante="true">Prestations</button><div class="menu__volet" id="menuPrestations"><ul class="menu__sous sur-pale"><li><a href="../services/renovation-complete">Rénovation complète</a></li><li><a href="../services/peinture">Peinture &amp; revêtements</a></li><li><a href="../services/platrerie-cloisons">Plâtrerie &amp; cloisons</a></li><li><a href="../services/carrelage-sols">Carrelage &amp; sols</a></li><li><a href="../services/nettoyage-fin-de-chantier">Nettoyage de chantier</a></li><li><a href="../services/remise-en-etat-appartement" aria-current="page">Remise en état</a></li><li><a href="../services/renovation-salle-de-bains">Salle de bains</a></li><li><a class="menu__tout" href="../services/">Toutes nos prestations</a></li></ul></div></li>
+    <li class="menu__groupe" data-ouvert="true"><button class="menu__rubrique menu__deplier" type="button" aria-expanded="true" aria-controls="menuPrestations" data-courante="true">Prestations</button><div class="menu__volet" id="menuPrestations"><ul class="menu__sous sur-pale"><li><a href="../services/renovation-complete">Rénovation d'appartement</a></li><li><a href="../services/peinture">Peinture &amp; papier peint</a></li><li><a href="../services/platrerie-cloisons">Plâtrerie &amp; cloisons</a></li><li><a href="../services/carrelage-sols">Carrelage &amp; parquet</a></li><li><a href="../services/nettoyage-fin-de-chantier">Nettoyage fin de chantier</a></li><li><a href="../services/remise-en-etat-appartement" aria-current="page">Remise en état d'appartement</a></li><li><a href="../services/renovation-salle-de-bains">Rénovation de salle de bain</a></li><li><a class="menu__tout" href="../services/">Toutes nos prestations</a></li></ul></div></li>
     <li><a class="menu__rubrique" href="../realisations">Réalisations</a></li>
     <li><a class="menu__rubrique" href="../entreprise">L'entreprise</a></li>
   </ul>
@@ -435,7 +435,7 @@
           <span aria-hidden="true">/</span>
           <a href="../services/">Prestations</a>
           <span aria-hidden="true">/</span>
-          <span>Remise en état entre deux locations</span>
+          <span>Remise en état d'appartement</span>
           </nav>
         </div>
         <div class="piece__tete">
@@ -581,7 +581,7 @@
           <p class="intercalaire__cote">Calendrier, immeuble habité</p>
         </div>
         <div class="intercalaire__corps">
-          <h2 id="local" class="h2">Relouer <br>à Lausanne</h2>
+          <h2 id="local" class="h2">Relouer un appartement <br>à Lausanne</h2>
           
         </div>
       </div>
@@ -680,7 +680,7 @@
         <li>
           <a class="voisin" href="../services/peinture">
             <span class="voisin__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.avif 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.avif 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-720.avif 720w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.avif 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1280.avif 1280w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.avif 1600w" sizes="64px"><img sizes="64px" src="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.webp" srcset="../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-240.webp 240w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-480.webp 480w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-960.webp 960w, ../assets/images/peinture-degagement-cuisine-villa-chailly-lausanne-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span>
-            <span class="voisin__nom">Peinture &amp; revêtements muraux</span>
+            <span class="voisin__nom">Peinture &amp; papier peint</span>
             <span class="voisin__chev" aria-hidden="true"></span>
           </a>
         </li>
@@ -694,7 +694,7 @@
         <li>
           <a class="voisin" href="../services/carrelage-sols">
             <span class="voisin__vue" aria-hidden="true"><picture><source type="image/avif" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.avif 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.avif 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-720.avif 720w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.avif 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1280.avif 1280w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.avif 1600w" sizes="64px"><img sizes="64px" src="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.webp" srcset="../assets/images/pose-de-sol-cuisine-gres-cerame-pully-240.webp 240w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-480.webp 480w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-960.webp 960w, ../assets/images/pose-de-sol-cuisine-gres-cerame-pully-1600.webp 1600w" alt="" width="316" height="237" loading="lazy" decoding="async"></picture></span>
-            <span class="voisin__nom">Carrelage &amp; sols</span>
+            <span class="voisin__nom">Carrelage, parquet &amp; sols</span>
             <span class="voisin__chev" aria-hidden="true"></span>
           </a>
         </li>
@@ -714,7 +714,7 @@
       <div class="rappel__cadre">
         <div class="rappel__corps">
           <p class="intercalaire__nom">Prochaine étape</p>
-          <h2 class="rappel__titre" id="rappelTitre">Un projet de remise en état ?</h2>
+          <h2 class="rappel__titre" id="rappelTitre">Un projet de remise en état d'appartement ?</h2>
           <p class="chapo">Nous nous déplaçons, mesurons et vous remettons un devis détaillé et gratuit 72 heures après la visite.</p>
           <div class="rappel__actions">
             <a class="btn btn--plein" href="../devis?travaux=remise-en-etat-appartement#formulaire">Demander un devis gratuit<span class="fleche" aria-hidden="true"></span></a>
@@ -760,13 +760,13 @@
       <nav class="pied__col" aria-labelledby="piedLots" data-volet>
         <h3 id="piedLots">Nos prestations</h3>
         <ul id="piedListeLots">
-          <li><a href="../services/renovation-complete">Rénovation complète</a></li>
-          <li><a href="../services/peinture">Peinture &amp; revêtements</a></li>
+          <li><a href="../services/renovation-complete">Rénovation d'appartement</a></li>
+          <li><a href="../services/peinture">Peinture &amp; papier peint</a></li>
           <li><a href="../services/platrerie-cloisons">Plâtrerie &amp; cloisons</a></li>
-          <li><a href="../services/carrelage-sols">Carrelage &amp; sols</a></li>
-          <li><a href="../services/nettoyage-fin-de-chantier">Nettoyage de chantier</a></li>
-          <li><a href="../services/remise-en-etat-appartement">Remise en état</a></li>
-          <li><a href="../services/renovation-salle-de-bains">Salle de bains</a></li>
+          <li><a href="../services/carrelage-sols">Carrelage &amp; parquet</a></li>
+          <li><a href="../services/nettoyage-fin-de-chantier">Nettoyage fin de chantier</a></li>
+          <li><a href="../services/remise-en-etat-appartement">Remise en état d'appartement</a></li>
+          <li><a href="../services/renovation-salle-de-bains">Rénovation de salle de bain</a></li>
         </ul>
       </nav>
 
@@ -796,7 +796,7 @@
   <a class="btn btn--cadre" href="tel:+41218470202"><span class="entete__combine" aria-hidden="true"></span>Appeler</a>
   <a class="btn btn--plein" href="../devis#formulaire">Devis gratuit<span class="fleche" aria-hidden="true"></span></a>
 </div>
-<script src="../assets/js/mur.js?v=4d1be03a" defer></script>
+<script src="../assets/js/mur.js?v=d6a8277c" defer></script>
 <script src="../assets/js/nav.js?v=01e807bb" defer></script>
 <script src="../assets/js/motion.js?v=86e7770c" defer></script>
 <script src="../assets/js/onglets.js?v=47e6592c" defer></script>

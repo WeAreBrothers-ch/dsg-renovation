@@ -213,7 +213,13 @@ pixel, repères d'angle, logo, bouton rouge) : « Cassez le mur pour
 entrer. » **Trois coups, pas un de
 plus** : le premier fait tomber la brique frappée, le deuxième celles qui
 l'entourent (le site paraît dans le trou), le troisième l'abat, et le site
-est là. Un
+est là. Depuis le
+30/10/2026, il ne se monte plus qu'à l'accueil, pour qui y arrive sans
+page d'origine (adresse tapée, favori, code QR) : jamais depuis Google
+ni depuis un lien, jamais sur une autre page, jamais pour un robot. Un
+écran couvrant à franchir avant le contenu est un interstitiel intrusif
+pour Google, et le visiteur venu d'une recherche repartait avant le
+troisième coup. Un
 onglet qui l'a cassé ne le revoit plus ; qui vient d'une page du site est
 déjà entré ; rien n'est gardé d'une visite à l'autre (stockage de session
 seulement). Pour le remontrer : ajouter `?mur` à l'adresse

@@ -89,7 +89,8 @@ def _local(fiche):
         </div>"""))
     premier = LOCAL[fiche["lots"][0]]
     seul = len(fiche["lots"]) == 1
-    titre = premier["titre"] if seul else "Ce que le bâti|lausannois impose"
+    titre = prestations.intertitres_de(fiche).get("local") or (
+        premier["titre"] if seul else "Ce que le bâti|lausannois impose")
     cote = premier["cote"] if seul else "Métier par métier"
     return f"""
   <section class="section" aria-labelledby="local">

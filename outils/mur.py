@@ -5,10 +5,15 @@ cassent (mur.js, 20-mur.css) : le premier fait tomber une brique, le
 deuxième celles qui l'entourent, le troisième l'abat, et le site apparaît
 derrière.
 
-Le mur se dresse devant qui arrive de l'extérieur : d'un moteur de
-recherche, d'un lien, d'un favori. Qui vient d'une page du site est
-déjà entré, même dans un nouvel onglet ; une fois cassé, il ne revient
-plus dans l'onglet, même au rechargement. Rien n'est gardé d'une visite
+Le mur ne se dresse qu'à l'accueil, devant qui y arrive sans venir
+d'ailleurs : une adresse tapée, un favori, un code QR. Qui arrive d'un
+moteur de recherche ou d'un lien ne le voit pas, ni sur aucune autre
+page : un écran à franchir avant le contenu, Google le compte comme un
+interstitiel intrusif, et le visiteur venu chercher un peintre repart
+avant le troisième coup. Les robots (Google, Bing, Lighthouse) ne le
+voient pas non plus : la page est la même, sans le jeu. Qui vient
+d'une page du site est déjà entré, même dans un nouvel onglet ; une
+fois cassé, il ne revient plus dans l'onglet, même au rechargement. Rien n'est gardé d'une visite
 à l'autre (la politique de confidentialité le promet) : la seule trace
 est en stockage de session, effacée avec l'onglet. L'adresse « ?mur »
 le remonte à volonté, pour le montrer au client.
@@ -26,16 +31,18 @@ CLE = "dsg-mur"
 
 # Posé dans <head>, avant le premier rendu : décide si le mur se monte
 # (classe « mur-ferme » : la page ne défile plus, le mur se montre dès
-# qu'il est lu). Il se monte si l'onglet n'a pas encore cassé le mur et
-# que la page précédente n'est pas du site, ou si l'adresse demande
-# « ?mur ». Sinon, l'onglet est noté entré. Si mur.js ne s'est pas
+# qu'il est lu). Il se monte à l'accueil, si l'onglet n'a pas encore
+# cassé le mur, que la visite n'a aucune page d'origine (ni moteur, ni
+# lien, ni page du site) et que le visiteur n'est pas un robot ; ou
+# partout si l'adresse demande « ?mur ». Sinon, l'onglet est noté entré. Si mur.js ne s'est pas
 # annoncé (« mur-pret ») au chargement complet, le mur se retire de
 # lui-même, et annonce « mur:ouvert » comme mur.js (motion.js attend ce
 # signal pour tracer).
 SCRIPT_TETE = (
     '<script>(function(h){var k="%s",v=false,d=false,r=document.referrer;'
     'try{v=sessionStorage.getItem(k)==="1"}catch(e){}'
-    'try{d=!!r&&new URL(r).origin===location.origin}catch(e){}'
+    'd=!!r||!/^\\/(index(\\.html)?)?$/.test(location.pathname)'
+    '||/bot|crawl|spider|slurp|lighthouse|headless|inspection|preview|facebook/i.test(navigator.userAgent);'
     'if(/[?&]mur(=|&|$)/.test(location.search)||(!v&&!d)){'
     'h.classList.add("mur-ferme");'
     'addEventListener("load",function(){if(!h.classList.contains("mur-pret")){'
@@ -67,7 +74,7 @@ def mur(base):
     monter : sans JavaScript, il n'existe pas pour le visiteur. Son pied
     (20-mur.css) ne se montre que sous la classe « mur-ferme ».
     """
-    return f"""<div class="mur" id="mur" role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
+    return f"""<div class="mur" id="mur" data-nosnippet role="dialog" aria-modal="true" aria-labelledby="murTitre" aria-describedby="murAnnonce" tabindex="-1" hidden>
   <canvas class="mur__briques" aria-hidden="true"></canvas>
   <div class="mur__cartouche">
     <div class="mur__tete">

@@ -16,8 +16,10 @@
    de lui, là où l'on voit le mur. Le cartouche ne bouge pas : il tombe
    avec le mur, au troisième coup.
 
-   Le mur se dresse devant qui arrive de l'extérieur du site, une fois
-   par onglet (outils/mur.py décide, avant le premier rendu). Au
+   Le mur se dresse à l'accueil seulement, devant qui y arrive sans
+   page d'origine (adresse tapée, favori), une fois par onglet ; jamais
+   depuis un moteur de recherche ni pour un robot (outils/mur.py décide,
+   avant le premier rendu). Au
    clavier, le bouton « Frapper » donne les coups ; les lecteurs
    d'écran entendent ce qui reste. Mouvement réduit : le mur est là
    d'emblée, les trous paraissent d'un coup, et il s'efface au troisième
