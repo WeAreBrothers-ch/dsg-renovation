@@ -33,13 +33,13 @@ PAGES = [
         "resume": "Appartement, maison ou immeuble repris de fond en comble, "
                   "tous corps de métier coordonnés.",
         "lots": ["renovation-complete"],
-        "titre": "Rénovation d'appartement et de maison à Lausanne",
+        "titre": "Rénovation complète d'appartement et de maison à Lausanne",
         "description": (
-            "Rénovation complète d'appartement ou de maison à Lausanne, clé "
-            "en main : tous les corps de métier coordonnés, un seul "
-            "responsable. Devis gratuit."
+            "Rénovation complète d'appartement, de maison ou d'immeuble à "
+            "Lausanne, rénovation intérieure clé en main : tous corps de "
+            "métier, un seul responsable."
         ),
-        "h1": ["Rénovation d'appartement", "et de maison à Lausanne"],
+        "h1": ["Rénovation complète d'appartement", "et de maison à Lausanne"],
         "chapo": "Appartement, maison ou immeuble repris de fond en comble. "
                  "Un seul contrat, un seul responsable de chantier, une seule "
                  "date de livraison.",
@@ -101,9 +101,9 @@ PAGES = [
         "lots": ["platrerie", "cloisons", "faux-plafonds"],
         "titre": "Plâtrier à Lausanne — cloisons, enduits et faux plafonds",
         "description": (
-            "Plâtrier-peintre à Lausanne : plâtrerie, enduits et lissage, "
-            "cloisons placo ou alba, faux plafonds avec éclairage intégré. "
-            "Devis gratuit 72 h après visite."
+            "Plâtrier-peintre à Lausanne : travaux de plâtrerie, enduits et "
+            "lissage, cloisons placo ou alba, faux plafonds avec éclairage "
+            "intégré. Devis gratuit."
         ),
         "h1": ["Plâtrier à Lausanne :", "plâtrerie, cloisons, faux plafonds"],
         "chapo": "Trois métiers qui dessinent la pièce : ce qui tient les murs, "
@@ -136,11 +136,11 @@ PAGES = [
         "resume": "Salles d'eau et cuisines recarrelées, parquet, vinyle et "
                   "linoléum posés sur support préparé.",
         "lots": ["carrelage", "pose-de-sol"],
-        "titre": "Carreleur à Lausanne — carrelage et pose de parquet",
+        "titre": "Carreleur à Lausanne — entreprise de carrelage et parquet",
         "description": (
-            "Carreleur à Lausanne : pose de carrelage en salle de bain et "
-            "cuisine, grès cérame grand format, pose de parquet, vinyle et "
-            "linoléum. Devis gratuit."
+            "Entreprise de carrelage à Lausanne : carreleur pour salle de "
+            "bain et cuisine, grès cérame grand format. Revêtements de sol : "
+            "parquet, vinyle, linoléum."
         ),
         "h1": ["Carreleur à Lausanne :", "carrelage et parquet"],
         "chapo": "Ce sur quoi on marche supporte tout le reste. Le plan de "
@@ -173,9 +173,9 @@ PAGES = [
         "lots": ["nettoyage-fin-de-chantier"],
         "titre": "Nettoyage de fin de chantier et de travaux à Lausanne",
         "description": (
-            "Nettoyage de fin de chantier à Lausanne : poussière de travaux, "
-            "vitres, sanitaires, sols. Logement habitable, prêt pour l'état "
-            "des lieux. Devis gratuit."
+            "Nettoyage de fin de chantier à Lausanne et dans le canton de "
+            "Vaud : poussière de travaux, vitres, sanitaires, sols. Logement "
+            "prêt pour l'état des lieux."
         ),
         "h1": ["Nettoyage de fin de chantier", "à Lausanne"],
         "chapo": "La poussière de plâtre se dépose trois fois avant de "

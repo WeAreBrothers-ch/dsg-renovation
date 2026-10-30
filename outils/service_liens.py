@@ -23,8 +23,11 @@ def zone(base, fiche):
           <p>Notre atelier est à Lausanne, avenue de Béthusy. Nous
           intervenons chaque semaine en ville — des immeubles anciens de
           Sous-Gare et du Vallon aux villas de Chailly et d'Épalinges — et
-          dans les communes de l'agglomération, ainsi que sur La Côte, à
-          Lavaux et jusqu'à Genève.</p>
+          dans les communes de l'agglomération : Pully, Prilly, Renens,
+          Crissier, Ecublens, Le Mont, Cheseaux, Lutry. Dans le canton de
+          Vaud, nous travaillons aussi sur La Côte — Morges, Rolle, Gland,
+          Nyon —, à Lavaux et sur la Riviera — Vevey, Montreux —, et
+          jusqu'à Genève.</p>
           <p>Un chantier proche, c'est une équipe qui arrive à l'heure et
           qui repasse sans compter quand une reprise est nécessaire. C'est
           la raison pour laquelle nous ne nous éloignons pas de l'arc

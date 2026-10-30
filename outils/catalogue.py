@@ -108,7 +108,7 @@ def pages(base_js, questions_balisees):
          FAITS_ENTREPRISE),
 
         ("realisations.html",
-         "Nos réalisations : rénovation d'appartement à Lausanne",
+         "Nos rénovations d'appartements et d'immeubles à Lausanne",
          "Six chantiers de rénovation livrés à Lausanne, Pully et Genève : "
          "appartements, maisons, immeubles. Surface, durée et travaux "
          "détaillés pour chacun.",

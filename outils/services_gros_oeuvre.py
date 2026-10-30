@@ -38,10 +38,11 @@ SERVICES = [
             "Nous prenons l'ensemble en charge. Vous signez un devis unique, "
             "vous recevez un planning daté avant le démarrage, et vous avez un "
             "seul numéro à appeler pendant toute la durée des travaux.",
-            "Nous intervenons sur des appartements de Lausanne et de ses "
-            "communes voisines, sur des villas de Pully, Lutry ou Épalinges, "
-            "et sur des immeubles locatifs pour le compte de régies "
-            "lausannoises.",
+            "Rénovation intérieure d'appartements à Lausanne et dans ses "
+            "communes voisines, rénovation de maisons — villas de Pully, "
+            "Lutry ou Épalinges, maisons anciennes des hauts de la ville — "
+            "et rénovation d'immeubles locatifs pour le compte de régies "
+            "lausannoises : nous intervenons sur les trois.",
         ],
         "prestations": [
             "Dépose des revêtements, cloisons et équipements existants",

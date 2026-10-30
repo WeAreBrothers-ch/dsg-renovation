@@ -83,9 +83,9 @@ PAGES = [
         "lots": ["renovation-salle-de-bains"],
         "titre": "Rénovation de salle de bain à Lausanne, clé en main",
         "description": (
-            "Rénovation de salle de bains à Lausanne : dépose, étanchéité "
-            "sous carrelage, faïence et sol, sanitaire et électricité "
-            "coordonnés. Devis gratuit."
+            "Rénovation de salle de bain à Lausanne et dans le canton de "
+            "Vaud : dépose, étanchéité, carrelage et faïence, sanitaire et "
+            "électricité coordonnés."
         ),
         "h1": ["Rénovation de salle de bain", "à Lausanne"],
         "chapo": "Dépose, support et étanchéité d'abord, carrelage et faïence "
