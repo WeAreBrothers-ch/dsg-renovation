@@ -183,24 +183,6 @@
   --trame-fond:conic-gradient(at var(--trame-taille) var(--trame-taille),transparent 75%,var(--trame-point) 0);
   --trame-calage:calc(50% + (var(--trame-pas) - var(--trame-taille)) / 2);
 
-  /* ---------- Le mur à l'entrée ----------
-     Un mur à casser pour entrer (20-mur.css, mur.js), dessiné comme le
-     reste du site : une élévation de plan sur la chaux. Chaque brique
-     est cernée d'un trait d'un pixel ; la plupart restent du papier,
-     quelques-unes prennent la chaux creusée, une sur dix est hachurée
-     comme l'eau du plan du Léman. Le trait est opaque — l'encre à 24 %
-     sur la chaux — pour ne pas doubler là où deux briques le partagent.
-     Rien n'y est du texte : aucun seuil de contraste n'y est requis. */
-  --mur-papier:var(--c-chaux);
-  --mur-trait:#C3BDB4;
-  --mur-hachure:rgba(var(--c-encre-rgb),.14);
-  --mur-teintes:#F4F1EC #F4F1EC #F4F1EC #F4F1EC #F4F1EC #F4F1EC #EFEBE4 #EFEBE4 #E9E4DC #E9E4DC;
-  /* Le pas d'une brique : une brique de terre cuite, 22 × 6,5 cm joint
-     compris, de 60 à 104 px (6,5 % de l'écran). */
-  --mur-pas:clamp(60px,6.5vw,104px);
-  /* Ce que le mur déborde de l'écran, en haut et en bas : aucune barre
-     de navigateur, aucun rebond d'un glissé ne laisse voir le site. */
-  --mur-deborde:max(8rem,20vh);
 }
 
 /* Le calage de la trame arrondi au pixel inférieur, là où le navigateur

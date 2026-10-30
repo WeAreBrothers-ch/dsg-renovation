@@ -30,13 +30,11 @@ FEUILLES = [
     "06-haut.css", "07-chantiers.css", "08-bas.css", "09-trace.css",
     "10-comparateur.css", "11-lumineuse.css", "12-trame.css", "13-carte.css",
     "14-document.css", "15-pages.css", "16-composants.css",
-    "17-repli.css", "18-confiance.css", "19-impression.css", "20-mur.css",
+    "17-repli.css", "18-confiance.css", "19-impression.css",
 ]
 FEUILLE_SITE = "assets/css/site.css"
 
-# mur.js en tête : il monte le mur à l'entrée avant que les autres
-# modules ne s'exécutent.
-BASE_JS = ["mur.js", "nav.js", "motion.js", "onglets.js", "trame.js"]
+BASE_JS = ["nav.js", "motion.js", "onglets.js", "trame.js"]
 
 
 def ecrire(chemin, contenu):

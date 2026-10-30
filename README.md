@@ -84,7 +84,6 @@ python3 -m http.server     # puis http://localhost:8000
 | `carte.py` | le plan du Léman de l'accueil : contour du lac, repères des communes, carton de Lausanne |
 | `confiance.py` | déroulés en cases (accueil, entreprise, méthode des prestations), logos, témoignages (masqués tant qu'ils sont provisoires) |
 | `accessibilite.py` | relie chaque section à son titre (lecteurs d'écran) |
-| `mur.py` | le mur à l'entrée : son cartouche, et le script de tête qui décide s'il se monte |
 | `briques.py`, `briques_bis.py` | couverture, intercalaire, chiffres, renvoi final, cartes, besoins, postes (liste ouverte), glissière (suites à faire glisser au téléphone, et leur rangée de repères) |
 | `repli.py` | onglets et dépliants |
 | `page_service.py`, `service_liens.py` | corps d'une page de prestation, zone, prestations voisines |
@@ -136,11 +135,8 @@ construction.
   Morges… » sur un même modèle seraient traitées par Google comme des
   pages satellites. La zone est couverte par la fiche d'établissement,
   les réalisations et le texte.
-- **Le mur à l'entrée** ne retire rien à la page : tout le contenu est
-  dans le HTML, derrière lui, et un robot sans JavaScript ne le voit pas.
-  Google, qui exécute les scripts, peut le compter comme un interstitiel
-  (une fenêtre qui couvre le contenu à l'arrivée depuis la recherche),
-  ce qu'il pénalise un peu au téléphone. À peser avec le client.
+- **Le mur à l'entrée** (v6.8) a été retiré le 30/10/2026 : un écran
+  à franchir avant le contenu est un interstitiel pour Google.
 - **Vitesse** : une seule feuille de style, polices servies par le site
   et préchargées, scripts différés, cache long (`.htaccess`). Les
   photos partent en AVIF (WebP pour les navigateurs qui ne le lisent
@@ -204,28 +200,11 @@ d'action du téléphone garde le nacré seul —, peinte par la feuille
 `trame.js` n'y ajoute plus que l'onde, posée pixel pour pixel sur ses
 points.
 
-Ce que la v6.8 a ajouté (12/10/2026) : **le mur à l'entrée**. Qui arrive
-sur le site de l'extérieur trouve l'écran couvert d'un mur dessiné en
-élévation, comme le site est dessiné en plan — des briques au trait sur la
-chaux, quelques-unes teintées ou hachurées —, qui se monte rang par rang ;
-un petit cartouche posé dessus, dessiné comme le reste du site (cadre d'un
-pixel, repères d'angle, logo, bouton rouge) : « Cassez le mur pour
-entrer. » **Trois coups, pas un de
-plus** : le premier fait tomber la brique frappée, le deuxième celles qui
-l'entourent (le site paraît dans le trou), le troisième l'abat, et le site
-est là. Depuis le
-30/10/2026, il ne se monte plus qu'à l'accueil, pour qui y arrive sans
-page d'origine (adresse tapée, favori, code QR) : jamais depuis Google
-ni depuis un lien, jamais sur une autre page, jamais pour un robot. Un
-écran couvrant à franchir avant le contenu est un interstitiel intrusif
-pour Google, et le visiteur venu d'une recherche repartait avant le
-troisième coup. Un
-onglet qui l'a cassé ne le revoit plus ; qui vient d'une page du site est
-déjà entré ; rien n'est gardé d'une visite à l'autre (stockage de session
-seulement). Pour le remontrer : ajouter `?mur` à l'adresse
-(`…/index.html?mur`). Sans JavaScript, il n'existe pas ; si son script
-échoue, il tombe de lui-même au chargement (`outils/mur.py`,
-`20-mur.css`, `mur.js`).
+Ce que la v6.8 avait ajouté (12/10/2026), **le mur à l'entrée** — un
+mur dessiné à casser en trois coups avant d'entrer —, a été retiré le
+30/10/2026 : Google compte un écran qui couvre le contenu à l'arrivée
+comme un interstitiel intrusif. Il reste dans l'historique git
+(`outils/mur.py`, `20-mur.css`, `mur.js`).
 
 Ce que la v6.5 a changé (07/10/2026), au bureau seulement : dans les
 sections à marge accrochée, le titre rejoint l'intitulé dans la marge
@@ -354,9 +333,8 @@ pas bougé d'un pixel.
 
 | Fichier | Rôle |
 |---|---|
-| `mur.js` | le mur à l'entrée : briques peintes sur une toile, trois coups (une brique, un trou, la chute), la page derrière inerte tant qu'il tient ; au clavier, le bouton « Frapper » |
 | `nav.js` | liste des prestations (survol, clavier, Échap), menu plein écran (focus piégé), barre d'action mobile, volets du pied de page |
-| `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) — derrière le mur de l'entrée, seulement quand il est tombé |
+| `motion.js` | année du pied de page ; l'enseigne qui s'allume ; le plan se trace : à l'arrivée de chaque bloc, ses filets, son toit, le plan du Léman (une fois) |
 | `onglets.js` | jeux d'onglets des pages de prestation ; marque qui glisse sous l'onglet ouvert et sous le filtre choisi ; au téléphone, referme les dépliants secondaires (`data-replie-telephone`), déplie « Lire la suite », rend les suites à faire glisser accessibles au clavier |
 | `comparateur.js` | glissière avant / après (souris, tactile, clavier), boutons « Avant » / « Après » qui montrent un état entier |
 | `lumineuse.js` | visionneuse plein écran des réalisations |
