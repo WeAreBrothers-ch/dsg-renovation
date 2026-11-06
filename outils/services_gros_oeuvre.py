@@ -35,7 +35,9 @@ SERVICES = [
             "pas passer avant le plâtrier, le peintre ne peut pas finir avant "
             "que les sols soient posés. C'est cette coordination qui fait "
             "tenir ou déraper un chantier.",
-            "Nous prenons l'ensemble en charge. Vous signez un devis unique, "
+            "DSG Rénovation, <a href=\"{base}index.html\">entreprise de "
+            "rénovation à Lausanne</a>, prend l'ensemble en charge. Vous "
+            "signez un devis unique, "
             "vous recevez un planning daté avant le démarrage, et vous avez un "
             "seul numéro à appeler pendant toute la durée des travaux.",
             "Rénovation intérieure d'appartements à Lausanne et dans ses "

@@ -212,7 +212,7 @@ INTERTITRES = {
         "quoi": "Rénovation complète d'appartement,|tous corps de métier",
         "local": "Rénover un appartement|ancien à Lausanne",
         "comment": "Comment se déroule|une rénovation complète",
-        "zone": "Rénovation complète à Lausanne|et sur l'arc lémanique",
+        "zone": "Rénovation d'appartement à Lausanne|et sur l'arc lémanique",
         "questions": "Vos questions sur|la rénovation complète",
         "voisins": "Les métiers d'une|rénovation complète",
     },
